@@ -1,0 +1,39 @@
+{
+    "projectId": "15zcyz",
+    "baseUrl": "http://automationpractice.com/",
+    "chromeWebSecurity": false,
+    "trashAssetsBeforeRuns": false,
+    "integrationFolder": "cypress/integration/",
+    "testFiles": ["**/*.feature", "**/*.spec.js"],
+    "numTestsKeptInMemory": 15,
+    "video": false,
+    "defaultCommandTimeout": 10000,
+    "viewportWidth": 1280,
+    "viewportHeight": 720,
+    "ignoreTestFiles": ["**/__snapshots__/*", "**/__image_snapshots__/*"],
+    "retries": {
+      "runMode": 1,
+      "openMode": 0
+    },
+    "screenshotOnRunFailure": false,
+    "screenshotsFolder": "cypress/test-results/assets/",
+    "screenshotConfig": {
+      "scale": false
+    },
+    "reporter": "mochawesome",
+    "reporterOptions": {
+        "reportDir": "cypress/test-results/",
+        "mochaFile": "cypress/test-results/my-test-output.xml",
+        "jenkinsMode": false,
+        "quite": true,
+        "overwrite": false,
+        "html": false,
+        "json": true
+    },
+    "env": {
+      "apiUrl": "localhost:3001/",
+      "frontUrl": "http://automationpractice.com/",
+      "contactUsUrl": "index.php?controller=contact"
+    }
+  }
+  

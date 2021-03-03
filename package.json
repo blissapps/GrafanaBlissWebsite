@@ -1,0 +1,46 @@
+{
+  "name": "admintestscypresspoc",
+  "version": "0.0.1",
+  "description": "Cypress POC for the new admin portal",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rm -rf ./node_modules/",
+    " --- CYPRESS DEV SCRIPTS ---- ": "",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run --browser chrome",
+    "cy:run:headless": "cypress run --browser chrome --headless --spec 'cypress/integration/**/*.spec.js'",
+    "cy:run:debug": "cypress run --browser chrome --headless --spec \"**/functional/**/*.feature\" -e TAGS='@DEBUG'",
+    
+    " --- CYPRESS PIPELINE SCRIPTS WITHOUT FILE RESULTS ---- ": "",
+    "cy:run:chrome": "cypress run --browser chrome --headless --spec \"**/functional/**/*.feature\" -e TAGS='not @ignore-integration and not @deprecated and not @ignore'",
+    "cy:run:firefox": "cypress run --browser firefox --headless",
+    "cy:run:edge": "cypress run --browser edge --headless",
+    "cy:run:api": "cypress run --browser chrome --headless --spec \"**/api/**/*.spec.js\"",
+
+    " --- MOCHAWESOME REPORT SCRIPTS ---- ": "",
+    "cy:run:headless:mocha": "yarn cy:clean:results && yarn cy:run:headless",
+    "cy:posttest:results": "yarn cy:merge:results && yarn cy:final:results",
+    
+    "cy:clean:results": "rm -rf cypress/test-results/*",
+    "cy:merge:results": "npx mochawesome-merge 'cypress/test-results/*.json' > mochawesomeFinal.json",
+    "cy:final:results": "marge mochawesomeFinal.json --reportDir cypress/test-results/ && mv mochawesomeFinal.json cypress/test-results/"
+  },
+  "keywords": [
+    "tests",
+    "js",
+    "cypress"
+  ],
+  "author": "Laerte Mello",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^6.6.0",
+    "cypress-xpath": "^1.6.1",
+    "cypress-waitfor": "^1.1.0",
+    "mocha": "^8.2.1",
+    "mochawesome": "^6.2.1",
+    "mochawesome-merge": "^4.2.0",
+    "mochawesome-report-generator": "^5.1.0",
+    "cypress-plugin-snapshots": "^1.4.4",
+    "dayjs": "^1.8.36"
+  }
+}
