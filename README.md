@@ -94,6 +94,6 @@ For this case, the tests are running inside the container via dockerfile so, you
 
 ### How to Run the tests with Docker
 > ```bash
-> # Into your cli 
+> # Into your cli:
 > docker build -t cypress .
 > ```
