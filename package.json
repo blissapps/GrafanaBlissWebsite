@@ -41,6 +41,7 @@
     "mochawesome-merge": "^4.2.0",
     "mochawesome-report-generator": "^5.1.0",
     "cypress-plugin-snapshots": "^1.4.4",
+    "cypress-select-tests":"^1.5.9",
     "dayjs": "^1.8.36"
   }
 }
