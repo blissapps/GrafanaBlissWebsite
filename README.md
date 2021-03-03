@@ -83,7 +83,7 @@ We can create many personalized ways to run cypress. To do this, we need to crea
 > cy:posttest:results
 > ```
 
-* Remember that all theses commands above can be totally adapted, modified or created according with the project current necessities
+* Remember that all theses commands above can be totally adapted, modified, or even created according with the project current necessities
 
 ## Cypress with Docker
 When we execute tests using our local resources, the tests take advantage of the host machine like browsers, memory and etc.
