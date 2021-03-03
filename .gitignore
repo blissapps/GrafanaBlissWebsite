@@ -1,8 +1,17 @@
+# Node modules and configs
 node_modules
+
+# Cypress local files:
 cypress/screenshots/*
 cypress/test-results/
-videos
-.vs
-**/.DS_Store
 test-results.xml
+videos
+
+# Vs code or other IDE generated config files:
+.vs
+
+# Yarn files
 yarn-error.log
+
+# MAC files
+**/.DS_Store

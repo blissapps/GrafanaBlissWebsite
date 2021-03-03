@@ -7,7 +7,7 @@ describe('Home page tests', () => {
         cy.visit('/')
     });
 
-    it('Home screen is diplayed', () => {
+    it.skip('Home screen is diplayed', () => {
         cy.url().should("contain", Cypress.env('frontUrl') + "index.php");
         homePage.matchPageSnapshot()
     });

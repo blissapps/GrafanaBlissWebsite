@@ -19,7 +19,6 @@ class BasePage {
     return cy.contains(text)
   }
 
-
   selectById(selectBoxId, selectText) {
     return cy.get(selectBoxId).select(selectText);
   }
