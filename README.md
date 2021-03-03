@@ -1,5 +1,9 @@
 # Cypress automation framework for the new admin portal
 
+### Suggested IDEs by [Cypress documentation](https://docs.cypress.io/guides/tooling/IDE-integration.html#Extensions-amp-Plugins):
+- VsCode (Best option to work with Cypress and it's free)
+- Intellij (Alternative solution, also free)
+
 ### Official framework links:
 - [Cypress website](https://www.cypress.io/).
 - The API documentation is available [here](https://docs.cypress.io/api/api/table-of-contents.html). 

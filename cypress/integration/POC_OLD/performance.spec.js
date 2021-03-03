@@ -1,4 +1,4 @@
-import BasePage from '../../support/pages/basePage';
+import BasePage from '../../support/pages/references_old/basePage';
 
 describe('Performance execution', () => {
     const basePage = new BasePage();

@@ -15,11 +15,18 @@
       "runMode": 1,
       "openMode": 0
     },
+
     "screenshotOnRunFailure": false,
     "screenshotsFolder": "cypress/test-results/assets/",
     "screenshotConfig": {
       "scale": false
     },
+
+    "include": [
+      "./node_modules/cypress",
+      "cypress/**/*.js"
+    ],
+
     "reporter": "mochawesome",
     "reporterOptions": {
         "reportDir": "cypress/test-results/",
@@ -30,6 +37,7 @@
         "html": false,
         "json": true
     },
+    
     "env": {
       "apiUrl": "localhost:3001/",
       "frontUrl": "http://automationpractice.com/",

@@ -1,6 +1,4 @@
-/// <reference types="Cypress" />
-
-import BasePage from "../../support/pages/basePage";
+import BasePage from "../../support/pages/references_old/basePage";
 
 describe("Tab execution", () => {
   const basePage = new BasePage();
@@ -18,7 +16,7 @@ describe("Tab execution", () => {
     basePage.typeInputValueById("#Username", "test-gsadmin-1")
     basePage.typeInputValueById("#Password", "GShares12345")
     basePage.clickElementByText("Sign In")
-
+    
     // Access client and participants
     cy.get('.chosen-single > span').click()
     cy.xpath('//*[@id="client_chosen"]/div/div/input').type('HasPurchasePlan_SIP{enter}')

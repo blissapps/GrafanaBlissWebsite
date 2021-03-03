@@ -1,5 +1,3 @@
-// import HomePage from '../../support/pages/homePage';
-
 import BasePage from "../../support/pages/basePage";
 
 describe.skip('GlobalShares.CodedUI.Tests.EquityAdmin.Modules.LoanManagement', () => {
