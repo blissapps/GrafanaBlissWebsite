@@ -14,7 +14,7 @@ Download the latest Node available version [here](https://nodejs.org/en/).
 
 Also, you can install via cli (MAC or Linux) using the Node Version Manager with the following commands:
 
-> ```bash
+> ```
 > curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash
 >
 > nvm install node
@@ -26,14 +26,14 @@ Also, you can install via cli (MAC or Linux) using the Node Version Manager with
 
 After the completed node's installation, you will need to clone this current repo:
 
-> ```bash
-> # Repository link
+> ```
+> # Repository link:
 > https://bitbucket.org/laertemello/gscypressautomationframework/src/master/
 > ```
 
 ## Installing the dependencies 
 Open the repo folder over CLI mode and install all dev dependencies using yarn. Just type:
-> ```bash
+> ```
 > yarn 
 > ```
 
@@ -42,7 +42,7 @@ Open the repo folder over CLI mode and install all dev dependencies using yarn. 
 > ```Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope CurrentUser```
 
 Once you run yarn, you will see something like this:
-> ```bash
+> ```
 > yarn install v1.15.2
 > info No lockfile found.
 > [1/4] 🔍  Resolving packages...
@@ -57,7 +57,7 @@ Once you run yarn, you will see something like this:
 Cypress give us the ability to run tests with a test runner interface that allow us to debug and develop tests much more quickly
 To do this, just run the following command: 
 
-> ```bash
+> ```
 > yarn cy:open
 > ```
 
@@ -66,7 +66,7 @@ With the last command above, Cypress interface will be open and you can select t
 ## How to Run the tests with Cypress using CLI
 We can create many personalized ways to run cypress. To do this, we need to create commands in the package.json file located in the root of this repo. So far, we have some commands to facilitate or day to day work, which are:
 
-> ```bash
+> ```
 > # Starting the tests via CLI with the Chrome browser by default:
 > yarn cy:run
 >
@@ -97,7 +97,7 @@ Using Docker you'll be able to customize your "machine configurations" without h
 For this case, the tests are running inside the container via dockerfile so, you can follow the next steps to see how to run tests with Docker.
 
 ### How to Run the tests with Docker
-> ```bash
+> ```
 > # Into your cli:
 > docker build -t cypress .
 > ```
