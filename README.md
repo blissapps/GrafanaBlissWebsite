@@ -1,5 +1,8 @@
 # Cypress automation framework for the new admin portal
 
+> Disclaimer: Bitbuket has some issues while reading markdown annotations. Please, copy the content in README.md and paste it in a markdown reader of your preference to see the documetation in the way it is supposed to be.
+
+
 ### Suggested IDEs by [Cypress documentation](https://docs.cypress.io/guides/tooling/IDE-integration.html#Extensions-amp-Plugins):
 - VsCode (Best option to work with Cypress and it's free)
 - Intellij (Alternative solution, also free)
