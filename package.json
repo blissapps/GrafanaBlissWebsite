@@ -1,7 +1,7 @@
 {
-  "name": "admintestscypresspoc",
+  "name": "gscypressautomationframework",
   "version": "0.0.1",
-  "description": "Cypress POC for the new admin portal",
+  "description": "Cypress framework for the new admin portal",
   "main": "index.js",
   "scripts": {
     "clean": "rm -rf ./node_modules/",
