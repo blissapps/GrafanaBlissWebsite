@@ -14,15 +14,15 @@ Download the latest Node available version [here](https://nodejs.org/en/).
 
 Also, you can install via cli (MAC or Linux) using the Node Version Manager with the following commands:
 
-> ``` bash
-> curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash
->
-> nvm install node
->
-> nvm use node
-> # Checking the version
-> npm -v
-> ```
+ ```
+ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash
+
+ nvm install node
+
+ nvm use node
+// Checking the version:
+ npm -v
+ ```
 
 After the completed node's installation, you will need to clone this current repo:
 
