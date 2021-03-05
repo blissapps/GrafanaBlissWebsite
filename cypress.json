@@ -17,7 +17,6 @@
     },
 
     "screenshotOnRunFailure": false,
-    "screenshotsFolder": "cypress/test-results/assets/",
     "screenshotConfig": {
       "scale": false
     },
