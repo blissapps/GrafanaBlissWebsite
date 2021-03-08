@@ -10,17 +10,14 @@
     "cy:run": "cypress run --browser chrome",
     "cy:run:headless": "cypress run --browser chrome --headless --spec 'cypress/integration/**/*.spec.js'",
     "cy:run:debug": "cypress run --browser chrome --headless --spec \"**/functional/**/*.feature\" -e TAGS='@DEBUG'",
-    
     " --- CYPRESS PIPELINE SCRIPTS WITHOUT FILE RESULTS ---- ": "",
     "cy:run:chrome": "cypress run --browser chrome --headless --spec \"**/functional/**/*.feature\" -e TAGS='not @ignore-integration and not @deprecated and not @ignore'",
     "cy:run:firefox": "cypress run --browser firefox --headless",
     "cy:run:edge": "cypress run --browser edge --headless",
     "cy:run:api": "cypress run --browser chrome --headless --spec \"**/api/**/*.spec.js\"",
-
     " --- MOCHAWESOME REPORT SCRIPTS ---- ": "",
     "cy:run:headless:mocha": "yarn cy:clean:results && yarn cy:run:headless",
     "cy:posttest:results": "yarn cy:merge:results && yarn cy:final:results",
-    
     "cy:clean:results": "rm -rf cypress/test-results/*",
     "cy:merge:results": "npx mochawesome-merge 'cypress/test-results/*.json' > mochawesomeFinal.json",
     "cy:final:results": "marge mochawesomeFinal.json --reportDir cypress/test-results/ && mv mochawesomeFinal.json cypress/test-results/"
@@ -34,14 +31,20 @@
   "license": "ISC",
   "devDependencies": {
     "cypress": "^6.6.0",
-    "cypress-xpath": "^1.6.1",
+    "cypress-plugin-snapshots": "^1.4.4",
+    "cypress-select-tests": "^1.5.9",
     "cypress-waitfor": "^1.1.0",
+    "cypress-xpath": "^1.6.1",
+    "cypress-file-upload": "^5.0.2",
+    "cypress-iframe": "^1.0.1",
     "mocha": "^8.2.1",
     "mochawesome": "^6.2.1",
     "mochawesome-merge": "^4.2.0",
     "mochawesome-report-generator": "^5.1.0",
-    "cypress-plugin-snapshots": "^1.4.4",
-    "cypress-select-tests":"^1.5.9",
     "dayjs": "^1.8.36"
+  },
+  "dependencies": {
+    "@cypress/skip-test": "^2.6.0",
+    "@4tw/cypress-drag-drop": "^1.6.0"
   }
 }

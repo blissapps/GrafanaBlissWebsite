@@ -29,5 +29,7 @@ const executeCommand = (command) => {
   };
   
 import "cypress-waitfor";
+import 'cypress-file-upload';
+import 'cypress-iframe';
   
 export default executeCommand;

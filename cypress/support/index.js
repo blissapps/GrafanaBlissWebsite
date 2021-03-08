@@ -20,6 +20,8 @@ import 'cypress-plugin-snapshots/commands';
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 require('cypress-xpath')
+require('@cypress/skip-test/support')
+
 var addContext = require('mochawesome/addContext');
 
 Cypress.on('test:after:run', (test, runnable) => {
