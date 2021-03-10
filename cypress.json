@@ -1,6 +1,5 @@
 {
     "projectId": "15zcyz",
-    "baseUrl": "http://automationpractice.com/",
     "chromeWebSecurity": false,
     "trashAssetsBeforeRuns": false,
     "integrationFolder": "cypress/integration/",
@@ -38,9 +37,9 @@
     },
     
     "env": {
-      "apiUrl": "localhost:3001/",
-      "frontUrl": "http://automationpractice.com/",
-      "contactUsUrl": "index.php?controller=contact"
+      "loginAuthURL": "https://ea-v3.myglobalshares.co.uk/",
+      "defaultUserAuth": "lmello@globalshares.co.uk",
+      "defaultPasswordAuth": "Swordfish123!"
     }
   }
   
