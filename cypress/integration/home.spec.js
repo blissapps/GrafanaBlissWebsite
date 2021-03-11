@@ -20,7 +20,7 @@ describe('Home page tests', () => {
         leftMenuBar.accessGlobalSettingsMenu("User Management", "Group Management")
         
         globalSettingsModalPage.checkModalHeaderTitle().should('have.text', 'Groups')
-        globalSettingsModalPage.checkSettingsUrl()
+        globalSettingsModalPage.checkGroupManagementsUrl()
         globalSettingsModalPage.selectTab('Inactive')
         
         leftMenuBar.closeMenuLeftBar()

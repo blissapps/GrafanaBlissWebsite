@@ -1,7 +1,8 @@
 import Common from '../pages/common'
 
 const selectors = {
-  headerTitle: '.header > h2'
+  headerTitle: '.header > h2',
+  userHeaderTitle: '.title'
 }
 
 const properties = {
@@ -11,20 +12,23 @@ const properties = {
   dapManagementUrl: '/settings/dap-management',
 }
 
+/**
+ * This class refers to the "modals" that appears in Global Settings when the user access it over the left menu bar.
+ */
 class GlobalSettingsModalPage extends Common{
 
   /**
-   * Check the settings url
+   * Check the group management url
    * 
    */
-  checkSettingsUrl(){
+  checkGroupManagementsUrl(){
     this.checkUrl(properties.groupManagementUrl)
   }
 
   /**
-   * Check the modal title to assert the correct page
+   * Return the header title, so it can be asserted in the test
    * 
-   * @returns The element if it exists
+   * @returns The actual header title if it exists. Examples: Group, Users, 
    */
    checkModalHeaderTitle(){
     return cy.get(selectors.headerTitle)
