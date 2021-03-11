@@ -86,6 +86,24 @@ class Common {
     return this.getElementByText(text).click()
   }
 
+  /**
+   * Selects a tab
+   * 
+   * @param {String} tabName Name of the tab you want to go in
+   */
+  selectTab(tabName){
+    cy.xpath(`//div[@class='tabs-bar']//span[text()='${tabName}']`).click()
+  }
+
+  /**
+   * Click in the first apperance of a text in a table of hearth-data-container type
+   *  
+   * @param {*} text text bo be clicked in the table
+   */
+  clickDataByTextInTable(text){
+    cy.xpath(`(//hearth-data-container//*[text() = '${text}'])[1]`).click()
+  }
+
 }
 
 export default Common;

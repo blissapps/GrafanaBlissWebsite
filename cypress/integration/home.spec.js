@@ -1,11 +1,13 @@
 import HomePage from '../support/pages/homePage'
 import GlobalSettingsModalPage from '../support/modals/globalSettingsModalPage'
+import EquityPeoplePage from '../support/pages/equityPeoplePage'
 
 import LeftMunuBar from '../support/components/leftMenuBar'
 
 describe('Home page tests', () => {
     const homePage = new HomePage
     const globalSettingsModalPage = new GlobalSettingsModalPage
+    const equityPeoplePage = new EquityPeoplePage
     const leftMenuBar = new LeftMunuBar
 
     beforeEach(() => {
@@ -16,7 +18,7 @@ describe('Home page tests', () => {
         homePage.selectClientFromTheList('Allianz')
     });
 
-    it('Test', () => {
+    it('Test Settings menu', () => {
         leftMenuBar.accessGlobalSettingsMenu("User Management", "Group Management")
         
         globalSettingsModalPage.checkModalHeaderTitle().should('have.text', 'Groups')
@@ -24,6 +26,14 @@ describe('Home page tests', () => {
         globalSettingsModalPage.selectTab('Inactive')
         
         leftMenuBar.closeMenuLeftBar()
+        homePage.checkUrl()
+    });
+
+    it.only('Test People`s page', () => {
+        homePage.selectClientFromTheList('Allianz')
+        equityPeoplePage.checkPeopleUrl()
+        equityPeoplePage.editParticipantDetails('39477')
+
     });
 
 });

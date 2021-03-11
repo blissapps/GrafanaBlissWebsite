@@ -18,7 +18,7 @@ const properties = {
 class GlobalSettingsModalPage extends Common{
 
   /**
-   * Check the group management url
+   * Check if the current page is the group management url
    * 
    */
   checkGroupManagementsUrl(){
@@ -32,15 +32,6 @@ class GlobalSettingsModalPage extends Common{
    */
    checkModalHeaderTitle(){
     return cy.get(selectors.headerTitle)
-  }
-
-  /**
-   * Selects a tab
-   * 
-   * @param {String} tabName Name of the tab you want to go in
-   */
-  selectTab(tabName){
-    cy.xpath(`//div[@class='tabs-bar']//span[text()='${tabName}']`).click()
   }
       
 }

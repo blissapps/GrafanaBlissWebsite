@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 import "cypress-waitfor";
 import "cypress-file-upload";
 import "cypress-iframe";
