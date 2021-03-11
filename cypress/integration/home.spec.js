@@ -32,7 +32,7 @@ describe('Home page tests', () => {
     it.only('Test People`s page', () => {
         homePage.selectClientFromTheList('Allianz')
         equityPeoplePage.checkPeopleUrl()
-        equityPeoplePage.editParticipantDetails('39477')
+        equityPeoplePage.openEditParticipantDetails('39477')
 
     });
 
