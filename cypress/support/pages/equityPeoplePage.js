@@ -6,7 +6,7 @@ const selectors = {
 }
 
 const properties = {
-  peopleURL: '/people'
+  pageURL: '/people'
 }
 
 const searchBar = new SearchBar;
@@ -17,7 +17,7 @@ class EquityPeoplePage extends Common{
    * Checks if the current page is Participants/People URL
    */
   checkPeopleUrl(){
-    this.checkUrl(properties.peopleURL)
+    this.checkUrl(properties.pageURL)
   }
 
   /**
