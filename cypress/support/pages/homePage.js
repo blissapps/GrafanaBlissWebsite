@@ -12,7 +12,6 @@ class HomePage extends BasePage{
     this.checkUrl(Cypress.env("homePageURL"))
   }
 
-
     /**
    * Search for a client using the search bar
    * @param {string} clientName Client name to search

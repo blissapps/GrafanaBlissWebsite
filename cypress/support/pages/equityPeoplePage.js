@@ -28,7 +28,7 @@ class EquityPeoplePage extends BasePage{
    * @example 'amount=1 record(s)' for '1 record(s)' beings displayed in the table 
    */
    checkAmountOfPeopleTable(amount){
-    cy.xpath("//*[@id='peopleRecordCount' and normalize-space(text())='1 record(s)']")
+    cy.xpath(`//*[@id='peopleRecordCount' and normalize-space(text())='${amount}']`)
   }
 
     /**

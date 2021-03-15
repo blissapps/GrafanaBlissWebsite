@@ -2,6 +2,7 @@
   "extends": ["eslint:recommended", "plugin:cypress/recommended"],
   "rules": {
     "no-undef": "off",
+    "no-unused-vars": "warn",
     "cypress/no-unnecessary-waiting": "warn"
   }
 }
