@@ -26,10 +26,10 @@ describe('Home page tests', () => {
         globalSettingsModalPage.selectTab('Inactive')
         
         leftMenuBar.closeMenuLeftBar()
-        homePage.checkUrl()
+        homePage.checkUrl('home')
     });
 
-    it.only('Test People`s page', () => {
+    it('Test People`s page', () => {
         homePage.selectClientFromTheList('Allianz')
         equityPeoplePage.checkPeopleUrl()
         equityPeoplePage.openEditParticipantDetails('39477')

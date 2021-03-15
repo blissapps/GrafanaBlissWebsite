@@ -1,10 +1,10 @@
-import Common from "./common";
+import BasePage from "./basePage";
 
 const properties = {
   pageURL: "/shareholder-profile",
 };
 
-class PeopleShareholderProfilePage extends Common {
+class PeopleShareholderProfilePage extends BasePage {
   /**
    * Checks if the current page is the Shareholder Profile URL, which is accessed through Equity People page
    */

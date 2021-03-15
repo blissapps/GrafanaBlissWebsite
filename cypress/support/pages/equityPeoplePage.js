@@ -1,4 +1,4 @@
-import Common from './common'
+import BasePage from './basePage'
 import SearchBar from '../components/searchBar'
 
 const selectors = {
@@ -11,7 +11,7 @@ const properties = {
 
 const searchBar = new SearchBar;
 
-class EquityPeoplePage extends Common{
+class EquityPeoplePage extends BasePage{
 
   /**
    * Checks if the current page is Participants/People URL

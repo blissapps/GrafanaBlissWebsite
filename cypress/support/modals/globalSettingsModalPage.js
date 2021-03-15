@@ -1,4 +1,4 @@
-import Common from '../pages/common'
+import BasePage from '../pages/basePage'
 
 const selectors = {
   headerTitle: '.header > h2',
@@ -15,7 +15,7 @@ const properties = {
 /**
  * This class refers to the "modals" that appears in Global Settings when the user access it over the left menu bar.
  */
-class GlobalSettingsModalPage extends Common{
+class GlobalSettingsModalPage extends BasePage{
 
   /**
    * Check if the current page is the group management url

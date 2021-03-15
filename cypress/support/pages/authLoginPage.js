@@ -1,10 +1,10 @@
-import Common from './common'
+import BasePage from './basePage'
 
 const messages ={
   errorMessage: 'You have an invalid username or password or your account is locked. Please try again or contact your service team to assist you.'
 }
 
-class AuthLoginPage extends Common{
+class AuthLoginPage extends BasePage{
 
   /**
    * Get the error message when a unsuccessful login is made

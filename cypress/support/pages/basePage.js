@@ -1,4 +1,7 @@
-class Common {
+/**
+ * This is the basePage class with all basic methods we can use across all the pages
+ */
+class BasePage {
 
   /**
    * Get an element by passing a text
@@ -106,4 +109,4 @@ class Common {
 
 }
 
-export default Common;
+export default BasePage;

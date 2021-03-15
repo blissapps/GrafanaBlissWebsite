@@ -1,9 +1,9 @@
-import Common from './common'
+import BasePage from './basePage'
 import SearchBar from '../components/searchBar'
 
 const searchBar = new SearchBar;
 
-class HomePage extends Common{
+class HomePage extends BasePage{
 
   /**
    * Check if the current page is the home URL
