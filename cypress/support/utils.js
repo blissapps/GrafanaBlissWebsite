@@ -1,3 +1,7 @@
+/**
+ * Basic methods that can be used across the project. Also called helpers
+ */
+
 class Utils {
   /**
    * Get a data in a list with the format {month, day, year}.
@@ -12,7 +16,10 @@ class Utils {
     const dayjs = require("dayjs");
 
     let now = dayjs();
-    let date = now.add(days, "day").add(months, "month").add(years, "year");
+    let date = now
+      .add(days, "day")
+      .add(months, "month")
+      .add(years, "year");
     const date_formated = date.format("MM/DD/YYYY");
 
     return date_formated.split("/");

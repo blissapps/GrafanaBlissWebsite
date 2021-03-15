@@ -33,7 +33,6 @@ describe('Home page tests', () => {
         homePage.selectClientFromTheList('Allianz')
         equityPeoplePage.checkPeopleUrl()
         equityPeoplePage.openEditParticipantDetails('39477')
-
     });
 
 });

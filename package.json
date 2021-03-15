@@ -37,14 +37,14 @@
     "cypress-xpath": "^1.6.1",
     "cypress-file-upload": "^5.0.2",
     "cypress-iframe": "^1.0.1",
+    "@cypress/skip-test": "^2.6.0",
+    "@4tw/cypress-drag-drop": "^1.6.0",
     "mocha": "^8.2.1",
     "mochawesome": "^6.2.1",
     "mochawesome-merge": "^4.2.0",
     "mochawesome-report-generator": "^5.1.0",
-    "dayjs": "^1.8.36"
-  },
-  "dependencies": {
-    "@cypress/skip-test": "^2.6.0",
-    "@4tw/cypress-drag-drop": "^1.6.0"
+    "dayjs": "^1.8.36",
+    "eslint": "^7.22.0",
+    "eslint-plugin-cypress": "2.11.2"
   }
 }
