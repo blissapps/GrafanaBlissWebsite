@@ -30,6 +30,7 @@ class LeftMunuBar{
    */
   accessGlobalSettingsMenu(item, subItem){
     this.openSettingsMenuBar()
+    cy.contains(item) // avoid element detached from the DOM
     cy.xpath(`(//a[normalize-space(text()) = '${item}'])[1]`).click()
 
     if (subItem){

@@ -18,6 +18,8 @@ class HomePage extends BasePage{
    */
    selectClientFromTheList(clientName){
     searchBar.search(clientName)
+    searchBar.clearSearchBox()
+    cy.contains(clientName) // avoid element detached from the DOM
     cy.xpath(`//gs-card//h4[normalize-space(text()) = '${clientName}']`).click()
   }
       
