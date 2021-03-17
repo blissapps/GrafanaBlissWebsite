@@ -6,19 +6,18 @@ const selectors = {
   signOut: 'a.logout'
 }
 
-class LeftMunuBar{
-
+class LeftMunuBar {
   /**
    * Closes the menu left page
    */
-  closeMenuLeftBar(){
+  closeMenuLeftBar() {
     cy.xpath(selectors.closeBar).click()
   }
 
   /**
    * Opens the settings menu left bar
    */
-  openSettingsMenuBar(){
+  openSettingsMenuBar() {
     cy.get(selectors.settingsButton).click()
   }
 
@@ -26,18 +25,17 @@ class LeftMunuBar{
    * Navigation menu
    * @param {string} item Main menu item
    * @param {string} subItem Submenu item if avaiable. If not, passes nothing like: accessMenuItem("Statement Management")
-   * 
+   *
    */
-  accessGlobalSettingsMenu(item, subItem){
+  accessGlobalSettingsMenu(item, subItem) {
     this.openSettingsMenuBar()
     cy.contains(item) // avoid element detached from the DOM
     cy.xpath(`(//a[normalize-space(text()) = '${item}'])[1]`).click()
 
-    if (subItem){
+    if (subItem) {
       cy.xpath(`(//a[normalize-space(text()) = '${subItem}'])[1]`).click()
     }
   }
-      
 }
-  
-export default LeftMunuBar;
+
+export default LeftMunuBar

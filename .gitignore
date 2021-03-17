@@ -13,5 +13,8 @@ videos
 # Yarn files
 yarn-error.log
 
+# Compiler report files
+dist
+
 # MAC files
 **/.DS_Store

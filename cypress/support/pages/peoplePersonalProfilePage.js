@@ -1,16 +1,16 @@
-import BasePage from "./basePage";
+import BasePage from './basePage'
 
 const properties = {
-  pageURL: "/personal-profile",
-};
+  pageURL: '/personal-profile'
+}
 
 class PeoplePersonalProfilePage extends BasePage {
   /**
    * Checks if the current page is the Personal Profile URL, which is accessed through Equity People page
    */
   checkPeoplePersonalProfileURL() {
-    this.checkUrl(properties.pageURL);
+    this.checkUrl(properties.pageURL)
   }
 }
 
-export default PeoplePersonalProfilePage;
+export default PeoplePersonalProfilePage

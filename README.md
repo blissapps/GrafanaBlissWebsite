@@ -4,7 +4,7 @@
 
 
 ### Suggested IDEs by [Cypress documentation](https://docs.cypress.io/guides/tooling/IDE-integration.html#Extensions-amp-Plugins):
-- VsCode (Best option to work with Cypress and it's free)
+- VsCode (Best option to work with Cypress and it's free). I strongly recommend you to use this one!
 - Intellij (Alternative solution, also free)
 
 ### Official framework links:

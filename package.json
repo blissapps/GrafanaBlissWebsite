@@ -20,7 +20,17 @@
     "cy:posttest:results": "yarn cy:merge:results && yarn cy:final:results",
     "cy:clean:results": "rm -rf cypress/test-results/*",
     "cy:merge:results": "npx mochawesome-merge 'cypress/test-results/*.json' > mochawesomeFinal.json",
-    "cy:final:results": "marge mochawesomeFinal.json --reportDir cypress/test-results/ && mv mochawesomeFinal.json cypress/test-results/"
+    "cy:final:results": "marge mochawesomeFinal.json --reportDir cypress/test-results/ && mv mochawesomeFinal.json cypress/test-results/",
+    " --- Formatting: ESLint and Prettier + Typescript compiler to support JS code ---- ": "",
+    "eslint": "eslint --report-unused-disable-directives --max-warnings=0 -c .eslintrc.json .",
+    "eslint:fix": "yarn eslint --fix",
+    "lint": "yarn eslint && yarn prettier:check",
+    "lint:fix": "yarn tsclearcompilefolder && yarn eslint:fix && yarn prettier:fix",
+    "prettier:cli": "prettier \"**/*.js\"",
+    "prettier:check": "yarn prettier:cli -l",
+    "prettier:fix": "yarn prettier:cli --write --single-quote",
+    "tsclearcompilefolder": "rm -rf dist",
+    "compile": "tsc && rm -rf dist"
   },
   "keywords": [
     "tests",
@@ -30,7 +40,7 @@
   "author": "Laerte Mello",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^6.6.0",
+    "cypress": "^6.7.1",
     "cypress-plugin-snapshots": "^1.4.4",
     "cypress-select-tests": "^1.5.9",
     "cypress-waitfor": "^1.1.0",
@@ -43,8 +53,17 @@
     "mochawesome": "^6.2.1",
     "mochawesome-merge": "^4.2.0",
     "mochawesome-report-generator": "^5.1.0",
-    "dayjs": "^1.8.36",
     "eslint": "^7.22.0",
-    "eslint-plugin-cypress": "2.11.2"
+    "eslint-plugin-cypress": "2.11.2",
+    "eslint-config-prettier": "^6.4.0",
+    "eslint-plugin-eslint-plugin": "^2.1.0",
+    "eslint-plugin-import": "^2.20.0",
+    "eslint-plugin-mocha": "^6.2.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "babel-eslint": "^10.0.3",
+    "prettier": "1.19.1",
+    "typescript": "^4.2.3",
+    "dayjs": "^1.8.36",
+    "tsc-silent": "^1.2.1"
   }
 }

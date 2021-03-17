@@ -13,17 +13,17 @@ class Utils {
    * @param {number} years amount of years to shitf
    */
   getDateInFutureOrPast(days, months, years) {
-    const dayjs = require("dayjs");
+    const dayjs = require('dayjs')
 
-    let now = dayjs();
-    let date = now
-      .add(days, "day")
-      .add(months, "month")
-      .add(years, "year");
-    const date_formated = date.format("MM/DD/YYYY");
+    const now = dayjs()
+    const date = now
+      .add(days, 'day')
+      .add(months, 'month')
+      .add(years, 'year')
+    const date_formated = date.format('MM/DD/YYYY')
 
-    return date_formated.split("/");
+    return date_formated.split('/')
   }
 }
 
-export default Utils;
+export default Utils
