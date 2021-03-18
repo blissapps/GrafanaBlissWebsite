@@ -5,6 +5,7 @@ node_modules
 cypress/screenshots/*
 cypress/test-results/
 test-results.xml
+results
 videos
 
 # Vs code or other IDE generated config files:
