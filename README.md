@@ -1,6 +1,6 @@
 # Cypress automation framework for the new admin portal
 
-> Disclaimer: Bitbuket has some issues while reading markdown annotations. Please, copy the content in the README.md file and paste it in a markdown reader of your preference to see the documentation in the way it is supposed to be.
+> Disclaimer: Bitbuket has some issues while reading markdown annotations. Please, go to [this link](https://globalshares.atlassian.net/wiki/spaces/GCE/pages/2825781674/Setup+and+how+to+run+tests) or copy the content in the README.md file and paste it in a markdown reader of your preference to see the documentation in the way it is supposed to be.
 
 
 ### Suggested IDEs by [Cypress documentation](https://docs.cypress.io/guides/tooling/IDE-integration.html#Extensions-amp-Plugins):
@@ -95,7 +95,7 @@ We can create many personalized ways to run cypress. To do this, we need to crea
 ## Cypress with Docker
 When we execute tests using our local resources, the tests take advantage of the host machine like browsers, memory and etc.
 
-Using Docker you'll be able to customize your "machine configurations" without having any extra infrastructure. It's so simple to create Containers on the fly and add your tests into a Continuos Integration Environment.
+Using Docker you'll be able to customize your "machine configurations" without having any extra infrastructure. It's so simple to create Containers on the fly and add your tests into a Continuous Integration Environment.
 
 For this case, the tests are running inside the container via dockerfile so, you can follow the next steps to see how to run tests with Docker.
 
