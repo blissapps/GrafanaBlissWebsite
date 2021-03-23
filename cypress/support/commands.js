@@ -14,7 +14,7 @@ const executeCommand = command => {
  * @param {string} password password to login. The default variable is set in the cypress.json file
  */
 Cypress.Commands.add('login', (email = Cypress.env('defaultUserAuth'), password = Cypress.env('defaultPasswordAuth')) => {
-  cy.visit(Cypress.env('loginAuthURL'))
+  cy.visit('/')
   cy.get('#username-field').type(email)
   cy.get('#password-field').type(password)
   cy.get('#login').click()
