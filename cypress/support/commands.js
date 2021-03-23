@@ -17,6 +17,7 @@ Cypress.Commands.add('login', (email = Cypress.env('defaultUserAuth'), password 
   cy.visit('/')
   cy.get('#username-field').type(email)
   cy.get('#password-field').type(password)
+  cy.contains('Continue') // avoid element detached from the DOM
   cy.get('#login').click()
 })
 
@@ -25,6 +26,7 @@ Cypress.Commands.add('login', (email = Cypress.env('defaultUserAuth'), password 
  */
 Cypress.Commands.add('logout', () => {
   cy.get('#profile-item').click()
+  cy.contains('Sign Out') // avoid element detached from the DOM
   cy.get('a.logout').click()
 })
 

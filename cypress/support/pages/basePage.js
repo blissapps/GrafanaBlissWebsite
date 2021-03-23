@@ -10,7 +10,8 @@ class BasePage {
    * @returns the element if found
    */
   getElementByText(text) {
-    return cy.xpath(`//*[normalize-space(text()) = '${text}']`)
+    // return cy.xpath(`//*[normalize-space(text()) = '${text}']`)
+    return cy.contains(text)
   }
 
   /**
@@ -23,16 +24,6 @@ class BasePage {
    */
   getElementByTagAndText(tag, text) {
     return cy.xpath(`//${tag}[normalize-space(text()) = '${text}']`)
-  }
-
-  /**
-   * Get the first element containing some text
-   *
-   * @param {string} text text to check if a element contain it
-   * @returns
-   */
-  getElementByContainsText(text) {
-    return cy.contains(text)
   }
 
   /**
