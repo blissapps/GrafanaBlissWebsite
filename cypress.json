@@ -1,47 +1,43 @@
 {
-    "projectId": "15zcyz",
-    "baseUrl": "https://ea-v3.myglobalshares.co.uk/",
-    "chromeWebSecurity": false,
-    "trashAssetsBeforeRuns": false,
-    "integrationFolder": "cypress/integration/",
-    "testFiles": ["**/*.feature", "**/*.spec.js"],
-    "numTestsKeptInMemory": 15,
-    "video": false,
-    "defaultCommandTimeout": 10000,
-    "viewportWidth": 1920,
-    "viewportHeight": 1080,
-    "ignoreTestFiles": ["**/__snapshots__/*", "**/__image_snapshots__/*"],
-    "retries": {
-      "runMode": 1,
-      "openMode": 0
-    },
+  "projectId": "15zcyz",
+  "baseUrl": "https://ea-v3.myglobalshares.co.uk/",
+  "chromeWebSecurity": false,
+  "trashAssetsBeforeRuns": false,
+  "integrationFolder": "cypress/integration/",
+  "testFiles": ["**/*.feature", "**/*.spec.js"],
+  "numTestsKeptInMemory": 15,
+  "video": false,
+  "defaultCommandTimeout": 10000,
+  "viewportWidth": 1920,
+  "viewportHeight": 1080,
+  "ignoreTestFiles": ["**/__snapshots__/*", "**/__image_snapshots__/*"],
+  "retries": {
+    "runMode": 1,
+    "openMode": 0
+  },
 
-    "screenshotOnRunFailure": false,
-    "screenshotConfig": {
-      "scale": false
-    },
+  "screenshotOnRunFailure": false,
+  "screenshotConfig": {
+    "scale": false
+  },
 
-    "include": [
-      "./node_modules/cypress",
-      "cypress/**/*.js"
-    ],
+  "include": ["./node_modules/cypress", "cypress/**/*.js"],
 
-    "reporter": "mochawesome",
-    "reporterOptions": {
-        "reportDir": "cypress/test-results/",
-        "mochaFile": "cypress/test-results/my-test-output.xml",
-        "jenkinsMode": false,
-        "quite": true,
-        "overwrite": false,
-        "html": false,
-        "json": true
-    },
-    
-    "env": {
-      "loginAuthURL": "https://ea-v3.myglobalshares.co.uk/",
-      "homePageURL": "https://ea-v3.myglobalshares.co.uk/home",
-      "defaultUserAuth": "lmello@globalshares.co.uk",
-      "defaultPasswordAuth": "Swordfish123!"
-    }
+  "reporter": "mochawesome",
+  "reporterOptions": {
+    "reportDir": "cypress/test-results/",
+    "mochaFile": "cypress/test-results/my-test-output.xml",
+    "jenkinsMode": false,
+    "quite": true,
+    "overwrite": false,
+    "html": false,
+    "json": true
+  },
+
+  "env": {
+    "loginAuthURL": "https://ea-v3.myglobalshares.co.uk/",
+    "homePageURL": "https://ea-v3.myglobalshares.co.uk/home",
+    "defaultUserAuth": "lmello@globalshares.co.uk",
+    "defaultPasswordAuth": "Swordfish123!"
   }
-  
+}

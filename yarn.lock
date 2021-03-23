@@ -765,10 +765,10 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
-"@cypress/browserify-preprocessor@2.2.4":
-  version "2.2.4"
-  resolved "https://registry.yarnpkg.com/@cypress/browserify-preprocessor/-/browserify-preprocessor-2.2.4.tgz#a2ff5a6a06938f7f1e78eb6de0e492641cf8561c"
-  integrity sha512-kMjkIFe6qka8Tkm9N3BrMB+Nn7WEAHIzEd3gfVoDL17Tr40xyOnKGuMhEkff1scd3RV3bjQxwQ9BQ6kI2nToAQ==
+"@cypress/browserify-preprocessor@3.0.1", "@cypress/browserify-preprocessor@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@cypress/browserify-preprocessor/-/browserify-preprocessor-3.0.1.tgz#ab86335b0c061d11f5ad7df03f06b1877b836f71"
+  integrity sha512-sErmFSEr5287bLMRl0POGnyFtJCs/lSk5yxrUIJUIHZ8eDvtTEr0V93xRgLjJVG54gJU4MbpHy1mRPA9VZbtQA==
   dependencies:
     "@babel/core" "7.4.5"
     "@babel/plugin-proposal-class-properties" "7.3.0"
@@ -784,7 +784,7 @@
     coffeeify "3.0.1"
     coffeescript "1.12.7"
     debug "4.1.1"
-    fs-extra "7.0.1"
+    fs-extra "9.0.0"
     lodash.clonedeep "4.5.0"
     through2 "^2.0.0"
     watchify "3.11.1"
@@ -2368,16 +2368,25 @@ cypress-plugin-snapshots@^1.4.4:
     source-map-support "^0.5.10"
     unidiff "1.0.2"
 
-cypress-select-tests@^1.5.9:
-  version "1.5.9"
-  resolved "https://registry.yarnpkg.com/cypress-select-tests/-/cypress-select-tests-1.5.9.tgz#47fec88e03dfa67d8c803782eabac5186707217a"
-  integrity sha512-3u2mz8E0xmGGnNLSAEs/KGfynfR+EnaCWdfhMlwDKSadkQkxBBeTNUetWzaaHyrOakG2HN1mPiohGNzMrj4BRw==
+cypress-select-tests@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/cypress-select-tests/-/cypress-select-tests-1.7.0.tgz#5513bad477777551980727f8b3af45167fdce14d"
+  integrity sha512-XZsH5AdfaIsmwpQUWBKn9ZxsHqMXWoJ/PQezuT88eYIinVCc1B12nPcpKhQelZ1/95fWPD+vywMuo64RMLMvKA==
   dependencies:
-    "@cypress/browserify-preprocessor" "2.2.4"
+    "@cypress/browserify-preprocessor" "3.0.1"
     debug "4.3.1"
     falafel "2.2.4"
     pluralize "8.0.0"
     through "2.3.8"
+
+cypress-tags@^0.0.20:
+  version "0.0.20"
+  resolved "https://registry.yarnpkg.com/cypress-tags/-/cypress-tags-0.0.20.tgz#1fac58881dfff5714c3b32b08ad9011b97877534"
+  integrity sha512-svGX0EmUopPQyGJJFjnVmB9O9r61Rz3ugPhPeY1xMYWwLGWEkhNCQEjdlgScOjh1mJZQJhBKUa8Scs7C184HVA==
+  dependencies:
+    "@cypress/browserify-preprocessor" "^3.0.1"
+    cypress "^6.5.0"
+    through "^2.3.8"
 
 cypress-waitfor@^1.1.0:
   version "1.1.0"
@@ -2389,7 +2398,7 @@ cypress-xpath@^1.6.1:
   resolved "https://registry.yarnpkg.com/cypress-xpath/-/cypress-xpath-1.6.1.tgz#31b8ba3a9544b485f8d520d279a397e27748a2ef"
   integrity sha512-o0SZlCscap8RkYZ1yOp+exse8RFO9x37rGOQ8qsAxR5/juJ10P522FG3v6kwzM7I15Ur7m5+sHs3yF41g7QeeQ==
 
-cypress@^6.8.0:
+cypress@^6.5.0, cypress@^6.8.0:
   version "6.8.0"
   resolved "https://registry.yarnpkg.com/cypress/-/cypress-6.8.0.tgz#8338f39212a8f71e91ff8c017a1b6e22d823d8c1"
   integrity sha512-W2e9Oqi7DmF48QtOD0LfsOLVq6ef2hcXZvJXI/E3PgFNmZXEVwBefhAxVCW9yTPortjYA2XkM20KyC4HRkOm9w==
@@ -3278,7 +3287,17 @@ fragment-cache@^0.2.1:
   dependencies:
     map-cache "^0.2.2"
 
-fs-extra@7.0.1, fs-extra@^7.0.0, fs-extra@^7.0.1:
+fs-extra@9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-9.0.0.tgz#b6afc31036e247b2466dc99c29ae797d5d4580a3"
+  integrity sha512-pmEYSk3vYsG/bF651KPUXZ+hvjpgWYw/Gc7W9NFUe3ZVLczKKWIij3IKpOrQcdw4TILtibFslZ0UmR8Vvzig4g==
+  dependencies:
+    at-least-node "^1.0.0"
+    graceful-fs "^4.2.0"
+    jsonfile "^6.0.1"
+    universalify "^1.0.0"
+
+fs-extra@^7.0.0, fs-extra@^7.0.1:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-7.0.1.tgz#4f189c44aa123b895f722804f55ea23eadc348e9"
   integrity sha512-YJDaCJZEnBmcbw13fvdAM9AwNOJwOzrE4pqMqBq5nFiEqXUqHwlK4B+3pUw6JNvfSPtX05xFHtYy/1ni01eGCw==
@@ -6018,7 +6037,7 @@ through2@^2.0.0:
     readable-stream "~2.3.6"
     xtend "~4.0.1"
 
-through@2.3.8, "through@>=2.2.7 <3":
+through@2.3.8, "through@>=2.2.7 <3", through@^2.3.8:
   version "2.3.8"
   resolved "https://registry.yarnpkg.com/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
   integrity sha1-DdTJ/6q8NXlgsbckEV1+Doai4fU=
@@ -6246,6 +6265,11 @@ universalify@^0.1.0:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/universalify/-/universalify-0.1.2.tgz#b646f69be3942dabcecc9d6639c80dc105efaa66"
   integrity sha512-rBJeI5CXAlmy1pV+617WB9J63U6XcazHHF2f2dbJix4XzpUF0RS3Zbj0FGIOCAva5P/d/GBOYaACQ1w+0azUkg==
+
+universalify@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/universalify/-/universalify-1.0.0.tgz#b61a1da173e8435b2fe3c67d29b9adf8594bd16d"
+  integrity sha512-rb6X1W158d7pRQBg5gkR8uPaSfiids68LTJQYOtEUhoJUWBdaQHsuT/EUduxXYxcrt4r5PJ4fuHW1MHT6p0qug==
 
 universalify@^2.0.0:
   version "2.0.0"

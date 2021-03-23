@@ -10,13 +10,15 @@
 // https://on.cypress.io/plugins-guide
 // ***********************************************************
 const { initPlugin } = require('cypress-plugin-snapshots/plugin')
+// const selectTestsWithGrep = require('cypress-select-tests/grep')
+const tagify = require('cypress-tags')
 
 /**
  * @type {Cypress.PluginConfig}
  */
 module.exports = (on, config) => {
-  // `on` is used to hook into various events Cypress emits
-  // `config` is the resolved Cypress config
+  //on('file:preprocessor', selectTestsWithGrep(config))
+  on('file:preprocessor', tagify(config))
   on('before:browser:launch', (launchOptions, browser = {}) => {
     if (browser.family === 'chromium') {
       launchOptions.args.push(
