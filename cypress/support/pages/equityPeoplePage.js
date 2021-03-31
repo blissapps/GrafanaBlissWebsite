@@ -42,7 +42,7 @@ class EquityPeoplePage extends BasePage {
   }
 
   /**
-   * Edit a participant from the list
+   * Edit a participant from the list and go to Peoples page details >> Cypress/support/pages/people
    *
    * @param {string} participantId Participant id to be searched
    */
