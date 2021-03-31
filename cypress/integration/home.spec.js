@@ -1,5 +1,5 @@
 import HomePage from '../support/pages/homePage'
-import GroupManagementPage from '../support/pages/settings/groupManagementPage'
+import GroupManagementPage from '../support/pages/settingsPages/groupManagementPage'
 import EquityPeoplePage from '../support/pages/equityPeoplePage'
 
 import LeftMunuBar from '../support/components/leftMenuBar'
