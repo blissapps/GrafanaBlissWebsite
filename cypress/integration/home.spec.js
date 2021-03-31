@@ -1,12 +1,12 @@
 import HomePage from '../support/pages/homePage'
-import GlobalSettingsModalPage from '../support/modals/globalSettingsModalPage'
+import GroupManagementPage from '../support/pages/settings/groupManagementPage'
 import EquityPeoplePage from '../support/pages/equityPeoplePage'
 
 import LeftMunuBar from '../support/components/leftMenuBar'
 
 describe('Home page tests', () => {
   const homePage = new HomePage()
-  const globalSettingsModalPage = new GlobalSettingsModalPage()
+  const groupManagementPage = new GroupManagementPage()
   const equityPeoplePage = new EquityPeoplePage()
   const leftMenuBar = new LeftMunuBar()
 
@@ -22,9 +22,8 @@ describe('Home page tests', () => {
   it('Test Settings menu', () => {
     leftMenuBar.accessGlobalSettingsMenu('User Management', 'Group Management')
 
-    globalSettingsModalPage.checkModalHeaderTitle().should('have.text', 'Groups')
-    globalSettingsModalPage.checkGroupManagementsUrl()
-    globalSettingsModalPage.selectTab('Inactive')
+    groupManagementPage.checkGroupManagementUrl()
+    groupManagementPage.selectTab('Inactive')
 
     leftMenuBar.closeMenuLeftBar()
     homePage.checkUrl('home')
