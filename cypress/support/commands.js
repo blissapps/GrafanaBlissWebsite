@@ -17,7 +17,8 @@ Cypress.Commands.add('login', (email = Cypress.env('defaultUserAuth'), password 
   cy.visit('/')
   cy.get('#username-field').type(email)
   cy.get('#password-field').type(password)
-  cy.contains('Continue') // avoid element detached from the DOM. See https://github.com/cypress-io/cypress/issues/7306
+  // eslint-disable-next-line cypress/no-unnecessary-waiting
+  cy.wait(500) // avoid element detached from the DOM. See https://github.com/cypress-io/cypress/issues/7306
   cy.get('#login').click()
 })
 
@@ -29,7 +30,6 @@ Cypress.Commands.add('logout', () => {
   cy.get('#profile-item').click()
   // eslint-disable-next-line cypress/no-unnecessary-waiting
   cy.wait(500) // avoid element detached from the DOM. See https://github.com/cypress-io/cypress/issues/7306
-  cy.contains('Sign Out')
   cy.get('a.logout').click()
 })
 

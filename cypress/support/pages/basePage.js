@@ -38,6 +38,17 @@ class BasePage {
   }
 
   /**
+   * Check url by passing a regex
+   *
+   * @param {RegExp} url The entire url or a part of it. Is is a string like this: /regex/
+   *
+   * @returns The assertion if the url exists or not
+   */
+  checkUrlByRegex(url) {
+    return cy.url().should('match', url)
+  }
+
+  /**
    * Select an item in a select box
    *
    * @param {string} selectBoxId select box Id in Jquery Selector

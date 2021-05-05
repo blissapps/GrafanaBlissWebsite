@@ -1,37 +1,23 @@
 import HomePage from '../support/pages/homePage'
-import GroupManagementPage from '../support/pages/settingsPages/groupManagementPage'
-import EquityPeoplePage from '../support/pages/equityPeoplePage'
-
-import LeftMunuBar from '../support/components/leftMenuBar'
 
 describe('Home page tests', () => {
   const homePage = new HomePage()
-  const groupManagementPage = new GroupManagementPage()
-  const equityPeoplePage = new EquityPeoplePage()
-  const leftMenuBar = new LeftMunuBar()
 
   beforeEach(() => {
     // @ts-ignore
     cy.login()
   })
 
-  it('Select a specific client from the list', () => {
+  it('C1234567_Select_Specific_Client_From_The_List', () => {
     homePage.selectClientFromTheList('Allianz')
+    homePage.checkUrlByRegex(/.?client.*[0-9].?people$/)
   })
 
-  it('Test Settings menu', () => {
-    leftMenuBar.accessGlobalSettingsMenu('User Management', 'Group Management')
-
-    groupManagementPage.checkGroupManagementUrl()
-    groupManagementPage.selectTab('Inactive')
-
-    leftMenuBar.closeMenuLeftBar()
-    homePage.checkUrl('home')
+  it('C1234567_Check_GroupBy_Displays_Correct_Order_For_Alphabetical', () => {
+    homePage.groubyByList()
   })
 
-  it('Test People`s page', () => {
-    homePage.selectClientFromTheList('Allianz')
-    equityPeoplePage.checkPeopleUrl()
-    equityPeoplePage.openEditParticipantDetails('39477')
-  })
+  // favorite and unfavorite a client
+
+  // Check summary client information. Ex: Allianz {GBR, NOT REGULATED, NOT SET}
 })

@@ -6,19 +6,19 @@ describe('Login and Logout tests', () => {
   const authLoginPage = new AuthLoginPage()
   const homePage = new HomePage()
 
-  it('Login and logout positive ', () => {
+  it('C1234567_Login_And_Logout_Positive', () => {
     cy.login()
     homePage.checkUrl('/home')
     cy.logout()
     authLoginPage.checkUrl('/Account/Login')
   })
 
-  it('Login negative with both wrong user and password', () => {
+  it('C1234567_Login_With_Both_Wrong_User_And_Password', () => {
     cy.login('wronguser@glbalshares.com', '123!ABC')
     authLoginPage.checkUnsuccessfulLoginErrorMessageDisplayed().should('be.visible')
   })
 
-  it('Login negative with correct user and wrong password', () => {
+  it('C1234567_Login_With_Correct_User_And_Wrong_Password', () => {
     cy.login('lmello@globalshares.co.uk', '123!ABC')
     authLoginPage.checkUnsuccessfulLoginErrorMessageDisplayed().should('be.visible')
   })
