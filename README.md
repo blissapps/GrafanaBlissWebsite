@@ -1,7 +1,7 @@
 # Cypress automation framework for the new admin portal
 
 > **⚠ Disclaimer:**
- Bitbuket has some issues while reading markdown annotations. Please, go to [this link](https://globalshares.atlassian.net/wiki/spaces/GCE/pages/2825781674/Setup+and+how+to+run+tests) or copy the content in the README.md file and paste it in a markdown reader of your preference to see the documentation in the way it is supposed to be.
+ Bitbuket may have some issues while reading markdown annotations. If it happens to you, please, go to [this link](https://globalshares.atlassian.net/wiki/spaces/GCE/pages/2825781674/Setup+and+how+to+run+tests) or copy the content in the README.md file and paste it in a markdown reader of your preference to see the documentation in the way it is supposed to be. Moreover, in this link you will find more details about this repo.
 
 
 ### Suggested IDEs by [Cypress documentation](https://docs.cypress.io/guides/tooling/IDE-integration.html#Extensions-amp-Plugins):
