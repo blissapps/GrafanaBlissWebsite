@@ -13,7 +13,8 @@
     "noUnusedParameters": true,
     "pretty": true,
     "strictNullChecks": true,
-    "sourceMap": false
+    "sourceMap": false,
+    "skipLibCheck": true,
   },
   "include": ["./cypress"],
   "exclude": ["node_modules"]
