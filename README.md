@@ -1,7 +1,7 @@
 # Cypress automation framework for the new admin portal
 
 > **⚠ Disclaimer:**
- Bitbuket may have some issues while reading markdown annotations. If it happens to you, please, go to [this link](https://globalshares.atlassian.net/wiki/spaces/GCE/pages/2825781674/Setup+and+how+to+run+tests) or copy the content in the README.md file and paste it in a markdown reader of your preference to see the documentation in the way it is supposed to be. Moreover, in this link you will find more details about this repo.
+ Bitbuket may have some issues while reading markdown annotations. If it happens to you, please, go to [this link](https://globalshares.atlassian.net/wiki/spaces/GCE/pages/2825781674/Setup+and+how+to+run+tests) or copy the content in this README.md file and paste it in a markdown reader of your preference to see the documentation in the way it is supposed to be. Moreover, in the link above you will find more details about this repository and about Cypress.
 
 
 ### Suggested IDEs by [Cypress documentation](https://docs.cypress.io/guides/tooling/IDE-integration.html#Extensions-amp-Plugins):
@@ -32,7 +32,7 @@ After the completed node's installation, you will need to clone this current rep
 
 > ```bash
 > # Repository link
-> https://bitbucket.org/laertemello/gscypressautomationframework/src/master/
+> https://bitbucket.org/globalshares/gscypressautomationframework/src/master/
 > ```
 
 ## Installing the dependencies 
