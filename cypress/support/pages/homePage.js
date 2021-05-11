@@ -6,7 +6,8 @@ const searchBar = new SearchBar()
 const selectors = {
   groupBySelector: 'gs-select .select > .ng-untouched',
   groupByAlphabetical: '.select-panel > :nth-child(2) > div',
-  separatorContainerForClientsList: '//gs-preloader-container//div[@class="card-group-section ng-star-inserted"]//div[@class="section-title"]'
+  separatorContainerForClientsList: '//gs-preloader-container//div[@class="card-group-section ng-star-inserted"]//div[@class="section-title"]',
+  favorite_icon: '//div[@class="client-action-btn"]'
 }
 
 class HomePage extends BasePage {
@@ -18,7 +19,17 @@ class HomePage extends BasePage {
   }
 
   /**
+   * Search for a client by ID
+   *
+   * @param {string} clientId Client name to search
+   */
+     selectClientById(clientId) {
+      cy.get(`#${clientId}`).scrollIntoView().click()
+    }
+
+  /**
    * Search for a client using the search bar
+   *
    * @param {string} clientName Client name to search
    */
   selectClientFromTheList(clientName) {
@@ -29,11 +40,30 @@ class HomePage extends BasePage {
   }
 
   /**
+   * Favorite/Unfavorite a client from the home client list
+   *
+   * @param {string} clientId Client id to be favored
+   */
+   favoriteUnfavoriteClient(clientId) {
+    cy.xpath(`//gs-card[@id='${clientId}']${selectors.favorite_icon}`).click({ force: true })
+  }
+
+  /**
+   * Check the favorite status of a specific client
+   *
+   * @param {string} clientId Client id to be checked
+   */
+     isClientFavorite(clientId) {
+      return cy.xpath(`//gs-card[@id='${clientId}' and @class='success ng-star-inserted favoriteVisible']`)
+    }
+
+  /**
    * Group By selector. If groupBy is not given, the default group method is Alphabetical
    * Change this solution as soon as an ID is provided
+   *
    * @param {string} groupBy Client name to search
    */
-  groubyByList(groupBy = '') {
+  groupByList(groupBy = '') {
     cy.get(selectors.groupBySelector).click()
 
     switch (groupBy) {
@@ -62,6 +92,24 @@ class HomePage extends BasePage {
           .should('contain.text', 'B')
     }
   }
+
+  /**
+     * Validate basic information for the client. This information is the one displayed in the home page for each client
+     * Example: Ex: 7digital => {GBR, REGULATED, ACTIVE}
+     *
+     * @param {string} clientId Client id to verify the summary information
+     * @param {string} location Client location, example 'GBR' for UK clients
+     * @param {string} regulated Client information about if it is regulated. Accepted parameters: 'Regulated' and 'Not Regulated'
+     * @param {string} status Client status. Accepted parameters includes: 'Active', 'NOT SET', 'Terminated', 'Implementation'
+     */
+  validateClientCardSummaryInformation(clientId, location='GBR', regulated='Regulated', status='Active') {
+    return (
+    cy.xpath(`//*[@id='${clientId}']//gs-badge[contains(text(),'${location}')]`).scrollIntoView() &&
+    cy.xpath(`//*[@id='${clientId}']//gs-badge[contains(text(),'${regulated}')]`).scrollIntoView() &&
+    cy.xpath(`//*[@id='${clientId}']//div[@class='card-footer']//gs-badge[contains(text(),'${status}')]`).scrollIntoView()
+    )
+  }
+
 }
 
 export default HomePage

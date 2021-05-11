@@ -1,12 +1,12 @@
 import HomePage from '../support/pages/homePage'
 import GroupManagementPage from '../support/pages/settingsPages/groupManagementPage'
 
-import LeftMunuBar from '../support/components/leftMenuBar'
+import LeftMenuBar from '../support/components/leftMenuBar'
 
 describe('Home page tests', () => {
   const homePage = new HomePage()
   const groupManagementPage = new GroupManagementPage()
-  const leftMenuBar = new LeftMunuBar()
+  const leftMenuBar = new LeftMenuBar()
 
   beforeEach(() => {
     // @ts-ignore

@@ -6,7 +6,7 @@ const selectors = {
   signOut: 'a.logout'
 }
 
-class LeftMunuBar {
+class LeftMenuBar {
   /**
    * Closes the menu left page
    */
@@ -24,7 +24,7 @@ class LeftMunuBar {
   /**
    * Navigation menu
    * @param {string} item Main menu item
-   * @param {string} subItem Submenu item if avaiable. If not, passes nothing like: accessMenuItem("Statement Management")
+   * @param {string} subItem Submenu item if available. If not, passes nothing like: accessMenuItem("Statement Management")
    *
    */
   accessGlobalSettingsMenu(item, subItem) {
@@ -38,4 +38,4 @@ class LeftMunuBar {
   }
 }
 
-export default LeftMunuBar
+export default LeftMenuBar
