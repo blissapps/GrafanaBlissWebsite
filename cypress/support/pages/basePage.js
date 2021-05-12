@@ -100,7 +100,7 @@ class BasePage {
   }
 
   /**
-   * Click in the first apperance of a text in a table of hearth-data-container type
+   * Click in the first appearance of a text in a table of hearth-data-container type
    *
    * @param {*} text text bo be clicked in the table
    */

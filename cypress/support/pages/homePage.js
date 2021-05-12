@@ -21,11 +21,13 @@ class HomePage extends BasePage {
   /**
    * Search for a client by ID
    *
-   * @param {string} clientId Client name to search
+   * @param {Number} clientId Client name to search
    */
-     selectClientById(clientId) {
-      cy.get(`#${clientId}`).scrollIntoView().click()
-    }
+  selectClientById(clientId) {
+    cy.get(`#client-${clientId}`)
+      .scrollIntoView()
+      .click()
+  }
 
   /**
    * Search for a client using the search bar
@@ -44,7 +46,7 @@ class HomePage extends BasePage {
    *
    * @param {string} clientId Client id to be favored
    */
-   favoriteUnfavoriteClient(clientId) {
+  favoriteUnfavoriteClient(clientId) {
     cy.xpath(`//gs-card[@id='${clientId}']${selectors.favorite_icon}`).click({ force: true })
   }
 
@@ -53,9 +55,9 @@ class HomePage extends BasePage {
    *
    * @param {string} clientId Client id to be checked
    */
-     isClientFavorite(clientId) {
-      return cy.xpath(`//gs-card[@id='${clientId}' and @class='success ng-star-inserted favoriteVisible']`)
-    }
+  isClientFavorite(clientId) {
+    return cy.xpath(`//gs-card[@id='${clientId}' and @class='success ng-star-inserted favoriteVisible']`)
+  }
 
   /**
    * Group By selector. If groupBy is not given, the default group method is Alphabetical
@@ -94,22 +96,21 @@ class HomePage extends BasePage {
   }
 
   /**
-     * Validate basic information for the client. This information is the one displayed in the home page for each client
-     * Example: Ex: 7digital => {GBR, REGULATED, ACTIVE}
-     *
-     * @param {string} clientId Client id to verify the summary information
-     * @param {string} location Client location, example 'GBR' for UK clients
-     * @param {string} regulated Client information about if it is regulated. Accepted parameters: 'Regulated' and 'Not Regulated'
-     * @param {string} status Client status. Accepted parameters includes: 'Active', 'NOT SET', 'Terminated', 'Implementation'
-     */
-  validateClientCardSummaryInformation(clientId, location='GBR', regulated='Regulated', status='Active') {
+   * Validate basic information for the client. This information is the one displayed in the home page for each client
+   * Example: Ex: 7digital => {GBR, REGULATED, ACTIVE}
+   *
+   * @param {string} clientId Client id to verify the summary information
+   * @param {string} location Client location, example 'GBR' for UK clients
+   * @param {string} regulated Client information about if it is regulated. Accepted parameters: 'Regulated' and 'Not Regulated'
+   * @param {string} status Client status. Accepted parameters includes: 'Active', 'NOT SET', 'Terminated', 'Implementation'
+   */
+  validateClientCardSummaryInformation(clientId, location = 'GBR', regulated = 'Regulated', status = 'Active') {
     return (
-    cy.xpath(`//*[@id='${clientId}']//gs-badge[contains(text(),'${location}')]`).scrollIntoView() &&
-    cy.xpath(`//*[@id='${clientId}']//gs-badge[contains(text(),'${regulated}')]`).scrollIntoView() &&
-    cy.xpath(`//*[@id='${clientId}']//div[@class='card-footer']//gs-badge[contains(text(),'${status}')]`).scrollIntoView()
+      cy.xpath(`//*[@id='${clientId}']//gs-badge[contains(text(),'${location}')]`).scrollIntoView() &&
+      cy.xpath(`//*[@id='${clientId}']//gs-badge[contains(text(),'${regulated}')]`).scrollIntoView() &&
+      cy.xpath(`//*[@id='${clientId}']//div[@class='card-footer']//gs-badge[contains(text(),'${status}')]`).scrollIntoView()
     )
   }
-
 }
 
 export default HomePage

@@ -22,4 +22,8 @@ describe('Home page tests', () => {
     leftMenuBar.closeMenuLeftBar()
     homePage.checkUrl('home')
   })
+
+  // Test as admin
+
+  // Test as a client
 })

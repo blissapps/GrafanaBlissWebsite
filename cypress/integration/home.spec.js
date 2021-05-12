@@ -48,5 +48,4 @@ describe('Home page tests', () => {
     homePage.validateClientCardSummaryInformation('client-234', 'GBR', 'Regulated', 'Terminated').should('be.visible')
     homePage.validateClientCardSummaryInformation('client-381', 'DEU', 'Regulated', 'Implementation').should('be.visible')
   })
-
 })

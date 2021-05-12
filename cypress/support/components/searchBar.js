@@ -8,7 +8,7 @@ class SearchBar {
   /**
    * Search bar
    *
-   * @param {string} textToSearch Param to search in the search bar
+   * @param {any} textToSearch Param to search in the search bar
    */
   search(textToSearch) {
     cy.get(selectors.inputBar).type(textToSearch)

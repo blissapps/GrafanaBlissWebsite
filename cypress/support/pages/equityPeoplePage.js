@@ -1,15 +1,14 @@
 import BasePage from './basePage'
-import SearchBar from '../components/searchBar'
 
 const selectors = {
-  editIconButton: '.record-actions > .mini'
+  editIconButton: '.record-actions > .mini',
+  noTrustsOrParticipantsCreatedMessage: '.content > div',
+  numberOfRecordsInTable: '#peopleRecordCount'
 }
 
 const properties = {
   pageURL: '/people'
 }
-
-const searchBar = new SearchBar()
 
 class EquityPeoplePage extends BasePage {
   /**
@@ -22,32 +21,78 @@ class EquityPeoplePage extends BasePage {
   /**
    * Checks the amount of records displayed in the people's table
    *
-   * @param {string} amount amount of people you want to check in the records
+   * @param {Number} amount amount of people you want to check in the records
    *
-   * @example 'amount=1 record(s)' for '1 record(s)' beings displayed in the table
+   * @example 'amount = 1 for '1 record(s)' being displayed in the table
    */
   checkAmountOfPeopleTable(amount) {
-    cy.xpath(`//*[@id='peopleRecordCount' and normalize-space(text())='${amount}']`)
+    cy.get(selectors.numberOfRecordsInTable)
+      .invoke('text')
+      .should('contain', amount)
   }
 
   /**
-   * Search for a participant using the search bar
+   * Search for a participant by Id - Directly from the table list
    *
-   * @param {string} participantId Participant id to be searched
+   * @param {Number} participantId Participant id to be searched
+   *
+   * @example 12345 as the participantId
    */
-  selectParticipantFromTheListToGetDetails(participantId) {
-    searchBar.search(participantId)
-    this.checkAmountOfPeopleTable('1 record(s)')
-    this.clickDataByTextInTable(participantId)
+  getParticipantFromTheList(participantId) {
+    return cy.get(`#participant-${participantId}`).scrollIntoView()
   }
 
   /**
-   * Edit a participant from the list and go to Peoples page details >> Cypress/support/pages/people
+   * Get the message 'There are no participants/trusts created' if displayed
    *
-   * @param {string} participantId Participant id to be searched
+   */
+  getNoParticipantsOrTrustsCreatedMessage() {
+    return cy.get(selectors.noTrustsOrParticipantsCreatedMessage)
+  }
+
+  /**
+   * Check the data listed in a participant [Id, name, email, and residency] over the Participants table
+   *
+   * @param {Array} data Array with the data needed to be validated. The correct order is the ORDER displayed in the UI,
+   * which actually is [id, name, email, residency]
+   *
+   * @example: send [123456, 'Bryan', 'SuppliedEmailAddress_169769_112967@myglobalshares.com', 'LUX'] to validate the participant 12345 data is
+   * displayed correctly in the Participants table list
+   */
+  validateParticipantDataDisplayedOnTheParticipantsList(data) {
+    for (let i = 1; i <= data.length; i++) {
+      cy.xpath(`(//*[@id='participant-${data[0]}']//gs-grid-cell)[${i}]`)
+        .invoke('text')
+        .should('contain', data[i - 1])
+    }
+  }
+
+  /**
+   * Verify the value of a cell in the table. This method was tested only for ID, NAME, and EMAIL.
+   * columnToVerify must be: 1 - ID;
+   *                         2 - NAME;
+   *                         3 - EMAIL;
+   *
+   * @param {Number} columnToVerify
+   * @param {any} value
+   */
+  checkParticipantCellContent(columnToVerify, value) {
+    cy.xpath(`//div[@class='data']//gs-grid-cell[${columnToVerify}]//span[@class='subtitled-cell-title']`).each($el => {
+      cy.wrap($el)
+        .invoke('text')
+        .should('contain', value)
+    })
+  }
+
+  /**
+   * Edit a participant from the list and go to Peoples page details >> Cypress/support/pages/peoplePages
+   *
+   * @param {Number} participantId Participant id to be searched
    */
   openEditParticipantDetails(participantId) {
-    this.selectParticipantFromTheListToGetDetails(participantId)
+    cy.get(`#participant-${participantId}`)
+      .scrollIntoView()
+      .click()
     cy.get(selectors.editIconButton).click()
   }
 }
