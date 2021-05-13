@@ -1,6 +1,6 @@
-import HomePage from '../support/pages/homePage'
-import EquityPeoplePage from '../support/pages/equityPeoplePage'
-import SearchBar from '../support/components/searchBar'
+import HomePage from '../../support/pages/homePage'
+import EquityPeoplePage from '../../support/pages/equityPeoplePage'
+import SearchBar from '../../support/components/searchBar'
 
 describe('Home page tests', () => {
   const homePage = new HomePage()
@@ -11,8 +11,6 @@ describe('Home page tests', () => {
     // @ts-ignore
     cy.login()
   })
-
-  // ******************************************************* PARTICIPANTS ****************************************************************** //
 
   /**
    * Search Engine - Search for a participant using the search engine and Look for ID, name, and email to check the expected data is correct
@@ -103,7 +101,7 @@ describe('Home page tests', () => {
   })
 
   /**
-   * Verify client without Participants and Trusts informs correctly that there are no participants/trusts (API Automation Tests)
+   * Verify client without Participants and Trusts informs correctly that there are no participants/trusts
    */
   it('C1234567_Client_Without_Participants_And_Trusts', () => {
     homePage.selectClientById(419)
@@ -112,8 +110,6 @@ describe('Home page tests', () => {
     equityPeoplePage.selectTab('Trusts')
     equityPeoplePage.getNoParticipantsOrTrustsCreatedMessage().should('be.visible')
   })
-
-  // CONTINUE FROM HERE ***************************************************
 
   /**
    * Check if the Id, name, email, and residency are being displayed correctly and in order in the Participants tab.
@@ -133,6 +129,8 @@ describe('Home page tests', () => {
 
   // Terminate a participant ???
 
+  // CONTINUE FROM HERE ***************************************************
+
   // Edit participant - Personal - Check mandatory fields and behavior over all the tabs (Overview, Address and Contact, and Bank Accounts)
 
   // Edit participant - Company - Check mandatory fields and behavior over all the tabs (Overview, and Payroll Information)
@@ -142,7 +140,4 @@ describe('Home page tests', () => {
   // Edit participant - Sale & Dividend - Check mandatory fields and behavior.
 
   // Edit participant - Primary Settings - Check mandatory fields and behavior over all the tabs (Sales, Transfers, Dividends, Financial Reporting, Exchange, and Adjustments)
-
-  // ******************************************************* TRUSTS ****************************************************************** //
-  // RBC Trust Account Jersey client!!!
 })
