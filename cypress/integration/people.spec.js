@@ -12,7 +12,7 @@ describe('Home page tests', () => {
     cy.login()
   })
 
-  // ********************************************** PARTICIPANTS ****************************************************************** //
+  // ******************************************************* PARTICIPANTS ****************************************************************** //
 
   /**
    * Search Engine - Search for a participant using the search engine and Look for ID, name, and email to check the expected data is correct
@@ -20,7 +20,7 @@ describe('Home page tests', () => {
   it('C1234567_SearchEngine_Search_For_ID_Name_Email', () => {
     const participantId = 112967
     const participantName = 'Bryan'
-    const participantEmail = 'SuppliedEmailAddress_169769_112967@myglobalshares.com'
+    const participantEmail = 'SuppliedEmailAddress_169761_112967@myglobalshares.com'
     const participantResidency = 'LUX'
 
     homePage.selectClientById(144)
@@ -85,6 +85,34 @@ describe('Home page tests', () => {
     equityPeoplePage.checkParticipantCellContent(2, participantLastName)
   })
 
+  /**
+   * Search Engine - Test ability to reuse the search engine after a search that does not bring any values
+   *
+   * @BUG
+   */
+  it.skip('C1234567_SearchEngine_Search_Again_After_Search_That_Does_Not_Bring_Anything', () => {
+    const participantId = 113026
+
+    homePage.selectClientById(144)
+    equityPeoplePage.checkPeopleUrl() // needed to use the search engine in the correct page
+
+    searchBar.search('thereIsNoOneLikeThisTEST')
+    equityPeoplePage.getNoParticipantsOrTrustsCreatedMessage().should('be.visible')
+    searchBar.search(participantId)
+    equityPeoplePage.getParticipantFromTheList(participantId).should('be.visible')
+  })
+
+  /**
+   * Verify client without Participants and Trusts informs correctly that there are no participants/trusts (API Automation Tests)
+   */
+  it('C1234567_Client_Without_Participants_And_Trusts', () => {
+    homePage.selectClientById(419)
+
+    equityPeoplePage.getNoParticipantsOrTrustsCreatedMessage().should('be.visible')
+    equityPeoplePage.selectTab('Trusts')
+    equityPeoplePage.getNoParticipantsOrTrustsCreatedMessage().should('be.visible')
+  })
+
   // CONTINUE FROM HERE ***************************************************
 
   /**
@@ -103,9 +131,7 @@ describe('Home page tests', () => {
    * Waiting for @IDS
    */
 
-  // Check client without Participants and Trusts informs correctly that there are no participants/trusts (API Automation Tests)
-
-  // Terminate a participant
+  // Terminate a participant ???
 
   // Edit participant - Personal - Check mandatory fields and behavior over all the tabs (Overview, Address and Contact, and Bank Accounts)
 
@@ -117,5 +143,6 @@ describe('Home page tests', () => {
 
   // Edit participant - Primary Settings - Check mandatory fields and behavior over all the tabs (Sales, Transfers, Dividends, Financial Reporting, Exchange, and Adjustments)
 
-  // ********************************************** TRUSTS ****************************************************************** //
+  // ******************************************************* TRUSTS ****************************************************************** //
+  // RBC Trust Account Jersey client!!!
 })
