@@ -1,10 +1,13 @@
-describe('Home page tests', () => {
+describe('Trusts tests', () => {
   beforeEach(() => {
     // @ts-ignore
     cy.login()
   })
 
-  // RBC Trust Account Jersey client!!!
+  // Need clients with trusts
 
-  // Terminate a trust ???
+
+  // ************* TESTS BELLOW MODIFY DATA DEFINITELY ***************
+
+  // Terminate a trust
 })

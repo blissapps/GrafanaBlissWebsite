@@ -2,7 +2,7 @@ import HomePage from '../../support/pages/homePage'
 import EquityPeoplePage from '../../support/pages/equityPeoplePage'
 import SearchBar from '../../support/components/searchBar'
 
-describe('Home page tests', () => {
+describe('Participants tests', () => {
   const homePage = new HomePage()
   const equityPeoplePage = new EquityPeoplePage()
   const searchBar = new SearchBar()
@@ -111,6 +111,17 @@ describe('Home page tests', () => {
     equityPeoplePage.getNoParticipantsOrTrustsCreatedMessage().should('be.visible')
   })
 
+   /**
+   * Verify PARTICIPANT DETAIL container data when picking a participant from the Participants table
+   */
+    it('C1234567_Verify_Participant_Detail_Container_Data', () => {
+      const participantId = 113026
+      homePage.selectClientById(144)
+
+      equityPeoplePage.clickParticipantFromTheList(participantId)
+      equityPeoplePage.checkParticipantDetailContent('Abel Lewis', 'New Zealand', 'ACTIVE')
+    })
+
   /**
    * Check if the Id, name, email, and residency are being displayed correctly and in order in the Participants tab.
    *
@@ -127,9 +138,12 @@ describe('Home page tests', () => {
    * Waiting for @IDS
    */
 
-  // Terminate a participant ???
+  /**
+   * Accessing participant admin directly from URL https://ea-v3.myglobalshares.co.uk/client/1/people
+   * Waiting for @IDS since the gs-notification message is not localized.
+   */
 
-  // CONTINUE FROM HERE ***************************************************
+  // ************** TESTS BELLOW MODIFY DATA DEFINITELY ***************
 
   // Edit participant - Personal - Check mandatory fields and behavior over all the tabs (Overview, Address and Contact, and Bank Accounts)
 
@@ -140,4 +154,6 @@ describe('Home page tests', () => {
   // Edit participant - Sale & Dividend - Check mandatory fields and behavior.
 
   // Edit participant - Primary Settings - Check mandatory fields and behavior over all the tabs (Sales, Transfers, Dividends, Financial Reporting, Exchange, and Adjustments)
+
+  // Terminate a participant
 })

@@ -4,7 +4,7 @@ const properties = {
   pageURL: '/settings/dap-management'
 }
 
-class DapManagement extends BasePage {
+class DapManagementPage extends BasePage {
   /**
    * Checks if the current page is Data Access Profile management URL
    */
@@ -13,4 +13,4 @@ class DapManagement extends BasePage {
   }
 }
 
-export default DapManagement
+export default DapManagementPage

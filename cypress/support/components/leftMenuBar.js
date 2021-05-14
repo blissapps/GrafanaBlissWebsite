@@ -26,6 +26,7 @@ class LeftMenuBar {
    * @param {string} item Main menu item
    * @param {string} subItem Submenu item if available. If not, passes nothing like: accessMenuItem("Statement Management")
    *
+   * @ID missing
    */
   accessGlobalSettingsMenu(item, subItem) {
     this.openSettingsMenuBar()
@@ -33,7 +34,7 @@ class LeftMenuBar {
     cy.xpath(`(//a[normalize-space(text()) = '${item}'])[1]`).click()
 
     if (subItem) {
-      cy.xpath(`(//a[normalize-space(text()) = '${subItem}'])[1]`).click()
+      cy.xpath(`//a[normalize-space(text()) = '${subItem}' and @href]`).click()
     }
   }
 }

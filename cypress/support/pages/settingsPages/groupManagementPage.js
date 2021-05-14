@@ -4,7 +4,7 @@ const properties = {
   pageURL: '/settings/group-management'
 }
 
-class GroupManagement extends BasePage {
+class GroupManagementPage extends BasePage {
   /**
    * Checks if the current page is Group management URL
    */
@@ -13,4 +13,4 @@ class GroupManagement extends BasePage {
   }
 }
 
-export default GroupManagement
+export default GroupManagementPage

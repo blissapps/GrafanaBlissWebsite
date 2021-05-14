@@ -11,6 +11,7 @@ class SearchBar {
    * @param {any} textToSearch Param to search in the search bar
    */
   search(textToSearch) {
+    cy.waitFor(selectors.inputBar)
     cy.get(selectors.inputBar).type(textToSearch)
     cy.get(selectors.searchClientButton).click()
     this.clearSearchBox()

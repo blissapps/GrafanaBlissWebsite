@@ -3,7 +3,11 @@ import BasePage from './basePage'
 const selectors = {
   editIconButton: '.record-actions > .mini',
   noTrustsOrParticipantsCreatedMessage: '.content > div',
-  numberOfRecordsInTable: '#peopleRecordCount'
+  numberOfRecordsInTable: '#peopleRecordCount',
+  participantDetailContainerTitle: '.record-title',
+  participantDetailContainerName: '.participant-name',
+  participantDetailContainerCountry: '.participant-country',
+  participantDetailContainerStatus: '.participant-status'
 }
 
 const properties = {
@@ -19,7 +23,7 @@ class EquityPeoplePage extends BasePage {
   }
 
   /**
-   * Checks the amount of records displayed in the people's table
+   * Checks the amount of records displayed in the People table
    *
    * @param {Number} amount amount of people you want to check in the records
    *
@@ -41,6 +45,17 @@ class EquityPeoplePage extends BasePage {
   getParticipantFromTheList(participantId) {
     return cy.get(`#participant-${participantId}`).scrollIntoView()
   }
+
+   /**
+   * Click in a Participant by Id - Directly from the table list
+   *
+   * @param {Number} participantId Participant id to be searched
+   *
+   * @example 12345 as the participantId
+   */
+    clickParticipantFromTheList(participantId) {
+      this.getParticipantFromTheList(participantId).click()
+    }
 
   /**
    * Get the message 'There are no participants/trusts created' if displayed
@@ -85,14 +100,26 @@ class EquityPeoplePage extends BasePage {
   }
 
   /**
+   * Verify if the data displayed in Participant Detail container is correct
+   *
+   * @param {String} name participant name
+   * @param {String} country participant country
+   * @param {String} status participant status
+   */
+  checkParticipantDetailContent(name, country, status) {
+    cy.get(selectors.participantDetailContainerTitle).should('be.visible')
+    cy.get(selectors.participantDetailContainerName).contains(name)
+    cy.get(selectors.participantDetailContainerCountry).contains(country)
+    cy.get(selectors.participantDetailContainerStatus).contains(status)
+  }
+
+  /**
    * Edit a participant from the list and go to Peoples page details >> Cypress/support/pages/peoplePages
    *
    * @param {Number} participantId Participant id to be searched
    */
   openEditParticipantDetails(participantId) {
-    cy.get(`#participant-${participantId}`)
-      .scrollIntoView()
-      .click()
+    this.getParticipantFromTheList(participantId).click()
     cy.get(selectors.editIconButton).click()
   }
 }
