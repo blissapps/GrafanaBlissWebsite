@@ -30,6 +30,5 @@ describe('Role Management tests over User Management settings', () => {
 
   //  ************** TESTS BELLOW MODIFY DATA DEFINITELY ***************
 
-
   // ************************************************ TESTS AS CLIENTS ************************************************** //
 })

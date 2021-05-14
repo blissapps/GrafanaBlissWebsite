@@ -111,16 +111,16 @@ describe('Participants tests', () => {
     equityPeoplePage.getNoParticipantsOrTrustsCreatedMessage().should('be.visible')
   })
 
-   /**
+  /**
    * Verify PARTICIPANT DETAIL container data when picking a participant from the Participants table
    */
-    it('C1234567_Verify_Participant_Detail_Container_Data', () => {
-      const participantId = 113026
-      homePage.selectClientById(144)
+  it('C1234567_Verify_Participant_Detail_Container_Data', () => {
+    const participantId = 113026
+    homePage.selectClientById(144)
 
-      equityPeoplePage.clickParticipantFromTheList(participantId)
-      equityPeoplePage.checkParticipantDetailContent('Abel Lewis', 'New Zealand', 'ACTIVE')
-    })
+    equityPeoplePage.clickParticipantFromTheList(participantId)
+    equityPeoplePage.checkParticipantDetailContent('Abel Lewis', 'New Zealand', 'ACTIVE')
+  })
 
   /**
    * Check if the Id, name, email, and residency are being displayed correctly and in order in the Participants tab.

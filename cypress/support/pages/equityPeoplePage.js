@@ -46,16 +46,16 @@ class EquityPeoplePage extends BasePage {
     return cy.get(`#participant-${participantId}`).scrollIntoView()
   }
 
-   /**
+  /**
    * Click in a Participant by Id - Directly from the table list
    *
    * @param {Number} participantId Participant id to be searched
    *
    * @example 12345 as the participantId
    */
-    clickParticipantFromTheList(participantId) {
-      this.getParticipantFromTheList(participantId).click()
-    }
+  clickParticipantFromTheList(participantId) {
+    this.getParticipantFromTheList(participantId).click()
+  }
 
   /**
    * Get the message 'There are no participants/trusts created' if displayed

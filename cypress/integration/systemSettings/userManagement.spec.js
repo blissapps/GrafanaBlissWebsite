@@ -36,9 +36,7 @@ describe('User Management tests over User Management settings', () => {
     userManagementPage.clickUserTable('amulcahyNE')
     // userManagementPage.checkAmountOfPeopleTable(53, 2)
     // check elements in table, we have something like this in Equity People Pages
-
   })
-
 
   // Verify USER DETAIL container data when picking a user from the Participants table
 
@@ -53,7 +51,6 @@ describe('User Management tests over User Management settings', () => {
   // Go to user management, pick a user, check password Reset Required behavior
 
   // Go to user management, pick a user, check unlock account behavior
-
 
   // ************************************************ TESTS AS CLIENTS ************************************************** //
 })

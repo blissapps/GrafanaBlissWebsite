@@ -6,7 +6,6 @@ describe('Trusts tests', () => {
 
   // Need clients with trusts
 
-
   // ************* TESTS BELLOW MODIFY DATA DEFINITELY ***************
 
   // Terminate a trust

@@ -27,11 +27,11 @@ class UserManagementPage extends BasePage {
    *
    * Waiting for @IDS
    */
-    getUserTable(username) {
-      searchBar.search(username)
+  getUserTable(username) {
+    searchBar.search(username)
 
-      return cy.xpath(`//div[@class='data']//*[text()='${username}']`)
-    }
+    return cy.xpath(`//div[@class='data']//*[text()='${username}']`)
+  }
 
   /**
    * Select a user from the table of users
@@ -53,10 +53,14 @@ class UserManagementPage extends BasePage {
    * @example 'records = 1 for '1 record(s)' being displayed in the table
    *          'results = 2 for '2 SEARCH RESULT(S)' being displayed in the table
    */
-    checkAmountOfPeopleTable(records, results) {
-      cy.get(selectors.numberOfRecordsInTable).invoke('text').should('contain', records)
-      cy.get(selectors.numberOfSearchResultsInTable).invoke('text').should('contain', results)
-    }
+  checkAmountOfPeopleTable(records, results) {
+    cy.get(selectors.numberOfRecordsInTable)
+      .invoke('text')
+      .should('contain', records)
+    cy.get(selectors.numberOfSearchResultsInTable)
+      .invoke('text')
+      .should('contain', results)
+  }
 }
 
 export default UserManagementPage

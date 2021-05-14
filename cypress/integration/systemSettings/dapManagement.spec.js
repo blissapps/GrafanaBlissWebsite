@@ -4,7 +4,7 @@ import DapManagementPage from '../../support/pages/settingsPages/dapManagementPa
 import LeftMenuBar from '../../support/components/leftMenuBar'
 describe('Data Access Profiles tests over User Management settings', () => {
   const homePage = new HomePage()
-  const dapManagementPage = new DapManagementPage
+  const dapManagementPage = new DapManagementPage()
 
   const leftMenuBar = new LeftMenuBar()
 
@@ -28,7 +28,6 @@ describe('Data Access Profiles tests over User Management settings', () => {
   })
 
   //  ************** TESTS BELLOW MODIFY DATA DEFINITELY ***************
-
 
   // ************************************************ TESTS AS CLIENTS ************************************************** //
 })
