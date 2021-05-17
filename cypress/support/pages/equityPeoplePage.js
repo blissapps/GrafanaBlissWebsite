@@ -88,8 +88,8 @@ class EquityPeoplePage extends BasePage {
    *                         2 - NAME;
    *                         3 - EMAIL;
    *
-   * @param {Number} columnToVerify
-   * @param {any} value
+   * @param {Number} columnToVerify this is the column name you want to verity the content of this cell
+   * @param {any} value This is the value supposed to be in the cell you choose
    */
   checkParticipantCellContent(columnToVerify, value) {
     cy.xpath(`//div[@class='data']//gs-grid-cell[${columnToVerify}]//span[@class='subtitled-cell-title']`).each($el => {

@@ -18,7 +18,7 @@ describe('Participants tests', () => {
   it('C1234567_SearchEngine_Search_For_ID_Name_Email', () => {
     const participantId = 112967
     const participantName = 'Bryan'
-    const participantEmail = 'SuppliedEmailAddress_169761_112967@myglobalshares.com'
+    const participantEmail = 'SuppliedEmailAddress_'
     const participantResidency = 'LUX'
 
     homePage.selectClientById(144)
@@ -28,12 +28,11 @@ describe('Participants tests', () => {
     equityPeoplePage.checkAmountOfPeopleTable(1)
     equityPeoplePage.getParticipantFromTheList(participantId).should('be.visible')
 
-    searchBar.search(participantName) // by name
-    equityPeoplePage.checkAmountOfPeopleTable(1)
-    equityPeoplePage.getParticipantFromTheList(participantId).should('be.visible')
-
     searchBar.search(participantEmail) // by e-mail
-    equityPeoplePage.checkAmountOfPeopleTable(1)
+    equityPeoplePage.checkAmountOfPeopleTable(50)
+
+    searchBar.search(participantName) // by name
+    equityPeoplePage.checkAmountOfPeopleTable(2)
     equityPeoplePage.getParticipantFromTheList(participantId).should('be.visible')
 
     equityPeoplePage.validateParticipantDataDisplayedOnTheParticipantsList([participantId, participantName, participantEmail, participantResidency])
@@ -104,7 +103,7 @@ describe('Participants tests', () => {
    * Verify client without Participants and Trusts informs correctly that there are no participants/trusts
    */
   it('C1234567_Client_Without_Participants_And_Trusts', () => {
-    homePage.selectClientById(419)
+    homePage.selectClientById(420)
 
     equityPeoplePage.getNoParticipantsOrTrustsCreatedMessage().should('be.visible')
     equityPeoplePage.selectTab('Trusts')

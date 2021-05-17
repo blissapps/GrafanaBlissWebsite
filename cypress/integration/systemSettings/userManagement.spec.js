@@ -30,12 +30,18 @@ describe('User Management tests over User Management settings', () => {
     homePage.checkUrl('home')
   })
 
-  // Test search engine for username and email
-  it.only('C1234567_AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', () => {
+  /**
+   * Test search engine for a username and a email
+   *
+   * @BUG @UNCOMPLETED
+   */
+  it.skip('C1234567_Search_For_Username_And_Email', () => {
     searchBar.search('amulcahyNE')
+    // userManagementPage.checkAmountOfPeopleTable(53, 2) // We need to verify this, it is possible a very weird bug
+    searchBar.search('test@globalshares.com')
+    // userManagementPage.checkAmountOfPeopleTable(53, 20) // We need to verify this, it is possible a very weird bug
     userManagementPage.clickUserTable('amulcahyNE')
-    // userManagementPage.checkAmountOfPeopleTable(53, 2)
-    // check elements in table, we have something like this in Equity People Pages
+    // check elements in table, we have something like this in Equity People Pages: (validateParticipantDataDisplayedOnTheParticipantsList)
   })
 
   // Verify USER DETAIL container data when picking a user from the Participants table
