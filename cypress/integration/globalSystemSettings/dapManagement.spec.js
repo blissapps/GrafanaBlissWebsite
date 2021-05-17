@@ -1,5 +1,5 @@
 import HomePage from '../../support/pages/homePage'
-import DapManagementPage from '../../support/pages/settingsPages/dapManagementPage'
+import DapManagementPage from '../../support/pages/globalSettingsPages/userManagementPages/dapManagementPage'
 
 import LeftMenuBar from '../../support/components/leftMenuBar'
 describe('Data Access Profiles tests over User Management settings', () => {

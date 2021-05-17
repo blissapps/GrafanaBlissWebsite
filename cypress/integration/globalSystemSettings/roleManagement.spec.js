@@ -1,11 +1,11 @@
 import HomePage from '../../support/pages/homePage'
-import GroupManagementPage from '../../support/pages/settingsPages/groupManagementPage'
+import RoleManagementPage from '../../support/pages/globalSettingsPages/userManagementPages/roleManagementPage'
 
 import LeftMenuBar from '../../support/components/leftMenuBar'
 
-describe('Group Management tests over User Management settings', () => {
+describe('Role Management tests over User Management settings', () => {
   const homePage = new HomePage()
-  const groupManagementPage = new GroupManagementPage()
+  const roleManagementPage = new RoleManagementPage()
 
   const leftMenuBar = new LeftMenuBar()
 
@@ -17,13 +17,13 @@ describe('Group Management tests over User Management settings', () => {
   // ************************************************ TESTS AS ADMIN TENANT ************************************************** //
 
   /**
-   * Verify if the settings send the user back to the home screen when the user closes the settings menu
+   * Verify if the settings send the user back to the home screen when the user closes the settings
    *
    * Waiting for @IDS
    */
   it('C1234567_Check_Behavior_When_Closing_The_Settings', () => {
-    leftMenuBar.accessGlobalSettingsMenu('User Management', 'Group Management')
-    groupManagementPage.checkGroupManagementUrl()
+    leftMenuBar.accessGlobalSettingsMenu('User Management', 'Role Management')
+    roleManagementPage.checkRoleManagementUrl()
     leftMenuBar.closeMenuLeftBar()
     homePage.checkUrl('home')
   })

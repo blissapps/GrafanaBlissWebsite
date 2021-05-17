@@ -1,5 +1,5 @@
-import BasePage from '../basePage'
-import SearchBar from '../../components/searchBar'
+import BasePage from '../../basePage'
+import SearchBar from '../../../components/searchBar'
 
 const properties = {
   pageURL: '/settings/user-management'

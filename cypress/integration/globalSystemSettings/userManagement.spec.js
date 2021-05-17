@@ -1,5 +1,5 @@
 import HomePage from '../../support/pages/homePage'
-import UserManagementPage from '../../support/pages/settingsPages/userManagementPage'
+import UserManagementPage from '../../support/pages/globalSettingsPages/userManagementPages/userManagementPage'
 
 import LeftMenuBar from '../../support/components/leftMenuBar'
 import SearchBar from '../../support/components/searchBar'
