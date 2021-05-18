@@ -95,7 +95,7 @@ class BasePage {
    *
    * @param {String} tabName Name of the tab you want to go in
    */
-  selectTab(tabName) {
+  selectTabByName(tabName) {
     cy.xpath(`//div[@class='tabs-bar']//div[@title='${tabName}']`).click()
   }
 

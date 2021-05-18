@@ -106,7 +106,7 @@ describe('Participants tests', () => {
     homePage.selectClientById(420)
 
     equityPeoplePage.getNoParticipantsOrTrustsCreatedMessage().should('be.visible')
-    equityPeoplePage.selectTab('Trusts')
+    equityPeoplePage.selectTabByName('Trusts')
     equityPeoplePage.getNoParticipantsOrTrustsCreatedMessage().should('be.visible')
   })
 

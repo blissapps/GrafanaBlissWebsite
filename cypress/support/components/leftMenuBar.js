@@ -18,7 +18,8 @@ class LeftMenuBar {
    * Opens the settings menu left bar
    */
   openSettingsMenuBar() {
-    cy.get(selectors.settingsButton).click()
+    cy.get(selectors.settingsButton).as('settingsBtn') // using alias in this case to avoid element to get too attached
+    cy.get('@settingsBtn').click()
   }
 
   /**
@@ -28,12 +29,12 @@ class LeftMenuBar {
    *
    * @ID missing
    */
-  accessGlobalSettingsMenu(item, subItem) {
+  accessGlobalSettingsMenu(item, subItem = '') {
     this.openSettingsMenuBar()
     cy.contains(item) // avoid element detached from the DOM
     cy.xpath(`(//a[normalize-space(text()) = '${item}'])[1]`).click()
 
-    if (subItem) {
+    if (subItem != '') {
       cy.xpath(`//a[normalize-space(text()) = '${subItem}' and @href]`).click()
     }
   }
