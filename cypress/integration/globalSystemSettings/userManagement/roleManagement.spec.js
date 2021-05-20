@@ -1,7 +1,7 @@
-import HomePage from '../../support/pages/homePage'
-import RoleManagementPage from '../../support/pages/globalSettingsPages/userManagementPages/roleManagementPage'
+import HomePage from '../../../support/pages/homePage'
+import RoleManagementPage from '../../../support/pages/globalSettingsPages/userManagementPages/roleManagementPage'
 
-import LeftMenuBar from '../../support/components/leftMenuBar'
+import LeftMenuBar from '../../../support/components/leftMenuBar'
 
 describe('Role Management tests over User Management settings', () => {
   const homePage = new HomePage()

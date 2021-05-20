@@ -11,14 +11,12 @@ const selectors = {
   clientStatementId: '#clientStatement-',
   reconcileClientButton: '.cdk-overlay-connected-position-bounding-box',
   backToManageStatementsButton: '#backLink',
-  participantStatementId: '#participantStatement-',
-  participantNameFilterStatementInput: '.input > .ng-untouched',
-  participantIdFilterStatementInput: '#participantIdSelect input',
-  regulatorFilterStatementInput: '#regulatorSelect > .select > input',
-  partnerFilterStatementInput: '#partnerSelect input',
   numberOfRecordsAfterFiltering: '//div[@class="grid-count ng-star-inserted"]',
   noDataFoundMessage: '#emptyContainer',
-  summaryDownloadButton: '(//gs-button)[1]'
+  summaryDownloadButton: '//gs-button[contains(text(),"Summary")]',
+  participantName: '(//gs-input-field//*[@class="input"])[1]',
+  participantId: '(//gs-input-field//*[@class="input"])[2]',
+  participantStatus: '#statusSelect input'
 }
 
 class ClientStatementsPage extends BasePage {
@@ -34,6 +32,7 @@ class ClientStatementsPage extends BasePage {
    *
    * @param {Number} clientId clientId number to be searched in the client statements table
    *
+   * @returns client row element from table
    */
   getClientFromTable(clientId) {
     return cy.get(selectors.clientStatementId + clientId)
@@ -42,6 +41,7 @@ class ClientStatementsPage extends BasePage {
   /**
    * Get no data found message when displayed
    *
+   * @returns no data message
    */
   getNoDataFoundMessage() {
     return cy.get(selectors.noDataFoundMessage)
@@ -50,6 +50,7 @@ class ClientStatementsPage extends BasePage {
   /**
    * Get summary button
    *
+   * @returns summary button element
    */
   getSummaryButton() {
     return cy.xpath(selectors.summaryDownloadButton)
@@ -78,8 +79,34 @@ class ClientStatementsPage extends BasePage {
    * Click in the summary button to download a csv file for a client
    *
    */
-  clickSummaryDownloadButton() {
-    this.getSummaryButton().click()
+  clickSummaryDownloadButtonToDownloadCSVFile() {
+    cy.xpath(selectors.numberOfRecordsAfterFiltering) //make sure we have data, so we can continue to download. Otherwise, summary button may fail
+    this.getSummaryButton()
+      .should('be.visible')
+      .click()
+  }
+
+  /**
+   * Inside the client, select a client participant from the table of participants and click in download pdf
+   *
+   * @param {Number} participantId clientId number to be searched in the client statements table
+   *
+   */
+  clickDownloadPDFFromParticipantStatement(participantId) {
+    // Make sure to search for the participant first, otherwise it wont work
+    this.filterParticipantStatements('', participantId, '')
+    this.checkAmountOfRecordsTable(1)
+
+    //cy.get('#clientParticipantStatement-' + participantId).trigger('mouseover', 'right')
+    //cy.xpath('//*[contains(@id,"cdk-overlay-")]//gs-svg-icon').click({ force: true })
+
+    cy.get('#clientParticipantStatement-' + participantId)
+      .click()
+      .then(() => {
+        cy.xpath('//*[contains(@id,"cdk-overlay-")]//gs-svg-icon')
+          .invoke('show')
+          .click({ force: true })
+      })
   }
 
   /**
@@ -89,7 +116,7 @@ class ClientStatementsPage extends BasePage {
    *
    * @example 'records = 1 for '1 record(s)' being displayed in the table
    */
-  checkAmountOfPeopleTable(records) {
+  checkAmountOfRecordsTable(records) {
     cy.xpath(selectors.numberOfRecordsAfterFiltering)
       .invoke('text')
       .should('contain', records)
@@ -112,7 +139,7 @@ class ClientStatementsPage extends BasePage {
    *
    * @example ('TomTom', '20190301', '20210519') for TomTom client with date range from 2019-03-01 up to 2021-05-19
    */
-  filterStatementsInClientStatements(clientName = '', dateFrom = '', dateTo = '') {
+  filterClientStatements(clientName = '', dateFrom = '', dateTo = '') {
     if (clientName != '') {
       cy.get(selectors.clientFilterStatementInput).type(clientName + '{enter}')
     }
@@ -121,6 +148,29 @@ class ClientStatementsPage extends BasePage {
       cy.get(selectors.dateFilterStatementInput)
         .first()
         .type(dateFrom + dateTo)
+    }
+  }
+
+  /**
+   * Filter for a participant in the participants table inside a client
+   *
+   * @param {String} participantName participant name to be searched into the participant statement filter
+   * @param {Number} participantId participant id to be searched into the participant statement filter
+   * @param {String} status participant status to be searched into the participant statement filter
+   */
+  filterParticipantStatements(participantName = '', participantId = -1, status = '') {
+    this.clearAllFilters()
+
+    if (participantName != '') {
+      cy.xpath(selectors.participantName).type(participantName + '{enter}')
+    }
+
+    if (participantId != -1) {
+      cy.xpath(selectors.participantId).type(participantId + '{enter}')
+    }
+
+    if (status != '') {
+      cy.get(selectors.participantStatus).type(status + '{enter}')
     }
   }
 }

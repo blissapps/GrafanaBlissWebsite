@@ -2,7 +2,7 @@
   "projectId": "15zcyz",
   "baseUrl": "https://ea-v3.myglobalshares.co.uk/",
   "chromeWebSecurity": false,
-  "trashAssetsBeforeRuns": false,
+  "trashAssetsBeforeRuns": true,
   "integrationFolder": "cypress/integration/",
   "testFiles": ["**/*.feature", "**/*.spec.js"],
   "numTestsKeptInMemory": 15,

@@ -1,7 +1,7 @@
-import HomePage from '../../support/pages/homePage'
-import GroupManagementPage from '../../support/pages/globalSettingsPages/userManagementPages/groupManagementPage'
+import HomePage from '../../../support/pages/homePage'
+import GroupManagementPage from '../../../support/pages/globalSettingsPages/userManagementPages/groupManagementPage'
 
-import LeftMenuBar from '../../support/components/leftMenuBar'
+import LeftMenuBar from '../../../support/components/leftMenuBar'
 
 describe('Group Management tests over User Management settings', () => {
   const homePage = new HomePage()

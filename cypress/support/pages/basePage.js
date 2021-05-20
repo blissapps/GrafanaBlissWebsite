@@ -15,18 +15,6 @@ class BasePage {
   }
 
   /**
-   * Get an element by passing a text and a specific html tag
-   *
-   * @param {*} tag html tag
-   * @param {*} text text to check
-   *
-   * @returns the element if found
-   */
-  getElementByTagAndText(tag, text) {
-    return cy.xpath(`//${tag}[normalize-space(text()) = '${text}']`)
-  }
-
-  /**
    * Check url
    *
    * @param {string} url The entire url or a part of it
@@ -49,38 +37,6 @@ class BasePage {
   }
 
   /**
-   * Select an item in a select box
-   *
-   * @param {string} selectBoxId select box Id in Jquery Selector
-   * @param {string} selectText text of the element to be selected
-   *
-   * @returns the element selected
-   */
-  selectById(selectBoxId, selectText) {
-    return cy.get(selectBoxId).select(selectText)
-  }
-
-  /**
-   * Type a text in a input field
-   *
-   * @param {string} inputId input id in Jquery Selector
-   * @param {string} value  value to be typed in the input
-   */
-  typeInputValueById(inputId, value) {
-    cy.get(inputId).type(value)
-  }
-
-  /**
-   * Type a text in a text area field
-   *
-   * @param {string} textAreaId text area id in Jquery Selector
-   * @param {string} value value to be typed in the input
-   */
-  typeTextAreaValueById(textAreaId, value) {
-    cy.get(textAreaId).type(value)
-  }
-
-  /**
    * Click in a element by passing the element text
    *
    * @param {*} text element text to be clicked
@@ -100,12 +56,13 @@ class BasePage {
   }
 
   /**
-   * Click in the first appearance of a text in a table of hearth-data-container type
+   * Verify if a file was downloaded in the default 'cypress/downloads/' path
    *
-   * @param {*} text text bo be clicked in the table
+   * @param {String} filename name of the file we want to verify if it was downloaded
    */
-  clickDataByTextInTable(text) {
-    cy.xpath(`(//hearth-data-container//*[text() = '${text}'])[1]`).click()
+  AssertFileWasDownloadedSuccessfully(filename) {
+    // Browser might take a while to download the file, so use "cy.readFile" to retry until the file exists and has length - and we assume that it has finished downloading then
+    return cy.readFile('cypress/downloads/' + filename, { timeout: 15000 }).should('have.length.gt', 50)
   }
 }
 

@@ -9,9 +9,13 @@
 // You can read more here:
 // https://on.cypress.io/plugins-guide
 // ***********************************************************
+
+// Plugin snapshot variables:
 const { initPlugin } = require('cypress-plugin-snapshots/plugin')
-// const selectTestsWithGrep = require('cypress-select-tests/grep')
+
+// Tags variables:
 const tagify = require('cypress-tags')
+// const selectTestsWithGrep = require('cypress-select-tests/grep')
 
 /**
  * @type {Cypress.PluginConfig}

@@ -1,8 +1,8 @@
-import HomePage from '../../support/pages/homePage'
-import UserManagementPage from '../../support/pages/globalSettingsPages/userManagementPages/userManagementPage'
+import HomePage from '../../../support/pages/homePage'
+import UserManagementPage from '../../../support/pages/globalSettingsPages/userManagementPages/userManagementPage'
 
-import LeftMenuBar from '../../support/components/leftMenuBar'
-import SearchBar from '../../support/components/searchBar'
+import LeftMenuBar from '../../../support/components/leftMenuBar'
+import SearchBar from '../../../support/components/searchBar'
 
 describe('User Management tests over User Management settings', () => {
   const homePage = new HomePage()
