@@ -12,6 +12,8 @@ describe('Statement Management tests', () => {
   beforeEach(() => {
     // @ts-ignore
     cy.login()
+    // @ts-ignore
+    cy.loginSuccessfulXHRWaits()
     leftMenuBar.accessGlobalSettingsMenu('Statement Management')
   })
 

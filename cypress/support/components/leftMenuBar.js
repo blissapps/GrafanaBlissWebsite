@@ -31,6 +31,8 @@ class LeftMenuBar {
    * @ID missing and this methods needs to be refactored to remove the waits when the element removed from the DOM be resolved
    */
   accessGlobalSettingsMenu(item, subItem = '') {
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
+    cy.wait(1000)
     this.openSettingsMenuBar()
     cy.contains(item) // avoid element detached from the DOM
 

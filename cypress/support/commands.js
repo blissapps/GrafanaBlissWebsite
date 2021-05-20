@@ -20,8 +20,14 @@ Cypress.Commands.add('login', (email = Cypress.env('defaultUserAuth'), password 
   // eslint-disable-next-line cypress/no-unnecessary-waiting
   cy.wait(500) // avoid element detached from the DOM. See https://github.com/cypress-io/cypress/issues/7306
   cy.get('#login').click()
+})
 
-  // Avoid elements detached from the DOM when loading the home page right after the login
+/**
+ * Waits for XHR requests that may generate elements detached from the DOM after a successful login
+ *
+ */
+Cypress.Commands.add('loginSuccessfulXHRWaits', () => {
+  // Avoid elements detached from the DOM when loading at the home page right after the login
   cy.intercept('GET', '/api/Users/Self/Tenants/**').as('waitsSettingsToBeLoaded')
   cy.intercept('GET', '/api/Tenants?*').as('waitsMenuToBeLoaded')
   cy.intercept('GET', '/api/Users/Self/Tenants/**/Permissions*').as('waitsPermissionsToBeReceived')
