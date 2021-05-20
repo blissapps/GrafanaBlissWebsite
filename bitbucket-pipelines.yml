@@ -1,0 +1,20 @@
+image: cypress/browsers:node12.14.1-chrome85-ff81
+options:
+  max-time: 10
+
+pipelines:
+  default:
+  - step:
+      name: Install dependencies
+      caches:
+        - npm
+        - cypress
+        - node
+      script:
+        - yarn
+        - yarn cy:run:headless
+  
+definitions:
+  caches:
+    npm: $HOME/.npm
+    cypress: $HOME/.cache/Cypress
