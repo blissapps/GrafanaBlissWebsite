@@ -83,7 +83,8 @@ class ClientStatementsPage extends BasePage {
     cy.xpath(selectors.numberOfRecordsAfterFiltering) //make sure we have data, so we can continue to download. Otherwise, summary button may fail
     this.getSummaryButton()
       .should('be.visible')
-      .click()
+      .as('summaryBtn')
+    cy.get('@summaryBtn').click()
   }
 
   /**

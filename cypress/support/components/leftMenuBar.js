@@ -24,18 +24,22 @@ class LeftMenuBar {
 
   /**
    * Navigation menu
+   *
    * @param {string} item Main menu item
    * @param {string} subItem Submenu item if available. If not, passes nothing like: accessMenuItem("Statement Management")
    *
-   * @ID missing
+   * @ID missing and this methods needs to be refactored to remove the waits when the element removed from the DOM be resolved
    */
   accessGlobalSettingsMenu(item, subItem = '') {
     this.openSettingsMenuBar()
     cy.contains(item) // avoid element detached from the DOM
-    cy.xpath(`(//a[normalize-space(text()) = '${item}'])[1]`).click()
+
+    cy.xpath(`(//a[normalize-space(text()) = '${item}'])[1]`).as('btnMenu')
+    cy.get('@btnMenu').click()
 
     if (subItem != '') {
-      cy.xpath(`//a[normalize-space(text()) = '${subItem}' and @href]`).click()
+      cy.xpath(`//a[normalize-space(text()) = '${subItem}' and @href]`).as('btnSubMenu')
+      cy.get('@btnSubMenu').click()
     }
   }
 }
