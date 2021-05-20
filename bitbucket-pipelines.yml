@@ -10,11 +10,13 @@ pipelines:
         - npm
         - cypress
         - node
+      script:
+        - yarn
   - step:
       name: Running Cypress in Chrome only
       script:
-        - yarn
-        - yarn cy:run:chrome
+        - yarn cy:run:headless
+
   
 definitions:
   caches:
