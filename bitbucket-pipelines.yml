@@ -1,6 +1,6 @@
 image: cypress/browsers:node12.14.1-chrome85-ff81
 options:
-  max-time: 10
+  max-time: 60
 
 pipelines:
   default:
