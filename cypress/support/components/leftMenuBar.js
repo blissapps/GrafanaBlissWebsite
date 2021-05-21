@@ -39,7 +39,6 @@ class LeftMenuBar {
     cy.xpath(`(//a[normalize-space(text()) = '${item}'])[1]`).as('btnMenu')
     cy.get('@btnMenu').click()
 
-    cy.contains(subItem) // avoid element detached from the DOM
     if (subItem != '') {
       cy.xpath(`//a[normalize-space(text()) = '${subItem}' and @href]`).as('btnSubMenu')
       cy.get('@btnSubMenu').click()
