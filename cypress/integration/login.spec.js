@@ -8,6 +8,7 @@ describe('Login and Logout tests', () => {
 
   it('C1234567_Login_And_Logout_Positive', () => {
     cy.login()
+    cy.loginSuccessfulXHRWaits()
     homePage.checkUrl('/home')
     cy.logout()
     authLoginPage.checkUrl('/Account/Login')
