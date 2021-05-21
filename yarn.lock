@@ -2398,6 +2398,11 @@ cypress-tags@^0.0.21:
     cypress "^6.8.0"
     through "^2.3.8"
 
+cypress-wait-until@^1.7.1:
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/cypress-wait-until/-/cypress-wait-until-1.7.1.tgz#3789cd18affdbb848e3cfc1f918353c7ba1de6f8"
+  integrity sha512-8DL5IsBTbAxBjfYgCzdbohPq/bY+IKc63fxtso1C8RWhLnQkZbVESyaclNr76jyxfId6uyzX8+Xnt0ZwaXNtkA==
+
 cypress-waitfor@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/cypress-waitfor/-/cypress-waitfor-1.1.0.tgz#7649f966f60780c22a53f3f7472ec1fc08a111c6"

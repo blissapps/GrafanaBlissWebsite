@@ -49,6 +49,7 @@
     "cypress-file-upload": "^5.0.2",
     "cypress-iframe": "^1.0.1",
     "@cypress/skip-test": "^2.6.0",
+    "cypress-wait-until": "^1.7.1",
     "@4tw/cypress-drag-drop": "^1.6.0",
     "mocha": "^8.2.1",
     "mochawesome": "^6.2.1",
