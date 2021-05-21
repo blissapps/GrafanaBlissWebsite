@@ -32,13 +32,14 @@ class LeftMenuBar {
    */
   accessGlobalSettingsMenu(item, subItem = '') {
     // eslint-disable-next-line cypress/no-unnecessary-waiting
-    cy.wait(1000)
+    cy.wait(2000)
     this.openSettingsMenuBar()
     cy.contains(item) // avoid element detached from the DOM
 
     cy.xpath(`(//a[normalize-space(text()) = '${item}'])[1]`).as('btnMenu')
     cy.get('@btnMenu').click()
 
+    cy.contains(subItem) // avoid element detached from the DOM
     if (subItem != '') {
       cy.xpath(`//a[normalize-space(text()) = '${subItem}' and @href]`).as('btnSubMenu')
       cy.get('@btnSubMenu').click()

@@ -12,6 +12,8 @@ describe('Role Management tests over User Management settings', () => {
   beforeEach(() => {
     // @ts-ignore
     cy.login()
+    // @ts-ignore
+    cy.loginSuccessfulXHRWaits()
   })
 
   // ************************************************ TESTS AS ADMIN TENANT ************************************************** //

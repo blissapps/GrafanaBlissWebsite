@@ -14,6 +14,8 @@ describe('User Management tests over User Management settings', () => {
   beforeEach(() => {
     // @ts-ignore
     cy.login()
+    // @ts-ignore
+    cy.loginSuccessfulXHRWaits()
     leftMenuBar.accessGlobalSettingsMenu('User Management', 'User Management')
   })
 

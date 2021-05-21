@@ -11,6 +11,8 @@ describe('Data Access Profiles tests over User Management settings', () => {
   beforeEach(() => {
     // @ts-ignore
     cy.login()
+    // @ts-ignore
+    cy.loginSuccessfulXHRWaits()
   })
 
   // ************************************************ TESTS AS ADMIN TENANT ************************************************** //
