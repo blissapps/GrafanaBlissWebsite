@@ -1,7 +1,7 @@
 import BasePage from '../pages/basePage'
 
 const selectors = {
-  logo: 'li.ng-tns-c119-1',
+  logo: 'li > a[href="/home"]',
   settingsButton: '#settingsLink',
   closeBarX: '//h2//gs-svg-icon',
   closeBarArrow: 'div .close-icon',
@@ -14,6 +14,13 @@ const selectors = {
 }
 
 class LeftMenuBar extends BasePage {
+  /**
+   * Click in the logo to go to the home page
+   */
+  clickLogoToGoToHomePage() {
+    cy.get(selectors.logo).click()
+  }
+
   /**
    * Closes the Global Setting menu located in the left menu
    */
@@ -29,7 +36,7 @@ class LeftMenuBar extends BasePage {
   }
 
   /**
-   * Check if the leftBar is open
+   * Check if the leftBar is closed
    *
    * @returns True if the left menu is closed
    */
@@ -41,7 +48,6 @@ class LeftMenuBar extends BasePage {
    * Opens the settings menu left bar
    */
   openSettingsMenuBar() {
-    this.isLeftMenuClosed()
     cy.get(selectors.settingsButton).as('settingsBtn') // using alias in this case to avoid element to get too attached
     cy.get('@settingsBtn').click()
   }
@@ -50,7 +56,6 @@ class LeftMenuBar extends BasePage {
    * Opens profile menu left bar
    */
   openProfileMenuBar() {
-    this.isLeftMenuClosed()
     cy.get(selectors.profileAvatar).as('profileBtn') // using alias in this case to avoid element to get too attached
     cy.get('@profileBtn').click()
   }

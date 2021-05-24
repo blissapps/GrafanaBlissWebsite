@@ -27,9 +27,9 @@ describe('Security tests', () => {
    * Change language to PORTUGUESE and verify some random texts around the system
    *
    */
-  it.only('C1234567_Change_Language_Successfully_To_Portuguese', () => {
+  it('C1234567_Change_Language_Successfully_To_Portuguese', () => {
     preferencesPage.changeLanguage('portuguese')
-    leftMenuBar.closeProfileLeftBar()
+    leftMenuBar.clickLogoToGoToHomePage()
 
     leftMenuBar.openSettingsMenuBar()
     leftMenuBar.getElementByText('Gestão de Utilizadores').should('be.visible')
