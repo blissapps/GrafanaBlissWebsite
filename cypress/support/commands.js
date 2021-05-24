@@ -50,7 +50,7 @@ Cypress.Commands.add('loginSuccessfulXHRWaits', () => {
   cy.intercept({ method: 'POST', url: 'https://rs.fullstory.com/rec/page' }, { success: true })
 
   // eslint-disable-next-line cypress/no-unnecessary-waiting
-  cy.wait(1500) // the menu is no stable yet. As soon as it is resolved, we are gonna remove this from here. See https://github.com/cypress-io/cypress/issues/7306
+  cy.wait(1500) // the menu is no stable yet due tome API duplicated calls. A ticket was open https://globalshares.atlassian.net/browse/PB-828
 })
 
 /**

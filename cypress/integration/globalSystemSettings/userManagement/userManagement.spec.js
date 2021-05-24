@@ -13,9 +13,7 @@ describe('User Management tests over User Management settings', () => {
 
   beforeEach(() => {
     // @ts-ignore
-    cy.login()
-    // @ts-ignore
-    cy.loginSuccessfulXHRWaits()
+    cy.login() && cy.loginSuccessfulXHRWaits()
     leftMenuBar.accessGlobalSettingsMenu('User Management', 'User Management')
   })
 
@@ -28,7 +26,7 @@ describe('User Management tests over User Management settings', () => {
    */
   it('C1234567_Check_Behavior_When_Closing_The_Settings', () => {
     userManagementPage.checkUserManagementUrl()
-    leftMenuBar.closeMenuLeftBar()
+    leftMenuBar.closeGlobalSettingLeftBar()
     homePage.checkUrl('home')
   })
 

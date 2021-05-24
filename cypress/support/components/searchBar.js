@@ -1,5 +1,5 @@
 const selectors = {
-  inputBar: '.input-bar',
+  inputBar: '.input-bar input',
   searchClientButton: '.search-action',
   clearClientFieldButton: '.clear-action'
 }
@@ -18,10 +18,11 @@ class SearchBar {
   }
 
   /**
-   * Clear the search bar content
+   * Clear the search bar content.
+   * For this kind of element, we cannot use the default clear from Cypress
    */
   clearSearchBox() {
-    cy.get(selectors.inputBar).type('{selectall}{backspace}{selectall}{backspace}')
+    cy.get(selectors.inputBar).clear()
   }
 }
 

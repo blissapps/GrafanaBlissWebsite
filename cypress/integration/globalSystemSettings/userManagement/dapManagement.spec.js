@@ -10,9 +10,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
 
   beforeEach(() => {
     // @ts-ignore
-    cy.login()
-    // @ts-ignore
-    cy.loginSuccessfulXHRWaits()
+    cy.login() && cy.loginSuccessfulXHRWaits()
   })
 
   // ************************************************ TESTS AS ADMIN TENANT ************************************************** //
@@ -25,7 +23,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
   it('C1234567_Check_Behavior_When_Closing_The_Settings', () => {
     leftMenuBar.accessGlobalSettingsMenu('User Management', 'Data Access Profiles')
     dapManagementPage.checkDapManagementUrl()
-    leftMenuBar.closeMenuLeftBar()
+    leftMenuBar.closeGlobalSettingLeftBar()
     homePage.checkUrl('home')
   })
 
