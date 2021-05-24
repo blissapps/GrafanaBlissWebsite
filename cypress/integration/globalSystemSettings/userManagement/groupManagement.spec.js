@@ -24,7 +24,7 @@ describe('Group Management tests over User Management settings', () => {
   it('C1234567_Check_Behavior_When_Closing_The_Settings', () => {
     leftMenuBar.accessGlobalSettingsMenu('User Management', 'Group Management')
     groupManagementPage.checkGroupManagementUrl()
-    leftMenuBar.closeGlobalSettingLeftBar()
+    leftMenuBar.closeGlobalSettingsLeftBar()
     homePage.checkUrl('home')
   })
 

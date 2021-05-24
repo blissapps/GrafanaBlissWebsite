@@ -23,7 +23,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
   it('C1234567_Check_Behavior_When_Closing_The_Settings', () => {
     leftMenuBar.accessGlobalSettingsMenu('User Management', 'Data Access Profiles')
     dapManagementPage.checkDapManagementUrl()
-    leftMenuBar.closeGlobalSettingLeftBar()
+    leftMenuBar.closeGlobalSettingsLeftBar()
     homePage.checkUrl('home')
   })
 

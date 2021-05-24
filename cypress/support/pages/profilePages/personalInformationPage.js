@@ -42,7 +42,6 @@ class PersonalInformationPage extends BasePage {
   }
 
   // put the save button in here when available
-
 }
 
 export default PersonalInformationPage

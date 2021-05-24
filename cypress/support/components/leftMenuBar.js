@@ -15,7 +15,7 @@ class LeftMenuBar {
   /**
    * Closes the Global Setting menu located in the left menu
    */
-  closeGlobalSettingLeftBar() {
+  closeGlobalSettingsLeftBar() {
     cy.xpath(selectors.closeBarX).click()
   }
 
