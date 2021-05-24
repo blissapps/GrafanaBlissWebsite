@@ -1,6 +1,6 @@
 image: cypress/browsers:node12.14.1-chrome85-ff81
 options:
-  max-time: 60
+  max-time: 120
 
 pipelines:
   default:
@@ -13,13 +13,21 @@ pipelines:
       script:
         - yarn
   - step:
-      name: Running Cypress in Chrome only
+      name: Cypress in Chrome only
       caches:
         - npm
         - cypress
         - node
       script:
         - yarn cy:run:headless
+  - step:
+      name: Cypress in Chrome only
+      caches:
+        - npm
+        - cypress
+        - node
+      script:
+        - yarn cy:run:firefox
 
   
 definitions:

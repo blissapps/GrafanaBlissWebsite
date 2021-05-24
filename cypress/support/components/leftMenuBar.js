@@ -1,3 +1,5 @@
+import BasePage from '../pages/basePage'
+
 const selectors = {
   logo: 'li.ng-tns-c119-1',
   settingsButton: '#settingsLink',
@@ -11,7 +13,7 @@ const selectors = {
   leftMenuOpen: '//*[@class= "ng-tns-c115-1 open"]'
 }
 
-class LeftMenuBar {
+class LeftMenuBar extends BasePage {
   /**
    * Closes the Global Setting menu located in the left menu
    */

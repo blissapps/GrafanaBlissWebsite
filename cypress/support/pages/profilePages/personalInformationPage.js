@@ -12,7 +12,7 @@ const properties = {
 
 class PersonalInformationPage extends BasePage {
   /**
-   * Checks if the current page is Participants/People URL
+   * Checks if the current page is the one in the properties
    */
   checkProfilePersonalInformationUrl() {
     this.checkUrl(properties.pageURL)
