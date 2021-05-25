@@ -32,12 +32,15 @@ describe('Statement Management tests', () => {
   /**
    * Filter for a combination of data that does not bring any results to test if a error message is displayed
    *
+   * @Only_Chrome https://globalshares.atlassian.net/browse/GDP-49661
+   *
    */
-  it('C1234567_Filter_Without_Results_Check_Message', () => {
+  it('C1234567_Filter_Without_Results_Check_Message', { browser: '!firefox' }, () => {
+    const clientName = 'None'
     const yesterdayDate = utils.getDateInFutureOrPast(-1, 0, 0, 'YYYY/MM/DD').join()
     const todayDate = utils.getDateInFutureOrPast(0, 0, 0, 'YYYY/MM/DD').join()
 
-    clientStatementsPage.filterClientStatements('TestTestTest', yesterdayDate, todayDate)
+    clientStatementsPage.filterClientStatements(clientName, yesterdayDate, todayDate)
     clientStatementsPage.getNoDataFoundMessage().should('be.visible')
   })
 
@@ -103,8 +106,12 @@ describe('Statement Management tests', () => {
     clientStatementsPage.AssertFileWasDownloadedSuccessfully(clientName.split(' ').join('_') + '_Summary.csv')
   })
 
-  // Select a client from the list after a search or not with participants published (ex Interxion), and click on a participant from the list with status published, and click to view pdf, and check if a pdf file was downloaded with name participant_Summary.pdf
-  it('C1234567_download_PDF_File_From_Participant', () => {
+  /**
+   * Select a client from the list after a search or not with participants published (ex Interxion), and click on a participant from the list with status published, and click to view pdf, and check if a pdf file was downloaded with name participant_Summary.pdf
+   *
+   * @Only_Chrome because Firefox does not allow do download pdf files without the confirmation popup
+   */
+  it('C1234567_download_PDF_File_From_Participant', { browser: '!firefox' }, () => {
     const clientID = 76
     const participantID = 32512
     const participantName = 'Pacheco'

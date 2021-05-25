@@ -148,7 +148,10 @@ class ClientStatementsPage extends BasePage {
     if (dateFrom != '' && dateTo != '') {
       cy.get(selectors.dateFilterStatementInput)
         .first()
-        .type(dateFrom + dateTo)
+        .type(dateFrom)
+      cy.get(selectors.dateFilterStatementInput)
+        .last()
+        .type(dateTo)
     }
   }
 

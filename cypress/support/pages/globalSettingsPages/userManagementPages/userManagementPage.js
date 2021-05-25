@@ -7,7 +7,8 @@ const properties = {
 
 const selectors = {
   numberOfRecordsInTable: '#userRecordCount',
-  numberOfSearchResultsInTable: '.search-results-count'
+  numberOfSearchResultsInTable: '.search-results-count',
+  userRowFromTable: '.data > gs-grid-row-list > gs-grid-row > gs-grid-cell'
 }
 
 const searchBar = new SearchBar()
@@ -41,7 +42,9 @@ class UserManagementPage extends BasePage {
    * Waiting for @IDS
    */
   clickUserTable(username) {
-    this.getUserTable(username).click()
+    this.getUserTable(username)
+      .first()
+      .click()
   }
 
   /**
@@ -60,6 +63,25 @@ class UserManagementPage extends BasePage {
     cy.get(selectors.numberOfSearchResultsInTable)
       .invoke('text')
       .should('contain', results)
+  }
+
+  /**
+   * Check the data listed in a user [username, email, and status] over the Users table
+   *
+   * @param {Array} data Array with the data needed to be validated. The correct order is the ORDER displayed in the UI,
+   * which actually is [username, email, and status]
+   *
+   * @example: send ['amulcahyNE', 'test@globalshares.com', 'Active'] to validate the data from user amulcahyNE is
+   * displayed correctly in the Participants table list
+   */
+  AssertUsersDataDisplayedOnTheParticipantsList(data) {
+    for (let i = 0; i < data.length; i++) {
+      //cy.get('.data > gs-grid-row-list > gs-grid-row > gs-grid-cell span').eq(i)
+      cy.get(selectors.userRowFromTable)
+        .eq(i)
+        .invoke('text')
+        .should('contain', data[i])
+    }
   }
 }
 

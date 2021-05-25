@@ -33,15 +33,20 @@ describe('User Management tests over User Management settings', () => {
   /**
    * Test search engine for a username and a email
    *
-   * @BUG @UNCOMPLETED
+   * @BUG_CHROME @UNCOMPLETED
    */
-  it.skip('C1234567_Search_For_Username_And_Email', () => {
-    searchBar.search('amulcahyNE')
-    // userManagementPage.checkAmountOfPeopleTable(53, 2) // We need to verify this, it is possible a very weird bug
-    searchBar.search('test@globalshares.com')
-    // userManagementPage.checkAmountOfPeopleTable(53, 20) // We need to verify this, it is possible a very weird bug
-    userManagementPage.clickUserTable('amulcahyNE')
-    // check elements in table, we have something like this in Equity People Pages: (validateParticipantDataDisplayedOnTheParticipantsList)
+  it('C1234567_Search_For_Username_And_Email', () => {
+    const userName = 'amulcahyNE'
+    const userEmail = 'test@globalshares.com'
+    const userStatus = 'Active'
+    userManagementPage.checkUserManagementUrl() // Check we are getting the correct search input in the correct page
+
+    searchBar.search(userEmail)
+    // userManagementPage.checkAmountOfPeopleTable(55, 20) // We need to verify this, it is possible a very weird bug
+    searchBar.search(userName)
+    // userManagementPage.checkAmountOfPeopleTable(55, 2) // We need to verify this, it is possible a very weird bug
+
+    userManagementPage.AssertUsersDataDisplayedOnTheParticipantsList([userName, userEmail, userStatus])
   })
 
   // Verify USER DETAIL container data when picking a user from the Participants table
