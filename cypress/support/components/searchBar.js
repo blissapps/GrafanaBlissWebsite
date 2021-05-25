@@ -23,6 +23,7 @@ class SearchBar {
    */
   clearSearchBox() {
     cy.get(selectors.inputBar).clear()
+    // cy.get(selectors.inputBar).type('{selectall}{backspace}{selectall}{backspace}')
   }
 }
 

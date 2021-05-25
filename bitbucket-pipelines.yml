@@ -21,7 +21,7 @@ pipelines:
       script:
         - yarn cy:run:headless
   - step:
-      name: Cypress in Chrome only
+      name: Cypress in Firefox only
       caches:
         - npm
         - cypress
