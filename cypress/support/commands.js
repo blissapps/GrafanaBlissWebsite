@@ -19,7 +19,7 @@ Cypress.Commands.add('login', (email = Cypress.env('defaultUserAuth'), password 
   cy.get('#username-field').type(email)
   cy.get('#password-field').type(password)
   // eslint-disable-next-line cypress/no-unnecessary-waiting
-  cy.wait(500) // avoid element detached from the DOM. See https://github.com/cypress-io/cypress/issues/7306
+  cy.wait(500) // avoid element detached from the DOM. See https://github.com/cypress-io/cypress/issues/7306. A ticket was open https://globalshares.atlassian.net/browse/PB-828
   cy.get('#login').click()
 })
 

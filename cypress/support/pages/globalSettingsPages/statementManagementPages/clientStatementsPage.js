@@ -11,11 +11,11 @@ const selectors = {
   clientStatementId: '#clientStatement-',
   reconcileClientButton: '.cdk-overlay-connected-position-bounding-box',
   backToManageStatementsButton: '#backLink',
-  numberOfRecordsAfterFiltering: '//div[@class="grid-count ng-star-inserted"]',
+  numberOfRecordsAfterFiltering: '#gridCount',
   noDataFoundMessage: '#emptyContainer',
   summaryDownloadButton: '//gs-button[contains(text(),"Summary")]',
-  participantName: '(//gs-input-field//*[@class="input"])[1]',
-  participantId: '(//gs-input-field//*[@class="input"])[2]',
+  participantName: '#pptNameFilter input',
+  participantId: '#pptIdFilter input',
   participantStatus: '#statusSelect input'
 }
 
@@ -64,7 +64,7 @@ class ClientStatementsPage extends BasePage {
   clickClientTable(clientId) {
     this.getClientFromTable(clientId)
       .scrollIntoView()
-      .click()
+      .click('left')
   }
 
   /**
@@ -80,7 +80,7 @@ class ClientStatementsPage extends BasePage {
    *
    */
   clickSummaryDownloadButtonToDownloadCSVFile() {
-    cy.xpath(selectors.numberOfRecordsAfterFiltering) //make sure we have data, so we can continue to download. Otherwise, summary button may fail
+    cy.get(selectors.numberOfRecordsAfterFiltering) //make sure we have data, so we can continue to download. Otherwise, summary button may fail
     this.getSummaryButton()
       .should('be.visible')
       .as('summaryBtn')
@@ -95,19 +95,14 @@ class ClientStatementsPage extends BasePage {
    */
   clickDownloadPDFFromParticipantStatement(participantId) {
     // Make sure to search for the participant first, otherwise it wont work
-    this.filterParticipantStatements('', participantId, '')
-    this.checkAmountOfRecordsTable(1)
+    // this.filterParticipantStatements('', participantId, '')
+    // this.checkAmountOfRecordsTable(1)
 
     //cy.get('#clientParticipantStatement-' + participantId).trigger('mouseover', 'right')
     //cy.xpath('//*[contains(@id,"cdk-overlay-")]//gs-svg-icon').click({ force: true })
 
-    cy.get('#clientParticipantStatement-' + participantId)
-      .click()
-      .then(() => {
-        cy.xpath('//*[contains(@id,"cdk-overlay-")]//gs-svg-icon')
-          .invoke('show')
-          .click({ force: true })
-      })
+    cy.get('#clientParticipantStatement-' + participantId + ' gs-svg-icon').as('participantRowSelected')
+    cy.get('@participantRowSelected').click()
   }
 
   /**
@@ -118,17 +113,9 @@ class ClientStatementsPage extends BasePage {
    * @example 'records = 1 for '1 record(s)' being displayed in the table
    */
   checkAmountOfRecordsTable(records) {
-    cy.xpath(selectors.numberOfRecordsAfterFiltering)
+    cy.get(selectors.numberOfRecordsAfterFiltering)
       .invoke('text')
       .should('contain', records)
-  }
-
-  /**
-   * Clear filters in a search
-   *
-   */
-  clearAllFilters() {
-    cy.get(selectors.clearAllFiltersButton).click()
   }
 
   /**
@@ -166,11 +153,11 @@ class ClientStatementsPage extends BasePage {
     this.clearAllFilters()
 
     if (participantName != '') {
-      cy.xpath(selectors.participantName).type(participantName + '{enter}')
+      cy.get(selectors.participantName).type(participantName + '{enter}')
     }
 
     if (participantId != -1) {
-      cy.xpath(selectors.participantId).type(participantId + '{enter}')
+      cy.get(selectors.participantId).type(participantId + '{enter}')
     }
 
     if (status != '') {

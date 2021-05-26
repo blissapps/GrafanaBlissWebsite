@@ -1,10 +1,12 @@
 import ClientStatementsPage from '../../support/pages/globalSettingsPages/statementManagementPages/clientStatementsPage'
+import ParticipantRegulatoryLinkagePage from '../../support/pages/globalSettingsPages/statementManagementPages/participantRegulatoryLinkagePage'
 import Utils from '../../support/utils'
 
 import LeftMenuBar from '../../support/components/leftMenuBar'
 
 describe('Statement Management tests', () => {
   const clientStatementsPage = new ClientStatementsPage()
+  const participantRegulatoryLinkagePage = new ParticipantRegulatoryLinkagePage()
 
   const leftMenuBar = new LeftMenuBar()
   const utils = new Utils()
@@ -57,7 +59,7 @@ describe('Statement Management tests', () => {
 
   /**
    * Filter a client with participants and Check search with participant name, id and status with a variety of combination, such as
-   * nameXid, nameXdate, idXdate, nameXidXdate.. (USE TomTom)
+   * nameXid, name vs date, id vs date, name vs id vs date.. (USE TomTom)
    *
    * missing @IDS
    */
@@ -117,9 +119,65 @@ describe('Statement Management tests', () => {
     const participantName = 'Pacheco'
 
     clientStatementsPage.clickClientTable(clientID)
-    clientStatementsPage.clickDownloadPDFFromParticipantStatement(participantID) // this method was not tested yet
+    clientStatementsPage.clickDownloadPDFFromParticipantStatement(participantID)
     clientStatementsPage.AssertFileWasDownloadedSuccessfully(participantName + '_Summary.pdf')
   })
 
-  // In participant tab, check the behavior of the filter - It is probably a bug
+  /**
+   * In participants tab, check the behavior of the filter by doing all combinations (Participant name only working for last name)
+   */
+  it.only('C1234567_TEST', () => {
+    const clientName = 'Acacia Pharma'
+    const participantName = 'Serrano'
+    const participantId = '544545'
+    const regulator = 'FINRA'
+    const partner = 'Global Shares Execution Services Ltd.'
+
+    clientStatementsPage.selectTabByName('Participant Regulatory Linkage')
+    participantRegulatoryLinkagePage.checkParticipantRegulatoryLinkageManagementUrl()
+
+    cy.log('Filter 1')
+    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName)
+    participantRegulatoryLinkagePage.checkAmountOfRecordsTable(125)
+
+    cy.log('Filter 2')
+    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName)
+    participantRegulatoryLinkagePage.checkAmountOfRecordsTable(2)
+
+    cy.log('Filter 3')
+    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName, participantId)
+    participantRegulatoryLinkagePage.checkAmountOfRecordsTable(2)
+
+    cy.log('Filter 4')
+    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName, participantId, regulator)
+    participantRegulatoryLinkagePage.checkAmountOfRecordsTable(1)
+
+    cy.log('Filter 5')
+    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName, participantId, regulator, partner)
+    participantRegulatoryLinkagePage.checkAmountOfRecordsTable(1)
+
+    cy.log('Filter 6')
+    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, '', participantId, '', '')
+    participantRegulatoryLinkagePage.checkAmountOfRecordsTable(2)
+
+    cy.log('Filter 7')
+    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, '', '', regulator, '')
+    participantRegulatoryLinkagePage.checkAmountOfRecordsTable(42)
+
+    cy.log('Filter 8')
+    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, '', '', '', partner)
+    participantRegulatoryLinkagePage.checkAmountOfRecordsTable(97)
+
+    cy.log('Filter 9')
+    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, '', '', regulator, partner)
+    participantRegulatoryLinkagePage.checkAmountOfRecordsTable(42)
+
+    cy.log('Filter 10')
+    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName, '', regulator, partner)
+    participantRegulatoryLinkagePage.checkAmountOfRecordsTable(1)
+
+    cy.log('Filter 11')
+    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName, participantId, '', partner)
+    participantRegulatoryLinkagePage.checkAmountOfRecordsTable(2)
+  })
 })

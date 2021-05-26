@@ -1,6 +1,11 @@
 /**
  * This is the basePage class with all basic methods we can use across all the pages
  */
+
+const selectors = {
+  clearAllFiltersButton: '#clearButton'
+}
+
 class BasePage {
   /**
    * Get an element by passing a text
@@ -52,7 +57,7 @@ class BasePage {
    * @param {String} tabName Name of the tab you want to go in
    */
   selectTabByName(tabName) {
-    cy.xpath(`//div[@class='tabs-bar']//div[@title='${tabName}']`).click()
+    cy.xpath(`//div[@class='tabs-bar']//*[@title='${tabName}']`).click()
   }
 
   /**
@@ -63,6 +68,14 @@ class BasePage {
   AssertFileWasDownloadedSuccessfully(filename) {
     // Browser might take a while to download the file, so use "cy.readFile" to retry until the file exists and has length - and we assume that it has finished downloading then
     return cy.readFile('cypress/downloads/' + filename, { timeout: 15000 }).should('have.length.gt', 50)
+  }
+
+  /**
+   * Clear filters in a search by pressing in the "Clear All Filters" button
+   *
+   */
+  clearAllFilters() {
+    cy.get(selectors.clearAllFiltersButton).click()
   }
 }
 
