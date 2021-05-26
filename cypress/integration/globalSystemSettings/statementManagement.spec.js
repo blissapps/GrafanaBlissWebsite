@@ -126,7 +126,7 @@ describe('Statement Management tests', () => {
   /**
    * In participants tab, check the behavior of the filter by doing all combinations (Participant name only working for last name)
    */
-  it.only('C1234567_TEST', () => {
+  it.only('C1234567_Filter_Behavior_of_Participant_Regulatory_Linkage', () => {
     const clientName = 'Acacia Pharma'
     const participantName = 'Serrano'
     const participantId = '544545'
@@ -135,6 +135,12 @@ describe('Statement Management tests', () => {
 
     clientStatementsPage.selectTabByName('Participant Regulatory Linkage')
     participantRegulatoryLinkagePage.checkParticipantRegulatoryLinkageManagementUrl()
+    participantRegulatoryLinkagePage.getNoDataFoundMessage().should('be.visible')
+
+    // Not working yet for first name, so lets verify this until it is fixed
+    cy.log('Filter 0')
+    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, 'Paisley')
+    participantRegulatoryLinkagePage.getNoDataFoundMessage().should('be.visible')
 
     cy.log('Filter 1')
     participantRegulatoryLinkagePage.filterParticipantsStatements(clientName)
@@ -177,6 +183,10 @@ describe('Statement Management tests', () => {
     participantRegulatoryLinkagePage.checkAmountOfRecordsTable(1)
 
     cy.log('Filter 11')
+    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName, participantId, '', partner)
+    participantRegulatoryLinkagePage.checkAmountOfRecordsTable(2)
+
+    cy.log('Filter 12')
     participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName, participantId, '', partner)
     participantRegulatoryLinkagePage.checkAmountOfRecordsTable(2)
   })

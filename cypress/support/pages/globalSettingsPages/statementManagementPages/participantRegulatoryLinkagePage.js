@@ -61,7 +61,7 @@ class ParticipantRegulatoryLinkagePage extends BasePage {
     }
 
     // eslint-disable-next-line cypress/no-unnecessary-waiting
-    cy.wait(200) // we could use cy.intercept, but they are changing a lot the requests at this point, and the amount of time is really low
+    cy.wait(300) // we could use cy.intercept, but they are changing a lot the requests at this point, and the amount of time is really low.
   }
 
   /**
