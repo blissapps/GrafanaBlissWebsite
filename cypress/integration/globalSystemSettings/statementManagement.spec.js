@@ -66,7 +66,7 @@ describe('Statement Management tests', () => {
    * Select a client from the list with the status INITIATED , and verify that the summary button is not available.
    * And, select a client from the list with the status RECONCILED , and verify that the summary button is not available
    */
-  it('C1234567_select_Client_With_Status_That_Does_Not_Have_Download_Report', () => {
+  it('C1234567_select_Client_With_Status_That_Does_Not_Have_Any_Download_Report', () => {
     clientStatementsPage.filterClientStatements('Cavotec')
     clientStatementsPage.clickClientTable(78)
     clientStatementsPage.getSummaryButton().should('not.exist')
@@ -81,7 +81,7 @@ describe('Statement Management tests', () => {
   /**
    * Select a client from the list with status PUBLISHED, and click to get the summary and check if a csv file was downloaded with name clientName_Summary.csv
    */
-  it('C1234567_Download_Summary_File_For_Client_With_Status_Published', () => {
+  it('C1234567_Download_Summary_File_For_Client_With_Status_Published', { browser: '!firefox' }, () => {
     const clientName = 'Interxion'
     const clientID = 76
 
@@ -95,7 +95,7 @@ describe('Statement Management tests', () => {
   /**
    * Select a client from the list with status PARTIALLY PUBLISHED, and click to get the summary and check if a csv file was downloaded with name clientName_Summary.csv
    */
-  it('C1234567_Download_Summary_File_For_Client_With_Status_Partially_Published', () => {
+  it('C1234567_Download_Summary_File_For_Client_With_Status_Partially_Published', { browser: '!firefox' }, () => {
     const clientName = 'Kin and Carta PLC'
     const clientID = 79
 
