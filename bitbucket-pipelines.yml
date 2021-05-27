@@ -19,7 +19,7 @@ pipelines:
           - cypress
           - node
         script:
-          - yarn cy:run:headless || true
+          - yarn cy:run:headless
     - step:
         name: Cypress in Firefox only
         caches:
