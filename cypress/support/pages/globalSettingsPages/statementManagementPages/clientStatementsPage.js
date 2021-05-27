@@ -9,11 +9,10 @@ const selectors = {
   dateFilterStatementInput: '#date-range-input input',
   clearAllFiltersButton: '#clearButton',
   clientStatementId: '#clientStatement-',
-  reconcileClientButton: '.cdk-overlay-connected-position-bounding-box',
   backToManageStatementsButton: '#backLink',
   numberOfRecordsAfterFiltering: '#gridCount',
   noDataFoundMessage: '#emptyContainer',
-  summaryDownloadButton: '//gs-button[contains(text(),"Summary")]',
+  summaryDownloadButton: 'div.header gs-button',
   participantName: '#pptNameFilter input',
   participantId: '#pptIdFilter input',
   participantStatus: '#statusSelect input'
@@ -53,7 +52,7 @@ class ClientStatementsPage extends BasePage {
    * @returns summary button element
    */
   getSummaryButton() {
-    return cy.xpath(selectors.summaryDownloadButton)
+    return cy.get(selectors.summaryDownloadButton)
   }
 
   /**
@@ -94,13 +93,6 @@ class ClientStatementsPage extends BasePage {
    *
    */
   clickDownloadPDFFromParticipantStatement(participantId) {
-    // Make sure to search for the participant first, otherwise it wont work
-    // this.filterParticipantStatements('', participantId, '')
-    // this.checkAmountOfRecordsTable(1)
-
-    //cy.get('#clientParticipantStatement-' + participantId).trigger('mouseover', 'right')
-    //cy.xpath('//*[contains(@id,"cdk-overlay-")]//gs-svg-icon').click({ force: true })
-
     cy.get('#clientParticipantStatement-' + participantId + ' gs-svg-icon').as('participantRowSelected')
     cy.get('@participantRowSelected').click()
   }
@@ -164,6 +156,20 @@ class ClientStatementsPage extends BasePage {
       cy.get(selectors.participantStatus).type(status + '{enter}')
     }
   }
+
+  /**
+   * Reconcile a client statement - NOT DONE YET
+   *
+   * @param {Number} recordId id number from the Client Statements table to reconcile
+   */
+  reconcileClient(recordId) {
+    cy.get(`#hover-actions-${recordId} gs-svg-icon`).as('clientSelected')
+    cy.get('@clientSelected')
+      .scrollIntoView()
+      .click()
+  }
+  // click in client or checkbox in the right nav bar
+  // click in cancel or reconcile
 }
 
 export default ClientStatementsPage

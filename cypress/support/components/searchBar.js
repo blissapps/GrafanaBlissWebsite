@@ -1,5 +1,5 @@
 const selectors = {
-  inputBar: '.input-bar input',
+  inputBar: 'gs-global-search .input-bar input',
   searchClientButton: '.search-action',
   clearClientFieldButton: '.clear-action'
 }

@@ -1,20 +1,19 @@
 import HomePage from '../../../support/pages/homePage'
 import UserManagementPage from '../../../support/pages/globalSettingsPages/userManagementPages/userManagementPage'
-
-import LeftMenuBar from '../../../support/components/leftMenuBar'
+import LeftMenuNavBar from '../../../support/components/leftMenuNavBar'
 import SearchBar from '../../../support/components/searchBar'
 
 describe('User Management tests over User Management settings', () => {
   const homePage = new HomePage()
   const userManagementPage = new UserManagementPage()
 
-  const leftMenuBar = new LeftMenuBar()
+  const leftMenuNavBar = new LeftMenuNavBar()
   const searchBar = new SearchBar()
 
   beforeEach(() => {
     // @ts-ignore
     cy.login() && cy.loginSuccessfulXHRWaits()
-    leftMenuBar.accessGlobalSettingsMenu('User Management', 'User Management')
+    leftMenuNavBar.accessGlobalSettingsMenu('user', 'user')
   })
 
   // ************************************************ TESTS AS ADMIN TENANT ************************************************** //
@@ -26,7 +25,7 @@ describe('User Management tests over User Management settings', () => {
    */
   it('C1234567_Check_Behavior_When_Closing_The_Settings', () => {
     userManagementPage.checkUserManagementUrl()
-    leftMenuBar.closeGlobalSettingsLeftBar()
+    leftMenuNavBar.closeGlobalSettingsLeftBar()
     homePage.checkUrl('home')
   })
 
@@ -34,7 +33,7 @@ describe('User Management tests over User Management settings', () => {
    * Test search engine for a username and a email
    *
    */
-  it('C1234567_Search_For_Username_And_Email', () => {
+  it.only('C1234567_Search_For_Username_And_Email', () => {
     const userName = 'amulcahyNE'
     const userEmail = 'test@globalshares.com'
     const userStatus = 'Active'

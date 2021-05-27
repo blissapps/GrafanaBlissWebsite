@@ -7,7 +7,8 @@ const properties = {
 
 const selectors = {
   numberOfSearchResultsInTable: '#userRecordCount .search-results-count',
-  userRowFromTable: '.data > gs-grid-row-list > gs-grid-row > gs-grid-cell'
+  user: '#user-',
+  userRowFromTable: 'div.data gs-grid-cell'
 }
 
 const searchBar = new SearchBar()
@@ -23,14 +24,14 @@ class UserManagementPage extends BasePage {
   /**
    * Get a user from the table of users
    *
-   * @param {string} username username text for the user to be searched
+   * @param {string} userId username text for the user to be searched
    *
-   * Waiting for @IDS
+   * @example send userId = 454292 to select this user from the table
    */
-  getUserTable(username) {
-    searchBar.search(username)
+  getUserTable(userId) {
+    searchBar.search(userId)
 
-    return cy.xpath(`//div[@class='data']//*[text()='${username}']`)
+    return cy.get(selectors.user + userId).first()
   }
 
   /**
@@ -41,9 +42,7 @@ class UserManagementPage extends BasePage {
    * Waiting for @IDS
    */
   clickUserTable(username) {
-    this.getUserTable(username)
-      .first()
-      .click()
+    this.getUserTable(username).click()
   }
 
   /**
@@ -70,7 +69,6 @@ class UserManagementPage extends BasePage {
    */
   AssertUsersDataDisplayedOnTheParticipantsList(data) {
     for (let i = 0; i < data.length; i++) {
-      //cy.get('.data > gs-grid-row-list > gs-grid-row > gs-grid-cell span').eq(i)
       cy.get(selectors.userRowFromTable)
         .eq(i)
         .invoke('text')

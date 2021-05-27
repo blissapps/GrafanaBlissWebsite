@@ -1,12 +1,12 @@
 import HomePage from '../../../support/pages/homePage'
 import DapManagementPage from '../../../support/pages/globalSettingsPages/userManagementPages/dapManagementPage'
+import LeftMenuNavBar from '../../../support/components/leftMenuNavBar'
 
-import LeftMenuBar from '../../../support/components/leftMenuBar'
 describe('Data Access Profiles tests over User Management settings', () => {
   const homePage = new HomePage()
   const dapManagementPage = new DapManagementPage()
 
-  const leftMenuBar = new LeftMenuBar()
+  const leftMenuNavBar = new LeftMenuNavBar()
 
   beforeEach(() => {
     // @ts-ignore
@@ -21,9 +21,9 @@ describe('Data Access Profiles tests over User Management settings', () => {
    * Waiting for @IDS
    */
   it('C1234567_Check_Behavior_When_Closing_The_Settings', () => {
-    leftMenuBar.accessGlobalSettingsMenu('User Management', 'Data Access Profiles')
+    leftMenuNavBar.accessGlobalSettingsMenu('user', 'dap')
     dapManagementPage.checkDapManagementUrl()
-    leftMenuBar.closeGlobalSettingsLeftBar()
+    leftMenuNavBar.closeGlobalSettingsLeftBar()
     homePage.checkUrl('home')
   })
 

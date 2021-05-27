@@ -1,17 +1,17 @@
 import SecurityPage from '../../support/pages/profilePages/securityPage'
 import HomePage from '../../support/pages/homePage'
 
-import LeftMenuBar from '../../support/components/leftMenuBar'
+import LeftMenuNavBar from '../../support/components/leftMenuNavBar'
 
 describe('Trusts tests', () => {
-  const leftMenuBar = new LeftMenuBar()
+  const leftMenuNavBar = new LeftMenuNavBar()
   const securityPage = new SecurityPage()
   const homePage = new HomePage()
 
   beforeEach(() => {
     // @ts-ignore
     cy.login() && cy.loginSuccessfulXHRWaits()
-    leftMenuBar.openProfileSecurityPage()
+    leftMenuNavBar.openProfileSecurityPage()
   })
 
   /**
@@ -19,7 +19,7 @@ describe('Trusts tests', () => {
    */
   it('C1234567_Check_URL_Access_Over_The_Menu', () => {
     securityPage.checkProfileSecurityUrl()
-    leftMenuBar.closeProfileLeftBar()
+    leftMenuNavBar.closeProfileLeftBar()
     homePage.checkUrl('home')
   })
 

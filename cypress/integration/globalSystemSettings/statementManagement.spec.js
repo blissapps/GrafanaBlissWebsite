@@ -1,20 +1,19 @@
 import ClientStatementsPage from '../../support/pages/globalSettingsPages/statementManagementPages/clientStatementsPage'
 import ParticipantRegulatoryLinkagePage from '../../support/pages/globalSettingsPages/statementManagementPages/participantRegulatoryLinkagePage'
 import Utils from '../../support/utils'
-
-import LeftMenuBar from '../../support/components/leftMenuBar'
+import LeftMenuNavBar from '../../support/components/leftMenuNavBar'
 
 describe('Statement Management tests', () => {
   const clientStatementsPage = new ClientStatementsPage()
   const participantRegulatoryLinkagePage = new ParticipantRegulatoryLinkagePage()
 
-  const leftMenuBar = new LeftMenuBar()
+  const leftMenuNavBar = new LeftMenuNavBar()
   const utils = new Utils()
 
   beforeEach(() => {
     // @ts-ignore
     cy.login() && cy.loginSuccessfulXHRWaits()
-    leftMenuBar.accessGlobalSettingsMenu('Statement Management')
+    leftMenuNavBar.accessGlobalSettingsMenu('statement')
   })
 
   /**
@@ -122,6 +121,14 @@ describe('Statement Management tests', () => {
     clientStatementsPage.clickDownloadPDFFromParticipantStatement(participantID)
     clientStatementsPage.AssertFileWasDownloadedSuccessfully(participantName + '_Summary.pdf')
   })
+
+  /**
+   * Reconcile a client - cancel the reconciliation
+   */
+
+  /**
+   * Reconcile a client - Successfully
+   */
 
   /**
    * In participants tab, check the behavior of the filter by doing all combinations (Participant name only working for last name)

@@ -1,17 +1,18 @@
 import HomePage from '../../../support/pages/homePage'
 import RoleManagementPage from '../../../support/pages/globalSettingsPages/userManagementPages/roleManagementPage'
 
-import LeftMenuBar from '../../../support/components/leftMenuBar'
+import LeftMenuNavBar from '../../../support/components/leftMenuNavBar'
 
 describe('Role Management tests over User Management settings', () => {
   const homePage = new HomePage()
   const roleManagementPage = new RoleManagementPage()
 
-  const leftMenuBar = new LeftMenuBar()
+  const leftMenuNavBar = new LeftMenuNavBar()
 
   beforeEach(() => {
     // @ts-ignore
     cy.login() && cy.loginSuccessfulXHRWaits()
+    leftMenuNavBar.accessGlobalSettingsMenu('user', 'role')
   })
 
   // ************************************************ TESTS AS ADMIN TENANT ************************************************** //
@@ -22,9 +23,8 @@ describe('Role Management tests over User Management settings', () => {
    * Waiting for @IDS
    */
   it('C1234567_Check_Behavior_When_Closing_The_Settings', () => {
-    leftMenuBar.accessGlobalSettingsMenu('User Management', 'Role Management')
     roleManagementPage.checkRoleManagementUrl()
-    leftMenuBar.closeGlobalSettingsLeftBar()
+    leftMenuNavBar.closeGlobalSettingsLeftBar()
     homePage.checkUrl('home')
   })
 
