@@ -6,8 +6,7 @@ const properties = {
 }
 
 const selectors = {
-  numberOfRecordsInTable: '#userRecordCount',
-  numberOfSearchResultsInTable: '.search-results-count',
+  numberOfSearchResultsInTable: '#userRecordCount .search-results-count',
   userRowFromTable: '.data > gs-grid-row-list > gs-grid-row > gs-grid-cell'
 }
 
@@ -48,18 +47,13 @@ class UserManagementPage extends BasePage {
   }
 
   /**
-   * Checks the amount of records displayed in the Users table
+   * Checks the amount of results displayed in the Users table after using the search engine
    *
-   * @param {Number} records amount of people you want to check in the records
    * @param {Number} results amount of people you want to check after a search
    *
-   * @example 'records = 1 for '1 record(s)' being displayed in the table
-   *          'results = 2 for '2 SEARCH RESULT(S)' being displayed in the table
+   * @example 'results = 2 for '2 SEARCH RESULT(S)' being displayed in the table
    */
-  checkAmountOfPeopleTable(records, results) {
-    cy.get(selectors.numberOfRecordsInTable)
-      .invoke('text')
-      .should('contain', records)
+  checkAmountOfSearchResults(results) {
     cy.get(selectors.numberOfSearchResultsInTable)
       .invoke('text')
       .should('contain', results)

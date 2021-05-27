@@ -33,7 +33,6 @@ describe('User Management tests over User Management settings', () => {
   /**
    * Test search engine for a username and a email
    *
-   * @BUG_CHROME @UNCOMPLETED
    */
   it('C1234567_Search_For_Username_And_Email', () => {
     const userName = 'amulcahyNE'
@@ -42,9 +41,9 @@ describe('User Management tests over User Management settings', () => {
     userManagementPage.checkUserManagementUrl() // Check we are getting the correct search input in the correct page
 
     searchBar.search(userEmail)
-    // userManagementPage.checkAmountOfPeopleTable(55, 20) // We need to verify this, it is possible a very weird bug
+    userManagementPage.checkAmountOfSearchResults(20)
     searchBar.search(userName)
-    // userManagementPage.checkAmountOfPeopleTable(55, 2) // We need to verify this, it is possible a very weird bug
+    userManagementPage.checkAmountOfSearchResults(2)
 
     userManagementPage.AssertUsersDataDisplayedOnTheParticipantsList([userName, userEmail, userStatus])
   })
