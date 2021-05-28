@@ -1,9 +1,9 @@
 import BasePage from '../basePage'
 
 const selectors = {
-  currentPasswordInput: '[name="currentPwd"] input',
-  newPasswordInput: '[name="newPwd"] input',
-  confirmChangeButton: 'gs-button'
+  currentPasswordInput: '#currentPassword input',
+  newPasswordInput: '#newPassword input',
+  confirmChangeButton: '#confirmChange'
 }
 
 const properties = {

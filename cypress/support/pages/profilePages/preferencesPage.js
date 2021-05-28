@@ -1,10 +1,10 @@
 import BasePage from '../basePage'
 
 const selectors = {
-  englishCard: '(//section//gs-card)[1]',
-  portugueseCard: '(//section//gs-card)[2]',
-  chineseCard: '(//section//gs-card)[3]',
-  japaneseCard: '(//section//gs-card)[4]'
+  englishCard: '#langCarden-US',
+  portugueseCard: '#langCardpt',
+  chineseCard: '#langCardzh-chs',
+  japaneseCard: '#langCardja'
 }
 
 const properties = {
@@ -29,19 +29,19 @@ class SecurityPage extends BasePage {
     language = language.toLowerCase()
     switch (language) {
       case 'portuguese':
-        cy.xpath(selectors.portugueseCard).click()
+        cy.get(selectors.portugueseCard).click()
         break
 
       case 'chinese':
-        cy.xpath(selectors.chineseCard).click()
+        cy.get(selectors.chineseCard).click()
         break
 
       case 'japanese':
-        cy.xpath(selectors.japaneseCard).click()
+        cy.get(selectors.japaneseCard).click()
         break
 
       default:
-        cy.xpath(selectors.englishCard).click()
+        cy.get(selectors.englishCard).click()
         break
     }
   }
