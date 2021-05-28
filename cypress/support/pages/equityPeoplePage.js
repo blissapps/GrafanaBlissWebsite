@@ -1,13 +1,21 @@
 import BasePage from './basePage'
 
 const selectors = {
-  editIconButton: '.record-actions > .mini',
-  noTrustsOrParticipantsCreatedMessage: '.content > div',
-  numberOfRecordsInTable: '#peopleRecordCount',
-  participantDetailContainerTitle: '.record-title',
-  participantDetailContainerName: '.participant-name',
-  participantDetailContainerCountry: '.participant-country',
-  participantDetailContainerStatus: '.participant-status'
+  peopleNavBar: '#peopleItem',
+  numberOfRecordsOnTable: '#peopleRecordCount',
+  hoverActionsIcons: '#hover-actions-',
+  noTrustsOrParticipantsCreatedMessage: 'gs-empty-container .content > div',
+  customizeColumnsIcon: '#pptOpenColumn',
+  numberOfRecordsInTable: '#peopleRecordCount'
+}
+
+const quickEditSelectors = {
+  editIconButton: '#quickEditEditPpt',
+  participantDetailTitle: '#quickEditHeader',
+  participantDetailName: '#quickEditPptName',
+  participantDetailCountry: '.participant-country',
+  participantDetailStatus: '.participant-status',
+  quickActionPanelIcon: '#quickEditActionPanel'
 }
 
 const properties = {
@@ -107,10 +115,10 @@ class EquityPeoplePage extends BasePage {
    * @param {String} status participant status
    */
   checkParticipantDetailContent(name, country, status) {
-    cy.get(selectors.participantDetailContainerTitle).should('be.visible')
-    cy.get(selectors.participantDetailContainerName).contains(name)
-    cy.get(selectors.participantDetailContainerCountry).contains(country)
-    cy.get(selectors.participantDetailContainerStatus).contains(status)
+    cy.get(quickEditSelectors.participantDetailTitle).should('be.visible')
+    cy.get(quickEditSelectors.participantDetailName).contains(name)
+    cy.get(quickEditSelectors.participantDetailCountry).contains(country)
+    cy.get(quickEditSelectors.participantDetailStatus).contains(status)
   }
 
   /**
@@ -120,7 +128,7 @@ class EquityPeoplePage extends BasePage {
    */
   openEditParticipantDetails(participantId) {
     this.getParticipantFromTheList(participantId).click()
-    cy.get(selectors.editIconButton).click()
+    cy.get(quickEditSelectors.editIconButton).click()
   }
 }
 
