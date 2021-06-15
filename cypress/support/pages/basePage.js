@@ -77,6 +77,14 @@ class BasePage {
   clearAllFilters() {
     cy.get(selectors.clearAllFiltersButton).click()
   }
+
+  /**
+   * Scrolls until the window bottom
+   *
+   */
+  scrollToBottom() {
+    cy.scrollTo('bottom')
+  }
 }
 
 export default BasePage
