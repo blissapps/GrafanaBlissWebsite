@@ -12,6 +12,7 @@ describe('Group Management tests over User Management settings', () => {
   beforeEach(() => {
     // @ts-ignore
     cy.login() && cy.loginSuccessfulXHRWaits()
+    leftMenuNavBar.accessGlobalSettingsMenu('user', 'group')
   })
 
   // ************************************************ TESTS AS ADMIN TENANT ************************************************** //
@@ -21,8 +22,7 @@ describe('Group Management tests over User Management settings', () => {
    *
    * Waiting for @IDS
    */
-  it('C1234567_Check_Behavior_When_Closing_The_Settings', () => {
-    leftMenuNavBar.accessGlobalSettingsMenu('user', 'group')
+  it('C7412690_Check_Behavior_When_Closing_The_Settings', () => {
     groupManagementPage.checkGroupManagementUrl()
     leftMenuNavBar.closeGlobalSettingsLeftBar()
     homePage.checkUrl('home')

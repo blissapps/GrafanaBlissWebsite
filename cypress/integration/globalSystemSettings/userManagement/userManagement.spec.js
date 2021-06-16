@@ -23,7 +23,7 @@ describe('User Management tests over User Management settings', () => {
    *
    * Waiting for @IDS
    */
-  it('C1234567_Check_Behavior_When_Closing_The_Settings', () => {
+  it('C7405960_Check_Behavior_When_Closing_The_Settings', () => {
     userManagementPage.checkUserManagementUrl()
     leftMenuNavBar.closeGlobalSettingsLeftBar()
     homePage.checkUrl('home')
@@ -33,7 +33,7 @@ describe('User Management tests over User Management settings', () => {
    * Test search engine for a username and a email
    *
    */
-  it.only('C1234567_Search_For_Username_And_Email', () => {
+  it('C7405961_Search_For_Username_And_Email', () => {
     const userName = 'amulcahyNE'
     const userEmail = 'test@globalshares.com'
     const userStatus = 'Active'

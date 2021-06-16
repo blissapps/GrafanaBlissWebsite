@@ -16,7 +16,7 @@ describe('Login and Logout tests', () => {
 
   it('C1234567_Login_With_Both_Wrong_User_And_Password', () => {
     cy.login('wronguser@glbalshares.com', '123!ABC')
-    authLoginPage.checkUnsuccessfulLoginErrorMessageDisplayed().should('be.visible')
+    authLoginPage.checkUnsuccessfulLoginErrorMessageDisplayedForInvalidEmail()
   })
 
   it('C1234567_Login_With_Correct_User_And_Wrong_Password', () => {

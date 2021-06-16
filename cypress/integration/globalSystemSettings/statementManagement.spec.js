@@ -50,8 +50,8 @@ describe('Statement Management tests', () => {
    * Select a client without participants, and verify if a message is displayed. Then, go back to statement management initial page
    */
   it('C7395182_Select_Client_Without_Participants_To_Check_Empty_State', () => {
-    clientStatementsPage.filterClientStatements('Cavotec')
-    clientStatementsPage.clickClientTable(78)
+    clientStatementsPage.filterClientStatements('Mizuho International plc')
+    clientStatementsPage.clickClientTable(141)
     clientStatementsPage.getNoDataFoundMessage().should('be.visible')
     clientStatementsPage.clickBackToManageStatements()
     clientStatementsPage.checkClientStatementsUrl()
@@ -59,13 +59,11 @@ describe('Statement Management tests', () => {
 
   /**
    * Select a client to view statements
+   * @MISSING_STEPS
    */
   it('C7394265_View_Statements', () => {
     clientStatementsPage.filterClientStatements('Repsol')
-    clientStatementsPage.clickClientTable(330)
-    clientStatementsPage.checkClientStatementsUrl()
-    clientStatementsPage.scrollToBottom()
-    clientStatementsPage.getElementByText('Cobb').should('be.visible') // Check the last participant to make sure the entire list was loaded
+    clientStatementsPage.clickClientTable(107)
   })
 
   /**
@@ -80,32 +78,32 @@ describe('Statement Management tests', () => {
    */
   it('C7394241_Statements_Download_Button_Visibility_Behavior', () => {
     // INITIATED
-    clientStatementsPage.filterClientStatements('Cavotec')
-    clientStatementsPage.clickClientTable(78)
+    clientStatementsPage.filterClientStatements('Acacia Pharma')
+    clientStatementsPage.clickClientTable(96)
     clientStatementsPage.getSummaryButton().should('not.exist')
     clientStatementsPage.clickBackToManageStatements()
 
     // RECONCILED
     clientStatementsPage.clearAllFilters()
-    clientStatementsPage.filterClientStatements('Amadeus')
-    clientStatementsPage.clickClientTable(81)
+    clientStatementsPage.filterClientStatements('Mercari')
+    clientStatementsPage.clickClientTable(84)
     clientStatementsPage.getSummaryButton().should('not.exist')
 
     // Pending Validation
+    clientStatementsPage.filterClientStatements('Amadeus')
+    clientStatementsPage.clickClientTable(81)
+    clientStatementsPage.getSummaryButton().should('be.visible')
+    clientStatementsPage.clickBackToManageStatements()
+
+    // PUBLISHED
     clientStatementsPage.filterClientStatements('Interxion')
     clientStatementsPage.clickClientTable(76)
     clientStatementsPage.getSummaryButton().should('be.visible')
     clientStatementsPage.clickBackToManageStatements()
 
-    // PUBLISHED
-    clientStatementsPage.filterClientStatements('Repsol')
-    clientStatementsPage.clickClientTable(330)
-    clientStatementsPage.getSummaryButton().should('be.visible')
-    clientStatementsPage.clickBackToManageStatements()
-
     // PARTIALLY PUBLISHED
-    clientStatementsPage.filterClientStatements('Sosei')
-    clientStatementsPage.clickClientTable(330)
+    clientStatementsPage.filterClientStatements('Cavotec')
+    clientStatementsPage.clickClientTable(78)
     clientStatementsPage.getSummaryButton().should('be.visible')
     clientStatementsPage.clickBackToManageStatements()
   })
