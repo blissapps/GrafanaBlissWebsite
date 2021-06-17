@@ -76,7 +76,7 @@ describe('Statement Management tests', () => {
   /**
    * Ensure that the statement download button is displayed only when the statement status is "Pending Validation",  "PUBLISHED", or "PARTIALLY PUBLISHED"
    */
-  it('C7394241_Statements_Download_Button_Visibility_Behavior', () => {
+  it.only('C7394241_Statements_Download_Button_Visibility_Behavior', () => {
     // INITIATED
     clientStatementsPage.filterClientStatements('Acacia Pharma')
     clientStatementsPage.clickClientTable(96)
@@ -88,24 +88,27 @@ describe('Statement Management tests', () => {
     clientStatementsPage.filterClientStatements('Mercari')
     clientStatementsPage.clickClientTable(84)
     clientStatementsPage.getSummaryButton().should('not.exist')
+    clientStatementsPage.clickBackToManageStatements()
 
     // Pending Validation
+    clientStatementsPage.clearAllFilters()
     clientStatementsPage.filterClientStatements('Amadeus')
     clientStatementsPage.clickClientTable(81)
     clientStatementsPage.getSummaryButton().should('be.visible')
     clientStatementsPage.clickBackToManageStatements()
 
     // PUBLISHED
+    clientStatementsPage.clearAllFilters()
     clientStatementsPage.filterClientStatements('Interxion')
     clientStatementsPage.clickClientTable(76)
     clientStatementsPage.getSummaryButton().should('be.visible')
     clientStatementsPage.clickBackToManageStatements()
 
     // PARTIALLY PUBLISHED
+    clientStatementsPage.clearAllFilters()
     clientStatementsPage.filterClientStatements('Cavotec')
     clientStatementsPage.clickClientTable(78)
     clientStatementsPage.getSummaryButton().should('be.visible')
-    clientStatementsPage.clickBackToManageStatements()
   })
 
   /**
