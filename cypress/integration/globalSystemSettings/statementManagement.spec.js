@@ -76,7 +76,7 @@ describe('Statement Management tests', () => {
   /**
    * Ensure that the statement download button is displayed only when the statement status is "Pending Validation",  "PUBLISHED", or "PARTIALLY PUBLISHED"
    */
-  it.only('C7394241_Statements_Download_Button_Visibility_Behavior', () => {
+  it('C7394241_Statements_Download_Button_Visibility_Behavior', () => {
     // INITIATED
     clientStatementsPage.filterClientStatements('Acacia Pharma')
     clientStatementsPage.clickClientTable(96)
