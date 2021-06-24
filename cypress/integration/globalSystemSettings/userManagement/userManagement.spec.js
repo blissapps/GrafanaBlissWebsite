@@ -40,9 +40,9 @@ describe('User Management tests over User Management settings', () => {
     userManagementPage.checkUserManagementUrl() // Check we are getting the correct search input in the correct page
 
     searchBar.search(userEmail)
-    userManagementPage.checkAmountOfSearchResults(20)
+    userManagementPage.checkAmountOfSearchResults(10)
     searchBar.search(userName)
-    userManagementPage.checkAmountOfSearchResults(2)
+    userManagementPage.checkAmountOfSearchResults(1)
 
     userManagementPage.AssertUsersDataDisplayedOnTheParticipantsList([userName, userEmail, userStatus])
   })

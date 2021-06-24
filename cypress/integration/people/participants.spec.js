@@ -29,7 +29,7 @@ describe('Participants tests', () => {
     equityPeoplePage.getParticipantFromTheList(participantId).should('be.visible')
 
     searchBar.search(participantEmail) // by e-mail
-    equityPeoplePage.checkAmountOfPeopleTable(203)
+    equityPeoplePage.checkAmountOfPeopleTable(233)
 
     searchBar.search(participantName) // by name
     equityPeoplePage.checkAmountOfPeopleTable(2)
