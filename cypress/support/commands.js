@@ -61,7 +61,7 @@ Cypress.Commands.add('logout', () => {
   cy.get('@avatarBtn').click()
   // eslint-disable-next-line cypress/no-unnecessary-waiting
   cy.wait(500) // avoid element detached from the DOM. See https://github.com/cypress-io/cypress/issues/7306
-  cy.get('a.logout').click()
+  cy.get('#logoutButton').click()
 })
 
 export default executeCommand

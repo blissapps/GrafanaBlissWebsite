@@ -77,6 +77,20 @@ class BasePage {
   clearAllFilters() {
     cy.get(selectors.clearAllFiltersButton).click()
   }
+
+  /**
+   * Move back or forward in the browser
+   *
+   * @param {String} direction 'back' or 'forward' in the browser
+   *
+   */
+  goBackOrForwardInBrowser(direction) {
+    if (direction === 'back') {
+      cy.go(-1)
+    } else if (direction === 'forward') {
+      cy.go(1)
+    }
+  }
 }
 
 export default BasePage

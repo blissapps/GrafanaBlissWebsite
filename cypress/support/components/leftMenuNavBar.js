@@ -153,6 +153,18 @@ class LeftMenuNavBar extends BasePage {
     cy.get(selectors.profilePreferences).as('btnPreferences')
     cy.get('@btnPreferences').click()
   }
+
+  /**
+   * This method can be used to assert the Sign Out button is always visible across the menus in the left nav bar
+   * @param {Boolean} visible True (Default) to be visible and false to not visible
+   */
+  assertSignOutButtonIsVisible(visible = true) {
+    if (visible) {
+      cy.get(selectors.signOut).should('be.visible')
+    } else {
+      cy.get(selectors.signOut).should('not.exist')
+    }
+  }
 }
 
 export default LeftMenuNavBar
