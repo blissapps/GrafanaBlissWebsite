@@ -168,8 +168,37 @@ class ClientStatementsPage extends BasePage {
       .scrollIntoView()
       .click()
   }
-  // click in client or checkbox in the right nav bar
-  // click in cancel or reconcile
+
+  /**
+   * Assert that the table shows all expected data in the columns, which are Ids, Clients, Regulators, and Statuses.
+   *
+   * @MISSING_IDS
+   */
+  AssertClientStatementsTableContainsExpectedColumns() {
+    const columnsToValidate = ['Id', 'Client', 'Regulator', 'Status'] // necessary until ids are placed
+
+    for (let i = 1; i <= columnsToValidate.length; i++) {
+      cy.xpath(`(//gs-grid//gs-grid-row-list//gs-grid-row//gs-grid-cell//span)[${i}]`)
+        .invoke('text')
+        .should('contain', columnsToValidate[i - 1])
+    }
+  }
+
+  /**
+   * This method will assert that the Client Statement list in being displayed in order, which is by ID
+   *
+   */
+  AssertClientStatementsTableInOrder() {
+    const idsList = [76, 77, 78, 79, 80] // This is the expected list with the database we have in the environment right now
+
+    let idsListIndex = 0
+    for (let i = 6; i <= 30; i += 5) {
+      cy.xpath(`(//gs-grid//gs-grid-row-list//gs-grid-row//gs-grid-cell//span)[${i}]`)
+        .invoke('text')
+        .should('contain', idsList[idsListIndex])
+      idsListIndex++
+    }
+  }
 }
 
 export default ClientStatementsPage

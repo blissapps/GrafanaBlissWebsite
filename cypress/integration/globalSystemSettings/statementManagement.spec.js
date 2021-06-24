@@ -16,6 +16,11 @@ describe('Statement Management tests', () => {
     leftMenuNavBar.accessGlobalSettingsMenu('statement')
   })
 
+  it('C7394715_Happy_Path_To_View_Statements_Accordingly', () => {
+    clientStatementsPage.AssertClientStatementsTableContainsExpectedColumns()
+    clientStatementsPage.AssertClientStatementsTableInOrder()
+  })
+
   /**
    * Test a client search with client name and dates
    * @MISSING_STEPS
