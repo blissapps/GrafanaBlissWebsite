@@ -55,6 +55,8 @@ class BasePage {
    * Selects a tab
    *
    * @param {String} tabName Name of the tab you want to go in
+   *
+   * @MISSING_IDS
    */
   selectTabByName(tabName) {
     cy.xpath(`//div[@class='tabs-bar']//*[@title='${tabName}']`).click()
@@ -89,6 +91,21 @@ class BasePage {
       cy.go(-1)
     } else if (direction === 'forward') {
       cy.go(1)
+    }
+  }
+
+  /**
+   * Assert that a table shows all expected data supposed to be in the columns. The order is taken in consideration.
+   *
+   * @param {Array} columnsToValidate column names to validate, example: columnsToValidate = [Id, Client, Regulator, Status]
+   *
+   * @MISSING_IDS When ids are placed in all columns name, change this method to also receive the ids
+   */
+  AssertTableContainsExpectedColumns(columnsToValidate) {
+    for (let i = 1; i <= columnsToValidate.length; i++) {
+      cy.xpath(`(//gs-grid//gs-grid-row-list//gs-grid-row//gs-grid-cell//span)[${i}]`)
+        .invoke('text')
+        .should('contain', columnsToValidate[i - 1])
     }
   }
 }

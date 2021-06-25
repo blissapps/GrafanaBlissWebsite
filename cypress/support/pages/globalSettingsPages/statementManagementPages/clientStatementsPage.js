@@ -176,19 +176,15 @@ class ClientStatementsPage extends BasePage {
    */
   AssertClientStatementsTableContainsExpectedColumns() {
     const columnsToValidate = ['Id', 'Client', 'Regulator', 'Status'] // necessary until ids are placed
-
-    for (let i = 1; i <= columnsToValidate.length; i++) {
-      cy.xpath(`(//gs-grid//gs-grid-row-list//gs-grid-row//gs-grid-cell//span)[${i}]`)
-        .invoke('text')
-        .should('contain', columnsToValidate[i - 1])
-    }
+    this.AssertTableContainsExpectedColumns(columnsToValidate)
   }
 
   /**
-   * This method will assert that the Client Statement list in being displayed in order, which is by ID
+   * This method will assert that the Client Statement list is being displayed in order, which is by ID
    *
+   * @MISSING_IDS
    */
-  AssertClientStatementsTableInOrder() {
+  AssertClientStatementsTableInOrderById() {
     const idsList = [76, 77, 78, 79, 80] // This is the expected list with the database we have in the environment right now
 
     let idsListIndex = 0
