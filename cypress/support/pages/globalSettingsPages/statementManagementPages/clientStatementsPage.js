@@ -56,6 +56,17 @@ class ClientStatementsPage extends BasePage {
   }
 
   /**
+   * Get reconciled button
+   *
+   * @param recordId Id number of the statement with the reconcile button
+   *
+   * @returns summary button element
+   */
+  getReconcileButton(recordId) {
+    return cy.get(`#hover-actions-${recordId} gs-svg-icon`)
+  }
+
+  /**
    * Select a client from the table of clients
    *
    * @param {Number} clientId clientId number to be searched in the client statements table
@@ -142,8 +153,6 @@ class ClientStatementsPage extends BasePage {
    * @param {String} status participant status to be searched into the participant statement filter
    */
   filterParticipantStatements(participantName = '', participantId = -1, status = '') {
-    this.clearAllFilters()
-
     if (participantName != '') {
       cy.get(selectors.participantName).type(participantName + '{enter}')
     }
@@ -158,24 +167,33 @@ class ClientStatementsPage extends BasePage {
   }
 
   /**
-   * Reconcile a client statement - NOT DONE YET
+   * Reconcile a client statement
    *
    * @param {Number} recordId id number from the Client Statements table to reconcile
    */
   reconcileClient(recordId) {
-    cy.get(`#hover-actions-${recordId} gs-svg-icon`).as('clientSelected')
-    cy.get('@clientSelected')
+    this.getReconcileButton(recordId)
       .scrollIntoView()
       .click()
   }
 
   /**
-   * Assert that the table shows all expected data in the columns, which are Ids, Clients, Regulators, and Statuses.
+   * Assert that the table from client statements shows all expected data in the columns, which are Ids, Clients, Regulators, and Statuses.
    *
    * @MISSING_IDS
    */
   AssertClientStatementsTableContainsExpectedColumns() {
     const columnsToValidate = ['Id', 'Client', 'Regulator', 'Status'] // necessary until ids are placed
+    this.AssertTableContainsExpectedColumns(columnsToValidate)
+  }
+
+  /**
+   * Assert that the table from participant statements (inside a client) shows all expected data in the columns, which are Ids and Statuses.
+   *
+   * @MISSING_IDS
+   */
+  AssertParticipantsStatementsTableContainsExpectedColumns() {
+    const columnsToValidate = ['Participant', 'Status'] // necessary until ids are placed
     this.AssertTableContainsExpectedColumns(columnsToValidate)
   }
 

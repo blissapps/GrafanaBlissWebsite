@@ -23,8 +23,8 @@ describe('Statement Management tests', () => {
 
   it('C7394241_Statements_Download_Button_Visibility_Behavior', () => {
     // INITIATED
-    clientStatementsPage.filterClientStatements('Acacia Pharma')
-    clientStatementsPage.clickClientTable(96)
+    clientStatementsPage.filterClientStatements('Velocys PLC')
+    clientStatementsPage.clickClientTable(103)
     clientStatementsPage.getSummaryButton().should('not.exist')
     clientStatementsPage.clickBackToManageStatements()
 
@@ -37,8 +37,8 @@ describe('Statement Management tests', () => {
 
     // Pending Validation
     clientStatementsPage.clearAllFilters()
-    clientStatementsPage.filterClientStatements('Amadeus')
-    clientStatementsPage.clickClientTable(81)
+    clientStatementsPage.filterClientStatements('Kerry Logistics')
+    clientStatementsPage.clickClientTable(97)
     clientStatementsPage.getSummaryButton().should('be.visible')
     clientStatementsPage.clickBackToManageStatements()
 
@@ -168,9 +168,42 @@ describe('Statement Management tests', () => {
     participantRegulatoryLinkagePage.getNoDataFoundMessage().should('be.visible')
   })
 
+  it('C7627260_Statements_Try_To_Reconcile_Single_Client_Statement_Not_In_Initiated_Status', () => {
+    // INITIATED
+    clientStatementsPage.filterClientStatements('Velocys PLC')
+    clientStatementsPage.getReconcileButton(103).should('be.visible')
+
+    // RECONCILED
+    clientStatementsPage.clearAllFilters()
+    clientStatementsPage.filterClientStatements('Mercari')
+    clientStatementsPage.getReconcileButton(84).should('not.exist')
+
+    // Pending Validation
+    clientStatementsPage.clearAllFilters()
+    clientStatementsPage.filterClientStatements('Kerry Logistics')
+    clientStatementsPage.getReconcileButton(97).should('not.exist')
+
+    // PUBLISHED
+    clientStatementsPage.clearAllFilters()
+    clientStatementsPage.filterClientStatements('Interxion')
+    clientStatementsPage.getReconcileButton(76).should('not.exist')
+
+    // PARTIALLY PUBLISHED
+    clientStatementsPage.clearAllFilters()
+    clientStatementsPage.filterClientStatements('Cavotec')
+    clientStatementsPage.getReconcileButton(78).should('not.exist')
+  })
+
   /**
-   * Select a client without participants, and verify if a message is displayed. Then, go back to statement management initial page
+   * @MISSING_STEPS
    */
+  it('C7394265_View_Statements', () => {
+    clientStatementsPage.filterClientStatements('Repsol')
+    clientStatementsPage.clickClientTable(107)
+    clientStatementsPage.checkUrl('/participants')
+    clientStatementsPage.AssertParticipantsStatementsTableContainsExpectedColumns()
+  })
+
   it('C7395182_Select_Client_Without_Participants_To_Check_Empty_State', () => {
     clientStatementsPage.filterClientStatements('Mizuho International plc')
     clientStatementsPage.clickClientTable(141)
@@ -180,12 +213,19 @@ describe('Statement Management tests', () => {
   })
 
   /**
-   * Select a client to view statements
-   * @MISSING_STEPS
+   * @Only_Chrome because Firefox does not allow do download pdf files without the confirmation popup
    */
-  it('C7394265_View_Statements', () => {
-    clientStatementsPage.filterClientStatements('Repsol')
-    clientStatementsPage.clickClientTable(107)
+  it('C7395183_download_PDF_File_From_Participant', { browser: '!firefox' }, () => {
+    const clientName = 'Interxion'
+    const clientID = 76
+    const participantID = 32512
+    const participantName = 'Pacheco'
+
+    clientStatementsPage.filterClientStatements(clientName)
+    clientStatementsPage.clickClientTable(clientID)
+    clientStatementsPage.filterParticipantStatements('', participantID)
+    clientStatementsPage.clickDownloadPDFFromParticipantStatement(participantID)
+    clientStatementsPage.AssertFileWasDownloadedSuccessfully(participantName + '_Summary.pdf')
   })
 
   /**
@@ -194,21 +234,6 @@ describe('Statement Management tests', () => {
    *
    * missing @IDS
    */
-
-  /**
-   * Select a client from the list after a search or not with participants published (ex Interxion), and click on a participant from the list with status published, and click to view pdf, and check if a pdf file was downloaded with name participant_Summary.pdf
-   *
-   * @Only_Chrome because Firefox does not allow do download pdf files without the confirmation popup
-   */
-  it('C7395183_download_PDF_File_From_Participant', { browser: '!firefox' }, () => {
-    const clientID = 76
-    const participantID = 32512
-    const participantName = 'Pacheco'
-
-    clientStatementsPage.clickClientTable(clientID)
-    clientStatementsPage.clickDownloadPDFFromParticipantStatement(participantID)
-    clientStatementsPage.AssertFileWasDownloadedSuccessfully(participantName + '_Summary.pdf')
-  })
 
   /**
    * Reconcile a client - cancel the reconciliation
