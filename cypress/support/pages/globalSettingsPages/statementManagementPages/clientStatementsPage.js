@@ -9,13 +9,18 @@ const selectors = {
   dateFilterStatementInput: '#date-range-input input',
   clearAllFiltersButton: '#clearButton',
   clientStatementId: '#clientStatement-',
+  clientParticipantStatementId: '#clientParticipantStatement-',
   backToManageStatementsButton: '#backLink',
-  numberOfRecordsAfterFiltering: '#gridCount',
+  numberOfRecords: '#gridCount',
   noDataFoundMessage: '#emptyContainer',
   summaryDownloadButton: 'div.header gs-button',
   participantName: '#pptNameFilter input',
   participantId: '#pptIdFilter input',
   participantStatus: '#statusSelect input'
+}
+
+const apiInterceptions = {
+  tableReloadedAfterFiltering: 'https://stonly.com/api/v2/widget/integration**'
 }
 
 class ClientStatementsPage extends BasePage {
@@ -67,6 +72,27 @@ class ClientStatementsPage extends BasePage {
   }
 
   /**
+   * Get number of records displayed in the table
+   *
+   * @returns element containing the number of records displayed
+   */
+  getNumberOfRecordsDisplayed() {
+    return cy.get(selectors.numberOfRecords)
+  }
+
+  /**
+   * Get the participant element in the client participants statements.
+   * This one is found right after opening the participants page inside a client statement.
+   *
+   * @param {Number} participantId participant Id number
+   *
+   * @returns the client participant statement.
+   */
+  getClientParticipantStatement(participantId) {
+    return cy.get(selectors.clientParticipantStatementId + participantId)
+  }
+
+  /**
    * Select a client from the table of clients
    *
    * @param {Number} clientId clientId number to be searched in the client statements table
@@ -90,7 +116,7 @@ class ClientStatementsPage extends BasePage {
    *
    */
   clickSummaryDownloadButtonToDownloadCSVFile() {
-    cy.get(selectors.numberOfRecordsAfterFiltering) //make sure we have data, so we can continue to download. Otherwise, summary button may fail
+    this.getNumberOfRecordsDisplayed() //make sure we have data, so we can continue to download. Otherwise, summary button may fail
     this.getSummaryButton()
       .should('be.visible')
       .as('summaryBtn')
@@ -116,9 +142,7 @@ class ClientStatementsPage extends BasePage {
    * @example 'records = 1 for '1 record(s)' being displayed in the table
    */
   checkAmountOfRecordsTable(records) {
-    cy.get(selectors.numberOfRecordsAfterFiltering)
-      .invoke('text')
-      .should('contain', records)
+    this.AssertNumberOfRecordsTable(this.getNumberOfRecordsDisplayed(), records)
   }
 
   /**
@@ -148,9 +172,9 @@ class ClientStatementsPage extends BasePage {
   /**
    * Filter for a participant in the participants table inside a client
    *
-   * @param {String} participantName participant name to be searched into the participant statement filter
-   * @param {Number} participantId participant id to be searched into the participant statement filter
-   * @param {String} status participant status to be searched into the participant statement filter
+   * @param {String} participantName participant name to be searched into the participant statement filter. Send '' to do use this filter
+   * @param {Number} participantId participant id to be searched into the participant statement filter. Send '' to do use this filter
+   * @param {String} status participant status to be searched into the participant statement filter. Send '' to do use this filter
    */
   filterParticipantStatements(participantName = '', participantId = -1, status = '') {
     if (participantName != '') {
@@ -164,6 +188,8 @@ class ClientStatementsPage extends BasePage {
     if (status != '') {
       cy.get(selectors.participantStatus).type(status + '{enter}')
     }
+
+    this.waitForTableToReloadAfterFiltering()
   }
 
   /**
@@ -212,6 +238,15 @@ class ClientStatementsPage extends BasePage {
         .should('contain', idsList[idsListIndex])
       idsListIndex++
     }
+  }
+
+  /**
+   * This method waits until the table in reloaded after filtering something in filter statements.
+   * It intercepts the call that is being made in the backend, avoiding unnecessary waits.
+   */
+  waitForTableToReloadAfterFiltering() {
+    cy.intercept('GET', apiInterceptions.tableReloadedAfterFiltering).as('tableReloads')
+    cy.wait('@tableReloads', { timeout: 10000 })
   }
 }
 

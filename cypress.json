@@ -37,7 +37,7 @@
   "env": {
     "loginAuthURL": "https://ea-v3.myglobalshares.co.uk/",
     "homePageURL": "https://ea-v3.myglobalshares.co.uk/home",
-    "defaultUserAuth": "lmello@globalshares.co.uk",
+    "defaultUserAuth": "lmello@globalshares.com",
     "defaultPasswordAuth": "Swordfish123!"
   }
 }

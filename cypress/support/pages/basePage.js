@@ -108,6 +108,19 @@ class BasePage {
         .should('contain', columnsToValidate[i - 1])
     }
   }
+
+  /**
+   * Assert the number of records displayed in a table. It is showed in the top like this: 'X record(s)'
+   *
+   * @param {Object} locator records locator where this method will extract the text from this locator
+   * @param {Number} numberOfRecords amount of people you want to check in the records
+   *
+   */
+  AssertNumberOfRecordsTable(locator, numberOfRecords) {
+    locator.invoke('text').then(text => {
+      expect(text.trim().split(' ')[0]).equal(numberOfRecords.toString()) // compare only numbers
+    })
+  }
 }
 
 export default BasePage
