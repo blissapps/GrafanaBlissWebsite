@@ -102,7 +102,7 @@ describe('Statement Management tests', () => {
   it('C7394266_Filter_Behavior_of_Participant_Regulatory_Linkage', () => {
     const clientName = 'Acacia Pharma'
     const participantName = 'Serrano'
-    const participantId = '544545'
+    const participantId = 544545
     const regulator = 'FINRA'
     const partner = 'Global Shares Execution Services Ltd.'
 
@@ -114,54 +114,67 @@ describe('Statement Management tests', () => {
     cy.log('Filter 0')
     participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, 'Paisley')
     participantRegulatoryLinkagePage.getNoDataFoundMessage().should('be.visible')
+    participantRegulatoryLinkagePage.clearAllFilters()
 
     cy.log('Filter 1')
     participantRegulatoryLinkagePage.filterParticipantsStatements(clientName)
     participantRegulatoryLinkagePage.checkAmountOfRecordsTable(125)
+    participantRegulatoryLinkagePage.clearAllFilters()
 
     cy.log('Filter 2')
     participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName)
     participantRegulatoryLinkagePage.checkAmountOfRecordsTable(2)
+    participantRegulatoryLinkagePage.clearAllFilters()
 
     cy.log('Filter 3')
     participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName, participantId)
     participantRegulatoryLinkagePage.checkAmountOfRecordsTable(2)
+    participantRegulatoryLinkagePage.clearAllFilters()
 
     cy.log('Filter 4')
     participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName, participantId, regulator)
     participantRegulatoryLinkagePage.checkAmountOfRecordsTable(1)
+    participantRegulatoryLinkagePage.clearAllFilters()
 
     cy.log('Filter 5')
     participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName, participantId, regulator, partner)
     participantRegulatoryLinkagePage.checkAmountOfRecordsTable(1)
+    participantRegulatoryLinkagePage.clearAllFilters()
 
     cy.log('Filter 6')
     participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, '', participantId, '', '')
     participantRegulatoryLinkagePage.checkAmountOfRecordsTable(2)
+    participantRegulatoryLinkagePage.clearAllFilters()
 
     cy.log('Filter 7')
-    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, '', '', regulator, '')
+    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, '', -1, regulator, '')
     participantRegulatoryLinkagePage.checkAmountOfRecordsTable(42)
+    participantRegulatoryLinkagePage.clearAllFilters()
 
     cy.log('Filter 8')
-    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, '', '', '', partner)
+    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, '', -1, '', partner)
     participantRegulatoryLinkagePage.checkAmountOfRecordsTable(97)
+    participantRegulatoryLinkagePage.clearAllFilters()
 
     cy.log('Filter 9')
-    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, '', '', regulator, partner)
+    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, '', -1, regulator, partner)
     participantRegulatoryLinkagePage.checkAmountOfRecordsTable(42)
+    participantRegulatoryLinkagePage.clearAllFilters()
 
     cy.log('Filter 10')
-    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName, '', regulator, partner)
+    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName, -1, regulator, partner)
     participantRegulatoryLinkagePage.checkAmountOfRecordsTable(1)
+    participantRegulatoryLinkagePage.clearAllFilters()
 
     cy.log('Filter 11')
     participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName, participantId, '', partner)
     participantRegulatoryLinkagePage.checkAmountOfRecordsTable(2)
+    participantRegulatoryLinkagePage.clearAllFilters()
 
     cy.log('Filter 12')
     participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName, participantId, '', partner)
     participantRegulatoryLinkagePage.checkAmountOfRecordsTable(2)
+    participantRegulatoryLinkagePage.clearAllFilters()
 
     cy.log('Filter 13 - Empty State')
     participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, 'emptyStateTest')
