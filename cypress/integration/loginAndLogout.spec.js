@@ -25,7 +25,7 @@ describe('Login and Logout tests', () => {
 
   it('C7668436_Login_With_Correct_User_And_Wrong_Password', () => {
     cy.login('lmello@globalshares.co.uk', '123!ABC')
-    authLoginPage.checkUnsuccessfulLoginErrorMessageDisplayed().should('be.visible')
+    authLoginPage.checkUnsuccessfulLoginErrorMessageDisplayed()
   })
 
   it('C7644496_Logout_Button_Consistency', () => {
