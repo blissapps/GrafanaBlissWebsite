@@ -30,6 +30,28 @@ class ParticipantRegulatoryLinkagePage extends BasePage {
     this.checkUrl(properties.pageURL)
   }
 
+  // --------------------------------------- GETS --------------------------------------------- //
+
+  /**
+   * Get no data found message when displayed
+   *
+   * @returns no data message
+   */
+  getNoDataFoundMessage() {
+    return cy.get(selectors.noDataFoundMessage)
+  }
+
+  /**
+   * Get number of records displayed in the table
+   *
+   * @returns element containing the number of records displayed
+   */
+  getNumberOfRecordsDisplayed() {
+    return cy.get(selectors.numberOfRecords)
+  }
+
+  // --------------------------------------- ASSERTIONS AND OTHERS --------------------------------------------- //
+
   /**
    * Filter data from participant regulatory linkage
    *
@@ -90,24 +112,6 @@ class ParticipantRegulatoryLinkagePage extends BasePage {
   }
 
   /**
-   * Get no data found message when displayed
-   *
-   * @returns no data message
-   */
-  getNoDataFoundMessage() {
-    return cy.get(selectors.noDataFoundMessage)
-  }
-
-  /**
-   * Get number of records displayed in the table
-   *
-   * @returns element containing the number of records displayed
-   */
-  getNumberOfRecordsDisplayed() {
-    return cy.get(selectors.numberOfRecords)
-  }
-
-  /**
    * Checks the amount of records displayed in the table
    *
    * @param {Number} records amount of people you want to check in the records
@@ -117,6 +121,8 @@ class ParticipantRegulatoryLinkagePage extends BasePage {
   checkAmountOfRecordsTable(records) {
     this.AssertNumberOfRecordsTable(this.getNumberOfRecordsDisplayed(), records)
   }
+
+  // ---------------------------------------  INTERCEPTIONS --------------------------------------------- //
 
   /**
    * This method waits until the table in reloaded after filtering something in filter statements.

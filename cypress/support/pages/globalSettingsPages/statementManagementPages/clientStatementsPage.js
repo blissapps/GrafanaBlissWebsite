@@ -31,6 +31,8 @@ class ClientStatementsPage extends BasePage {
     this.checkUrl(properties.pageURL)
   }
 
+  // --------------------------------------- GETS --------------------------------------------- //
+
   /**
    * Get client from the records table
    *
@@ -92,6 +94,8 @@ class ClientStatementsPage extends BasePage {
     return cy.get(selectors.clientParticipantStatementId + participantId)
   }
 
+  // --------------------------------------- CLICKS --------------------------------------------- //
+
   /**
    * Select a client from the table of clients
    *
@@ -133,6 +137,19 @@ class ClientStatementsPage extends BasePage {
     cy.get('#clientParticipantStatement-' + participantId + ' gs-svg-icon').as('participantRowSelected')
     cy.get('@participantRowSelected').click()
   }
+
+  /**
+   * Reconcile a client statement
+   *
+   * @param {Number} recordId id number from the Client Statements table to reconcile
+   */
+  clickToReconcileClient(recordId) {
+    this.getReconcileButton(recordId)
+      .scrollIntoView()
+      .click()
+  }
+
+  // --------------------------------------- ASSERTIONS AND OTHERS --------------------------------------------- //
 
   /**
    * Checks the amount of records displayed in the table
@@ -193,17 +210,6 @@ class ClientStatementsPage extends BasePage {
   }
 
   /**
-   * Reconcile a client statement
-   *
-   * @param {Number} recordId id number from the Client Statements table to reconcile
-   */
-  reconcileClient(recordId) {
-    this.getReconcileButton(recordId)
-      .scrollIntoView()
-      .click()
-  }
-
-  /**
    * Assert that the table from client statements shows all expected data in the columns, which are Ids, Clients, Regulators, and Statuses.
    *
    * @MISSING_IDS
@@ -239,6 +245,8 @@ class ClientStatementsPage extends BasePage {
       idsListIndex++
     }
   }
+
+  // ---------------------------------------  INTERCEPTIONS --------------------------------------------- //
 
   /**
    * This method waits until the table in reloaded after filtering something in filter statements.

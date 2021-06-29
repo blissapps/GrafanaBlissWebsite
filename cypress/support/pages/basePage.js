@@ -9,18 +9,6 @@ const selectors = {
 
 class BasePage {
   /**
-   * Get an element by passing a text
-   *
-   * @param {string} text text to get the element
-   *
-   * @returns the element if found
-   */
-  getElementByText(text) {
-    // return cy.xpath(`//*[normalize-space(text()) = '${text}']`)
-    return cy.contains(text)
-  }
-
-  /**
    * Check url
    *
    * @param {string} url The entire url or a part of it
@@ -40,6 +28,20 @@ class BasePage {
    */
   checkUrlByRegex(url) {
     return cy.url().should('match', url)
+  }
+
+  // --------------------------------------- GETS, SELECTS AND CLICKS --------------------------------------------- //
+
+  /**
+   * Get an element by passing a text
+   *
+   * @param {string} text text to get the element
+   *
+   * @returns the element if found
+   */
+  getElementByText(text) {
+    // return cy.xpath(`//*[normalize-space(text()) = '${text}']`)
+    return cy.contains(text)
   }
 
   /**
@@ -63,15 +65,7 @@ class BasePage {
     cy.xpath(`//div[@class='tabs-bar']//*[@title='${tabName}']`).click()
   }
 
-  /**
-   * Verify if a file was downloaded in the default 'cypress/downloads/' path
-   *
-   * @param {String} filename name of the file we want to verify if it was downloaded
-   */
-  AssertFileWasDownloadedSuccessfully(filename) {
-    // Browser might take a while to download the file, so use "cy.readFile" to retry until the file exists and has length - and we assume that it has finished downloading then
-    return cy.readFile('cypress/downloads/' + filename, { timeout: 15000 }).should('have.length.gt', 50)
-  }
+  // --------------------------------------- ASSERTIONS AND OTHERS --------------------------------------------- //
 
   /**
    * Clear filters in a search by pressing in the "Clear All Filters" button
@@ -93,6 +87,16 @@ class BasePage {
     } else if (direction === 'forward') {
       cy.go(1)
     }
+  }
+
+  /**
+   * Verify if a file was downloaded in the default 'cypress/downloads/' path
+   *
+   * @param {String} filename name of the file we want to verify if it was downloaded
+   */
+  AssertFileWasDownloadedSuccessfully(filename) {
+    // Browser might take a while to download the file, so use "cy.readFile" to retry until the file exists and has length - and we assume that it has finished downloading then
+    return cy.readFile('cypress/downloads/' + filename, { timeout: 15000 }).should('have.length.gt', 50)
   }
 
   /**

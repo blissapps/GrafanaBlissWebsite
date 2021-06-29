@@ -20,6 +20,8 @@ class UserManagementPage extends BasePage {
     this.checkUrl(properties.pageURL)
   }
 
+  // --------------------------------------- GETS --------------------------------------------- //
+
   /**
    * Get a user from the table of users
    *
@@ -33,6 +35,8 @@ class UserManagementPage extends BasePage {
     return cy.get(selectors.user + userId).first()
   }
 
+  // --------------------------------------- CLICKS --------------------------------------------- //
+
   /**
    * Select a user from the table of users
    *
@@ -43,6 +47,8 @@ class UserManagementPage extends BasePage {
   clickUserTable(username) {
     this.getUserTable(username).click()
   }
+
+  // --------------------------------------- ASSERTIONS AND OTHERS --------------------------------------------- //
 
   /**
    * Checks the amount of results displayed in the Users table after using the search engine

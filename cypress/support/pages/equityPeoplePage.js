@@ -30,18 +30,7 @@ class EquityPeoplePage extends BasePage {
     this.checkUrl(properties.pageURL)
   }
 
-  /**
-   * Checks the amount of records displayed in the People table
-   *
-   * @param {Number} amount amount of people you want to check in the records
-   *
-   * @example 'amount = 1 for '1 record(s)' being displayed in the table
-   */
-  checkAmountOfPeopleTable(amount) {
-    cy.get(selectors.numberOfRecordsInTable)
-      .invoke('text')
-      .should('contain', amount)
-  }
+  // --------------------------------------- GETS --------------------------------------------- //
 
   /**
    * Search for a participant by Id - Directly from the table list
@@ -55,6 +44,16 @@ class EquityPeoplePage extends BasePage {
   }
 
   /**
+   * Get the message 'There are no participants/trusts created' if displayed
+   *
+   */
+  getNoParticipantsOrTrustsCreatedMessage() {
+    return cy.get(selectors.noTrustsOrParticipantsCreatedMessage)
+  }
+
+  // --------------------------------------- CLICKS --------------------------------------------- //
+
+  /**
    * Click in a Participant by Id - Directly from the table list
    *
    * @param {Number} participantId Participant id to be searched
@@ -65,12 +64,19 @@ class EquityPeoplePage extends BasePage {
     this.getParticipantFromTheList(participantId).click()
   }
 
+  // -------------------------------- ASSERTIONS AND OTHERS ------------------------------------- //
+
   /**
-   * Get the message 'There are no participants/trusts created' if displayed
+   * Checks the amount of records displayed in the People table
    *
+   * @param {Number} amount amount of people you want to check in the records
+   *
+   * @example 'amount = 1 for '1 record(s)' being displayed in the table
    */
-  getNoParticipantsOrTrustsCreatedMessage() {
-    return cy.get(selectors.noTrustsOrParticipantsCreatedMessage)
+  checkAmountOfPeopleTable(amount) {
+    cy.get(selectors.numberOfRecordsInTable)
+      .invoke('text')
+      .should('contain', amount)
   }
 
   /**

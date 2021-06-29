@@ -23,6 +23,8 @@ class HomePage extends BasePage {
     this.checkUrl(Cypress.env('homePageURL'))
   }
 
+  // --------------------------------------- GETS --------------------------------------------- //
+
   /**
    * Get client from the cards list
    *
@@ -31,6 +33,8 @@ class HomePage extends BasePage {
   getClientCard(clientId) {
     return cy.get(`${selectors.clientCard}${clientId}`)
   }
+
+  // --------------------------------- ASSERTIONS AND OTHERS----------------------------------- //
 
   /**
    * Search for a client by ID
