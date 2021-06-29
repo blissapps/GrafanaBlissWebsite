@@ -3,7 +3,8 @@
  */
 
 const selectors = {
-  clearAllFiltersButton: '#clearButton'
+  clearAllFiltersButton: '#clearButton',
+  gsGridTable: 'div.data gs-grid-cell'
 }
 
 class BasePage {
@@ -120,6 +121,31 @@ class BasePage {
     locator.invoke('text').then(text => {
       expect(text.trim().split(' ')[0]).equal(numberOfRecords.toString()) // compare only numbers
     })
+  }
+
+  /**
+   * Check the data in a row listed in a table of type gs-grid
+   * It is possible to validate multiple rows, just sent the data one after the other (check last example)
+   *
+   * @param {Array} data Array with the data needed to be validated. The correct order is the ORDER displayed in the UI,
+   * example [username, email, and status].
+   *
+   * @example: send ['amulcahyNE', 'test@globalshares.com', 'Active'] to validate the data from user amulcahyNE is
+   * displayed correctly in the Users table list.
+   *
+   * @example send [76, 'Interxion', 'Form1099', 'Published'] to validate Id, Client, Regulator, and Status in Statements page.
+   *
+   * It is also possible to validate more than one row at a time.
+   * @example send [76, 'Interxion', 'Form1099', 'Published', 77, 'TomTom', 'Form1099', 'Published'] to validate the first two
+   * rows in the Statements page
+   */
+  AssertDataDisplayedOnGsGridTable(data) {
+    for (let i = 0; i < data.length; i++) {
+      cy.get(selectors.gsGridTable)
+        .eq(i)
+        .invoke('text')
+        .should('contain', data[i])
+    }
   }
 }
 

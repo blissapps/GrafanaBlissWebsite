@@ -33,18 +33,18 @@ describe('User Management tests over User Management settings', () => {
    * Test search engine for a username and a email
    *
    */
-  it('C7405961_Search_For_Username_And_Email', () => {
+  it.only('C7405961_Search_For_Username_And_Email', () => {
     const userName = 'amulcahyNE'
     const userEmail = 'test@globalshares.com'
     const userStatus = 'Active'
     userManagementPage.checkUserManagementUrl() // Check we are getting the correct search input in the correct page
 
     searchBar.search(userEmail)
-    userManagementPage.checkAmountOfSearchResults(10)
+    userManagementPage.checkAmountOfSearchResults(20)
     searchBar.search(userName)
-    userManagementPage.checkAmountOfSearchResults(1)
+    userManagementPage.checkAmountOfSearchResults(2)
 
-    userManagementPage.AssertUsersDataDisplayedOnTheParticipantsList([userName, userEmail, userStatus])
+    userManagementPage.AssertDataDisplayedOnGsGridTable([userName, userEmail, userStatus])
   })
 
   // Verify USER DETAIL container data when picking a user from the Participants table
