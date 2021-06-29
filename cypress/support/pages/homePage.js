@@ -19,7 +19,7 @@ class HomePage extends BasePage {
   /**
    * Check if the current page is the home URL
    */
-  CheckHomeUrl() {
+  checkHomeUrl() {
     this.checkUrl(Cypress.env('homePageURL'))
   }
 

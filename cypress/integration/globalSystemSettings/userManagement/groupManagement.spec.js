@@ -25,7 +25,7 @@ describe('Group Management tests over User Management settings', () => {
   it('C7412690_Check_Behavior_When_Closing_The_Settings', () => {
     groupManagementPage.checkGroupManagementUrl()
     leftMenuNavBar.closeGlobalSettingsLeftBar()
-    homePage.checkUrl('home')
+    homePage.checkHomeUrl()
   })
 
   //  ************** TESTS BELLOW MODIFY DATA DEFINITELY ***************

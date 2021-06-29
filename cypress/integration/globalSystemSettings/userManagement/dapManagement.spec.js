@@ -24,7 +24,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
     leftMenuNavBar.accessGlobalSettingsMenu('user', 'dap')
     dapManagementPage.checkDapManagementUrl()
     leftMenuNavBar.closeGlobalSettingsLeftBar()
-    homePage.checkUrl('home')
+    homePage.checkHomeUrl()
   })
 
   //  ************** TESTS BELLOW MODIFY DATA DEFINITELY ***************
