@@ -181,7 +181,10 @@ describe('Statement Management tests', () => {
     participantRegulatoryLinkagePage.getNoDataFoundMessage().should('be.visible')
   })
 
-  it('C7627260_Statements_Try_To_Reconcile_Single_Client_Statement_Not_In_Initiated_Status', () => {
+  /**
+   * @MISSING_DATA
+   */
+  it.skip('C7627260_Statements_Try_To_Reconcile_Single_Client_Statement_Not_In_Initiated_Status', () => {
     // INITIATED
     clientStatementsPage.filterClientStatements('Velocys PLC')
     clientStatementsPage.getReconcileButton(103).should('be.visible')
