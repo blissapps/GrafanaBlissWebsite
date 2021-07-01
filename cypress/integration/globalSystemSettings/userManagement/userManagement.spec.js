@@ -18,11 +18,6 @@ describe('User Management tests over User Management settings', () => {
 
   // ************************************************ TESTS AS ADMIN TENANT ************************************************** //
 
-  /**
-   * Verify if the settings send the user back to the home screen when the user closes the settings menu
-   *
-   * Waiting for @IDS
-   */
   it('C7405960_Check_Behavior_When_Closing_The_Settings', () => {
     userManagementPage.checkUserManagementUrl()
     leftMenuNavBar.closeGlobalSettingsLeftBar()
@@ -30,21 +25,49 @@ describe('User Management tests over User Management settings', () => {
   })
 
   /**
-   * Test search engine for a username and a email
+   *
+   * SPIKED DUE TO https://globalshares.atlassian.net/browse/GDP-50236
    *
    */
-  it('C7405961_Search_For_Username_And_Email', () => {
-    const userName = 'amulcahyNE'
+  it.skip('C7405961_Search_For_Username_And_Email', () => {
+    const username = 'amulcahyNE'
     const userEmail = 'test@globalshares.com'
     const userStatus = 'Active'
     userManagementPage.checkUserManagementUrl() // Check we are getting the correct search input in the correct page
 
     searchBar.search(userEmail)
-    userManagementPage.checkAmountOfSearchResults(20)
-    searchBar.search(userName)
-    userManagementPage.checkAmountOfSearchResults(2)
+    userManagementPage.AssertAmountOfSearchResults(20)
+    searchBar.search(username)
+    userManagementPage.AssertAmountOfSearchResults(2)
 
-    userManagementPage.AssertDataDisplayedOnGsGridTable([userName, userEmail, userStatus])
+    userManagementPage.AssertDataDisplayedOnGsGridTable([username, userEmail, userStatus])
+  })
+
+  it('C7353826_List_User_Happy_Path_Contains_Expected_Columns_On_Users_Table', () => {
+    userManagementPage.AssertTableContainsExpectedColumns(['username', 'email', 'status'])
+  })
+
+  it('C7592114_Users_Happy_Path_View_User_Details_L4', () => {
+    const username = 'amulcahyNE'
+    const userId = 454292
+    const publicName = 'Gage Gilbert'
+    const status = 'active'
+    const email = 'test@globalshares.com'
+    const groups = ['View Only', 'Global Admin Group']
+    const firstName = 'Reagan'
+    const lastName = 'Jerry'
+    const jobTitle = 'Writer'
+    const qualifications = 'Reading'
+    const organization = 'Global Shares'
+    const phone = '99123'
+
+    searchBar.search(username)
+    userManagementPage.clickUserTable(userId)
+
+    userManagementPage.AssertRightNavBarIsDisplayed()
+    userManagementPage.AssertUserDetailContentInRightNavBar(publicName, username, status, email)
+    userManagementPage.clickLinkToAccessUserInfoDetailsOnRightNavBar()
+    userManagementPage.AssertUserInfoContentInRightNavBar(groups, firstName, lastName, publicName, jobTitle, qualifications, organization, phone, email, username)
   })
 
   // Verify USER DETAIL container data when picking a user from the Participants table

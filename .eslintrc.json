@@ -64,7 +64,7 @@
     "func-names": "error",
     "guard-for-in": "error",
     "linebreak-style": "error",
-    "max-params": ["error", 8],
+    "max-params": ["error", 10],
     "newline-before-return": "error",
     "no-empty-function": "warn",
     "no-trailing-spaces": "error",

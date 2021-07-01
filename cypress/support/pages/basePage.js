@@ -4,7 +4,8 @@
 
 const selectors = {
   clearAllFiltersButton: '#clearButton',
-  gsGridTable: 'div.data gs-grid-cell'
+  gsGridTable: 'div.data gs-grid-cell',
+  rightNavBarWithDetails: 'gs-container-l4'
 }
 
 class BasePage {
@@ -150,6 +151,15 @@ class BasePage {
         .invoke('text')
         .should('contain', data[i])
     }
+  }
+
+  /**
+   * Assert the right nav bar (L4) containing details is displayed
+   */
+  AssertRightNavBarIsDisplayed() {
+    cy.get(selectors.rightNavBarWithDetails)
+      .last()
+      .should('be.visible')
   }
 }
 

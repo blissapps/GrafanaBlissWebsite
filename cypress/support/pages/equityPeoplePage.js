@@ -9,7 +9,7 @@ const selectors = {
   numberOfRecordsInTable: '#peopleRecordCount'
 }
 
-const quickEditSelectors = {
+const quickEditNavBarSelectors = {
   editIconButton: '#quickEditEditPpt',
   participantDetailTitle: '#quickEditHeader',
   participantDetailName: '#quickEditPptName',
@@ -121,10 +121,10 @@ class EquityPeoplePage extends BasePage {
    * @param {String} status participant status
    */
   checkParticipantDetailContent(name, country, status) {
-    cy.get(quickEditSelectors.participantDetailTitle).should('be.visible')
-    cy.get(quickEditSelectors.participantDetailName).contains(name)
-    cy.get(quickEditSelectors.participantDetailCountry).contains(country)
-    cy.get(quickEditSelectors.participantDetailStatus).contains(status)
+    cy.get(quickEditNavBarSelectors.participantDetailTitle).should('be.visible')
+    cy.get(quickEditNavBarSelectors.participantDetailName).contains(name)
+    cy.get(quickEditNavBarSelectors.participantDetailCountry).contains(country)
+    cy.get(quickEditNavBarSelectors.participantDetailStatus).contains(status)
   }
 
   /**
@@ -134,7 +134,7 @@ class EquityPeoplePage extends BasePage {
    */
   openEditParticipantDetails(participantId) {
     this.getParticipantFromTheList(participantId).click()
-    cy.get(quickEditSelectors.editIconButton).click()
+    cy.get(quickEditNavBarSelectors.editIconButton).click()
   }
 }
 

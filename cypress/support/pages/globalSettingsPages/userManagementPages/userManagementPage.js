@@ -1,5 +1,4 @@
 import BasePage from '../../basePage'
-import SearchBar from '../../../components/searchBar'
 
 const properties = {
   pageURL: '/settings/user-management'
@@ -10,7 +9,30 @@ const selectors = {
   user: '#user-'
 }
 
-const searchBar = new SearchBar()
+const userDetailNavBarSelectors = {
+  headerTitle: 'gs-container-l4 div.record-title',
+  editIconButton: 'gs-container-l4 gs-button.icon',
+  publicName: '#public-name',
+  username: 'gs-container-l4 div.small',
+  status: 'gs-container-l4 gs-badge',
+  userInfoTitle: 'gs-container-l4 div.info-col h5',
+  userInfoEmail: 'gs-container-l4 div.info-col div',
+  userInfoButtonAccess: 'gs-container-l4 a gs-svg-icon'
+}
+
+const userInfoNavBarSelectors = {
+  userInfoHeader: 'gs-container-l4 h4',
+  groups: 'gs-container-l4 section.user-groups span.label',
+  personalFirstName: 'gs-container-l4 gs-input-field[formcontrolname=firstName] div.input input',
+  personalLastName: 'gs-container-l4 gs-input-field[formcontrolname=lastName] div.input input',
+  personalPublicName: 'gs-container-l4 gs-input-field[formcontrolname=publicName] div.input input',
+  personalJobTitle: 'gs-container-l4 gs-input-field[formcontrolname=jobTitle] div.input input',
+  personalQualifications: 'gs-container-l4 gs-input-field[formcontrolname=qualifications] div.input input',
+  personalOrganization: 'gs-container-l4 gs-input-field[formcontrolname=organization] div.input input',
+  contactPhone: 'gs-container-l4 gs-input-field[formcontrolname=contactNumber] div.input input',
+  contactPreferredEmail: 'gs-container-l4 gs-input-field[formcontrolname=emailAddress] div.input input',
+  AccountDetailsUsername: 'gs-container-l4 gs-input-field[formcontrolname=username] div.input input'
+}
 
 class UserManagementPage extends BasePage {
   /**
@@ -25,13 +47,11 @@ class UserManagementPage extends BasePage {
   /**
    * Get a user from the table of users
    *
-   * @param {string} userId username text for the user to be searched
+   * @param {Number} userId User id for the user to be searched
    *
    * @example send userId = 454292 to select this user from the table
    */
   getUserTable(userId) {
-    searchBar.search(userId)
-
     return cy.get(selectors.user + userId).first()
   }
 
@@ -40,12 +60,18 @@ class UserManagementPage extends BasePage {
   /**
    * Select a user from the table of users
    *
-   * @param {string} username username text for the user to be searched
+   * @param {Number} userId User id for the user to be searched
    *
-   * Waiting for @IDS
    */
-  clickUserTable(username) {
-    this.getUserTable(username).click()
+  clickUserTable(userId) {
+    this.getUserTable(userId).click('left')
+  }
+
+  /**
+   * Click in the '>' link button to access User Info details inside the right nav bar (L4)
+   */
+  clickLinkToAccessUserInfoDetailsOnRightNavBar() {
+    cy.get(userDetailNavBarSelectors.userInfoButtonAccess).click()
   }
 
   // --------------------------------------- ASSERTIONS AND OTHERS --------------------------------------------- //
@@ -57,10 +83,68 @@ class UserManagementPage extends BasePage {
    *
    * @example 'results = 2 for '2 SEARCH RESULT(S)' being displayed in the table
    */
-  checkAmountOfSearchResults(results) {
-    cy.get(selectors.numberOfSearchResultsInTable)
-      .invoke('text')
-      .should('contain', results)
+  AssertAmountOfSearchResults(results) {
+    this.AssertNumberOfRecordsTable(selectors.numberOfSearchResultsInTable, results)
+  }
+
+  /**
+   * Verify if the data displayed in User Detail container is correct
+   *
+   * @param {String} publicName User public name
+   * @param {String} username Username
+   * @param {String} status User status
+   * @param {String} email User email
+   */
+  AssertUserDetailContentInRightNavBar(publicName, username, status, email) {
+    // General User Details assertions
+    cy.get(userDetailNavBarSelectors.headerTitle).should('be.visible')
+    cy.get(userDetailNavBarSelectors.publicName).should('contain.text', publicName)
+    cy.get(userDetailNavBarSelectors.username).should('contain.text', username)
+    cy.get(userDetailNavBarSelectors.status).should('contain.text', status)
+
+    // General User Info assertions
+    cy.get(userDetailNavBarSelectors.userInfoTitle).should('be.visible')
+    cy.get(userDetailNavBarSelectors.userInfoEmail).should('contain.text', email)
+  }
+
+  /**
+   * Assert information contained in the User Info panel in the right nav bar (L4)
+   *
+   * @param {Array} groups Array of groups to be validated, example: ['View Only', 'Global Admin Group']. Send an empty array to skip groups validation
+   * @param {String} firstName User first name under Personal section
+   * @param {String} lastName User last name under Personal section
+   * @param {String} publicName User public name under Personal section
+   * @param {String} jobTitle User job title under Personal section
+   * @param {String} qualifications User qualifications under Personal section
+   * @param {String} organization User organization under Personal section
+   * @param {String} phone User phone under Contact section
+   * @param {String} email User email under Contact section
+   * @param {String} username User username under Account Details section
+   */
+  AssertUserInfoContentInRightNavBar(groups, firstName, lastName, publicName, jobTitle, qualifications, organization, phone, email, username) {
+    // Assert User Info Header
+    cy.get(userInfoNavBarSelectors.userInfoHeader).should('be.visible')
+
+    // Assert groups if groups list is not empty
+    if (groups.length > 0) {
+      for (let i = 0; i < groups.length; i++) {
+        cy.get(userInfoNavBarSelectors.groups)
+          .eq(i)
+          .invoke('text')
+          .should('contain', groups[i])
+      }
+    }
+
+    // Assert User Info Header
+    cy.get(userInfoNavBarSelectors.personalFirstName).should('have.value', firstName)
+    cy.get(userInfoNavBarSelectors.personalLastName).should('have.value', lastName)
+    cy.get(userInfoNavBarSelectors.personalPublicName).should('have.value', publicName)
+    cy.get(userInfoNavBarSelectors.personalJobTitle).should('have.value', jobTitle)
+    cy.get(userInfoNavBarSelectors.personalQualifications).should('have.value', qualifications)
+    cy.get(userInfoNavBarSelectors.personalOrganization).should('have.value', organization)
+    cy.get(userInfoNavBarSelectors.contactPhone).should('have.value', phone)
+    cy.get(userInfoNavBarSelectors.contactPreferredEmail).should('have.value', email)
+    cy.get(userInfoNavBarSelectors.AccountDetailsUsername).should('have.value', username)
   }
 }
 
