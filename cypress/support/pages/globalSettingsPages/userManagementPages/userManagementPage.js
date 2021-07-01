@@ -6,7 +6,8 @@ const properties = {
 
 const selectors = {
   numberOfSearchResultsInTable: '#userRecordCount .search-results-count',
-  user: '#user-'
+  user: '#user-',
+  noUserMsg: '#noUsersMsg'
 }
 
 const userDetailNavBarSelectors = {
@@ -55,6 +56,10 @@ class UserManagementPage extends BasePage {
     return cy.get(selectors.user + userId).first()
   }
 
+  getNoUserMessage() {
+    return cy.get(selectors.noUserMsg)
+  }
+
   // --------------------------------------- CLICKS --------------------------------------------- //
 
   /**
@@ -75,6 +80,13 @@ class UserManagementPage extends BasePage {
   }
 
   // --------------------------------------- ASSERTIONS AND OTHERS --------------------------------------------- //
+
+  /**
+   * Assert the msg about empty user state is visible
+   */
+  assertNoUserMsgIdDisplayed() {
+    this.getNoUserMessage().should('be.visible')
+  }
 
   /**
    * Checks the amount of results displayed in the Users table after using the search engine

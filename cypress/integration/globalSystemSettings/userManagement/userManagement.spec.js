@@ -29,16 +29,21 @@ describe('User Management tests over User Management settings', () => {
    * SPIKED DUE TO https://globalshares.atlassian.net/browse/GDP-50236
    *
    */
-  it.skip('C7405961_Search_For_Username_And_Email', () => {
+  it.skip('C7592116_Users_Search_For_Username_/_Email_And_Check_Highlighted_Data', () => {
     const username = 'amulcahyNE'
     const userEmail = 'test@globalshares.com'
     const userStatus = 'Active'
     userManagementPage.checkUserManagementUrl() // Check we are getting the correct search input in the correct page
 
+    // Email
     searchBar.search(userEmail)
-    userManagementPage.AssertAmountOfSearchResults(20)
+    userManagementPage.AssertAmountOfSearchResults(14)
+    userManagementPage.AssertDataDisplayedOnGsGridTableIsHighlighted(userEmail)
+
+    // Username
     searchBar.search(username)
     userManagementPage.AssertAmountOfSearchResults(2)
+    userManagementPage.AssertDataDisplayedOnGsGridTableIsHighlighted(username)
 
     userManagementPage.AssertDataDisplayedOnGsGridTable([username, userEmail, userStatus])
   })
@@ -68,6 +73,20 @@ describe('User Management tests over User Management settings', () => {
     userManagementPage.AssertUserDetailContentInRightNavBar(publicName, username, status, email)
     userManagementPage.clickLinkToAccessUserInfoDetailsOnRightNavBar()
     userManagementPage.AssertUserInfoContentInRightNavBar(groups, firstName, lastName, publicName, jobTitle, qualifications, organization, phone, email, username)
+  })
+
+  it('C7592117_Users_No_Users_Match_Search', () => {
+    userManagementPage.checkUserManagementUrl() // Check we are getting the correct search input in the correct page
+
+    searchBar.search('test_empty_state')
+    userManagementPage.assertNoUserMsgIdDisplayed()
+  })
+
+  it('C7592119_User_pastes_SQL_Code_Into_The_Search_Box', () => {
+    userManagementPage.checkUserManagementUrl() // Check we are getting the correct search input in the correct page
+
+    searchBar.search('SELECT * FROM users')
+    userManagementPage.assertNoUserMsgIdDisplayed()
   })
 
   // Verify USER DETAIL container data when picking a user from the Participants table

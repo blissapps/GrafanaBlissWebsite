@@ -4,7 +4,8 @@
 
 const selectors = {
   clearAllFiltersButton: '#clearButton',
-  gsGridTable: 'div.data gs-grid-cell',
+  gsGridTableCell: 'div.data gs-grid-cell',
+  gsGridTableCellHighlighted: 'div.data gs-grid-cell gs-highlighted-text.is-matched',
   rightNavBarWithDetails: 'gs-container-l4'
 }
 
@@ -118,14 +119,16 @@ class BasePage {
   /**
    * Assert the number of records displayed in a table. It is showed in the top like this: 'X record(s)'
    *
-   * @param {Object} locator records locator where this method will extract the text from this locator
+   * @param {Object} locator Object locator where this method will extract the text from this locator
    * @param {Number} numberOfRecords amount of people you want to check in the records
    *
    */
   AssertNumberOfRecordsTable(locator, numberOfRecords) {
-    locator.invoke('text').then(text => {
-      expect(text.trim().split(' ')[0]).equal(numberOfRecords.toString()) // compare only numbers
-    })
+    cy.get(locator)
+      .invoke('text')
+      .then(text => {
+        expect(text.trim().split(' ')[0]).equal(numberOfRecords.toString()) // compare only numbers
+      })
   }
 
   /**
@@ -146,11 +149,24 @@ class BasePage {
    */
   AssertDataDisplayedOnGsGridTable(data) {
     for (let i = 0; i < data.length; i++) {
-      cy.get(selectors.gsGridTable)
+      cy.get(selectors.gsGridTableCell)
         .eq(i)
         .invoke('text')
         .should('contain', data[i])
     }
+  }
+
+  /**
+   * Assert a data is highlighted in a GS Table
+   *
+   * @param {String} dataHighlighted Element text to check if it is highlighted
+   */
+  AssertDataDisplayedOnGsGridTableIsHighlighted(dataHighlighted) {
+    cy.get(selectors.gsGridTableCellHighlighted).should('be.visible')
+    cy.get(selectors.gsGridTableCellHighlighted)
+      .first()
+      .invoke('text')
+      .should('contain', dataHighlighted)
   }
 
   /**

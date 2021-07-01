@@ -41,15 +41,6 @@ class ParticipantRegulatoryLinkagePage extends BasePage {
     return cy.get(selectors.noDataFoundMessage)
   }
 
-  /**
-   * Get number of records displayed in the table
-   *
-   * @returns element containing the number of records displayed
-   */
-  getNumberOfRecordsDisplayed() {
-    return cy.get(selectors.numberOfRecords)
-  }
-
   // --------------------------------------- ASSERTIONS AND OTHERS --------------------------------------------- //
 
   /**
@@ -119,7 +110,7 @@ class ParticipantRegulatoryLinkagePage extends BasePage {
    * @example 'records = 1 for '1 record(s)' being displayed in the table
    */
   checkAmountOfRecordsTable(records) {
-    this.AssertNumberOfRecordsTable(this.getNumberOfRecordsDisplayed(), records)
+    this.AssertNumberOfRecordsTable(selectors.numberOfRecords, records)
   }
 
   // ---------------------------------------  INTERCEPTIONS --------------------------------------------- //

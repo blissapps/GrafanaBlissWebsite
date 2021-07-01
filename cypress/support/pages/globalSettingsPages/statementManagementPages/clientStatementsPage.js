@@ -159,7 +159,7 @@ class ClientStatementsPage extends BasePage {
    * @example 'records = 1 for '1 record(s)' being displayed in the table
    */
   checkAmountOfRecordsTable(records) {
-    this.AssertNumberOfRecordsTable(this.getNumberOfRecordsDisplayed(), records)
+    this.AssertNumberOfRecordsTable(selectors.numberOfRecords, records)
   }
 
   /**
