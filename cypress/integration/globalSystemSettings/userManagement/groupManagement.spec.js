@@ -32,9 +32,12 @@ describe('Group Management tests over User Management settings', () => {
 
   /**
    *TODO: Steps for Inactive groups (waiting for data to be available).
+   *
+   * SkIPPING due to https://globalshares.atlassian.net/browse/PB-873
+   *
    * @missing_data
    */
-  it.only('C7412691_Search_Engine_Search_for_Groups_With_Different_Combinations_In_Active_And_Inactive_Tabs', () => {
+  it('C7412691_Search_Engine_Search_for_Groups_With_Different_Combinations_In_Active_And_Inactive_Tabs', () => {
     groupManagementPage.assertNoGroupSelectedMessageState()
 
     let group = 'GLOBAL'

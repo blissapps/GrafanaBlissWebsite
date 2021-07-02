@@ -23,7 +23,9 @@ const userDetailNavBarSelectors = {
 
 const userInfoNavBarSelectors = {
   userInfoHeader: 'gs-container-l4 h4',
-  groups: 'gs-container-l4 section.user-groups span.label',
+  groups: 'gs-container-l4 section.user-groups',
+  showAllGroupsBtn: 'gs-button[data-test-id=show-all]',
+  showLessGroupsBtn: 'gs-button[data-test-id=hide]',
   personalFirstName: 'gs-container-l4 gs-input-field[formcontrolname=firstName] div.input input',
   personalLastName: 'gs-container-l4 gs-input-field[formcontrolname=lastName] div.input input',
   personalPublicName: 'gs-container-l4 gs-input-field[formcontrolname=publicName] div.input input',
@@ -142,12 +144,12 @@ class UserManagementPage extends BasePage {
   assertUserInfoContentInRightNavBar(groups, firstName, lastName, publicName, jobTitle, qualifications, organization, phone, email, username) {
     // Assert User Info Header
     cy.get(userInfoNavBarSelectors.userInfoHeader).should('be.visible')
+    cy.get(userInfoNavBarSelectors.showAllGroupsBtn).click() // make all groups visible
 
     // Assert groups if groups list is not empty
     if (groups.length > 0) {
       for (let i = 0; i < groups.length; i++) {
         cy.get(userInfoNavBarSelectors.groups)
-          .eq(i)
           .invoke('text')
           .should('contain', groups[i])
       }

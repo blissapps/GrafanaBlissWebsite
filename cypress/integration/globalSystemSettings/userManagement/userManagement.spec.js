@@ -66,7 +66,9 @@ describe('User Management tests over User Management settings', () => {
     const organization = 'Global Shares'
     const phone = '99123'
 
-    searchBar.search(username)
+    userManagementPage.checkUserManagementUrl() // Check we are getting the correct search input in the correct page
+
+    searchBar.search(username, 500)
     userManagementPage.clickUserTable(userId)
 
     userManagementPage.assertRightNavBarIsDisplayed()
