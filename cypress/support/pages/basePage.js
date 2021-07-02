@@ -96,7 +96,7 @@ class BasePage {
    *
    * @param {String} filename name of the file we want to verify if it was downloaded
    */
-  AssertFileWasDownloadedSuccessfully(filename) {
+  assertFileWasDownloadedSuccessfully(filename) {
     // Browser might take a while to download the file, so use "cy.readFile" to retry until the file exists and has length - and we assume that it has finished downloading then
     return cy.readFile('cypress/downloads/' + filename, { timeout: 15000 }).should('have.length.gt', 50)
   }
@@ -108,7 +108,7 @@ class BasePage {
    *
    * @MISSING_IDS When ids are placed in all columns name, change this method to also receive the ids
    */
-  AssertTableContainsExpectedColumns(columnsToValidate) {
+  assertTableContainsExpectedColumns(columnsToValidate) {
     for (let i = 1; i <= columnsToValidate.length; i++) {
       cy.xpath(`(//gs-grid//gs-grid-row-list//gs-grid-row//gs-grid-cell//span)[${i}]`)
         .invoke('text')
@@ -123,7 +123,7 @@ class BasePage {
    * @param {Number} numberOfRecords amount of people you want to check in the records
    *
    */
-  AssertNumberOfRecordsTable(locator, numberOfRecords) {
+  assertNumberOfRecordsTable(locator, numberOfRecords) {
     cy.get(locator)
       .invoke('text')
       .then(text => {
@@ -147,7 +147,7 @@ class BasePage {
    * @example send [76, 'Interxion', 'Form1099', 'Published', 77, 'TomTom', 'Form1099', 'Published'] to validate the first two
    * rows in the Statements page
    */
-  AssertDataDisplayedOnGsGridTable(data) {
+  assertDataDisplayedOnGsGridTable(data) {
     for (let i = 0; i < data.length; i++) {
       cy.get(selectors.gsGridTableCell)
         .eq(i)
@@ -161,7 +161,7 @@ class BasePage {
    *
    * @param {String} dataHighlighted Element text to check if it is highlighted
    */
-  AssertDataDisplayedOnGsGridTableIsHighlighted(dataHighlighted) {
+  assertDataDisplayedOnGsGridTableIsHighlighted(dataHighlighted) {
     cy.get(selectors.gsGridTableCellHighlighted).should('be.visible')
     cy.get(selectors.gsGridTableCellHighlighted)
       .first()
@@ -172,7 +172,7 @@ class BasePage {
   /**
    * Assert the right nav bar (L4) containing details is displayed
    */
-  AssertRightNavBarIsDisplayed() {
+  assertRightNavBarIsDisplayed() {
     cy.get(selectors.rightNavBarWithDetails)
       .last()
       .should('be.visible')

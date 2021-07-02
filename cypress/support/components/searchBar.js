@@ -9,12 +9,17 @@ class SearchBar {
    * Search bar
    *
    * @param {any} textToSearch Param to search in the search bar
+   * @param {object} delay Sometimes, there are no XHR requests to intercept, so it is necessary to have a quick delay after using the search engine.
    */
-  search(textToSearch) {
+  search(textToSearch, delay = null) {
+    this.clearSearchBox()
     cy.waitFor(selectors.inputBar)
     cy.get(selectors.inputBar).type(textToSearch)
     cy.get(selectors.searchClientButton).click()
-    this.clearSearchBox()
+
+    if (delay) {
+      cy.wait(delay)
+    }
   }
 
   /**

@@ -2,12 +2,14 @@ import HomePage from '../../../support/pages/homePage'
 import GroupManagementPage from '../../../support/pages/globalSettingsPages/userManagementPages/groupManagementPage'
 
 import LeftMenuNavBar from '../../../support/components/leftMenuNavBar'
+import SearchBar from '../../../support/components/searchBar'
 
 describe('Group Management tests over User Management settings', () => {
   const homePage = new HomePage()
   const groupManagementPage = new GroupManagementPage()
 
   const leftMenuNavBar = new LeftMenuNavBar()
+  const searchBar = new SearchBar()
 
   beforeEach(() => {
     // @ts-ignore
@@ -22,13 +24,70 @@ describe('Group Management tests over User Management settings', () => {
    *
    * Waiting for @IDS
    */
-  it('C7412690_Check_Behavior_When_Closing_The_Settings', () => {
+  it('C7412690_Check_The_System_Behavior_When_Closing_The_Settings_Nav_Bar', () => {
     groupManagementPage.checkGroupManagementUrl()
     leftMenuNavBar.closeGlobalSettingsLeftBar()
     homePage.checkHomeUrl()
   })
 
-  //  ************** TESTS BELLOW MODIFY DATA DEFINITELY ***************
+  /**
+   *TODO: Steps for Inactive groups (waiting for data to be available).
+   * @missing_data
+   */
+  it.only('C7412691_Search_Engine_Search_for_Groups_With_Different_Combinations_In_Active_And_Inactive_Tabs', () => {
+    groupManagementPage.assertNoGroupSelectedMessageState()
+
+    let group = 'GLOBAL'
+    searchBar.search(group, 500)
+    groupManagementPage.assertAmountOfSearchResults(1)
+    groupManagementPage.assertSearchResultGroups([1])
+
+    group = 'global'
+    searchBar.search(group, 500)
+    groupManagementPage.assertAmountOfSearchResults(1)
+    groupManagementPage.assertSearchResultGroups([1])
+
+    group = 'GLObal'
+    searchBar.search(group, 500)
+    groupManagementPage.assertAmountOfSearchResults(1)
+    groupManagementPage.assertSearchResultGroups([1])
+
+    group = 'randomName'
+    searchBar.search(group, 500)
+    groupManagementPage.assertNoGroupsFoundIsVisible()
+
+    group = 'SELECT * FROM groups'
+    searchBar.search(group, 500)
+    groupManagementPage.assertNoGroupsFoundIsVisible()
+
+    // Once data is given, uncomment the code with the new data
+    /**
+    groupManagementPage.selectTabByName('Inactive') // Inactive TAB
+
+    group = 'ABC'
+    searchBar.search(group, 500)
+    groupManagementPage.assertAmountOfSearchResults(2)
+    groupManagementPage.assertSearchResultGroups([1122, 1125])
+
+    group = 'abc'
+    searchBar.search(group, 500)
+    groupManagementPage.assertAmountOfSearchResults(2)
+    groupManagementPage.assertSearchResultGroups([1122, 1125])
+
+    group = 'AbC'
+    searchBar.search(group, 500)
+    groupManagementPage.assertAmountOfSearchResults(2)
+    groupManagementPage.assertSearchResultGroups([1122, 1125])
+
+    group = 'randomName'
+    searchBar.search(group, 500)
+    groupManagementPage.assertNoGroupsFoundIsVisible()
+
+    group = 'SELECT * FROM groups'
+    searchBar.search(group, 500)
+    groupManagementPage.assertNoGroupsFoundIsVisible()
+     */
+  })
 
   // ************************************************ TESTS AS CLIENTS ************************************************** //
 })

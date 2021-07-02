@@ -82,10 +82,16 @@ class UserManagementPage extends BasePage {
   // --------------------------------------- ASSERTIONS AND OTHERS --------------------------------------------- //
 
   /**
-   * Assert the msg about empty user state is visible
+   * Assert the msg about empty user state is visible or not
+   *
+   * @param {Boolean} visible True to check if the state is visible, false otherwise
    */
-  assertNoUserMsgIdDisplayed() {
-    this.getNoUserMessage().should('be.visible')
+  assertNoUserMsgIdDisplayed(visible = true) {
+    if (visible) {
+      this.getNoUserMessage().should('be.visible')
+    } else {
+      this.getNoUserMessage().should('not.exist')
+    }
   }
 
   /**
@@ -95,8 +101,8 @@ class UserManagementPage extends BasePage {
    *
    * @example 'results = 2 for '2 SEARCH RESULT(S)' being displayed in the table
    */
-  AssertAmountOfSearchResults(results) {
-    this.AssertNumberOfRecordsTable(selectors.numberOfSearchResultsInTable, results)
+  assertAmountOfSearchResults(results) {
+    this.assertNumberOfRecordsTable(selectors.numberOfSearchResultsInTable, results)
   }
 
   /**
@@ -107,7 +113,7 @@ class UserManagementPage extends BasePage {
    * @param {String} status User status
    * @param {String} email User email
    */
-  AssertUserDetailContentInRightNavBar(publicName, username, status, email) {
+  assertUserDetailContentInRightNavBar(publicName, username, status, email) {
     // General User Details assertions
     cy.get(userDetailNavBarSelectors.headerTitle).should('be.visible')
     cy.get(userDetailNavBarSelectors.publicName).should('contain.text', publicName)
@@ -133,7 +139,7 @@ class UserManagementPage extends BasePage {
    * @param {String} email User email under Contact section
    * @param {String} username User username under Account Details section
    */
-  AssertUserInfoContentInRightNavBar(groups, firstName, lastName, publicName, jobTitle, qualifications, organization, phone, email, username) {
+  assertUserInfoContentInRightNavBar(groups, firstName, lastName, publicName, jobTitle, qualifications, organization, phone, email, username) {
     // Assert User Info Header
     cy.get(userInfoNavBarSelectors.userInfoHeader).should('be.visible')
 

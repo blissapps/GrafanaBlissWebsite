@@ -159,7 +159,7 @@ class ClientStatementsPage extends BasePage {
    * @example 'records = 1 for '1 record(s)' being displayed in the table
    */
   checkAmountOfRecordsTable(records) {
-    this.AssertNumberOfRecordsTable(selectors.numberOfRecords, records)
+    this.assertNumberOfRecordsTable(selectors.numberOfRecords, records)
   }
 
   /**
@@ -216,7 +216,7 @@ class ClientStatementsPage extends BasePage {
    */
   AssertClientStatementsTableContainsExpectedColumns() {
     const columnsToValidate = ['Id', 'Client', 'Regulator', 'Status'] // necessary until ids are placed
-    this.AssertTableContainsExpectedColumns(columnsToValidate)
+    this.assertTableContainsExpectedColumns(columnsToValidate)
   }
 
   /**
@@ -224,9 +224,9 @@ class ClientStatementsPage extends BasePage {
    *
    * @MISSING_IDS
    */
-  AssertParticipantsStatementsTableContainsExpectedColumns() {
+  assertParticipantsStatementsTableContainsExpectedColumns() {
     const columnsToValidate = ['Participant', 'Status'] // necessary until ids are placed
-    this.AssertTableContainsExpectedColumns(columnsToValidate)
+    this.assertTableContainsExpectedColumns(columnsToValidate)
   }
 
   /**
@@ -234,7 +234,7 @@ class ClientStatementsPage extends BasePage {
    *
    * @MISSING_IDS
    */
-  AssertClientStatementsTableInOrderById() {
+  assertClientStatementsTableInOrderById() {
     const idsList = [76, 77, 78, 79, 80] // This is the expected list with the database we have in the environment right now
 
     let idsListIndex = 0

@@ -18,7 +18,7 @@ describe('Statement Management tests', () => {
 
   it('C7394715_Happy_Path_To_View_Statements_Accordingly', () => {
     clientStatementsPage.AssertClientStatementsTableContainsExpectedColumns()
-    clientStatementsPage.AssertClientStatementsTableInOrderById()
+    clientStatementsPage.assertClientStatementsTableInOrderById()
   })
 
   it('C7394241_Statements_Download_Button_Visibility_Behavior', () => {
@@ -65,7 +65,7 @@ describe('Statement Management tests', () => {
     clientStatementsPage.clickClientTable(clientID)
     clientStatementsPage.getSummaryButton().should('be.visible')
     clientStatementsPage.clickSummaryDownloadButtonToDownloadCSVFile()
-    clientStatementsPage.AssertFileWasDownloadedSuccessfully(clientName + '_Summary.csv')
+    clientStatementsPage.assertFileWasDownloadedSuccessfully(clientName + '_Summary.csv')
   })
 
   it('C7353833_Use_Filter_To_Search_For_Client_Statements', () => {
@@ -79,7 +79,7 @@ describe('Statement Management tests', () => {
     clientStatementsPage.getClientFromTable(clientId).should('be.visible')
     clientStatementsPage.checkAmountOfRecordsTable(1)
     clientStatementsPage.clearAllFilters()
-    clientStatementsPage.AssertClientStatementsTableInOrderById()
+    clientStatementsPage.assertClientStatementsTableInOrderById()
 
     // only name
     clientStatementsPage.filterClientStatements('TomTom')
@@ -217,7 +217,7 @@ describe('Statement Management tests', () => {
     clientStatementsPage.filterClientStatements('Repsol')
     clientStatementsPage.clickClientTable(107)
     clientStatementsPage.checkUrl('/participants')
-    clientStatementsPage.AssertParticipantsStatementsTableContainsExpectedColumns()
+    clientStatementsPage.assertParticipantsStatementsTableContainsExpectedColumns()
   })
 
   it('C7395182_Select_Client_Without_Participants_To_Check_Empty_State', () => {
@@ -297,7 +297,7 @@ describe('Statement Management tests', () => {
     clientStatementsPage.clickClientTable(clientID)
     clientStatementsPage.filterParticipantStatements('', participantID)
     clientStatementsPage.clickDownloadPDFFromParticipantStatement(participantID)
-    clientStatementsPage.AssertFileWasDownloadedSuccessfully(participantName + '_Summary.pdf')
+    clientStatementsPage.assertFileWasDownloadedSuccessfully(participantName + '_Summary.pdf')
   })
 
   /**

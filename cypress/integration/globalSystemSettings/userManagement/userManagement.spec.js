@@ -37,19 +37,19 @@ describe('User Management tests over User Management settings', () => {
 
     // Email
     searchBar.search(userEmail)
-    userManagementPage.AssertAmountOfSearchResults(14)
-    userManagementPage.AssertDataDisplayedOnGsGridTableIsHighlighted(userEmail)
+    userManagementPage.assertAmountOfSearchResults(14)
+    userManagementPage.assertDataDisplayedOnGsGridTableIsHighlighted(userEmail)
 
     // Username
     searchBar.search(username)
-    userManagementPage.AssertAmountOfSearchResults(2)
-    userManagementPage.AssertDataDisplayedOnGsGridTableIsHighlighted(username)
+    userManagementPage.assertAmountOfSearchResults(2)
+    userManagementPage.assertDataDisplayedOnGsGridTableIsHighlighted(username)
 
-    userManagementPage.AssertDataDisplayedOnGsGridTable([username, userEmail, userStatus])
+    userManagementPage.assertDataDisplayedOnGsGridTable([username, userEmail, userStatus])
   })
 
   it('C7353826_List_User_Happy_Path_Contains_Expected_Columns_On_Users_Table', () => {
-    userManagementPage.AssertTableContainsExpectedColumns(['username', 'email', 'status'])
+    userManagementPage.assertTableContainsExpectedColumns(['username', 'email', 'status'])
   })
 
   it('C7592114_Users_Happy_Path_View_User_Details_L4', () => {
@@ -69,10 +69,10 @@ describe('User Management tests over User Management settings', () => {
     searchBar.search(username)
     userManagementPage.clickUserTable(userId)
 
-    userManagementPage.AssertRightNavBarIsDisplayed()
-    userManagementPage.AssertUserDetailContentInRightNavBar(publicName, username, status, email)
+    userManagementPage.assertRightNavBarIsDisplayed()
+    userManagementPage.assertUserDetailContentInRightNavBar(publicName, username, status, email)
     userManagementPage.clickLinkToAccessUserInfoDetailsOnRightNavBar()
-    userManagementPage.AssertUserInfoContentInRightNavBar(groups, firstName, lastName, publicName, jobTitle, qualifications, organization, phone, email, username)
+    userManagementPage.assertUserInfoContentInRightNavBar(groups, firstName, lastName, publicName, jobTitle, qualifications, organization, phone, email, username)
   })
 
   it('C7592117_Users_No_Users_Match_Search', () => {
