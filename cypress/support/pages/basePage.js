@@ -6,7 +6,8 @@ const selectors = {
   clearAllFiltersButton: '#clearButton',
   gsGridTableCell: 'div.data gs-grid-cell',
   gsGridTableCellHighlighted: 'div.data gs-grid-cell gs-highlighted-text.is-matched',
-  rightNavBarWithDetails: 'gs-container-l4'
+  rightNavBarWithDetails: 'gs-container-l4',
+  toastNotification: 'div.toast-content'
 }
 
 class BasePage {
@@ -176,6 +177,17 @@ class BasePage {
     cy.get(selectors.rightNavBarWithDetails)
       .last()
       .should('be.visible')
+  }
+
+  /**
+   * Assert a toast notification is displayed alongside a given message
+   *
+   * @param {String} toastMsg Toast message
+   */
+  assertToastNotificationMessageIsDisplayed(toastMsg) {
+    cy.get(selectors.toastNotification)
+      .should('be.visible')
+      .should('contain.text', toastMsg)
   }
 }
 

@@ -92,5 +92,35 @@ describe('Group Management tests over User Management settings', () => {
      */
   })
 
+  it('C7499684_Groups_Happy_Path_Active_And_Inactive_Groups', () => {
+    groupManagementPage.assertActiveGroupsAreDisplayed()
+    groupManagementPage.selectTabByName('Inactive')
+    groupManagementPage.assertInactiveGroupsAreDisplayed()
+  })
+
+  /**
+   * @missing_data
+   */
+  it('C7499679_Groups_Deactivate_And_Activate_A_Group', () => {
+    const groupId = 1122
+    const groupName = 'Active and Inactive'
+
+    groupManagementPage.deactivateGroup(groupId, groupName)
+    groupManagementPage.activateGroup(groupId, groupName)
+  })
+
+  /**
+   * SKIPPING DUE TO ___________________________________________
+   *
+   * @missing_data
+   */
+  it.skip('C7493036_Groups_Duplicate_A_Group', () => {
+    const groupId = 1122
+    const groupName = 'Active and Inactive'
+    const newNameForDuplicatedGroup = 'Duplicated Group'
+
+    groupManagementPage.duplicateGroup(groupId, groupName, newNameForDuplicatedGroup)
+  })
+
   // ************************************************ TESTS AS CLIENTS ************************************************** //
 })
