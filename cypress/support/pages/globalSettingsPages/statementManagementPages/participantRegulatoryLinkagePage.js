@@ -4,7 +4,6 @@ const properties = {
   pageURL: '/statement/participants'
 }
 
-// @ts-ignore
 const selectors = {
   clientFilterStatementInput: '#clientSelect input',
   participantNameFilterStatementInput: '#pptName input',

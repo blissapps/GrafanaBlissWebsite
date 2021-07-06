@@ -10,6 +10,7 @@ const selectors = {
   noUserMsg: '#noUsersMsg'
 }
 
+// These selectors are the ones from the l4 nav bar (right nav bar)
 const userDetailNavBarSelectors = {
   headerTitle: 'gs-container-l4 div.record-title',
   editIconButton: 'gs-container-l4 gs-button.icon',
@@ -21,6 +22,7 @@ const userDetailNavBarSelectors = {
   userInfoButtonAccess: 'gs-container-l4 a gs-svg-icon'
 }
 
+// These selectors are the ones from the l4 nav bar (right nav bar)
 const userInfoNavBarSelectors = {
   userInfoHeader: 'gs-container-l4 h4',
   groups: 'gs-container-l4 section.user-groups',

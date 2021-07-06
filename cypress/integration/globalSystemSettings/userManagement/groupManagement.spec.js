@@ -22,7 +22,6 @@ describe('Group Management tests over User Management settings', () => {
   /**
    * Verify if the settings send the user back to the home screen when the user closes the settings menu
    *
-   * Waiting for @IDS
    */
   it('C7412690_Check_The_System_Behavior_When_Closing_The_Settings_Nav_Bar', () => {
     groupManagementPage.checkGroupManagementUrl()
@@ -35,7 +34,7 @@ describe('Group Management tests over User Management settings', () => {
    *
    * SkIPPING due to https://globalshares.atlassian.net/browse/PB-873
    *
-   * @missing_data
+   * @missing_data Need to have some groups in both active and inactive tabs
    */
   it('C7412691_Search_Engine_Search_for_Groups_With_Different_Combinations_In_Active_And_Inactive_Tabs', () => {
     groupManagementPage.assertNoGroupSelectedMessageState()
@@ -110,9 +109,9 @@ describe('Group Management tests over User Management settings', () => {
   })
 
   /**
-   * SKIPPING DUE TO ___________________________________________
+   * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-875
    *
-   * @missing_data
+   * @missing_data Need to have at least one group created and activated
    */
   it.skip('C7493036_Groups_Duplicate_A_Group', () => {
     const groupId = 1122
@@ -120,6 +119,20 @@ describe('Group Management tests over User Management settings', () => {
     const newNameForDuplicatedGroup = 'Duplicated Group'
 
     groupManagementPage.duplicateGroup(groupId, groupName, newNameForDuplicatedGroup)
+  })
+
+  it('C7493034_Groups_Create_A_New_Group', () => {
+    const groupName = 'Created Group From Automation'
+    const roleName = 'View Only'
+    const roleId = 1397
+    const dapNames = ['Test', 'View']
+    const dapIds = [60, 12]
+    const userNames = ['carolyn', 'igor']
+    const userIds = [754546, 754556]
+    const companyName = ['7Digital', '9F Group']
+    const companyIds = [144, 337]
+
+    groupManagementPage.createGroup(groupName, roleName, roleId, dapNames, dapIds, userNames, userIds, companyName, companyIds)
   })
 
   // ************************************************ TESTS AS CLIENTS ************************************************** //

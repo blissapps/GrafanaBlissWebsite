@@ -6,7 +6,7 @@ const selectors = {
   clearAllFiltersButton: '#clearButton',
   gsGridTableCell: 'div.data gs-grid-cell',
   gsGridTableCellHighlighted: 'div.data gs-grid-cell gs-highlighted-text.is-matched',
-  rightNavBarWithDetails: 'gs-container-l4',
+  rightNavBar: 'gs-container-l4',
   toastNotification: 'div.toast-content'
 }
 
@@ -174,7 +174,7 @@ class BasePage {
    * Assert the right nav bar (L4) containing details is displayed
    */
   assertRightNavBarIsDisplayed() {
-    cy.get(selectors.rightNavBarWithDetails)
+    cy.get(selectors.rightNavBar)
       .last()
       .should('be.visible')
   }
