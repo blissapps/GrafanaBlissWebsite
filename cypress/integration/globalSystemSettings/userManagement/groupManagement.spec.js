@@ -170,7 +170,7 @@ describe('Group Management tests over User Management settings', () => {
   /**
    * @missing_data Need to have a group. Also, it needs to have at least on role created in the environment.
    */
-  it.only('C7419664_Groups_Discard_Without_Saving', () => {
+  it.skip('C7419664_Groups_Discard_Without_Saving', () => {
     const groupId = 1317
     const roleName = 'View Only'
     const roleId = 1397
