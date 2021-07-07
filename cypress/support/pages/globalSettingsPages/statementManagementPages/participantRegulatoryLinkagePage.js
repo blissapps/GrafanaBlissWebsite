@@ -17,7 +17,7 @@ const selectors = {
 }
 
 const apiInterceptions = {
-  tableReloadedAfterFiltering: 'https://stonly.com/api/v2/widget/integration**',
+  tableReloadedAfterFiltering: 'https://api.stonly.com/api/v2/widget/integration**',
   linkagesParticipants: '/api/v1.0/Clients/**/ParticipantStatements/Linkages**'
 }
 
@@ -98,7 +98,7 @@ class ParticipantRegulatoryLinkagePage extends BasePage {
     }
 
     // eslint-disable-next-line cypress/no-unnecessary-waiting
-    cy.wait(700) // Angular is taking more time than expected, so even using intercept, it is not being sufficient.
+    cy.wait(850) // Angular is taking more time than expected, so even using intercept, it is not being sufficient.
   }
 
   /**

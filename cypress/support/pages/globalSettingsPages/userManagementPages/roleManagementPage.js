@@ -5,7 +5,7 @@ const properties = {
 }
 
 const apiInterceptions = {
-  pageLoadedRequest: 'https://stonly.com/api/v2/widget/integration?*'
+  pageLoadedRequest: 'https://api.stonly.com/api/v2/widget/integration?*'
 }
 
 class RoleManagementPage extends BasePage {
@@ -13,8 +13,8 @@ class RoleManagementPage extends BasePage {
    * Checks if the current pageLoad is Role management URL
    */
   checkRoleManagementUrl() {
-    this.checkUrl(properties.pageURL)
     this.waitUntilPageIsLoaded()
+    this.checkUrl(properties.pageURL)
   }
 
   // ---------------------------------------  INTERCEPTIONS --------------------------------------------- //
