@@ -182,12 +182,17 @@ class BasePage {
   /**
    * Assert a toast notification is displayed alongside a given message
    *
-   * @param {String} toastMsg Toast message
+   * @param {String} toastMsg Toast message text
+   * @param {Boolean} notDisplayed Send True to assert that no toast message is displayed
    */
-  assertToastNotificationMessageIsDisplayed(toastMsg) {
-    cy.get(selectors.toastNotification)
-      .should('be.visible')
-      .should('contain.text', toastMsg)
+  assertToastNotificationMessageIsDisplayed(toastMsg, notDisplayed = false) {
+    if (!notDisplayed) {
+      cy.get(selectors.toastNotification)
+        .should('be.visible')
+        .should('contain.text', toastMsg)
+    } else {
+      cy.get(selectors.toastNotification).should('not.exist')
+    }
   }
 }
 

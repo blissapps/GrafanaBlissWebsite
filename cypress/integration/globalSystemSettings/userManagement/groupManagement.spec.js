@@ -40,26 +40,26 @@ describe('Group Management tests over User Management settings', () => {
     groupManagementPage.assertNoGroupSelectedMessageState()
 
     let group = 'GLOBAL'
-    searchBar.search(group, 500)
+    searchBar.search(group)
     groupManagementPage.assertAmountOfSearchResults(1)
     groupManagementPage.assertSearchResultGroups([1])
 
     group = 'global'
-    searchBar.search(group, 500)
+    searchBar.search(group)
     groupManagementPage.assertAmountOfSearchResults(1)
     groupManagementPage.assertSearchResultGroups([1])
 
     group = 'GLObal'
-    searchBar.search(group, 500)
+    searchBar.search(group)
     groupManagementPage.assertAmountOfSearchResults(1)
     groupManagementPage.assertSearchResultGroups([1])
 
     group = 'randomName'
-    searchBar.search(group, 500)
+    searchBar.search(group)
     groupManagementPage.assertNoGroupsFoundIsVisible()
 
     group = 'SELECT * FROM groups'
-    searchBar.search(group, 500)
+    searchBar.search(group)
     groupManagementPage.assertNoGroupsFoundIsVisible()
 
     // Once data is given, uncomment the code with the new data
@@ -67,26 +67,26 @@ describe('Group Management tests over User Management settings', () => {
     groupManagementPage.selectTabByName('Inactive') // Inactive TAB
 
     group = 'ABC'
-    searchBar.search(group, 500)
+    searchBar.search(group)
     groupManagementPage.assertAmountOfSearchResults(2)
     groupManagementPage.assertSearchResultGroups([1122, 1125])
 
     group = 'abc'
-    searchBar.search(group, 500)
+    searchBar.search(group)
     groupManagementPage.assertAmountOfSearchResults(2)
     groupManagementPage.assertSearchResultGroups([1122, 1125])
 
     group = 'AbC'
-    searchBar.search(group, 500)
+    searchBar.search(group)
     groupManagementPage.assertAmountOfSearchResults(2)
     groupManagementPage.assertSearchResultGroups([1122, 1125])
 
     group = 'randomName'
-    searchBar.search(group, 500)
+    searchBar.search(group)
     groupManagementPage.assertNoGroupsFoundIsVisible()
 
     group = 'SELECT * FROM groups'
-    searchBar.search(group, 500)
+    searchBar.search(group)
     groupManagementPage.assertNoGroupsFoundIsVisible()
      */
   })
@@ -133,6 +133,51 @@ describe('Group Management tests over User Management settings', () => {
     const companyIds = [144, 337]
 
     groupManagementPage.createGroup(groupName, roleName, roleId, dapNames, dapIds, userNames, userIds, companyName, companyIds)
+  })
+
+  /**
+   * @missing_data Need to have a group with NO role associated. Also, it needs to have at least on role created in the environment.
+   */
+  it.skip('C7419661_Groups_Add_A_Role_To_A_Group', () => {
+    const groupId = 1229
+    const groupName = 'Add Role'
+    const roleName = 'View Only'
+    const roleId = 1397
+
+    groupManagementPage.clickGroup(groupId)
+    groupManagementPage.selectRoleToGroup(roleName, roleId)
+    groupManagementPage.saveGroupInformation(groupName + ' Saved')
+
+    groupManagementPage.assertRoleAssociatedWithGroup(roleId)
+  })
+
+  /**
+   * @missing_data Need to have a group with an associated role created. Also, it needs to have at least two roles created in the environment.
+   */
+  it.skip('C7419662_Groups_Change_The_Role_Associated_With_A_Group', () => {
+    const groupId = 1230
+    const groupName = 'Change this role'
+    const roleName = 'View Only'
+    const roleId = 1397
+
+    groupManagementPage.clickGroup(groupId)
+    groupManagementPage.selectRoleToGroup(roleName, roleId)
+    groupManagementPage.saveGroupInformation(groupName + ' Saved')
+
+    groupManagementPage.assertRoleAssociatedWithGroup(roleId)
+  })
+
+  /**
+   * @missing_data Need to have a group. Also, it needs to have at least on role created in the environment.
+   */
+  it.only('C7419664_Groups_Discard_Without_Saving', () => {
+    const groupId = 1317
+    const roleName = 'View Only'
+    const roleId = 1397
+
+    groupManagementPage.clickGroup(groupId)
+    groupManagementPage.selectRoleToGroup(roleName, roleId)
+    groupManagementPage.discardGroupInformation()
   })
 
   // ************************************************ TESTS AS CLIENTS ************************************************** //

@@ -22,11 +22,13 @@ const selectors = {
   threeDotDeactivateBtn: 'gs-action-panel-option[data-test-id=action-deactivate]',
   groupNameInput: 'gs-input-inline[data-test-id=name-input]',
   saveGroupBtn: 'gs-button[data-test-id=save-button]',
+  discardGroupBtn: 'gs-button[data-test-id=discard-button]',
   newGroupBtn: 'gs-button[data-test-id=create-group]',
-  selectRoleBtn: 'a[href="/tenant/1/settings/group-management/0/select/role"]',
-  AddDAPBtn: 'a[href="/tenant/1/settings/group-management/0/select/dap"]',
-  AddUsersBtn: 'a[href="/tenant/1/settings/group-management/0/select/user"]',
-  AddCompaniesBtn: 'a[href="/tenant/1/settings/group-management/0/select/client"]'
+  selectRoleBtn: '*[data-test-id=section-role] *[data-test-id=add-entity]',
+  AddDAPBtn: '*[data-test-id=section-dap] *[data-test-id=add-entity]',
+  AddUsersBtn: '*[data-test-id=section-user] *[data-test-id=add-entity]',
+  AddCompaniesBtn: '*[data-test-id=section-client] *[data-test-id=add-entity]',
+  changeRoleBtn: '*[data-test-id=section-role] a'
 }
 
 // These selectors are the ones from the l4 nav bar (right nav bar)
@@ -36,6 +38,13 @@ const groupsNavBarSelectors = {
   entityCardId: 'gs-container-l4 gs-card[data-test-id=entity-',
   confirmBtn: 'gs-container-l4 gs-button[data-test-id=confirm-button]',
   dismissBtn: 'gs-container-l4 gs-button[data-test-id=dismiss-button]'
+}
+
+const groupsCardsSelectors = {
+  roleCardId: '*[data-test-id=section-role] gs-card[data-test-id=entity-',
+  DapCardId: '*[data-test-id=section-dap] gs-card[data-test-id=entity-',
+  UsersCardId: '*[data-test-id=section-user] gs-card[data-test-id=entity-',
+  CompaniesCardId: '*[data-test-id=section-client] gs-card[data-test-id=entity-'
 }
 
 const apiInterceptions = {
@@ -162,6 +171,15 @@ class GroupManagementPage extends BasePage {
     cy.get(selectors.inactiveGroupsList).should('be.visible')
   }
 
+  /**
+   * Assert the role is associated with the selected group
+   *
+   * @param {Number} roleId Role id number to assert the association with a selected group
+   */
+  assertRoleAssociatedWithGroup(roleId) {
+    cy.get(groupsCardsSelectors.roleCardId + roleId).should('be.visible')
+  }
+
   // ----------------------------------------------- OTHERS --------------------------------------------- //
 
   /**
@@ -222,6 +240,118 @@ class GroupManagementPage extends BasePage {
   }
 
   /**
+   * Modify a group name from a selected group
+   *
+   * @param {String} groupName Name of the group that is going to be created.
+   */
+  modifyGroupName(groupName) {
+    cy.get(selectors.groupNameInput).as('groupNameInput')
+    cy.get('@groupNameInput').should('have.text', 'New Group')
+    cy.get('@groupNameInput').clear()
+    cy.get('@groupNameInput').type(groupName)
+  }
+
+  /**
+   * Select a role to a selected group
+   *
+   * @param {String} roleName Role name that is going to be added into this group.
+   * @param {Number} roleId Role id number that is going to be added into this group.
+   */
+  selectRoleToGroup(roleName, roleId) {
+    cy.get(selectors.selectRoleBtn).click()
+    this.checkUrl('/select/role')
+
+    cy.get(groupsNavBarSelectors.searchInput).type(roleName)
+    cy.get(groupsNavBarSelectors.entityCardId + roleId).click()
+    cy.get(groupsNavBarSelectors.confirmBtn).click()
+  }
+
+  /**
+   * Add Daps to a selected group
+   *
+   * @param {Array} dapNames Array of name of data access profiles that are going to be added into this group.
+   * @param {Array} dapIds Array of if of data access profiles that are going to be added into this group.
+   *
+   * @example
+   * All dapNames and dapIds need to be placed in order.
+   * For example: dapNames=['dap1', 'dap2'] needs to match the exactly order in dapIds=[1, 2]
+   */
+  addDapsToGroup(dapNames, dapIds) {
+    cy.get(selectors.AddDAPBtn).click()
+    this.checkUrl('/select/dap')
+
+    for (let i = 0; i < dapNames.length; i++) {
+      cy.get(groupsNavBarSelectors.searchInput).type(dapNames[i])
+      cy.get(groupsNavBarSelectors.entityCardId + dapIds[i]).click()
+      cy.get(groupsNavBarSelectors.searchInput).clear()
+    }
+    cy.get(groupsNavBarSelectors.confirmBtn).click()
+  }
+
+  /**
+   * Add Users to a selected group
+   *
+   * @param {Array} userNames Array of names of users that are going to be added into this group.
+   * @param {Array} userIds Array of ids of users that are going to be added into this group.
+   *
+   * @example
+   * All userNames and userIds need to be placed in order.
+   * For example: userNames=['user1', 'user2'] needs to match the exactly order in userIds=[1, 2]
+   */
+  addUsersToGroup(userNames, userIds) {
+    cy.get(selectors.AddUsersBtn).click()
+    this.checkUrl('/select/user')
+
+    for (let i = 0; i < userNames.length; i++) {
+      cy.get(groupsNavBarSelectors.searchInput).type(userNames[i])
+      cy.get(groupsNavBarSelectors.entityCardId + userIds[i]).click()
+      cy.get(groupsNavBarSelectors.searchInput).clear()
+    }
+    cy.get(groupsNavBarSelectors.confirmBtn).click()
+  }
+
+  /**
+   * Add Companies to a selected group
+   *
+   * @param {Array} companyNames Array of names of companies that are going to be added into this group.
+   * @param {Array} companyIds Array of ids of companies  that are going to be added into this group.
+   *
+   * @example
+   * All companyNames and companyIds need to be placed in order.
+   * For example: companyNames=['company1', 'company2'] needs to match the exactly order in companyIds=[1, 2]
+   */
+  addCompaniesToGroup(companyNames, companyIds) {
+    cy.get(selectors.AddCompaniesBtn).click()
+    this.checkUrl('/select/client')
+
+    for (let i = 0; i < companyNames.length; i++) {
+      cy.get(groupsNavBarSelectors.searchInput).type(companyNames[i])
+      cy.get(groupsNavBarSelectors.entityCardId + companyIds[i]).click()
+      cy.get(groupsNavBarSelectors.searchInput).clear()
+    }
+    cy.get(groupsNavBarSelectors.confirmBtn).click()
+  }
+
+  /**
+   * Save all updates in the selected group by clicking in the Save button
+   *
+   * @param {String} toastNotificationMessage
+   */
+  saveGroupInformation(toastNotificationMessage) {
+    cy.get(selectors.saveGroupBtn).click()
+    this.assertToastNotificationMessageIsDisplayed(toastNotificationMessage)
+  }
+
+  /**
+   * Discard all updates in the selected group by clicking in the Discard button
+   */
+  discardGroupInformation() {
+    cy.get(selectors.discardGroupBtn).click()
+    this.assertToastNotificationMessageIsDisplayed('', true)
+  }
+
+  /**
+   * Given you are in the groups main page, create a group by calling this method
    *
    * @param {String} groupName Name of the group that is going to be created.
    * @param {String} roleName Role name that is going to be added into this group.
@@ -230,61 +360,36 @@ class GroupManagementPage extends BasePage {
    * @param {Array} dapIds Array of if of data access profiles that are going to be added into this group.
    * @param {Array} userNames Array of names of users that are going to be added into this group.
    * @param {Array} userIds Array of ids of users that are going to be added into this group.
-   * @param {Array} companyName Array of names of companies that are going to be added into this group.
+   * @param {Array} companyNames Array of names of companies that are going to be added into this group.
    * @param {Array} companyIds Array of ids of companies  that are going to be added into this group.
+   *
+   * @example
+   * All names and ids need to be placed in order for all parameters that it is applied.
+   * For example: dapNames=['dap1', 'dap2'] needs to match the exactly order in dapIds=[1, 2]
+   *
    */
-  createGroup(groupName, roleName, roleId, dapNames, dapIds, userNames, userIds, companyName, companyIds) {
+  createGroup(groupName, roleName, roleId, dapNames, dapIds, userNames, userIds, companyNames, companyIds) {
     cy.get(selectors.newGroupBtn).click()
 
-    // Group name
-    cy.get(selectors.groupNameInput).as('groupNameInput')
-    cy.get('@groupNameInput').should('have.text', 'New Group')
-    cy.get('@groupNameInput').clear()
-    cy.get('@groupNameInput').type(groupName)
+    this.modifyGroupName(groupName)
 
-    // Roles
     if (roleName) {
-      this.checkUrl('')
-      cy.get(selectors.selectRoleBtn).click()
-      cy.get(groupsNavBarSelectors.searchInput).type(roleName)
-      cy.get(groupsNavBarSelectors.entityCardId + roleId).click()
-      cy.get(groupsNavBarSelectors.confirmBtn).click()
+      this.selectRoleToGroup(roleName, roleId)
     }
 
-    // DAPs
     if (dapNames.length > 0) {
-      cy.get(selectors.AddDAPBtn).click()
-      for (let i = 0; i < dapNames.length; i++) {
-        cy.get(groupsNavBarSelectors.searchInput).type(dapNames[i])
-        cy.get(groupsNavBarSelectors.entityCardId + dapIds[i]).click()
-        cy.get(groupsNavBarSelectors.searchInput).clear()
-      }
-      cy.get(groupsNavBarSelectors.confirmBtn).click()
+      this.addDapsToGroup(dapNames, dapIds)
     }
 
-    //Users
     if (userNames.length > 0) {
-      cy.get(selectors.AddUsersBtn).click()
-      for (let i = 0; i < userNames.length; i++) {
-        cy.get(groupsNavBarSelectors.searchInput).type(userNames[i])
-        cy.get(groupsNavBarSelectors.entityCardId + userIds[i]).click()
-        cy.get(groupsNavBarSelectors.searchInput).clear()
-      }
-      cy.get(groupsNavBarSelectors.confirmBtn).click()
+      this.addUsersToGroup(userNames, userIds)
     }
 
-    // Companies
-    if (companyName.length > 0) {
-      cy.get(selectors.AddCompaniesBtn).click()
-      for (let i = 0; i < companyName.length; i++) {
-        cy.get(groupsNavBarSelectors.searchInput).type(companyName[i])
-        cy.get(groupsNavBarSelectors.entityCardId + companyIds[i]).click()
-        cy.get(groupsNavBarSelectors.searchInput).clear()
-      }
-      cy.get(groupsNavBarSelectors.confirmBtn).click()
+    if (companyNames.length > 0) {
+      this.addCompaniesToGroup(companyNames, companyIds)
     }
 
-    cy.get(selectors.saveGroupBtn).click()
+    this.saveGroupInformation(groupName + ' Saved')
   }
 }
 
