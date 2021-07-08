@@ -28,7 +28,8 @@ const selectors = {
   AddDAPBtn: '*[data-test-id=section-dap] *[data-test-id=add-entity]',
   AddUsersBtn: '*[data-test-id=section-user] *[data-test-id=add-entity]',
   AddCompaniesBtn: '*[data-test-id=section-client] *[data-test-id=add-entity]',
-  changeRoleBtn: '*[data-test-id=section-role] a'
+  changeRoleBtn: '*[data-test-id=section-role] a',
+  showAllUsersBtn: '*[data-test-id=section-user] gs-button[data-test-id=show-all]'
 }
 
 // These selectors are the ones from the l4 nav bar (right nav bar)
@@ -175,9 +176,35 @@ class GroupManagementPage extends BasePage {
    * Assert the role is associated with the selected group
    *
    * @param {Number} roleId Role id number to assert the association with a selected group
+   * @param {Boolean} displayed true to validate if the role is associated with the group, false otherwise
    */
-  assertRoleAssociatedWithGroup(roleId) {
-    cy.get(groupsCardsSelectors.roleCardId + roleId).should('be.visible')
+  assertRoleAssociatedWithGroup(roleId, displayed = true) {
+    if (displayed) {
+      cy.get(groupsCardsSelectors.roleCardId + roleId).should('be.visible')
+    } else {
+      cy.get(groupsCardsSelectors.roleCardId + roleId).should('not.exist')
+    }
+  }
+
+  /**
+   * Assert if an user is associated with the selected group
+   *
+   * @param {Number} userId List of user ids
+   * @param {Boolean} displayed True if you wants to assert the user is associated with the group, false otherwise
+   * @param {Boolean} showAll True to click in the showAll buttons for the case where we have lots of users associated
+   */
+  assertUserAssociatedWithGroup(userId, displayed = true, showAll = false) {
+    if (showAll) {
+      cy.get(selectors.showAllUsersBtn).click()
+    }
+
+    if (displayed) {
+      cy.get(groupsCardsSelectors.UsersCardId + userId)
+        .scrollIntoView()
+        .should('be.visible')
+    } else {
+      cy.get(groupsCardsSelectors.UsersCardId + userId).should('not.exist')
+    }
   }
 
   // ----------------------------------------------- OTHERS --------------------------------------------- //

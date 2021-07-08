@@ -170,7 +170,7 @@ describe('Group Management tests over User Management settings', () => {
   /**
    * @missing_data Need to have a group. Also, it needs to have at least on role created in the environment.
    */
-  it.skip('C7419664_Groups_Discard_Without_Saving', () => {
+  it.skip('C7419664_Groups_Discard_Without_Saving_The_Role', () => {
     const groupId = 1317
     const roleName = 'View Only'
     const roleId = 1397
@@ -178,6 +178,39 @@ describe('Group Management tests over User Management settings', () => {
     groupManagementPage.clickGroup(groupId)
     groupManagementPage.selectRoleToGroup(roleName, roleId)
     groupManagementPage.discardGroupInformation()
+    groupManagementPage.assertRoleAssociatedWithGroup(1397, false)
+  })
+
+  /**
+   * @missing_data Need to have a group. Also, it needs to have at least one user created in the environment.
+   */
+  it.skip('C7419658_Groups_Add_A_User_To_A_Group', () => {
+    const groupId = 1231
+    const groupName = 'Add User'
+    const userName = ['carolyn_giles', 'amulcahyNE']
+    const userIds = [754546, 454292]
+
+    groupManagementPage.clickGroup(groupId)
+    groupManagementPage.addUsersToGroup(userName, userIds)
+    groupManagementPage.saveGroupInformation(groupName + ' Saved')
+
+    groupManagementPage.assertUserAssociatedWithGroup(userIds[0])
+    groupManagementPage.assertUserAssociatedWithGroup(userIds[1])
+  })
+
+  /**
+   * @missing_data Need to have a group. Also, it needs to have at least one user created in the environment.
+   */
+  it.skip('C7419660_Groups_Discard_Without_Saving_The_User', () => {
+    const groupId = 1256
+    const userName = ['carolyn_giles', 'amulcahyNE']
+    const userIds = [754546, 454292]
+
+    groupManagementPage.clickGroup(groupId)
+    groupManagementPage.addUsersToGroup(userName, userIds)
+    groupManagementPage.discardGroupInformation()
+    groupManagementPage.assertUserAssociatedWithGroup(userIds[0], false)
+    groupManagementPage.assertUserAssociatedWithGroup(userIds[1], false)
   })
 
   // ************************************************ TESTS AS CLIENTS ************************************************** //
