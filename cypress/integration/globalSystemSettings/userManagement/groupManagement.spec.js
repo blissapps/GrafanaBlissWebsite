@@ -178,6 +178,7 @@ describe('Group Management tests over User Management settings', () => {
     groupManagementPage.clickGroup(groupId)
     groupManagementPage.selectRoleToGroup(roleName, roleId)
     groupManagementPage.discardGroupInformation()
+
     groupManagementPage.assertRoleAssociatedWithGroup(1397, false)
   })
 
@@ -209,8 +210,43 @@ describe('Group Management tests over User Management settings', () => {
     groupManagementPage.clickGroup(groupId)
     groupManagementPage.addUsersToGroup(userName, userIds)
     groupManagementPage.discardGroupInformation()
+
     groupManagementPage.assertUserAssociatedWithGroup(userIds[0], false)
     groupManagementPage.assertUserAssociatedWithGroup(userIds[1], false)
+  })
+
+  /**
+   * @missing_data Need to have a group. Also, it needs to have at least one client created in the environment.
+   */
+  it.skip('C7462559_Groups_Add_A_Client_To_A_Group', () => {
+    const groupId = 1257
+    const groupName = 'Add Clients'
+    const companyNames = ['7Digital', '9F Group', 'Allianz']
+    const companyIds = [144, 337, 55]
+
+    groupManagementPage.clickGroup(groupId)
+    groupManagementPage.addCompaniesToGroup(companyNames, companyIds)
+    groupManagementPage.saveGroupInformation(groupName + ' Saved')
+
+    groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[0])
+    groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[1])
+    groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[2])
+  })
+
+  /**
+   * @missing_data Need to have a group. Also, it needs to have at least one client created in the environment.
+   */
+  it.skip('C7462561_Groups_Discard_Without_Saving_The_Company', () => {
+    const groupId = 1257
+    const companyNames = ['7Digital', '9F Group', 'Allianz']
+    const companyIds = [144, 337, 55]
+
+    groupManagementPage.clickGroup(groupId)
+    groupManagementPage.addCompaniesToGroup(companyNames, companyIds)
+    groupManagementPage.discardGroupInformation()
+
+    groupManagementPage.assertUserAssociatedWithGroup(companyIds[0], false)
+    groupManagementPage.assertUserAssociatedWithGroup(companyIds[1], false)
   })
 
   // ************************************************ TESTS AS CLIENTS ************************************************** //

@@ -189,7 +189,7 @@ class GroupManagementPage extends BasePage {
   /**
    * Assert if an user is associated with the selected group
    *
-   * @param {Number} userId List of user ids
+   * @param {Number} userId User Id
    * @param {Boolean} displayed True if you wants to assert the user is associated with the group, false otherwise
    * @param {Boolean} showAll True to click in the showAll buttons for the case where we have lots of users associated
    */
@@ -204,6 +204,27 @@ class GroupManagementPage extends BasePage {
         .should('be.visible')
     } else {
       cy.get(groupsCardsSelectors.UsersCardId + userId).should('not.exist')
+    }
+  }
+
+  /**
+   * Assert if an client/company is associated with the selected group
+   *
+   * @param {Number} companyId Company/client id
+   * @param {Boolean} displayed True if you wants to assert the client is associated with the group, false otherwise
+   * @param {Boolean} showAll True to click in the showAll buttons for the case where we have lots of clients associated
+   */
+  assertCompanyAssociatedWithGroup(companyId, displayed = true, showAll = false) {
+    if (showAll) {
+      cy.get(selectors.showAllUsersBtn).click()
+    }
+
+    if (displayed) {
+      cy.get(groupsCardsSelectors.CompaniesCardId + companyId)
+        .scrollIntoView()
+        .should('be.visible')
+    } else {
+      cy.get(groupsCardsSelectors.UsersCardId + companyId).should('not.exist')
     }
   }
 
