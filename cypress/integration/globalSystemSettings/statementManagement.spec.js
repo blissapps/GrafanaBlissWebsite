@@ -88,7 +88,7 @@ describe('Statement Management tests', () => {
   })
 
   /**
-   * @Only_Chrome https://globalshares.atlassian.net/browse/GDP-49661
+   * @chrome_only https://globalshares.atlassian.net/browse/GDP-49661
    */
   it('C7353834_Filter_To_Check_Empty_State', { browser: '!firefox' }, () => {
     const clientName = 'None'
@@ -285,9 +285,9 @@ describe('Statement Management tests', () => {
   })
 
   /**
-   * @Only_Chrome because Firefox does not allow do download pdf files without the confirmation popup
+   * @chrome_only because Firefox does not allow do download pdf files without the confirmation popup
    */
-  it('C7395183_download_PDF_File_From_Participant', { browser: '!firefox' }, () => {
+  it.only('C7395183_download_PDF_File_From_Participant', { browser: '!firefox' }, () => {
     const clientName = 'Interxion'
     const clientID = 76
     const participantID = 32512

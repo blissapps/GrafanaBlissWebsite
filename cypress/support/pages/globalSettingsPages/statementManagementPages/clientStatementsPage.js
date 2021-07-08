@@ -20,7 +20,7 @@ const selectors = {
 }
 
 const apiInterceptions = {
-  tableReloadedAfterFiltering: 'https://stonly.com/api/v2/widget/integration**'
+  tableReloadedAfterFiltering: 'https://api.stonly.com/api/v2/widget/integration**'
 }
 
 class ClientStatementsPage extends BasePage {
