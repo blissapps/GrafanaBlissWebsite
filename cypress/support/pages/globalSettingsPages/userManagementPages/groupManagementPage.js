@@ -298,6 +298,27 @@ class GroupManagementPage extends BasePage {
   }
 
   /**
+   * Assert if an DAP is associated with the selected group
+   *
+   * @param {Number} dapId DAP Id
+   * @param {Boolean} displayed True if you wants to assert the dap is associated with the group, false otherwise
+   * @param {Boolean} showAll True to click in the showAll buttons for the case where we have lots of users associated
+   */
+  assertDapAssociatedWithGroup(dapId, displayed = true, showAll = false) {
+    if (showAll) {
+      cy.get(selectors.showAllUsersBtn).click()
+    }
+
+    if (displayed) {
+      this.getCardByEntityAndId('daps', dapId)
+        .scrollIntoView()
+        .should('be.visible')
+    } else {
+      this.getCardByEntityAndId('daps', dapId).should('not.exist')
+    }
+  }
+
+  /**
    * Assert if an user is associated with the selected group
    *
    * @param {Number} userId User Id
@@ -398,6 +419,16 @@ class GroupManagementPage extends BasePage {
   }
 
   // ----------------------------------------------- OTHERS --------------------------------------------- //
+
+  /**
+   * This method has the exactly implementation of the method getGroupHeader()
+   * This is necessary is some cases, since groups page has a problem while scrolling anything. So, this behavior is strict to Groups
+   *
+   * @returns Group header
+   */
+  scrollToGroupsTop() {
+    return cy.get(selectors.groupNameInput).scrollIntoView()
+  }
 
   /**
    * Given I am in the main groups page over the Active tab, this method deactivates a group by sending the group id
@@ -611,6 +642,53 @@ class GroupManagementPage extends BasePage {
     }
 
     this.saveGroupInformation(groupName + ' Saved')
+  }
+
+  /**
+   * Remove a role from a selected group
+   *
+   * @param {Number} roleId Role Id number that is going to be removed of the selected group.
+   */
+  removeRoleFromGroup(roleId) {
+    cy.get(groupsCardsSelectors.roleCardId + roleId + '] ' + selectors.removeIconButton)
+      .scrollIntoView()
+      .click()
+  }
+
+  /**
+   * Remove DAPs from a selected group
+   *
+   * @param {Array} dapIds Array of ids of daps that are going to be removed of the selected group.
+   * @param {Boolean} showAll True to click in the showAll buttons for the case where we have lots of clients associated
+   */
+  removeDapsFromGroup(dapIds, showAll = false) {
+    if (showAll) {
+      cy.get(selectors.showAllCompaniesBtn).click()
+    }
+
+    for (let i = 0; i < dapIds.length; i++) {
+      cy.get(groupsCardsSelectors.dapsCardId + dapIds[i] + '] ' + selectors.removeIconButton)
+        .scrollIntoView()
+        .click()
+    }
+  }
+
+  /**
+   * Remove Users from a selected group
+   *
+   * @param {Array} userIds Array of ids of users that are going to be removed of the selected group.
+   * @param {Boolean} showAll True to click in the showAll buttons for the case where we have lots of clients associated
+   */
+  removeUsersFromGroup(userIds, showAll = false) {
+    if (showAll) {
+      cy.get(selectors.showAllCompaniesBtn).click()
+    }
+
+    for (let i = 0; i < userIds.length; i++) {
+      cy.get(groupsCardsSelectors.usersCardId + userIds[i] + '] ' + selectors.removeIconButton)
+        .scrollIntoView()
+        .click()
+    }
   }
 
   /**

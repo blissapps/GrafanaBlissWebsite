@@ -257,7 +257,7 @@ describe('Group Management tests over User Management settings', () => {
     const roleId = 1397
 
     groupManagementPage.clickGroup(groupId)
-    groupManagementPage.getGroupHeader() // strategy used just to move the scroll up
+    groupManagementPage.scrollToGroupsTop() // strategy used just to move the scroll up
 
     groupManagementPage.assertRoleAssociatedWithGroup(roleId)
 
@@ -323,7 +323,7 @@ describe('Group Management tests over User Management settings', () => {
     const groupId = 1219
 
     groupManagementPage.clickGroup(groupId)
-    groupManagementPage.getGroupHeader() // strategy used just to move the scroll up
+    groupManagementPage.scrollToGroupsTop() // strategy used just to move the scroll up
 
     // daps
     groupManagementPage.clickShowAll('daps')
@@ -344,17 +344,106 @@ describe('Group Management tests over User Management settings', () => {
     groupManagementPage.assertNumberOfCardsDisplayedInASection('companies', 8)
   })
 
+  /**
+   * @missing_data Need to have a group with 1 company registered
+   */
   it.skip('C7462619_Groups_Client_Is_Removed_From_The_Group', () => {
     const groupId = 1223
     const groupName = 'Remove company'
     const companyIds = [144]
 
     groupManagementPage.clickGroup(groupId)
-    groupManagementPage.getGroupHeader() // strategy used just to move the scroll up
+    groupManagementPage.scrollToGroupsTop() // strategy used just to move the scroll up
 
     groupManagementPage.removeCompaniesFromGroup(companyIds)
     groupManagementPage.saveGroupInformation(groupName + ' Saved')
     groupManagementPage.assertUserAssociatedWithGroup(companyIds[0], false)
+  })
+
+  /**
+   * @missing_data Need to have a group with 1 DAP registered
+   */
+  it.skip('C7462619_Groups_DAP_Is_Removed_From_The_Group', () => {
+    const groupId = 1222
+    const groupName = 'Remove dap'
+    const dapIds = [60]
+
+    groupManagementPage.clickGroup(groupId)
+    groupManagementPage.scrollToGroupsTop() // strategy used just to move the scroll up
+
+    groupManagementPage.removeDapsFromGroup(dapIds)
+    groupManagementPage.saveGroupInformation(groupName + ' Saved')
+    groupManagementPage.assertDapAssociatedWithGroup(dapIds[0], false)
+  })
+
+  /**
+   * @missing_data Need to have a group. Also, it needs to have at least one dap created in the environment.
+   */
+  it.skip('C7412692_Groups_Add_A_Data_Access_Profile_To_A_Group', () => {
+    const groupId = 1221
+    const groupName = 'Add DAPs'
+    const dapNames = ['Test', 'Test', 'Test3']
+    const dapIds = [60, 77, 78]
+
+    groupManagementPage.clickGroup(groupId)
+    groupManagementPage.addDapsToGroup(dapNames, dapIds)
+    groupManagementPage.saveGroupInformation(groupName + ' Saved')
+
+    groupManagementPage.assertDapAssociatedWithGroup(dapIds[0])
+    groupManagementPage.assertDapAssociatedWithGroup(dapIds[1])
+    groupManagementPage.assertDapAssociatedWithGroup(dapIds[2])
+  })
+
+  /**
+   * @missing_data Need to have a group. Also, it needs to have at least one DAP created in the environment.
+   */
+  it.skip('C7412694_Groups_Discard_Without_Saving_DAPs', () => {
+    const groupId = 1281
+    const dapNames = ['Test', 'Test', 'Test3']
+    const dapIds = [60, 77, 78]
+
+    groupManagementPage.clickGroup(groupId)
+    groupManagementPage.addDapsToGroup(dapNames, dapIds)
+    groupManagementPage.discardGroupInformation()
+
+    groupManagementPage.assertDapAssociatedWithGroup(dapIds[0], false)
+    groupManagementPage.assertDapAssociatedWithGroup(dapIds[1], false)
+    groupManagementPage.assertDapAssociatedWithGroup(dapIds[2], false)
+  })
+
+  /**
+   * @missing_data Need to have a group with 1 User registered
+   */
+  it.skip('C7493032_Groups_User_Is_Removed_From_The_Group', () => {
+    const groupId = 1282
+    const groupName = 'Remove user'
+    const userIds = [754546, 754556]
+
+    groupManagementPage.clickGroup(groupId)
+    groupManagementPage.scrollToGroupsTop() // strategy used just to move the scroll up
+
+    groupManagementPage.removeUsersFromGroup(userIds)
+    groupManagementPage.saveGroupInformation(groupName + ' Saved')
+
+    groupManagementPage.assertUserAssociatedWithGroup(userIds[0], false)
+    groupManagementPage.assertUserAssociatedWithGroup(userIds[1], false)
+  })
+
+  /**
+   * @missing_data Need to have a group with 1 Role registered
+   */
+  it.skip('C8161539_Groups_Role_Is_Removed_From_The_Group', () => {
+    const groupId = 1424
+    const groupName = 'Remove role'
+    const roleId = 1854
+
+    groupManagementPage.clickGroup(groupId)
+    groupManagementPage.scrollToGroupsTop() // strategy used just to move the scroll up
+
+    groupManagementPage.removeRoleFromGroup(roleId)
+    groupManagementPage.saveGroupInformation(groupName + ' Saved')
+
+    groupManagementPage.assertRoleAssociatedWithGroup(1854, false)
   })
 
   // ************************************************ TESTS AS CLIENTS ************************************************** //
