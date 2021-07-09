@@ -316,5 +316,33 @@ describe('Group Management tests over User Management settings', () => {
     groupManagementPage.assertNumberOfRecordsInASection('companies', 18)
   })
 
+  /**
+   * @missing_data Need to have a group with 1 role at least 8 DAPs, 8 Users, and 8 Clients linked to a this group
+   */
+  it.skip('C7462615_Groups_Expand_DAPs_Users_And_Clients', () => {
+    const groupId = 1219
+
+    groupManagementPage.clickGroup(groupId)
+    groupManagementPage.getGroupHeader() // strategy used just to move the scroll up
+
+    // daps
+    groupManagementPage.clickShowAll('daps')
+    groupManagementPage.assertNumberOfCardsDisplayedInASection('daps', 9)
+    groupManagementPage.clickHide('daps')
+    groupManagementPage.assertNumberOfCardsDisplayedInASection('daps', 8)
+
+    // users
+    groupManagementPage.clickShowAll('users')
+    groupManagementPage.assertNumberOfCardsDisplayedInASection('users', 17)
+    groupManagementPage.clickHide('users')
+    groupManagementPage.assertNumberOfCardsDisplayedInASection('users', 8)
+
+    // clients
+    groupManagementPage.clickShowAll('companies')
+    groupManagementPage.assertNumberOfCardsDisplayedInASection('companies', 18)
+    groupManagementPage.clickHide('companies')
+    groupManagementPage.assertNumberOfCardsDisplayedInASection('companies', 8)
+  })
+
   // ************************************************ TESTS AS CLIENTS ************************************************** //
 })

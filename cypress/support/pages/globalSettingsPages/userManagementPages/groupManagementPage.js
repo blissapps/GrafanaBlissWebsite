@@ -29,7 +29,12 @@ const selectors = {
   AddUsersBtn: '*[data-test-id=section-user] *[data-test-id=add-entity]',
   AddCompaniesBtn: '*[data-test-id=section-client] *[data-test-id=add-entity]',
   changeRoleBtn: '*[data-test-id=section-role] a',
-  showAllUsersBtn: '*[data-test-id=section-user] gs-button[data-test-id=show-all]'
+  showAllDapsBtn: '*[data-test-id=section-dap] gs-button[data-test-id=show-all]',
+  showAllUsersBtn: '*[data-test-id=section-user] gs-button[data-test-id=show-all]',
+  showAllCompaniesBtn: '*[data-test-id=section-client] gs-button[data-test-id=show-all]',
+  hideDapsBtn: '*[data-test-id=section-dap] gs-button[data-test-id=hide]',
+  hideUsersBtn: '*[data-test-id=section-user] gs-button[data-test-id=hide]',
+  hideCompaniesBtn: '*[data-test-id=section-client] gs-button[data-test-id=hide]'
 }
 
 // These selectors are the ones from the l4 nav bar (right nav bar)
@@ -121,6 +126,66 @@ class GroupManagementPage extends BasePage {
    */
   clickActivateGroupButton() {
     cy.get(selectors.activateGroupBtn).click()
+  }
+
+  /**
+   * Click in the show all button of a given entity/section
+   *
+   * @param {String} entity
+   */
+  clickShowAll(entity) {
+    switch (entity) {
+      case 'daps':
+        cy.get(selectors.showAllDapsBtn)
+          .scrollIntoView()
+          .click()
+        break
+
+      case 'users':
+        cy.get(selectors.showAllUsersBtn)
+          .scrollIntoView()
+          .click()
+        break
+
+      case 'companies':
+        cy.get(selectors.showAllCompaniesBtn)
+          .scrollIntoView()
+          .click()
+        break
+
+      default:
+        throw new Error('This section does not exists, choose among the following: daps, users, or companies')
+    }
+  }
+
+  /**
+   * Click in the show all button of a given entity/section
+   *
+   * @param {String} entity
+   */
+  clickHide(entity) {
+    switch (entity) {
+      case 'daps':
+        cy.get(selectors.hideDapsBtn)
+          .scrollIntoView()
+          .click()
+        break
+
+      case 'users':
+        cy.get(selectors.hideUsersBtn)
+          .scrollIntoView()
+          .click()
+        break
+
+      case 'companies':
+        cy.get(selectors.hideCompaniesBtn)
+          .scrollIntoView()
+          .click()
+        break
+
+      default:
+        throw new Error('This section does not exists, choose among the following: daps, users, or companies')
+    }
   }
 
   // --------------------------------------- ASSERTIONS --------------------------------------------- //
@@ -233,7 +298,7 @@ class GroupManagementPage extends BasePage {
    */
   assertCompanyAssociatedWithGroup(companyId, displayed = true, showAll = false) {
     if (showAll) {
-      cy.get(selectors.showAllUsersBtn).click()
+      cy.get(selectors.showAllCompaniesBtn).click()
     }
 
     if (displayed) {
@@ -270,7 +335,7 @@ class GroupManagementPage extends BasePage {
         break
 
       default:
-        throw new Error('This section does not exists')
+        throw new Error('This section does not exists, choose among the following: roles, daps, users, or companies')
     }
   }
 
@@ -299,7 +364,7 @@ class GroupManagementPage extends BasePage {
         break
 
       default:
-        throw new Error('This section does not exists')
+        throw new Error('This section does not exists, choose among the following: roles, daps, users, or companies')
     }
   }
 
