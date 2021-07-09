@@ -185,9 +185,9 @@ describe('Group Management tests over User Management settings', () => {
   /**
    * @missing_data Need to have a group. Also, it needs to have at least one user created in the environment.
    */
-  it.skip('C7419658_Groups_Add_A_User_To_A_Group', () => {
+  it.skip('C7419658_Groups_Add_Users_To_A_Group', () => {
     const groupId = 1231
-    const groupName = 'Add User'
+    const groupName = 'Add Users'
     const userName = ['carolyn_giles', 'amulcahyNE']
     const userIds = [754546, 454292]
 
@@ -237,7 +237,7 @@ describe('Group Management tests over User Management settings', () => {
    * @missing_data Need to have a group. Also, it needs to have at least one client created in the environment.
    */
   it.skip('C7462561_Groups_Discard_Without_Saving_The_Company', () => {
-    const groupId = 1257
+    const groupId = 1220
     const companyNames = ['7Digital', '9F Group', 'Allianz']
     const companyIds = [144, 337, 55]
 
@@ -342,6 +342,19 @@ describe('Group Management tests over User Management settings', () => {
     groupManagementPage.assertNumberOfCardsDisplayedInASection('companies', 18)
     groupManagementPage.clickHide('companies')
     groupManagementPage.assertNumberOfCardsDisplayedInASection('companies', 8)
+  })
+
+  it.skip('C7462619_Groups_Client_Is_Removed_From_The_Group', () => {
+    const groupId = 1223
+    const groupName = 'Remove company'
+    const companyIds = [144]
+
+    groupManagementPage.clickGroup(groupId)
+    groupManagementPage.getGroupHeader() // strategy used just to move the scroll up
+
+    groupManagementPage.removeCompaniesFromGroup(companyIds)
+    groupManagementPage.saveGroupInformation(groupName + ' Saved')
+    groupManagementPage.assertUserAssociatedWithGroup(companyIds[0], false)
   })
 
   // ************************************************ TESTS AS CLIENTS ************************************************** //

@@ -34,7 +34,8 @@ const selectors = {
   showAllCompaniesBtn: '*[data-test-id=section-client] gs-button[data-test-id=show-all]',
   hideDapsBtn: '*[data-test-id=section-dap] gs-button[data-test-id=hide]',
   hideUsersBtn: '*[data-test-id=section-user] gs-button[data-test-id=hide]',
-  hideCompaniesBtn: '*[data-test-id=section-client] gs-button[data-test-id=hide]'
+  hideCompaniesBtn: '*[data-test-id=section-client] gs-button[data-test-id=hide]',
+  removeIconButton: 'gs-button[data-test-id=remove-entity]'
 }
 
 // These selectors are the ones from the l4 nav bar (right nav bar)
@@ -106,6 +107,32 @@ class GroupManagementPage extends BasePage {
    */
   getGroupHeader() {
     return cy.get(selectors.groupNameInput).scrollIntoView()
+  }
+
+  /**
+   *
+   * @param {*} sectionName Choose one of these: roles, daps, users, or companies
+   * @param {*} entityId Id number of the entity
+   *
+   * @returns The relative card of a role, dap, user, or client
+   */
+  getCardByEntityAndId(sectionName, entityId) {
+    switch (sectionName) {
+      case 'roles':
+        return cy.get(groupsCardsSelectors.roleCardId + entityId)
+
+      case 'daps':
+        return cy.get(groupsCardsSelectors.dapsCardId + entityId)
+
+      case 'users':
+        return cy.get(groupsCardsSelectors.usersCardId + entityId)
+
+      case 'companies':
+        return cy.get(groupsCardsSelectors.companiesCardId + entityId)
+
+      default:
+        throw new Error('This section does not exists, choose among the following: roles, daps, users, or companies')
+    }
   }
 
   // --------------------------------------- CLICKS --------------------------------------------- //
@@ -262,9 +289,11 @@ class GroupManagementPage extends BasePage {
    */
   assertRoleAssociatedWithGroup(roleId, displayed = true) {
     if (displayed) {
-      cy.get(groupsCardsSelectors.roleCardId + roleId).should('be.visible')
+      this.getCardByEntityAndId('roles', roleId)
+        .scrollIntoView()
+        .should('be.visible')
     } else {
-      cy.get(groupsCardsSelectors.roleCardId + roleId).should('not.exist')
+      this.getCardByEntityAndId('roles', roleId).should('not.exist')
     }
   }
 
@@ -281,11 +310,11 @@ class GroupManagementPage extends BasePage {
     }
 
     if (displayed) {
-      cy.get(groupsCardsSelectors.usersCardId + userId)
+      this.getCardByEntityAndId('users', userId)
         .scrollIntoView()
         .should('be.visible')
     } else {
-      cy.get(groupsCardsSelectors.usersCardId + userId).should('not.exist')
+      this.getCardByEntityAndId('users', userId).should('not.exist')
     }
   }
 
@@ -302,11 +331,11 @@ class GroupManagementPage extends BasePage {
     }
 
     if (displayed) {
-      cy.get(groupsCardsSelectors.companiesCardId + companyId)
+      this.getCardByEntityAndId('companies', companyId)
         .scrollIntoView()
         .should('be.visible')
     } else {
-      cy.get(groupsCardsSelectors.usersCardId + companyId).should('not.exist')
+      this.getCardByEntityAndId('companies', companyId).should('not.exist')
     }
   }
 
@@ -526,7 +555,9 @@ class GroupManagementPage extends BasePage {
    * @param {String} toastNotificationMessage
    */
   saveGroupInformation(toastNotificationMessage) {
-    cy.get(selectors.saveGroupBtn).click()
+    cy.get(selectors.saveGroupBtn)
+      .scrollIntoView()
+      .click()
     this.assertToastNotificationMessageIsDisplayed(toastNotificationMessage)
   }
 
@@ -534,7 +565,9 @@ class GroupManagementPage extends BasePage {
    * Discard all updates in the selected group by clicking in the Discard button
    */
   discardGroupInformation() {
-    cy.get(selectors.discardGroupBtn).click()
+    cy.get(selectors.discardGroupBtn)
+      .scrollIntoView()
+      .click()
     this.assertToastNotificationMessageIsDisplayed('', true)
   }
 
@@ -578,6 +611,24 @@ class GroupManagementPage extends BasePage {
     }
 
     this.saveGroupInformation(groupName + ' Saved')
+  }
+
+  /**
+   * Remove Companies from a selected group
+   *
+   * @param {Array} companyIds Array of ids of companies that are going to be removed of the selected group.
+   * @param {Boolean} showAll True to click in the showAll buttons for the case where we have lots of clients associated
+   */
+  removeCompaniesFromGroup(companyIds, showAll = false) {
+    if (showAll) {
+      cy.get(selectors.showAllCompaniesBtn).click()
+    }
+
+    for (let i = 0; i < companyIds.length; i++) {
+      cy.get(groupsCardsSelectors.companiesCardId + companyIds[i] + '] ' + selectors.removeIconButton)
+        .scrollIntoView()
+        .click()
+    }
   }
 }
 
