@@ -43,9 +43,17 @@ const groupsNavBarSelectors = {
 
 const groupsCardsSelectors = {
   roleCardId: '*[data-test-id=section-role] gs-card[data-test-id=entity-',
-  DapCardId: '*[data-test-id=section-dap] gs-card[data-test-id=entity-',
-  UsersCardId: '*[data-test-id=section-user] gs-card[data-test-id=entity-',
-  CompaniesCardId: '*[data-test-id=section-client] gs-card[data-test-id=entity-'
+  dapsCardId: '*[data-test-id=section-dap] gs-card[data-test-id=entity-',
+  usersCardId: '*[data-test-id=section-user] gs-card[data-test-id=entity-',
+  companiesCardId: '*[data-test-id=section-client] gs-card[data-test-id=entity-',
+  rolesAllCards: '*[data-test-id=section-role] gs-card',
+  dapsAllCards: '*[data-test-id=section-dap] gs-card',
+  usersAllCards: '*[data-test-id=section-user] gs-card',
+  companiesAllCards: '*[data-test-id=section-client] gs-card',
+  rolesRecordsCounter: '*[data-test-id=section-role] span.record-count',
+  dapsRecordsCounter: '*[data-test-id=section-dap] span.record-count',
+  usersRecordsCounter: '*[data-test-id=section-user] span.record-count',
+  companiesRecordsCounter: '*[data-test-id=section-client] span.record-count'
 }
 
 const apiInterceptions = {
@@ -74,9 +82,9 @@ class GroupManagementPage extends BasePage {
   }
 
   /**
-   * Get a group by sending the group ID. It can be easily discovered in the Chrome/Firefox dev tools by accessing the elements tab
+   * Get a group by sending the group name. It can be easily discovered in the Chrome/Firefox dev tools by accessing the elements tab
    *
-   * @param {String} groupName group id number
+   * @param {String} groupName Group name
    *
    * @returns The group element
    */
@@ -84,6 +92,15 @@ class GroupManagementPage extends BasePage {
     cy.get(selectors.groupNameList).as('group')
 
     return cy.get('@group').filter(`:contains('${groupName}')`)
+  }
+
+  /**
+   * Get the group header element of a selected group
+   *
+   * @returns Group header
+   */
+  getGroupHeader() {
+    return cy.get(selectors.groupNameInput).scrollIntoView()
   }
 
   // --------------------------------------- CLICKS --------------------------------------------- //
@@ -139,7 +156,7 @@ class GroupManagementPage extends BasePage {
   }
 
   /**
-   * Assert the search results list id displayed with the results highlighted. It also asserts that a Other Groups list is displayed
+   * Assert the search results list id is displayed with the results highlighted. It also asserts that a Other Groups list is displayed
    *
    * @param {Array} groupsId Array containing the ids of the groups that are supposed to be displayed in the search result list.
    *
@@ -199,11 +216,11 @@ class GroupManagementPage extends BasePage {
     }
 
     if (displayed) {
-      cy.get(groupsCardsSelectors.UsersCardId + userId)
+      cy.get(groupsCardsSelectors.usersCardId + userId)
         .scrollIntoView()
         .should('be.visible')
     } else {
-      cy.get(groupsCardsSelectors.UsersCardId + userId).should('not.exist')
+      cy.get(groupsCardsSelectors.usersCardId + userId).should('not.exist')
     }
   }
 
@@ -220,11 +237,69 @@ class GroupManagementPage extends BasePage {
     }
 
     if (displayed) {
-      cy.get(groupsCardsSelectors.CompaniesCardId + companyId)
+      cy.get(groupsCardsSelectors.companiesCardId + companyId)
         .scrollIntoView()
         .should('be.visible')
     } else {
-      cy.get(groupsCardsSelectors.UsersCardId + companyId).should('not.exist')
+      cy.get(groupsCardsSelectors.usersCardId + companyId).should('not.exist')
+    }
+  }
+
+  /**
+   * Assert the amount of cards displayed in the group sections (roles, daps, users, or companies) is corrected
+   *
+   * @param {String} sectionName Choose one of these: roles, daps, users, or companies
+   * @param {Number} amountOfCards Amount of cards supposed to be displayed in a group section
+   */
+  assertNumberOfCardsDisplayedInASection(sectionName, amountOfCards) {
+    switch (sectionName) {
+      case 'roles':
+        cy.get(groupsCardsSelectors.rolesAllCards).should('have.length', amountOfCards)
+        break
+
+      case 'daps':
+        cy.get(groupsCardsSelectors.dapsAllCards).should('have.length', amountOfCards)
+        break
+
+      case 'users':
+        cy.get(groupsCardsSelectors.usersAllCards).should('have.length', amountOfCards)
+        break
+
+      case 'companies':
+        cy.get(groupsCardsSelectors.companiesAllCards).should('have.length', amountOfCards)
+        break
+
+      default:
+        throw new Error('This section does not exists')
+    }
+  }
+
+  /**
+   * Assert the number of records displayed in the group sections (roles, daps, users, or companies) is corrected
+   *
+   * @param {String} sectionName Choose one of these: roles, daps, users, or companies
+   * @param {Number} numberOrRecords Amount of records supposed to be displayed in a group section
+   */
+  assertNumberOfRecordsInASection(sectionName, numberOrRecords) {
+    switch (sectionName) {
+      case 'roles':
+        this.assertNumberOfRecordsTable(groupsCardsSelectors.rolesRecordsCounter, numberOrRecords)
+        break
+
+      case 'daps':
+        this.assertNumberOfRecordsTable(groupsCardsSelectors.dapsRecordsCounter, numberOrRecords)
+        break
+
+      case 'users':
+        this.assertNumberOfRecordsTable(groupsCardsSelectors.usersRecordsCounter, numberOrRecords)
+        break
+
+      case 'companies':
+        this.assertNumberOfRecordsTable(groupsCardsSelectors.companiesRecordsCounter, numberOrRecords)
+        break
+
+      default:
+        throw new Error('This section does not exists')
     }
   }
 
@@ -274,7 +349,7 @@ class GroupManagementPage extends BasePage {
     cy.get(selectors.threeDotBtn).click()
     cy.get(selectors.threeDotDuplicateBtn).click()
 
-    cy.get(selectors.groupNameInput).as('groupNameInput')
+    this.getGroupHeader().as('groupNameInput')
     cy.get('@groupNameInput').should('have.text', 'Copy of ' + groupName)
     cy.get('@groupNameInput').type(newNameForDuplicatedGroup)
     cy.get(selectors.saveGroupBtn).click()
@@ -293,7 +368,7 @@ class GroupManagementPage extends BasePage {
    * @param {String} groupName Name of the group that is going to be created.
    */
   modifyGroupName(groupName) {
-    cy.get(selectors.groupNameInput).as('groupNameInput')
+    this.getGroupHeader().as('groupNameInput')
     cy.get('@groupNameInput').should('have.text', 'New Group')
     cy.get('@groupNameInput').clear()
     cy.get('@groupNameInput').type(groupName)

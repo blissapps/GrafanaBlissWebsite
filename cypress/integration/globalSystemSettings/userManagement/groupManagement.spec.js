@@ -249,5 +249,72 @@ describe('Group Management tests over User Management settings', () => {
     groupManagementPage.assertUserAssociatedWithGroup(companyIds[1], false)
   })
 
+  /**
+   * @missing_data Need to have a group with 1 role at least 8 DAPs, 8 Users, and 8 Clients linked to a this group
+   */
+  it.skip('C7462614_Groups_Show_High_Level_Content_Of_A_Group', () => {
+    const groupId = 1219
+    const roleId = 1397
+
+    groupManagementPage.clickGroup(groupId)
+    groupManagementPage.getGroupHeader() // strategy used just to move the scroll up
+
+    groupManagementPage.assertRoleAssociatedWithGroup(roleId)
+
+    // roles
+    groupManagementPage.assertNumberOfCardsDisplayedInASection('roles', 1)
+    groupManagementPage.assertNumberOfRecordsInASection('roles', 1)
+
+    // daps
+    groupManagementPage.assertNumberOfCardsDisplayedInASection('daps', 8)
+    groupManagementPage.assertNumberOfRecordsInASection('daps', 9)
+
+    // users
+    groupManagementPage.assertNumberOfCardsDisplayedInASection('users', 8)
+    groupManagementPage.assertNumberOfRecordsInASection('users', 17)
+
+    // companies
+    groupManagementPage.assertNumberOfCardsDisplayedInASection('companies', 8)
+    groupManagementPage.assertNumberOfRecordsInASection('companies', 18)
+
+    // CHANGE RESOLUTION
+    groupManagementPage.changeBrowserResolution(1500, 1080)
+
+    // roles
+    groupManagementPage.assertNumberOfCardsDisplayedInASection('roles', 1)
+    groupManagementPage.assertNumberOfRecordsInASection('roles', 1)
+
+    // daps
+    groupManagementPage.assertNumberOfCardsDisplayedInASection('daps', 4)
+    groupManagementPage.assertNumberOfRecordsInASection('daps', 9)
+
+    // users
+    groupManagementPage.assertNumberOfCardsDisplayedInASection('users', 4)
+    groupManagementPage.assertNumberOfRecordsInASection('users', 17)
+
+    // companies
+    groupManagementPage.assertNumberOfCardsDisplayedInASection('companies', 4)
+    groupManagementPage.assertNumberOfRecordsInASection('companies', 18)
+
+    // CHANGE RESOLUTION
+    groupManagementPage.changeBrowserResolution(1200, 960)
+
+    // roles
+    groupManagementPage.assertNumberOfCardsDisplayedInASection('roles', 1)
+    groupManagementPage.assertNumberOfRecordsInASection('roles', 1)
+
+    // daps
+    groupManagementPage.assertNumberOfCardsDisplayedInASection('daps', 2)
+    groupManagementPage.assertNumberOfRecordsInASection('daps', 9)
+
+    // users
+    groupManagementPage.assertNumberOfCardsDisplayedInASection('users', 2)
+    groupManagementPage.assertNumberOfRecordsInASection('users', 17)
+
+    // companies
+    groupManagementPage.assertNumberOfCardsDisplayedInASection('companies', 2)
+    groupManagementPage.assertNumberOfRecordsInASection('companies', 18)
+  })
+
   // ************************************************ TESTS AS CLIENTS ************************************************** //
 })

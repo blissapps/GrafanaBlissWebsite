@@ -68,7 +68,7 @@ class BasePage {
     cy.xpath(`//div[@class='tabs-bar']//*[@title='${tabName}']`).click()
   }
 
-  // --------------------------------------- ASSERTIONS AND OTHERS --------------------------------------------- //
+  // ---------------------------------------  OTHERS --------------------------------------------- //
 
   /**
    * Clear filters in a search by pressing in the "Clear All Filters" button
@@ -92,6 +92,16 @@ class BasePage {
     }
   }
 
+  /**
+   *
+   * @param {Number} x Number of pixels in the x coordinates (width)
+   * @param {Number} y Number of pixels in the Y coordinates (height)
+   */
+  changeBrowserResolution(x, y) {
+    cy.viewport(x, y)
+  }
+
+  // --------------------------------------- ASSERTIONS --------------------------------------------- //
   /**
    * Verify if a file was downloaded in the default 'cypress/downloads/' path
    *
