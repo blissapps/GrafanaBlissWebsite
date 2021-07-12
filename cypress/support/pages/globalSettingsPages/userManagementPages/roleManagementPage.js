@@ -1,4 +1,4 @@
-import BasePage from '../../basePage'
+import BaseManagementPage from './baseManagementPage'
 
 const properties = {
   pageURL: '/settings/role-management'
@@ -8,7 +8,7 @@ const apiInterceptions = {
   pageLoadedRequest: 'https://api.stonly.com/api/v2/widget/integration?*'
 }
 
-class RoleManagementPage extends BasePage {
+class RoleManagementPage extends BaseManagementPage {
   /**
    * Checks if the current pageLoad is Role management URL
    */

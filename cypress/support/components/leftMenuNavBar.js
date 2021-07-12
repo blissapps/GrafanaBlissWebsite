@@ -39,6 +39,8 @@ class LeftMenuNavBar extends BasePage {
 
   /**
    * Closes the Global Setting menu located in the left menu
+   *
+   * @missing_ids
    */
   closeGlobalSettingsLeftBar() {
     cy.xpath(selectors.closeNavBarX).click()
