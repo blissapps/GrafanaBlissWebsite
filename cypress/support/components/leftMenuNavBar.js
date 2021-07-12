@@ -35,6 +35,7 @@ class LeftMenuNavBar extends BasePage {
    */
   clickLogoToGoToHomePage() {
     cy.get(selectors.logo).click()
+    this.checkUrl(Cypress.env('homePageURL'))
   }
 
   /**

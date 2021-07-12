@@ -93,5 +93,33 @@ describe('Role Management tests over User Management settings', () => {
     roleManagementPage.assertRolesInAlphabeticalOrder()
   })
 
+  /**
+   * @missing_data For test this scenario there should be no Active nor Inactive roles.
+   */
+  it.skip('C7499690_Empty_State_Active_And_Inactive_Roles)', () => {
+    roleManagementPage.assertEmptyStateMessageIsVisible()
+    roleManagementPage.selectTabByName('Inactive')
+    roleManagementPage.assertEmptyStateMessageIsVisible()
+  })
+
+  /**
+   * @missing_data Need to have some roles in the active tab
+   */
+  it.skip('C7499693_Empty_State_Active_And_Inactive_Roles)', () => {
+    roleManagementPage.reloadPage()
+    roleManagementPage.checkRoleManagementUrl()
+    roleManagementPage.assertActiveRolesAreDisplayed()
+
+    leftMenuNavBar.clickLogoToGoToHomePage()
+    roleManagementPage.goBackOrForwardInBrowser('back')
+    roleManagementPage.checkRoleManagementUrl()
+    roleManagementPage.assertActiveRolesAreDisplayed()
+
+    leftMenuNavBar.clickLogoToGoToHomePage()
+    cy.visit('/tenant/1/settings/role-management', { failOnStatusCode: false })
+    roleManagementPage.checkRoleManagementUrl()
+    roleManagementPage.assertActiveRolesAreDisplayed()
+  })
+
   // ************************************************ TESTS AS CLIENTS ************************************************** //
 })

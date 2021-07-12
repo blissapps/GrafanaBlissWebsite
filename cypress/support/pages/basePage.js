@@ -101,6 +101,13 @@ class BasePage {
     cy.viewport(x, y)
   }
 
+  /**
+   * Reload/Refresh the current page
+   */
+  reloadPage() {
+    cy.reload()
+  }
+
   // --------------------------------------- ASSERTIONS --------------------------------------------- //
   /**
    * Verify if a file was downloaded in the default 'cypress/downloads/' path

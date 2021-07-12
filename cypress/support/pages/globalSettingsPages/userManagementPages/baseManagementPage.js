@@ -6,7 +6,8 @@ const selectors = {
   searchResultItem: '#searchResultItem_',
   otherGroupList: 'gs-list[data-test-id=searchListing-other]',
   otherItem: '#otherItem_',
-  noResultsFound: 'div.not-found'
+  noResultsFound: 'div.not-found',
+  noRecordsFoundEmptyState: 'gs-empty-container .content > div'
 }
 
 /**
@@ -52,6 +53,19 @@ class BaseManagementPage extends BasePage {
    */
   assertNoResultFoundIsVisible() {
     cy.get(selectors.noResultsFound).should('be.visible')
+  }
+
+  /**
+   * Assert if the message in the gs-empty-container, regarding a empty state (when no data is loaded), is displayed
+   *
+   * @param {Boolean} visible True to check if the state is visible, false otherwise
+   */
+  assertEmptyStateMessageIsVisible(visible = true) {
+    if (visible) {
+      cy.get(selectors.noRecordsFoundEmptyState).should('be.visible')
+    } else {
+      cy.get(selectors.noRecordsFoundEmptyState).should('not.exist')
+    }
   }
 }
 
