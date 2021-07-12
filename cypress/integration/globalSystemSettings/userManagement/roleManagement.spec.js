@@ -105,7 +105,7 @@ describe('Role Management tests over User Management settings', () => {
   /**
    * @missing_data Need to have some roles in the active tab
    */
-  it.skip('C7499693_Empty_State_Active_And_Inactive_Roles)', () => {
+  it.skip('C7499693_List_Roles_Navigation_Issues)', () => {
     roleManagementPage.reloadPage()
     roleManagementPage.checkRoleManagementUrl()
     roleManagementPage.assertActiveRolesAreDisplayed()
