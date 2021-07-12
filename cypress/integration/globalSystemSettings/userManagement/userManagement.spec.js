@@ -52,7 +52,10 @@ describe('User Management tests over User Management settings', () => {
     userManagementPage.assertTableContainsExpectedColumns(['username', 'email', 'status'])
   })
 
-  it('C7592114_Users_Happy_Path_View_User_Details_L4', () => {
+  /**
+   * @missing_data Need to have proper groups registered
+   */
+  it.skip('C7592114_Users_Happy_Path_View_User_Details_L4', () => {
     const username = 'amulcahyNE'
     const userId = 454292
     const publicName = 'Gage Gilbert'

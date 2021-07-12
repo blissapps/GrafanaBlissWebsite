@@ -142,11 +142,16 @@ class UserManagementPage extends BasePage {
    * @param {String} phone User phone under Contact section
    * @param {String} email User email under Contact section
    * @param {String} username User username under Account Details section
+   * @param {Boolean} showAll True to click in the show all button to display all the groups in case there are lots of groups registered
    */
-  assertUserInfoContentInRightNavBar(groups, firstName, lastName, publicName, jobTitle, qualifications, organization, phone, email, username) {
+  assertUserInfoContentInRightNavBar(groups, firstName, lastName, publicName, jobTitle, qualifications, organization, phone, email, username, showAll = false) {
     // Assert User Info Header
     cy.get(userInfoNavBarSelectors.userInfoHeader).should('be.visible')
-    cy.get(userInfoNavBarSelectors.showAllGroupsBtn).click() // make all groups visible
+
+    // Make all groups visible in order that are lots of groups registered
+    if (showAll) {
+      cy.get(userInfoNavBarSelectors.showAllGroupsBtn).click()
+    }
 
     // Assert groups if groups list is not empty
     if (groups.length > 0) {
