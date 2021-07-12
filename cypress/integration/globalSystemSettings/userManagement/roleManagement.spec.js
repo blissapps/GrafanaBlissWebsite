@@ -81,5 +81,15 @@ describe('Role Management tests over User Management settings', () => {
     roleManagementPage.assertNoResultFoundIsVisible()
   })
 
+  /**
+   * @missing_data Need to have some roles in both active and inactive tabs
+   */
+  it.only('C7499688_Groups_Happy_Path_Active_And_Inactive_Roles', () => {
+    roleManagementPage.assertActiveRolesAreDisplayed()
+    roleManagementPage.selectTabByName('Inactive')
+    roleManagementPage.assertInactiveRolesAreDisplayed()
+    roleManagementPage.assertRolesInAlphabeticalOrder()
+  })
+
   // ************************************************ TESTS AS CLIENTS ************************************************** //
 })

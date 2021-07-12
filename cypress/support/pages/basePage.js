@@ -204,6 +204,32 @@ class BasePage {
       cy.get(selectors.toastNotification).should('not.exist')
     }
   }
+
+  /**
+   * Assert a list of elements is in alphabetical order.
+   * It works by sending an locator with many similar elements, so this method can extract the text of all elements and assert they are being displayed neatly.
+   *
+   * @param {Object} locator Object locator containing many elements
+   */
+  assertElementsInAlphabeticalOrder(locator) {
+    const listDisplayed = []
+    let listOrdered = []
+
+    cy.get(locator)
+      .each(($el, index) => {
+        cy.wrap($el)
+          .invoke('text')
+          .then(text => {
+            listDisplayed.push(text)
+            cy.log('Element added in the list to compare: ' + listDisplayed[index])
+          })
+      })
+      .then(() => {
+        listOrdered = listDisplayed.sort()
+        expect(JSON.stringify(listOrdered) === JSON.stringify(listDisplayed)).to.be.true
+        cy.log('List is alphabetically ordered')
+      })
+  }
 }
 
 export default BasePage
