@@ -95,15 +95,6 @@ class GroupManagementPage extends BaseManagementPage {
   }
 
   /**
-   * Get the group header element of a selected group
-   *
-   * @returns Group header
-   */
-  getGroupHeader() {
-    return cy.get(selectors.groupNameInput).scrollIntoView()
-  }
-
-  /**
    *
    * @param {*} sectionName Choose one of these: roles, daps, users, or companies
    * @param {*} entityId Id number of the entity
@@ -377,16 +368,6 @@ class GroupManagementPage extends BaseManagementPage {
   // ----------------------------------------------- OTHERS --------------------------------------------- //
 
   /**
-   * This method has the exactly implementation of the method getGroupHeader()
-   * This is necessary is some cases, since groups page has a problem while scrolling anything. So, this behavior is strict to Groups
-   *
-   * @returns Group header
-   */
-  scrollToGroupsTop() {
-    return cy.get(selectors.groupNameInput).scrollIntoView()
-  }
-
-  /**
    * Given I am in the main groups page over the Active tab, this method deactivates a group by sending the group id
    *
    * @param {Number} groupId group id number
@@ -430,29 +411,16 @@ class GroupManagementPage extends BaseManagementPage {
     cy.get(selectors.threeDotBtn).click()
     cy.get(selectors.threeDotDuplicateBtn).click()
 
-    this.getGroupHeader().as('groupNameInput')
+    this.getEntityHeader().as('groupNameInput')
     cy.get('@groupNameInput').should('have.text', 'Copy of ' + groupName)
     cy.get('@groupNameInput').type(newNameForDuplicatedGroup)
     cy.get(selectors.saveGroupBtn).click()
     this.assertInactiveGroupsAreDisplayed()
 
-    cy.intercept('GET', apiInterceptions.groupsReloaded).as('waitsTableReloads')
-    cy.wait('@waitsTableReloads', { timeout: 10000 })
+    this.waitTableReloads()
 
     this.assertToastNotificationMessageIsDisplayed(newNameForDuplicatedGroup + ' Saved')
     this.getGroupByName(newNameForDuplicatedGroup).should('be.visible')
-  }
-
-  /**
-   * Modify a group name from a selected group
-   *
-   * @param {String} groupName Name of the group that is going to be created.
-   */
-  modifyGroupName(groupName) {
-    this.getGroupHeader().as('groupNameInput')
-    cy.get('@groupNameInput').should('have.text', 'New Group')
-    cy.get('@groupNameInput').clear()
-    cy.get('@groupNameInput').type(groupName)
   }
 
   /**
@@ -579,7 +547,7 @@ class GroupManagementPage extends BaseManagementPage {
   createGroup(groupName, roleName, roleId, dapNames, dapIds, userNames, userIds, companyNames, companyIds) {
     cy.get(selectors.newGroupBtn).click()
 
-    this.modifyGroupName(groupName)
+    this.modifyEntityName(groupName, 'New Group')
 
     if (roleName) {
       this.selectRoleToGroup(roleName, roleId)
@@ -663,6 +631,12 @@ class GroupManagementPage extends BaseManagementPage {
         .scrollIntoView()
         .click()
     }
+  }
+
+  // ---------------------------------------  INTERCEPTIONS --------------------------------------------- //
+  waitTableReloads() {
+    cy.intercept('GET', apiInterceptions.groupsReloaded).as('waitsTableReloads')
+    cy.wait('@waitsTableReloads', { timeout: 10000 })
   }
 }
 

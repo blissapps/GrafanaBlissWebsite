@@ -15,6 +15,7 @@
     "strictNullChecks": true,
     "sourceMap": false,
     "skipLibCheck": true,
+    "lib": ["ESNext.String", "es7"]
   },
   "include": ["./cypress"],
   "exclude": ["node_modules"]

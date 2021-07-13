@@ -7,7 +7,8 @@ const selectors = {
   otherGroupList: 'gs-list[data-test-id=searchListing-other]',
   otherItem: '#otherItem_',
   noResultsFound: 'div.not-found',
-  noRecordsFoundEmptyState: 'gs-empty-container .content > div'
+  noRecordsFoundEmptyState: 'gs-empty-container .content > div',
+  entityNameInput: 'gs-input-inline[data-test-id=name-input]'
 }
 
 /**
@@ -15,7 +16,17 @@ const selectors = {
  *
  */
 class BaseManagementPage extends BasePage {
-  // --------------------------------------- ASSERTIONS --------------------------------------------- //
+  // ------------------------------------------------------- GETS ---------------------------------------------------------------------- //
+  /**
+   * Get the entity (group role, or dap) header element of a selected entity
+   *
+   * @returns Entity header
+   */
+  getEntityHeader() {
+    return cy.get(selectors.entityNameInput).scrollIntoView()
+  }
+
+  // --------------------------------------------------------- ASSERTIONS ------------------------------------------------------------------ //
   /**
    * Assert the amount of results displayed in the Search Results list, after using the search engine
    *
@@ -66,6 +77,35 @@ class BaseManagementPage extends BasePage {
     } else {
       cy.get(selectors.noRecordsFoundEmptyState).should('not.exist')
     }
+  }
+
+  // ----------------------------------------------- OTHERS --------------------------------------------- //
+
+  /**
+   * This method has the exactly implementation of the method getEntityHeader()
+   * This is necessary is some cases, since groups page has a problem while scrolling anything. So, this behavior is strict to Groups
+   *
+   * @returns Entity Header
+   */
+  scrollToGroupsTop() {
+    return cy.get(selectors.entityNameInput).scrollIntoView()
+  }
+
+  /**
+   * Modify a entity (group role, or dap) name from a selected entity. It also can verify the current name of the entity, right before changing it.
+   *
+   * @param {String} entityName Name of the role that is going to be modified.
+   * @param {String} currentName Send the current name of the input field if you want to verify it before changing it.
+   */
+  modifyEntityName(entityName, currentName = '') {
+    this.getEntityHeader().as('input')
+
+    if (currentName != '') {
+      cy.get('@input').should('have.text', currentName)
+    }
+
+    cy.get('@input').clear()
+    cy.get('@input').type(entityName)
   }
 }
 

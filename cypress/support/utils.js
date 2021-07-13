@@ -26,6 +26,17 @@ class Utils {
 
     return date_formatted.split('/')
   }
+
+  /**
+   * Verify if a array contains duplicated elements
+   *
+   * @param {Array} array array to be verified
+   *
+   * @returns True if there is a duplicated element, false otherwise
+   */
+  arrayHasDuplicates(array) {
+    return new Set(array).size !== array.length
+  }
 }
 
 export default Utils
