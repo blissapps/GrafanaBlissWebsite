@@ -148,7 +148,7 @@ describe('Group Management tests over User Management settings', () => {
 
     groupManagementPage.clickGroup(groupId)
     groupManagementPage.selectRoleToGroup(roleName, roleId)
-    groupManagementPage.saveGroupInformation(groupName + ' Saved')
+    groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
 
     groupManagementPage.assertRoleAssociatedWithGroup(roleId)
   })
@@ -164,7 +164,7 @@ describe('Group Management tests over User Management settings', () => {
 
     groupManagementPage.clickGroup(groupId)
     groupManagementPage.selectRoleToGroup(roleName, roleId)
-    groupManagementPage.saveGroupInformation(groupName + ' Saved')
+    groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
 
     groupManagementPage.assertRoleAssociatedWithGroup(roleId)
   })
@@ -179,7 +179,7 @@ describe('Group Management tests over User Management settings', () => {
 
     groupManagementPage.clickGroup(groupId)
     groupManagementPage.selectRoleToGroup(roleName, roleId)
-    groupManagementPage.discardGroupInformation()
+    groupManagementPage.discardEntityInformation()
 
     groupManagementPage.assertRoleAssociatedWithGroup(1397, false)
   })
@@ -195,7 +195,7 @@ describe('Group Management tests over User Management settings', () => {
 
     groupManagementPage.clickGroup(groupId)
     groupManagementPage.addUsersToGroup(userName, userIds)
-    groupManagementPage.saveGroupInformation(groupName + ' Saved')
+    groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
 
     groupManagementPage.assertUserAssociatedWithGroup(userIds[0])
     groupManagementPage.assertUserAssociatedWithGroup(userIds[1])
@@ -211,7 +211,7 @@ describe('Group Management tests over User Management settings', () => {
 
     groupManagementPage.clickGroup(groupId)
     groupManagementPage.addUsersToGroup(userName, userIds)
-    groupManagementPage.discardGroupInformation()
+    groupManagementPage.discardEntityInformation()
 
     groupManagementPage.assertUserAssociatedWithGroup(userIds[0], false)
     groupManagementPage.assertUserAssociatedWithGroup(userIds[1], false)
@@ -228,7 +228,8 @@ describe('Group Management tests over User Management settings', () => {
 
     groupManagementPage.clickGroup(groupId)
     groupManagementPage.addCompaniesToGroup(companyNames, companyIds)
-    groupManagementPage.saveGroupInformation(groupName + ' Saved')
+    groupManagementPage.saveEntityInformation()
+    groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
 
     groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[0])
     groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[1])
@@ -245,7 +246,7 @@ describe('Group Management tests over User Management settings', () => {
 
     groupManagementPage.clickGroup(groupId)
     groupManagementPage.addCompaniesToGroup(companyNames, companyIds)
-    groupManagementPage.discardGroupInformation()
+    groupManagementPage.discardEntityInformation()
 
     groupManagementPage.assertUserAssociatedWithGroup(companyIds[0], false)
     groupManagementPage.assertUserAssociatedWithGroup(companyIds[1], false)
@@ -358,7 +359,7 @@ describe('Group Management tests over User Management settings', () => {
     groupManagementPage.scrollToGroupsTop() // strategy used just to move the scroll up
 
     groupManagementPage.removeCompaniesFromGroup(companyIds)
-    groupManagementPage.saveGroupInformation(groupName + ' Saved')
+    groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
     groupManagementPage.assertUserAssociatedWithGroup(companyIds[0], false)
   })
 
@@ -374,7 +375,7 @@ describe('Group Management tests over User Management settings', () => {
     groupManagementPage.scrollToGroupsTop() // strategy used just to move the scroll up
 
     groupManagementPage.removeDapsFromGroup(dapIds)
-    groupManagementPage.saveGroupInformation(groupName + ' Saved')
+    groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
     groupManagementPage.assertDapAssociatedWithGroup(dapIds[0], false)
   })
 
@@ -389,7 +390,7 @@ describe('Group Management tests over User Management settings', () => {
 
     groupManagementPage.clickGroup(groupId)
     groupManagementPage.addDapsToGroup(dapNames, dapIds)
-    groupManagementPage.saveGroupInformation(groupName + ' Saved')
+    groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
 
     groupManagementPage.assertDapAssociatedWithGroup(dapIds[0])
     groupManagementPage.assertDapAssociatedWithGroup(dapIds[1])
@@ -406,7 +407,7 @@ describe('Group Management tests over User Management settings', () => {
 
     groupManagementPage.clickGroup(groupId)
     groupManagementPage.addDapsToGroup(dapNames, dapIds)
-    groupManagementPage.discardGroupInformation()
+    groupManagementPage.discardEntityInformation()
 
     groupManagementPage.assertDapAssociatedWithGroup(dapIds[0], false)
     groupManagementPage.assertDapAssociatedWithGroup(dapIds[1], false)
@@ -425,7 +426,7 @@ describe('Group Management tests over User Management settings', () => {
     groupManagementPage.scrollToGroupsTop() // strategy used just to move the scroll up
 
     groupManagementPage.removeUsersFromGroup(userIds)
-    groupManagementPage.saveGroupInformation(groupName + ' Saved')
+    groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
 
     groupManagementPage.assertUserAssociatedWithGroup(userIds[0], false)
     groupManagementPage.assertUserAssociatedWithGroup(userIds[1], false)
@@ -443,7 +444,7 @@ describe('Group Management tests over User Management settings', () => {
     groupManagementPage.scrollToGroupsTop() // strategy used just to move the scroll up
 
     groupManagementPage.removeRoleFromGroup(roleId)
-    groupManagementPage.saveGroupInformation(groupName + ' Saved')
+    groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
 
     groupManagementPage.assertRoleAssociatedWithGroup(1854, false)
   })

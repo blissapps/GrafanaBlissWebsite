@@ -4,12 +4,16 @@ import RoleManagementPage from '../../../support/pages/globalSettingsPages/userM
 import LeftMenuNavBar from '../../../support/components/leftMenuNavBar'
 import SearchBar from '../../../support/components/searchBar'
 
+import Utils from '../../../support/utils'
+
 describe('Role Management tests over User Management settings', () => {
   const homePage = new HomePage()
   const roleManagementPage = new RoleManagementPage()
 
   const leftMenuNavBar = new LeftMenuNavBar()
   const searchBar = new SearchBar()
+
+  const utils = new Utils()
 
   beforeEach(() => {
     // @ts-ignore
@@ -119,6 +123,22 @@ describe('Role Management tests over User Management settings', () => {
     cy.visit('/tenant/1/settings/role-management', { failOnStatusCode: false })
     roleManagementPage.checkRoleManagementUrl()
     roleManagementPage.assertActiveRolesAreDisplayed()
+  })
+
+  it('C7499700_Create_A_New_Role_Happy_Path)', () => {
+    const roleName = 'Create new role ' + utils.getRandomNumber()
+
+    roleManagementPage.clickToCreateRoleWithNewName(roleName)
+    roleManagementPage.insertOrRemoveAccessFiltersPermissions('accessfilters', ['view', 'update', 'create', 'delete'])
+    roleManagementPage.insertOrRemoveAccessFiltersPermissions('api', ['view'])
+    roleManagementPage.insertOrRemoveAccessFiltersPermissions('settings', ['update'])
+    roleManagementPage.insertOrRemoveAccessFiltersPermissions('accessfilters', ['create'], false)
+    roleManagementPage.insertOrRemoveAccessFiltersPermissions('settings', ['update'], false)
+    roleManagementPage.insertOrRemoveAccessFiltersPermissions('settings', ['delete'])
+    roleManagementPage.insertOrRemoveAccessFiltersPermissions('groups', ['view', 'update', 'create', 'delete'])
+
+    roleManagementPage.saveEntityInformation()
+    roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully')
   })
 
   // ************************************************ TESTS AS CLIENTS ************************************************** //

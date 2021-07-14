@@ -37,6 +37,16 @@ class Utils {
   arrayHasDuplicates(array) {
     return new Set(array).size !== array.length
   }
+
+  /**
+   * Get a random number based on the Date library.
+   * This method allows us to get the number of milliseconds elapsed since January 1, 1970.
+   *
+   * @returns A random number based in Date.now()
+   */
+  getRandomNumber() {
+    return Date.now()
+  }
 }
 
 export default Utils

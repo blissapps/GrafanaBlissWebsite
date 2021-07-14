@@ -15,20 +15,12 @@ const selectors = {
   threeDotDuplicateBtn: 'gs-action-panel-option[data-test-id=action-duplicate]',
   threeDotDeactivateBtn: 'gs-action-panel-option[data-test-id=action-deactivate]',
   groupNameInput: 'gs-input-inline[data-test-id=name-input]',
-  saveGroupBtn: 'gs-button[data-test-id=save-button]',
-  discardGroupBtn: 'gs-button[data-test-id=discard-button]',
   newGroupBtn: 'gs-button[data-test-id=create-group]',
   selectRoleBtn: '*[data-test-id=section-role] *[data-test-id=add-entity]',
   AddDAPBtn: '*[data-test-id=section-dap] *[data-test-id=add-entity]',
   AddUsersBtn: '*[data-test-id=section-user] *[data-test-id=add-entity]',
   AddCompaniesBtn: '*[data-test-id=section-client] *[data-test-id=add-entity]',
   changeRoleBtn: '*[data-test-id=section-role] a',
-  showAllDapsBtn: '*[data-test-id=section-dap] gs-button[data-test-id=show-all]',
-  showAllUsersBtn: '*[data-test-id=section-user] gs-button[data-test-id=show-all]',
-  showAllCompaniesBtn: '*[data-test-id=section-client] gs-button[data-test-id=show-all]',
-  hideDapsBtn: '*[data-test-id=section-dap] gs-button[data-test-id=hide]',
-  hideUsersBtn: '*[data-test-id=section-user] gs-button[data-test-id=hide]',
-  hideCompaniesBtn: '*[data-test-id=section-client] gs-button[data-test-id=hide]',
   removeIconButton: 'gs-button[data-test-id=remove-entity]'
 }
 
@@ -140,66 +132,6 @@ class GroupManagementPage extends BaseManagementPage {
     cy.get(selectors.activateGroupBtn).click()
   }
 
-  /**
-   * Click in the show all button of a given entity/section
-   *
-   * @param {String} entity
-   */
-  clickShowAll(entity) {
-    switch (entity) {
-      case 'daps':
-        cy.get(selectors.showAllDapsBtn)
-          .scrollIntoView()
-          .click()
-        break
-
-      case 'users':
-        cy.get(selectors.showAllUsersBtn)
-          .scrollIntoView()
-          .click()
-        break
-
-      case 'companies':
-        cy.get(selectors.showAllCompaniesBtn)
-          .scrollIntoView()
-          .click()
-        break
-
-      default:
-        throw new Error('This section does not exists, choose among the following: daps, users, or companies')
-    }
-  }
-
-  /**
-   * Click in the show all button of a given entity/section
-   *
-   * @param {String} entity
-   */
-  clickHide(entity) {
-    switch (entity) {
-      case 'daps':
-        cy.get(selectors.hideDapsBtn)
-          .scrollIntoView()
-          .click()
-        break
-
-      case 'users':
-        cy.get(selectors.hideUsersBtn)
-          .scrollIntoView()
-          .click()
-        break
-
-      case 'companies':
-        cy.get(selectors.hideCompaniesBtn)
-          .scrollIntoView()
-          .click()
-        break
-
-      default:
-        throw new Error('This section does not exists, choose among the following: daps, users, or companies')
-    }
-  }
-
   // --------------------------------------- ASSERTIONS --------------------------------------------- //
   /**
    * Assert if the msg about no groups selected is displayed or not
@@ -253,7 +185,7 @@ class GroupManagementPage extends BaseManagementPage {
    */
   assertDapAssociatedWithGroup(dapId, displayed = true, showAll = false) {
     if (showAll) {
-      cy.get(selectors.showAllUsersBtn).click()
+      this.clickShowAll('users')
     }
 
     if (displayed) {
@@ -274,7 +206,7 @@ class GroupManagementPage extends BaseManagementPage {
    */
   assertUserAssociatedWithGroup(userId, displayed = true, showAll = false) {
     if (showAll) {
-      cy.get(selectors.showAllUsersBtn).click()
+      this.clickShowAll('users')
     }
 
     if (displayed) {
@@ -295,7 +227,7 @@ class GroupManagementPage extends BaseManagementPage {
    */
   assertCompanyAssociatedWithGroup(companyId, displayed = true, showAll = false) {
     if (showAll) {
-      cy.get(selectors.showAllCompaniesBtn).click()
+      this.clickShowAll('companies')
     }
 
     if (displayed) {
@@ -414,12 +346,12 @@ class GroupManagementPage extends BaseManagementPage {
     this.getEntityHeader().as('groupNameInput')
     cy.get('@groupNameInput').should('have.text', 'Copy of ' + groupName)
     cy.get('@groupNameInput').type(newNameForDuplicatedGroup)
-    cy.get(selectors.saveGroupBtn).click()
-    this.assertInactiveGroupsAreDisplayed()
+    this.saveEntityInformation()
+    this.assertToastNotificationMessageIsDisplayed(newNameForDuplicatedGroup + ' Saved')
 
     this.waitTableReloads()
 
-    this.assertToastNotificationMessageIsDisplayed(newNameForDuplicatedGroup + ' Saved')
+    this.assertInactiveGroupsAreDisplayed()
     this.getGroupByName(newNameForDuplicatedGroup).should('be.visible')
   }
 
@@ -505,28 +437,6 @@ class GroupManagementPage extends BaseManagementPage {
   }
 
   /**
-   * Save all updates in the selected group by clicking in the Save button
-   *
-   * @param {String} toastNotificationMessage
-   */
-  saveGroupInformation(toastNotificationMessage) {
-    cy.get(selectors.saveGroupBtn)
-      .scrollIntoView()
-      .click()
-    this.assertToastNotificationMessageIsDisplayed(toastNotificationMessage)
-  }
-
-  /**
-   * Discard all updates in the selected group by clicking in the Discard button
-   */
-  discardGroupInformation() {
-    cy.get(selectors.discardGroupBtn)
-      .scrollIntoView()
-      .click()
-    this.assertToastNotificationMessageIsDisplayed('', true)
-  }
-
-  /**
    * Given you are in the groups main page, create a group by calling this method
    *
    * @param {String} groupName Name of the group that is going to be created.
@@ -565,7 +475,8 @@ class GroupManagementPage extends BaseManagementPage {
       this.addCompaniesToGroup(companyNames, companyIds)
     }
 
-    this.saveGroupInformation(groupName + ' Saved')
+    this.saveEntityInformation()
+    this.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
   }
 
   /**
@@ -587,7 +498,7 @@ class GroupManagementPage extends BaseManagementPage {
    */
   removeDapsFromGroup(dapIds, showAll = false) {
     if (showAll) {
-      cy.get(selectors.showAllCompaniesBtn).click()
+      this.clickShowAll('daps')
     }
 
     for (let i = 0; i < dapIds.length; i++) {
@@ -605,7 +516,7 @@ class GroupManagementPage extends BaseManagementPage {
    */
   removeUsersFromGroup(userIds, showAll = false) {
     if (showAll) {
-      cy.get(selectors.showAllCompaniesBtn).click()
+      this.clickShowAll('users')
     }
 
     for (let i = 0; i < userIds.length; i++) {
@@ -623,7 +534,7 @@ class GroupManagementPage extends BaseManagementPage {
    */
   removeCompaniesFromGroup(companyIds, showAll = false) {
     if (showAll) {
-      cy.get(selectors.showAllCompaniesBtn).click()
+      this.clickShowAll('companies')
     }
 
     for (let i = 0; i < companyIds.length; i++) {

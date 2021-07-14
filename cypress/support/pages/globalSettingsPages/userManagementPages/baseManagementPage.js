@@ -8,7 +8,17 @@ const selectors = {
   otherItem: '#otherItem_',
   noResultsFound: 'div.not-found',
   noRecordsFoundEmptyState: 'gs-empty-container .content > div',
-  entityNameInput: 'gs-input-inline[data-test-id=name-input]'
+  entityNameInput: 'gs-input-inline[data-test-id=name-input]',
+  saveBtn: 'gs-button[data-test-id=save-button]',
+  discardBtn: 'gs-button[data-test-id=discard-button]',
+  showAllDapsBtn: '*[data-test-id=section-dap] gs-button[data-test-id=show-all]',
+  showAllUsersBtn: '*[data-test-id=section-user] gs-button[data-test-id=show-all]',
+  showAllCompaniesBtn: '*[data-test-id=section-client] gs-button[data-test-id=show-all]',
+  showAllGroupsBtn: '*[data-test-id=section-group] gs-button[data-test-id=show-all]',
+  hideDapsBtn: '*[data-test-id=section-dap] gs-button[data-test-id=hide]',
+  hideUsersBtn: '*[data-test-id=section-user] gs-button[data-test-id=hide]',
+  hideCompaniesBtn: '*[data-test-id=section-client] gs-button[data-test-id=hide]',
+  hideGroupsBtn: '*[data-test-id=section-group] gs-button[data-test-id=hide]'
 }
 
 /**
@@ -24,6 +34,80 @@ class BaseManagementPage extends BasePage {
    */
   getEntityHeader() {
     return cy.get(selectors.entityNameInput).scrollIntoView()
+  }
+
+  // ------------------------------------------------------- CLICKS ---------------------------------------------------------------------- //
+
+  /**
+   * Click in the Show All button of a given entity/section
+   *
+   * @param {String} entity It can be 'daps', 'users', 'companies', or 'groups'
+   */
+  clickShowAll(entity) {
+    switch (entity) {
+      case 'daps':
+        cy.get(selectors.showAllDapsBtn)
+          .scrollIntoView()
+          .click()
+        break
+
+      case 'users':
+        cy.get(selectors.showAllUsersBtn)
+          .scrollIntoView()
+          .click()
+        break
+
+      case 'companies':
+        cy.get(selectors.showAllCompaniesBtn)
+          .scrollIntoView()
+          .click()
+        break
+
+      case 'groups':
+        cy.get(selectors.showAllGroupsBtn)
+          .scrollIntoView()
+          .click()
+        break
+
+      default:
+        throw new Error('This section does not exists, choose among the following: daps, users, or companies')
+    }
+  }
+
+  /**
+   * Click in the Hide button of a given entity/section
+   *
+   * @param {String} entity It can be 'daps', 'users', 'companies', or 'groups'
+   */
+  clickHide(entity) {
+    switch (entity) {
+      case 'daps':
+        cy.get(selectors.hideDapsBtn)
+          .scrollIntoView()
+          .click()
+        break
+
+      case 'users':
+        cy.get(selectors.hideUsersBtn)
+          .scrollIntoView()
+          .click()
+        break
+
+      case 'companies':
+        cy.get(selectors.hideCompaniesBtn)
+          .scrollIntoView()
+          .click()
+        break
+
+      case 'groups':
+        cy.get(selectors.hideGroupsBtn)
+          .scrollIntoView()
+          .click()
+        break
+
+      default:
+        throw new Error('This section does not exists, choose among the following: daps, users, or companies')
+    }
   }
 
   // --------------------------------------------------------- ASSERTIONS ------------------------------------------------------------------ //
@@ -106,6 +190,25 @@ class BaseManagementPage extends BasePage {
 
     cy.get('@input').clear()
     cy.get('@input').type(entityName)
+  }
+
+  /**
+   * Save all updates made in the selected entity by clicking in the Save button. The entity can be groups, roles, or daps
+   */
+  saveEntityInformation() {
+    cy.get(selectors.saveBtn)
+      .scrollIntoView()
+      .click()
+  }
+
+  /**
+   * Discard all updates in the selected entity by clicking in the Discard button. The entity can be groups, roles, or daps
+   */
+  discardEntityInformation() {
+    cy.get(selectors.discardBtn)
+      .scrollIntoView()
+      .click()
+    this.assertToastNotificationMessageIsDisplayed('', true)
   }
 }
 
