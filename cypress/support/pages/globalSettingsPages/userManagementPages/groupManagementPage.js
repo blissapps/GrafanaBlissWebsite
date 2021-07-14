@@ -9,7 +9,6 @@ const selectors = {
   activeGroupsList: 'gs-tab[data-test-id=activeTab] #groupList gs-list',
   inactiveGroupsList: 'gs-tab[data-test-id=inactiveTab] #groupList gs-list',
   groupId: '#group_',
-  groupNameList: 'gs-list a',
   activateGroupBtn: 'gs-button[data-test-id=activateBtn]',
   threeDotBtn: 'gs-button[data-test-id=detailsActionPanelBtn]',
   threeDotDuplicateBtn: 'gs-action-panel-option[data-test-id=action-duplicate]',
@@ -71,19 +70,6 @@ class GroupManagementPage extends BaseManagementPage {
    */
   getGroupById(groupId) {
     return cy.get(selectors.groupId + groupId)
-  }
-
-  /**
-   * Get a group by sending the group name.
-   *
-   * @param {String} groupName Group name.
-   *
-   * @returns The group element
-   */
-  getGroupByName(groupName) {
-    cy.get(selectors.groupNameList).as('group')
-
-    return cy.get('@group').filter(`:contains('${groupName}')`)
   }
 
   /**
@@ -353,7 +339,7 @@ class GroupManagementPage extends BaseManagementPage {
     this.waitTableReloads()
 
     this.assertInactiveGroupsAreDisplayed()
-    this.getGroupByName(newNameForDuplicatedGroup).should('be.visible')
+    this.getEntityByName(newNameForDuplicatedGroup).should('be.visible')
   }
 
   /**

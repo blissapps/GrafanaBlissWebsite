@@ -9,7 +9,8 @@ const selectors = {
   activeRolesList: 'gs-tab[data-test-id=activeTab] #roleList gs-list',
   inactiveRolesList: 'gs-tab[data-test-id=inactiveTab] #roleList gs-list',
   rolesDisplayed: '#roleList gs-list a[id*="role_',
-  newRoleBtn: 'gs-button[data-test-id=create-role]'
+  newRoleBtn: 'gs-button[data-test-id=create-role]',
+  roleId: '#role_'
 }
 
 const apiInterceptions = {
@@ -27,16 +28,38 @@ class RoleManagementPage extends BaseManagementPage {
     this.checkUrl(properties.pageURL)
   }
 
+  // ----------------------------------------------- GETS --------------------------------------------- //
+
+  /**
+   * Get a role by sending the role ID.
+   *
+   * @param {Number} roleId role id number.
+   *
+   * @returns The role element
+   */
+  getRoleById(roleId) {
+    return cy.get(selectors.roleId + roleId)
+  }
+
   // ----------------------------------------------- CLICKS --------------------------------------------- //
 
   /**
    * Click in the new role button and change the current default role name
    *
-   * @param {*} roleName Name given to replace the default 'New Role' name that comes by default
+   * @param {String} roleName Name given to replace the default 'New Role' name that comes by default
    */
   clickToCreateRoleWithNewName(roleName) {
     cy.get(selectors.newRoleBtn).click()
     this.modifyEntityName(roleName, 'New Role')
+  }
+
+  /**
+   * Click in a role by sending the role ID.
+   *
+   * @param {Number} roleId Role id number.
+   */
+  clickRole(roleId) {
+    this.getRoleById(roleId).click()
   }
 
   // --------------------------------------- ASSERTIONS --------------------------------------------- //

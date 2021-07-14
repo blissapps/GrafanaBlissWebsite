@@ -18,7 +18,8 @@ const selectors = {
   hideDapsBtn: '*[data-test-id=section-dap] gs-button[data-test-id=hide]',
   hideUsersBtn: '*[data-test-id=section-user] gs-button[data-test-id=hide]',
   hideCompaniesBtn: '*[data-test-id=section-client] gs-button[data-test-id=hide]',
-  hideGroupsBtn: '*[data-test-id=section-group] gs-button[data-test-id=hide]'
+  hideGroupsBtn: '*[data-test-id=section-group] gs-button[data-test-id=hide]',
+  entityNameInList: 'gs-list a'
 }
 
 /**
@@ -34,6 +35,19 @@ class BaseManagementPage extends BasePage {
    */
   getEntityHeader() {
     return cy.get(selectors.entityNameInput).scrollIntoView()
+  }
+
+  /**
+   * Get a entity by its name while sending the entity name.
+   *
+   * @param {String} entityName Entity name.
+   *
+   * @returns The entity element located in the entity list
+   */
+  getEntityByName(entityName) {
+    cy.get(selectors.entityNameInList).as('group')
+
+    return cy.get('@group').filter(`:contains('${entityName}')`)
   }
 
   // ------------------------------------------------------- CLICKS ---------------------------------------------------------------------- //
@@ -161,6 +175,15 @@ class BaseManagementPage extends BasePage {
     } else {
       cy.get(selectors.noRecordsFoundEmptyState).should('not.exist')
     }
+  }
+
+  /**
+   * Assert a entity is displayed under the roles list. Entities are 'roles', 'daps', or 'groups'
+   *
+   * @param {String} entityName Entity name
+   */
+  assertEntityIsDisplayedInTheList(entityName) {
+    this.getEntityByName(entityName).should('be.visible')
   }
 
   // ----------------------------------------------- OTHERS --------------------------------------------- //

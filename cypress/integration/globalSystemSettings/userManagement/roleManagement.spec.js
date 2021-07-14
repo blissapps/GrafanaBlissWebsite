@@ -139,6 +139,8 @@ describe('Role Management tests over User Management settings', () => {
 
     roleManagementPage.saveEntityInformation()
     roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully')
+    roleManagementPage.assertActiveRolesAreDisplayed()
+    roleManagementPage.assertEntityIsDisplayedInTheList(roleName)
   })
 
   // ************************************************ TESTS AS CLIENTS ************************************************** //
