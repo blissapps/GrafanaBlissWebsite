@@ -63,9 +63,9 @@ class GroupManagementPage extends BaseManagementPage {
   // --------------------------------------- GETS --------------------------------------------- //
 
   /**
-   * Get a group by sending the group ID. It can be easily discovered in the Chrome/Firefox dev tools by accessing the elements tab
+   * Get a group by sending the group ID.
    *
-   * @param {Number} groupId group id number
+   * @param {Number} groupId Group id number.
    *
    * @returns The group element
    */
@@ -74,9 +74,9 @@ class GroupManagementPage extends BaseManagementPage {
   }
 
   /**
-   * Get a group by sending the group name. It can be easily discovered in the Chrome/Firefox dev tools by accessing the elements tab
+   * Get a group by sending the group name.
    *
-   * @param {String} groupName Group name
+   * @param {String} groupName Group name.
    *
    * @returns The group element
    */
@@ -87,9 +87,10 @@ class GroupManagementPage extends BaseManagementPage {
   }
 
   /**
+   * Get a specific card of a selected group
    *
-   * @param {*} sectionName Choose one of these: roles, daps, users, or companies
-   * @param {*} entityId Id number of the entity
+   * @param {String} sectionName Choose one of these: roles, daps, users, or companies
+   * @param {Number} entityId Id number of the entity
    *
    * @returns The relative card of a role, dap, user, or client
    */
@@ -115,9 +116,9 @@ class GroupManagementPage extends BaseManagementPage {
   // --------------------------------------- CLICKS --------------------------------------------- //
 
   /**
-   * Click in a group by sending the group ID. It can be easily discovered in the Chrome/Firefox dev tools by accessing the elements tab
+   * Click in a group by sending the group ID.
    *
-   * @param {Number} groupId group id number
+   * @param {Number} groupId Group id number.
    *
    * @returns The group element
    */
