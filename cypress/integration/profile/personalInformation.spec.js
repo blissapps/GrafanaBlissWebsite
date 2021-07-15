@@ -1,11 +1,9 @@
 import PersonalInformationPage from '../../support/pages/profilePages/personalInformationPage'
-import HomePage from '../../support/pages/homePage'
 import LeftMenuNavBar from '../../support/components/leftMenuNavBar'
 
 describe('Personal Information tests', () => {
   const leftMenuNavBar = new LeftMenuNavBar()
   const personalInformationPage = new PersonalInformationPage()
-  const homePage = new HomePage()
 
   beforeEach(() => {
     // @ts-ignore
@@ -19,7 +17,7 @@ describe('Personal Information tests', () => {
   it('C1234567_Check_URL_Access_Over_The_Menu', () => {
     personalInformationPage.checkProfilePersonalInformationUrl()
     leftMenuNavBar.closeProfileLeftBar()
-    homePage.checkUrl('home')
+    personalInformationPage.checkProfilePersonalInformationUrl()
   })
 
   /**

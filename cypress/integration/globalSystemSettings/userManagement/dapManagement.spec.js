@@ -1,9 +1,7 @@
-import HomePage from '../../../support/pages/homePage'
 import DapManagementPage from '../../../support/pages/globalSettingsPages/userManagementPages/dapManagementPage'
 import LeftMenuNavBar from '../../../support/components/leftMenuNavBar'
 
 describe('Data Access Profiles tests over User Management settings', () => {
-  const homePage = new HomePage()
   const dapManagementPage = new DapManagementPage()
 
   const leftMenuNavBar = new LeftMenuNavBar()
@@ -24,7 +22,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
     leftMenuNavBar.accessGlobalSettingsMenu('user', 'dap')
     dapManagementPage.checkDapManagementUrl()
     leftMenuNavBar.closeGlobalSettingsLeftBar()
-    homePage.checkHomeUrl()
+    dapManagementPage.checkDapManagementUrl()
   })
 
   //  ************** TESTS BELLOW MODIFY DATA DEFINITELY ***************

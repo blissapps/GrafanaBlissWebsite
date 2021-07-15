@@ -1,4 +1,3 @@
-import HomePage from '../../../support/pages/homePage'
 import RoleManagementPage from '../../../support/pages/globalSettingsPages/userManagementPages/roleManagementPage'
 
 import LeftMenuNavBar from '../../../support/components/leftMenuNavBar'
@@ -7,7 +6,6 @@ import SearchBar from '../../../support/components/searchBar'
 import Utils from '../../../support/utils'
 
 describe('Role Management tests over User Management settings', () => {
-  const homePage = new HomePage()
   const roleManagementPage = new RoleManagementPage()
 
   const leftMenuNavBar = new LeftMenuNavBar()
@@ -26,7 +24,7 @@ describe('Role Management tests over User Management settings', () => {
 
   it('C7544080_Check_Behavior_When_Closing_The_Settings', () => {
     leftMenuNavBar.closeGlobalSettingsLeftBar()
-    homePage.checkHomeUrl()
+    roleManagementPage.checkRoleManagementUrl()
   })
 
   /**

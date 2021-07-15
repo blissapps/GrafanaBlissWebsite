@@ -1,11 +1,9 @@
 import PreferencesPage from '../../support/pages/profilePages/preferencesPage'
-import HomePage from '../../support/pages/homePage'
 import LeftMenuNavBar from '../../support/components/leftMenuNavBar'
 
-describe('Security tests', () => {
+describe('Preferences tests', () => {
   const leftMenuNavBar = new LeftMenuNavBar()
   const preferencesPage = new PreferencesPage()
-  const homePage = new HomePage()
 
   beforeEach(() => {
     // @ts-ignore
@@ -19,7 +17,7 @@ describe('Security tests', () => {
   it('C1234567_Check_URL_Access_Over_The_Menu', () => {
     preferencesPage.checkProfilePreferencesUrl()
     leftMenuNavBar.closeProfileLeftBar()
-    homePage.checkUrl('home')
+    preferencesPage.checkProfilePreferencesUrl()
   })
 
   /**

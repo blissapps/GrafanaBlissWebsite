@@ -229,7 +229,7 @@ describe('Statement Management tests', () => {
   })
 
   /**
-   * SPIKED DUE TO https://globalshares.atlassian.net/browse/GDP-50204
+   * SPIKED DUE TO https://globalshares.atlassian.net/browse/PB-898
    */
   it.skip('C7394707_Participant_Filter_Behavior', () => {
     const clientName = 'Interxion'
@@ -287,7 +287,7 @@ describe('Statement Management tests', () => {
   /**
    * @chrome_only because Firefox does not allow do download pdf files without the confirmation popup
    */
-  it.only('C7395183_download_PDF_File_From_Participant', { browser: '!firefox' }, () => {
+  it('C7395183_download_PDF_File_From_Participant', { browser: '!firefox' }, () => {
     const clientName = 'Interxion'
     const clientID = 76
     const participantID = 32512

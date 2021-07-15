@@ -8,7 +8,7 @@ const selectors = {
   leftMenuOpen: '//*[@class= "ng-tns-c115-1 open"]',
 
   navBarHeaderClientName: '#navBarHeader',
-  closeNavBarX: '//h2//gs-svg-icon',
+  closeNavBarIcon: '#collapse',
 
   profileLargeAvatar: '#profileLargeAvatar',
   profileName: '#profileFullName',
@@ -44,7 +44,7 @@ class LeftMenuNavBar extends BasePage {
    * @missing_ids
    */
   closeGlobalSettingsLeftBar() {
-    cy.xpath(selectors.closeNavBarX).click()
+    cy.get(selectors.closeNavBarIcon).click()
   }
 
   /**

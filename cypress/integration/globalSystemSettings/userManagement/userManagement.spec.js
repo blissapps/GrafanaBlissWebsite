@@ -1,10 +1,8 @@
-import HomePage from '../../../support/pages/homePage'
 import UserManagementPage from '../../../support/pages/globalSettingsPages/userManagementPages/userManagementPage'
 import LeftMenuNavBar from '../../../support/components/leftMenuNavBar'
 import SearchBar from '../../../support/components/searchBar'
 
 describe('User Management tests over User Management settings', () => {
-  const homePage = new HomePage()
   const userManagementPage = new UserManagementPage()
 
   const leftMenuNavBar = new LeftMenuNavBar()
@@ -21,15 +19,10 @@ describe('User Management tests over User Management settings', () => {
   it('C7405960_Check_Behavior_When_Closing_The_Settings', () => {
     userManagementPage.checkUserManagementUrl()
     leftMenuNavBar.closeGlobalSettingsLeftBar()
-    homePage.checkHomeUrl()
+    userManagementPage.checkUserManagementUrl()
   })
 
-  /**
-   *
-   * SPIKED DUE TO https://globalshares.atlassian.net/browse/GDP-50236
-   *
-   */
-  it.skip('C7592116_Users_Search_For_Username_/_Email_And_Check_Highlighted_Data', () => {
+  it('C7592116_Users_Search_For_Username_/_Email_And_Check_Highlighted_Data', () => {
     const username = 'amulcahyNE'
     const userEmail = 'test@globalshares.com'
     const userStatus = 'Active'
@@ -37,12 +30,12 @@ describe('User Management tests over User Management settings', () => {
 
     // Email
     searchBar.search(userEmail)
-    userManagementPage.assertAmountOfSearchResults(14)
+    userManagementPage.assertAmountOfSearchResults(10)
     userManagementPage.assertDataDisplayedOnGsGridTableIsHighlighted(userEmail)
 
     // Username
     searchBar.search(username)
-    userManagementPage.assertAmountOfSearchResults(2)
+    userManagementPage.assertAmountOfSearchResults(1)
     userManagementPage.assertDataDisplayedOnGsGridTableIsHighlighted(username)
 
     userManagementPage.assertDataDisplayedOnGsGridTable([username, userEmail, userStatus])

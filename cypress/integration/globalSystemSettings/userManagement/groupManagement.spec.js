@@ -1,11 +1,9 @@
-import HomePage from '../../../support/pages/homePage'
 import GroupManagementPage from '../../../support/pages/globalSettingsPages/userManagementPages/groupManagementPage'
 
 import LeftMenuNavBar from '../../../support/components/leftMenuNavBar'
 import SearchBar from '../../../support/components/searchBar'
 
 describe('Group Management tests over User Management settings', () => {
-  const homePage = new HomePage()
   const groupManagementPage = new GroupManagementPage()
 
   const leftMenuNavBar = new LeftMenuNavBar()
@@ -26,7 +24,7 @@ describe('Group Management tests over User Management settings', () => {
    */
   it('C7412690_Check_The_System_Behavior_When_Closing_The_Settings_Nav_Bar', () => {
     leftMenuNavBar.closeGlobalSettingsLeftBar()
-    homePage.checkHomeUrl()
+    groupManagementPage.checkGroupManagementUrl()
   })
 
   /**
