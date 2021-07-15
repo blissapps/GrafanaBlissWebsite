@@ -238,7 +238,7 @@ class ClientStatementsPage extends BasePage {
     const idsList = [76, 77, 78, 79, 80] // This is the expected list with the database we have in the environment right now
 
     let idsListIndex = 0
-    for (let i = 6; i <= 30; i += 5) {
+    for (let i = 6; i <= 30; i += 6) {
       cy.xpath(`(//gs-grid//gs-grid-row-list//gs-grid-row//gs-grid-cell//span)[${i}]`)
         .invoke('text')
         .should('contain', idsList[idsListIndex])

@@ -24,7 +24,6 @@ class RoleManagementPage extends BaseManagementPage {
    * Checks if the current pageLoad is Role management URL
    */
   checkRoleManagementUrl() {
-    this.waitUntilPageIsLoaded()
     this.checkUrl(properties.pageURL)
   }
 
