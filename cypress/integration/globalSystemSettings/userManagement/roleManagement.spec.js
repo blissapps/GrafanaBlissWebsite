@@ -123,7 +123,7 @@ describe('Role Management tests over User Management settings', () => {
     roleManagementPage.assertActiveRolesAreDisplayed()
   })
 
-  it('C7499700_Create_A_New_Role_Happy_Path)', () => {
+  it('C7499700_Create_A_New_Role_Happy_Path', () => {
     const roleName = 'Create new role ' + utils.getRandomNumber()
 
     roleManagementPage.clickToCreateRoleWithNewName(roleName)
@@ -136,8 +136,44 @@ describe('Role Management tests over User Management settings', () => {
     roleManagementPage.insertOrRemoveAccessFiltersPermissions('groups', ['view', 'update', 'create', 'delete'])
 
     roleManagementPage.saveEntityInformation()
+
     roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully')
     roleManagementPage.assertActiveRolesAreDisplayed()
+    roleManagementPage.assertEntityIsDisplayedInTheList(roleName)
+  })
+
+  it('C7499701_Create_A_New_Role_Discard_Role', () => {
+    const roleName = 'Create and Discard'
+
+    roleManagementPage.clickToCreateRoleWithNewName(roleName)
+    roleManagementPage.insertOrRemoveAccessFiltersPermissions('accessfilters', ['view', 'update', 'create', 'delete'])
+    roleManagementPage.insertOrRemoveAccessFiltersPermissions('api', ['view'])
+    roleManagementPage.insertOrRemoveAccessFiltersPermissions('settings', ['update'])
+    roleManagementPage.insertOrRemoveAccessFiltersPermissions('accessfilters', ['create'], false)
+    roleManagementPage.insertOrRemoveAccessFiltersPermissions('settings', ['update'], false)
+    roleManagementPage.insertOrRemoveAccessFiltersPermissions('settings', ['delete'])
+    roleManagementPage.insertOrRemoveAccessFiltersPermissions('groups', ['view', 'update', 'create', 'delete'])
+
+    roleManagementPage.discardEntityInformation()
+    roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully', false)
+    roleManagementPage.assertEntityIsDisplayedInTheList(roleName, false)
+  })
+
+  it('C7499702_Create_A_New_Role_Mandatory_Fields_Are_Not_Populated', () => {
+    const roleName = 'Filling Mandatory Fields ' + utils.getRandomNumber()
+
+    roleManagementPage.clickToCreateRoleWithNewName('{backspace}') // just to save the role with empty name
+    roleManagementPage.saveEntityInformation()
+
+    roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully', false)
+    roleManagementPage.assertNotificationErrorDisplayed()
+    roleManagementPage.assertEntityIsDisplayedInTheList(roleName, false)
+
+    roleManagementPage.modifyEntityName(roleName)
+    roleManagementPage.saveEntityInformation()
+
+    roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully')
+    roleManagementPage.assertNotificationErrorDisplayed()
     roleManagementPage.assertEntityIsDisplayedInTheList(roleName)
   })
 

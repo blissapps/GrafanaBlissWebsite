@@ -181,9 +181,14 @@ class BaseManagementPage extends BasePage {
    * Assert a entity is displayed under the roles list. Entities are 'roles', 'daps', or 'groups'
    *
    * @param {String} entityName Entity name
+   * @param {Boolean} displayed True to assert the entity is displayed. False otherwise.
    */
-  assertEntityIsDisplayedInTheList(entityName) {
-    this.getEntityByName(entityName).should('be.visible')
+  assertEntityIsDisplayedInTheList(entityName, displayed = true) {
+    if (displayed) {
+      this.getEntityByName(entityName).should('be.visible')
+    } else {
+      this.getEntityByName(entityName).should('not.exist')
+    }
   }
 
   // ----------------------------------------------- OTHERS --------------------------------------------- //
@@ -231,7 +236,6 @@ class BaseManagementPage extends BasePage {
     cy.get(selectors.discardBtn)
       .scrollIntoView()
       .click()
-    this.assertToastNotificationMessageIsDisplayed('', true)
   }
 }
 

@@ -7,7 +7,8 @@ const selectors = {
   gsGridTableCell: 'div.data gs-grid-cell',
   gsGridTableCellHighlighted: 'div.data gs-grid-cell gs-highlighted-text.is-matched',
   rightNavBar: 'gs-container-l4',
-  toastNotification: 'div.toast-content'
+  toastNotification: 'div.toast-content',
+  notificationError: '#notificationError'
 }
 
 class BasePage {
@@ -200,10 +201,10 @@ class BasePage {
    * Assert a toast notification is displayed alongside a given message
    *
    * @param {String} toastMsg Toast message text
-   * @param {Boolean} notDisplayed Send True to assert that no toast message is displayed
+   * @param {Boolean} displayed True to assert the entity is displayed. False otherwise.
    */
-  assertToastNotificationMessageIsDisplayed(toastMsg, notDisplayed = false) {
-    if (!notDisplayed) {
+  assertToastNotificationMessageIsDisplayed(toastMsg, displayed = true) {
+    if (displayed) {
       cy.get(selectors.toastNotification)
         .should('be.visible')
         .should('contain.text', toastMsg)
@@ -236,6 +237,15 @@ class BasePage {
         expect(JSON.stringify(listOrdered) === JSON.stringify(listDisplayed)).to.be.true
         cy.log('List is alphabetically ordered')
       })
+  }
+
+  /**
+   * Assert the notificationError message is displayed
+   *
+   * @param {Boolean} displayed True is the default value to validate if the notification error message is displayed. False otherwise.
+   */
+  assertNotificationErrorDisplayed(displayed = true) {
+    displayed ? cy.get(selectors.notificationError).should('be.visible') : cy.get(selectors.notificationError).should('not.exist')
   }
 }
 
