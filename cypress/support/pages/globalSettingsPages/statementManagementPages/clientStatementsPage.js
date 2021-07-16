@@ -225,7 +225,7 @@ class ClientStatementsPage extends BasePage {
    * @MISSING_IDS
    */
   assertParticipantsStatementsTableContainsExpectedColumns() {
-    const columnsToValidate = ['Participant', 'Status'] // necessary until ids are placed
+    const columnsToValidate = ['', 'Participant', 'Status'] // necessary until ids are placed
     this.assertTableContainsExpectedColumns(columnsToValidate)
   }
 

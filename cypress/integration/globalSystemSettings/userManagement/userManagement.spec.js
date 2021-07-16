@@ -28,12 +28,12 @@ describe('User Management tests over User Management settings', () => {
     const userStatus = 'Active'
     userManagementPage.checkUserManagementUrl() // Check we are getting the correct search input in the correct page
 
-    // Email
+    cy.log('EMAIL')
     searchBar.search(userEmail)
     userManagementPage.assertAmountOfSearchResults(10)
     userManagementPage.assertDataDisplayedOnGsGridTableIsHighlighted(userEmail)
 
-    // Username
+    cy.log('USERNAME')
     searchBar.search(username)
     userManagementPage.assertAmountOfSearchResults(1)
     userManagementPage.assertDataDisplayedOnGsGridTableIsHighlighted(username)
