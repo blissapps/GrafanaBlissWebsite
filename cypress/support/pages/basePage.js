@@ -234,7 +234,8 @@ class BasePage {
           })
       })
       .then(() => {
-        listOrdered = listDisplayed.sort()
+        listOrdered = listDisplayed.slice()
+        listOrdered = listOrdered.sort()
         expect(JSON.stringify(listOrdered) === JSON.stringify(listDisplayed)).to.be.true
         cy.log('List is alphabetically ordered')
       })
