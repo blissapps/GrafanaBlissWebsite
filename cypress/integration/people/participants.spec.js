@@ -109,7 +109,7 @@ describe.skip('Participants tests', () => {
     homePage.selectClientById(420)
 
     equityPeoplePage.getNoParticipantsOrTrustsCreatedMessage().should('be.visible')
-    equityPeoplePage.selectTabByName('Trusts')
+    equityPeoplePage.clickTabByTitle('Trusts')
     equityPeoplePage.getNoParticipantsOrTrustsCreatedMessage().should('be.visible')
   })
 

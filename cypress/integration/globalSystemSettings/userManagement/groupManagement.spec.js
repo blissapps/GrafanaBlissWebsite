@@ -59,7 +59,8 @@ describe('Group Management tests over User Management settings', () => {
     searchBar.search(group)
     groupManagementPage.assertNoResultFoundIsVisible()
 
-    groupManagementPage.selectTabByName('Inactive') // Inactive TAB
+    // Now on Inactive TAB
+    groupManagementPage.clickTabByTitle('Inactive')
 
     group = 'ABC'
     searchBar.search(group)
@@ -90,7 +91,7 @@ describe('Group Management tests over User Management settings', () => {
    */
   it.skip('C7499684_Groups_Happy_Path_Active_And_Inactive_Groups', () => {
     groupManagementPage.assertActiveGroupsAreDisplayed()
-    groupManagementPage.selectTabByName('Inactive')
+    groupManagementPage.clickTabByTitle('Inactive')
     groupManagementPage.assertInactiveGroupsAreDisplayed()
   })
 

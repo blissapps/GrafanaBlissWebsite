@@ -34,7 +34,7 @@ class BasePage {
     return cy.url().should('match', url)
   }
 
-  // --------------------------------------- GETS, SELECTS AND CLICKS --------------------------------------------- //
+  // --------------------------------------- GETS, SELECTS, AND CLICKS --------------------------------------------- //
 
   /**
    * Get an element by passing a text
@@ -59,14 +59,14 @@ class BasePage {
   }
 
   /**
-   * Selects a tab
+   * Click in a tab by the html title
    *
-   * @param {String} tabName Name of the tab you want to go in
+   * @param {String} tabTitle Html title of the tab you want to go in
    *
    * @MISSING_IDS
    */
-  selectTabByName(tabName) {
-    cy.xpath(`//div[@class='tabs-bar']//*[@title='${tabName}']`).click()
+  clickTabByTitle(tabTitle) {
+    cy.get(`div.tabs-bar div[title=${tabTitle}]`).click()
   }
 
   // ---------------------------------------  OTHERS --------------------------------------------- //

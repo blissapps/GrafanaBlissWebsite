@@ -293,7 +293,7 @@ class GroupManagementPage extends BaseManagementPage {
    * @param {String} groupName group name
    */
   deactivateGroup(groupId, groupName) {
-    this.selectTabByName('Active')
+    this.clickTabByTitle('Active')
     this.clickGroup(groupId)
     cy.get(selectors.threeDotBtn).click()
     cy.get(selectors.threeDotDeactivateBtn).click()
@@ -309,7 +309,7 @@ class GroupManagementPage extends BaseManagementPage {
    * @param {String} groupName group name
    */
   activateGroup(groupId, groupName) {
-    this.selectTabByName('Inactive')
+    this.clickTabByTitle('Inactive')
     this.clickGroup(groupId)
     this.clickActivateGroupButton()
     this.assertActiveGroupsAreDisplayed()
@@ -325,7 +325,7 @@ class GroupManagementPage extends BaseManagementPage {
    * @param {String} newNameForDuplicatedGroup group name to the new duplicated group
    */
   duplicateGroup(groupId, groupName, newNameForDuplicatedGroup) {
-    this.selectTabByName('Active')
+    this.clickTabByTitle('Active')
     this.clickGroup(groupId)
     cy.get(selectors.threeDotBtn).click()
     cy.get(selectors.threeDotDuplicateBtn).click()

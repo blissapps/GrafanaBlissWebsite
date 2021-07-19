@@ -57,7 +57,8 @@ describe('Role Management tests over User Management settings', () => {
     searchBar.search(role)
     roleManagementPage.assertNoResultFoundIsVisible()
 
-    roleManagementPage.selectTabByName('Inactive') // Inactive TAB
+    // Now on Inactive TAB
+    roleManagementPage.clickTabByTitle('Inactive')
 
     role = 'ZZZ'
     searchBar.search(role)
@@ -90,7 +91,7 @@ describe('Role Management tests over User Management settings', () => {
     roleManagementPage.assertActiveRolesAreDisplayed()
     roleManagementPage.assertRolesInAlphabeticalOrder()
 
-    roleManagementPage.selectTabByName('Inactive')
+    roleManagementPage.clickTabByTitle('Inactive')
     roleManagementPage.assertInactiveRolesAreDisplayed()
     roleManagementPage.assertRolesInAlphabeticalOrder()
   })
@@ -100,7 +101,7 @@ describe('Role Management tests over User Management settings', () => {
    */
   it.skip('C7499690_Empty_State_Active_And_Inactive_Roles)', () => {
     roleManagementPage.assertEmptyStateMessageIsVisible()
-    roleManagementPage.selectTabByName('Inactive')
+    roleManagementPage.clickTabByTitle('Inactive')
     roleManagementPage.assertEmptyStateMessageIsVisible()
   })
 
