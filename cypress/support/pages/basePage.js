@@ -7,7 +7,8 @@ const selectors = {
   gsGridTableCell: 'div.data gs-grid-cell',
   gsGridTableCellHighlighted: 'div.data gs-grid-cell gs-highlighted-text.is-matched',
   rightNavBar: 'gs-container-l4',
-  toastNotification: 'div.toast-content',
+  toastNotification: 'gs-toast div.toast-content',
+  toastNotificationXBtn: 'gs-toast gs-svg-icon svg',
   notificationError: '#notificationError'
 }
 
@@ -204,14 +205,23 @@ class BasePage {
    *
    * @param {String} toastMsg Toast message text
    * @param {Boolean} displayed True to assert the entity is displayed. False otherwise.
+   * @param {Boolean} displayed True to close the toastNotification right after it is displayed
    */
-  assertToastNotificationMessageIsDisplayed(toastMsg, displayed = true) {
+  assertToastNotificationMessageIsDisplayed(toastMsg, displayed = true, close = false) {
+    if (!displayed && close) {
+      throw new Error('It does not make sense to check if the toast is displayed and then ask for close it!')
+    }
+
     if (displayed) {
       cy.get(selectors.toastNotification)
         .should('be.visible')
         .should('contain.text', toastMsg)
     } else {
       cy.get(selectors.toastNotification).should('not.exist')
+    }
+
+    if (close) {
+      cy.get(selectors.toastNotificationXBtn).click()
     }
   }
 
@@ -247,8 +257,15 @@ class BasePage {
    *
    * @param {Boolean} displayed True is the default value to validate if the notification error message is displayed. False otherwise.
    */
-  assertNotificationErrorDisplayed(displayed = true) {
+  assertNotificationErrorDisplayed(displayed = true, textDisplayed = '') {
     displayed ? cy.get(selectors.notificationError).should('be.visible') : cy.get(selectors.notificationError).should('not.exist')
+
+    textDisplayed != ''
+      ? cy
+          .get(selectors.notificationError)
+          .invoke('text')
+          .should('contain.text', textDisplayed)
+      : true
   }
 }
 

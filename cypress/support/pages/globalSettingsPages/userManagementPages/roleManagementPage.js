@@ -40,6 +40,13 @@ class RoleManagementPage extends BaseManagementPage {
     return cy.get(selectors.roleId + roleId)
   }
 
+  /**
+   * Get the new role button element
+   */
+  getNewRoleButton() {
+    return cy.get(selectors.newRoleBtn)
+  }
+
   // ----------------------------------------------- CLICKS --------------------------------------------- //
 
   /**
@@ -48,7 +55,7 @@ class RoleManagementPage extends BaseManagementPage {
    * @param {String} roleName Name given to replace the default 'New Role' name that comes by default
    */
   clickToCreateRoleWithNewName(roleName) {
-    cy.get(selectors.newRoleBtn).click()
+    this.getNewRoleButton().click()
     this.modifyEntityName(roleName, 'New Role')
   }
 

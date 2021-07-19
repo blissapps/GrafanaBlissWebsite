@@ -178,5 +178,50 @@ describe('Role Management tests over User Management settings', () => {
     roleManagementPage.assertEntityIsDisplayedInTheList(roleName)
   })
 
+  /**
+   * @missing_data For test this scenario there should be no "Create Role" permission for the user.
+   */
+  it.skip('C7499703_User_Does_Not_Have_Permissions_To_Create_New_Role', () => {
+    // @ts-ignore
+    cy.logout() && cy.login('UserNoCreateRole@globalshares.com', '1234579846') // Logout to login with the correct user without permission
+
+    leftMenuNavBar.accessGlobalSettingsMenu('user', 'role')
+    roleManagementPage.checkRoleManagementUrl()
+    roleManagementPage.getNewRoleButton().should('not.exist')
+
+    cy.visit('/0')
+    // Assert in here some error message that will appears
+  })
+
+  /**
+   * @missing_data For this scenario we need to have a role called Existing Role with any permissions or not
+   */
+  it.skip('C7499706_Create_A_New_Role_ Same_Role_Names', () => {
+    const roleName = 'Create new role ' + utils.getRandomNumber()
+    const existingRole = 'Existing role'
+
+    // Setup
+    cy.log('SETTING DATA UP')
+    roleManagementPage.clickToCreateRoleWithNewName(roleName)
+    roleManagementPage.saveEntityInformation()
+    roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully', true, true)
+    roleManagementPage.assertActiveRolesAreDisplayed()
+    roleManagementPage.assertEntityIsDisplayedInTheList(roleName)
+
+    // Test
+    cy.log('TEST SCENARIO STARTING')
+    roleManagementPage.clickToCreateRoleWithNewName(roleName)
+    roleManagementPage.saveEntityInformation()
+    roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully', false)
+    roleManagementPage.assertNotificationErrorDisplayed()
+    roleManagementPage.discardEntityInformation()
+
+    roleManagementPage.getEntityByName(existingRole).click()
+    roleManagementPage.modifyEntityName(roleName)
+    roleManagementPage.saveEntityInformation()
+    roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully', false)
+    roleManagementPage.assertNotificationErrorDisplayed()
+  })
+
   // ************************************************ TESTS AS CLIENTS ************************************************** //
 })
