@@ -122,6 +122,7 @@ class BasePage {
 
   /**
    * Assert that a table shows all expected data supposed to be in the columns. The order is taken in consideration.
+   * In case the first column is a checkbox, it will be ignored, so just send the other columns in order
    *
    * @param {Array} columnsToValidate column names to validate, example: columnsToValidate = [Id, Client, Regulator, Status]
    *

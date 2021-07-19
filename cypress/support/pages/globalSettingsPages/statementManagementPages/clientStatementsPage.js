@@ -220,16 +220,6 @@ class ClientStatementsPage extends BasePage {
   }
 
   /**
-   * Assert that the table from participant statements (inside a client) shows all expected data in the columns, which are Ids and Statuses.
-   *
-   * @MISSING_IDS
-   */
-  assertParticipantsStatementsTableContainsExpectedColumns() {
-    const columnsToValidate = ['Participant', 'Status'] // necessary until ids are placed
-    this.assertTableContainsExpectedColumns(columnsToValidate)
-  }
-
-  /**
    * This method will assert that the Client Statement list is being displayed in order, which is by ID
    *
    * @MISSING_IDS

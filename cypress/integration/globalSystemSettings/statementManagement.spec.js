@@ -217,7 +217,7 @@ describe('Statement Management tests', () => {
     clientStatementsPage.filterClientStatements('Repsol')
     clientStatementsPage.clickClientTable(107)
     clientStatementsPage.checkUrl('/participants')
-    clientStatementsPage.assertParticipantsStatementsTableContainsExpectedColumns()
+    clientStatementsPage.assertTableContainsExpectedColumns(['Participant', 'Status'])
   })
 
   it('C7395182_Select_Client_Without_Participants_To_Check_Empty_State', () => {
