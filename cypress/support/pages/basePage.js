@@ -66,7 +66,7 @@ class BasePage {
    * @MISSING_IDS
    */
   clickTabByTitle(tabTitle) {
-    cy.get(`div.tabs-bar div[title=${tabTitle}]`).click()
+    cy.get(`div.tabs-bar *[title='${tabTitle}']`).click()
   }
 
   // ---------------------------------------  OTHERS --------------------------------------------- //
