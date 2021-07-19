@@ -129,8 +129,8 @@ class BasePage {
    */
   assertTableContainsExpectedColumns(columnsToValidate) {
     for (let i = 1; i <= columnsToValidate.length; i++) {
-      cy.get('gs-grid-row gs-grid-cell span')
-        .eq(i)
+      cy.get('gs-grid gs-grid-row-list gs-grid-row gs-grid-cell span:not(:empty)')
+        .eq(i - 1)
         .invoke('text')
         .should('contain', columnsToValidate[i - 1])
     }

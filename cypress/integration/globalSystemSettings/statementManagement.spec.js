@@ -285,9 +285,12 @@ describe('Statement Management tests', () => {
   })
 
   /**
-   * @chrome_only because Firefox does not allow do download pdf files without the confirmation popup
+   * @chrome_only because Firefox does not save the downloaded file in the default cypress download folder
+   *
+   * SKIPPED because this test will have a different behavior
+   *
    */
-  it('C7395183_download_PDF_File_From_Participant', { browser: '!firefox' }, () => {
+  it.skip('C7395183_download_PDF_File_From_Participant', { browser: '!firefox' }, () => {
     const clientName = 'Interxion'
     const clientID = 76
     const participantID = 32512
