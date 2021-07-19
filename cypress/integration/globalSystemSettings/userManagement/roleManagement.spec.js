@@ -194,7 +194,7 @@ describe('Role Management tests over User Management settings', () => {
   })
 
   /**
-   * @missing_data For this scenario we need to have a role called Existing Role with any permissions or not
+   * @missing_data For this scenario we need to have a role called Existing Role (No permissions needed)
    */
   it.skip('C7499706_Create_A_New_Role_ Same_Role_Names', () => {
     const roleName = 'Create new role ' + utils.getRandomNumber()
