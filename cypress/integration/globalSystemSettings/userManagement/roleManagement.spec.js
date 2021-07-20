@@ -160,7 +160,7 @@ describe('Role Management tests over User Management settings', () => {
     roleManagementPage.assertEntityIsDisplayedInTheList(roleName, false)
   })
 
-  it('C7499702_Create_A_New_Role_Mandatory_Fields_Are_Not_Populated', () => {
+  it.only('C7499702_Create_A_New_Role_Mandatory_Fields_Are_Not_Populated', () => {
     const roleName = 'Filling Mandatory Fields ' + utils.getRandomNumber()
 
     roleManagementPage.clickToCreateRoleWithNewName('{backspace}') // just to save the role with empty name

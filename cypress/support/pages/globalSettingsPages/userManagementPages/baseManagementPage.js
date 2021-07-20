@@ -41,13 +41,26 @@ class BaseManagementPage extends BasePage {
    * Get a entity by its name while sending the entity name.
    *
    * @param {String} entityName Entity name.
+   * @param {Boolean} displayed True to assert the entity is displayed by name in the list of entities. False otherwise.
    *
    * @returns The entity element located in the entity list
    */
-  getEntityByName(entityName) {
-    cy.get(selectors.entityNameInList).as('group')
+  getEntityByName(entityName, displayed = true) {
+    if (displayed) {
+      cy.get(selectors.entityNameInList).as('group')
 
-    return cy.get('@group').filter(`:contains('${entityName}')`)
+      return cy
+        .get('@group')
+        .filter(`:contains('${entityName}')`)
+        .scrollIntoView()
+    } else {
+      cy.get(selectors.entityNameInList).as('group')
+
+      return cy
+        .get('@group')
+        .filter(`:contains('${entityName}')`)
+        .should('not.exist')
+    }
   }
 
   // ------------------------------------------------------- CLICKS ---------------------------------------------------------------------- //
@@ -187,7 +200,7 @@ class BaseManagementPage extends BasePage {
     if (displayed) {
       this.getEntityByName(entityName).should('be.visible')
     } else {
-      this.getEntityByName(entityName).should('not.exist')
+      this.getEntityByName(entityName, displayed)
     }
   }
 
