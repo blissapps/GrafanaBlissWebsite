@@ -37,7 +37,7 @@ class RoleManagementPage extends BaseManagementPage {
    * @returns The role element
    */
   getRoleById(roleId) {
-    return cy.get(selectors.roleId + roleId)
+    return cy.get(selectors.roleId + roleId).scrollIntoView()
   }
 
   /**
@@ -45,6 +45,168 @@ class RoleManagementPage extends BaseManagementPage {
    */
   getNewRoleButton() {
     return cy.get(selectors.newRoleBtn)
+  }
+
+  /**
+   * Get all types of permissions [view, update ...] associated with a permission
+   *
+   * @param {String} permissionName name of the permission
+   * @returns array of type of permissions associated with the permissionName given
+   */
+  getPermissionsByName(permissionName) {
+    // Choose permission name
+    cy.log('PERMISSION CHOSEN WAS: ' + permissionName)
+    switch (permissionName) {
+      case 'accessfilters':
+        return cy.get('tr[name=permission_accessfilters] td')
+
+      case 'api':
+        return cy.get('tr[name=permission_api]')
+
+      case 'bi':
+        return cy.get('tr[name=permission_bi]')
+
+      case 'categories':
+        return cy.get('tr[name=permission_categories]')
+
+      case 'clients':
+        return cy.get('tr[name=permission_clients]')
+
+      case 'clients_modules':
+        return cy.get('tr[name=permission_clients_modules]')
+
+      case 'companysecurity':
+        return cy.get('tr[name=permission_companysecurity]')
+
+      case 'companysecuritycurrentvalue':
+        return cy.get('tr[name=permission_companysecuritycurrentvalue]')
+
+      case 'contents':
+        return cy.get('tr[name=permission_contents]')
+
+      case 'contributions':
+        return cy.get('tr[name=permission_contributions]')
+
+      case 'emails':
+        return cy.get('tr[name=permission_emails]')
+
+      case 'grants':
+        return cy.get('tr[name=permission_grants]')
+
+      case 'groups':
+        return cy.get('tr[name=permission_groups]')
+
+      case 'mobile':
+        return cy.get('tr[name=permission_mobile]')
+
+      case 'participants':
+        return cy.get('tr[name=permission_participants]')
+
+      case 'participants_account':
+        return cy.get('tr[name=permission_participants_account]')
+
+      case 'participants_bankaccounts':
+        return cy.get('tr[name=permission_participants_bankaccounts]')
+
+      case 'participants_compliance':
+        return cy.get('tr[name=permission_participants_compliance]')
+
+      case 'participants_dividends':
+        return cy.get('tr[name=permission_participants_dividends]')
+
+      case 'participants_events':
+        return cy.get('tr[name=permission_participants_events]')
+
+      case 'participants_financialreporting':
+        return cy.get('tr[name=permission_participants_financialreporting]')
+
+      case 'participants_gateway':
+        return cy.get('tr[name=permission_participants_gateway]')
+
+      case 'participants_linkage':
+        return cy.get('tr[name=permission_participants_linkage]')
+
+      case 'participants_onbehalf':
+        return cy.get('tr[name=permission_participants_onbehalf]')
+
+      case 'participants_partners':
+        return cy.get('tr[name=permission_participants_partners]')
+
+      case 'participants_restrictions':
+        return cy.get('tr[name=permission_participants_restrictions]')
+
+      case 'participants_sharemanagement':
+        return cy.get('tr[name=permission_participants_sharemanagement]')
+
+      case 'participants_sharetransactions':
+        return cy.get('tr[name=permission_participants_sharetransactions]')
+
+      case 'participants_tax':
+        return cy.get('tr[name=permission_participants_tax]')
+
+      case 'participants_trading':
+        return cy.get('tr[name=permission_participants_trading]')
+
+      case 'partner_account':
+        return cy.get('tr[name=permission_partner_account]')
+
+      case 'partner_custodyaccountmovement':
+        return cy.get('tr[name=permission_partner_custodyaccountmovement]')
+
+      case 'partners':
+        return cy.get('tr[name=permission_partners]')
+
+      case 'payrollschedules':
+        return cy.get('tr[name=permission_payrollschedules]')
+
+      case 'plans':
+        return cy.get('tr[name=permission_plans]')
+
+      case 'purchaseplans':
+        return cy.get('tr[name=permission_purchaseplans]')
+
+      case 'roles':
+        return cy.get('tr[name=permission_roles]')
+
+      case 'settings':
+        return cy.get('tr[name=permission_settings]')
+
+      case 'shareissuances':
+        return cy.get('tr[name=permission_shareissuances]')
+
+      case 'sms':
+        return cy.get('tr[name=permission_sms]')
+
+      case 'tags':
+        return cy.get('tr[name=permission_tags]')
+
+      case 'tenants':
+        return cy.get('tr[name=permission_tenants]')
+
+      case 'terminationrequests':
+        return cy.get('tr[name=permission_terminationrequests]')
+
+      case 'terminationtypes':
+        return cy.get('tr[name=permission_terminationtypes]')
+
+      case 'termsandconditions':
+        return cy.get('tr[name=permission_termsandconditions]')
+
+      case 'transactions':
+        return cy.get('tr[name=permission_transactions]')
+
+      case 'transactionwindows':
+        return cy.get('tr[name=permission_transactionwindows]')
+
+      case 'users':
+        return cy.get('tr[name=permission_users]')
+
+      case 'vestingschedules':
+        return cy.get('tr[name=permission_vestingschedules]')
+
+      default:
+        throw new Error('Please, provide a valid permission name!')
+    }
   }
 
   // ----------------------------------------------- CLICKS --------------------------------------------- //
@@ -66,6 +228,8 @@ class RoleManagementPage extends BaseManagementPage {
    */
   clickRole(roleId) {
     this.getRoleById(roleId).click()
+
+    this.waitUntilPageIsLoaded() // wait to have all permissions loaded
   }
 
   // --------------------------------------- ASSERTIONS --------------------------------------------- //
@@ -94,233 +258,33 @@ class RoleManagementPage extends BaseManagementPage {
    * Insert or remove permissions of a selected role
    *
    * @param {String} permissionName Permission name of a role
-   * @param {Array} permissionsKind Array containing the permissions, for this permission are allowed ['view', 'update', 'create', 'delete']
+   * @param {Array} permissionsType Array containing the permissions, for this permission are allowed ['view', 'update', 'create', 'delete']
    * @param {Boolean} insertPermission True to insert permission, false to remove
    *
    * @example:
-   * insertOrRemoveAccessFiltersPermissions('accessfilters', ['delete']) -> It inserts the permission delete in the access filter permission
-   * insertOrRemoveAccessFiltersPermissions('settings', ['update'], false) -> It removes the permission update in the settings permission
+   * insertOrRemovePermissions('accessfilters', ['delete']) -> It inserts the permission Delete in the Access Filter permission
+   * insertOrRemovePermissions('settings', ['update'], false) -> It removes the permission Update in the Settings permission
    */
-  insertOrRemoveAccessFiltersPermissions(permissionName, permissionsKind, insertPermission = true) {
-    // Manipulate permissionName and permissionsKind, so we do not need to be worried about capitalization nor blank spaces
+  insertOrRemovePermissions(permissionName, permissionsType, insertPermission = true) {
+    // Manipulate permissionName and permissionsType, so we do not need to be worried about capitalization nor blank spaces
     permissionName = permissionName.replaceAll(' ', '').toLowerCase()
-    permissionsKind = permissionsKind.map(permission => permission.replaceAll(' ', '').toLowerCase())
+    permissionsType = permissionsType.map(permission => permission.replaceAll(' ', '').toLowerCase())
 
     // Verify array integrity
-    if (utils.arrayHasDuplicates(permissionsKind) || permissionsKind.length > 4) {
+    if (utils.arrayHasDuplicates(permissionsType) || permissionsType.length > 4) {
       throw new Error('A permission type must be unique and the max amount of permissions is 4.')
-    }
-
-    // Choose permission name
-    cy.log('PERMISSION CHOSEN WAS: ' + permissionName)
-    switch (permissionName) {
-      case 'accessfilters':
-        cy.get('tr[name=permission_accessfilters] td').as('permission')
-        break
-
-      case 'api':
-        cy.get('tr[name=permission_api]').as('permission')
-        break
-
-      case 'bi':
-        cy.get('tr[name=permission_bi]').as('permission')
-        break
-
-      case 'categories':
-        cy.get('tr[name=permission_categories]').as('permission')
-        break
-
-      case 'clients':
-        cy.get('tr[name=permission_clients]').as('permission')
-        break
-
-      case 'clients_modules':
-        cy.get('tr[name=permission_clients_modules]').as('permission')
-        break
-
-      case 'companysecurity':
-        cy.get('tr[name=permission_companysecurity]').as('permission')
-        break
-
-      case 'companysecuritycurrentvalue':
-        cy.get('tr[name=permission_companysecuritycurrentvalue]').as('permission')
-        break
-
-      case 'contents':
-        cy.get('tr[name=permission_contents]').as('permission')
-        break
-
-      case 'contributions':
-        cy.get('tr[name=permission_contributions]').as('permission')
-        break
-
-      case 'emails':
-        cy.get('tr[name=permission_emails]').as('permission')
-        break
-
-      case 'grants':
-        cy.get('tr[name=permission_grants]').as('permission')
-        break
-
-      case 'groups':
-        cy.get('tr[name=permission_groups]').as('permission')
-        break
-
-      case 'mobile':
-        cy.get('tr[name=permission_mobile]').as('permission')
-        break
-
-      case 'participants':
-        cy.get('tr[name=permission_participants]').as('permission')
-        break
-
-      case 'participants_account':
-        cy.get('tr[name=permission_participants_account]').as('permission')
-        break
-
-      case 'participants_bankaccounts':
-        cy.get('tr[name=permission_participants_bankaccounts]').as('permission')
-        break
-
-      case 'participants_compliance':
-        cy.get('tr[name=permission_participants_compliance]').as('permission')
-        break
-
-      case 'participants_dividends':
-        cy.get('tr[name=permission_participants_dividends]').as('permission')
-        break
-
-      case 'participants_events':
-        cy.get('tr[name=permission_participants_events]').as('permission')
-        break
-
-      case 'participants_financialreporting':
-        cy.get('tr[name=permission_participants_financialreporting]').as('permission')
-        break
-
-      case 'participants_gateway':
-        cy.get('tr[name=permission_participants_gateway]').as('permission')
-        break
-
-      case 'participants_linkage':
-        cy.get('tr[name=permission_participants_linkage]').as('permission')
-        break
-
-      case 'participants_onbehalf':
-        cy.get('tr[name=permission_participants_onbehalf]').as('permission')
-        break
-
-      case 'participants_partners':
-        cy.get('tr[name=permission_participants_partners]').as('permission')
-        break
-
-      case 'participants_restrictions':
-        cy.get('tr[name=permission_participants_restrictions]').as('permission')
-        break
-
-      case 'participants_sharemanagement':
-        cy.get('tr[name=permission_participants_sharemanagement]').as('permission')
-        break
-
-      case 'participants_sharetransactions':
-        cy.get('tr[name=permission_participants_sharetransactions]').as('permission')
-        break
-
-      case 'participants_tax':
-        cy.get('tr[name=permission_participants_tax]').as('permission')
-        break
-
-      case 'participants_trading':
-        cy.get('tr[name=permission_participants_trading]').as('permission')
-        break
-
-      case 'partner_account':
-        cy.get('tr[name=permission_partner_account]').as('permission')
-        break
-
-      case 'partner_custodyaccountmovement':
-        cy.get('tr[name=permission_partner_custodyaccountmovement]').as('permission')
-        break
-
-      case 'partners':
-        cy.get('tr[name=permission_partners]').as('permission')
-        break
-
-      case 'payrollschedules':
-        cy.get('tr[name=permission_payrollschedules]').as('permission')
-        break
-
-      case 'plans':
-        cy.get('tr[name=permission_plans]').as('permission')
-        break
-
-      case 'purchaseplans':
-        cy.get('tr[name=permission_purchaseplans]').as('permission')
-        break
-
-      case 'roles':
-        cy.get('tr[name=permission_roles]').as('permission')
-        break
-
-      case 'settings':
-        cy.get('tr[name=permission_settings]').as('permission')
-        break
-
-      case 'shareissuances':
-        cy.get('tr[name=permission_shareissuances]').as('permission')
-        break
-
-      case 'sms':
-        cy.get('tr[name=permission_sms]').as('permission')
-        break
-
-      case 'tags':
-        cy.get('tr[name=permission_tags]').as('permission')
-        break
-
-      case 'tenants':
-        cy.get('tr[name=permission_tenants]').as('permission')
-        break
-
-      case 'terminationrequests':
-        cy.get('tr[name=permission_terminationrequests]').as('permission')
-        break
-
-      case 'terminationtypes':
-        cy.get('tr[name=permission_terminationtypes]').as('permission')
-        break
-
-      case 'termsandconditions':
-        cy.get('tr[name=permission_termsandconditions]').as('permission')
-        break
-
-      case 'transactions':
-        cy.get('tr[name=permission_transactions]').as('permission')
-        break
-
-      case 'transactionwindows':
-        cy.get('tr[name=permission_transactionwindows]').as('permission')
-        break
-
-      case 'users':
-        cy.get('tr[name=permission_api]').as('permission')
-        break
-
-      case 'vestingschedules':
-        cy.get('tr[name=permission_vestingschedules]').as('permission')
-        break
-
-      default:
-        throw new Error('Please, provide a valid permission name!')
     }
 
     // Variable to control if we are gonna insert or remove the permission
     let verifyActiveState = ''
     insertPermission ? (verifyActiveState = ':not([class*= active])') : (verifyActiveState = '[class*= active]')
 
+    // Pick permission
+    this.getPermissionsByName(permissionName).as('permission')
+
     // Insert or remove the permissions
-    for (let i = 0; i < permissionsKind.length; i++) {
-      switch (permissionsKind[i]) {
+    for (let i = 0; i < permissionsType.length; i++) {
+      switch (permissionsType[i]) {
         case 'view':
           cy.get('@permission')
             .find('gs-checkbox[name = view]' + verifyActiveState)
@@ -350,7 +314,114 @@ class RoleManagementPage extends BaseManagementPage {
           break
 
         default:
-          throw new Error('Please, provide a valid permission for this one!')
+          throw new Error('Please, provide a valid permission type for this one!')
+      }
+    }
+  }
+
+  /**
+   * Insert or remove ALL permissions at once of a selected role
+   *
+   * @param {String} permissionsType Permissions type, in which are are allowed ['view', 'update', 'create', 'delete']
+   *
+   * @example:
+   * insertOrRemoveAllPermissions('delete') -> It clicks on the Delete column header to insert or remove all delete permissions of all permissions
+   */
+  insertOrRemoveAllPermissions(permissionsType) {
+    // Manipulate permissionName and permissionsType, so we do not need to be worried about capitalization nor blank spaces
+    permissionsType = permissionsType.replaceAll(' ', '').toLowerCase()
+
+    switch (permissionsType) {
+      case 'view':
+        cy.get('thead th[name=column_view]')
+          .scrollIntoView()
+          .click()
+        break
+
+      case 'update':
+        cy.get('thead th[name=column_update]')
+          .scrollIntoView()
+          .click()
+        break
+
+      case 'create':
+        cy.get('thead th[name=column_create]')
+          .scrollIntoView()
+          .click()
+        break
+
+      case 'delete':
+        cy.get('thead th[name=column_delete]')
+          .scrollIntoView()
+          .click()
+        break
+
+      default:
+        throw new Error('Please, provide a valid permission type!')
+    }
+  }
+
+  /**
+   * Assert a given permission is active or not of a selected role
+   *
+   * @param {String} permissionName Permission name of a role
+   * @param {Array} permissionsType Array containing the permissions, for this permission are allowed ['view', 'update', 'create', 'delete']
+   * @param {Boolean} activeState True to insert permission, false to remove
+   *
+   * @example:
+   * assertPermissionState('accessfilters', ['delete'], true) -> It asserts the permission Delete in the Access Filter permission is active
+   * assertPermissionState('settings', ['update'], false) -> It asserts the permission Update in the Settings permission is NOT active
+   */
+  assertPermissionState(permissionName, permissionsType, activeState) {
+    // Manipulate permissionName and permissionsType, so we do not need to be worried about capitalization nor blank spaces
+    permissionName = permissionName.replaceAll(' ', '').toLowerCase()
+    permissionsType = permissionsType.map(permission => permission.replaceAll(' ', '').toLowerCase())
+
+    // Verify array integrity
+    if (utils.arrayHasDuplicates(permissionsType) || permissionsType.length > 4) {
+      throw new Error('A permission type must be unique and the max amount of permissions is 4.')
+    }
+
+    // Variable to control the expected permission state
+    let verifyActiveState = ''
+    activeState ? (verifyActiveState = '[class*= active]') : (verifyActiveState = ':not([class*= active])')
+
+    // Pick permission
+    this.getPermissionsByName(permissionName).as('permission')
+
+    // Insert or remove the permissions
+    for (let i = 0; i < permissionsType.length; i++) {
+      switch (permissionsType[i]) {
+        case 'view':
+          cy.get('@permission')
+            .find('gs-checkbox[name = view]' + verifyActiveState)
+            .scrollIntoView()
+            .should('be.visible')
+          break
+
+        case 'update':
+          cy.get('@permission')
+            .find('gs-checkbox[name = update]' + verifyActiveState)
+            .scrollIntoView()
+            .should('be.visible')
+          break
+
+        case 'create':
+          cy.get('@permission')
+            .find('gs-checkbox[name = create]' + verifyActiveState)
+            .scrollIntoView()
+            .should('be.visible')
+          break
+
+        case 'delete':
+          cy.get('@permission')
+            .find('gs-checkbox[name = delete]' + verifyActiveState)
+            .scrollIntoView()
+            .should('be.visible')
+          break
+
+        default:
+          throw new Error('Please, provide a valid permission type for this one!')
       }
     }
   }

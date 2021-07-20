@@ -131,13 +131,11 @@ describe('Role Management tests over User Management settings', () => {
     const roleName = 'Create new role ' + utils.getRandomNumber()
 
     roleManagementPage.clickToCreateRoleWithNewName(roleName)
-    roleManagementPage.insertOrRemoveAccessFiltersPermissions('accessfilters', ['view', 'update', 'create', 'delete'])
-    roleManagementPage.insertOrRemoveAccessFiltersPermissions('api', ['view'])
-    roleManagementPage.insertOrRemoveAccessFiltersPermissions('settings', ['update'])
-    roleManagementPage.insertOrRemoveAccessFiltersPermissions('accessfilters', ['create'], false)
-    roleManagementPage.insertOrRemoveAccessFiltersPermissions('settings', ['update'], false)
-    roleManagementPage.insertOrRemoveAccessFiltersPermissions('settings', ['delete'])
-    roleManagementPage.insertOrRemoveAccessFiltersPermissions('groups', ['view', 'update', 'create', 'delete'])
+    roleManagementPage.insertOrRemovePermissions('accessfilters', ['view', 'update', 'create', 'delete'])
+    roleManagementPage.insertOrRemovePermissions('api', ['view'])
+    roleManagementPage.insertOrRemovePermissions('settings', ['update'])
+    roleManagementPage.insertOrRemovePermissions('settings', ['delete'])
+    roleManagementPage.insertOrRemovePermissions('groups', ['view', 'update', 'create', 'delete'])
 
     roleManagementPage.saveEntityInformation()
 
@@ -150,13 +148,9 @@ describe('Role Management tests over User Management settings', () => {
     const roleName = 'Create and Discard'
 
     roleManagementPage.clickToCreateRoleWithNewName(roleName)
-    roleManagementPage.insertOrRemoveAccessFiltersPermissions('accessfilters', ['view', 'update', 'create', 'delete'])
-    roleManagementPage.insertOrRemoveAccessFiltersPermissions('api', ['view'])
-    roleManagementPage.insertOrRemoveAccessFiltersPermissions('settings', ['update'])
-    roleManagementPage.insertOrRemoveAccessFiltersPermissions('accessfilters', ['create'], false)
-    roleManagementPage.insertOrRemoveAccessFiltersPermissions('settings', ['update'], false)
-    roleManagementPage.insertOrRemoveAccessFiltersPermissions('settings', ['delete'])
-    roleManagementPage.insertOrRemoveAccessFiltersPermissions('groups', ['view', 'update', 'create', 'delete'])
+    roleManagementPage.insertOrRemovePermissions('accessfilters', ['view', 'update', 'create', 'delete'])
+    roleManagementPage.insertOrRemovePermissions('api', ['view'])
+    roleManagementPage.insertOrRemovePermissions('groups', ['view', 'update', 'create', 'delete'])
 
     roleManagementPage.discardEntityInformation()
     roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully', false)
@@ -197,7 +191,7 @@ describe('Role Management tests over User Management settings', () => {
   })
 
   /**
-   * @missing_data For this scenario we need to have a role called Existing Role (No permissions needed)
+   * @missing_data For this scenario we need to have a role called 'Existing Role' (No permissions needed)
    */
   it.skip('C7499706_Create_A_New_Role_ Same_Role_Names', () => {
     const roleName = 'Create new role ' + utils.getRandomNumber()
@@ -226,5 +220,81 @@ describe('Role Management tests over User Management settings', () => {
     roleManagementPage.assertNotificationErrorDisplayed()
   })
 
+  /**
+   * @missing_data For this scenario we need to have a role called 'Add Permissions To Role' with no permissions selected
+   */
+  it.skip('C7499830_View/Update_Role_Permissions_Add_Permission_To_Role', () => {
+    const roleId = 1515
+
+    roleManagementPage.clickRole(roleId)
+
+    roleManagementPage.insertOrRemovePermissions('accessfilters', ['view', 'update', 'create'])
+    roleManagementPage.insertOrRemovePermissions('api', ['view'])
+    roleManagementPage.insertOrRemovePermissions('settings', ['update', 'delete'])
+    roleManagementPage.insertOrRemovePermissions('groups', ['view', 'delete'])
+    roleManagementPage.insertOrRemoveAllPermissions('delete')
+    roleManagementPage.saveEntityInformation()
+    roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully', true)
+
+    // PUT (aborted) /api/Roles/1515
+
+    roleManagementPage.reloadPage()
+    roleManagementPage.clickRole(roleId)
+
+    // Assert permissions given
+    roleManagementPage.assertPermissionState('accessfilters', ['view', 'update', 'create'], true)
+    roleManagementPage.assertPermissionState('api', ['view'], true)
+    roleManagementPage.assertPermissionState('bi', ['view'], false)
+    roleManagementPage.assertPermissionState('clients', ['update'], false)
+    roleManagementPage.assertPermissionState('settings', ['update'], true)
+    roleManagementPage.assertPermissionState('settings', ['view', 'create'], false)
+    roleManagementPage.assertPermissionState('groups', ['view'], true)
+    roleManagementPage.assertPermissionState('groups', ['update', 'create'], false)
+
+    // Assert Delete permissions type given to all permissions
+    roleManagementPage.assertPermissionState('accessfilters', ['delete'], true)
+    roleManagementPage.assertPermissionState('categories', ['delete'], true)
+    roleManagementPage.assertPermissionState('companysecurity', ['delete'], true)
+    roleManagementPage.assertPermissionState('contents', ['delete'], true)
+    roleManagementPage.assertPermissionState('contributions', ['delete'], true)
+    roleManagementPage.assertPermissionState('emails', ['delete'], true)
+    roleManagementPage.assertPermissionState('grants', ['delete'], true)
+    roleManagementPage.assertPermissionState('groups', ['delete'], true)
+    roleManagementPage.assertPermissionState('participants', ['delete'], true)
+    roleManagementPage.assertPermissionState('participants_bankaccounts', ['delete'], true)
+    roleManagementPage.assertPermissionState('participants_compliance', ['delete'], true)
+    roleManagementPage.assertPermissionState('participants_dividends', ['delete'], true)
+    roleManagementPage.assertPermissionState('participants_financialreporting', ['delete'], true)
+    roleManagementPage.assertPermissionState('participants_gateway', ['delete'], true)
+    roleManagementPage.assertPermissionState('participants_linkage', ['delete'], true)
+    roleManagementPage.assertPermissionState('participants_partners', ['delete'], true)
+    roleManagementPage.assertPermissionState('participants_restrictions', ['delete'], true)
+    roleManagementPage.assertPermissionState('participants_sharemanagement', ['delete'], true)
+    roleManagementPage.assertPermissionState('participants_sharetransactions', ['delete'], true)
+    roleManagementPage.assertPermissionState('participants_tax', ['delete'], true)
+    roleManagementPage.assertPermissionState('participants_trading', ['delete'], true)
+    roleManagementPage.assertPermissionState('payrollschedules', ['delete'], true)
+    roleManagementPage.assertPermissionState('plans', ['delete'], true)
+    roleManagementPage.assertPermissionState('purchaseplans', ['delete'], true)
+    roleManagementPage.assertPermissionState('roles', ['delete'], true)
+    roleManagementPage.assertPermissionState('settings', ['delete'], true)
+    roleManagementPage.assertPermissionState('shareissuances', ['delete'], true)
+    roleManagementPage.assertPermissionState('tags', ['delete'], true)
+    roleManagementPage.assertPermissionState('tenants', ['delete'], true)
+    roleManagementPage.assertPermissionState('transactions', ['delete'], true)
+    roleManagementPage.assertPermissionState('transactionwindows', ['delete'], true)
+    roleManagementPage.assertPermissionState('users', ['delete'], true)
+    roleManagementPage.assertPermissionState('vestingschedules', ['delete'], true)
+
+    //teardown - Remove all permissions at once
+    roleManagementPage.insertOrRemoveAllPermissions('view')
+    roleManagementPage.insertOrRemoveAllPermissions('view')
+    roleManagementPage.insertOrRemoveAllPermissions('update')
+    roleManagementPage.insertOrRemoveAllPermissions('update')
+    roleManagementPage.insertOrRemoveAllPermissions('create')
+    roleManagementPage.insertOrRemoveAllPermissions('create')
+    roleManagementPage.insertOrRemoveAllPermissions('delete')
+    roleManagementPage.saveEntityInformation()
+  })
   // ************************************************ TESTS AS CLIENTS ************************************************** //
 })
