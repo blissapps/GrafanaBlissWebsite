@@ -1,4 +1,4 @@
-image: cypress/browsers:node14.16.0-chrome89-ff86
+image: cypress/browsers:node14.17.0-chrome91-ff89
 options:
   max-time: 120
 
