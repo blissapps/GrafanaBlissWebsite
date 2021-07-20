@@ -173,7 +173,9 @@ class ClientStatementsPage extends BasePage {
    */
   filterClientStatements(clientName = '', dateFrom = '', dateTo = '') {
     if (clientName != '') {
-      cy.get(selectors.clientFilterStatementInput).type(clientName + '{enter}')
+      cy.get(selectors.clientFilterStatementInput).as('clientFilterInput')
+      cy.get('@clientFilterInput').type(clientName)
+      cy.get('@clientFilterInput').type('{enter}')
     }
 
     if (dateFrom != '' && dateTo != '') {

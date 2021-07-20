@@ -6,11 +6,14 @@ import SearchBar from '../../../support/components/searchBar'
 import Utils from '../../../support/utils'
 
 describe('Role Management tests over User Management settings', () => {
+  // Pages
   const roleManagementPage = new RoleManagementPage()
 
+  // Components
   const leftMenuNavBar = new LeftMenuNavBar()
   const searchBar = new SearchBar()
 
+  // Others
   const utils = new Utils()
 
   beforeEach(() => {

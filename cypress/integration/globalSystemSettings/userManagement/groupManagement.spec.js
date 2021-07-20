@@ -3,11 +3,18 @@ import GroupManagementPage from '../../../support/pages/globalSettingsPages/user
 import LeftMenuNavBar from '../../../support/components/leftMenuNavBar'
 import SearchBar from '../../../support/components/searchBar'
 
+import Utils from '../../../support/utils'
+
 describe('Group Management tests over User Management settings', () => {
+  // Pages
   const groupManagementPage = new GroupManagementPage()
 
+  // Components
   const leftMenuNavBar = new LeftMenuNavBar()
   const searchBar = new SearchBar()
+
+  // Others
+  const utils = new Utils()
 
   beforeEach(() => {
     // @ts-ignore
@@ -123,7 +130,7 @@ describe('Group Management tests over User Management settings', () => {
    * @missing_data Need to have at least one group and roles, daps, users, and companies to associate
    */
   it.skip('C7493034_Groups_Create_A_New_Group', () => {
-    const groupName = 'Created Group From Automation'
+    const groupName = 'Created Group ' + utils.getRandomNumber()
     const roleName = 'View Only'
     const roleId = 1397
     const dapNames = ['Test', 'View']
