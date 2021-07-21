@@ -438,6 +438,8 @@ describe('Role Management tests over User Management settings', () => {
   /**
    * @missing_data For this scenario we need to have a role called 'Activate Role' in the inactive tab
    *
+   * SKIPPING also due to https://globalshares.atlassian.net/browse/PB-905
+   *
    * @missing_steps check if the role is editable or not
    */
   it.skip('C7499833_Deactivate_And_Activate_Role', () => {
