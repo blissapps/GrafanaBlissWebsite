@@ -368,7 +368,7 @@ describe('Role Management tests over User Management settings', () => {
    * @missing_data For this scenario we need to have a role called 'Discard changes' with some permissions selected
    *               The permissions are: access filters [all], api [view], groups [view and delete], settings [delete] and CREATE in all permissions
    */
-  it.only('C7499832_View/Update_Role_Permissions_Discard_Unsaved_Changes', () => {
+  it.skip('C7499832_View/Update_Role_Permissions_Discard_Unsaved_Changes', () => {
     const roleId = 1403
 
     roleManagementPage.clickRole(roleId)
