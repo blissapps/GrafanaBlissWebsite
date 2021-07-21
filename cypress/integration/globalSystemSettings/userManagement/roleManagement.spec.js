@@ -236,8 +236,6 @@ describe('Role Management tests over User Management settings', () => {
     roleManagementPage.saveEntityInformation()
     roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully', true)
 
-    // PUT (aborted) /api/Roles/1515
-
     roleManagementPage.reloadPage()
     roleManagementPage.clickRole(roleId)
 
@@ -287,6 +285,7 @@ describe('Role Management tests over User Management settings', () => {
     roleManagementPage.assertPermissionState('vestingschedules', ['delete'], true)
 
     //teardown - Remove all permissions at once
+    cy.log('--- TEARDOWN ---')
     roleManagementPage.insertOrRemoveAllPermissions('view')
     roleManagementPage.insertOrRemoveAllPermissions('view')
     roleManagementPage.insertOrRemoveAllPermissions('update')
@@ -295,6 +294,145 @@ describe('Role Management tests over User Management settings', () => {
     roleManagementPage.insertOrRemoveAllPermissions('create')
     roleManagementPage.insertOrRemoveAllPermissions('delete')
     roleManagementPage.saveEntityInformation()
+  })
+
+  /**
+   * @missing_data For this scenario we need to have a role called 'Remove permission' with some permissions selected
+   *               The permissions are: access filters [view and update], categories [view], users [create], and DELETE in all permissions
+   */
+  it.skip('C7499831_View/Update_Role_Permissions_Remove_Permission_From_Role', () => {
+    const roleId = 1423
+
+    roleManagementPage.clickRole(roleId)
+
+    roleManagementPage.insertOrRemovePermissions('accessfilters', ['view', 'update'], false)
+    roleManagementPage.insertOrRemovePermissions('categories', ['view'], false)
+    roleManagementPage.insertOrRemovePermissions('users', ['create'], false)
+    roleManagementPage.insertOrRemoveAllPermissions('delete')
+    roleManagementPage.saveEntityInformation()
+    roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully', true)
+
+    roleManagementPage.reloadPage()
+    roleManagementPage.clickRole(roleId)
+
+    // Assert permissions removed
+    roleManagementPage.assertPermissionState('accessfilters', ['view', 'update'], false)
+    roleManagementPage.assertPermissionState('categories', ['view'], false)
+    roleManagementPage.assertPermissionState('users', ['create'], false)
+
+    // Assert Delete permissions type removed from all permissions
+    roleManagementPage.assertPermissionState('accessfilters', ['delete'], false)
+    roleManagementPage.assertPermissionState('categories', ['delete'], false)
+    roleManagementPage.assertPermissionState('companysecurity', ['delete'], false)
+    roleManagementPage.assertPermissionState('contents', ['delete'], false)
+    roleManagementPage.assertPermissionState('contributions', ['delete'], false)
+    roleManagementPage.assertPermissionState('emails', ['delete'], false)
+    roleManagementPage.assertPermissionState('grants', ['delete'], false)
+    roleManagementPage.assertPermissionState('groups', ['delete'], false)
+    roleManagementPage.assertPermissionState('participants', ['delete'], false)
+    roleManagementPage.assertPermissionState('participants_bankaccounts', ['delete'], false)
+    roleManagementPage.assertPermissionState('participants_compliance', ['delete'], false)
+    roleManagementPage.assertPermissionState('participants_dividends', ['delete'], false)
+    roleManagementPage.assertPermissionState('participants_financialreporting', ['delete'], false)
+    roleManagementPage.assertPermissionState('participants_gateway', ['delete'], false)
+    roleManagementPage.assertPermissionState('participants_linkage', ['delete'], false)
+    roleManagementPage.assertPermissionState('participants_partners', ['delete'], false)
+    roleManagementPage.assertPermissionState('participants_restrictions', ['delete'], false)
+    roleManagementPage.assertPermissionState('participants_sharemanagement', ['delete'], false)
+    roleManagementPage.assertPermissionState('participants_sharetransactions', ['delete'], false)
+    roleManagementPage.assertPermissionState('participants_tax', ['delete'], false)
+    roleManagementPage.assertPermissionState('participants_trading', ['delete'], false)
+    roleManagementPage.assertPermissionState('payrollschedules', ['delete'], false)
+    roleManagementPage.assertPermissionState('plans', ['delete'], false)
+    roleManagementPage.assertPermissionState('purchaseplans', ['delete'], false)
+    roleManagementPage.assertPermissionState('roles', ['delete'], false)
+    roleManagementPage.assertPermissionState('settings', ['delete'], false)
+    roleManagementPage.assertPermissionState('shareissuances', ['delete'], false)
+    roleManagementPage.assertPermissionState('tags', ['delete'], false)
+    roleManagementPage.assertPermissionState('tenants', ['delete'], false)
+    roleManagementPage.assertPermissionState('transactions', ['delete'], false)
+    roleManagementPage.assertPermissionState('transactionwindows', ['delete'], false)
+    roleManagementPage.assertPermissionState('users', ['delete'], false)
+    roleManagementPage.assertPermissionState('vestingschedules', ['delete'], false)
+
+    //teardown - Add permissions removed
+    cy.log('--- TEARDOWN ---')
+    roleManagementPage.insertOrRemoveAllPermissions('delete')
+    roleManagementPage.insertOrRemovePermissions('accessfilters', ['view', 'update'], true)
+    roleManagementPage.insertOrRemovePermissions('categories', ['view'], true)
+    roleManagementPage.insertOrRemovePermissions('users', ['create'], true)
+    roleManagementPage.saveEntityInformation()
+  })
+
+  /**
+   * @missing_data For this scenario we need to have a role called 'Discard changes' with some permissions selected
+   *               The permissions are: access filters [all], api [view], groups [view and delete], settings [delete] and CREATE in all permissions
+   */
+  it.only('C7499832_View/Update_Role_Permissions_Discard_Unsaved_Changes', () => {
+    const roleId = 1403
+
+    roleManagementPage.clickRole(roleId)
+
+    roleManagementPage.insertOrRemovePermissions('accessfilters', ['update'], false)
+    roleManagementPage.insertOrRemovePermissions('api', ['view'], false)
+    roleManagementPage.insertOrRemovePermissions('groups', ['delete'], false)
+    roleManagementPage.insertOrRemovePermissions('settings', ['delete'], false)
+    roleManagementPage.insertOrRemovePermissions('bi', ['view'], true)
+    roleManagementPage.insertOrRemovePermissions('categories', ['update', 'delete'], true)
+    roleManagementPage.insertOrRemoveAllPermissions('create')
+    roleManagementPage.discardEntityInformation()
+    roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully', false)
+
+    roleManagementPage.reloadPage()
+    roleManagementPage.clickRole(roleId)
+
+    // Assert permissions not changed
+    roleManagementPage.assertPermissionState('accessfilters', ['view', 'update', 'delete'], true)
+    roleManagementPage.assertPermissionState('api', ['view'], true)
+    roleManagementPage.assertPermissionState('groups', ['view', 'delete'], true)
+    roleManagementPage.assertPermissionState('settings', ['delete'], true)
+    roleManagementPage.assertPermissionState('bi', ['view'], false)
+    roleManagementPage.assertPermissionState('categories', ['update', 'delete'], false)
+
+    // Assert CREATE permissions type removed from all permissions
+    roleManagementPage.assertPermissionState('accessfilters', ['create'], true)
+    roleManagementPage.assertPermissionState('categories', ['create'], true)
+    roleManagementPage.assertPermissionState('clients', ['create'], true)
+    roleManagementPage.assertPermissionState('clients_modules', ['create'], true)
+    roleManagementPage.assertPermissionState('companysecurity', ['create'], true)
+    roleManagementPage.assertPermissionState('contents', ['create'], true)
+    roleManagementPage.assertPermissionState('contributions', ['create'], true)
+    roleManagementPage.assertPermissionState('emails', ['create'], true)
+    roleManagementPage.assertPermissionState('grants', ['create'], true)
+    roleManagementPage.assertPermissionState('groups', ['create'], true)
+    roleManagementPage.assertPermissionState('participants', ['create'], true)
+    roleManagementPage.assertPermissionState('participants_account', ['create'], true)
+    roleManagementPage.assertPermissionState('participants_bankaccounts', ['create'], true)
+    roleManagementPage.assertPermissionState('participants_compliance', ['create'], true)
+    roleManagementPage.assertPermissionState('participants_dividends', ['create'], true)
+    roleManagementPage.assertPermissionState('participants_financialreporting', ['create'], true)
+    roleManagementPage.assertPermissionState('participants_gateway', ['create'], true)
+    roleManagementPage.assertPermissionState('participants_linkage', ['create'], true)
+    roleManagementPage.assertPermissionState('participants_partners', ['create'], true)
+    roleManagementPage.assertPermissionState('participants_restrictions', ['create'], true)
+    roleManagementPage.assertPermissionState('participants_sharemanagement', ['create'], true)
+    roleManagementPage.assertPermissionState('participants_sharetransactions', ['create'], true)
+    roleManagementPage.assertPermissionState('participants_tax', ['create'], true)
+    roleManagementPage.assertPermissionState('participants_trading', ['create'], true)
+    roleManagementPage.assertPermissionState('partner_account', ['create'], true)
+    roleManagementPage.assertPermissionState('partner_custodyaccountmovement', ['create'], true)
+    roleManagementPage.assertPermissionState('payrollschedules', ['create'], true)
+    roleManagementPage.assertPermissionState('plans', ['create'], true)
+    roleManagementPage.assertPermissionState('purchaseplans', ['create'], true)
+    roleManagementPage.assertPermissionState('roles', ['create'], true)
+    roleManagementPage.assertPermissionState('settings', ['create'], true)
+    roleManagementPage.assertPermissionState('shareissuances', ['create'], true)
+    roleManagementPage.assertPermissionState('tags', ['create'], true)
+    roleManagementPage.assertPermissionState('terminationrequests', ['create'], true)
+    roleManagementPage.assertPermissionState('transactions', ['create'], true)
+    roleManagementPage.assertPermissionState('transactionwindows', ['create'], true)
+    roleManagementPage.assertPermissionState('users', ['create'], true)
+    roleManagementPage.assertPermissionState('vestingschedules', ['create'], true)
   })
   // ************************************************ TESTS AS CLIENTS ************************************************** //
 })

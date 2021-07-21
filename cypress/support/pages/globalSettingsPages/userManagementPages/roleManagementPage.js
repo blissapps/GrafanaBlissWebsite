@@ -205,7 +205,7 @@ class RoleManagementPage extends BaseManagementPage {
         return cy.get('tr[name=permission_vestingschedules]')
 
       default:
-        throw new Error('Please, provide a valid permission name!')
+        throw new Error(permissionName + ' is not valid. Please, provide a valid permission name!')
     }
   }
 
@@ -314,7 +314,7 @@ class RoleManagementPage extends BaseManagementPage {
           break
 
         default:
-          throw new Error('Please, provide a valid permission type for this one!')
+          throw new Error(permissionsType + ' is not valid. Please, provide a valid permission type for this one!')
       }
     }
   }
@@ -331,6 +331,7 @@ class RoleManagementPage extends BaseManagementPage {
     // Manipulate permissionName and permissionsType, so we do not need to be worried about capitalization nor blank spaces
     permissionsType = permissionsType.replaceAll(' ', '').toLowerCase()
 
+    cy.log('Permissions: ' + permissionsType)
     switch (permissionsType) {
       case 'view':
         cy.get('thead th[name=column_view]')
@@ -357,7 +358,7 @@ class RoleManagementPage extends BaseManagementPage {
         break
 
       default:
-        throw new Error('Please, provide a valid permission type!')
+        throw new Error(permissionsType + ' is not valid. Please, provide a valid permission type!')
     }
   }
 
@@ -366,7 +367,7 @@ class RoleManagementPage extends BaseManagementPage {
    *
    * @param {String} permissionName Permission name of a role
    * @param {Array} permissionsType Array containing the permissions, for this permission are allowed ['view', 'update', 'create', 'delete']
-   * @param {Boolean} activeState True to insert permission, false to remove
+   * @param {Boolean} activeState True to assert the permission is selected, false otherwise
    *
    * @example:
    * assertPermissionState('accessfilters', ['delete'], true) -> It asserts the permission Delete in the Access Filter permission is active
@@ -421,7 +422,7 @@ class RoleManagementPage extends BaseManagementPage {
           break
 
         default:
-          throw new Error('Please, provide a valid permission type for this one!')
+          throw new Error(permissionsType + ' is not valid. Please, provide a valid permission type for this one!')
       }
     }
   }
