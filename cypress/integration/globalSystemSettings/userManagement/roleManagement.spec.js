@@ -180,7 +180,7 @@ describe('Role Management tests over User Management settings', () => {
    */
   it.skip('C7499703_User_Does_Not_Have_Permissions_To_Create_New_Role', () => {
     // @ts-ignore
-    cy.logout() && cy.login('UserNoCreateRole@globalshares.com', '1234579846') // Logout to login with the correct user without permission
+    cy.logout() && cy.login('UserNoCreateRole@globalshares.com', '1234579846') && cy.loginSuccessfulXHRWaits() // Logout to login with the correct user without permission
 
     leftMenuNavBar.accessGlobalSettingsMenu('user', 'role')
     roleManagementPage.checkRoleManagementUrl()
@@ -193,9 +193,9 @@ describe('Role Management tests over User Management settings', () => {
   /**
    * @missing_data For this scenario we need to have a role called 'Existing Role' (No permissions needed)
    */
-  it.skip('C7499706_Create_A_New_Role_ Same_Role_Names', () => {
+  it.skip('C7499706_Create_A_New_Role_Same_Role_Names', () => {
     const roleName = 'Create new role ' + utils.getRandomNumber()
-    const existingRole = 'Existing role'
+    const roleId = 1426
 
     // Setup
     cy.log('SETTING DATA UP')
@@ -213,7 +213,7 @@ describe('Role Management tests over User Management settings', () => {
     roleManagementPage.assertNotificationErrorDisplayed()
     roleManagementPage.discardEntityInformation()
 
-    roleManagementPage.getEntityByName(existingRole).click()
+    roleManagementPage.clickRole(roleId)
     roleManagementPage.modifyEntityName(roleName)
     roleManagementPage.saveEntityInformation()
     roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully', false)
@@ -434,5 +434,57 @@ describe('Role Management tests over User Management settings', () => {
     roleManagementPage.assertPermissionState('users', ['create'], true)
     roleManagementPage.assertPermissionState('vestingschedules', ['create'], true)
   })
+
+  /**
+   * @missing_data For this scenario we need to have a role called 'Activate Role' in the inactive tab
+   *
+   * @missing_steps check if the role is editable or not
+   */
+  it.skip('C7499833_Deactivate_And_Activate_Role', () => {
+    const roleId = 1405
+    const roleName = 'Activate and Inactivate'
+
+    // Inactivate role
+    roleManagementPage.clickRole(roleId)
+    roleManagementPage.deactivateRole()
+    roleManagementPage.assertToastNotificationMessageIsDisplayed('Role deactivated', true, true)
+    roleManagementPage.assertInactiveRolesAreDisplayed()
+    roleManagementPage.assertEntityIsDisplayedInTheList(roleName)
+    // Missing step to make sure that the role is now non-editable
+
+    // Activate role
+    roleManagementPage.clickTabByTitle('Inactive')
+    roleManagementPage.clickRole(roleId, false)
+    roleManagementPage.activateRole()
+    roleManagementPage.assertToastNotificationMessageIsDisplayed('Role activated')
+    roleManagementPage.assertActiveRolesAreDisplayed()
+    roleManagementPage.assertEntityIsDisplayedInTheList(roleName)
+
+    // Missing step to make sure that the role can now be edited
+  })
+
+  /**
+   * @missing_data For test this scenario there should be no "Update Role" permission for the user.
+   * Also, two roles must be provided, one for each active and inactive states. Suggested role names: generic role active, generic role inactive
+   *
+   * @missing_steps Assert Deactivate and Activate button are not shown
+   */
+  it.skip('C7499835_Activate/Deactivate_Role_No_Permission', () => {
+    // @ts-ignore
+    cy.logout() && cy.login('lmello@globalshares.com', 'Swordfish123!') && cy.loginSuccessfulXHRWaits() // Logout to login with the correct user without permission
+    leftMenuNavBar.accessGlobalSettingsMenu('user', 'role')
+    roleManagementPage.checkRoleManagementUrl()
+
+    const roleIdActive = 1405
+    const roleIdInactive = 1407
+
+    roleManagementPage.clickRole(roleIdActive)
+    // Make sure that the Deactivate button is not shown
+
+    roleManagementPage.clickTabByTitle('Inactive')
+    roleManagementPage.clickRole(roleIdInactive)
+    roleManagementPage.assertActivateButtonDisplayed(false)
+  })
+
   // ************************************************ TESTS AS CLIENTS ************************************************** //
 })

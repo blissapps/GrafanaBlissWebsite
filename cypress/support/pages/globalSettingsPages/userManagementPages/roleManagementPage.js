@@ -10,7 +10,10 @@ const selectors = {
   inactiveRolesList: 'gs-tab[data-test-id=inactiveTab] #roleList gs-list',
   rolesDisplayed: '#roleList gs-list a[id*="role_',
   newRoleBtn: 'gs-button[data-test-id=create-role]',
-  roleId: '#role_'
+  roleId: '#role_',
+  threeDotBtn: 'gs-button[data-test-id=detailsActionPanelBtn]',
+  threeDotDeactivateBtn: 'gs-action-panel-option[data-test-id=action-deactivate]',
+  activateRoleBtn: 'gs-button[data-test-id=activateBtn]'
 }
 
 const apiInterceptions = {
@@ -225,11 +228,14 @@ class RoleManagementPage extends BaseManagementPage {
    * Click in a role by sending the role ID.
    *
    * @param {Number} roleId Role id number.
+   * @param {Boolean} wait Sometimes the roles take a time to be loaded. If it does not happen, send false and the request/response will not be awaited
    */
-  clickRole(roleId) {
+  clickRole(roleId, wait = true) {
     this.getRoleById(roleId).click()
 
-    this.waitUntilPageIsLoaded() // wait to have all permissions loaded
+    if (wait) {
+      this.waitUntilPageIsLoaded() // wait to have all permissions loaded
+    }
   }
 
   // --------------------------------------- ASSERTIONS --------------------------------------------- //
@@ -248,8 +254,20 @@ class RoleManagementPage extends BaseManagementPage {
     cy.get(selectors.inactiveRolesList).should('be.visible')
   }
 
+  /**
+   * Assert if the roles are being displayed in alphabetical order by default
+   */
   assertRolesInAlphabeticalOrder() {
     this.assertElementsInAlphabeticalOrder(selectors.rolesDisplayed)
+  }
+
+  /**
+   * Assert the Activate button is displayed
+   *
+   * @param {Boolean} displayed Send false to verify the Activate Button is not displayed. True is the default for otherwise
+   */
+  assertActivateButtonDisplayed(displayed = true) {
+    displayed ? cy.get('@activateBtn').should('be.visible') : cy.get('@activateBtn').should('not.exist')
   }
 
   // ----------------------------------------------- PERMISSIONS --------------------------------------------- //
@@ -425,6 +443,23 @@ class RoleManagementPage extends BaseManagementPage {
           throw new Error(permissionsType + ' is not valid. Please, provide a valid permission type for this one!')
       }
     }
+  }
+
+  // -------------------------------------------- OTHERS -------------------------------------------------//
+  /**
+   * Inactive the selected role
+   *
+   */
+  deactivateRole() {
+    cy.get(selectors.threeDotBtn).click()
+    cy.get(selectors.threeDotDeactivateBtn).click()
+  }
+
+  /**
+   * Activate the selected role
+   */
+  activateRole() {
+    cy.get(selectors.activateRoleBtn).click()
   }
 
   // ---------------------------------------  INTERCEPTIONS --------------------------------------------- //

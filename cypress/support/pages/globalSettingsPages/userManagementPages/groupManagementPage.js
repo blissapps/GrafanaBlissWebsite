@@ -112,13 +112,6 @@ class GroupManagementPage extends BaseManagementPage {
     this.getGroupById(groupId).click()
   }
 
-  /**
-   * Click in the activate group button to activate a group
-   */
-  clickActivateGroupButton() {
-    cy.get(selectors.activateGroupBtn).click()
-  }
-
   // --------------------------------------- ASSERTIONS --------------------------------------------- //
   /**
    * Assert if the msg about no groups selected is displayed or not
@@ -287,46 +280,29 @@ class GroupManagementPage extends BaseManagementPage {
   // ----------------------------------------------- OTHERS --------------------------------------------- //
 
   /**
-   * Given I am in the main groups page over the Active tab, this method deactivates a group by sending the group id
+   * Inactive the selected group
    *
-   * @param {Number} groupId group id number
-   * @param {String} groupName group name
    */
-  deactivateGroup(groupId, groupName) {
-    this.clickTabByTitle('Active')
-    this.clickGroup(groupId)
+  deactivateGroup() {
     cy.get(selectors.threeDotBtn).click()
     cy.get(selectors.threeDotDeactivateBtn).click()
-    this.assertInactiveGroupsAreDisplayed()
-    this.getGroupById(groupId).should('be.visible')
-    this.assertToastNotificationMessageIsDisplayed(groupName + ' Deactivated')
   }
 
   /**
-   * Given I am in the main groups page over the Active tab, this method actives a group by sending the group id
-   *
-   * @param {Number} groupId group id number
-   * @param {String} groupName group name
+   * Active the selected group
    */
-  activateGroup(groupId, groupName) {
-    this.clickTabByTitle('Inactive')
-    this.clickGroup(groupId)
-    this.clickActivateGroupButton()
-    this.assertActiveGroupsAreDisplayed()
-    this.getGroupById(groupId).should('be.visible')
-    this.assertToastNotificationMessageIsDisplayed(groupName + ' Activated')
+  activateGroup() {
+    cy.get(selectors.activateGroupBtn).click()
   }
 
   /**
-   * Given I am in the main groups page over the Active tab, this method duplicates a group by sending the group id
+   * Duplicate the selected group and insert a new name on it.
+   * Also, verify if the name of the group is 'Copy of ... ' as soon as it is duplicated
    *
-   * @param {Number} groupId group id number
-   * @param {String} groupName group name
-   * @param {String} newNameForDuplicatedGroup group name to the new duplicated group
+   * @param {String} groupName Group name that is going to be duplicated
+   * @param {String} newNameForDuplicatedGroup Group name to the new duplicated group
    */
-  duplicateGroup(groupId, groupName, newNameForDuplicatedGroup) {
-    this.clickTabByTitle('Active')
-    this.clickGroup(groupId)
+  duplicateGroupAndAssertDefaultName(groupName, newNameForDuplicatedGroup) {
     cy.get(selectors.threeDotBtn).click()
     cy.get(selectors.threeDotDuplicateBtn).click()
 
@@ -334,12 +310,8 @@ class GroupManagementPage extends BaseManagementPage {
     cy.get('@groupNameInput').should('have.text', 'Copy of ' + groupName)
     cy.get('@groupNameInput').type(newNameForDuplicatedGroup)
     this.saveEntityInformation()
-    this.assertToastNotificationMessageIsDisplayed(newNameForDuplicatedGroup + ' Saved')
 
     this.waitTableReloads()
-
-    this.assertInactiveGroupsAreDisplayed()
-    this.getEntityByName(newNameForDuplicatedGroup).should('be.visible')
   }
 
   /**

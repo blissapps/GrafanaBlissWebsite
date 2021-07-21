@@ -47,17 +47,15 @@ class BaseManagementPage extends BasePage {
    */
   getEntityByName(entityName, displayed = true) {
     if (displayed) {
-      cy.get(selectors.entityNameInList).as('group')
+      cy.get(selectors.entityNameInList).as('entity')
 
       return cy
-        .get('@group')
+        .get('@entity')
         .filter(`:contains('${entityName}')`)
         .scrollIntoView()
     } else {
-      cy.get(selectors.entityNameInList).as('group')
-
       return cy
-        .get('@group')
+        .get(selectors.entityNameInList)
         .filter(`:contains('${entityName}')`)
         .should('not.exist')
     }

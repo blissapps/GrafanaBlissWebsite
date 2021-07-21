@@ -96,34 +96,49 @@ describe('Group Management tests over User Management settings', () => {
   /**
    * @missing_data Need to have some groups in both active and inactive tabs
    */
-  it.skip('C7499684_Groups_Happy_Path_Active_And_Inactive_Groups', () => {
+  it.skip('C7499684_Groups_Happy_Path_List_Active_And_Inactive_Groups', () => {
     groupManagementPage.assertActiveGroupsAreDisplayed()
     groupManagementPage.clickTabByTitle('Inactive')
     groupManagementPage.assertInactiveGroupsAreDisplayed()
   })
 
   /**
-   * @missing_data Need to have a group created
+   * @missing_data Need to have a group created in the Inactive tab
    */
   it.skip('C7499679_Groups_Deactivate_And_Activate_A_Group', () => {
     const groupId = 1122
     const groupName = 'Active and Inactive'
 
-    groupManagementPage.deactivateGroup(groupId, groupName)
-    groupManagementPage.activateGroup(groupId, groupName)
+    // Inactivating a group
+    groupManagementPage.clickGroup(groupId)
+    groupManagementPage.deactivateGroup()
+    groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Deactivated')
+    groupManagementPage.assertInactiveGroupsAreDisplayed()
+    groupManagementPage.assertEntityIsDisplayedInTheList(groupName)
+
+    // Activating a group
+    groupManagementPage.clickTabByTitle('Inactive')
+    groupManagementPage.activateGroup()
+    groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Activated')
+    groupManagementPage.assertActiveGroupsAreDisplayed()
+    groupManagementPage.assertEntityIsDisplayedInTheList(groupName)
   })
 
   /**
    * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-875
    *
-   * @missing_data Need to have at least one group created and activated
+   * @missing_data Need to have at least one active group called 'Duplicate this group'
    */
   it.skip('C7493036_Groups_Duplicate_A_Group', () => {
     const groupId = 1122
-    const groupName = 'Active and Inactive'
-    const newNameForDuplicatedGroup = 'Duplicated Group'
+    const groupName = 'Duplicate this group'
+    const newNameForDuplicatedGroup = 'Duplicated Group' + utils.getRandomNumber()
 
-    groupManagementPage.duplicateGroup(groupId, groupName, newNameForDuplicatedGroup)
+    groupManagementPage.clickGroup(groupId)
+    groupManagementPage.duplicateGroupAndAssertDefaultName(groupName, newNameForDuplicatedGroup)
+    groupManagementPage.assertToastNotificationMessageIsDisplayed(newNameForDuplicatedGroup + ' Saved')
+    groupManagementPage.assertInactiveGroupsAreDisplayed()
+    groupManagementPage.assertEntityIsDisplayedInTheList(newNameForDuplicatedGroup)
   })
 
   /**
