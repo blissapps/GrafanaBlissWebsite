@@ -230,7 +230,7 @@ class RoleManagementPage extends BaseManagementPage {
    * @param {Number} roleId Role id number.
    * @param {Boolean} wait Sometimes the roles take a time to be loaded. If it does not happen, send false and the request/response will not be awaited
    */
-  clickRole(roleId, wait = true) {
+  clickRoleById(roleId, wait = true) {
     this.getRoleById(roleId).click()
 
     if (wait) {

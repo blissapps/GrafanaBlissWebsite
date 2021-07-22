@@ -108,7 +108,7 @@ class GroupManagementPage extends BaseManagementPage {
    *
    * @returns The group element
    */
-  clickGroup(groupId) {
+  clickGroupById(groupId) {
     this.getGroupById(groupId).click()
   }
 

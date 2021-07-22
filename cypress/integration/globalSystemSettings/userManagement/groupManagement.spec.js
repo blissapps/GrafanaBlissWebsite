@@ -110,7 +110,7 @@ describe('Group Management tests over User Management settings', () => {
     const groupName = 'Active and Inactive'
 
     // Inactivating a group
-    groupManagementPage.clickGroup(groupId)
+    groupManagementPage.clickGroupById(groupId)
     groupManagementPage.deactivateGroup()
     groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Deactivated')
     groupManagementPage.assertInactiveGroupsAreDisplayed()
@@ -134,7 +134,7 @@ describe('Group Management tests over User Management settings', () => {
     const groupName = 'Duplicate this group'
     const newNameForDuplicatedGroup = 'Duplicated Group' + utils.getRandomNumber()
 
-    groupManagementPage.clickGroup(groupId)
+    groupManagementPage.clickGroupById(groupId)
     groupManagementPage.duplicateGroupAndAssertDefaultName(groupName, newNameForDuplicatedGroup)
     groupManagementPage.assertToastNotificationMessageIsDisplayed(newNameForDuplicatedGroup + ' Saved')
     groupManagementPage.assertInactiveGroupsAreDisplayed()
@@ -167,7 +167,7 @@ describe('Group Management tests over User Management settings', () => {
     const roleName = 'View Only'
     const roleId = 1397
 
-    groupManagementPage.clickGroup(groupId)
+    groupManagementPage.clickGroupById(groupId)
     groupManagementPage.selectRoleToGroup(roleName, roleId)
     groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
 
@@ -183,7 +183,7 @@ describe('Group Management tests over User Management settings', () => {
     const roleName = 'View Only'
     const roleId = 1397
 
-    groupManagementPage.clickGroup(groupId)
+    groupManagementPage.clickGroupById(groupId)
     groupManagementPage.selectRoleToGroup(roleName, roleId)
     groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
 
@@ -198,7 +198,7 @@ describe('Group Management tests over User Management settings', () => {
     const roleName = 'View Only'
     const roleId = 1397
 
-    groupManagementPage.clickGroup(groupId)
+    groupManagementPage.clickGroupById(groupId)
     groupManagementPage.selectRoleToGroup(roleName, roleId)
     groupManagementPage.discardEntityInformation()
 
@@ -214,7 +214,7 @@ describe('Group Management tests over User Management settings', () => {
     const userName = ['carolyn_giles', 'amulcahyNE']
     const userIds = [754546, 454292]
 
-    groupManagementPage.clickGroup(groupId)
+    groupManagementPage.clickGroupById(groupId)
     groupManagementPage.addUsersToGroup(userName, userIds)
     groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
 
@@ -230,7 +230,7 @@ describe('Group Management tests over User Management settings', () => {
     const userName = ['carolyn_giles', 'amulcahyNE']
     const userIds = [754546, 454292]
 
-    groupManagementPage.clickGroup(groupId)
+    groupManagementPage.clickGroupById(groupId)
     groupManagementPage.addUsersToGroup(userName, userIds)
     groupManagementPage.discardEntityInformation()
 
@@ -247,7 +247,7 @@ describe('Group Management tests over User Management settings', () => {
     const companyNames = ['7Digital', '9F Group', 'Allianz']
     const companyIds = [144, 337, 55]
 
-    groupManagementPage.clickGroup(groupId)
+    groupManagementPage.clickGroupById(groupId)
     groupManagementPage.addCompaniesToGroup(companyNames, companyIds)
     groupManagementPage.saveEntityInformation()
     groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
@@ -265,7 +265,7 @@ describe('Group Management tests over User Management settings', () => {
     const companyNames = ['7Digital', '9F Group', 'Allianz']
     const companyIds = [144, 337, 55]
 
-    groupManagementPage.clickGroup(groupId)
+    groupManagementPage.clickGroupById(groupId)
     groupManagementPage.addCompaniesToGroup(companyNames, companyIds)
     groupManagementPage.discardEntityInformation()
 
@@ -280,7 +280,7 @@ describe('Group Management tests over User Management settings', () => {
     const groupId = 1219
     const roleId = 1397
 
-    groupManagementPage.clickGroup(groupId)
+    groupManagementPage.clickGroupById(groupId)
     groupManagementPage.scrollToGroupsTop() // strategy used just to move the scroll up
 
     groupManagementPage.assertRoleAssociatedWithGroup(roleId)
@@ -346,7 +346,7 @@ describe('Group Management tests over User Management settings', () => {
   it.skip('C7462615_Groups_Expand_DAPs_Users_And_Clients', () => {
     const groupId = 1219
 
-    groupManagementPage.clickGroup(groupId)
+    groupManagementPage.clickGroupById(groupId)
     groupManagementPage.scrollToGroupsTop() // strategy used just to move the scroll up
 
     // daps
@@ -376,7 +376,7 @@ describe('Group Management tests over User Management settings', () => {
     const groupName = 'Remove company'
     const companyIds = [144]
 
-    groupManagementPage.clickGroup(groupId)
+    groupManagementPage.clickGroupById(groupId)
     groupManagementPage.scrollToGroupsTop() // strategy used just to move the scroll up
 
     groupManagementPage.removeCompaniesFromGroup(companyIds)
@@ -392,7 +392,7 @@ describe('Group Management tests over User Management settings', () => {
     const groupName = 'Remove dap'
     const dapIds = [60]
 
-    groupManagementPage.clickGroup(groupId)
+    groupManagementPage.clickGroupById(groupId)
     groupManagementPage.scrollToGroupsTop() // strategy used just to move the scroll up
 
     groupManagementPage.removeDapsFromGroup(dapIds)
@@ -409,7 +409,7 @@ describe('Group Management tests over User Management settings', () => {
     const dapNames = ['Test', 'Test', 'Test3']
     const dapIds = [60, 77, 78]
 
-    groupManagementPage.clickGroup(groupId)
+    groupManagementPage.clickGroupById(groupId)
     groupManagementPage.addDapsToGroup(dapNames, dapIds)
     groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
 
@@ -426,7 +426,7 @@ describe('Group Management tests over User Management settings', () => {
     const dapNames = ['Test', 'Test', 'Test3']
     const dapIds = [60, 77, 78]
 
-    groupManagementPage.clickGroup(groupId)
+    groupManagementPage.clickGroupById(groupId)
     groupManagementPage.addDapsToGroup(dapNames, dapIds)
     groupManagementPage.discardEntityInformation()
 
@@ -443,7 +443,7 @@ describe('Group Management tests over User Management settings', () => {
     const groupName = 'Remove user'
     const userIds = [754546, 754556]
 
-    groupManagementPage.clickGroup(groupId)
+    groupManagementPage.clickGroupById(groupId)
     groupManagementPage.scrollToGroupsTop() // strategy used just to move the scroll up
 
     groupManagementPage.removeUsersFromGroup(userIds)
@@ -461,7 +461,7 @@ describe('Group Management tests over User Management settings', () => {
     const groupName = 'Remove role'
     const roleId = 1854
 
-    groupManagementPage.clickGroup(groupId)
+    groupManagementPage.clickGroupById(groupId)
     groupManagementPage.scrollToGroupsTop() // strategy used just to move the scroll up
 
     groupManagementPage.removeRoleFromGroup(roleId)

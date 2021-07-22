@@ -213,7 +213,7 @@ describe('Role Management tests over User Management settings', () => {
     roleManagementPage.assertNotificationErrorDisplayed()
     roleManagementPage.discardEntityInformation()
 
-    roleManagementPage.clickRole(roleId)
+    roleManagementPage.clickRoleById(roleId)
     roleManagementPage.modifyEntityName(roleName)
     roleManagementPage.saveEntityInformation()
     roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully', false)
@@ -226,7 +226,7 @@ describe('Role Management tests over User Management settings', () => {
   it.skip('C7499830_View/Update_Role_Permissions_Add_Permission_To_Role', () => {
     const roleId = 1515
 
-    roleManagementPage.clickRole(roleId)
+    roleManagementPage.clickRoleById(roleId)
 
     roleManagementPage.insertOrRemovePermissions('accessfilters', ['view', 'update', 'create'])
     roleManagementPage.insertOrRemovePermissions('api', ['view'])
@@ -237,7 +237,7 @@ describe('Role Management tests over User Management settings', () => {
     roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully', true)
 
     roleManagementPage.reloadPage()
-    roleManagementPage.clickRole(roleId)
+    roleManagementPage.clickRoleById(roleId)
 
     // Assert permissions given
     roleManagementPage.assertPermissionState('accessfilters', ['view', 'update', 'create'], true)
@@ -303,7 +303,7 @@ describe('Role Management tests over User Management settings', () => {
   it.skip('C7499831_View/Update_Role_Permissions_Remove_Permission_From_Role', () => {
     const roleId = 1423
 
-    roleManagementPage.clickRole(roleId)
+    roleManagementPage.clickRoleById(roleId)
 
     roleManagementPage.insertOrRemovePermissions('accessfilters', ['view', 'update'], false)
     roleManagementPage.insertOrRemovePermissions('categories', ['view'], false)
@@ -313,7 +313,7 @@ describe('Role Management tests over User Management settings', () => {
     roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully', true)
 
     roleManagementPage.reloadPage()
-    roleManagementPage.clickRole(roleId)
+    roleManagementPage.clickRoleById(roleId)
 
     // Assert permissions removed
     roleManagementPage.assertPermissionState('accessfilters', ['view', 'update'], false)
@@ -371,7 +371,7 @@ describe('Role Management tests over User Management settings', () => {
   it.skip('C7499832_View/Update_Role_Permissions_Discard_Unsaved_Changes', () => {
     const roleId = 1403
 
-    roleManagementPage.clickRole(roleId)
+    roleManagementPage.clickRoleById(roleId)
 
     roleManagementPage.insertOrRemovePermissions('accessfilters', ['update'], false)
     roleManagementPage.insertOrRemovePermissions('api', ['view'], false)
@@ -384,7 +384,7 @@ describe('Role Management tests over User Management settings', () => {
     roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully', false)
 
     roleManagementPage.reloadPage()
-    roleManagementPage.clickRole(roleId)
+    roleManagementPage.clickRoleById(roleId)
 
     // Assert permissions not changed
     roleManagementPage.assertPermissionState('accessfilters', ['view', 'update', 'delete'], true)
@@ -447,7 +447,7 @@ describe('Role Management tests over User Management settings', () => {
     const roleName = 'Activate and Inactivate'
 
     // Inactivate role
-    roleManagementPage.clickRole(roleId)
+    roleManagementPage.clickRoleById(roleId)
     roleManagementPage.deactivateRole()
     roleManagementPage.assertToastNotificationMessageIsDisplayed('Role deactivated', true, true)
     roleManagementPage.assertInactiveRolesAreDisplayed()
@@ -456,7 +456,7 @@ describe('Role Management tests over User Management settings', () => {
 
     // Activate role
     roleManagementPage.clickTabByTitle('Inactive')
-    roleManagementPage.clickRole(roleId, false)
+    roleManagementPage.clickRoleById(roleId, false)
     roleManagementPage.activateRole()
     roleManagementPage.assertToastNotificationMessageIsDisplayed('Role activated')
     roleManagementPage.assertActiveRolesAreDisplayed()
@@ -480,11 +480,11 @@ describe('Role Management tests over User Management settings', () => {
     const roleIdActive = 1405
     const roleIdInactive = 1407
 
-    roleManagementPage.clickRole(roleIdActive)
+    roleManagementPage.clickRoleById(roleIdActive)
     // Make sure that the Deactivate button is not shown
 
     roleManagementPage.clickTabByTitle('Inactive')
-    roleManagementPage.clickRole(roleIdInactive)
+    roleManagementPage.clickRoleById(roleIdInactive)
     roleManagementPage.assertActivateButtonDisplayed(false)
   })
 
