@@ -11,7 +11,8 @@ const selectors = {
   addGroupsBtn: '*[data-test-id=section-group] *[data-test-id=add-entity]',
   dapId: 'a[data-test-id=dap-',
   groupsCardId: '*[data-test-id=section-group] gs-card[data-test-id=entity-',
-  removeIconButton: 'gs-button[data-test-id=remove-entity]'
+  removeIconButton: 'gs-button[data-test-id=remove-entity]',
+  conditionsContainer: 'div.condition-container'
 }
 
 class DapManagementPage extends BaseManagementPage {
@@ -92,6 +93,15 @@ class DapManagementPage extends BaseManagementPage {
     } else {
       cy.get(selectors.groupsCardId + groupId).should('not.exist')
     }
+  }
+
+  /**
+   * Assert the container with all Conditions is displayed
+   */
+  assertConditionsContainerDisplayed() {
+    cy.get(selectors.conditionsContainer)
+      .scrollIntoView()
+      .should('be.visible')
   }
 
   // ----------------------------------------------- OTHERS --------------------------------------------- //

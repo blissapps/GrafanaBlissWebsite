@@ -85,5 +85,19 @@ describe('Data Access Profiles tests over User Management settings', () => {
     dapManagementPage.assertNoDapExistsMessageIsDisplayed()
   })
 
+  /**
+   * @missing_data Need to have a DAP with at least one group and one condition associated
+   */
+  it.skip('C7564743_DAP_Load_Current_Conditions', () => {
+    const dapId = 44
+    const dapName = 'View only'
+    const groupIds = [1124]
+
+    dapManagementPage.clickDapById(dapId)
+    dapManagementPage.assertEntityHeaderIsDisplayed(dapName)
+    dapManagementPage.assertConditionsContainerDisplayed()
+    dapManagementPage.assertGroupAssociatedWithDap(groupIds[0])
+  })
+
   // ************************************************ TESTS AS CLIENTS ************************************************** //
 })

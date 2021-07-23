@@ -145,6 +145,23 @@ class BaseManagementPage extends BasePage {
   }
 
   // --------------------------------------------------------- ASSERTIONS ------------------------------------------------------------------ //
+
+  /**
+   * Assert if the entity herder is displayed. Also, asserts its content if the parameter headerText is sent
+   *
+   * @param {String} headerText Send the name of the header if you wants to validate the header content. DO NOT sent nothing to skip the validation of the content
+   * and just validate that the header is displayed
+   */
+  assertEntityHeaderIsDisplayed(headerText = '') {
+    this.getEntityHeader().as('header')
+
+    cy.get('@header').should('be.visible')
+
+    if (headerText != '') {
+      cy.get('@header').should('contain.text', headerText)
+    }
+  }
+
   /**
    * Assert the amount of results displayed in the Search Results list, after using the search engine
    *
@@ -198,7 +215,7 @@ class BaseManagementPage extends BasePage {
   }
 
   /**
-   * Assert a entity is displayed under the roles list. Entities are 'roles', 'daps', or 'groups'
+   * Assert a entity is displayed under the entity list. Entities are 'roles', 'daps', or 'groups'
    *
    * @param {String} entityName Entity name
    * @param {Boolean} displayed True to assert the entity is displayed. False otherwise.
