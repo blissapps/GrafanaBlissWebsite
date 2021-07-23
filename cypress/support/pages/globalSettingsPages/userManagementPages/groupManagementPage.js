@@ -16,22 +16,14 @@ const selectors = {
   groupNameInput: 'gs-input-inline[data-test-id=name-input]',
   newGroupBtn: 'gs-button[data-test-id=create-group]',
   selectRoleBtn: '*[data-test-id=section-role] *[data-test-id=add-entity]',
-  AddDAPBtn: '*[data-test-id=section-dap] *[data-test-id=add-entity]',
-  AddUsersBtn: '*[data-test-id=section-user] *[data-test-id=add-entity]',
-  AddCompaniesBtn: '*[data-test-id=section-client] *[data-test-id=add-entity]',
+  addDAPBtn: '*[data-test-id=section-dap] *[data-test-id=add-entity]',
+  addUsersBtn: '*[data-test-id=section-user] *[data-test-id=add-entity]',
+  addCompaniesBtn: '*[data-test-id=section-client] *[data-test-id=add-entity]',
   changeRoleBtn: '*[data-test-id=section-role] a',
   removeIconButton: 'gs-button[data-test-id=remove-entity]'
 }
 
-// These selectors are the ones from the l4 nav bar (right nav bar)
-const groupsNavBarSelectors = {
-  headerTitle: 'gs-container-l4 h4[data-test-id=title]',
-  searchInput: 'gs-container-l4 input',
-  entityCardId: 'gs-container-l4 gs-card[data-test-id=entity-',
-  confirmBtn: 'gs-container-l4 gs-button[data-test-id=confirm-button]',
-  dismissBtn: 'gs-container-l4 gs-button[data-test-id=dismiss-button]'
-}
-
+// These selectors are the ones from the cards
 const groupsCardsSelectors = {
   roleCardId: '*[data-test-id=section-role] gs-card[data-test-id=entity-',
   dapsCardId: '*[data-test-id=section-dap] gs-card[data-test-id=entity-',
@@ -160,7 +152,7 @@ class GroupManagementPage extends BaseManagementPage {
    * Assert if an DAP is associated with the selected group
    *
    * @param {Number} dapId DAP Id
-   * @param {Boolean} displayed True if you wants to assert the dap is associated with the group, false otherwise
+   * @param {Boolean} displayed True if you want to assert the dap is associated with the group, false otherwise
    * @param {Boolean} showAll True to click in the showAll buttons for the case where we have lots of users associated
    */
   assertDapAssociatedWithGroup(dapId, displayed = true, showAll = false) {
@@ -181,7 +173,7 @@ class GroupManagementPage extends BaseManagementPage {
    * Assert if an user is associated with the selected group
    *
    * @param {Number} userId User Id
-   * @param {Boolean} displayed True if you wants to assert the user is associated with the group, false otherwise
+   * @param {Boolean} displayed True if you want to assert the user is associated with the group, false otherwise
    * @param {Boolean} showAll True to click in the showAll buttons for the case where we have lots of users associated
    */
   assertUserAssociatedWithGroup(userId, displayed = true, showAll = false) {
@@ -202,7 +194,7 @@ class GroupManagementPage extends BaseManagementPage {
    * Assert if an client/company is associated with the selected group
    *
    * @param {Number} companyId Company/client id
-   * @param {Boolean} displayed True if you wants to assert the client is associated with the group, false otherwise
+   * @param {Boolean} displayed True if you want to assert the client is associated with the group, false otherwise
    * @param {Boolean} showAll True to click in the showAll buttons for the case where we have lots of clients associated
    */
   assertCompanyAssociatedWithGroup(companyId, displayed = true, showAll = false) {
@@ -322,33 +314,22 @@ class GroupManagementPage extends BaseManagementPage {
    */
   selectRoleToGroup(roleName, roleId) {
     cy.get(selectors.selectRoleBtn).click()
-    this.checkUrl('/select/role')
-
-    cy.get(groupsNavBarSelectors.searchInput).type(roleName)
-    cy.get(groupsNavBarSelectors.entityCardId + roleId).click()
-    cy.get(groupsNavBarSelectors.confirmBtn).click()
+    this.addEntitiesInTheRightNavBar('role', [roleName], [roleId])
   }
 
   /**
    * Add Daps to a selected group
    *
    * @param {Array} dapNames Array of name of data access profiles that are going to be added into this group.
-   * @param {Array} dapIds Array of if of data access profiles that are going to be added into this group.
+   * @param {Array} dapIds Array of id of data access profiles that are going to be added into this group.
    *
    * @example
    * All dapNames and dapIds need to be placed in order.
    * For example: dapNames=['dap1', 'dap2'] needs to match the exactly order in dapIds=[1, 2]
    */
   addDapsToGroup(dapNames, dapIds) {
-    cy.get(selectors.AddDAPBtn).click()
-    this.checkUrl('/select/dap')
-
-    for (let i = 0; i < dapNames.length; i++) {
-      cy.get(groupsNavBarSelectors.searchInput).type(dapNames[i])
-      cy.get(groupsNavBarSelectors.entityCardId + dapIds[i]).click()
-      cy.get(groupsNavBarSelectors.searchInput).clear()
-    }
-    cy.get(groupsNavBarSelectors.confirmBtn).click()
+    cy.get(selectors.addDAPBtn).click()
+    this.addEntitiesInTheRightNavBar('dap', dapNames, dapIds)
   }
 
   /**
@@ -362,15 +343,8 @@ class GroupManagementPage extends BaseManagementPage {
    * For example: userNames=['user1', 'user2'] needs to match the exactly order in userIds=[1, 2]
    */
   addUsersToGroup(userNames, userIds) {
-    cy.get(selectors.AddUsersBtn).click()
-    this.checkUrl('/select/user')
-
-    for (let i = 0; i < userNames.length; i++) {
-      cy.get(groupsNavBarSelectors.searchInput).type(userNames[i])
-      cy.get(groupsNavBarSelectors.entityCardId + userIds[i]).click()
-      cy.get(groupsNavBarSelectors.searchInput).clear()
-    }
-    cy.get(groupsNavBarSelectors.confirmBtn).click()
+    cy.get(selectors.addUsersBtn).click()
+    this.addEntitiesInTheRightNavBar('user', userNames, userIds)
   }
 
   /**
@@ -384,15 +358,8 @@ class GroupManagementPage extends BaseManagementPage {
    * For example: companyNames=['company1', 'company2'] needs to match the exactly order in companyIds=[1, 2]
    */
   addCompaniesToGroup(companyNames, companyIds) {
-    cy.get(selectors.AddCompaniesBtn).click()
-    this.checkUrl('/select/client')
-
-    for (let i = 0; i < companyNames.length; i++) {
-      cy.get(groupsNavBarSelectors.searchInput).type(companyNames[i])
-      cy.get(groupsNavBarSelectors.entityCardId + companyIds[i]).click()
-      cy.get(groupsNavBarSelectors.searchInput).clear()
-    }
-    cy.get(groupsNavBarSelectors.confirmBtn).click()
+    cy.get(selectors.addCompaniesBtn).click()
+    this.addEntitiesInTheRightNavBar('client', companyNames, companyIds)
   }
 
   /**
@@ -453,7 +420,7 @@ class GroupManagementPage extends BaseManagementPage {
    * Remove DAPs from a selected group
    *
    * @param {Array} dapIds Array of ids of daps that are going to be removed of the selected group.
-   * @param {Boolean} showAll True to click in the showAll buttons for the case where we have lots of clients associated
+   * @param {Boolean} showAll True to click in the showAll buttons for the case where we have lots of daps associated
    */
   removeDapsFromGroup(dapIds, showAll = false) {
     if (showAll) {
@@ -471,7 +438,7 @@ class GroupManagementPage extends BaseManagementPage {
    * Remove Users from a selected group
    *
    * @param {Array} userIds Array of ids of users that are going to be removed of the selected group.
-   * @param {Boolean} showAll True to click in the showAll buttons for the case where we have lots of clients associated
+   * @param {Boolean} showAll True to click in the showAll buttons for the case where we have lots of users associated
    */
   removeUsersFromGroup(userIds, showAll = false) {
     if (showAll) {

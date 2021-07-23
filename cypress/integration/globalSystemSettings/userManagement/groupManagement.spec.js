@@ -162,13 +162,14 @@ describe('Group Management tests over User Management settings', () => {
    * @missing_data Need to have a group with NO role associated. Also, it needs to have at least on role created in the environment.
    */
   it.skip('C7419661_Groups_Add_A_Role_To_A_Group', () => {
-    const groupId = 1229
+    const groupId = 1059
     const groupName = 'Add Role'
     const roleName = 'View Only'
-    const roleId = 1397
+    const roleId = 1655
 
     groupManagementPage.clickGroupById(groupId)
     groupManagementPage.selectRoleToGroup(roleName, roleId)
+    groupManagementPage.saveEntityInformation()
     groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
 
     groupManagementPage.assertRoleAssociatedWithGroup(roleId)
@@ -209,13 +210,14 @@ describe('Group Management tests over User Management settings', () => {
    * @missing_data Need to have a group. Also, it needs to have at least one user created in the environment.
    */
   it.skip('C7419658_Groups_Add_Users_To_A_Group', () => {
-    const groupId = 1231
+    const groupId = 1008
     const groupName = 'Add Users'
-    const userName = ['carolyn_giles', 'amulcahyNE']
-    const userIds = [754546, 454292]
+    const userName = ['dfonsecaNE', 'amulcahyNE']
+    const userIds = [454293, 454292]
 
     groupManagementPage.clickGroupById(groupId)
     groupManagementPage.addUsersToGroup(userName, userIds)
+    groupManagementPage.saveEntityInformation()
     groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
 
     groupManagementPage.assertUserAssociatedWithGroup(userIds[0])
@@ -242,7 +244,7 @@ describe('Group Management tests over User Management settings', () => {
    * @missing_data Need to have a group. Also, it needs to have at least one client created in the environment.
    */
   it.skip('C7462559_Groups_Add_A_Client_To_A_Group', () => {
-    const groupId = 1257
+    const groupId = 1084
     const groupName = 'Add Clients'
     const companyNames = ['7Digital', '9F Group', 'Allianz']
     const companyIds = [144, 337, 55]
@@ -281,7 +283,7 @@ describe('Group Management tests over User Management settings', () => {
     const roleId = 1397
 
     groupManagementPage.clickGroupById(groupId)
-    groupManagementPage.scrollToGroupsTop() // strategy used just to move the scroll up
+    groupManagementPage.scrollToTop() // strategy used just to move the scroll up
 
     groupManagementPage.assertRoleAssociatedWithGroup(roleId)
 
@@ -347,7 +349,7 @@ describe('Group Management tests over User Management settings', () => {
     const groupId = 1219
 
     groupManagementPage.clickGroupById(groupId)
-    groupManagementPage.scrollToGroupsTop() // strategy used just to move the scroll up
+    groupManagementPage.scrollToTop() // strategy used just to move the scroll up
 
     // daps
     groupManagementPage.clickShowAll('daps')
@@ -377,7 +379,7 @@ describe('Group Management tests over User Management settings', () => {
     const companyIds = [144]
 
     groupManagementPage.clickGroupById(groupId)
-    groupManagementPage.scrollToGroupsTop() // strategy used just to move the scroll up
+    groupManagementPage.scrollToTop() // strategy used just to move the scroll up
 
     groupManagementPage.removeCompaniesFromGroup(companyIds)
     groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
@@ -393,7 +395,7 @@ describe('Group Management tests over User Management settings', () => {
     const dapIds = [60]
 
     groupManagementPage.clickGroupById(groupId)
-    groupManagementPage.scrollToGroupsTop() // strategy used just to move the scroll up
+    groupManagementPage.scrollToTop() // strategy used just to move the scroll up
 
     groupManagementPage.removeDapsFromGroup(dapIds)
     groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
@@ -404,13 +406,14 @@ describe('Group Management tests over User Management settings', () => {
    * @missing_data Need to have a group. Also, it needs to have at least one dap created in the environment.
    */
   it.skip('C7412692_Groups_Add_A_Data_Access_Profile_To_A_Group', () => {
-    const groupId = 1221
+    const groupId = 1057
     const groupName = 'Add DAPs'
-    const dapNames = ['Test', 'Test', 'Test3']
-    const dapIds = [60, 77, 78]
+    const dapNames = ['Test', 'Test2', 'Test3']
+    const dapIds = [39, 40, 41]
 
     groupManagementPage.clickGroupById(groupId)
     groupManagementPage.addDapsToGroup(dapNames, dapIds)
+    groupManagementPage.saveEntityInformation()
     groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
 
     groupManagementPage.assertDapAssociatedWithGroup(dapIds[0])
@@ -444,7 +447,7 @@ describe('Group Management tests over User Management settings', () => {
     const userIds = [754546, 754556]
 
     groupManagementPage.clickGroupById(groupId)
-    groupManagementPage.scrollToGroupsTop() // strategy used just to move the scroll up
+    groupManagementPage.scrollToTop() // strategy used just to move the scroll up
 
     groupManagementPage.removeUsersFromGroup(userIds)
     groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
@@ -462,7 +465,7 @@ describe('Group Management tests over User Management settings', () => {
     const roleId = 1854
 
     groupManagementPage.clickGroupById(groupId)
-    groupManagementPage.scrollToGroupsTop() // strategy used just to move the scroll up
+    groupManagementPage.scrollToTop() // strategy used just to move the scroll up
 
     groupManagementPage.removeRoleFromGroup(roleId)
     groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')

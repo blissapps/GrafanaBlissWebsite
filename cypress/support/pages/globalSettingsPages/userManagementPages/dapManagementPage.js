@@ -8,7 +8,10 @@ const selectors = {
   activeDapList: 'gs-tab[data-test-id=activeTab] #dapList gs-list',
   inactiveDapList: 'gs-tab[data-test-id=inactiveTab] #dapList gs-list',
   noDapExistsMessage: '#emptyList',
-  dapId: '#a[data-test-id=dap-'
+  addGroupsBtn: '*[data-test-id=section-group] *[data-test-id=add-entity]',
+  dapId: 'a[data-test-id=dap-',
+  groupsCardId: '*[data-test-id=section-group] gs-card[data-test-id=entity-',
+  removeIconButton: 'gs-button[data-test-id=remove-entity]'
 }
 
 class DapManagementPage extends BaseManagementPage {
@@ -68,6 +71,62 @@ class DapManagementPage extends BaseManagementPage {
    */
   assertNoDapExistsMessageIsDisplayed() {
     cy.get(selectors.noDapExistsMessage).should('be.visible')
+  }
+
+  /**
+   * Assert if an group is associated with the selected dap
+   *
+   * @param {Number} groupId Group Id
+   * @param {Boolean} displayed True if you want to assert the group is associated with the dap, false otherwise
+   * @param {Boolean} showAll True to click in the showAll buttons for the case where we have lots of groups associated
+   */
+  assertGroupAssociatedWithDap(groupId, displayed = true, showAll = false) {
+    if (showAll) {
+      this.clickShowAll('groups')
+    }
+
+    if (displayed) {
+      cy.get(selectors.groupsCardId + groupId)
+        .scrollIntoView()
+        .should('be.visible')
+    } else {
+      cy.get(selectors.groupsCardId + groupId).should('not.exist')
+    }
+  }
+
+  // ----------------------------------------------- OTHERS --------------------------------------------- //
+
+  /**
+   * Add Groups to a selected DAP
+   *
+   * @param {Array} groupNames Array of name of groups that are going to be added into this dap.
+   * @param {Array} groupIds Array of id of groups that are going to be added into this dap.
+   *
+   * @example
+   * All dapNames and dapIds need to be placed in order.
+   * For example: dapNames=['dap1', 'dap2'] needs to match the exactly order in dapIds=[1, 2]
+   */
+  addGroupsToDap(groupNames, groupIds) {
+    cy.get(selectors.addGroupsBtn).click()
+    this.addEntitiesInTheRightNavBar('group', groupNames, groupIds)
+  }
+
+  /**
+   * Remove groups from a selected dap
+   *
+   * @param {Array} groupsIds Array of ids of groups that are going to be removed of the selected DAP.
+   * @param {Boolean} showAll True to click in the showAll buttons for the case where we have lots of groups associated
+   */
+  removeDapsFromGroup(groupsIds, showAll = false) {
+    if (showAll) {
+      this.clickShowAll('groups')
+    }
+
+    for (let i = 0; i < groupsIds.length; i++) {
+      cy.get(selectors.groupsCardId + groupsIds[i] + '] ' + selectors.removeIconButton)
+        .scrollIntoView()
+        .click()
+    }
   }
 }
 

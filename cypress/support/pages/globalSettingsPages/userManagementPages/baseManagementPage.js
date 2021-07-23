@@ -22,6 +22,15 @@ const selectors = {
   entityNameInList: 'gs-list a'
 }
 
+// These selectors are the ones from the l4 nav bar (right nav bar)
+const groupsNavBarSelectors = {
+  headerTitle: 'gs-container-l4 h4[data-test-id=title]',
+  searchInput: 'gs-container-l4 input',
+  entityCardId: 'gs-container-l4 gs-card[data-test-id=entity-',
+  confirmBtn: 'gs-container-l4 gs-button[data-test-id=confirm-button]',
+  dismissBtn: 'gs-container-l4 gs-button[data-test-id=dismiss-button]'
+}
+
 /**
  * This class is a common page for all common methods and locators over User Management, Group Management, Role Management, and Data Access Profiles.
  *
@@ -206,12 +215,11 @@ class BaseManagementPage extends BasePage {
 
   /**
    * This method has the exactly implementation of the method getEntityHeader()
-   * This is necessary is some cases, since groups page has a problem while scrolling anything. So, this behavior is strict to Groups
+   * This is necessary is some cases, since settings pages have a problem while scrolling anything. So, this behavior is strict to settings like groups, roles, and daps
    *
-   * @returns Entity Header
    */
-  scrollToGroupsTop() {
-    return cy.get(selectors.entityNameInput).scrollIntoView()
+  scrollToTop() {
+    cy.get(selectors.entityNameInput).scrollIntoView()
   }
 
   /**
@@ -247,6 +255,33 @@ class BaseManagementPage extends BasePage {
     cy.get(selectors.discardBtn)
       .scrollIntoView()
       .click()
+  }
+
+  /**
+   * Add entities in the nav right bar After clicking the "+ Add entity" button.
+   * This is valid for adding groups, daps, users, clients and roles
+   *
+   * @param {String} entityType Type of the entity that is going to be added. It can be = group, role, dap, user, client
+   * @param {Array} entityNames Array containing the names of the entities that are going to be added into this entity.
+   * @param {Array} entityIds Array containing the ids of the entities that are going to be added into this entity.
+   *
+   * @example
+   * All entityNames and entityIds need to be placed in order.
+   * For example: entityNames=['user1', 'user2'] needs to match the exactly order in entityIds=[1, 2]
+   *
+   * @example
+   * call the method like this : addEntitiesInTheRightNavBar('group', ['groupName1', 'groupName2'], [idGroup1, idGroup2]])
+   * call the method like this : addEntitiesInTheRightNavBar('user', ['userName1', 'userName2'], [idUser1, idUser2]])
+   */
+  addEntitiesInTheRightNavBar(entityType, entityNames, entityIds) {
+    this.checkUrl('/select/' + entityType)
+
+    for (let i = 0; i < entityNames.length; i++) {
+      cy.get(groupsNavBarSelectors.searchInput).type(entityNames[i])
+      cy.get(groupsNavBarSelectors.entityCardId + entityIds[i]).click()
+      cy.get(groupsNavBarSelectors.searchInput).clear()
+    }
+    cy.get(groupsNavBarSelectors.confirmBtn).click()
   }
 }
 
