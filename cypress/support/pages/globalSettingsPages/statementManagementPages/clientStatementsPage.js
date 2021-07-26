@@ -224,11 +224,11 @@ class ClientStatementsPage extends BasePage {
   /**
    * This method will assert that the Client Statement list is being displayed in order, which is by ID
    *
+   * @param {Array} idsList Ordered list of ids to validate
+   *
    * @MISSING_IDS
    */
-  assertClientStatementsTableInOrderById() {
-    const idsList = [76, 77, 78, 79, 80] // This is the expected list with the database we have in the environment right now
-
+  assertClientStatementsTableInOrderById(idsList) {
     let idsListIndex = 0
     for (let i = 6; i <= 30; i += 6) {
       cy.xpath(`(//gs-grid//gs-grid-row-list//gs-grid-row//gs-grid-cell//span)[${i}]`)

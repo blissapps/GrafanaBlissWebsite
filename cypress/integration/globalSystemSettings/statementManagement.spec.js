@@ -17,8 +17,10 @@ describe('Statement Management tests', () => {
   })
 
   it('C7394715_Happy_Path_To_View_Statements_Accordingly', () => {
+    const idsClientList = [76, 77, 78, 79, 80]
+
     clientStatementsPage.AssertClientStatementsTableContainsExpectedColumns()
-    clientStatementsPage.assertClientStatementsTableInOrderById()
+    clientStatementsPage.assertClientStatementsTableInOrderById(idsClientList)
   })
 
   it('C7394241_Statements_Download_Button_Visibility_Behavior', () => {
@@ -74,12 +76,13 @@ describe('Statement Management tests', () => {
     const dateFrom = '20190301'
     const dateTo = '20210519'
     const clientId = 77
+    const idsClientList = [76, 77, 78, 79, 80]
 
     clientStatementsPage.filterClientStatements(clientName, dateFrom, dateTo)
     clientStatementsPage.getClientFromTable(clientId).should('be.visible')
     clientStatementsPage.checkAmountOfRecordsTable(1)
     clientStatementsPage.clearAllFilters()
-    clientStatementsPage.assertClientStatementsTableInOrderById()
+    clientStatementsPage.assertClientStatementsTableInOrderById(idsClientList)
 
     // only name
     clientStatementsPage.filterClientStatements('TomTom')
@@ -185,7 +188,7 @@ describe('Statement Management tests', () => {
   })
 
   /**
-   * @MISSING_DATA
+   * @MISSING_DATA Need to have a clients for each possible state
    */
   it.skip('C7627260_Statements_Try_To_Reconcile_Single_Client_Statement_Not_In_Initiated_Status', () => {
     // INITIATED
@@ -214,7 +217,7 @@ describe('Statement Management tests', () => {
   })
 
   /**
-   * @MISSING_STEPS
+   * @MISSING_STEPS scroll not working properly
    */
   it('C7394265_View_Statements', () => {
     clientStatementsPage.filterClientStatements('Repsol')
