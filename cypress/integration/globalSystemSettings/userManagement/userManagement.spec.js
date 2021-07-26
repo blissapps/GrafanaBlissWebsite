@@ -16,7 +16,7 @@ describe('User Management tests over User Management settings', () => {
 
   // ************************************************ TESTS AS ADMIN TENANT ************************************************** //
 
-  it('C7405960_Check_Behavior_When_Closing_The_Settings', () => {
+  it('C7405960_User_Check_Behavior_When_Closing_The_Settings', () => {
     userManagementPage.checkUserManagementUrl()
     leftMenuNavBar.closeGlobalSettingsLeftBar()
     userManagementPage.checkUserManagementUrl()

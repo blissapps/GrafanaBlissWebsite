@@ -20,7 +20,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
    *
    * Waiting for @IDS
    */
-  it('C7564741_Check_The_System_Behavior_When_Closing_The_Settings_Nav_Bar', () => {
+  it('C7564741_DAP_Check_The_System_Behavior_When_Closing_The_Settings_Nav_Bar', () => {
     leftMenuNavBar.closeGlobalSettingsLeftBar()
     dapManagementPage.checkDapManagementUrl()
   })

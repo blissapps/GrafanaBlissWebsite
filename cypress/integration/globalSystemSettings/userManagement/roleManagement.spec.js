@@ -25,7 +25,7 @@ describe('Role Management tests over User Management settings', () => {
 
   // ************************************************ TESTS AS ADMIN TENANT ************************************************** //
 
-  it('C7544080_Check_Behavior_When_Closing_The_Settings', () => {
+  it('C7544080_Role_Check_Behavior_When_Closing_The_Settings', () => {
     leftMenuNavBar.closeGlobalSettingsLeftBar()
     roleManagementPage.checkRoleManagementUrl()
   })

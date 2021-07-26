@@ -29,7 +29,7 @@ describe('Group Management tests over User Management settings', () => {
    * Verify if the settings send the user back to the home screen when the user closes the settings menu
    *
    */
-  it('C7412690_Check_The_System_Behavior_When_Closing_The_Settings_Nav_Bar', () => {
+  it('C7412690_Group_Check_The_System_Behavior_When_Closing_The_Settings_Nav_Bar', () => {
     leftMenuNavBar.closeGlobalSettingsLeftBar()
     groupManagementPage.checkGroupManagementUrl()
   })
