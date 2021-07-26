@@ -389,7 +389,7 @@ describe('Group Management tests over User Management settings', () => {
   /**
    * @missing_data Need to have a group with 1 DAP registered
    */
-  it.skip('C7462619_Groups_DAP_Is_Removed_From_The_Group', () => {
+  it.skip('C7493030_Groups_DAP_Is_Removed_From_The_Group', () => {
     const groupId = 1222
     const groupName = 'Remove dap'
     const dapIds = [60]

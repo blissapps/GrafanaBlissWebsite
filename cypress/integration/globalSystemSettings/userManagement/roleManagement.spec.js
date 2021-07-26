@@ -194,18 +194,9 @@ describe('Role Management tests over User Management settings', () => {
    * @missing_data For this scenario we need to have a role called 'Existing Role' (No permissions needed)
    */
   it.skip('C7499706_Create_A_New_Role_Same_Role_Names', () => {
-    const roleName = 'Create new role ' + utils.getRandomNumber()
+    const roleName = 'Existing Role'
     const roleId = 1426
 
-    // Setup
-    cy.log('SETTING DATA UP')
-    roleManagementPage.clickToCreateRoleWithNewName(roleName)
-    roleManagementPage.saveEntityInformation()
-    roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully', true, true)
-    roleManagementPage.assertActiveRolesAreDisplayed()
-    roleManagementPage.assertEntityIsDisplayedInTheList(roleName)
-
-    // Test
     cy.log('TEST SCENARIO STARTING')
     roleManagementPage.clickToCreateRoleWithNewName(roleName)
     roleManagementPage.saveEntityInformation()
