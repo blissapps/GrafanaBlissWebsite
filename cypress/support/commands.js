@@ -64,4 +64,38 @@ Cypress.Commands.add('logout', () => {
   cy.get('#logoutButton').click()
 })
 
+/**
+ * Insert or remove latency in the test to simulate slow connections
+ * PS: When using this, you modify all chrome session.
+ * So, remember to call the method again with latency = -1 in case you want to remove the latency for all tests in sequence
+ *
+ * @param {Number} latencyTime Time of latency to simulate a slow connection
+ *
+ * Only works on Chrome
+ */
+Cypress.Commands.add('changeNetworkLatency', (latencyTime = -1) => {
+  cy.log('************ Inserting LATENCY:' + latencyTime + 'ms **************')
+    .then(() => {
+      return Cypress.automation('remote:debugger:protocol', {
+        command: 'Network.enable'
+      })
+    })
+    .then(() => {
+      return Cypress.automation('remote:debugger:protocol', {
+        command: 'Network.emulateNetworkConditions',
+        params: {
+          offline: false,
+          latency: latencyTime,
+          downloadThroughput: -1,
+          uploadThroughput: -1
+        }
+      })
+    })
+    .then(() => {
+      return Cypress.automation('remote:debugger:protocol', {
+        command: 'Network.disable'
+      })
+    })
+})
+
 export default executeCommand
