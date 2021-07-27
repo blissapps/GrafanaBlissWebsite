@@ -147,7 +147,7 @@ class BaseManagementPage extends BasePage {
   // --------------------------------------------------------- ASSERTIONS ------------------------------------------------------------------ //
 
   /**
-   * Assert if the entity herder is displayed. Also, asserts its content if the parameter headerText is sent
+   * Assert if the entity header/name is displayed. Also, asserts its content if the parameter headerText is sent
    *
    * @param {String} headerText Send the name of the header if you wants to validate the header content. DO NOT sent nothing to skip the validation of the content
    * and just validate that the header is displayed
@@ -243,17 +243,14 @@ class BaseManagementPage extends BasePage {
    * Modify a entity (group role, or dap) name from a selected entity. It also can verify the current name of the entity, right before changing it.
    *
    * @param {String} entityName Name of the role that is going to be modified.
-   * @param {String} currentName Send the current name of the input field if you want to verify it before changing it.
    */
-  modifyEntityName(entityName, currentName = '') {
+  modifyEntityName(entityName) {
     this.getEntityHeader().as('input')
 
-    if (currentName != '') {
-      cy.get('@input').should('have.text', currentName)
-    }
-
     cy.get('@input').clear()
-    cy.get('@input').type(entityName)
+    cy.get('@input')
+      .type(entityName)
+      .blur() // remove focus from element
   }
 
   /**

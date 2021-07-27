@@ -11,8 +11,15 @@ const selectors = {
   addGroupsBtn: '*[data-test-id=section-group] *[data-test-id=add-entity]',
   dapId: 'a[data-test-id=dap-',
   groupsCardId: '*[data-test-id=section-group] gs-card[data-test-id=entity-',
-  removeIconButton: 'gs-button[data-test-id=remove-entity]',
-  conditionsContainer: 'div.condition-container'
+  removeIconButton: 'gs-button[data-test-id=remove-entity]'
+}
+
+const conditionsSelectors = {
+  conditionsContainer: 'div.condition-container',
+  initialCondition: 'div.conditions-panel hearth-dap-condition-property div.initial-conditional',
+  generalSelect: 'div.select',
+  generalSelectOptions: 'div.cdk-overlay-container *[dir=ltr] gs-option',
+  inputs: 'div.conditions-panel hearth-dap-condition-property div.input input'
 }
 
 class DapManagementPage extends BaseManagementPage {
@@ -96,11 +103,34 @@ class DapManagementPage extends BaseManagementPage {
   }
 
   /**
-   * Assert the container with all Conditions is displayed
+   * Assert the container with all conditions is displayed: I includes the a initial conditional, the select box and the input with value.
+   * This is based on the US https://globalshares.atlassian.net/browse/PB-32
    */
-  assertConditionsContainerDisplayed() {
-    cy.get(selectors.conditionsContainer)
+  assertConditionsContainerDisplayedWithExpectedValues() {
+    // Container visible
+    cy.get(conditionsSelectors.conditionsContainer)
       .scrollIntoView()
+      .should('be.visible')
+
+    // Initial conditional
+    cy.get(conditionsSelectors.initialCondition)
+      .first()
+      .should('be.visible')
+
+    // Select options
+    const optionsAvailable = ['Business Unit', 'Client id', 'Is international mobile?', 'Participant id', 'Payroll id', 'Residency', 'Tax status']
+    cy.get(conditionsSelectors.generalSelect)
+      .first()
+      .click()
+
+    for (let i = 0; i < optionsAvailable.length; i++) {
+      cy.get(conditionsSelectors.generalSelectOptions)
+        .eq(i)
+        .should('have.text', optionsAvailable[i])
+    }
+
+    cy.get(conditionsSelectors.inputs)
+      .first()
       .should('be.visible')
   }
 

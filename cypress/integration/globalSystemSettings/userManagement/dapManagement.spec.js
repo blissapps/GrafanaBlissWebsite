@@ -86,17 +86,31 @@ describe('Data Access Profiles tests over User Management settings', () => {
   })
 
   /**
-   * @missing_data Need to have a DAP with at least one group and one condition associated
+   * @missing_data Need to have a DAP with one group and one condition associated
    */
   it.skip('C7564743_DAP_Load_Current_Conditions', () => {
-    const dapId = 44
-    const dapName = 'View only'
-    const groupIds = [1124]
+    const dapId = 10
+    const dapName = 'Dap1'
+    const groupIds = [957]
 
     dapManagementPage.clickDapById(dapId)
     dapManagementPage.assertEntityHeaderIsDisplayed(dapName)
-    dapManagementPage.assertConditionsContainerDisplayed()
+    dapManagementPage.assertConditionsContainerDisplayedWithExpectedValues()
     dapManagementPage.assertGroupAssociatedWithDap(groupIds[0])
+  })
+
+  /**
+   * @missing_data Need to have a simple DAP created
+   */
+  it.only('C7564744_DAP_Rename_The_DAP', () => {
+    const dapId = 25
+    const newDapName = 'DAP was renamed'
+
+    dapManagementPage.clickDapById(dapId)
+    dapManagementPage.modifyEntityName(newDapName)
+    dapManagementPage.assertEntityHeaderIsDisplayed(newDapName)
+    dapManagementPage.saveEntityInformation()
+    dapManagementPage.assertToastNotificationMessageIsDisplayed(newDapName + ' Saved')
   })
 
   // ************************************************ TESTS AS CLIENTS ************************************************** //

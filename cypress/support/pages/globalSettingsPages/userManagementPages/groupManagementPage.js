@@ -383,7 +383,9 @@ class GroupManagementPage extends BaseManagementPage {
   createGroup(groupName, roleName, roleId, dapNames, dapIds, userNames, userIds, companyNames, companyIds) {
     cy.get(selectors.newGroupBtn).click()
 
-    this.modifyEntityName(groupName, 'New Group')
+    // Make sure the default value is 'New Group' before renaming it
+    this.assertEntityHeaderIsDisplayed('New Group')
+    this.modifyEntityName(groupName)
 
     if (roleName) {
       this.selectRoleToGroup(roleName, roleId)
