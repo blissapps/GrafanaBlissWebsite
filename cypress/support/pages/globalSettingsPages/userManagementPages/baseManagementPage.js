@@ -152,7 +152,7 @@ class BaseManagementPage extends BasePage {
    * @param {String} headerText Send the name of the header if you wants to validate the header content. DO NOT sent nothing to skip the validation of the content
    * and just validate that the header is displayed
    */
-  assertEntityHeaderIsDisplayed(headerText = '') {
+  assertEntityHeaderIsDisplayedAsExpected(headerText = '') {
     this.getEntityHeader().as('header')
 
     cy.get('@header').should('be.visible')

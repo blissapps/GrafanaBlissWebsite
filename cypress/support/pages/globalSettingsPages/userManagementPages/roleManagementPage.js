@@ -221,7 +221,10 @@ class RoleManagementPage extends BaseManagementPage {
    */
   clickToCreateRoleWithNewName(roleName) {
     this.getNewRoleButton().click()
-    this.modifyEntityName(roleName, 'New Role')
+
+    // Make sure the default value is 'New Role' before renaming it
+    this.assertEntityHeaderIsDisplayedAsExpected('New Role')
+    this.modifyEntityName(roleName)
   }
 
   /**

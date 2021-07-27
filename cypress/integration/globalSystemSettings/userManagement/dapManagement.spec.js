@@ -94,7 +94,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
     const groupIds = [957]
 
     dapManagementPage.clickDapById(dapId)
-    dapManagementPage.assertEntityHeaderIsDisplayed(dapName)
+    dapManagementPage.assertEntityHeaderIsDisplayedAsExpected(dapName)
     dapManagementPage.assertConditionsContainerDisplayedWithExpectedValues()
     dapManagementPage.assertGroupAssociatedWithDap(groupIds[0])
   })
@@ -108,7 +108,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
 
     dapManagementPage.clickDapById(dapId)
     dapManagementPage.modifyEntityName(newDapName)
-    dapManagementPage.assertEntityHeaderIsDisplayed(newDapName)
+    dapManagementPage.assertEntityHeaderIsDisplayedAsExpected(newDapName)
     dapManagementPage.saveEntityInformation()
     dapManagementPage.assertToastNotificationMessageIsDisplayed(newDapName + ' Saved')
   })

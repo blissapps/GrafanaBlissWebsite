@@ -384,7 +384,7 @@ class GroupManagementPage extends BaseManagementPage {
     cy.get(selectors.newGroupBtn).click()
 
     // Make sure the default value is 'New Group' before renaming it
-    this.assertEntityHeaderIsDisplayed('New Group')
+    this.assertEntityHeaderIsDisplayedAsExpected('New Group')
     this.modifyEntityName(groupName)
 
     if (roleName) {
