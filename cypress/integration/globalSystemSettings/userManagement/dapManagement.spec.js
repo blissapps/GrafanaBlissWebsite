@@ -102,7 +102,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
   /**
    * @missing_data Need to have a simple DAP created
    */
-  it.only('C7564744_DAP_Rename_The_DAP', () => {
+  it.skip('C7564744_DAP_Rename_The_DAP', () => {
     const dapId = 25
     const newDapName = 'DAP was renamed'
 
