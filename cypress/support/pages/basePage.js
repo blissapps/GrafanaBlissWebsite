@@ -133,8 +133,7 @@ class BasePage {
     for (let i = 1; i <= columnsToValidate.length; i++) {
       cy.get('gs-grid gs-grid-row-list gs-grid-row gs-grid-cell span:not(:empty)')
         .eq(i - 1)
-        .invoke('text')
-        .should('contain', columnsToValidate[i - 1])
+        .should('contain.text', columnsToValidate[i - 1])
     }
   }
 
@@ -173,8 +172,7 @@ class BasePage {
     for (let i = 0; i < data.length; i++) {
       cy.get(selectors.gsGridTableCell)
         .eq(i)
-        .invoke('text')
-        .should('contain', data[i])
+        .should('contain.text', data[i])
     }
   }
 
@@ -187,8 +185,7 @@ class BasePage {
     cy.get(selectors.gsGridTableCellHighlighted).should('be.visible')
     cy.get(selectors.gsGridTableCellHighlighted)
       .first()
-      .invoke('text')
-      .should('contain', dataHighlighted)
+      .should('contain.text', dataHighlighted)
   }
 
   /**
@@ -260,12 +257,7 @@ class BasePage {
   assertNotificationErrorDisplayed(displayed = true, textDisplayed = '') {
     displayed ? cy.get(selectors.notificationError).should('be.visible') : cy.get(selectors.notificationError).should('not.exist')
 
-    textDisplayed != ''
-      ? cy
-          .get(selectors.notificationError)
-          .invoke('text')
-          .should('contain.text', textDisplayed)
-      : true
+    textDisplayed != '' ? cy.get(selectors.notificationError).should('contain.text', textDisplayed) : true
   }
 }
 
