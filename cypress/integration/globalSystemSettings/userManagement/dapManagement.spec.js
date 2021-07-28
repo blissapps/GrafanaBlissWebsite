@@ -41,12 +41,12 @@ describe('Data Access Profiles tests over User Management settings', () => {
     dapManagementPage.assertGroupAssociatedWithDap(groupIds[0])
     dapManagementPage.assertGroupAssociatedWithDap(groupIds[1])
 
-    dapManagementPage.removeDapsFromGroup([groupIds[0]])
+    dapManagementPage.removeGroupFromDap([groupIds[0]])
     dapManagementPage.saveEntityInformation()
     dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved', true, true)
     dapManagementPage.assertGroupAssociatedWithDap(groupIds[0], false)
 
-    dapManagementPage.removeDapsFromGroup([groupIds[1]])
+    dapManagementPage.removeGroupFromDap([groupIds[1]])
     dapManagementPage.assertGroupAssociatedWithDap(groupIds[1], false)
     dapManagementPage.discardEntityInformation()
     dapManagementPage.assertGroupAssociatedWithDap(groupIds[1])
@@ -58,7 +58,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
     dapManagementPage.assertToastNotificationMessageIsDisplayed('Changes to data access profile were discard')
 
     //teardown
-    dapManagementPage.removeDapsFromGroup([groupIds[1]])
+    dapManagementPage.removeGroupFromDap([groupIds[1]])
     dapManagementPage.saveEntityInformation()
   })
 
@@ -103,7 +103,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
    * @missing_data Need to have a simple DAP created
    */
   it.skip('C7564744_DAP_Rename_The_DAP', () => {
-    const dapId = 25
+    const dapId = 20
     const newDapName = 'DAP was renamed'
 
     dapManagementPage.clickDapById(dapId)
@@ -111,6 +111,22 @@ describe('Data Access Profiles tests over User Management settings', () => {
     dapManagementPage.assertEntityHeaderIsDisplayedAsExpected(newDapName)
     dapManagementPage.saveEntityInformation()
     dapManagementPage.assertToastNotificationMessageIsDisplayed(newDapName + ' Saved')
+  })
+
+  /**
+   * @missing_data Need to have a simple DAP created with a single condition
+   */
+  it.skip('C7564744_DAP_Change_An_Existing_Condition', () => {
+    const dapId = 30
+    const newDapName = 'Change condition'
+
+    dapManagementPage.clickDapById(dapId)
+    dapManagementPage.modifyCondition([], [1, 'Client id'], [2, '11'])
+    dapManagementPage.saveEntityInformation()
+
+    dapManagementPage.assertToastNotificationMessageIsDisplayed(newDapName + ' Saved')
+    dapManagementPage.assertConditionValue(1, 'Client id')
+    dapManagementPage.assertConditionValue(2, '11')
   })
 
   // ************************************************ TESTS AS CLIENTS ************************************************** //
