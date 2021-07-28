@@ -187,8 +187,7 @@ class BaseManagementPage extends BasePage {
     for (let i = 0; i < entityId.length; i++) {
       cy.get(selectors.searchResultList + ' ' + selectors.searchResultItem + entityId[i])
         .should('be.visible')
-        .invoke('attr', 'class')
-        .should('contain', 'item-highlight ng-star-inserted') // assert it is highlighted
+        .should('have.class', 'item-highlight ng-star-inserted') // assert it is highlighted
     }
 
     cy.get(selectors.otherGroupList).should('be.visible')

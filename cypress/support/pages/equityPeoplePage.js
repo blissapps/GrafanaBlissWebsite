@@ -74,9 +74,7 @@ class EquityPeoplePage extends BasePage {
    * @example 'amount = 1 for '1 record(s)' being displayed in the table
    */
   checkAmountOfPeopleTable(amount) {
-    cy.get(selectors.numberOfRecordsInTable)
-      .invoke('text')
-      .should('contain', amount)
+    cy.get(selectors.numberOfRecordsInTable).should('contain.text', amount)
   }
 
   /**
@@ -90,9 +88,7 @@ class EquityPeoplePage extends BasePage {
    */
   validateParticipantDataDisplayedOnTheParticipantsList(data) {
     for (let i = 1; i <= data.length; i++) {
-      cy.xpath(`(//*[@id='participant-${data[0]}']//gs-grid-cell)[${i}]`)
-        .invoke('text')
-        .should('contain', data[i - 1])
+      cy.xpath(`(//*[@id='participant-${data[0]}']//gs-grid-cell)[${i}]`).should('contain.text', data[i - 1])
     }
   }
 
@@ -107,9 +103,7 @@ class EquityPeoplePage extends BasePage {
    */
   checkParticipantCellContent(columnToVerify, value) {
     cy.xpath(`//div[@class='data']//gs-grid-cell[${columnToVerify}]//span[@class='subtitled-cell-title']`).each($el => {
-      cy.wrap($el)
-        .invoke('text')
-        .should('contain', value)
+      cy.wrap($el).should('contain.text', value)
     })
   }
 

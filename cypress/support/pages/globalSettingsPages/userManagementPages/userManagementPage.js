@@ -156,9 +156,7 @@ class UserManagementPage extends BasePage {
     // Assert groups if groups list is not empty
     if (groups.length > 0) {
       for (let i = 0; i < groups.length; i++) {
-        cy.get(userInfoNavBarSelectors.groups)
-          .invoke('text')
-          .should('contain', groups[i])
+        cy.get(userInfoNavBarSelectors.groups).should('contain.text', groups[i])
       }
     }
 

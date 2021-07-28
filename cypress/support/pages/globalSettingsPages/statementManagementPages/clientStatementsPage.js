@@ -231,9 +231,7 @@ class ClientStatementsPage extends BasePage {
   assertClientStatementsTableInOrderById(idsList) {
     let idsListIndex = 0
     for (let i = 6; i <= 30; i += 6) {
-      cy.xpath(`(//gs-grid//gs-grid-row-list//gs-grid-row//gs-grid-cell//span)[${i}]`)
-        .invoke('text')
-        .should('contain', idsList[idsListIndex])
+      cy.xpath(`(//gs-grid//gs-grid-row-list//gs-grid-row//gs-grid-cell//span)[${i}]`).should('contain.text', idsList[idsListIndex])
       idsListIndex++
     }
   }
