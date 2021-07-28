@@ -116,7 +116,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
   /**
    * @missing_data Need to have a simple DAP created with a single condition
    */
-  it.skip('C7564744_DAP_Change_An_Existing_Condition', () => {
+  it.skip('C7564745_DAP_Change_An_Existing_Condition', () => {
     const dapId = 30
     const newDapName = 'Change condition'
 
@@ -125,6 +125,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
     dapManagementPage.saveEntityInformation()
 
     dapManagementPage.assertToastNotificationMessageIsDisplayed(newDapName + ' Saved')
+    dapManagementPage.reloadPage()
     dapManagementPage.assertConditionValue(1, 'Client id')
     dapManagementPage.assertConditionValue(2, '11')
   })
