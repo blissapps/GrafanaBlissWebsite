@@ -172,7 +172,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
   })
 
   /**
-   * @missing_data Need to have a simple DAP created with a single condition
+   * @missing_data Need to have a simple DAP created with two conditions created
    */
   it.skip('C7564748_DAP_Remove_Condition', () => {
     const dapId = 5
