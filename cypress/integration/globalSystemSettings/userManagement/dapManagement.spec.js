@@ -190,5 +190,39 @@ describe('Data Access Profiles tests over User Management settings', () => {
     dapManagementPage.assertConditionValue(5, '11', false)
   })
 
+  /**
+   * @missing_data Need to have a simple DAP created with only one condition created
+   */
+  it.skip('C7564749_DAP_Discard_Changes_Condition', () => {
+    const dapId = 6
+
+    dapManagementPage.clickDapById(dapId)
+
+    dapManagementPage.addCondition(1, 2)
+    dapManagementPage.modifyCondition([], [4, 'Client id'], [5, '11'])
+    dapManagementPage.discardEntityInformation()
+    dapManagementPage.assertToastNotificationMessageIsDisplayed('Changes to data access profile were discard')
+  })
+
+  /**
+   * @missing_data Need to have a two simple DAPs created
+   *
+   */
+  it.skip('C7564750_DAP_Try_To_Leave_Existing_DAP_Name_Blank', () => {
+    const dapId = 7
+    const dapName = 'Existing DAP name blank'
+    const dapIdToChangeFocus = 8
+
+    dapManagementPage.clickDapById(dapId)
+    dapManagementPage.modifyEntityName('{backspace}')
+    dapManagementPage.saveEntityInformation()
+    dapManagementPage.assertNotificationErrorDisplayed('Name should not be empty.')
+
+    dapManagementPage.clickDapById(dapIdToChangeFocus)
+    dapManagementPage.assertEntityHeaderIsDisplayedAsExpected() // This assertion in here just make sure the second dap was loaded
+    dapManagementPage.clickDapById(dapId)
+    dapManagementPage.assertEntityHeaderIsDisplayedAsExpected(dapName)
+  })
+
   // ************************************************ TESTS AS CLIENTS ************************************************** //
 })
