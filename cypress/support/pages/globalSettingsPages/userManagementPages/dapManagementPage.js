@@ -20,7 +20,12 @@ const conditionsSelectors = {
   generalSelect: 'div.select',
   generalSelectOptions: 'div.cdk-overlay-container *[dir=ltr] [class*=select-panel] gs-option',
   inputs: 'div.conditions-panel hearth-dap-condition-property div.input input',
-  generalElement: 'div.conditions input'
+  generalElement: 'div.conditions input',
+  addElementLevel1: 'div.conditions hearth-dap-action-bar gs-svg-icon.level-1',
+  addElementLevel2: 'div.conditions hearth-dap-action-bar gs-svg-icon.level-2',
+  addElementLevel3: 'div.conditions hearth-dap-action-bar gs-svg-icon.level-3',
+  conditionalElements: 'div.conditions hearth-dap-condition-conditional',
+  removeConditionLine: 'div.remove-action svg'
 }
 
 class DapManagementPage extends BaseManagementPage {
@@ -143,16 +148,24 @@ class DapManagementPage extends BaseManagementPage {
    *
    * @param {Number} elementPosition The element position of the 'div.conditions input' locator
    * @param {String} conditionValue The value to assert in the elementPosition
+   * @param {Boolean} displayed Send to false to assert the condition does not exists or if it was removed
    *
    * @example
    * assertConditionValue(1, 'Client id') to assert the element 'div.conditions input' in position 1 is equal to  'Client id'
    */
-  assertConditionValue(elementPosition, conditionValue) {
+  assertConditionValue(elementPosition, conditionValue, displayed = true) {
     cy.log('Asserting element position ' + elementPosition + ' has value ' + conditionValue)
-    cy.get(conditionsSelectors.generalElement)
-      .eq(elementPosition - 1)
-      .scrollIntoView()
-      .should('contain.value', conditionValue)
+
+    if (displayed) {
+      cy.get(conditionsSelectors.generalElement)
+        .eq(elementPosition - 1)
+        .scrollIntoView()
+        .should('contain.value', conditionValue)
+    } else {
+      cy.get(conditionsSelectors.generalElement)
+        .eq(elementPosition - 1)
+        .should('not.exist')
+    }
   }
 
   // ----------------------------------------------- OTHERS --------------------------------------------- //
@@ -197,7 +210,7 @@ class DapManagementPage extends BaseManagementPage {
    * @needs_refactoring
    *
    * Modifies conditions of a select dap
-   * The method gets a array of selectors based on 'div.conditions input', so it is necessary to send the element position with the eq() filter
+   * The method gets a array of selectors based on 'div.conditions input', so it is necessary to send the element position to be used in the eq() filter
    *
    * @param {Array} conditionType Send a array containing the position and the option to choose in a condition and/or. Example: [3, 'or'] means the element 'div.conditions input' in position 3 will be selected as 'or'
    * @param {Array} condition Send a array containing the position and the option to choose in a condition type like 'Business Unit', 'Client id', 'Is international mobile?', and etc.. Example: [3, 'Client id'] means the element 'div.conditions input' in position 3 will be selected as 'Client id'
@@ -262,6 +275,65 @@ class DapManagementPage extends BaseManagementPage {
           })
       }
     }
+  }
+
+  /**
+   * Add a condition into a DAP
+   * PS: It only adds the elements without the possibility to insert the proper values on them. For that, use the modifyCondition method right after using this one
+   *
+   * @param {Number} conditionIndex As we may have lots of if/and/or boxes, send the index of the one you want to add a condition. The locator is located in "conditionsSelectors.conditionalElements"
+   * @param {Number} level Level 1, 2, or 3 to choose in which level the condition is going to be added.
+   *
+   * @example
+   * addCondition(1, 1) -> first conditional element addling a condition in the level 1
+   * addCondition(2, 2) -> second conditional element addling a condition in the level 2
+   * addCondition(7, 3) -> Add a condition in the level 3 of the element in the position 7
+   */
+  addCondition(conditionIndex, level) {
+    cy.log('Adding condition in the index ' + conditionIndex + ' with the level ' + level)
+
+    let locator = ''
+
+    switch (level) {
+      case 1:
+        locator = conditionsSelectors.addElementLevel1
+        break
+
+      case 2:
+        locator = conditionsSelectors.addElementLevel2
+        break
+
+      case 3:
+        locator = conditionsSelectors.addElementLevel3
+        break
+
+      default:
+        throw new Error('Level is invalid, choose 1, 2, or 3!')
+    }
+
+    cy.get(conditionsSelectors.conditionalElements)
+      .eq(conditionIndex - 1)
+      .click({ force: true })
+      .then(() => {
+        cy.get(locator)
+          .trigger('mouseover')
+          .click()
+      })
+  }
+
+  /**
+   * Remove a condition
+   *
+   * @param {Number} lineToRemove Line number to remove the condition
+   *
+   * @example:
+   * removeCondition(2) -> Removes the condition of line 2
+   */
+  removeCondition(lineToRemove) {
+    cy.get(conditionsSelectors.removeConditionLine)
+      .eq(lineToRemove - 1)
+      .trigger('mouseover')
+      .click({ force: true })
   }
 }
 

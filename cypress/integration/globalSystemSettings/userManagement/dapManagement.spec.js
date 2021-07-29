@@ -118,16 +118,76 @@ describe('Data Access Profiles tests over User Management settings', () => {
    */
   it.skip('C7564745_DAP_Change_An_Existing_Condition', () => {
     const dapId = 30
-    const newDapName = 'Change condition'
+    const dapName = 'Change condition'
 
     dapManagementPage.clickDapById(dapId)
     dapManagementPage.modifyCondition([], [1, 'Client id'], [2, '11'])
     dapManagementPage.saveEntityInformation()
 
-    dapManagementPage.assertToastNotificationMessageIsDisplayed(newDapName + ' Saved')
+    dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved')
     dapManagementPage.reloadPage()
     dapManagementPage.assertConditionValue(1, 'Client id')
     dapManagementPage.assertConditionValue(2, '11')
+  })
+
+  /**
+   * @missing_data Need to have a simple DAP created with a single condition
+   */
+  it.skip('C7564746_DAP_Add_Condition_On_Same_Level', () => {
+    const dapId = 3
+    const dapName = 'Add condition same level'
+
+    dapManagementPage.clickDapById(dapId)
+
+    dapManagementPage.addCondition(1, 1)
+    dapManagementPage.modifyCondition([3, 'or'], [4, 'Client id'], [5, '11'])
+    dapManagementPage.saveEntityInformation()
+    dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved')
+
+    dapManagementPage.reloadPage()
+    dapManagementPage.clickDapById(dapId)
+    dapManagementPage.assertConditionValue(3, 'or')
+    dapManagementPage.assertConditionValue(4, 'Client id')
+    dapManagementPage.assertConditionValue(5, '11')
+  })
+
+  /**
+   * @missing_data Need to have a simple DAP created with a single condition
+   */
+  it.skip('C7564747_DAP_Add_Nested_Condition', () => {
+    const dapId = 4
+    const dapName = 'Add nested condition'
+
+    dapManagementPage.clickDapById(dapId)
+
+    dapManagementPage.addCondition(1, 2)
+    dapManagementPage.modifyCondition([], [4, 'Client id'], [5, '11'])
+    dapManagementPage.saveEntityInformation()
+    dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved')
+
+    dapManagementPage.reloadPage()
+    dapManagementPage.clickDapById(dapId)
+    dapManagementPage.assertConditionValue(4, 'Client id')
+    dapManagementPage.assertConditionValue(5, '11')
+  })
+
+  /**
+   * @missing_data Need to have a simple DAP created with a single condition
+   */
+  it.skip('C7564748_DAP_Remove_Condition', () => {
+    const dapId = 5
+    const dapName = 'Remove condition'
+
+    dapManagementPage.clickDapById(dapId)
+
+    dapManagementPage.removeCondition(2)
+    dapManagementPage.saveEntityInformation()
+    dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved')
+
+    dapManagementPage.reloadPage()
+    dapManagementPage.clickDapById(dapId)
+    dapManagementPage.assertConditionValue(4, 'Client id', false)
+    dapManagementPage.assertConditionValue(5, '11', false)
   })
 
   // ************************************************ TESTS AS CLIENTS ************************************************** //
