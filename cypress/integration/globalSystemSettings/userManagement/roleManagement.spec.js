@@ -197,7 +197,6 @@ describe('Role Management tests over User Management settings', () => {
     const roleName = 'Existing Role'
     const roleId = 1426
 
-    cy.log('TEST SCENARIO STARTING')
     roleManagementPage.clickToCreateRoleWithNewName(roleName)
     roleManagementPage.saveEntityInformation()
     roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully', false)
