@@ -111,7 +111,7 @@ describe('Group Management tests over User Management settings', () => {
 
     // Inactivating a group
     groupManagementPage.clickGroupById(groupId)
-    groupManagementPage.deactivateGroup()
+    groupManagementPage.clickToDeactivateEntity()
     groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Deactivated')
     groupManagementPage.assertInactiveGroupsAreDisplayed()
     groupManagementPage.assertEntityIsDisplayedInTheList(groupName)
@@ -130,12 +130,16 @@ describe('Group Management tests over User Management settings', () => {
    * @missing_data Need to have at least one active group called 'Duplicate this group'
    */
   it.skip('C7493036_Groups_Duplicate_A_Group', () => {
-    const groupId = 1122
+    const groupId = 957
     const groupName = 'Duplicate this group'
     const newNameForDuplicatedGroup = 'Duplicated Group' + utils.getRandomNumber()
 
     groupManagementPage.clickGroupById(groupId)
-    groupManagementPage.duplicateGroupAndAssertDefaultName(groupName, newNameForDuplicatedGroup)
+    groupManagementPage.clickToDuplicateEntity()
+    groupManagementPage.assertEntityHeaderIsDisplayedAsExpected('Copy of ' + groupName)
+    groupManagementPage.modifyEntityName(newNameForDuplicatedGroup)
+    groupManagementPage.saveEntityInformation()
+
     groupManagementPage.assertToastNotificationMessageIsDisplayed(newNameForDuplicatedGroup + ' Saved')
     groupManagementPage.assertInactiveGroupsAreDisplayed()
     groupManagementPage.assertEntityIsDisplayedInTheList(newNameForDuplicatedGroup)

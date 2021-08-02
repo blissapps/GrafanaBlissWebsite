@@ -13,7 +13,9 @@ const selectors = {
   groupsCardId: '*[data-test-id=section-group] gs-card[data-test-id=entity-',
   removeIconButton: 'gs-button[data-test-id=remove-entity]',
   createDapBtn: 'gs-button[data-test-id="create-dap"]',
-  dapDetailsContainer: 'hearth-dap-details'
+  dapDetailsContainer: 'hearth-dap-details',
+  selectNotEditable: 'gs-select.disabled',
+  activateDapBtn: 'gs-button[data-test-id=activate-button]'
 }
 
 const conditionsSelectors = {
@@ -192,6 +194,15 @@ class DapManagementPage extends BaseManagementPage {
     displayed ? cy.get(selectors.dapDetailsContainer).should('be.visible') : cy.get(selectors.dapDetailsContainer).should('not.exist')
   }
 
+  /**
+   * Assert if a Dap is editable or not
+   *
+   * @param {Boolean} editable True to assert the Dap is editable, false otherwise
+   */
+  assertDapEditable(editable = true) {
+    editable ? cy.get(selectors.selectNotEditable).should('not.exist') : cy.get(selectors.selectNotEditable).should('exist')
+  }
+
   // ----------------------------------------------- OTHERS --------------------------------------------- //
 
   /**
@@ -358,6 +369,13 @@ class DapManagementPage extends BaseManagementPage {
       .eq(lineToRemove - 1)
       .trigger('mouseover')
       .click({ force: true })
+  }
+
+  /**
+   * Activate the selected dap
+   */
+  activateDap() {
+    cy.get(selectors.activateDapBtn).click()
   }
 }
 

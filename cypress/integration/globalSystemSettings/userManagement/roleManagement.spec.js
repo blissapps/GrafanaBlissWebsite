@@ -438,7 +438,7 @@ describe('Role Management tests over User Management settings', () => {
 
     // Inactivate role
     roleManagementPage.clickRoleById(roleId)
-    roleManagementPage.deactivateRole()
+    roleManagementPage.clickToDeactivateEntity()
     roleManagementPage.assertToastNotificationMessageIsDisplayed('Role deactivated', true, true)
     roleManagementPage.assertInactiveRolesAreDisplayed()
     roleManagementPage.assertEntityIsDisplayedInTheList(roleName)

@@ -10,9 +10,6 @@ const selectors = {
   inactiveGroupsList: 'gs-tab[data-test-id=inactiveTab] #groupList gs-list',
   groupId: '#group_',
   activateGroupBtn: 'gs-button[data-test-id=activateBtn]',
-  threeDotBtn: 'gs-button[data-test-id=detailsActionPanelBtn]',
-  threeDotDuplicateBtn: 'gs-action-panel-option[data-test-id=action-duplicate]',
-  threeDotDeactivateBtn: 'gs-action-panel-option[data-test-id=action-deactivate]',
   groupNameInput: 'gs-input-inline[data-test-id=name-input]',
   newGroupBtn: 'gs-button[data-test-id=create-group]',
   selectRoleBtn: '*[data-test-id=section-role] *[data-test-id=add-entity]',
@@ -37,10 +34,6 @@ const groupsCardsSelectors = {
   dapsRecordsCounter: '*[data-test-id=section-dap] span.record-count',
   usersRecordsCounter: '*[data-test-id=section-user] span.record-count',
   companiesRecordsCounter: '*[data-test-id=section-client] span.record-count'
-}
-
-const apiInterceptions = {
-  groupsReloaded: '/api/Groups**/Clients'
 }
 
 class GroupManagementPage extends BaseManagementPage {
@@ -272,38 +265,10 @@ class GroupManagementPage extends BaseManagementPage {
   // ----------------------------------------------- OTHERS --------------------------------------------- //
 
   /**
-   * Inactive the selected group
-   *
-   */
-  deactivateGroup() {
-    cy.get(selectors.threeDotBtn).click()
-    cy.get(selectors.threeDotDeactivateBtn).click()
-  }
-
-  /**
-   * Active the selected group
+   * Activate the selected group
    */
   activateGroup() {
     cy.get(selectors.activateGroupBtn).click()
-  }
-
-  /**
-   * Duplicate the selected group and insert a new name on it.
-   * Also, verify if the name of the group is 'Copy of ... ' as soon as it is duplicated
-   *
-   * @param {String} groupName Group name that is going to be duplicated
-   * @param {String} newNameForDuplicatedGroup Group name to the new duplicated group
-   */
-  duplicateGroupAndAssertDefaultName(groupName, newNameForDuplicatedGroup) {
-    cy.get(selectors.threeDotBtn).click()
-    cy.get(selectors.threeDotDuplicateBtn).click()
-
-    this.getEntityHeader().as('groupNameInput')
-    cy.get('@groupNameInput').should('have.text', 'Copy of ' + groupName)
-    cy.get('@groupNameInput').type(newNameForDuplicatedGroup)
-    this.saveEntityInformation()
-
-    this.waitTableReloads()
   }
 
   /**
@@ -470,12 +435,6 @@ class GroupManagementPage extends BaseManagementPage {
         .scrollIntoView()
         .click()
     }
-  }
-
-  // ---------------------------------------  INTERCEPTIONS --------------------------------------------- //
-  waitTableReloads() {
-    cy.intercept('GET', apiInterceptions.groupsReloaded).as('waitsTableReloads')
-    cy.wait('@waitsTableReloads', { timeout: 10000 })
   }
 }
 

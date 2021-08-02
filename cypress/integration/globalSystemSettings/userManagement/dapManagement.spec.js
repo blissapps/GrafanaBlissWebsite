@@ -293,5 +293,36 @@ describe('Data Access Profiles tests over User Management settings', () => {
     dapManagementPage.assertEntityHeaderIsDisplayedAsExpected(dapName)
   })
 
+  /**
+   * @missing_data Need to have an active DAP created in the active tab
+   *
+   * Waiting also for https://globalshares.atlassian.net/wiki/spaces/~338817290/pages/3384774689/ids+missing+report+2 so the method clickToDeactivateEntity() will work
+   *
+   *
+   */
+  it.skip('C7568176_DAP_Deactivate_And_Activate_DAP', () => {
+    const dapId = 20
+    const dapName = 'Deactivate me'
+
+    // Deactivate DAP
+    dapManagementPage.clickDapById(dapId)
+    //dapManagementPage.clickToDeactivateEntity() // uncomment as soon as  ids missing report 2 is finished
+    cy.get('gs-button[data-test-id=more-actions-button]').click() // temporarily placed until the ids missing report 2 is finished
+    cy.get('gs-action-panel-option[data-test-id=deactivate-button]').click() // temporarily placed until the ids missing report 2 is finished
+
+    dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Deactivated', true, true)
+    dapManagementPage.assertInactiveDapsAreDisplayed()
+    dapManagementPage.assertEntityIsDisplayedInTheList(dapName)
+    dapManagementPage.assertDapEditable(false)
+
+    // Activate DAP
+    dapManagementPage.activateDap()
+
+    dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Activated')
+    dapManagementPage.assertActiveDapsAreDisplayed()
+    dapManagementPage.assertEntityIsDisplayedInTheList(dapName)
+    dapManagementPage.assertDapEditable()
+  })
+
   // ************************************************ TESTS AS CLIENTS ************************************************** //
 })

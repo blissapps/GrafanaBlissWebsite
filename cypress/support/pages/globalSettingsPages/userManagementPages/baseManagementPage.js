@@ -19,7 +19,10 @@ const selectors = {
   hideUsersBtn: '*[data-test-id=section-user] gs-button[data-test-id=hide]',
   hideCompaniesBtn: '*[data-test-id=section-client] gs-button[data-test-id=hide]',
   hideGroupsBtn: '*[data-test-id=section-group] gs-button[data-test-id=hide]',
-  entityNameInList: 'gs-list a'
+  entityNameInList: 'gs-list a',
+  threeDotBtn: 'gs-button[data-test-id=detailsActionPanelBtn]',
+  threeDotDuplicateBtn: 'gs-action-panel-option[data-test-id=action-duplicate]',
+  threeDotDeactivateBtn: 'gs-action-panel-option[data-test-id=action-deactivate]'
 }
 
 // These selectors are the ones from the l4 nav bar (right nav bar)
@@ -144,8 +147,29 @@ class BaseManagementPage extends BasePage {
     }
   }
 
+  /**
+   * Click in a entity in the list of entities by sending the entity name
+   *
+   * @param {String} entityName name of the entity to be clicked
+   */
   clickEntityByName(entityName) {
     this.getEntityByName(entityName).click()
+  }
+
+  /**
+   * Click to duplicate a selected entity
+   */
+  clickToDuplicateEntity() {
+    cy.get(selectors.threeDotBtn).click()
+    cy.get(selectors.threeDotDuplicateBtn).click()
+  }
+
+  /**
+   * Click to deactivate a selected entity
+   */
+  clickToDeactivateEntity() {
+    cy.get(selectors.threeDotBtn).click()
+    cy.get(selectors.threeDotDeactivateBtn).click()
   }
 
   // --------------------------------------------------------- ASSERTIONS ------------------------------------------------------------------ //

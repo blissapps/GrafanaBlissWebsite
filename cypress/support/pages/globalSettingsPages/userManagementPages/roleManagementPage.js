@@ -11,8 +11,6 @@ const selectors = {
   rolesDisplayed: '#roleList gs-list a[id*="role_',
   newRoleBtn: 'gs-button[data-test-id=create-role]',
   roleId: '#role_',
-  threeDotBtn: 'gs-button[data-test-id=detailsActionPanelBtn]',
-  threeDotDeactivateBtn: 'gs-action-panel-option[data-test-id=action-deactivate]',
   activateRoleBtn: 'gs-button[data-test-id=activateBtn]'
 }
 
@@ -449,14 +447,6 @@ class RoleManagementPage extends BaseManagementPage {
   }
 
   // -------------------------------------------- OTHERS -------------------------------------------------//
-  /**
-   * Inactive the selected role
-   *
-   */
-  deactivateRole() {
-    cy.get(selectors.threeDotBtn).click()
-    cy.get(selectors.threeDotDeactivateBtn).click()
-  }
 
   /**
    * Activate the selected role
