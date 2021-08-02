@@ -145,7 +145,7 @@ describe('Role Management tests over User Management settings', () => {
   })
 
   it('C7499701_Create_A_New_Role_Discard_Role', () => {
-    const roleName = 'Create and Discard'
+    const roleName = 'Create and Discard' + utils.getRandomNumber()
 
     roleManagementPage.clickToCreateRoleWithNewName(roleName)
     roleManagementPage.insertOrRemovePermissions('accessfilters', ['view', 'update', 'create', 'delete'])

@@ -144,6 +144,10 @@ class BaseManagementPage extends BasePage {
     }
   }
 
+  clickEntityByName(entityName) {
+    this.getEntityByName(entityName).click()
+  }
+
   // --------------------------------------------------------- ASSERTIONS ------------------------------------------------------------------ //
 
   /**

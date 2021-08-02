@@ -11,7 +11,9 @@ const selectors = {
   addGroupsBtn: '*[data-test-id=section-group] *[data-test-id=add-entity]',
   dapId: 'a[data-test-id=dap-',
   groupsCardId: '*[data-test-id=section-group] gs-card[data-test-id=entity-',
-  removeIconButton: 'gs-button[data-test-id=remove-entity]'
+  removeIconButton: 'gs-button[data-test-id=remove-entity]',
+  createDapBtn: 'gs-button[data-test-id="create-dap"]',
+  dapDetailsContainer: 'hearth-dap-details'
 }
 
 const conditionsSelectors = {
@@ -49,6 +51,15 @@ class DapManagementPage extends BaseManagementPage {
     return cy.get(selectors.dapId + dapId).scrollIntoView()
   }
 
+  /**
+   * Get create new Dap button
+   *
+   * @returns Button to create a new DAP
+   */
+  getCreateNewDapButton() {
+    return cy.get(selectors.createDapBtn)
+  }
+
   // ----------------------------------------------- CLICKS --------------------------------------------- //
 
   /**
@@ -58,6 +69,10 @@ class DapManagementPage extends BaseManagementPage {
    */
   clickDapById(dapId) {
     this.getDapById(dapId).click()
+  }
+
+  clickCreateNewDap() {
+    this.getCreateNewDapButton().click()
   }
 
   // ----------------------------------------------- ASSERTS --------------------------------------------- //
@@ -166,6 +181,15 @@ class DapManagementPage extends BaseManagementPage {
         .eq(elementPosition - 1)
         .should('not.exist')
     }
+  }
+
+  /**
+   * Assert the DAP container with dap details is displayed or not
+   *
+   * @param {Boolean} displayed True to assert de DAP details are displayed, False otherwise
+   */
+  assertDapDetailsContainerDisplayed(displayed = true) {
+    displayed ? cy.get(selectors.dapDetailsContainer).should('be.visible') : cy.get(selectors.dapDetailsContainer).should('not.exist')
   }
 
   // ----------------------------------------------- OTHERS --------------------------------------------- //
@@ -285,8 +309,8 @@ class DapManagementPage extends BaseManagementPage {
    * @param {Number} level Level 1, 2, or 3 to choose in which level the condition is going to be added.
    *
    * @example
-   * addCondition(1, 1) -> first conditional element addling a condition in the level 1
-   * addCondition(2, 2) -> second conditional element addling a condition in the level 2
+   * addCondition(1, 1) -> first conditional element adding a condition in the level 1
+   * addCondition(2, 2) -> second conditional element adding a condition in the level 2
    * addCondition(7, 3) -> Add a condition in the level 3 of the element in the position 7
    */
   addCondition(conditionIndex, level) {

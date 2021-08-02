@@ -1,10 +1,17 @@
 import DapManagementPage from '../../../support/pages/globalSettingsPages/userManagementPages/dapManagementPage'
 import LeftMenuNavBar from '../../../support/components/leftMenuNavBar'
 
+import Utils from '../../../support/utils'
+
 describe('Data Access Profiles tests over User Management settings', () => {
+  // Pages
   const dapManagementPage = new DapManagementPage()
 
+  // Components
   const leftMenuNavBar = new LeftMenuNavBar()
+
+  // Others
+  const utils = new Utils()
 
   beforeEach(() => {
     // @ts-ignore
@@ -83,6 +90,68 @@ describe('Data Access Profiles tests over User Management settings', () => {
     dapManagementPage.clickTabByTitle('Inactive')
     dapManagementPage.assertInactiveDapsAreDisplayed(false)
     dapManagementPage.assertNoDapExistsMessageIsDisplayed()
+  })
+
+  it('C8981124_DAP_Create_DAP_With_No_Nested_Conditions', () => {
+    const dapName = 'Create new DAP no nested ' + utils.getRandomNumber()
+
+    dapManagementPage.clickCreateNewDap()
+    dapManagementPage.modifyEntityName(dapName)
+    dapManagementPage.modifyCondition([], [1, 'Client id'], [2, '11'])
+    dapManagementPage.saveEntityInformation()
+
+    dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved')
+    dapManagementPage.assertEntityIsDisplayedInTheList(dapName)
+
+    dapManagementPage.reloadPage()
+    dapManagementPage.clickEntityByName(dapName)
+    dapManagementPage.assertConditionValue(1, 'Client id')
+    dapManagementPage.assertConditionValue(2, '11')
+  })
+
+  it('C8981125_DAP_Create_DAP_With_Nested_Conditions', () => {
+    const dapName = 'Create new DAP NESTED ' + utils.getRandomNumber()
+
+    dapManagementPage.clickCreateNewDap()
+    dapManagementPage.modifyEntityName(dapName)
+    dapManagementPage.modifyCondition([], [1, 'Client id'], [2, '11'])
+    dapManagementPage.addCondition(1, 2)
+    dapManagementPage.modifyCondition([3, 'or'], [4, 'Client id'], [5, '11'])
+    dapManagementPage.saveEntityInformation()
+
+    dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved')
+    dapManagementPage.assertEntityIsDisplayedInTheList(dapName)
+
+    dapManagementPage.reloadPage()
+    dapManagementPage.clickEntityByName(dapName)
+    dapManagementPage.assertConditionValue(1, 'Client id')
+    dapManagementPage.assertConditionValue(2, '11')
+    dapManagementPage.assertConditionValue(3, 'or')
+    dapManagementPage.assertConditionValue(4, 'Client id')
+    dapManagementPage.assertConditionValue(5, '11')
+  })
+
+  it('C8981126_DAP_Discard_Unsaved_DAP', () => {
+    const dapName = 'Create and Discard DAP ' + utils.getRandomNumber()
+
+    dapManagementPage.clickCreateNewDap()
+    dapManagementPage.modifyEntityName(dapName)
+    dapManagementPage.modifyCondition([], [1, 'Client id'], [2, '11'])
+    dapManagementPage.discardEntityInformation()
+
+    dapManagementPage.assertDapDetailsContainerDisplayed(false)
+    dapManagementPage.assertToastNotificationMessageIsDisplayed('New data access profile was discarded')
+    dapManagementPage.assertEntityIsDisplayedInTheList(dapName, false)
+  })
+
+  it('C8981127_DAP_Save_Without_Conditions', () => {
+    const dapName = 'Create without conditions '
+
+    dapManagementPage.clickCreateNewDap()
+    dapManagementPage.modifyEntityName(dapName)
+    dapManagementPage.saveEntityInformation()
+
+    dapManagementPage.assertNotificationErrorDisplayed()
   })
 
   /**
