@@ -1,7 +1,7 @@
 const selectors = {
   inputBar: 'gs-global-search .input-bar input',
   searchClientButton: '.search-action',
-  clearClientFieldButton: '.clear-action'
+  clearXButton: 'gs-global-search div.clear-action gs-svg-icon'
 }
 
 class SearchBar {
@@ -23,11 +23,17 @@ class SearchBar {
 
   /**
    * Clear the search bar content.
-   * For this kind of element, we cannot use the default clear from Cypress
    */
   clearSearchBox() {
     cy.get(selectors.inputBar).clear()
     // cy.get(selectors.inputBar).type('{selectall}{backspace}{selectall}{backspace}')
+  }
+
+  /**
+   * Clear the search bar by pressing the X icon
+   */
+  clearSearchBoxByXIcon() {
+    cy.get(selectors.clearXButton).click()
   }
 }
 

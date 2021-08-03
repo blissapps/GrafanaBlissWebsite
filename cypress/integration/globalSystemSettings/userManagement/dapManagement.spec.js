@@ -1,5 +1,7 @@
 import DapManagementPage from '../../../support/pages/globalSettingsPages/userManagementPages/dapManagementPage'
+
 import LeftMenuNavBar from '../../../support/components/leftMenuNavBar'
+import SearchBar from '../../../support/components/searchBar'
 
 import Utils from '../../../support/utils'
 
@@ -9,6 +11,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
 
   // Components
   const leftMenuNavBar = new LeftMenuNavBar()
+  const searchBar = new SearchBar()
 
   // Others
   const utils = new Utils()
@@ -296,8 +299,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
   /**
    * @missing_data Need to have an active DAP created in the active tab
    *
-   * Waiting also for https://globalshares.atlassian.net/wiki/spaces/~338817290/pages/3384774689/ids+missing+report+2 so the method clickToDeactivateEntity() will work
-   *
+   * @Waiting also for https://globalshares.atlassian.net/wiki/spaces/~338817290/pages/3384774689/ids+missing+report+2 so the method clickToDeactivateEntity() will work
    *
    */
   it.skip('C7568176_DAP_Deactivate_And_Activate_DAP', () => {
@@ -306,7 +308,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
 
     // Deactivate DAP
     dapManagementPage.clickDapById(dapId)
-    //dapManagementPage.clickToDeactivateEntity() // uncomment as soon as  ids missing report 2 is finished
+    //dapManagementPage.clickToDeactivateEntity() // uncomment as soon as ids missing report 2 is finished
     cy.get('gs-button[data-test-id=more-actions-button]').click() // temporarily placed until the ids missing report 2 is finished
     cy.get('gs-action-panel-option[data-test-id=deactivate-button]').click() // temporarily placed until the ids missing report 2 is finished
 
@@ -322,6 +324,79 @@ describe('Data Access Profiles tests over User Management settings', () => {
     dapManagementPage.assertActiveDapsAreDisplayed()
     dapManagementPage.assertEntityIsDisplayedInTheList(dapName)
     dapManagementPage.assertDapEditable()
+  })
+
+  /**
+   *
+   * SkIPPING due to https://globalshares.atlassian.net/browse/PB-873
+   *
+   * @missing_data Need to have some daps called 'dap to search' in both active and inactive tabs. Also need to have another dap called 'other group dap' in both active and inactive tab.
+   *               All daps must have just one 'Business Unit' conditions added
+   */
+  it.skip('C7592109_DAP_Search_Functionality', () => {
+    let dap = 'DAP TO SEARCH'
+    const dapCondition = 'Business'
+
+    // ACTIVE TAB
+    searchBar.search(dap)
+    dapManagementPage.assertAmountOfSearchResults(3)
+    dapManagementPage.assertSearchResultListAccuracy([29, 30, 31])
+
+    dap = 'dap to search'
+    searchBar.search(dap)
+    dapManagementPage.assertAmountOfSearchResults(3)
+    dapManagementPage.assertSearchResultListAccuracy([29, 30, 31])
+
+    dap = 'dAp To SEarch 1'
+    searchBar.search(dap)
+    dapManagementPage.assertAmountOfSearchResults(1)
+    dapManagementPage.assertSearchResultListAccuracy([29])
+
+    dap = 'randomName' + utils.getRandomNumber()
+    searchBar.search(dap)
+    dapManagementPage.assertNoResultFoundIsVisible()
+
+    dap = 'SELECT * FROM daps'
+    searchBar.search(dap)
+    dapManagementPage.assertNoResultFoundIsVisible()
+
+    // Verify conditions in a selected active dap
+    searchBar.clearSearchBoxByXIcon()
+    dapManagementPage.clickDapById(29)
+    searchBar.search(dapCondition)
+    dapManagementPage.assertAmountOfSearchedConditionResults(1)
+
+    // INACTIVE TAB
+    dapManagementPage.clickTabByTitle('Inactive')
+
+    dap = 'DAP TO SEARCH'
+    searchBar.search(dap)
+    dapManagementPage.assertAmountOfSearchResults(3)
+    dapManagementPage.assertSearchResultListAccuracy([32, 33, 34])
+
+    dap = 'dap to search'
+    searchBar.search(dap)
+    dapManagementPage.assertAmountOfSearchResults(3)
+    dapManagementPage.assertSearchResultListAccuracy([32, 33, 34])
+
+    dap = 'dAp To SEarch 4'
+    searchBar.search(dap)
+    dapManagementPage.assertAmountOfSearchResults(1)
+    dapManagementPage.assertSearchResultListAccuracy([32])
+
+    dap = 'randomName'
+    searchBar.search(dap)
+    dapManagementPage.assertNoResultFoundIsVisible()
+
+    dap = 'SELECT * FROM daps'
+    searchBar.search(dap)
+    dapManagementPage.assertNoResultFoundIsVisible()
+
+    // Verify conditions in a selected active dap
+    searchBar.clearSearchBoxByXIcon()
+    dapManagementPage.clickDapById(32)
+    searchBar.search(dapCondition)
+    dapManagementPage.assertAmountOfSearchedConditionResults(1)
   })
 
   // ************************************************ TESTS AS CLIENTS ************************************************** //

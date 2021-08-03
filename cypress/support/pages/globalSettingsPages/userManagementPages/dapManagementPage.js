@@ -29,7 +29,8 @@ const conditionsSelectors = {
   addElementLevel2: 'div.conditions hearth-dap-action-bar gs-svg-icon.level-2',
   addElementLevel3: 'div.conditions hearth-dap-action-bar gs-svg-icon.level-3',
   conditionalElements: 'div.conditions hearth-dap-condition-conditional',
-  removeConditionLine: 'div.remove-action svg'
+  removeConditionLine: 'div.remove-action svg',
+  numberOfSearchedResultsInConditions: 'hearth-dap-conditions span span'
 }
 
 class DapManagementPage extends BaseManagementPage {
@@ -201,6 +202,17 @@ class DapManagementPage extends BaseManagementPage {
    */
   assertDapEditable(editable = true) {
     editable ? cy.get(selectors.selectNotEditable).should('not.exist') : cy.get(selectors.selectNotEditable).should('exist')
+  }
+
+  /**
+   * Assert the amount of results displayed for conditions after using the search engine to look for conditions
+   *
+   * @param {Number} results amount of results you want to check after a search
+   *
+   * @example Send 'results = 2' to validate the '2 SEARCH RESULT(S)' is being displayed in the condition search result
+   */
+  assertAmountOfSearchedConditionResults(results) {
+    this.assertNumberOfRecordsTable(conditionsSelectors.numberOfSearchedResultsInConditions, results)
   }
 
   // ----------------------------------------------- OTHERS --------------------------------------------- //

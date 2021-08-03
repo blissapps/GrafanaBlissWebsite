@@ -1,7 +1,7 @@
 import BasePage from '../../basePage'
 
 const selectors = {
-  numberOfSearchResultsInTable: 'div.search-label',
+  numberOfSearchResultsInTable: '#recordCount',
   searchResultList: 'gs-list[data-test-id=searchListing-found]',
   searchResultItem: '#searchResultItem_',
   otherGroupList: 'gs-list[data-test-id=searchListing-other]',
