@@ -183,7 +183,7 @@ describe('Role Management tests over User Management settings', () => {
    */
   it.skip('C7499703_User_Does_Not_Have_Permissions_To_Create_New_Role', () => {
     // @ts-ignore
-    cy.logout() && cy.login('UserNoCreateRole@globalshares.com', '1234579846') && cy.loginSuccessfulXHRWaits() // Logout to login with the correct user without permission
+    cy.logout() && cy.login('UserNoCreateRolePermission@globalshares.com', '1234579846') && cy.loginSuccessfulXHRWaits() // Logout to login with the correct user without permission
 
     leftMenuNavBar.accessGlobalSettingsMenu('user', 'role')
     roleManagementPage.checkRoleManagementUrl()
@@ -467,7 +467,7 @@ describe('Role Management tests over User Management settings', () => {
    */
   it.skip('C7499835_Activate/Deactivate_Role_No_Permission', () => {
     // @ts-ignore
-    cy.logout() && cy.login('lmello@globalshares.com', 'Swordfish123!') && cy.loginSuccessfulXHRWaits() // Logout to login with the correct user without permission
+    cy.logout() && cy.login('userNoUpdateRolePermission@globalshares.com', '123456!') && cy.loginSuccessfulXHRWaits() // Logout to login with the correct user without permission
     leftMenuNavBar.accessGlobalSettingsMenu('user', 'role')
     roleManagementPage.checkRoleManagementUrl()
 
