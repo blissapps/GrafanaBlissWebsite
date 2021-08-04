@@ -207,7 +207,7 @@ class BaseManagementPage extends BasePage {
    *
    * @param {Array} entityId Array containing the ids of groups, roles, or daps that are supposed to be displayed in the search result list.
    *
-   * @example Send entityId=[1] to assert if the group Global Admin Group was correctly found after using the search engine.
+   * @example Send entityId=[1] to assert if the group with id 1 was correctly found in the results list, after using the search engine.
    */
   assertSearchResultListAccuracy(entityId) {
     cy.get(selectors.searchResultList).should('be.visible')
