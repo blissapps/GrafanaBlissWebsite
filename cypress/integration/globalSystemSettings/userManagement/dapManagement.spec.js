@@ -147,14 +147,17 @@ describe('Data Access Profiles tests over User Management settings', () => {
     dapManagementPage.assertEntityIsDisplayedInTheList(dapName, false)
   })
 
-  it('C8981127_DAP_Save_Without_Conditions', () => {
+  /**
+   * SKIPPING DUE TO: https://globalshares.atlassian.net/browse/PB-920
+   */
+  it.skip('C8981127_DAP_Save_Without_Conditions', () => {
     const dapName = 'Create without conditions '
 
     dapManagementPage.clickCreateNewDap()
     dapManagementPage.modifyEntityName(dapName)
     dapManagementPage.saveEntityInformation()
 
-    dapManagementPage.assertNotificationErrorDisplayed()
+    dapManagementPage.assertNotificationErrorDisplayed('A DAP cannot be saved with no conditions')
   })
 
   /**
@@ -281,7 +284,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
    *
    */
   it.skip('C7564750_DAP_Try_To_Leave_Existing_DAP_Name_Blank', () => {
-    const dapId = 7
+    const dapId = 47
     const dapName = 'Existing DAP name blank'
     const dapIdToChangeFocus = 8
 
@@ -397,6 +400,68 @@ describe('Data Access Profiles tests over User Management settings', () => {
     dapManagementPage.clickDapById(32)
     searchBar.search(dapCondition)
     dapManagementPage.assertAmountOfSearchedConditionResults(1)
+  })
+
+  /**
+   *
+   * @missing_data Need to have two DAPs, one in each active and inactive tabs, with special symbols in the profile name
+   */
+  it.skip('C7592110_DAP_Negative_Scenarios', () => {
+    let dap = '1$¨(*&!¨_}º]+£`¬'
+    let dapId = 45
+
+    cy.log(' ---------------- ACTIVE TAB --------------------- ')
+
+    searchBar.search(dap)
+    dapManagementPage.assertAmountOfSearchResults(1)
+    dapManagementPage.assertSearchResultListAccuracy([dapId])
+
+    dap = '1$¨'
+    searchBar.search(dap)
+    dapManagementPage.assertAmountOfSearchResults(1)
+    dapManagementPage.assertSearchResultListAccuracy([dapId])
+
+    dap = '£`¬'
+    searchBar.search(dap)
+    dapManagementPage.assertAmountOfSearchResults(1)
+    dapManagementPage.assertSearchResultListAccuracy([dapId])
+
+    dap = '[d]'
+    searchBar.search(dap)
+    dapManagementPage.assertNoResultFoundIsVisible()
+
+    dap = '1$¨(*&!¨_}º]+£`¬'.repeat(25) // huge amount of chars to search
+    searchBar.search(dap)
+    dapManagementPage.assertNoResultFoundIsVisible()
+
+    cy.log(' ---------------- INACTIVE TAB --------------------- ')
+
+    // INACTIVE TAB
+    dapManagementPage.clickTabByTitle('Inactive')
+
+    dap = '(*&!¨_}º]'
+    dapId = 46
+    searchBar.search(dap)
+    dapManagementPage.assertAmountOfSearchResults(1)
+    dapManagementPage.assertSearchResultListAccuracy([dapId])
+
+    dap = '(*&'
+    searchBar.search(dap)
+    dapManagementPage.assertAmountOfSearchResults(1)
+    dapManagementPage.assertSearchResultListAccuracy([dapId])
+
+    dap = '}º]'
+    searchBar.search(dap)
+    dapManagementPage.assertAmountOfSearchResults(1)
+    dapManagementPage.assertSearchResultListAccuracy([dapId])
+
+    dap = '[d]'
+    searchBar.search(dap)
+    dapManagementPage.assertNoResultFoundIsVisible()
+
+    dap = '(*&!¨_}º]'.repeat(40) // huge amount of chars to search
+    searchBar.search(dap)
+    dapManagementPage.assertNoResultFoundIsVisible()
   })
 
   // ************************************************ TESTS AS CLIENTS ************************************************** //

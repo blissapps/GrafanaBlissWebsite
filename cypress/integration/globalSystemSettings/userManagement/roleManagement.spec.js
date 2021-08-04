@@ -157,21 +157,24 @@ describe('Role Management tests over User Management settings', () => {
     roleManagementPage.assertEntityIsDisplayedInTheList(roleName, false)
   })
 
-  it('C7499702_Create_A_New_Role_Mandatory_Fields_Are_Not_Populated', () => {
+  /**
+   * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-922
+   */
+  it.skip('C7499702_Create_A_New_Role_Mandatory_Fields_Are_Not_Populated', () => {
     const roleName = 'Filling Mandatory Fields ' + utils.getRandomNumber()
 
     roleManagementPage.clickToCreateRoleWithNewName('{backspace}') // just to save the role with empty name
     roleManagementPage.saveEntityInformation()
 
     roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully', false)
-    roleManagementPage.assertNotificationErrorDisplayed()
+    roleManagementPage.assertNotificationErrorDisplayed('Name should not be empty.')
     roleManagementPage.assertEntityIsDisplayedInTheList(roleName, false)
 
     roleManagementPage.modifyEntityName(roleName)
     roleManagementPage.saveEntityInformation()
 
     roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully')
-    roleManagementPage.assertNotificationErrorDisplayed()
+    roleManagementPage.assertNotificationErrorDisplayed('', false)
     roleManagementPage.assertEntityIsDisplayedInTheList(roleName)
   })
 
@@ -192,22 +195,23 @@ describe('Role Management tests over User Management settings', () => {
 
   /**
    * @missing_data For this scenario we need to have a role called 'Existing Role' (No permissions needed)
+   *
    */
   it.skip('C7499706_Create_A_New_Role_Same_Role_Names', () => {
     const roleName = 'Existing Role'
-    const roleId = 1426
+    const roleId = 1498
 
     roleManagementPage.clickToCreateRoleWithNewName(roleName)
     roleManagementPage.saveEntityInformation()
     roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully', false)
-    roleManagementPage.assertNotificationErrorDisplayed()
+    roleManagementPage.assertNotificationErrorDisplayed('Name value is not valid.')
     roleManagementPage.discardEntityInformation()
 
-    roleManagementPage.clickRoleById(roleId)
+    roleManagementPage.clickRoleById(roleId, false)
     roleManagementPage.modifyEntityName(roleName)
     roleManagementPage.saveEntityInformation()
     roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully', false)
-    roleManagementPage.assertNotificationErrorDisplayed()
+    roleManagementPage.assertNotificationErrorDisplayed('', false)
   })
 
   /**
