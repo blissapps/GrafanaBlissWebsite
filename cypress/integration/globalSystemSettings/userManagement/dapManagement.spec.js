@@ -18,6 +18,9 @@ describe('Data Access Profiles tests over User Management settings', () => {
 
   beforeEach(() => {
     // @ts-ignore
+    cy.log(Cypress.currentTest.title)
+
+    // @ts-ignore
     cy.login() && cy.loginSuccessfulXHRWaits()
     leftMenuNavBar.accessGlobalSettingsMenu('user', 'dap')
     dapManagementPage.checkDapManagementUrl()
@@ -475,8 +478,6 @@ describe('Data Access Profiles tests over User Management settings', () => {
     const dapName = 'Duplicate me'
     const newDapName = 'Duplicated DAP ' + utils.getRandomNumber()
     const groupIdAssociated = 957
-
-    // cy.log(Cypress.currentTest)
 
     // Duplicate DAP
     dapManagementPage.clickDapById(dapId)
