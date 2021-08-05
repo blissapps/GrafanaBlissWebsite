@@ -138,13 +138,13 @@ class BasePage {
   }
 
   /**
-   * Assert the number of records displayed in a table. It is showed in the top like this: 'X record(s)'
+   * Assert the number of records displayed. It is showed in the top like this: 'X record(s)'
    *
    * @param {Object} locator Object locator where this method will extract the text from this locator
    * @param {Number} numberOfRecords amount of people you want to check in the records
    *
    */
-  assertNumberOfRecordsTable(locator, numberOfRecords) {
+  assertNumberOfRecordsDisplayed(locator, numberOfRecords) {
     cy.get(locator)
       .invoke('text')
       .then(text => {
@@ -265,6 +265,16 @@ class BasePage {
           expect(text.trim()).equal(textDisplayed)
         })
     }
+  }
+
+  /**
+   * Assert if an element is focused
+   *
+   * @param {String} elementSelector element selector to be validated
+   * @param {boolean} focused True is default to validate if the element is focused. False, otherwise.
+   */
+  assertElementIsFocused(elementSelector, focused = true) {
+    focused ? cy.get(elementSelector).should('have.focus') : cy.get(elementSelector).should('not.have.focus')
   }
 }
 

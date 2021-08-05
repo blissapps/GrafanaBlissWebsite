@@ -205,12 +205,18 @@ class GroupManagementPage extends BaseManagementPage {
   }
 
   /**
-   * Assert the amount of cards displayed in the group sections (roles, daps, users, or companies) is corrected
+   * Assert if the amount of cards displayed in a section (roles, daps, users, or companies) is corrected
    *
    * @param {String} sectionName Choose one of these: roles, daps, users, or companies
    * @param {Number} amountOfCards Amount of cards supposed to be displayed in a group section
+   * @param {Boolean} showAll False to not click in the showAll in case it is not displayed. True otherwise
    */
-  assertNumberOfCardsDisplayedInASection(sectionName, amountOfCards) {
+  assertNumberOfCardsDisplayedInASection(sectionName, amountOfCards, showAll = false) {
+    // clicks in show all in case we have lots of cards
+    if (showAll) {
+      this.clickShowAll(sectionName)
+    }
+
     switch (sectionName) {
       case 'roles':
         cy.get(groupsCardsSelectors.rolesAllCards).should('have.length', amountOfCards)
@@ -234,7 +240,7 @@ class GroupManagementPage extends BaseManagementPage {
   }
 
   /**
-   * Assert the number of records displayed in the group sections (roles, daps, users, or companies) is corrected
+   * Assert the number of records displayed in the group sections (roles, daps, users, or companies) is correct
    *
    * @param {String} sectionName Choose one of these: roles, daps, users, or companies
    * @param {Number} numberOrRecords Amount of records supposed to be displayed in a group section
@@ -242,19 +248,19 @@ class GroupManagementPage extends BaseManagementPage {
   assertNumberOfRecordsInASection(sectionName, numberOrRecords) {
     switch (sectionName) {
       case 'roles':
-        this.assertNumberOfRecordsTable(groupsCardsSelectors.rolesRecordsCounter, numberOrRecords)
+        this.assertNumberOfRecordsDisplayed(groupsCardsSelectors.rolesRecordsCounter, numberOrRecords)
         break
 
       case 'daps':
-        this.assertNumberOfRecordsTable(groupsCardsSelectors.dapsRecordsCounter, numberOrRecords)
+        this.assertNumberOfRecordsDisplayed(groupsCardsSelectors.dapsRecordsCounter, numberOrRecords)
         break
 
       case 'users':
-        this.assertNumberOfRecordsTable(groupsCardsSelectors.usersRecordsCounter, numberOrRecords)
+        this.assertNumberOfRecordsDisplayed(groupsCardsSelectors.usersRecordsCounter, numberOrRecords)
         break
 
       case 'companies':
-        this.assertNumberOfRecordsTable(groupsCardsSelectors.companiesRecordsCounter, numberOrRecords)
+        this.assertNumberOfRecordsDisplayed(groupsCardsSelectors.companiesRecordsCounter, numberOrRecords)
         break
 
       default:

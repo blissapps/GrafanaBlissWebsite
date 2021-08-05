@@ -198,7 +198,7 @@ class BaseManagementPage extends BasePage {
    * @example Send 'results = 2' to validate the '2 SEARCH RESULT(S)' is being displayed in the Search Results list
    */
   assertAmountOfSearchResults(results) {
-    this.assertNumberOfRecordsTable(selectors.numberOfSearchResultsInTable, results)
+    this.assertNumberOfRecordsDisplayed(selectors.numberOfSearchResultsInTable, results)
   }
 
   /**
@@ -253,6 +253,15 @@ class BaseManagementPage extends BasePage {
     } else {
       this.getEntityByName(entityName, displayed)
     }
+  }
+
+  /**
+   * Assert the entity is being focused by checking the entity name
+   *
+   * @param {Boolean} focused True is default to validate if the entity is focused. False, otherwise.
+   */
+  assertEntityIsFocused(focused = true) {
+    this.assertElementIsFocused(selectors.entityNameInput, focused)
   }
 
   // ----------------------------------------------- OTHERS --------------------------------------------- //

@@ -15,7 +15,9 @@ const selectors = {
   createDapBtn: 'gs-button[data-test-id="create-dap"]',
   dapDetailsContainer: 'hearth-dap-details',
   selectNotEditable: 'gs-select.disabled',
-  activateDapBtn: 'gs-button[data-test-id=activate-button]'
+  activateDapBtn: 'gs-button[data-test-id=activate-button]',
+  groupsRecordsCounter: '*[data-test-id=section-group] span.record-count',
+  groupsAllCards: '*[data-test-id=section-group] gs-card'
 }
 
 const conditionsSelectors = {
@@ -212,7 +214,25 @@ class DapManagementPage extends BaseManagementPage {
    * @example Send 'results = 2' to validate the '2 SEARCH RESULT(S)' is being displayed in the condition search result
    */
   assertAmountOfSearchedConditionResults(results) {
-    this.assertNumberOfRecordsTable(conditionsSelectors.numberOfSearchedResultsInConditions, results)
+    this.assertNumberOfRecordsDisplayed(conditionsSelectors.numberOfSearchedResultsInConditions, results)
+  }
+
+  /**
+   * Assert if the number of groups of a selected DAP is displayed correct
+   *
+   * @param {Number} numberOrRecords Amount of records supposed to be displayed in a group section
+   */
+  assertNumberOfGroupRecordsAssociatedWithDap(numberOrRecords) {
+    this.assertNumberOfRecordsDisplayed(selectors.groupsRecordsCounter, numberOrRecords)
+  }
+
+  /**
+   * Assert if the amount of cards displayed in the group section is corrected
+   *
+   * @param {Number} amountOfCards Amount of cards supposed to be displayed in a group section
+   */
+  assertNumberOfGroupCardsAssociatedWithDap(amountOfCards) {
+    cy.get(selectors.groupsAllCards).should('have.length', amountOfCards)
   }
 
   // ----------------------------------------------- OTHERS --------------------------------------------- //

@@ -106,7 +106,7 @@ class UserManagementPage extends BasePage {
    * @example 'results = 2 for '2 SEARCH RESULT(S)' being displayed in the table
    */
   assertAmountOfSearchResults(results) {
-    this.assertNumberOfRecordsTable(selectors.numberOfSearchResultsInTable, results)
+    this.assertNumberOfRecordsDisplayed(selectors.numberOfSearchResultsInTable, results)
   }
 
   /**

@@ -464,5 +464,43 @@ describe('Data Access Profiles tests over User Management settings', () => {
     dapManagementPage.assertNoResultFoundIsVisible()
   })
 
+  /**
+   * @missing_data Need to have an active DAP created with a condition and with a group attached
+   *
+   * @Waiting also for https://globalshares.atlassian.net/wiki/spaces/~338817290/pages/3384774689/ids+missing+report+2 so the method clickToDeactivateEntity() will work
+   *
+   */
+  it.skip('C7568169_DAP_Duplicate_DAP', () => {
+    const dapId = 64
+    const dapName = 'Duplicate me'
+    const newDapName = 'Duplicated DAP ' + utils.getRandomNumber()
+    const groupIdAssociated = 957
+
+    // cy.log(Cypress.currentTest)
+
+    // Duplicate DAP
+    dapManagementPage.clickDapById(dapId)
+    dapManagementPage.assertNumberOfGroupRecordsAssociatedWithDap(1)
+    dapManagementPage.assertNumberOfGroupCardsAssociatedWithDap(1)
+    // dapManagementPage.clickToDuplicateEntity() // uncomment as soon as ids missing report 2 is finished
+    cy.get('gs-button[data-test-id=more-actions-button]').click() // temporarily placed until the ids missing report 2 is finished
+    cy.get('gs-action-panel-option[data-test-id=duplicate-button]').click() // temporarily placed until the ids missing report 2 is finished
+
+    dapManagementPage.assertEntityIsFocused()
+    dapManagementPage.assertEntityHeaderIsDisplayedAsExpected('Copy of ' + dapName)
+
+    dapManagementPage.modifyEntityName(newDapName)
+    dapManagementPage.saveEntityInformation()
+
+    dapManagementPage.assertToastNotificationMessageIsDisplayed(newDapName + ' Saved', true, true)
+    dapManagementPage.assertEntityIsDisplayedInTheList(newDapName)
+    dapManagementPage.assertConditionValue(1, 'Business Unit')
+    dapManagementPage.assertConditionValue(2, '1')
+    dapManagementPage.assertGroupAssociatedWithDap(groupIdAssociated, false)
+    dapManagementPage.assertNumberOfGroupRecordsAssociatedWithDap(0)
+    dapManagementPage.assertNumberOfGroupCardsAssociatedWithDap(0)
+    dapManagementPage.assertEntityIsFocused(false)
+  })
+
   // ************************************************ TESTS AS CLIENTS ************************************************** //
 })
