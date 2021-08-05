@@ -174,8 +174,66 @@ describe('Role Management tests over User Management settings', () => {
     roleManagementPage.saveEntityInformation()
 
     roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully')
-    roleManagementPage.assertNotificationErrorDisplayed('', false)
+    roleManagementPage.assertNotificationErrorDisplayed('Name should not be empty.', false)
     roleManagementPage.assertEntityIsDisplayedInTheList(roleName)
+  })
+
+  /**
+   * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-922
+   */
+  it.skip('C7499704_Create_A_New_Role_Name_Character_Limit_When_Creating', () => {
+    let roleName = utils.generateRandomString(51)
+
+    // 51 chars
+    roleManagementPage.clickToCreateRoleWithNewName(roleName)
+    roleManagementPage.saveEntityInformation()
+
+    roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully', false)
+    roleManagementPage.assertNotificationErrorDisplayed('Name length must be 50 characters or fewer.')
+    roleManagementPage.assertEntityIsDisplayedInTheList(roleName, false)
+
+    // 50 chars
+    roleName = utils.generateRandomString(50)
+    roleManagementPage.modifyEntityName(roleName)
+    roleManagementPage.saveEntityInformation()
+
+    roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully')
+    roleManagementPage.assertNotificationErrorDisplayed('Name length must be 50 characters or fewer.', false)
+    roleManagementPage.assertEntityIsDisplayedInTheList(roleName)
+  })
+
+  /**
+   * @missing_data Need to have a role created
+   *
+   * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-922
+   */
+  it.skip('C7499705_Create_A_New_Role_Name_Character_Limit_When_Editing', () => {
+    const roleId = 1375
+    const roleName = 'Edit me'
+    let newRoleName = utils.generateRandomString(51)
+
+    // 51 chars
+    roleManagementPage.clickRoleById(roleId)
+    roleManagementPage.modifyEntityName(newRoleName)
+    roleManagementPage.saveEntityInformation()
+
+    roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully', false)
+    roleManagementPage.assertNotificationErrorDisplayed('Name length must be 50 characters or fewer.')
+    roleManagementPage.assertEntityIsDisplayedInTheList(newRoleName, false)
+
+    // 50 chars
+    newRoleName = utils.generateRandomString(50)
+    roleManagementPage.modifyEntityName(newRoleName)
+    roleManagementPage.saveEntityInformation()
+
+    roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully')
+    roleManagementPage.assertNotificationErrorDisplayed('Name length must be 50 characters or fewer.', false)
+    roleManagementPage.assertEntityIsDisplayedInTheList(newRoleName)
+
+    // tearDown
+    cy.log('TEARDOWN')
+    roleManagementPage.modifyEntityName(roleName)
+    roleManagementPage.saveEntityInformation()
   })
 
   /**

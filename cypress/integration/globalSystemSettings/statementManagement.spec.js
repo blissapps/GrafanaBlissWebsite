@@ -23,10 +23,7 @@ describe('Statement Management tests', () => {
     clientStatementsPage.assertClientStatementsTableInOrderById(idsClientList)
   })
 
-  /**
-   * SKIPPED DUE TO https://globalshares.atlassian.net/browse/PB-923
-   */
-  it.skip('C7394241_Statements_Download_Button_Visibility_Behavior', () => {
+  it('C7394241_Statements_Download_Button_Visibility_Behavior', () => {
     // INITIATED
     clientStatementsPage.filterClientStatements('Velocys PLC')
     clientStatementsPage.clickClientTable(103)
@@ -73,10 +70,7 @@ describe('Statement Management tests', () => {
     clientStatementsPage.assertFileWasDownloadedSuccessfully(clientName + '_Summary.csv')
   })
 
-  /**
-   * SKIPPED DUE TO https://globalshares.atlassian.net/browse/PB-923
-   */
-  it.skip('C7353833_Use_Filter_To_Search_For_Client_Statements', () => {
+  it('C7353833_Use_Filter_To_Search_For_Client_Statements', () => {
     // name and date
     const clientName = 'TomTom'
     const dateFrom = '20190301'
@@ -225,19 +219,15 @@ describe('Statement Management tests', () => {
   /**
    * @MISSING_STEPS scroll not working properly
    *
-   * SKIPPED DUE TO https://globalshares.atlassian.net/browse/PB-923
    */
-  it.skip('C7394265_View_Statements', () => {
+  it('C7394265_View_Statements', () => {
     clientStatementsPage.filterClientStatements('Repsol')
     clientStatementsPage.clickClientTable(107)
     clientStatementsPage.checkUrl('/participants')
     clientStatementsPage.assertTableContainsExpectedColumns(['Participant', 'Status'])
   })
 
-  /**
-   * SKIPPED DUE TO https://globalshares.atlassian.net/browse/PB-923
-   */
-  it.skip('C7395182_Select_Client_Without_Participants_To_Check_Empty_State', () => {
+  it('C7395182_Select_Client_Without_Participants_To_Check_Empty_State', () => {
     clientStatementsPage.filterClientStatements('Mizuho International plc')
     clientStatementsPage.clickClientTable(141)
     clientStatementsPage.getNoDataFoundMessage().should('be.visible')
