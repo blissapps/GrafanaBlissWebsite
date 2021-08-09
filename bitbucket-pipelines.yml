@@ -12,10 +12,6 @@ pipelines:
           - node
         script:
           - yarn
-        artifacts:
-          - cypress/screenshots/**
-          - cypress/videos/**
-          - cypress/test-results/**
     - step:
         name: Cypress in Chrome only
         caches:
@@ -24,6 +20,10 @@ pipelines:
           - node
         script:
           - yarn cy:run:headless
+        artifacts:
+          - cypress/screenshots/**
+          - cypress/videos/**
+          - cypress/test-results/**
     - step:
         name: Cypress in Firefox only
         caches:
@@ -32,6 +32,10 @@ pipelines:
           - node
         script:
           - yarn cy:run:firefox
+        artifacts:
+          - cypress/screenshots/**
+          - cypress/videos/**
+          - cypress/test-results/**
 
 definitions:
   caches:
