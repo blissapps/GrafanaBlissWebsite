@@ -12,6 +12,10 @@ pipelines:
           - node
         script:
           - yarn
+        artifacts:
+          - cypress/screenshots/**
+          - cypress/videos/**
+          - cypress/test-results/**
     - step:
         name: Cypress in Chrome only
         caches:
