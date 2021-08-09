@@ -19,7 +19,12 @@ pipelines:
           - cypress
           - node
         script:
-          - yarn cy:run:headless
+          - yarn cy:run:headless:mocha:chrome
+          - yarn cy:posttest:results
+        artifacts:
+          - cypress/screenshots/**
+          - cypress/videos/**
+          - cypress/test-results/**
     - step:
         name: Cypress in Firefox only
         caches:
@@ -27,7 +32,12 @@ pipelines:
           - cypress
           - node
         script:
-          - yarn cy:run:firefox
+          - yarn cy:run:headless:mocha:firefox
+          - yarn cy:posttest:results
+        artifacts:
+          - cypress/screenshots/**
+          - cypress/videos/**
+          - cypress/test-results/**
 
 definitions:
   caches:
