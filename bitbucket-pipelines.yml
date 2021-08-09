@@ -19,7 +19,7 @@ pipelines:
           - cypress
           - node
         script:
-          - yarn cy:run:headless:mocha
+          - yarn cy:run:headless:mocha:chrome
           - yarn cy:posttest:results
         artifacts:
           - cypress/screenshots/**
