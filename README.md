@@ -92,7 +92,7 @@ We can create many personalized ways to run cypress. To do this, we need to crea
 > cy:run:edge
 >
 > # Starting the tests via CLI [Browser Chrome] and get reports by the end (run each command after the other):
-> cy:run:headless:mocha
+> cy:run:headless:mocha:chrome
 > cy:posttest:results
 > ```
 
