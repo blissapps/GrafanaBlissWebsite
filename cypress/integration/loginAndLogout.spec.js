@@ -3,10 +3,18 @@ import AuthLoginPage from '../support/pages/authLoginPage'
 import HomePage from '../support/pages/homePage'
 import LeftMenuNavBar from '../support/components/leftMenuNavBar'
 
+import dataTest from '../fixtures/data.json'
+
 describe('Login and Logout tests', () => {
+  // Pages
   const authLoginPage = new AuthLoginPage()
   const homePage = new HomePage()
+
+  //Components
   const leftMenuNavBar = new LeftMenuNavBar()
+
+  // Localized data
+  const dataTestLanguage = Cypress.env('language')
 
   it('C7644497_Login_And_Logout_Functionalities_Are_Persistent', () => {
     cy.login()
@@ -20,16 +28,12 @@ describe('Login and Logout tests', () => {
 
   it('C7668435_Login_With_Both_Wrong_User_And_Password', () => {
     cy.login('wronguser@glbalshares.com', '123!ABC')
-    authLoginPage.assertUnsuccessfulLoginErrorMessageDisplayed(
-      'You have an invalid username or password or your account is locked. Please try again or contact your service team to assist you.'
-    )
+    authLoginPage.assertUnsuccessfulLoginErrorMessageDisplayed(dataTest[dataTestLanguage].errorMessages.loginInvalidEmailOrPassword)
   })
 
   it('C7668436_Login_With_Correct_User_And_Wrong_Password', () => {
     cy.login('lmello@globalshares.co.uk', '123!ABC')
-    authLoginPage.assertUnsuccessfulLoginErrorMessageDisplayed(
-      'You have an invalid username or password or your account is locked. Please try again or contact your service team to assist you.'
-    )
+    authLoginPage.assertUnsuccessfulLoginErrorMessageDisplayed(dataTest[dataTestLanguage].errorMessages.loginInvalidEmailOrPassword)
   })
 
   it('C7644496_Logout_Button_Consistency', () => {
