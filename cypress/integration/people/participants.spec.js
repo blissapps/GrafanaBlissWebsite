@@ -28,17 +28,17 @@ describe.skip('Participants tests', () => {
     equityPeoplePage.checkPeopleUrl() // needed to use the search engine in the correct page
 
     searchBar.search(participantId) // by id
-    equityPeoplePage.checkAmountOfPeopleTable(1)
+    equityPeoplePage.assertAmountOfPeopleTable(1)
     equityPeoplePage.getParticipantFromTheList(participantId).should('be.visible')
 
     searchBar.search(participantEmail) // by e-mail
-    equityPeoplePage.checkAmountOfPeopleTable(233)
+    equityPeoplePage.assertAmountOfPeopleTable(233)
 
     searchBar.search(participantName) // by name
-    equityPeoplePage.checkAmountOfPeopleTable(2)
+    equityPeoplePage.assertAmountOfPeopleTable(2)
     equityPeoplePage.getParticipantFromTheList(participantId).should('be.visible')
 
-    equityPeoplePage.validateParticipantDataDisplayedOnTheParticipantsList([participantId, participantName, participantEmail, participantResidency])
+    equityPeoplePage.assertParticipantDataDisplayedOnTheParticipantsList([participantId, participantName, participantEmail, participantResidency])
   })
 
   /**
@@ -64,7 +64,7 @@ describe.skip('Participants tests', () => {
     equityPeoplePage.checkPeopleUrl() // needed to use the search engine in the correct page
 
     searchBar.search('Abel Lewis')
-    equityPeoplePage.checkAmountOfPeopleTable(1)
+    equityPeoplePage.assertAmountOfPeopleTable(1)
     equityPeoplePage.getParticipantFromTheList(participantId).should('be.visible')
   })
 
@@ -82,7 +82,7 @@ describe.skip('Participants tests', () => {
 
     searchBar.search(participantLastName)
     equityPeoplePage.getParticipantFromTheList(participantId).should('be.visible')
-    equityPeoplePage.checkParticipantCellContent(2, participantLastName)
+    equityPeoplePage.assertParticipantCellContent(2, participantLastName)
   })
 
   /**
@@ -121,7 +121,7 @@ describe.skip('Participants tests', () => {
     homePage.selectClientById(144)
 
     equityPeoplePage.clickParticipantFromTheList(participantId)
-    equityPeoplePage.checkParticipantDetailContent('Abel Lewis', 'New Zealand', 'ACTIVE')
+    equityPeoplePage.assertParticipantDetailContent('Abel Lewis', 'New Zealand', 'ACTIVE')
   })
 
   /**

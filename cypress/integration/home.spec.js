@@ -28,21 +28,21 @@ describe('Home page tests', () => {
    */
   it('C1234567_Favorite_And_Unfavorite_Client', () => {
     homePage.favoriteUnfavoriteClient(146)
-    homePage.isClientFavorite(146).should('be.visible')
+    homePage.assertIClientIsFavorite(146).should('be.visible')
 
     //teardown
     homePage.favoriteUnfavoriteClient(146)
-    homePage.isClientFavorite(146).should('not.exist')
+    homePage.assertIClientIsFavorite(146).should('not.exist')
   })
 
   /**
    * Verify if the client summary information in the home card is correct for some clients
    */
   it('C1234567_Check_Client_Summary_Information', () => {
-    homePage.validateClientCardSummaryInformation(144, '7digital', 'GBR', 'Regulated', 'Active').should('be.visible')
-    homePage.validateClientCardSummaryInformation(337, '9F Group', 'CHN', 'Not Regulated', 'NOT SET').should('be.visible')
-    homePage.validateClientCardSummaryInformation(162, 'Archant', 'GBR', 'Not Regulated', 'Terminated').should('be.visible')
-    homePage.validateClientCardSummaryInformation(234, 'Janus Henderson', 'GBR', 'Regulated', 'Terminated').should('be.visible')
-    homePage.validateClientCardSummaryInformation(381, 'GASCADE Gastransport', 'DEU', 'Regulated', 'Implementation').should('be.visible')
+    homePage.assertClientCardSummaryInformation(144, '7digital', 'GBR', 'Regulated', 'Active').should('be.visible')
+    homePage.assertClientCardSummaryInformation(337, '9F Group', 'CHN', 'Not Regulated', 'NOT SET').should('be.visible')
+    homePage.assertClientCardSummaryInformation(162, 'Archant', 'GBR', 'Not Regulated', 'Terminated').should('be.visible')
+    homePage.assertClientCardSummaryInformation(234, 'Janus Henderson', 'GBR', 'Regulated', 'Terminated').should('be.visible')
+    homePage.assertClientCardSummaryInformation(381, 'GASCADE Gastransport', 'DEU', 'Regulated', 'Implementation').should('be.visible')
   })
 })

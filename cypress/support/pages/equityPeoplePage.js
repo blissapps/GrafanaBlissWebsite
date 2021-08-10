@@ -64,16 +64,16 @@ class EquityPeoplePage extends BasePage {
     this.getParticipantFromTheList(participantId).click()
   }
 
-  // -------------------------------- ASSERTIONS AND OTHERS ------------------------------------- //
+  // -------------------------------- ASSERTIONS ------------------------------------- //
 
   /**
-   * Checks the amount of records displayed in the People table
+   * Assert the amount of records displayed in the People table
    *
    * @param {Number} amount amount of people you want to check in the records
    *
    * @example 'amount = 1 for '1 record(s)' being displayed in the table
    */
-  checkAmountOfPeopleTable(amount) {
+  assertAmountOfPeopleTable(amount) {
     cy.get(selectors.numberOfRecordsInTable).should('contain.text', amount)
   }
 
@@ -86,7 +86,7 @@ class EquityPeoplePage extends BasePage {
    * @example: send [123456, 'Bryan', 'SuppliedEmailAddress_169769_112967@myglobalshares.com', 'LUX'] to validate the participant 12345 data is
    * displayed correctly in the Participants table list
    */
-  validateParticipantDataDisplayedOnTheParticipantsList(data) {
+  assertParticipantDataDisplayedOnTheParticipantsList(data) {
     for (let i = 1; i <= data.length; i++) {
       cy.xpath(`(//*[@id='participant-${data[0]}']//gs-grid-cell)[${i}]`).should('contain.text', data[i - 1])
     }
@@ -101,7 +101,7 @@ class EquityPeoplePage extends BasePage {
    * @param {Number} columnToVerify this is the column name you want to verity the content of this cell
    * @param {any} value This is the value supposed to be in the cell you choose
    */
-  checkParticipantCellContent(columnToVerify, value) {
+  assertParticipantCellContent(columnToVerify, value) {
     cy.xpath(`//div[@class='data']//gs-grid-cell[${columnToVerify}]//span[@class='subtitled-cell-title']`).each($el => {
       cy.wrap($el).should('contain.text', value)
     })
@@ -114,12 +114,14 @@ class EquityPeoplePage extends BasePage {
    * @param {String} country participant country
    * @param {String} status participant status
    */
-  checkParticipantDetailContent(name, country, status) {
+  assertParticipantDetailContent(name, country, status) {
     cy.get(quickEditNavBarSelectors.participantDetailTitle).should('be.visible')
     cy.get(quickEditNavBarSelectors.participantDetailName).contains(name)
     cy.get(quickEditNavBarSelectors.participantDetailCountry).contains(country)
     cy.get(quickEditNavBarSelectors.participantDetailStatus).contains(status)
   }
+
+  // ------------------------------------- OTHERS ------------------------------------- //
 
   /**
    * Edit a participant from the list and go to Peoples page details >> Cypress/support/pages/peoplePages

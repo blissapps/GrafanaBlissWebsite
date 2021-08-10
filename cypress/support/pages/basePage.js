@@ -95,6 +95,7 @@ class BasePage {
   }
 
   /**
+   * Change the browser resolution
    *
    * @param {Number} x Number of pixels in the x coordinates (width)
    * @param {Number} y Number of pixels in the Y coordinates (height)

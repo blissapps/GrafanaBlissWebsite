@@ -20,12 +20,16 @@ describe('Login and Logout tests', () => {
 
   it('C7668435_Login_With_Both_Wrong_User_And_Password', () => {
     cy.login('wronguser@glbalshares.com', '123!ABC')
-    authLoginPage.checkUnsuccessfulLoginErrorMessageDisplayed()
+    authLoginPage.assertUnsuccessfulLoginErrorMessageDisplayed(
+      'You have an invalid username or password or your account is locked. Please try again or contact your service team to assist you.'
+    )
   })
 
   it('C7668436_Login_With_Correct_User_And_Wrong_Password', () => {
     cy.login('lmello@globalshares.co.uk', '123!ABC')
-    authLoginPage.checkUnsuccessfulLoginErrorMessageDisplayed()
+    authLoginPage.assertUnsuccessfulLoginErrorMessageDisplayed(
+      'You have an invalid username or password or your account is locked. Please try again or contact your service team to assist you.'
+    )
   })
 
   it('C7644496_Logout_Button_Consistency', () => {

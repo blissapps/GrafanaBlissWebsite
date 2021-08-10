@@ -34,7 +34,51 @@ class HomePage extends BasePage {
     return cy.get(`${selectors.clientCard}${clientId}`)
   }
 
-  // --------------------------------- ASSERTIONS AND OTHERS----------------------------------- //
+  // --------------------------------- ASSERTIONS ----------------------------------- //
+
+  /**
+   * Check the favorite status of a specific client
+   *
+   * @param {Number} clientId Client id to be checked
+   */
+  assertIClientIsFavorite(clientId) {
+    return cy.get(`${selectors.clientCard}${clientId}.favoriteVisible`)
+  }
+
+  /**
+   * Validate basic information for the client. This information is the one displayed in the home page for each client
+   * Example: Ex: 7digital => {GBR, REGULATED, ACTIVE}
+   *
+   * @param {Number} clientId Client id to verify the summary information
+   * @param {String} clientName Client name to verify the summary information
+   * @param {String} location Client location, example 'GBR' for UK clients
+   * @param {String} regulated Client information about if it is regulated. Accepted parameters: 'Regulated' and 'Not Regulated'
+   * @param {String} status Client status. Accepted parameters includes: 'Active', 'NOT SET', 'Terminated', 'Implementation'
+   *
+   * @example validateClientCardSummaryInformation('144', 'GBR', 'Regulated', 'Active')
+   */
+  assertClientCardSummaryInformation(clientId, clientName, location = 'GBR', regulated = 'Regulated', status = 'Active') {
+    return (
+      cy
+        .get(selectors.clientCard + clientId + ' ' + selectors.clientCardHeader + clientId)
+        .scrollIntoView()
+        .contains(clientName) &&
+      cy
+        .get(selectors.clientCard + clientId + ' ' + selectors.clientCardCountryBadge + clientId)
+        .scrollIntoView()
+        .contains(location) &&
+      cy
+        .get(selectors.clientCard + clientId + ' ' + selectors.clientCardRegulatedStatus + clientId)
+        .scrollIntoView()
+        .contains(regulated) &&
+      cy
+        .get(selectors.clientCard + clientId + ' ' + selectors.clientCardStatus + clientId)
+        .scrollIntoView()
+        .contains(status)
+    )
+  }
+
+  // ------------------------------------- OTHERS----------------------------------- //
 
   /**
    * Search for a client by ID
@@ -71,15 +115,6 @@ class HomePage extends BasePage {
   }
 
   /**
-   * Check the favorite status of a specific client
-   *
-   * @param {Number} clientId Client id to be checked
-   */
-  isClientFavorite(clientId) {
-    return cy.get(`${selectors.clientCard}${clientId}.favoriteVisible`)
-  }
-
-  /**
    * Group By selector. If groupBy is not given, the default group method is Alphabetical
    * Change this solution as soon as an ID is provided
    *
@@ -93,7 +128,7 @@ class HomePage extends BasePage {
         cy.get(selectors.groupByAlphabetical).click()
     }
 
-    this.checkGroupListOrder(groupBy)
+    this.assertGroupListOrder(groupBy)
   }
 
   /**
@@ -101,7 +136,7 @@ class HomePage extends BasePage {
    *
    * Change this solution as soon as an ID is provided
    */
-  checkGroupListOrder(groupBy = '') {
+  assertGroupListOrder(groupBy = '') {
     switch (groupBy) {
       default:
         cy.xpath(selectors.separatorContainerForClientsList)
@@ -114,39 +149,6 @@ class HomePage extends BasePage {
           .eq(2)
           .should('contain.text', 'B')
     }
-  }
-
-  /**
-   * Validate basic information for the client. This information is the one displayed in the home page for each client
-   * Example: Ex: 7digital => {GBR, REGULATED, ACTIVE}
-   *
-   * @param {Number} clientId Client id to verify the summary information
-   * @param {String} clientName Client name to verify the summary information
-   * @param {String} location Client location, example 'GBR' for UK clients
-   * @param {String} regulated Client information about if it is regulated. Accepted parameters: 'Regulated' and 'Not Regulated'
-   * @param {String} status Client status. Accepted parameters includes: 'Active', 'NOT SET', 'Terminated', 'Implementation'
-   *
-   * @example validateClientCardSummaryInformation('144', 'GBR', 'Regulated', 'Active')
-   */
-  validateClientCardSummaryInformation(clientId, clientName, location = 'GBR', regulated = 'Regulated', status = 'Active') {
-    return (
-      cy
-        .get(selectors.clientCard + clientId + ' ' + selectors.clientCardHeader + clientId)
-        .scrollIntoView()
-        .contains(clientName) &&
-      cy
-        .get(selectors.clientCard + clientId + ' ' + selectors.clientCardCountryBadge + clientId)
-        .scrollIntoView()
-        .contains(location) &&
-      cy
-        .get(selectors.clientCard + clientId + ' ' + selectors.clientCardRegulatedStatus + clientId)
-        .scrollIntoView()
-        .contains(regulated) &&
-      cy
-        .get(selectors.clientCard + clientId + ' ' + selectors.clientCardStatus + clientId)
-        .scrollIntoView()
-        .contains(status)
-    )
   }
 }
 
