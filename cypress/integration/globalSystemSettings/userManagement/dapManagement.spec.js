@@ -1,4 +1,5 @@
 import DapManagementPage from '../../../support/pages/globalSettingsPages/userManagementPages/dapManagementPage'
+import GroupManagementPage from '../../../support/pages/globalSettingsPages/userManagementPages/groupManagementPage'
 
 import LeftMenuNavBar from '../../../support/components/leftMenuNavBar'
 import SearchBar from '../../../support/components/searchBar'
@@ -8,6 +9,7 @@ import Utils from '../../../support/utils'
 describe('Data Access Profiles tests over User Management settings', () => {
   // Pages
   const dapManagementPage = new DapManagementPage()
+  const groupManagementPage = new GroupManagementPage()
 
   // Components
   const leftMenuNavBar = new LeftMenuNavBar()
@@ -96,6 +98,84 @@ describe('Data Access Profiles tests over User Management settings', () => {
     dapManagementPage.clickTabByTitle('Inactive')
     dapManagementPage.assertInactiveDapsAreDisplayed(false)
     dapManagementPage.assertNoDapExistsMessageIsDisplayed()
+  })
+
+  /**
+   * @missing_data Need to have a DAP with 3 groups associated
+   */
+  it.skip('C9277649_DAP_View_Groups_Linked_To_DAP', () => {
+    const dapId = 7
+    const groupIdAssociated = [963, 964, 965]
+
+    dapManagementPage.clickDapById(dapId)
+    dapManagementPage.assertNumberOfGroupRecordsAssociatedWithDap(3)
+    dapManagementPage.assertGroupAssociatedWithDap(groupIdAssociated[0])
+    dapManagementPage.assertGroupAssociatedWithDap(groupIdAssociated[1])
+    dapManagementPage.assertGroupAssociatedWithDap(groupIdAssociated[2])
+  })
+
+  /**
+   * @missing_data Need to have a DAP and 2 groups available to be added. These groups should only be used in this test
+   */
+  it.skip('C9277650_DAP_Link_Groups_To_DAP', () => {
+    const dapId = 11
+    const dapName = 'Add groups'
+    const groupName = ['Group to be added in DAP 1', 'Group to be added in DAP 2']
+    const groupIdsToAssociate = [966, 967]
+
+    dapManagementPage.clickDapById(dapId)
+    dapManagementPage.addGroupsToDap(groupName, groupIdsToAssociate)
+    dapManagementPage.saveEntityInformation()
+
+    dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved')
+    dapManagementPage.assertNumberOfGroupRecordsAssociatedWithDap(2)
+    dapManagementPage.assertGroupAssociatedWithDap(groupIdsToAssociate[0])
+    dapManagementPage.assertGroupAssociatedWithDap(groupIdsToAssociate[1])
+
+    // So go to groups and see if the association is made
+    leftMenuNavBar.accessGlobalSettingsMenu('', 'group', false)
+    groupManagementPage.clickGroupById(groupIdsToAssociate[0])
+    groupManagementPage.assertDapAssociatedWithGroup(dapId)
+    groupManagementPage.clickGroupById(groupIdsToAssociate[1])
+    groupManagementPage.assertDapAssociatedWithGroup(dapId)
+  })
+
+  /**
+   * @missing_data Need to have a DAP and any 2 groups available to be added and discarded
+   */
+  it.skip('C9277651_DAP_Discard_Daft_Linked_Groups', () => {
+    const dapId = 13
+    const groupName = ['Group to be added in DAP 1', 'Group to be added in DAP 2']
+    const groupIdsToAssociate = [966, 967]
+
+    dapManagementPage.clickDapById(dapId)
+    dapManagementPage.addGroupsToDap(groupName, groupIdsToAssociate)
+    dapManagementPage.discardEntityInformation()
+
+    dapManagementPage.assertToastNotificationMessageIsDisplayed('Changes to data access profile were discard')
+    dapManagementPage.assertNumberOfGroupRecordsAssociatedWithDap(0)
+    dapManagementPage.assertGroupAssociatedWithDap(groupIdsToAssociate[0], false)
+    dapManagementPage.assertGroupAssociatedWithDap(groupIdsToAssociate[1], false)
+  })
+
+  /**
+   * @missing_data Need to have a DAP and any 2 groups available with 2 existing groups linked
+   *
+   * @chrome_only
+   */
+  it.skip('C9277652_DAP_Error_Linked_Groups_To_DAPs _Cannot_Connect_API_Timeout', { browser: '!firefox' }, () => {
+    const dapId = 14
+    const groupName = ['Group to be added in DAP 1', 'Group to be added in DAP 2']
+    const groupIdsToAssociate = [966, 967]
+
+    dapManagementPage.clickDapById(dapId)
+    dapManagementPage.addGroupsToDap(groupName, groupIdsToAssociate)
+    // @ts-ignore
+    cy.network({ offline: true }) && cy.assertNetworkOnline({ online: false })
+    dapManagementPage.saveEntityInformation()
+    dapManagementPage.assertNotificationErrorDisplayed()
+    // @ts-ignore
+    cy.network({ offline: false }) && cy.assertNetworkOnline({ online: true })
   })
 
   it('C8981124_DAP_Create_DAP_With_No_Nested_Conditions', () => {

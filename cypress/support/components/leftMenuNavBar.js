@@ -82,18 +82,19 @@ class LeftMenuNavBar extends BasePage {
   /**
    * Navigation menu
    *
-   * @param {string} item Main menu item, available options are: user, statement
-   * @param {string} subItem Submenu item if available. If not, passes nothing like:
+   * @param {String} item Main menu item, available options are: user, statement
+   * @param {String} subItem Submenu item if available. If not, passes nothing like the examples provided
+   * @param {Boolean} openLeftBar True is the default value to open the left bar. Send False in case it is already open
    *
    * @example: accessGlobalSettingsMenu("user", "dap")
    * @example: accessGlobalSettingsMenu("statement")
    *
    */
-  accessGlobalSettingsMenu(item, subItem = '') {
+  accessGlobalSettingsMenu(item, subItem = '', openLeftBar = true) {
     item = item.toLowerCase()
     subItem = subItem.toLowerCase()
 
-    this.openSettingsMenuBar()
+    openLeftBar ? this.openSettingsMenuBar() : true
 
     // Menus
     if (item === 'user') {

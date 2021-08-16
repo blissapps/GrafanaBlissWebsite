@@ -98,4 +98,55 @@ Cypress.Commands.add('changeNetworkLatency', (latencyTime = -1) => {
     })
 })
 
+/**
+ * Go online or offline
+ *
+ * @param {Object} options Object to control the network behavior. See examples.
+ *
+ * Only works on Chrome
+ *
+ * @example:
+ * cy.network({ offline: true }) => Goes offline
+ * cy.network({ offline: false }) => Goes Online
+ */
+Cypress.Commands.add('network', options => {
+  cy.log('***************** Go offline: ' + options.offline + ' ********************')
+  Cypress.automation('remote:debugger:protocol', {
+    command: 'Network.enable'
+  })
+
+  Cypress.automation('remote:debugger:protocol', {
+    command: 'Network.emulateNetworkConditions',
+    params: {
+      offline: options.offline,
+      latency: 0,
+      downloadThroughput: 0,
+      uploadThroughput: 0,
+      connectionType: 'none'
+    }
+  })
+
+  // eslint-disable-next-line cypress/no-unnecessary-waiting
+  cy.wait(1000) // Just to give a time to the browser to switch the internet connection mode
+})
+
+/**
+ * Assert if the browser is connected to the internet or not
+ *
+ * Only works on Chrome
+ *
+ * @example:
+ * cy.network({ online: true }) => Assert the browser is connected
+ * cy.network({ online: false }) => Assert the browser is NOT connected
+ */
+Cypress.Commands.add('assertNetworkOnline', options => {
+  return (
+    cy
+      // @ts-ignore
+      .wrap(window)
+      .its('navigator.onLine')
+      .should('be.' + options.online)
+  )
+})
+
 export default executeCommand
