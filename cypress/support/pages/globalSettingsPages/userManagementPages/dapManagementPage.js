@@ -235,6 +235,16 @@ class DapManagementPage extends BaseManagementPage {
     cy.get(selectors.groupsAllCards).should('have.length', amountOfCards)
   }
 
+  /**
+   * Assert add groups button is visible
+   *
+   * @param {Boolean} visible True is default value to assert the add groups button is visible. False to assert otherwise
+   *
+   */
+  assertAddGroupsButtonIsVisible(visible = true) {
+    visible ? cy.get(selectors.addGroupsBtn).should('be.visible') : cy.get(selectors.addGroupsBtn).should('not.exist')
+  }
+
   // ----------------------------------------------- OTHERS --------------------------------------------- //
 
   /**

@@ -1,4 +1,5 @@
 import GroupManagementPage from '../../../support/pages/globalSettingsPages/userManagementPages/groupManagementPage'
+import DapManagementPage from '../../../support/pages/globalSettingsPages/userManagementPages/dapManagementPage'
 
 import LeftMenuNavBar from '../../../support/components/leftMenuNavBar'
 import SearchBar from '../../../support/components/searchBar'
@@ -8,6 +9,7 @@ import Utils from '../../../support/utils'
 describe('Group Management tests over User Management settings', () => {
   // Pages
   const groupManagementPage = new GroupManagementPage()
+  const dapManagementPage = new DapManagementPage()
 
   // Components
   const leftMenuNavBar = new LeftMenuNavBar()
@@ -407,13 +409,13 @@ describe('Group Management tests over User Management settings', () => {
   })
 
   /**
-   * @missing_data Need to have a group. Also, it needs to have at least one dap created in the environment.
+   * @missing_data Need to have a group. Also, it needs to have 3 daps created in the environment.
    */
   it.skip('C7412692_Groups_Add_A_Data_Access_Profile_To_A_Group', () => {
-    const groupId = 1057
-    const groupName = 'Add DAPs'
-    const dapNames = ['Test', 'Test2', 'Test3']
-    const dapIds = [39, 40, 41]
+    const groupId = 1022
+    const groupName = 'ADD daps'
+    const dapNames = ['DAP 1', 'DAP 2', 'DAP 3']
+    const dapIds = [41, 42, 43]
 
     groupManagementPage.clickGroupById(groupId)
     groupManagementPage.addDapsToGroup(dapNames, dapIds)
@@ -423,6 +425,16 @@ describe('Group Management tests over User Management settings', () => {
     groupManagementPage.assertDapAssociatedWithGroup(dapIds[0])
     groupManagementPage.assertDapAssociatedWithGroup(dapIds[1])
     groupManagementPage.assertDapAssociatedWithGroup(dapIds[2])
+
+    leftMenuNavBar.accessGlobalSettingsMenu('', 'dap', false)
+    dapManagementPage.checkDapManagementUrl()
+
+    dapManagementPage.clickDapById(dapIds[0])
+    dapManagementPage.assertGroupAssociatedWithDap(groupId)
+    dapManagementPage.clickDapById(dapIds[1])
+    dapManagementPage.assertGroupAssociatedWithDap(groupId)
+    dapManagementPage.clickDapById(dapIds[2])
+    dapManagementPage.assertGroupAssociatedWithDap(groupId)
   })
 
   /**

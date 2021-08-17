@@ -178,6 +178,22 @@ describe('Data Access Profiles tests over User Management settings', () => {
     cy.network({ offline: false }) && cy.assertNetworkOnline({ online: true })
   })
 
+  /**
+   * @missing_data Need to have a user with more than 1 client assigned (to make sure the landing page is the home page) and 1 DAP with the proper given access to this user
+   *
+   */
+  it.skip('C9277653_DAP_User_Does_Not_Have_Permission_Needed_To_Link_A_Group_To_The_DAP', () => {
+    const dapId = 14
+
+    // @ts-ignore
+    cy.logout() && cy.login(Cypress.env('viewOnlyDefaultUserAuth'), Cypress.env('defaultPasswordAuth')) && cy.loginSuccessfulXHRWaits() // Logout to login with the correct user without permission
+    leftMenuNavBar.accessGlobalSettingsMenu('user', 'dap')
+    dapManagementPage.checkDapManagementUrl()
+
+    dapManagementPage.clickDapById(dapId)
+    dapManagementPage.assertAddGroupsButtonIsVisible(false)
+  })
+
   it('C8981124_DAP_Create_DAP_With_No_Nested_Conditions', () => {
     const dapName = 'Create new DAP no nested ' + utils.getRandomNumber()
 
