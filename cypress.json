@@ -38,6 +38,7 @@
     "loginAuthURL": "https://ea-v3.myglobalshares.co.uk/",
     "homePageURL": "https://ea-v3.myglobalshares.co.uk/home",
     "defaultUserAuth": "lmello@globalshares.com",
+    "viewOnlyDefaultUserAuth": "ViewOnlyUser@globalshares.com",
     "defaultPasswordAuth": "Swordfish123!",
     "language": "english"
   }

@@ -178,25 +178,6 @@ describe('Data Access Profiles tests over User Management settings', () => {
     cy.network({ offline: false }) && cy.assertNetworkOnline({ online: true })
   })
 
-  /**
-   * @missing_data Need to have a DAP
-   *
-   */
-  it.only('C9277653_DAP_User_Does_Not_Have_Permission_Needed_To_Link_A_Group_To_The_DAP', () => {
-    const dapId = 14
-    const groupName = ['Group to be added in DAP 1', 'Group to be added in DAP 2']
-    const groupIdsToAssociate = [966, 967]
-
-    dapManagementPage.clickDapById(dapId)
-    dapManagementPage.addGroupsToDap(groupName, groupIdsToAssociate)
-    // @ts-ignore
-    cy.network({ offline: true }) && cy.assertNetworkOnline({ online: false })
-    dapManagementPage.saveEntityInformation()
-    dapManagementPage.assertNotificationErrorDisplayed()
-    // @ts-ignore
-    cy.network({ offline: false }) && cy.assertNetworkOnline({ online: true })
-  })
-
   it('C8981124_DAP_Create_DAP_With_No_Nested_Conditions', () => {
     const dapName = 'Create new DAP no nested ' + utils.getRandomNumber()
 
