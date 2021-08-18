@@ -33,7 +33,11 @@ const groupsCardsSelectors = {
   rolesRecordsCounter: '*[data-test-id=section-role] span.record-count',
   dapsRecordsCounter: '*[data-test-id=section-dap] span.record-count',
   usersRecordsCounter: '*[data-test-id=section-user] span.record-count',
-  companiesRecordsCounter: '*[data-test-id=section-client] span.record-count'
+  companiesRecordsCounter: '*[data-test-id=section-client] span.record-count',
+  rolesSearchResultsCounter: '*[data-test-id=section-role] .search-label',
+  dapsSearchResultsCounter: '*[data-test-id=section-dap] .search-label',
+  usersSearchResultsCounter: '*[data-test-id=section-user] .search-label',
+  companiesSearchResultsCounter: '*[data-test-id=section-client] .search-label'
 }
 
 class GroupManagementPage extends BaseManagementPage {
@@ -261,6 +265,42 @@ class GroupManagementPage extends BaseManagementPage {
 
       case 'companies':
         this.assertNumberOfRecordsDisplayed(groupsCardsSelectors.companiesRecordsCounter, numberOrRecords)
+        break
+
+      default:
+        throw new Error('This section does not exists, choose among the following: roles, daps, users, or companies')
+    }
+  }
+
+  /**
+   * Assert the number of search results displayed in the group sections (roles, daps, users, or companies) is correct.
+   * This number is shown right after a searching over the search engine. The result follows this format: "X SEARCH RESULT(S)"
+   *
+   * @param {String} sectionName Choose one of these: roles, daps, users, or companies.
+   * @param {any} numberOfSearchResults Amount of search results supposed to be displayed in a group section. For "NO MATCHING USERS FOUND", send 'No'.
+   *
+   * @example
+   * assertNumberOfSearchResultsInASection('roles', 1) => Assert "1 SEARCH RESULT(S)" is being displayed in Roles
+   * assertNumberOfSearchResultsInASection('daps', 2) Assert "2 SEARCH RESULT(S)" is being displayed in Data Access Profiles
+   * assertNumberOfSearchResultsInASection('users', 'No') Assert "NO MATCHING USERS FOUND" is being displayed in Users
+   * assertNumberOfSearchResultsInASection('users', 'No') Assert "NO MATCHING CLIENTS FOUND" is being displayed in Companies
+   */
+  assertNumberOfSearchResultsInASection(sectionName, numberOfSearchResults) {
+    switch (sectionName) {
+      case 'roles':
+        this.assertNumberOfRecordsDisplayed(groupsCardsSelectors.rolesSearchResultsCounter, numberOfSearchResults)
+        break
+
+      case 'daps':
+        this.assertNumberOfRecordsDisplayed(groupsCardsSelectors.dapsSearchResultsCounter, numberOfSearchResults)
+        break
+
+      case 'users':
+        this.assertNumberOfRecordsDisplayed(groupsCardsSelectors.usersSearchResultsCounter, numberOfSearchResults)
+        break
+
+      case 'companies':
+        this.assertNumberOfRecordsDisplayed(groupsCardsSelectors.companiesSearchResultsCounter, numberOfSearchResults)
         break
 
       default:

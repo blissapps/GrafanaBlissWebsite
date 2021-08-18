@@ -39,17 +39,17 @@ describe('Role Management tests over User Management settings', () => {
   it.skip('C7544081_Search_Engine_Search_For_Role_With_Different_Combinations_In_Active_And_Inactive_Tabs', () => {
     let role = 'ROLE'
     searchBar.search(role)
-    roleManagementPage.assertAmountOfSearchResults(3)
+    roleManagementPage.assertAmountOfSearchResultsInTheList(3)
     roleManagementPage.assertSearchResultListAccuracy([1400, 1401, 1402])
 
     role = 'role'
     searchBar.search(role)
-    roleManagementPage.assertAmountOfSearchResults(3)
+    roleManagementPage.assertAmountOfSearchResultsInTheList(3)
     roleManagementPage.assertSearchResultListAccuracy([1400, 1401, 1402])
 
     role = 'rOlE1'
     searchBar.search(role)
-    roleManagementPage.assertAmountOfSearchResults(1)
+    roleManagementPage.assertAmountOfSearchResultsInTheList(1)
     roleManagementPage.assertSearchResultListAccuracy([1400])
 
     role = 'randomName'
@@ -65,17 +65,17 @@ describe('Role Management tests over User Management settings', () => {
 
     role = 'ZZZ'
     searchBar.search(role)
-    roleManagementPage.assertAmountOfSearchResults(2)
+    roleManagementPage.assertAmountOfSearchResultsInTheList(2)
     roleManagementPage.assertSearchResultListAccuracy([1403, 1405])
 
     role = 'zzz'
     searchBar.search(role)
-    roleManagementPage.assertAmountOfSearchResults(2)
+    roleManagementPage.assertAmountOfSearchResultsInTheList(2)
     roleManagementPage.assertSearchResultListAccuracy([1403, 1405])
 
     role = 'ZzZ'
     searchBar.search(role)
-    roleManagementPage.assertAmountOfSearchResults(2)
+    roleManagementPage.assertAmountOfSearchResultsInTheList(2)
     roleManagementPage.assertSearchResultListAccuracy([1403, 1405])
 
     role = 'randomName'

@@ -43,22 +43,27 @@ describe('Group Management tests over User Management settings', () => {
    * @missing_data Need to have some groups in both active and inactive tabs
    */
   it.skip('C7412691_Search_Engine_Search_for_Groups_With_Different_Combinations_In_Active_And_Inactive_Tabs', () => {
+    const groupsIdActiveTab = [1]
+    const groupsIdInactiveTab = [1055, 1056]
     groupManagementPage.assertNoGroupSelectedMessageState()
 
     let group = 'GLOBAL'
     searchBar.search(group)
-    groupManagementPage.assertAmountOfSearchResults(1)
-    groupManagementPage.assertSearchResultListAccuracy([1])
+    groupManagementPage.assertAmountOfSearchResultsInTheList(1)
+    groupManagementPage.assertSearchResultListAccuracy(groupsIdActiveTab)
+    groupManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
     group = 'global'
     searchBar.search(group)
-    groupManagementPage.assertAmountOfSearchResults(1)
-    groupManagementPage.assertSearchResultListAccuracy([1])
+    groupManagementPage.assertAmountOfSearchResultsInTheList(1)
+    groupManagementPage.assertSearchResultListAccuracy(groupsIdActiveTab)
+    groupManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
     group = 'GLObal'
     searchBar.search(group)
-    groupManagementPage.assertAmountOfSearchResults(1)
-    groupManagementPage.assertSearchResultListAccuracy([1])
+    groupManagementPage.assertAmountOfSearchResultsInTheList(1)
+    groupManagementPage.assertSearchResultListAccuracy(groupsIdActiveTab)
+    groupManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
     group = 'randomName'
     searchBar.search(group)
@@ -73,18 +78,21 @@ describe('Group Management tests over User Management settings', () => {
 
     group = 'ABC'
     searchBar.search(group)
-    groupManagementPage.assertAmountOfSearchResults(2)
-    groupManagementPage.assertSearchResultListAccuracy([1122, 1125])
+    groupManagementPage.assertAmountOfSearchResultsInTheList(2)
+    groupManagementPage.assertSearchResultListAccuracy(groupsIdInactiveTab)
+    groupManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
     group = 'abc'
     searchBar.search(group)
-    groupManagementPage.assertAmountOfSearchResults(2)
-    groupManagementPage.assertSearchResultListAccuracy([1122, 1125])
+    groupManagementPage.assertAmountOfSearchResultsInTheList(2)
+    groupManagementPage.assertSearchResultListAccuracy(groupsIdInactiveTab)
+    groupManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
     group = 'AbC'
     searchBar.search(group)
-    groupManagementPage.assertAmountOfSearchResults(2)
-    groupManagementPage.assertSearchResultListAccuracy([1122, 1125])
+    groupManagementPage.assertAmountOfSearchResultsInTheList(2)
+    groupManagementPage.assertSearchResultListAccuracy(groupsIdInactiveTab)
+    groupManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
     group = 'randomName'
     searchBar.search(group)
@@ -93,6 +101,62 @@ describe('Group Management tests over User Management settings', () => {
     group = 'SELECT * FROM groups'
     searchBar.search(group)
     groupManagementPage.assertNoResultFoundIsVisible()
+  })
+
+  /**
+   * @missing_data Need to have a group with 1 roles, 2 daps, 3 users and 2 companies added.
+   *
+   * * SkIPPING due to https://globalshares.atlassian.net/browse/PB-873
+   */
+  it.skip('C9277663_Groups_Happy_Path_For_Searching_Behavior_In_Groups_Roles_Daps_Clients_And_Users_Over_The_Groups_Page', () => {
+    const groupId = 940
+    const roleId = [1385]
+    const dapsId = [2, 3]
+    const searchTerm = 'To be searched'
+    const user = 'amulcahyNE'
+    const userId = [454292]
+    const client = '7Digital'
+    const clientId = [144]
+
+    groupManagementPage.clickGroupById(groupId)
+    searchBar.search(searchTerm)
+    groupManagementPage.assertSearchResultListAccuracy([groupId])
+
+    // Roles and DAPs to be found in the search
+    groupManagementPage.assertNumberOfRecordsInASection('roles', 1)
+    groupManagementPage.assertNumberOfSearchResultsInASection('roles', 1)
+    groupManagementPage.assertNumberOfRecordsInASection('daps', 2)
+    groupManagementPage.assertNumberOfSearchResultsInASection('daps', 2)
+    groupManagementPage.assertNumberOfRecordsInASection('users', 3)
+    groupManagementPage.assertNumberOfSearchResultsInASection('users', 'No')
+    groupManagementPage.assertNumberOfRecordsInASection('companies', 2)
+    groupManagementPage.assertNumberOfSearchResultsInASection('companies', 'No')
+    groupManagementPage.assertCardsDisplayedInHighlightedMode(roleId, 'role')
+    groupManagementPage.assertCardsDisplayedInHighlightedMode(dapsId, 'daps')
+
+    // Users to be found in the search
+    searchBar.search(user)
+    groupManagementPage.assertNumberOfRecordsInASection('roles', 1)
+    groupManagementPage.assertNumberOfSearchResultsInASection('roles', 'No')
+    groupManagementPage.assertNumberOfRecordsInASection('daps', 2)
+    groupManagementPage.assertNumberOfSearchResultsInASection('daps', 'No')
+    groupManagementPage.assertNumberOfRecordsInASection('users', 3)
+    groupManagementPage.assertNumberOfSearchResultsInASection('users', 1)
+    groupManagementPage.assertNumberOfRecordsInASection('companies', 2)
+    groupManagementPage.assertNumberOfSearchResultsInASection('companies', 'No')
+    groupManagementPage.assertCardsDisplayedInHighlightedMode(userId, 'daps')
+
+    // Clients to be found in the search
+    searchBar.search(client)
+    groupManagementPage.assertNumberOfRecordsInASection('roles', 1)
+    groupManagementPage.assertNumberOfSearchResultsInASection('roles', 'No')
+    groupManagementPage.assertNumberOfRecordsInASection('daps', 2)
+    groupManagementPage.assertNumberOfSearchResultsInASection('daps', 'No')
+    groupManagementPage.assertNumberOfRecordsInASection('users', 3)
+    groupManagementPage.assertNumberOfSearchResultsInASection('users', 'No')
+    groupManagementPage.assertNumberOfRecordsInASection('companies', 2)
+    groupManagementPage.assertNumberOfSearchResultsInASection('companies', 1)
+    groupManagementPage.assertCardsDisplayedInHighlightedMode(clientId, 'daps')
   })
 
   /**
@@ -352,26 +416,26 @@ describe('Group Management tests over User Management settings', () => {
    * @missing_data Need to have a group with 1 role at least 8 DAPs, 8 Users, and 8 Clients linked to a this group
    */
   it.skip('C7462615_Groups_Expand_DAPs_Users_And_Clients', () => {
-    const groupId = 1219
+    const groupId = 964
 
     groupManagementPage.clickGroupById(groupId)
     groupManagementPage.scrollToTop() // strategy used just to move the scroll up
 
     // daps
     groupManagementPage.clickShowAll('daps')
-    groupManagementPage.assertNumberOfCardsDisplayedInASection('daps', 9)
+    groupManagementPage.assertNumberOfCardsDisplayedInASection('daps', 13)
     groupManagementPage.clickHide('daps')
     groupManagementPage.assertNumberOfCardsDisplayedInASection('daps', 8)
 
     // users
     groupManagementPage.clickShowAll('users')
-    groupManagementPage.assertNumberOfCardsDisplayedInASection('users', 17)
+    groupManagementPage.assertNumberOfCardsDisplayedInASection('users', 11)
     groupManagementPage.clickHide('users')
     groupManagementPage.assertNumberOfCardsDisplayedInASection('users', 8)
 
     // clients
     groupManagementPage.clickShowAll('companies')
-    groupManagementPage.assertNumberOfCardsDisplayedInASection('companies', 18)
+    groupManagementPage.assertNumberOfCardsDisplayedInASection('companies', 15)
     groupManagementPage.clickHide('companies')
     groupManagementPage.assertNumberOfCardsDisplayedInASection('companies', 8)
   })

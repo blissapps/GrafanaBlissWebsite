@@ -245,6 +245,19 @@ class DapManagementPage extends BaseManagementPage {
     visible ? cy.get(selectors.addGroupsBtn).should('be.visible') : cy.get(selectors.addGroupsBtn).should('not.exist')
   }
 
+  /**
+   * Assert if the amount of group cards displayed is corrected
+   *
+   * @param {Number} amountOfCards Amount of cards supposed to be displayed in groups
+   * @param {Boolean} showAll False to not click in the showAll button in case it is not displayed. True otherwise
+   */
+  assertNumberOfGroupCardsDisplayedInASection(amountOfCards, showAll = false) {
+    // clicks in show all in case we have lots of cards
+    showAll ? this.clickShowAll('groups') : true
+
+    cy.get(selectors.groupsAllCards).should('have.length', amountOfCards)
+  }
+
   // ----------------------------------------------- OTHERS --------------------------------------------- //
 
   /**

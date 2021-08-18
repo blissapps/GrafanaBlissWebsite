@@ -441,17 +441,17 @@ describe('Data Access Profiles tests over User Management settings', () => {
 
     // ACTIVE TAB
     searchBar.search(dap)
-    dapManagementPage.assertAmountOfSearchResults(3)
+    dapManagementPage.assertAmountOfSearchResultsInTheList(3)
     dapManagementPage.assertSearchResultListAccuracy([29, 30, 31])
 
     dap = 'dap to search'
     searchBar.search(dap)
-    dapManagementPage.assertAmountOfSearchResults(3)
+    dapManagementPage.assertAmountOfSearchResultsInTheList(3)
     dapManagementPage.assertSearchResultListAccuracy([29, 30, 31])
 
     dap = 'dAp To SEarch 1'
     searchBar.search(dap)
-    dapManagementPage.assertAmountOfSearchResults(1)
+    dapManagementPage.assertAmountOfSearchResultsInTheList(1)
     dapManagementPage.assertSearchResultListAccuracy([29])
 
     dap = 'randomName' + utils.getRandomNumber()
@@ -473,17 +473,17 @@ describe('Data Access Profiles tests over User Management settings', () => {
 
     dap = 'DAP TO SEARCH'
     searchBar.search(dap)
-    dapManagementPage.assertAmountOfSearchResults(3)
+    dapManagementPage.assertAmountOfSearchResultsInTheList(3)
     dapManagementPage.assertSearchResultListAccuracy([32, 33, 34])
 
     dap = 'dap to search'
     searchBar.search(dap)
-    dapManagementPage.assertAmountOfSearchResults(3)
+    dapManagementPage.assertAmountOfSearchResultsInTheList(3)
     dapManagementPage.assertSearchResultListAccuracy([32, 33, 34])
 
     dap = 'dAp To SEarch 4'
     searchBar.search(dap)
-    dapManagementPage.assertAmountOfSearchResults(1)
+    dapManagementPage.assertAmountOfSearchResultsInTheList(1)
     dapManagementPage.assertSearchResultListAccuracy([32])
 
     dap = 'randomName'
@@ -512,17 +512,17 @@ describe('Data Access Profiles tests over User Management settings', () => {
     cy.log(' ---------------- ACTIVE TAB --------------------- ')
 
     searchBar.search(dap)
-    dapManagementPage.assertAmountOfSearchResults(1)
+    dapManagementPage.assertAmountOfSearchResultsInTheList(1)
     dapManagementPage.assertSearchResultListAccuracy([dapId])
 
     dap = '1$¨'
     searchBar.search(dap)
-    dapManagementPage.assertAmountOfSearchResults(1)
+    dapManagementPage.assertAmountOfSearchResultsInTheList(1)
     dapManagementPage.assertSearchResultListAccuracy([dapId])
 
     dap = '£`¬'
     searchBar.search(dap)
-    dapManagementPage.assertAmountOfSearchResults(1)
+    dapManagementPage.assertAmountOfSearchResultsInTheList(1)
     dapManagementPage.assertSearchResultListAccuracy([dapId])
 
     dap = '[d]'
@@ -541,17 +541,17 @@ describe('Data Access Profiles tests over User Management settings', () => {
     dap = '(*&!¨_}º]'
     dapId = 46
     searchBar.search(dap)
-    dapManagementPage.assertAmountOfSearchResults(1)
+    dapManagementPage.assertAmountOfSearchResultsInTheList(1)
     dapManagementPage.assertSearchResultListAccuracy([dapId])
 
     dap = '(*&'
     searchBar.search(dap)
-    dapManagementPage.assertAmountOfSearchResults(1)
+    dapManagementPage.assertAmountOfSearchResultsInTheList(1)
     dapManagementPage.assertSearchResultListAccuracy([dapId])
 
     dap = '}º]'
     searchBar.search(dap)
-    dapManagementPage.assertAmountOfSearchResults(1)
+    dapManagementPage.assertAmountOfSearchResultsInTheList(1)
     dapManagementPage.assertSearchResultListAccuracy([dapId])
 
     dap = '[d]'
@@ -597,6 +597,20 @@ describe('Data Access Profiles tests over User Management settings', () => {
     dapManagementPage.assertNumberOfGroupRecordsAssociatedWithDap(0)
     dapManagementPage.assertNumberOfGroupCardsAssociatedWithDap(0)
     dapManagementPage.assertEntityIsFocused(false)
+  })
+
+  /**
+   * @missing_data Need to have a DAP with 1 role at least 8 Groups linked to a this DAP
+   *
+   * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-949
+   */
+  it.skip('C9446198_Groups_Expand_And_Collapse_DAP_With_Many_Groups_added', () => {
+    const dapId = 58
+
+    dapManagementPage.clickDapById(dapId)
+    dapManagementPage.assertNumberOfGroupCardsDisplayedInASection(13, true)
+    dapManagementPage.clickHide('groups')
+    dapManagementPage.assertNumberOfGroupCardsDisplayedInASection(8)
   })
 
   // ************************************************ TESTS AS CLIENTS ************************************************** //

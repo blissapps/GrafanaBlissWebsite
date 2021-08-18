@@ -139,7 +139,7 @@ class BasePage {
   }
 
   /**
-   * Assert the number of records displayed. It is shown in the top like this: 'X record(s)'
+   * Assert the number of records displayed. It is shown in the top like this: 'X record(s)' or 'X SEARCH RESULT(S)'
    *
    * @param {Object} locator Object locator where this method will extract the text from this locator
    * @param {Number} numberOfRecords amount of people you want to check in the records

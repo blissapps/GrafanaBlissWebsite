@@ -4,6 +4,7 @@ const selectors = {
   numberOfSearchResultsInTable: '#recordCount',
   searchResultList: 'gs-list[data-test-id=searchListing-found]',
   searchResultItem: '#searchResultItem_',
+  searchResultAllItemsHighlighted: '*[id*="searchResultItem_"] gs-highlighted-text mark:not(:empty)',
   otherGroupList: 'gs-list[data-test-id=searchListing-other]',
   otherItem: '#otherItem_',
   noResultsFound: 'div.not-found',
@@ -83,32 +84,29 @@ class BaseManagementPage extends BasePage {
   clickShowAll(entity) {
     switch (entity) {
       case 'daps':
-        cy.get(selectors.showAllDapsBtn)
-          .scrollIntoView()
-          .click()
+        cy.get(selectors.showAllDapsBtn).as('showAllButton')
         break
 
       case 'users':
-        cy.get(selectors.showAllUsersBtn)
-          .scrollIntoView()
-          .click()
+        cy.get(selectors.showAllUsersBtn).as('showAllButton')
         break
 
       case 'companies':
-        cy.get(selectors.showAllCompaniesBtn)
-          .scrollIntoView()
-          .click()
+        cy.get(selectors.showAllCompaniesBtn).as('showAllButton')
         break
 
       case 'groups':
-        cy.get(selectors.showAllGroupsBtn)
-          .scrollIntoView()
-          .click()
+        cy.get(selectors.showAllGroupsBtn).as('showAllButton')
         break
 
       default:
         throw new Error('This section does not exists, choose among the following: daps, users, or companies')
     }
+
+    cy.get('@showAllButton')
+      .scrollIntoView()
+      .should('contain.text', 'Show all')
+      .click()
   }
 
   /**
@@ -119,32 +117,29 @@ class BaseManagementPage extends BasePage {
   clickHide(entity) {
     switch (entity) {
       case 'daps':
-        cy.get(selectors.hideDapsBtn)
-          .scrollIntoView()
-          .click()
+        cy.get(selectors.hideDapsBtn).as('hideButton')
         break
 
       case 'users':
-        cy.get(selectors.hideUsersBtn)
-          .scrollIntoView()
-          .click()
+        cy.get(selectors.hideUsersBtn).as('hideButton')
         break
 
       case 'companies':
-        cy.get(selectors.hideCompaniesBtn)
-          .scrollIntoView()
-          .click()
+        cy.get(selectors.hideCompaniesBtn).as('hideButton')
         break
 
       case 'groups':
-        cy.get(selectors.hideGroupsBtn)
-          .scrollIntoView()
-          .click()
+        cy.get(selectors.hideGroupsBtn).as('hideButton')
         break
 
       default:
         throw new Error('This section does not exists, choose among the following: daps, users, or companies')
     }
+
+    cy.get('@hideButton')
+      .scrollIntoView()
+      .should('contain.text', 'Hide')
+      .click()
   }
 
   /**
@@ -197,12 +192,12 @@ class BaseManagementPage extends BasePage {
    *
    * @example Send 'results = 2' to validate the '2 SEARCH RESULT(S)' is being displayed in the Search Results list
    */
-  assertAmountOfSearchResults(results) {
+  assertAmountOfSearchResultsInTheList(results) {
     this.assertNumberOfRecordsDisplayed(selectors.numberOfSearchResultsInTable, results)
   }
 
   /**
-   * Assert the Search Results list id is displayed with the accurate results highlighted.
+   * Assert the Search Results list id is displayed
    * It also asserts that a Other Groups list is displayed
    *
    * @param {Array} entityId Array containing the ids of groups, roles, or daps that are supposed to be displayed in the search result list.
@@ -213,9 +208,7 @@ class BaseManagementPage extends BasePage {
     cy.get(selectors.searchResultList).should('be.visible')
 
     for (let i = 0; i < entityId.length; i++) {
-      cy.get(selectors.searchResultList + ' ' + selectors.searchResultItem + entityId[i])
-        .should('be.visible')
-        .should('have.class', 'item-highlight ng-star-inserted') // assert it is highlighted
+      cy.get(selectors.searchResultList + ' ' + selectors.searchResultItem + entityId[i]).should('be.visible')
     }
 
     cy.get(selectors.otherGroupList).should('be.visible')
@@ -262,6 +255,34 @@ class BaseManagementPage extends BasePage {
    */
   assertEntityIsFocused(focused = true) {
     this.assertElementIsFocused(selectors.entityNameInput, focused)
+  }
+
+  /**
+   * Assert a card is being highlighted displayed. It usually happens after searching for it in the search bar
+   *
+   * @param {Array} entitiesIds Entities ids to be verified. This is how this method locates the cards
+   * @param {String} entityType If this card is a role, dap, user, group, or company
+   * @param {Boolean} showAll False is the default value to NOT click in the 'show all button'. Sent True to click in the 'show all' button in case there are many entities
+   */
+  assertCardsDisplayedInHighlightedMode(entitiesIds, entityType, showAll = false) {
+    showAll ? this.clickShowAll(entityType) : true
+
+    for (let i = 0; i < entitiesIds.length; i++) {
+      cy.get(`gs-card[data-test-id="entity-${entitiesIds[i]}"] gs-highlighted-text mark:not(:empty)`).as('entityCard')
+      cy.get('@entityCard')
+        .scrollIntoView()
+        .should('be.visible')
+    }
+  }
+
+  /**
+   * Assert a search result is being highlighted displayed. It usually happens after searching for it in the search bar
+   *
+   */
+  assertAllSearchResultItensAreDisplayedInHighlightedMode() {
+    cy.get(selectors.searchResultAllItemsHighlighted).each($el => {
+      cy.wrap($el).should('be.visible')
+    })
   }
 
   // ----------------------------------------------- OTHERS --------------------------------------------- //
