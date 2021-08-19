@@ -45,21 +45,21 @@ describe('Role Management tests over User Management settings', () => {
     roleManagementPage.assertAmountOfSearchResultsInTheList(3)
     roleManagementPage.assertSearchResultListAccuracy(rolesIdActiveTab)
     roleManagementPage.assertOtherGroupListDisplayed()
-    // roleManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
+    roleManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
     role = 'ROLE TO BE SEARCHED'
     searchBar.search(role)
     roleManagementPage.assertAmountOfSearchResultsInTheList(3)
     roleManagementPage.assertSearchResultListAccuracy(rolesIdActiveTab)
     roleManagementPage.assertOtherGroupListDisplayed()
-    // roleManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
+    roleManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
     role = 'role To Be searchEd'
     searchBar.search(role)
     roleManagementPage.assertAmountOfSearchResultsInTheList(3)
     roleManagementPage.assertSearchResultListAccuracy(rolesIdActiveTab)
     roleManagementPage.assertOtherGroupListDisplayed()
-    // roleManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
+    roleManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
     role = 'randomName'
     searchBar.search(role)
@@ -79,21 +79,21 @@ describe('Role Management tests over User Management settings', () => {
     roleManagementPage.assertAmountOfSearchResultsInTheList(2)
     roleManagementPage.assertSearchResultListAccuracy(rolesIdInactiveTab)
     roleManagementPage.assertOtherGroupListDisplayed()
-    // roleManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
+    roleManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
     role = 'zzz'
     searchBar.search(role)
     roleManagementPage.assertAmountOfSearchResultsInTheList(2)
     roleManagementPage.assertSearchResultListAccuracy(rolesIdInactiveTab)
     roleManagementPage.assertOtherGroupListDisplayed()
-    // roleManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
+    roleManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
     role = 'ZzZ'
     searchBar.search(role)
     roleManagementPage.assertAmountOfSearchResultsInTheList(2)
     roleManagementPage.assertSearchResultListAccuracy(rolesIdInactiveTab)
     roleManagementPage.assertOtherGroupListDisplayed()
-    // roleManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
+    roleManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
     role = 'randomName'
     searchBar.search(role)
