@@ -51,27 +51,32 @@ describe('Group Management tests over User Management settings', () => {
     searchBar.search(group)
     groupManagementPage.assertAmountOfSearchResultsInTheList(1)
     groupManagementPage.assertSearchResultListAccuracy(groupsIdActiveTab)
+    groupManagementPage.assertOtherGroupListDisplayed()
     groupManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
     group = 'global'
     searchBar.search(group)
     groupManagementPage.assertAmountOfSearchResultsInTheList(1)
     groupManagementPage.assertSearchResultListAccuracy(groupsIdActiveTab)
+    groupManagementPage.assertOtherGroupListDisplayed()
     groupManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
     group = 'GLObal'
     searchBar.search(group)
     groupManagementPage.assertAmountOfSearchResultsInTheList(1)
     groupManagementPage.assertSearchResultListAccuracy(groupsIdActiveTab)
+    groupManagementPage.assertOtherGroupListDisplayed()
     groupManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
     group = 'randomName'
     searchBar.search(group)
     groupManagementPage.assertNoResultFoundIsVisible()
+    groupManagementPage.assertOtherGroupListDisplayed()
 
     group = 'SELECT * FROM groups'
     searchBar.search(group)
     groupManagementPage.assertNoResultFoundIsVisible()
+    groupManagementPage.assertOtherGroupListDisplayed()
 
     // Now on Inactive TAB
     groupManagementPage.clickTabByTitle('Inactive')
@@ -80,27 +85,32 @@ describe('Group Management tests over User Management settings', () => {
     searchBar.search(group)
     groupManagementPage.assertAmountOfSearchResultsInTheList(2)
     groupManagementPage.assertSearchResultListAccuracy(groupsIdInactiveTab)
+    groupManagementPage.assertOtherGroupListDisplayed()
     groupManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
     group = 'abc'
     searchBar.search(group)
     groupManagementPage.assertAmountOfSearchResultsInTheList(2)
     groupManagementPage.assertSearchResultListAccuracy(groupsIdInactiveTab)
+    groupManagementPage.assertOtherGroupListDisplayed()
     groupManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
     group = 'AbC'
     searchBar.search(group)
     groupManagementPage.assertAmountOfSearchResultsInTheList(2)
     groupManagementPage.assertSearchResultListAccuracy(groupsIdInactiveTab)
+    groupManagementPage.assertOtherGroupListDisplayed()
     groupManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
     group = 'randomName'
     searchBar.search(group)
     groupManagementPage.assertNoResultFoundIsVisible()
+    groupManagementPage.assertOtherGroupListDisplayed()
 
     group = 'SELECT * FROM groups'
     searchBar.search(group)
     groupManagementPage.assertNoResultFoundIsVisible()
+    groupManagementPage.assertOtherGroupListDisplayed()
   })
 
   /**
@@ -121,6 +131,7 @@ describe('Group Management tests over User Management settings', () => {
     groupManagementPage.clickGroupById(groupId)
     searchBar.search(searchTerm)
     groupManagementPage.assertSearchResultListAccuracy([groupId])
+    groupManagementPage.assertOtherGroupListDisplayed()
 
     // Roles and DAPs to be found in the search
     groupManagementPage.assertNumberOfRecordsInASection('roles', 1)

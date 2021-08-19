@@ -34,31 +34,42 @@ describe('Role Management tests over User Management settings', () => {
    *
    * SkIPPING due to https://globalshares.atlassian.net/browse/PB-873
    *
-   * @missing_data Need to have some roles in both active and inactive tabs
+   * @missing_data Besides the roles we need to search, we need to have some roles in both active and inactive tabs to be displayed in the OTHER GROUP
    */
   it.skip('C7544081_Search_Engine_Search_For_Role_With_Different_Combinations_In_Active_And_Inactive_Tabs', () => {
-    let role = 'ROLE'
+    const rolesIdActiveTab = [1385, 1468, 1469]
+    const rolesIdInactiveTab = [1466, 1467]
+
+    let role = 'role to be searched'
     searchBar.search(role)
     roleManagementPage.assertAmountOfSearchResultsInTheList(3)
-    roleManagementPage.assertSearchResultListAccuracy([1400, 1401, 1402])
+    roleManagementPage.assertSearchResultListAccuracy(rolesIdActiveTab)
+    roleManagementPage.assertOtherGroupListDisplayed()
+    // roleManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
-    role = 'role'
+    role = 'ROLE TO BE SEARCHED'
     searchBar.search(role)
     roleManagementPage.assertAmountOfSearchResultsInTheList(3)
-    roleManagementPage.assertSearchResultListAccuracy([1400, 1401, 1402])
+    roleManagementPage.assertSearchResultListAccuracy(rolesIdActiveTab)
+    roleManagementPage.assertOtherGroupListDisplayed()
+    // roleManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
-    role = 'rOlE1'
+    role = 'role To Be searchEd'
     searchBar.search(role)
-    roleManagementPage.assertAmountOfSearchResultsInTheList(1)
-    roleManagementPage.assertSearchResultListAccuracy([1400])
+    roleManagementPage.assertAmountOfSearchResultsInTheList(3)
+    roleManagementPage.assertSearchResultListAccuracy(rolesIdActiveTab)
+    roleManagementPage.assertOtherGroupListDisplayed()
+    // roleManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
     role = 'randomName'
     searchBar.search(role)
     roleManagementPage.assertNoResultFoundIsVisible()
+    roleManagementPage.assertOtherGroupListDisplayed()
 
     role = 'SELECT * FROM groups'
     searchBar.search(role)
     roleManagementPage.assertNoResultFoundIsVisible()
+    roleManagementPage.assertOtherGroupListDisplayed()
 
     // Now on Inactive TAB
     roleManagementPage.clickTabByTitle('Inactive')
@@ -66,25 +77,33 @@ describe('Role Management tests over User Management settings', () => {
     role = 'ZZZ'
     searchBar.search(role)
     roleManagementPage.assertAmountOfSearchResultsInTheList(2)
-    roleManagementPage.assertSearchResultListAccuracy([1403, 1405])
+    roleManagementPage.assertSearchResultListAccuracy(rolesIdInactiveTab)
+    roleManagementPage.assertOtherGroupListDisplayed()
+    // roleManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
     role = 'zzz'
     searchBar.search(role)
     roleManagementPage.assertAmountOfSearchResultsInTheList(2)
-    roleManagementPage.assertSearchResultListAccuracy([1403, 1405])
+    roleManagementPage.assertSearchResultListAccuracy(rolesIdInactiveTab)
+    roleManagementPage.assertOtherGroupListDisplayed()
+    // roleManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
     role = 'ZzZ'
     searchBar.search(role)
     roleManagementPage.assertAmountOfSearchResultsInTheList(2)
-    roleManagementPage.assertSearchResultListAccuracy([1403, 1405])
+    roleManagementPage.assertSearchResultListAccuracy(rolesIdInactiveTab)
+    roleManagementPage.assertOtherGroupListDisplayed()
+    // roleManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
     role = 'randomName'
     searchBar.search(role)
     roleManagementPage.assertNoResultFoundIsVisible()
+    roleManagementPage.assertOtherGroupListDisplayed()
 
     role = 'SELECT * FROM roles'
     searchBar.search(role)
     roleManagementPage.assertNoResultFoundIsVisible()
+    roleManagementPage.assertOtherGroupListDisplayed()
   })
 
   /**

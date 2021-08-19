@@ -7,7 +7,7 @@ const selectors = {
   searchResultAllItemsHighlighted: '*[id*="searchResultItem_"] gs-highlighted-text mark:not(:empty)',
   otherGroupList: 'gs-list[data-test-id=searchListing-other]',
   otherItem: '#otherItem_',
-  noResultsFound: 'div.not-found',
+  noResultsFound: '#emptyRecordCount',
   noRecordsFoundEmptyState: 'gs-empty-container .content > div',
   entityNameInput: 'gs-input-inline[data-test-id=name-input]',
   saveBtn: 'gs-button[data-test-id=save-button]',
@@ -197,8 +197,16 @@ class BaseManagementPage extends BasePage {
   }
 
   /**
-   * Assert the Search Results list id is displayed
-   * It also asserts that a Other Groups list is displayed
+   * Assert if the OTHER GROUP list is displayed right after searching for an entity in the search bar
+   *
+   * @param {Boolean} displayed True is default value to make sure the OTHER GROUP list is displayed. False to assert otherwise
+   */
+  assertOtherGroupListDisplayed(displayed = true) {
+    displayed ? cy.get(selectors.otherGroupList).should('be.visible') : cy.get(selectors.otherGroupList).should('not.exist')
+  }
+
+  /**
+   * Assert the Search Results list is displayed with the given ids.
    *
    * @param {Array} entityId Array containing the ids of groups, roles, or daps that are supposed to be displayed in the search result list.
    *
@@ -210,8 +218,6 @@ class BaseManagementPage extends BasePage {
     for (let i = 0; i < entityId.length; i++) {
       cy.get(selectors.searchResultList + ' ' + selectors.searchResultItem + entityId[i]).should('be.visible')
     }
-
-    cy.get(selectors.otherGroupList).should('be.visible')
   }
 
   /**
