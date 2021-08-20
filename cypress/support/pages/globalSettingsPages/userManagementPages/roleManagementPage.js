@@ -10,8 +10,9 @@ const selectors = {
   inactiveRolesList: 'gs-tab[data-test-id=inactiveTab] #roleList gs-list',
   rolesDisplayed: '#roleList gs-list a[id*="role_',
   newRoleBtn: 'gs-button[data-test-id=create-role]',
-  roleId: '#role_',
-  activateRoleBtn: 'gs-button[data-test-id=activateBtn]'
+  roleId: '*[id*=role_',
+  activateRoleBtn: 'gs-button[data-test-id=activateBtn]',
+  allPermissionsHeaders: 'thead th a'
 }
 
 const apiInterceptions = {
@@ -239,6 +240,17 @@ class RoleManagementPage extends BaseManagementPage {
     }
   }
 
+  /**
+   * Click in the last role available in the list of roles
+   *
+   */
+  clickLastRole() {
+    cy.get(selectors.roleId)
+      .last()
+      .scrollIntoView()
+      .click()
+  }
+
   // --------------------------------------- ASSERTIONS --------------------------------------------- //
 
   /**
@@ -444,6 +456,15 @@ class RoleManagementPage extends BaseManagementPage {
           throw new Error(permissionsType + ' is not valid. Please, provide a valid permission type for this one!')
       }
     }
+  }
+
+  /**
+   * Assert the permissions headers View, Update, Create, and Delete are displayed
+   */
+  assertPermissionsHeadersAreDisplayed() {
+    cy.get(selectors.allPermissionsHeaders).each($header => {
+      cy.wrap($header).should('be.visible')
+    })
   }
 
   // -------------------------------------------- OTHERS -------------------------------------------------//

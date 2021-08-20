@@ -107,9 +107,17 @@ describe('Role Management tests over User Management settings', () => {
   })
 
   /**
+   * @missing_data Need to have at least 50 registered roles to scroll down
+   */
+  it.skip('C9281161_Role_CRUD_Permissions_Are_Visible', () => {
+    roleManagementPage.clickLastRole()
+    roleManagementPage.assertPermissionsHeadersAreDisplayed()
+  })
+
+  /**
    * @missing_data Need to have some roles in both active and inactive tabs
    */
-  it.skip('C7499688_Groups_Happy_Path_Active_And_Inactive_Roles', () => {
+  it.skip('C7499688_List Roles_Happy_Path_Active_And_Inactive_Roles', () => {
     roleManagementPage.assertActiveRolesAreDisplayed()
     roleManagementPage.assertRolesInAlphabeticalOrder()
 
