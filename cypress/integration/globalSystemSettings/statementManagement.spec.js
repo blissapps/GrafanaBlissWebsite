@@ -357,6 +357,25 @@ describe('Statement Management tests', () => {
   })
 
   /**
+   *
+   * @missing_data Need to have one client Initiated to be able to Reconcile it
+   *
+   * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-912
+   *
+   */
+  it.skip('C9281170_Statements_L4_Window', () => {
+    const clientInitiated = 'Santen Pharmaceutical'
+    const clientInitiatedId = 140
+    const securityIds = [795]
+
+    // Client status INITIATED
+    clientStatementsPage.filterClientStatements(clientInitiated)
+    clientStatementsPage.clickToReconcileClient(clientInitiatedId)
+    clientStatementsPage.assertReconcileStatemenRightWindowDisplayed()
+    clientStatementsPage.assertReconcileStatementRightWindowDisplaysElementsAsExpected(securityIds)
+  })
+
+  /**
    * Filter a client with participants and Check search with participant name, id and status with a variety of combination, such as
    * nameXid, name vs date, id vs date, name vs id vs date.. (USE TomTom)
    *

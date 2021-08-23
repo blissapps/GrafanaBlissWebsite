@@ -19,6 +19,15 @@ const selectors = {
   participantStatus: '#statusSelect input'
 }
 
+const reconcileStatementsSelectors = {
+  containerWindow: 'gs-container-l4-overlay gs-container-l4',
+  securityCardList: 'gs-container-l4 .list',
+  securityCard: 'gs-container-l4 gs-card[data-test-id*=security-',
+  securityCheckBox: 'gs-container-l4 gs-checkbox',
+  cancelButton: 'gs-container-l4 gs-button:first-child',
+  reconcileButton: '#client-reconcile-btn'
+}
+
 const apiInterceptions = {
   tableReloadedAfterFiltering: 'https://api.stonly.com/api/v2/widget/integration**',
   clientStatementsLoaded: 'https://api-regrep.myglobalshares.co.uk/api/v1.0/ClientStatements?limit=50&offset=0'
@@ -245,6 +254,66 @@ class ClientStatementsPage extends BasePage {
    */
   assertReconcileButtonDisplayed(clientId, displayed = true) {
     displayed ? this.getReconcileButton(clientId).should('be.visible') : this.getReconcileButton(clientId).should('not.exist')
+  }
+
+  /**
+   * Assert the L4 window for RECONCILIATE STATEMENTS is visible
+   *
+   * @param {Boolean} displayed True to assert the reconcile window is displayed. False, otherwise.
+   */
+  assertReconcileStatemenRightWindowDisplayed(displayed = true) {
+    displayed ? cy.get(reconcileStatementsSelectors.containerWindow).should('be.visible') : cy.get(reconcileStatementsSelectors.containerWindow).should('not.exist')
+  }
+
+  /**
+   * Assert the L4 window for RECONCILIATE STATEMENTS is visible and all components are placed as expected. It was made according to PB-612
+   *
+   * @param {Array} securityIds Security ids to be validated
+   */
+  assertReconcileStatementRightWindowDisplaysElementsAsExpected(securityIds) {
+    // Window must be open
+    this.assertReconcileStatemenRightWindowDisplayed()
+
+    // List containing cards must be displayed
+    cy.get(reconcileStatementsSelectors.securityCardList).should('be.visible')
+
+    // Security cards must be displayed
+    for (let i = 0; i < securityIds.length; i++) {
+      cy.get(reconcileStatementsSelectors.securityCard + securityIds[i]).should('be.visible')
+    }
+
+    // Checkbox security must be displayed
+    cy.get(reconcileStatementsSelectors.securityCheckBox).should('be.visible')
+
+    // Cancel button must be displayed
+    cy.get(reconcileStatementsSelectors.cancelButton).should('be.visible')
+
+    // Reconcile button must be displayed but it should be disabled
+    cy.get(reconcileStatementsSelectors.reconcileButton)
+      .should('be.visible')
+      .should('have.class', 'default medium square primary disabled')
+
+    // Reconcile button must be displayed and enabled
+    cy.get(reconcileStatementsSelectors.securityCheckBox).click()
+    cy.get(reconcileStatementsSelectors.reconcileButton)
+      .should('be.visible')
+      .should('have.class', 'default medium square primary')
+
+    // Once clicked in a security option, the Reconcile Button must also be enabled
+    cy.get(reconcileStatementsSelectors.securityCheckBox).click()
+    cy.get(reconcileStatementsSelectors.reconcileButton)
+      .should('be.visible')
+      .should('have.class', 'default medium square primary disabled')
+    cy.get(reconcileStatementsSelectors.securityCard)
+      .first()
+      .click()
+    cy.get(reconcileStatementsSelectors.reconcileButton)
+      .should('be.visible')
+      .should('have.class', 'default medium square primary')
+
+    // Cancel button must close the window
+    cy.get(reconcileStatementsSelectors.cancelButton).click()
+    this.assertReconcileStatemenRightWindowDisplayed(false)
   }
 
   // ---------------------------------------  INTERCEPTIONS --------------------------------------------- //
