@@ -9,7 +9,8 @@ const selectors = {
   rightNavBar: 'gs-container-l4',
   toastNotification: 'gs-toast div.toast-content',
   toastNotificationXBtn: 'gs-toast gs-svg-icon svg',
-  notificationError: '#notificationError'
+  notificationError: '#notificationError',
+  bulkActionsCheckbox: 'gs-grid-row gs-checkbox'
 }
 
 class BasePage {
@@ -276,6 +277,15 @@ class BasePage {
    */
   assertElementIsFocused(elementSelector, focused = true) {
     focused ? cy.get(elementSelector).should('have.focus') : cy.get(elementSelector).should('not.have.focus')
+  }
+
+  /**
+   * Assert if the bulk actions (checkbox to select more than 1 element in a table) is displayed
+   *
+   * @param {Boolean} displayed True is default value to check if the checkbox exists. False otherwise
+   */
+  assertBulkOptionsDisplayed(displayed = true) {
+    displayed ? cy.get(selectors.bulkActionsCheckbox).should('exist') : cy.get(selectors.bulkActionsCheckbox).should('not.exist')
   }
 }
 

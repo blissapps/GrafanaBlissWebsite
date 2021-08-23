@@ -14,12 +14,13 @@ describe('Statement Management tests', () => {
     // @ts-ignore
     cy.login() && cy.loginSuccessfulXHRWaits()
     leftMenuNavBar.accessGlobalSettingsMenu('statement')
+    clientStatementsPage.checkClientStatementsUrl()
   })
 
   it('C7394715_Happy_Path_To_View_Statements_Accordingly', () => {
     const idsClientList = [76, 77, 78, 79, 80]
 
-    clientStatementsPage.AssertClientStatementsTableContainsExpectedColumns()
+    clientStatementsPage.assertClientStatementsTableContainsExpectedColumns()
     clientStatementsPage.assertClientStatementsTableInOrderById(idsClientList)
   })
 
@@ -308,6 +309,51 @@ describe('Statement Management tests', () => {
     clientStatementsPage.filterParticipantStatements('', participantID)
     clientStatementsPage.clickDownloadPDFFromParticipantStatement(participantID)
     clientStatementsPage.assertFileWasDownloadedSuccessfully(participantName + '_Summary.pdf')
+  })
+
+  /**
+   *
+   * @missing_data Need to have at least one client for each possible state {Published, Partially Publish, Reconciled, Pending Validation, and Initiated}
+   *
+   */
+  it.skip('C9281169_Statements_Reconcile_Button', () => {
+    const clientPublished = 'Interxion'
+    const clientPublishedId = 76
+    const clientPartiallyPublished = 'Cavotec'
+    const clientPartiallyPublishedId = 78
+    const clientReconciled = 'Veloxis'
+    const clientReconciledId = 80
+    const clientPendingValidation = 'Arcadis'
+    const clientPendingValidationId = 136
+    const clientInitiated = 'Dimension Data'
+    const clientInitiatedId = 117
+
+    clientStatementsPage.waitForClientStatementsToBeLoaded() // First make sure the clients were loaded before testing that the bulk actions are not displayed
+    clientStatementsPage.assertBulkOptionsDisplayed(false)
+
+    // Client status PUBLISHED
+    clientStatementsPage.filterClientStatements(clientPublished)
+    clientStatementsPage.assertReconcileButtonDisplayed(clientPublishedId, false)
+    clientStatementsPage.clearAllFilters()
+
+    // Client status PARTIALLY PUBLISHED
+    clientStatementsPage.filterClientStatements(clientPartiallyPublished)
+    clientStatementsPage.assertReconcileButtonDisplayed(clientPartiallyPublishedId, false)
+    clientStatementsPage.clearAllFilters()
+
+    // Client status RECONCILED
+    clientStatementsPage.filterClientStatements(clientReconciled)
+    clientStatementsPage.assertReconcileButtonDisplayed(clientReconciledId, false)
+    clientStatementsPage.clearAllFilters()
+
+    // Client status PENDING VALIDATION
+    clientStatementsPage.filterClientStatements(clientPendingValidation)
+    clientStatementsPage.assertReconcileButtonDisplayed(clientPendingValidationId, false)
+    clientStatementsPage.clearAllFilters()
+
+    // Client status INITIATED
+    clientStatementsPage.filterClientStatements(clientInitiated)
+    clientStatementsPage.assertReconcileButtonDisplayed(clientInitiatedId)
   })
 
   /**

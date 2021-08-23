@@ -20,7 +20,8 @@ const selectors = {
 }
 
 const apiInterceptions = {
-  tableReloadedAfterFiltering: 'https://api.stonly.com/api/v2/widget/integration**'
+  tableReloadedAfterFiltering: 'https://api.stonly.com/api/v2/widget/integration**',
+  clientStatementsLoaded: 'https://api-regrep.myglobalshares.co.uk/api/v1.0/ClientStatements?limit=50&offset=0'
 }
 
 class ClientStatementsPage extends BasePage {
@@ -65,12 +66,12 @@ class ClientStatementsPage extends BasePage {
   /**
    * Get reconciled button
    *
-   * @param recordId Id number of the statement with the reconcile button
+   * @param clientId Id number of the statement with the reconcile button
    *
    * @returns summary button element
    */
-  getReconcileButton(recordId) {
-    return cy.get(`#hover-actions-${recordId} gs-svg-icon`)
+  getReconcileButton(clientId) {
+    return cy.get(`#hover-actions-${clientId} gs-svg-icon`)
   }
 
   /**
@@ -216,7 +217,7 @@ class ClientStatementsPage extends BasePage {
    *
    * @MISSING_IDS
    */
-  AssertClientStatementsTableContainsExpectedColumns() {
+  assertClientStatementsTableContainsExpectedColumns() {
     const columnsToValidate = ['Id', 'Client', 'Regulator', 'Status'] // necessary until ids are placed
     this.assertTableContainsExpectedColumns(columnsToValidate)
   }
@@ -236,6 +237,16 @@ class ClientStatementsPage extends BasePage {
     }
   }
 
+  /**
+   * Assert the state of the reconcile button.
+   *
+   * @param {Number} clientId Client id number to hover in this client to make sure the reconcile button is visible or not
+   * @param {Boolean} displayed True to assert the reconcile button is displayed. False, otherwise.
+   */
+  assertReconcileButtonDisplayed(clientId, displayed = true) {
+    displayed ? this.getReconcileButton(clientId).should('be.visible') : this.getReconcileButton(clientId).should('not.exist')
+  }
+
   // ---------------------------------------  INTERCEPTIONS --------------------------------------------- //
 
   /**
@@ -245,6 +256,11 @@ class ClientStatementsPage extends BasePage {
   waitForTableToReloadAfterFiltering() {
     cy.intercept('GET', apiInterceptions.tableReloadedAfterFiltering).as('tableReloads')
     cy.wait('@tableReloads', { timeout: 10000 })
+  }
+
+  waitForClientStatementsToBeLoaded() {
+    cy.intercept('GET', apiInterceptions.clientStatementsLoaded).as('clientsLoaded')
+    cy.wait('@clientsLoaded', { timeout: 10000 })
   }
 }
 
