@@ -17,7 +17,6 @@ describe('Role Management tests over User Management settings', () => {
   const utils = new Utils()
 
   beforeEach(() => {
-    // @ts-ignore
     cy.login() && cy.loginSuccessfulXHRWaits()
     leftMenuNavBar.accessGlobalSettingsMenu('user', 'role')
     roleManagementPage.checkRoleManagementUrl()
@@ -267,7 +266,6 @@ describe('Role Management tests over User Management settings', () => {
    * @missing_data For test this scenario there should be no "Create Role" permission for the user.
    */
   it.skip('C7499703_User_Does_Not_Have_Permissions_To_Create_New_Role', () => {
-    // @ts-ignore
     cy.logout() && cy.login('UserNoCreateRolePermission@globalshares.com', '1234579846') && cy.loginSuccessfulXHRWaits() // Logout to login with the correct user without permission
 
     leftMenuNavBar.accessGlobalSettingsMenu('user', 'role')
@@ -551,7 +549,6 @@ describe('Role Management tests over User Management settings', () => {
    * @missing_steps Assert Deactivate and Activate button are not shown
    */
   it.skip('C7499835_Activate/Deactivate_Role_No_Permission', () => {
-    // @ts-ignore
     cy.logout() && cy.login('userNoUpdateRolePermission@globalshares.com', '123456!') && cy.loginSuccessfulXHRWaits() // Logout to login with the correct user without permission
     leftMenuNavBar.accessGlobalSettingsMenu('user', 'role')
     roleManagementPage.checkRoleManagementUrl()

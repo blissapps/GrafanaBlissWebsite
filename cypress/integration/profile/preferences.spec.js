@@ -6,7 +6,6 @@ describe('Preferences tests', () => {
   const preferencesPage = new PreferencesPage()
 
   beforeEach(() => {
-    // @ts-ignore
     cy.login() && cy.loginSuccessfulXHRWaits()
     leftMenuNavBar.openProfilePreferencesPage()
   })

@@ -3,7 +3,6 @@
  */
 describe.skip('Trusts tests', () => {
   beforeEach(() => {
-    // @ts-ignore
     cy.login()
   })
 

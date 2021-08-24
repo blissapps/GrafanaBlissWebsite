@@ -4,7 +4,6 @@ describe('Home page tests', () => {
   const homePage = new HomePage()
 
   beforeEach(() => {
-    // @ts-ignore
     cy.login()
   })
 

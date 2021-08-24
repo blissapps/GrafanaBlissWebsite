@@ -1,3 +1,9 @@
+/**
+ * TO AVOID ANY ERRORS WHEN CREATING A COMMAND,
+ * DO NOT FORGET TO ADD THE METHOD SIGNATURE IN THE index.d.ts
+ * FILE LOCATED IN cypress/support/
+ */
+
 /// <reference types="cypress" />
 
 import 'cypress-waitfor'

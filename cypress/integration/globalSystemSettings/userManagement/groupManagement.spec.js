@@ -19,7 +19,6 @@ describe('Group Management tests over User Management settings', () => {
   const utils = new Utils()
 
   beforeEach(() => {
-    // @ts-ignore
     cy.login() && cy.loginSuccessfulXHRWaits()
     leftMenuNavBar.accessGlobalSettingsMenu('user', 'group')
     groupManagementPage.checkGroupManagementUrl()

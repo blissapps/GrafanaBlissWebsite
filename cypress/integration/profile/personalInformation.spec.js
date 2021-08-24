@@ -6,7 +6,6 @@ describe('Personal Information tests', () => {
   const personalInformationPage = new PersonalInformationPage()
 
   beforeEach(() => {
-    // @ts-ignore
     cy.login() && cy.loginSuccessfulXHRWaits()
     leftMenuNavBar.openProfilePersonalInformationPage()
   })

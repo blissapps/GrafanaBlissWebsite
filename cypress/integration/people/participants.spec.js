@@ -11,7 +11,6 @@ describe.skip('Participants tests', () => {
   const searchBar = new SearchBar()
 
   beforeEach(() => {
-    // @ts-ignore
     cy.login()
   })
 

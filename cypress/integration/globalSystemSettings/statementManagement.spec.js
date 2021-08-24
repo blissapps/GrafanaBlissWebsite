@@ -11,7 +11,6 @@ describe('Statement Management tests', () => {
   const utils = new Utils()
 
   beforeEach(() => {
-    // @ts-ignore
     cy.login() && cy.loginSuccessfulXHRWaits()
     leftMenuNavBar.accessGlobalSettingsMenu('statement')
     clientStatementsPage.checkClientStatementsUrl()

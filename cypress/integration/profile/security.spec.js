@@ -7,7 +7,6 @@ describe('Security tests', () => {
   const securityPage = new SecurityPage()
 
   beforeEach(() => {
-    // @ts-ignore
     cy.login() && cy.loginSuccessfulXHRWaits()
     leftMenuNavBar.openProfileSecurityPage()
   })
