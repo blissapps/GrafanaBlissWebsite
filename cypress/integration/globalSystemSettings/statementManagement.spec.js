@@ -368,7 +368,6 @@ describe('Statement Management tests', () => {
     const clientInitiatedId = 140
     const securityIds = [795]
 
-    // Client status INITIATED
     clientStatementsPage.filterClientStatements(clientInitiated)
     clientStatementsPage.clickToReconcileClient(clientInitiatedId)
     clientStatementsPage.assertReconcileStatemenRightWindowDisplayed()
