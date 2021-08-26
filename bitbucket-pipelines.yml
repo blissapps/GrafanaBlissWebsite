@@ -19,7 +19,7 @@ pipelines:
           - cypress
           - node
         script:
-          - yarn cypress run --browser firefox --headless --spec ''cypress/integration/globalSystemSettings/statementManagement.spec.js'
+          - yarn cypress run --browser firefox --headless --spec 'cypress/integration/globalSystemSettings/statementManagement.spec.js'
         artifacts:
           - cypress/screenshots/**
           - cypress/videos/**
