@@ -59,9 +59,12 @@ describe('Statement Management tests', () => {
   })
 
   /**
-   * @firefox_limited because Firefox does not save the downloaded file in the default cypress download folder
+   * @firefox_limited because Firefox does not save the downloaded file in the default cypress download folder.
+   * It works only in the pipeline with Linux machines. You will face an issue (running this test locally.) while this issue is not resolved by the Cypress team.
+   *
+   * Issue open in https://github.com/cypress-io/cypress/issues/17896
    */
-  it.only('C7394242_Download_Summary_Report_Functionality', () => {
+  it('C7394242_Download_Summary_Report_Functionality', () => {
     // Pending Validation
     const clientName = 'Interxion'
     const clientID = 76
@@ -70,12 +73,8 @@ describe('Statement Management tests', () => {
     clientStatementsPage.clickClientTable(clientID)
     clientStatementsPage.getSummaryButton().should('be.visible')
     clientStatementsPage.clickSummaryDownloadButtonToDownloadCSVFile()
-    // clientStatementsPage.assertProgressBarDisplayed()
-
-    // Not possible to assert it with Firefox. A bug was raised to the Cypress Team
-    //if (Cypress.isBrowser('!firefox')) {
+    clientStatementsPage.assertProgressBarDisplayed()
     clientStatementsPage.assertFileWasDownloadedSuccessfully(clientName + '_Summary.csv')
-    //}
   })
 
   it('C7353833_Use_Filter_To_Search_For_Client_Statements', () => {
@@ -300,12 +299,15 @@ describe('Statement Management tests', () => {
   })
 
   /**
-   * @firefox_limited because Firefox does not save the downloaded file in the default cypress download folder
+   * @firefox_limited because Firefox does not save the downloaded file in the default cypress download folder.
+   * It works only in the pipeline with Linux machines. You will face an issue (running this test locally.) while this issue is not resolved by the Cypress team.
+   *
+   * Issue open in https://github.com/cypress-io/cypress/issues/17896
    *
    * SKIPPED because this test will have a different behavior
    *
    */
-  it.skip('C7395183_download_PDF_File_From_Participant', { browser: '!firefox' }, () => {
+  it.skip('C7395183_download_PDF_File_From_Participant', () => {
     const clientName = 'Interxion'
     const clientID = 76
     const participantID = 32512
@@ -315,9 +317,7 @@ describe('Statement Management tests', () => {
     clientStatementsPage.clickClientTable(clientID)
     clientStatementsPage.filterParticipantStatements('', participantID)
     clientStatementsPage.clickDownloadPDFFromParticipantStatement(participantID)
-    if (Cypress.isBrowser('!firefox')) {
-      clientStatementsPage.assertFileWasDownloadedSuccessfully(participantName + '_Summary.pdf')
-    }
+    clientStatementsPage.assertFileWasDownloadedSuccessfully(participantName + '_Summary.pdf')
   })
 
   /**
