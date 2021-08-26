@@ -10,7 +10,8 @@ const selectors = {
   toastNotification: 'gs-toast div.toast-content',
   toastNotificationXBtn: 'gs-toast gs-svg-icon svg',
   notificationError: '#notificationError',
-  bulkActionsCheckbox: 'gs-grid-row gs-checkbox'
+  bulkActionsCheckbox: 'gs-grid-row gs-checkbox',
+  gsProgressBar: 'hearth-root gs-progress-indicator'
 }
 
 class BasePage {
@@ -273,7 +274,7 @@ class BasePage {
    * Assert if an element is focused
    *
    * @param {String} elementSelector element selector to be validated
-   * @param {boolean} focused True is default to validate if the element is focused. False, otherwise.
+   * @param {boolean} focused True is default to validate if the element is focused. False to assert otherwise.
    */
   assertElementIsFocused(elementSelector, focused = true) {
     focused ? cy.get(elementSelector).should('have.focus') : cy.get(elementSelector).should('not.have.focus')
@@ -282,10 +283,19 @@ class BasePage {
   /**
    * Assert if the bulk actions (checkbox to select more than 1 element in a table) is displayed
    *
-   * @param {Boolean} displayed True is default value to check if the checkbox exists. False otherwise
+   * @param {Boolean} displayed True is default value to check if the checkbox exists. False to assert otherwise.
    */
   assertBulkOptionsDisplayed(displayed = true) {
     displayed ? cy.get(selectors.bulkActionsCheckbox).should('exist') : cy.get(selectors.bulkActionsCheckbox).should('not.exist')
+  }
+
+  /**
+   * Assert if the gs progress bar is displayed on the top of a page
+   *
+   * @param {Boolean} displayed True is default value to check if the progress bar is being displayed. False to assert otherwise.
+   */
+  assertProgressBarDisplayed(displayed = true) {
+    displayed ? cy.get(selectors.gsProgressBar).should('be.visible') : cy.get(selectors.gsProgressBar).should('not.exist')
   }
 }
 
