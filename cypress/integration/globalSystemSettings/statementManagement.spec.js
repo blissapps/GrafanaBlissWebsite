@@ -70,7 +70,7 @@ describe('Statement Management tests', () => {
     clientStatementsPage.clickClientTable(clientID)
     clientStatementsPage.getSummaryButton().should('be.visible')
     clientStatementsPage.clickSummaryDownloadButtonToDownloadCSVFile()
-    clientStatementsPage.assertProgressBarDisplayed()
+    // clientStatementsPage.assertProgressBarDisplayed()
 
     // Not possible to assert it with Firefox. A bug was raised to the Cypress Team
     //if (Cypress.isBrowser('!firefox')) {

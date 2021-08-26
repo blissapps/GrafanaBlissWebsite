@@ -24,6 +24,7 @@ pipelines:
           - cypress/screenshots/**
           - cypress/videos/**
           - cypress/test-results/**
+          - cypress/downloads/**
 
 
 definitions:
