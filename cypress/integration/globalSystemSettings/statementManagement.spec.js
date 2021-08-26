@@ -58,7 +58,10 @@ describe('Statement Management tests', () => {
     clientStatementsPage.getSummaryButton().should('be.visible')
   })
 
-  it('C7394242_Download_Functionality', { browser: '!firefox' }, () => {
+  /**
+   * @firefox_limited because Firefox does not save the downloaded file in the default cypress download folder
+   */
+  it.only('C7394242_Download_Summary_Report_Functionality', () => {
     // Pending Validation
     const clientName = 'Interxion'
     const clientID = 76
@@ -67,7 +70,12 @@ describe('Statement Management tests', () => {
     clientStatementsPage.clickClientTable(clientID)
     clientStatementsPage.getSummaryButton().should('be.visible')
     clientStatementsPage.clickSummaryDownloadButtonToDownloadCSVFile()
+    clientStatementsPage.assertProgressBarDisplayed()
+
+    // Not possible to assert it with Firefox. A bug was raised to the Cypress Team
+    //if (Cypress.isBrowser('!firefox')) {
     clientStatementsPage.assertFileWasDownloadedSuccessfully(clientName + '_Summary.csv')
+    //}
   })
 
   it('C7353833_Use_Filter_To_Search_For_Client_Statements', () => {
@@ -292,7 +300,7 @@ describe('Statement Management tests', () => {
   })
 
   /**
-   * @chrome_only because Firefox does not save the downloaded file in the default cypress download folder
+   * @firefox_limited because Firefox does not save the downloaded file in the default cypress download folder
    *
    * SKIPPED because this test will have a different behavior
    *
@@ -307,7 +315,9 @@ describe('Statement Management tests', () => {
     clientStatementsPage.clickClientTable(clientID)
     clientStatementsPage.filterParticipantStatements('', participantID)
     clientStatementsPage.clickDownloadPDFFromParticipantStatement(participantID)
-    clientStatementsPage.assertFileWasDownloadedSuccessfully(participantName + '_Summary.pdf')
+    if (Cypress.isBrowser('!firefox')) {
+      clientStatementsPage.assertFileWasDownloadedSuccessfully(participantName + '_Summary.pdf')
+    }
   })
 
   /**
