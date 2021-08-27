@@ -9,9 +9,7 @@ const selectors = {
   participantNameFilterStatementInput: '#pptName input',
   participantIdFilterStatementInput: '#participantIdSelect input',
   regulatorFilterStatementInput: '#regulatorSelect > .select > input',
-  partnerFilterStatementInput: '#partnerSelect input',
-  clearAllFiltersButton: '#clearButton',
-  participantStatementId: '#participantStatement-'
+  partnerFilterStatementInput: '#partnerSelect input'
 }
 
 const apiInterceptions = {

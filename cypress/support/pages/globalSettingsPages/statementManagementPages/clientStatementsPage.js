@@ -7,7 +7,6 @@ const properties = {
 const selectors = {
   clientFilterStatementInput: '#clientSelect input',
   dateFilterStatementInput: '#date-range-input input',
-  clearAllFiltersButton: '#clearButton',
   clientStatementId: '#clientStatement-',
   clientParticipantStatementId: '#clientParticipantStatement-',
   backToManageStatementsButton: '#backLink',
