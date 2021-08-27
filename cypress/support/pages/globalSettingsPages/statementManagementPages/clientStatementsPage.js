@@ -101,7 +101,7 @@ class ClientStatementsPage extends BasePage {
    * @returns the client participant statement.
    */
   getClientParticipantStatement(participantId) {
-    return cy.get(selectors.clientParticipantStatementId + participantId)
+    return cy.get(selectors.clientParticipantStatementId + participantId).scrollIntoView()
   }
 
   // --------------------------------------- CLICKS --------------------------------------------- //
@@ -159,7 +159,7 @@ class ClientStatementsPage extends BasePage {
       .click()
   }
 
-  // --------------------------------------- ASSERTIONS AND OTHERS --------------------------------------------- //
+  // --------------------------------------- ASSERTIONS --------------------------------------------- //
 
   /**
    * Checks the amount of records displayed in the table
@@ -168,57 +168,10 @@ class ClientStatementsPage extends BasePage {
    *
    * @example 'records = 1 for '1 record(s)' being displayed in the table
    */
-  checkAmountOfRecordsTable(records) {
-    this.assertNumberOfRecordsDisplayed(selectors.numberOfRecords, records)
-  }
-
-  /**
-   * Filter data from client statements
-   *
-   * @param {String} clientName client name to be filtered in the client input field
-   * @param {String} dateFrom initial date to be filtered in the As of Date input field
-   * @param {String} dateTo final date to be filtered in the As of Date input field
-   *
-   * @example ('TomTom', '20190301', '20210519') for TomTom client with date range from 2019-03-01 up to 2021-05-19
-   */
-  filterClientStatements(clientName = '', dateFrom = '', dateTo = '') {
-    if (clientName != '') {
-      cy.get(selectors.clientFilterStatementInput).as('clientFilterInput')
-      cy.get('@clientFilterInput').type(clientName)
-      cy.get('@clientFilterInput').type('{enter}')
-    }
-
-    if (dateFrom != '' && dateTo != '') {
-      cy.get(selectors.dateFilterStatementInput)
-        .first()
-        .type(dateFrom)
-      cy.get(selectors.dateFilterStatementInput)
-        .last()
-        .type(dateTo)
-    }
-  }
-
-  /**
-   * Filter for a participant in the participants table inside a client
-   *
-   * @param {String} participantName participant name to be searched into the participant statement filter. Send '' to do use this filter
-   * @param {Number} participantId participant id to be searched into the participant statement filter. Send '' to do use this filter
-   * @param {String} status participant status to be searched into the participant statement filter. Send '' to do use this filter
-   */
-  filterParticipantStatements(participantName = '', participantId = -1, status = '') {
-    if (participantName != '') {
-      cy.get(selectors.participantName).type(participantName + '{enter}')
-    }
-
-    if (participantId != -1) {
-      cy.get(selectors.participantId).type(participantId + '{enter}')
-    }
-
-    if (status != '') {
-      cy.get(selectors.participantStatus).type(status + '{enter}')
-    }
-
-    this.waitForTableToReloadAfterFiltering()
+  assertAmountOfRecordsTable(records) {
+    cy.xpath(`//*[@id="gridCount"][normalize-space(text())="${records} record(s)"]`)
+      .scrollIntoView()
+      .should('be.visible')
   }
 
   /**
@@ -314,6 +267,69 @@ class ClientStatementsPage extends BasePage {
     // Cancel button must close the window
     cy.get(reconcileStatementsSelectors.cancelButton).click()
     this.assertReconcileStatemenRightWindowDisplayed(false)
+  }
+
+  /**
+   * Assert the participant is displayed or not in the participant table
+   *
+   * @param {Number} participantId The id of the participant
+   * @param {Boolean} displayed True is the default value to check the participant is visible. False, otherwise
+   */
+  assertParticipantStatementDisplayed(participantId, displayed = true) {
+    displayed ? this.getClientParticipantStatement(participantId).should('be.visible') : this.getClientParticipantStatement(participantId).should('not.exist')
+  }
+
+  // -----------------------------------------------OTHERS --------------------------------------------- //
+
+  /**
+   * Filter data from client statements
+   *
+   * @param {String} clientName client name to be filtered in the client input field
+   * @param {String} dateFrom initial date to be filtered in the As of Date input field
+   * @param {String} dateTo final date to be filtered in the As of Date input field
+   *
+   * @example ('TomTom', '20190301', '20210519') for TomTom client with date range from 2019-03-01 up to 2021-05-19
+   */
+  filterClientStatements(clientName = '', dateFrom = '', dateTo = '') {
+    if (clientName != '') {
+      cy.get(selectors.clientFilterStatementInput).as('clientFilterInput')
+      cy.get('@clientFilterInput').type(clientName)
+      cy.get('@clientFilterInput').type('{enter}')
+    }
+
+    if (dateFrom != '' && dateTo != '') {
+      cy.get(selectors.dateFilterStatementInput)
+        .first()
+        .type(dateFrom)
+      cy.get(selectors.dateFilterStatementInput)
+        .last()
+        .type(dateTo)
+    }
+  }
+
+  /**
+   * Filter for a participant in the participants table inside a client
+   *
+   * @param {String} participantName participant name to be searched into the participant statement filter. Send '' to not use this filter
+   * @param {Number} participantId participant id to be searched into the participant statement filter. Send -1 to not use this filter
+   * @param {String} status participant status to be searched into the participant statement filter. Send '' to not use this filter
+   */
+  filterParticipantStatements(participantName = '', participantId = -1, status = '') {
+    cy.log('FILTERING PARTICIPANT')
+
+    if (participantName != '') {
+      cy.get(selectors.participantName).type(participantName + '{enter}')
+    }
+
+    if (participantId != -1) {
+      cy.get(selectors.participantId).type(participantId + '{enter}')
+    }
+
+    if (status != '') {
+      cy.get(selectors.participantStatus).type(status + '{enter}')
+    }
+
+    this.waitForTableToReloadAfterFiltering()
   }
 
   // ---------------------------------------  INTERCEPTIONS --------------------------------------------- //

@@ -87,14 +87,14 @@ describe('Statement Management tests', () => {
 
     clientStatementsPage.filterClientStatements(clientName, dateFrom, dateTo)
     clientStatementsPage.getClientFromTable(clientId).should('be.visible')
-    clientStatementsPage.checkAmountOfRecordsTable(1)
+    clientStatementsPage.assertAmountOfRecordsTable(1)
     clientStatementsPage.clearAllFilters()
     clientStatementsPage.assertClientStatementsTableInOrderById(idsClientList)
 
     // only name
     clientStatementsPage.filterClientStatements('TomTom')
     clientStatementsPage.getClientFromTable(clientId).should('be.visible')
-    clientStatementsPage.checkAmountOfRecordsTable(1)
+    clientStatementsPage.assertAmountOfRecordsTable(1)
   })
 
   /**
@@ -115,7 +115,8 @@ describe('Statement Management tests', () => {
   it.skip('C7394266_Filter_Behavior_of_Participant_Regulatory_Linkage', () => {
     const clientName = 'Acacia Pharma'
     const participantName = 'Serrano'
-    const participantId = 544545
+    //const participantId = 544545
+    const participantExternalId = 'API-10001'
     const regulator = 'FINRA'
     const partner = 'Global Shares Execution Services Ltd.'
 
@@ -131,62 +132,62 @@ describe('Statement Management tests', () => {
 
     cy.log('FILTER 1')
     participantRegulatoryLinkagePage.filterParticipantsStatements(clientName)
-    participantRegulatoryLinkagePage.checkAmountOfRecordsTable(125)
+    participantRegulatoryLinkagePage.assertAmountOfRecordsTable(125)
     participantRegulatoryLinkagePage.clearAllFilters()
 
     cy.log('FILTER 2')
     participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName)
-    participantRegulatoryLinkagePage.checkAmountOfRecordsTable(2)
+    participantRegulatoryLinkagePage.assertAmountOfRecordsTable(2)
     participantRegulatoryLinkagePage.clearAllFilters()
 
     cy.log('FILTER 3')
-    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName, participantId)
-    participantRegulatoryLinkagePage.checkAmountOfRecordsTable(2)
+    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName, participantExternalId)
+    participantRegulatoryLinkagePage.assertAmountOfRecordsTable(2)
     participantRegulatoryLinkagePage.clearAllFilters()
 
     cy.log('FILTER 4')
-    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName, participantId, regulator)
-    participantRegulatoryLinkagePage.checkAmountOfRecordsTable(1)
+    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName, participantExternalId, regulator)
+    participantRegulatoryLinkagePage.assertAmountOfRecordsTable(1)
     participantRegulatoryLinkagePage.clearAllFilters()
 
     cy.log('FILTER 5')
-    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName, participantId, regulator, partner)
-    participantRegulatoryLinkagePage.checkAmountOfRecordsTable(1)
+    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName, participantExternalId, regulator, partner)
+    participantRegulatoryLinkagePage.assertAmountOfRecordsTable(1)
     participantRegulatoryLinkagePage.clearAllFilters()
 
     cy.log('FILTER 6')
-    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, '', participantId, '', '')
-    participantRegulatoryLinkagePage.checkAmountOfRecordsTable(2)
+    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, '', participantExternalId, '', '')
+    participantRegulatoryLinkagePage.assertAmountOfRecordsTable(2)
     participantRegulatoryLinkagePage.clearAllFilters()
 
     cy.log('FILTER 7')
     participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, '', -1, regulator, '')
-    participantRegulatoryLinkagePage.checkAmountOfRecordsTable(42)
+    participantRegulatoryLinkagePage.assertAmountOfRecordsTable(42)
     participantRegulatoryLinkagePage.clearAllFilters()
 
     cy.log('FILTER 8')
     participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, '', -1, '', partner)
-    participantRegulatoryLinkagePage.checkAmountOfRecordsTable(97)
+    participantRegulatoryLinkagePage.assertAmountOfRecordsTable(97)
     participantRegulatoryLinkagePage.clearAllFilters()
 
     cy.log('FILTER 9')
     participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, '', -1, regulator, partner)
-    participantRegulatoryLinkagePage.checkAmountOfRecordsTable(42)
+    participantRegulatoryLinkagePage.assertAmountOfRecordsTable(42)
     participantRegulatoryLinkagePage.clearAllFilters()
 
     cy.log('FILTER 10')
     participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName, -1, regulator, partner)
-    participantRegulatoryLinkagePage.checkAmountOfRecordsTable(1)
+    participantRegulatoryLinkagePage.assertAmountOfRecordsTable(1)
     participantRegulatoryLinkagePage.clearAllFilters()
 
     cy.log('FILTER 11')
-    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName, participantId, '', partner)
-    participantRegulatoryLinkagePage.checkAmountOfRecordsTable(2)
+    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName, participantExternalId, '', partner)
+    participantRegulatoryLinkagePage.assertAmountOfRecordsTable(2)
     participantRegulatoryLinkagePage.clearAllFilters()
 
     cy.log('FILTER 12')
-    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName, participantId, '', partner)
-    participantRegulatoryLinkagePage.checkAmountOfRecordsTable(2)
+    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName, participantExternalId, '', partner)
+    participantRegulatoryLinkagePage.assertAmountOfRecordsTable(2)
     participantRegulatoryLinkagePage.clearAllFilters()
 
     cy.log('FILTER 13 - Empty State')
@@ -243,7 +244,7 @@ describe('Statement Management tests', () => {
   })
 
   /**
-   * SPIKED DUE TO https://globalshares.atlassian.net/browse/PB-898
+   * SPIKED DUE TO https://globalshares.atlassian.net/browse/PB-898 and https://globalshares.atlassian.net/browse/PB-806
    */
   it.skip('C7394707_Participant_Filter_Behavior', () => {
     const clientName = 'Interxion'
@@ -254,47 +255,47 @@ describe('Statement Management tests', () => {
 
     clientStatementsPage.filterClientStatements(clientName)
     clientStatementsPage.clickClientTable(clientID)
-    clientStatementsPage.getNumberOfRecordsDisplayed().should('be.visible')
+    clientStatementsPage.getNumberOfRecordsDisplayed()
 
     // By Id
     clientStatementsPage.filterParticipantStatements('', participantID)
-    clientStatementsPage.getClientParticipantStatement(participantID)
-    clientStatementsPage.checkAmountOfRecordsTable(1)
+    clientStatementsPage.assertParticipantStatementDisplayed(participantID)
+    clientStatementsPage.assertAmountOfRecordsTable(1)
     clientStatementsPage.clearAllFilters()
 
     // By Name
     clientStatementsPage.filterParticipantStatements(participantName)
-    clientStatementsPage.getClientParticipantStatement(participantID)
-    clientStatementsPage.checkAmountOfRecordsTable(1)
+    clientStatementsPage.assertParticipantStatementDisplayed(participantID)
+    clientStatementsPage.assertAmountOfRecordsTable(1)
     clientStatementsPage.clearAllFilters()
 
     // By Status
     clientStatementsPage.filterParticipantStatements('', -1, participantStatus)
-    clientStatementsPage.checkAmountOfRecordsTable(15)
+    clientStatementsPage.assertAmountOfRecordsTable(15)
     clientStatementsPage.clearAllFilters()
 
     // By Id and Status
     clientStatementsPage.filterParticipantStatements('', participantID, participantStatus)
-    clientStatementsPage.getClientParticipantStatement(participantID)
-    clientStatementsPage.checkAmountOfRecordsTable(1)
+    clientStatementsPage.assertParticipantStatementDisplayed(participantID)
+    clientStatementsPage.assertAmountOfRecordsTable(1)
     clientStatementsPage.clearAllFilters()
 
     // By Name and Id
     clientStatementsPage.filterParticipantStatements(participantName, participantID)
-    clientStatementsPage.getClientParticipantStatement(participantID)
-    clientStatementsPage.checkAmountOfRecordsTable(1)
+    clientStatementsPage.assertParticipantStatementDisplayed(participantID)
+    clientStatementsPage.assertAmountOfRecordsTable(1)
     clientStatementsPage.clearAllFilters()
 
     // By Name and Status
     clientStatementsPage.filterParticipantStatements(participantName, -1, participantStatus)
-    clientStatementsPage.getClientParticipantStatement(participantID)
-    clientStatementsPage.checkAmountOfRecordsTable(1)
+    clientStatementsPage.assertParticipantStatementDisplayed(participantID)
+    clientStatementsPage.assertAmountOfRecordsTable(1)
     clientStatementsPage.clearAllFilters()
 
     // By Name, Id, and Status
     clientStatementsPage.filterParticipantStatements(participantName, participantID, participantStatus)
-    clientStatementsPage.getClientParticipantStatement(participantID)
-    clientStatementsPage.checkAmountOfRecordsTable(1)
+    clientStatementsPage.assertParticipantStatementDisplayed(participantID)
+    clientStatementsPage.assertAmountOfRecordsTable(1)
     clientStatementsPage.clearAllFilters()
   })
 

@@ -47,7 +47,7 @@ class ParticipantRegulatoryLinkagePage extends BasePage {
    *
    * @param {String} clientName client name to be filtered in the client input field
    * @param {String} participantName participant name to be filtered in the Participant Name input field
-   * @param {Number} participantId participant id to be filtered in the Participant Id input field
+   * @param {any} participantId participant id to be filtered in the Participant Id input field
    * @param {String} regulator regulator name to be filtered in the Regulator input field
    * @param {String} partner partner name to be filtered in the Partner input field
    *
@@ -75,7 +75,6 @@ class ParticipantRegulatoryLinkagePage extends BasePage {
         .type(participantId + '{enter}')
         .then(() => {
           this.waitForStatementsToReloadAfterFiltering()
-          this.waitForTableToReloadAfterFiltering()
         })
     }
 
@@ -84,7 +83,6 @@ class ParticipantRegulatoryLinkagePage extends BasePage {
         .type(regulator + '{enter}')
         .then(() => {
           this.waitForStatementsToReloadAfterFiltering()
-          this.waitForTableToReloadAfterFiltering()
         })
     }
 
@@ -93,7 +91,6 @@ class ParticipantRegulatoryLinkagePage extends BasePage {
         .type(partner + '{enter}')
         .then(() => {
           this.waitForStatementsToReloadAfterFiltering()
-          this.waitForTableToReloadAfterFiltering()
         })
     }
 
@@ -108,20 +105,13 @@ class ParticipantRegulatoryLinkagePage extends BasePage {
    *
    * @example 'records = 1 for '1 record(s)' being displayed in the table
    */
-  checkAmountOfRecordsTable(records) {
-    this.assertNumberOfRecordsDisplayed(selectors.numberOfRecords, records)
+  assertAmountOfRecordsTable(records) {
+    cy.xpath(`//*[@id="gridCount"][normalize-space(text())="${records} record(s)"]`)
+      .scrollIntoView()
+      .should('be.visible')
   }
 
   // ---------------------------------------  INTERCEPTIONS --------------------------------------------- //
-
-  /**
-   * This method waits until the table in reloaded after filtering something in filter statements.
-   * It intercepts the call that is being made in the backend, avoiding unnecessary waits.
-   */
-  waitForTableToReloadAfterFiltering() {
-    cy.intercept('GET', apiInterceptions.tableReloadedAfterFiltering).as('tableReloads')
-    cy.wait('@tableReloads', { timeout: 10000 })
-  }
 
   /**
    * This method will wait until a XHR request, that brings all statements after filtering, is reloaded
