@@ -1,4 +1,4 @@
-import BasePage from '../../basePage'
+import BaseStatementManagementPage from './baseStatementsManagementPage'
 
 const properties = {
   pageURL: '/statement/clients'
@@ -11,8 +11,6 @@ const selectors = {
   clientStatementId: '#clientStatement-',
   clientParticipantStatementId: '#clientParticipantStatement-',
   backToManageStatementsButton: '#backLink',
-  numberOfRecords: '#gridCount',
-  noDataFoundMessage: '#emptyContainer',
   summaryDownloadButton: 'div.header gs-button',
   participantName: '#pptNameFilter input',
   participantId: '#pptIdFilter input',
@@ -33,7 +31,7 @@ const apiInterceptions = {
   clientStatementsLoaded: 'https://api-regrep.myglobalshares.co.uk/api/v1.0/ClientStatements?limit=50&offset=0'
 }
 
-class ClientStatementsPage extends BasePage {
+class ClientStatementsPage extends BaseStatementManagementPage {
   /**
    * Checks if the current page is the one in properties.pageURL
    */
@@ -55,15 +53,6 @@ class ClientStatementsPage extends BasePage {
   }
 
   /**
-   * Get no data found message when displayed
-   *
-   * @returns no data message
-   */
-  getNoDataFoundMessage() {
-    return cy.get(selectors.noDataFoundMessage)
-  }
-
-  /**
    * Get summary button
    *
    * @returns summary button element
@@ -81,15 +70,6 @@ class ClientStatementsPage extends BasePage {
    */
   getReconcileButton(clientId) {
     return cy.get(`#hover-actions-${clientId} gs-svg-icon`)
-  }
-
-  /**
-   * Get number of records displayed in the table
-   *
-   * @returns element containing the number of records displayed
-   */
-  getNumberOfRecordsDisplayed() {
-    return cy.get(selectors.numberOfRecords)
   }
 
   /**
@@ -160,19 +140,6 @@ class ClientStatementsPage extends BasePage {
   }
 
   // --------------------------------------- ASSERTIONS --------------------------------------------- //
-
-  /**
-   * Checks the amount of records displayed in the table
-   *
-   * @param {Number} records amount of people you want to check in the records
-   *
-   * @example 'records = 1 for '1 record(s)' being displayed in the table
-   */
-  assertAmountOfRecordsTable(records) {
-    cy.xpath(`//*[@id="gridCount"][normalize-space(text())="${records} record(s)"]`)
-      .scrollIntoView()
-      .should('be.visible')
-  }
 
   /**
    * Assert that the table from client statements shows all expected data in the columns, which are Ids, Clients, Regulators, and Statuses.
@@ -343,6 +310,9 @@ class ClientStatementsPage extends BasePage {
     cy.wait('@tableReloads', { timeout: 10000 })
   }
 
+  /**
+   * Waits for clients to be loaded in the table
+   */
   waitForClientStatementsToBeLoaded() {
     cy.intercept('GET', apiInterceptions.clientStatementsLoaded).as('clientsLoaded')
     cy.wait('@clientsLoaded', { timeout: 10000 })

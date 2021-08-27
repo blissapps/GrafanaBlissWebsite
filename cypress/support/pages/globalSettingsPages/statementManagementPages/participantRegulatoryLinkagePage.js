@@ -1,4 +1,4 @@
-import BasePage from '../../basePage'
+import BaseStatementManagementPage from './baseStatementsManagementPage'
 
 const properties = {
   pageURL: '/statement/participants'
@@ -11,33 +11,19 @@ const selectors = {
   regulatorFilterStatementInput: '#regulatorSelect > .select > input',
   partnerFilterStatementInput: '#partnerSelect input',
   clearAllFiltersButton: '#clearButton',
-  participantStatementId: '#participantStatement-',
-  numberOfRecords: '#gridCount',
-  noDataFoundMessage: '#emptyContainer'
+  participantStatementId: '#participantStatement-'
 }
 
 const apiInterceptions = {
-  tableReloadedAfterFiltering: 'https://api.stonly.com/api/v2/widget/integration**',
   linkagesParticipants: '/api/v1.0/Clients/**/ParticipantStatements/Linkages**'
 }
 
-class ParticipantRegulatoryLinkagePage extends BasePage {
+class ParticipantRegulatoryLinkagePage extends BaseStatementManagementPage {
   /**
    * Checks if the current page is the one in properties.pageURL
    */
   checkParticipantRegulatoryLinkageManagementUrl() {
     this.checkUrl(properties.pageURL)
-  }
-
-  // --------------------------------------- GETS --------------------------------------------- //
-
-  /**
-   * Get no data found message when displayed
-   *
-   * @returns no data message
-   */
-  getNoDataFoundMessage() {
-    return cy.get(selectors.noDataFoundMessage)
   }
 
   // --------------------------------------- ASSERTIONS AND OTHERS --------------------------------------------- //
@@ -95,20 +81,7 @@ class ParticipantRegulatoryLinkagePage extends BasePage {
     }
 
     // eslint-disable-next-line cypress/no-unnecessary-waiting
-    cy.wait(850) // Angular is taking more time than expected, so even using intercept, it is not being sufficient.
-  }
-
-  /**
-   * Checks the amount of records displayed in the table
-   *
-   * @param {Number} records amount of people you want to check in the records
-   *
-   * @example 'records = 1 for '1 record(s)' being displayed in the table
-   */
-  assertAmountOfRecordsTable(records) {
-    cy.xpath(`//*[@id="gridCount"][normalize-space(text())="${records} record(s)"]`)
-      .scrollIntoView()
-      .should('be.visible')
+    cy.wait(850) // Angular is taking more time than expected to render elements. So, even using intercept, it is not sufficient and we need to add this explicity waiting.
   }
 
   // ---------------------------------------  INTERCEPTIONS --------------------------------------------- //
