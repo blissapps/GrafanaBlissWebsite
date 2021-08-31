@@ -385,6 +385,50 @@ describe('Statement Management tests', () => {
   })
 
   /**
+   *
+   * @missing_data Need to have one client with Pending Validation status. This client needs to have some participants with Pending Validation
+   *
+   */
+  it.skip('C9309233_Statements_User_Puts_Statements_On_Hold', () => {
+    const clientName = 'SJP'
+    const clientId = 133
+    const participantIDs = [166106, 354141, 169181, 202976]
+    const participantStatusBefore = 'Pending Validation'
+    const participantStatusAfter = 'On Hold'
+
+    clientStatementsPage.filterClientStatements(clientName)
+    clientStatementsPage.clickClientTable(clientId)
+
+    clientStatementsPage.filterParticipantStatements('', participantIDs[0])
+    clientStatementsPage.clickInTheCheckboxToSelectParticipant(participantIDs[0])
+    clientStatementsPage.assertParticipantStatus(participantIDs[0], participantStatusBefore)
+    clientStatementsPage.clearAllFilters()
+
+    clientStatementsPage.filterParticipantStatements('', participantIDs[1])
+    clientStatementsPage.clickInTheCheckboxToSelectParticipant(participantIDs[1])
+    clientStatementsPage.assertParticipantStatus(participantIDs[1], participantStatusBefore)
+    clientStatementsPage.clearAllFilters()
+
+    clientStatementsPage.filterParticipantStatements('', participantIDs[2])
+    clientStatementsPage.clickInTheCheckboxToSelectParticipant(participantIDs[2])
+    clientStatementsPage.assertParticipantStatus(participantIDs[2], participantStatusBefore)
+    clientStatementsPage.clearAllFilters()
+
+    clientStatementsPage.filterParticipantStatements('', participantIDs[3])
+    clientStatementsPage.clickInTheCheckboxToSelectParticipant(participantIDs[3])
+    clientStatementsPage.assertParticipantStatus(participantIDs[3], participantStatusBefore)
+    clientStatementsPage.clearAllFilters()
+
+    clientStatementsPage.clickToOnHoldAllSelectedParticipants(participantIDs.length)
+
+    clientStatementsPage.assertParticipantStatus(participantIDs[0], participantStatusAfter)
+    clientStatementsPage.assertParticipantStatus(participantIDs[1], participantStatusAfter)
+    clientStatementsPage.assertParticipantStatus(participantIDs[2], participantStatusAfter)
+    clientStatementsPage.assertParticipantStatus(participantIDs[3], participantStatusAfter)
+    clientStatementsPage.assertToastNotificationMessageIsDisplayed('Success')
+  })
+
+  /**
    * Filter a client with participants and Check search with participant name, id and status with a variety of combination, such as
    * nameXid, name vs date, id vs date, name vs id vs date.. (USE TomTom)
    *

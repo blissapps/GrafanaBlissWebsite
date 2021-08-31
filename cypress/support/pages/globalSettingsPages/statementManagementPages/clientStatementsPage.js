@@ -13,7 +13,8 @@ const selectors = {
   summaryDownloadButton: 'div.header gs-button',
   participantName: '#pptNameFilter input',
   participantId: '#pptIdFilter input',
-  participantStatus: '#statusSelect input'
+  participantStatus: '#statusSelect input',
+  onHoldBtn: '#onHold'
 }
 
 const reconcileStatementsSelectors = {
@@ -23,6 +24,11 @@ const reconcileStatementsSelectors = {
   securityCheckBox: 'gs-container-l4 gs-checkbox',
   cancelButton: 'gs-container-l4 gs-button:first-child',
   reconcileButton: '#client-reconcile-btn'
+}
+
+const onHoldStatementsSelectors = {
+  numberOfStatements: 'gs-container-l4 h2',
+  onHoldBtn: 'gs-container-l4 gs-button[appearance=primary]'
 }
 
 const apiInterceptions = {
@@ -123,7 +129,7 @@ class ClientStatementsPage extends BaseStatementManagementPage {
    *
    */
   clickDownloadPDFFromParticipantStatement(participantId) {
-    cy.get('#clientParticipantStatement-' + participantId + ' gs-svg-icon').as('participantRowSelected')
+    cy.get(selectors.clientParticipantStatementId + participantId + ' gs-svg-icon').as('participantRowSelected')
     cy.get('@participantRowSelected').click()
   }
 
@@ -136,6 +142,34 @@ class ClientStatementsPage extends BaseStatementManagementPage {
     this.getReconcileButton(recordId)
       .scrollIntoView()
       .click()
+  }
+
+  /**
+   * When bulk actions are available, click in the checkbox of a specific participant
+   *
+   * @param {Number} participantId Id of the participant that is going to be selected by the checkbox
+   */
+  clickInTheCheckboxToSelectParticipant(participantId) {
+    cy.get(selectors.clientParticipantStatementId + participantId)
+      .invoke('hover')
+      .then(() => {
+        cy.get(selectors.clientParticipantStatementId + participantId + ' gs-grid-cell').as('checkbox')
+        cy.get('@checkbox')
+          .first()
+          .click()
+      })
+  }
+
+  /**
+   * Click in the on hold button located in the table header when one or more participants with Pending Validation statuses are selected.
+   * After that, verify the number of participant statements that will be on hold and click in on hold
+   *
+   * @param {Number} numberOfParticipantsStatements Number of Participants Statements to be put On Hold
+   */
+  clickToOnHoldAllSelectedParticipants(numberOfParticipantsStatements) {
+    cy.get(selectors.onHoldBtn).click()
+    cy.get(onHoldStatementsSelectors.numberOfStatements).should('have.text', numberOfParticipantsStatements)
+    cy.get(onHoldStatementsSelectors.onHoldBtn).click()
   }
 
   // --------------------------------------- ASSERTIONS --------------------------------------------- //
@@ -245,7 +279,18 @@ class ClientStatementsPage extends BaseStatementManagementPage {
     displayed ? this.getClientParticipantStatement(participantId).should('be.visible') : this.getClientParticipantStatement(participantId).should('not.exist')
   }
 
-  // -----------------------------------------------OTHERS --------------------------------------------- //
+  /**
+   * Assert the participant status
+   *
+   * @param {Number} participantId Participant id number to be asserted
+   * @param {String} participantStatus Status to be verified into this participant. Status can be: Pending Validation, On Hold ...
+   *
+   */
+  assertParticipantStatus(participantId, participantStatus) {
+    cy.get(selectors.clientParticipantStatementId + participantId + ' gs-grid-cell gs-badge').should('contain.text', participantStatus)
+  }
+
+  // ----------------------------------------------------------------------OTHERS ------------------------------------------------------------------- //
 
   /**
    * Filter data from client statements

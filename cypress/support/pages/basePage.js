@@ -113,6 +113,15 @@ class BasePage {
     cy.reload()
   }
 
+  /**
+   * Click in the checkbox to select all elements of table when bulk actions is available
+   */
+  clickToSelectAllElementsInTable() {
+    this.assertBulkOptionsDisplayed()
+
+    cy.get(selectors.bulkActionsCheckbox).click()
+  }
+
   // --------------------------------------- ASSERTIONS --------------------------------------------- //
   /**
    * Verify if a file was downloaded in the default 'cypress/downloads/' path
@@ -281,21 +290,21 @@ class BasePage {
   }
 
   /**
-   * Assert if the bulk actions (checkbox to select more than 1 element in a table) is displayed
-   *
-   * @param {Boolean} displayed True is default value to check if the checkbox exists. False to assert otherwise.
-   */
-  assertBulkOptionsDisplayed(displayed = true) {
-    displayed ? cy.get(selectors.bulkActionsCheckbox).should('exist') : cy.get(selectors.bulkActionsCheckbox).should('not.exist')
-  }
-
-  /**
    * Assert if the gs progress bar is displayed on the top of a page
    *
    * @param {Boolean} displayed True is default value to check if the progress bar is being displayed. False to assert otherwise.
    */
   assertProgressBarDisplayed(displayed = true) {
     displayed ? cy.get(selectors.gsProgressBar).should('be.visible') : cy.get(selectors.gsProgressBar).should('not.exist')
+  }
+
+  /**
+   * Assert if the bulk actions (checkbox to select more than 1 element in a table) is displayed
+   *
+   * @param {Boolean} displayed True is default value to check if the checkbox exists. False to assert otherwise.
+   */
+  assertBulkOptionsDisplayed(displayed = true) {
+    displayed ? cy.get(selectors.bulkActionsCheckbox).should('exist') : cy.get(selectors.bulkActionsCheckbox).should('not.exist')
   }
 }
 
