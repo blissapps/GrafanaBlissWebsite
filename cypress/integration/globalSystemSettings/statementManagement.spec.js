@@ -474,6 +474,32 @@ describe('Statement Management tests', () => {
   })
 
   /**
+   *
+   * @missing_data Need to have one client with any status but Pending Validation nor Published.
+   *
+   */
+  it.skip('C9324997_Try_To_Recall_Single_Participant_Statement_Not_In_Published_Status', () => {
+    const clientReconciledName = 'Veloxis Pharmaceuticals'
+    const clientReconciledId = 80
+    const participantOnHoldId = 251656
+    const participantPendingValidationId = 251654
+
+    clientStatementsPage.filterClientStatements(clientReconciledName)
+    clientStatementsPage.clickClientTable(clientReconciledId)
+
+    // Participant with On Hold status
+    clientStatementsPage.filterParticipantStatements('', participantOnHoldId)
+    clientStatementsPage.assertParticipantStatus(participantOnHoldId, 'On Hold')
+    clientStatementsPage.assertRecallButtonDisplayedForParticipant(participantOnHoldId, false)
+    clientStatementsPage.clearAllFilters()
+
+    //Participant with Pending Validation status
+    clientStatementsPage.filterParticipantStatements('', participantPendingValidationId)
+    clientStatementsPage.assertParticipantStatus(participantPendingValidationId, 'Pending Validation')
+    clientStatementsPage.assertRecallButtonDisplayedForParticipant(participantPendingValidationId, false)
+  })
+
+  /**
    * Filter a client with participants and Check search with participant name, id and status with a variety of combination, such as
    * nameXid, name vs date, id vs date, name vs id vs date.. (USE TomTom)
    *

@@ -14,7 +14,8 @@ const selectors = {
   participantName: '#pptNameFilter input',
   participantId: '#pptIdFilter input',
   participantStatus: '#statusSelect input',
-  onHoldBtn: '#onHold'
+  onHoldBtn: '#onHold',
+  recallBtn: 'gs-hover-icon-actions gs-svg-icon'
 }
 
 const reconcileStatementsSelectors = {
@@ -67,11 +68,11 @@ class ClientStatementsPage extends BaseStatementManagementPage {
   }
 
   /**
-   * Get reconciled button
+   * Get reconciled button for a specific client
    *
    * @param clientId Id number of the statement with the reconcile button
    *
-   * @returns summary button element
+   * @returns reconcile button for the client
    */
   getReconcileButton(clientId) {
     return cy.get(`#hover-actions-${clientId} gs-svg-icon`)
@@ -288,6 +289,28 @@ class ClientStatementsPage extends BaseStatementManagementPage {
    */
   assertParticipantStatus(participantId, participantStatus) {
     cy.get(selectors.clientParticipantStatementId + participantId + ' gs-grid-cell gs-badge').should('contain.text', participantStatus)
+  }
+
+  /**
+   * Assert the recall button is available for a given participant
+   *
+   *
+   * @param {Number} participantId The participant id to check if the recall button is available for it
+   * @param {Boolean} displayed True to assert the recall button is displayed. False, otherwise.
+   *
+   *
+   * @missing_ids
+   */
+  assertRecallButtonDisplayedForParticipant(participantId, displayed) {
+    displayed
+      ? cy
+          .get(selectors.clientParticipantStatementId + participantId + ' ' + selectors.recallBtn)
+          .eq(1)
+          .should('be.visible')
+      : cy
+          .get(selectors.clientParticipantStatementId + participantId + ' ' + selectors.recallBtn)
+          .eq(1)
+          .should('not.exist')
   }
 
   // ----------------------------------------------------------------------OTHERS ------------------------------------------------------------------- //
