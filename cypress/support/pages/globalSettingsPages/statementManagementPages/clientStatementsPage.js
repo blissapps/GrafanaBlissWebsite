@@ -15,7 +15,8 @@ const selectors = {
   participantId: '#pptIdFilter input',
   participantStatus: '#statusSelect input',
   onHoldBtn: '#onHold',
-  recallBtn: 'gs-hover-icon-actions gs-svg-icon'
+  recallBtn: 'gs-hover-icon-actions gs-svg-icon',
+  approveBtn: 'gs-hover-icon-actions gs-svg-icon'
 }
 
 const reconcileStatementsSelectors = {
@@ -95,10 +96,10 @@ class ClientStatementsPage extends BaseStatementManagementPage {
   /**
    * Select a client from the table of clients
    *
-   * @param {Number} clientId clientId number to be searched in the client statements table
+   * @param {Number} clientStatementId clientId number to be searched in the client statements table
    */
-  clickClientTable(clientId) {
-    this.getClientFromTable(clientId)
+  clickClientTable(clientStatementId) {
+    this.getClientFromTable(clientStatementId)
       .scrollIntoView()
       .click('left')
   }
@@ -288,7 +289,9 @@ class ClientStatementsPage extends BaseStatementManagementPage {
    *
    */
   assertParticipantStatus(participantId, participantStatus) {
-    cy.get(selectors.clientParticipantStatementId + participantId + ' gs-grid-cell gs-badge').should('contain.text', participantStatus)
+    cy.get(selectors.clientParticipantStatementId + participantId + ' gs-grid-cell gs-badge')
+      .scrollIntoView()
+      .should('contain.text', participantStatus)
   }
 
   /**
@@ -301,7 +304,7 @@ class ClientStatementsPage extends BaseStatementManagementPage {
    *
    * @missing_ids
    */
-  assertRecallButtonDisplayedForParticipant(participantId, displayed) {
+  assertRecallButtonDisplayedForParticipant(participantId, displayed = true) {
     displayed
       ? cy
           .get(selectors.clientParticipantStatementId + participantId + ' ' + selectors.recallBtn)
@@ -309,6 +312,28 @@ class ClientStatementsPage extends BaseStatementManagementPage {
           .should('be.visible')
       : cy
           .get(selectors.clientParticipantStatementId + participantId + ' ' + selectors.recallBtn)
+          .eq(1)
+          .should('not.exist')
+  }
+
+  /**
+   * Assert the approve button is available for a given participant
+   *
+   *
+   * @param {Number} participantId The participant id to check if the approve button is available for it
+   * @param {Boolean} displayed True to assert the approve button is displayed. False, otherwise.
+   *
+   *
+   * @missing_ids
+   */
+  assertApproveButtonDisplayedForParticipant(participantId, displayed = true) {
+    displayed
+      ? cy
+          .get(selectors.clientParticipantStatementId + participantId + ' ' + selectors.approveBtn)
+          .eq(1)
+          .should('be.visible')
+      : cy
+          .get(selectors.clientParticipantStatementId + participantId + ' ' + selectors.approveBtn)
           .eq(1)
           .should('not.exist')
   }

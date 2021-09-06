@@ -196,7 +196,7 @@ describe('Statement Management tests', () => {
   })
 
   /**
-   * @MISSING_DATA Need to have a clients for each possible state
+   * @missing_data Need to have a clients for each possible state
    */
   it.skip('C7627260_Statements_Try_To_Reconcile_Single_Client_Statement_Not_In_Initiated_Status', () => {
     // INITIATED
@@ -474,9 +474,7 @@ describe('Statement Management tests', () => {
   })
 
   /**
-   *
    * @missing_data Need to have one client with any status but Pending Validation nor Published.
-   *
    */
   it.skip('C9324997_Try_To_Recall_Single_Participant_Statement_Not_In_Published_Status', () => {
     const clientReconciledName = 'Veloxis Pharmaceuticals'
@@ -497,6 +495,47 @@ describe('Statement Management tests', () => {
     clientStatementsPage.filterParticipantStatements('', participantPendingValidationId)
     clientStatementsPage.assertParticipantStatus(participantPendingValidationId, 'Pending Validation')
     clientStatementsPage.assertRecallButtonDisplayedForParticipant(participantPendingValidationId, false)
+  })
+
+  /**
+   *
+   * @missing_data Need to have one client with PARTIALLY PUBLISHED status and at least 3 participants into it with ON HOLD status and 3 with other statuses
+   *
+   * @missing_steps
+   *
+   */
+  it.skip('C9324992_Publish_Participant_Statements_Not_On_Hold', () => {
+    const clientPartiallyPublished = 'Veloxis'
+    const clientPartiallyPublishedId = 80
+    const participantOnHoldIds = [251656, 251597, 251654]
+    const participantOtherStatusesIds = [251593, 251613, 251629]
+
+    clientStatementsPage.filterClientStatements(clientPartiallyPublished)
+    clientStatementsPage.clickClientTable(clientPartiallyPublishedId)
+
+    // Assert approve button displayed only for specific participants
+    clientStatementsPage.assertApproveButtonDisplayedForParticipant(participantOnHoldIds[0])
+    clientStatementsPage.assertApproveButtonDisplayedForParticipant(participantOnHoldIds[1])
+    clientStatementsPage.assertApproveButtonDisplayedForParticipant(participantOnHoldIds[2])
+    clientStatementsPage.assertApproveButtonDisplayedForParticipant(participantOtherStatusesIds[0], false)
+    clientStatementsPage.assertApproveButtonDisplayedForParticipant(participantOtherStatusesIds[1], false)
+    clientStatementsPage.assertApproveButtonDisplayedForParticipant(participantOtherStatusesIds[2], false)
+
+    // Select participants to approve
+    clientStatementsPage.filterParticipantStatements('', participantOnHoldIds[0])
+    clientStatementsPage.clickInTheCheckboxToSelectParticipant(participantOnHoldIds[0])
+    clientStatementsPage.assertParticipantStatus(participantOnHoldIds[0], 'On Hold')
+    clientStatementsPage.clearAllFilters()
+
+    clientStatementsPage.filterParticipantStatements('', participantOnHoldIds[1])
+    clientStatementsPage.clickInTheCheckboxToSelectParticipant(participantOnHoldIds[1])
+    clientStatementsPage.assertParticipantStatus(participantOnHoldIds[1], 'On Hold')
+    clientStatementsPage.clearAllFilters()
+
+    clientStatementsPage.filterParticipantStatements('', participantOnHoldIds[2])
+    clientStatementsPage.clickInTheCheckboxToSelectParticipant(participantOnHoldIds[2])
+    clientStatementsPage.assertParticipantStatus(participantOnHoldIds[2], 'On Hold')
+    clientStatementsPage.clearAllFilters()
   })
 
   /**
