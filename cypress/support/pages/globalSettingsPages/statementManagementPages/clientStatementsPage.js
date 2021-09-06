@@ -10,7 +10,7 @@ const selectors = {
   clientStatementId: '#clientStatement-',
   clientParticipantStatementId: '#clientParticipantStatement-',
   backToManageStatementsButton: '#backLink',
-  summaryDownloadButton: 'div.header gs-button',
+  summaryDownloadButton: '#downloadSummary',
   participantName: '#pptNameFilter input',
   participantId: '#pptIdFilter input',
   participantStatus: '#statusSelect input',
@@ -56,7 +56,7 @@ class ClientStatementsPage extends BaseStatementManagementPage {
    * @returns client row element from table
    */
   getClientFromTable(clientId) {
-    return cy.get(selectors.clientStatementId + clientId)
+    return cy.get(selectors.clientStatementId + clientId).scrollIntoView()
   }
 
   /**
@@ -175,6 +175,26 @@ class ClientStatementsPage extends BaseStatementManagementPage {
   }
 
   // --------------------------------------- ASSERTIONS --------------------------------------------- //
+
+  /**
+   * Assert the client is displayed in the table on statement/clients
+   *
+   * @param {Boolean} displayed True to assert theclient is displayed. False, otherwise.
+   *
+   */
+  assertClientDisplayedOnClientStatementsTable(clientId, displayed = true) {
+    displayed ? this.getClientFromTable(clientId).should('be.visible') : this.getClientFromTable(clientId).should('not.exist')
+  }
+
+  /**
+   * Assert that the table from client statements shows all expected data in the columns, which are Ids, Clients, Regulators, and Statuses.
+   *
+   * @param {Boolean} displayed True to assert the summary window is displayed. False, otherwise.
+   *
+   */
+  assertSummaryButtonDisplayed(displayed = true) {
+    displayed ? this.getSummaryButton().should('be.visible') : this.getSummaryButton().should('not.exist')
+  }
 
   /**
    * Assert that the table from client statements shows all expected data in the columns, which are Ids, Clients, Regulators, and Statuses.

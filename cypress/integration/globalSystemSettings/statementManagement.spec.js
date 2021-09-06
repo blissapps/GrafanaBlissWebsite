@@ -27,35 +27,35 @@ describe('Statement Management tests', () => {
     // INITIATED
     clientStatementsPage.filterClientStatements('Velocys PLC')
     clientStatementsPage.clickClientTable(103)
-    clientStatementsPage.getSummaryButton().should('not.exist')
+    clientStatementsPage.assertSummaryButtonDisplayed(false)
     clientStatementsPage.clickBackToManageStatements()
 
     // RECONCILED
     clientStatementsPage.clearAllFilters()
     clientStatementsPage.filterClientStatements('Mercari')
     clientStatementsPage.clickClientTable(84)
-    clientStatementsPage.getSummaryButton().should('not.exist')
+    clientStatementsPage.assertSummaryButtonDisplayed(false)
     clientStatementsPage.clickBackToManageStatements()
 
     // Pending Validation
     clientStatementsPage.clearAllFilters()
     clientStatementsPage.filterClientStatements('Kerry Logistics')
     clientStatementsPage.clickClientTable(97)
-    clientStatementsPage.getSummaryButton().should('be.visible')
+    clientStatementsPage.assertSummaryButtonDisplayed()
     clientStatementsPage.clickBackToManageStatements()
 
     // PUBLISHED
     clientStatementsPage.clearAllFilters()
     clientStatementsPage.filterClientStatements('Interxion')
     clientStatementsPage.clickClientTable(76)
-    clientStatementsPage.getSummaryButton().should('be.visible')
+    clientStatementsPage.assertSummaryButtonDisplayed()
     clientStatementsPage.clickBackToManageStatements()
 
     // PARTIALLY PUBLISHED
     clientStatementsPage.clearAllFilters()
     clientStatementsPage.filterClientStatements('Cavotec')
     clientStatementsPage.clickClientTable(78)
-    clientStatementsPage.getSummaryButton().should('be.visible')
+    clientStatementsPage.assertSummaryButtonDisplayed()
   })
 
   /**
@@ -71,7 +71,7 @@ describe('Statement Management tests', () => {
 
     clientStatementsPage.filterClientStatements(clientName)
     clientStatementsPage.clickClientTable(clientID)
-    clientStatementsPage.getSummaryButton().should('be.visible')
+    clientStatementsPage.assertSummaryButtonDisplayed()
     clientStatementsPage.clickSummaryDownloadButtonToDownloadCSVFile()
     clientStatementsPage.assertProgressBarDisplayed()
     clientStatementsPage.assertFileWasDownloadedSuccessfully(clientName + '_Summary.csv')
@@ -86,14 +86,14 @@ describe('Statement Management tests', () => {
     const idsClientList = [76, 77, 78, 79, 80]
 
     clientStatementsPage.filterClientStatements(clientName, dateFrom, dateTo)
-    clientStatementsPage.getClientFromTable(clientId).should('be.visible')
+    clientStatementsPage.assertClientDisplayedOnClientStatementsTable(clientId)
     clientStatementsPage.assertAmountOfRecordsTable(1)
     clientStatementsPage.clearAllFilters()
     clientStatementsPage.assertClientStatementsTableInOrderById(idsClientList)
 
     // only name
     clientStatementsPage.filterClientStatements('TomTom')
-    clientStatementsPage.getClientFromTable(clientId).should('be.visible')
+    clientStatementsPage.assertClientDisplayedOnClientStatementsTable(clientId)
     clientStatementsPage.assertAmountOfRecordsTable(1)
   })
 
@@ -106,7 +106,7 @@ describe('Statement Management tests', () => {
     const todayDate = utils.getDateInFutureOrPast(0, 0, 0, 'YYYY/MM/DD').join()
 
     clientStatementsPage.filterClientStatements(clientName, yesterdayDate, todayDate)
-    clientStatementsPage.getNoDataFoundMessage().should('be.visible')
+    clientStatementsPage.assertNoDataMessageFoundDisplayed()
   })
 
   /**
@@ -122,12 +122,12 @@ describe('Statement Management tests', () => {
 
     clientStatementsPage.clickTabByTitle('Participant Regulatory Linkage')
     participantRegulatoryLinkagePage.checkParticipantRegulatoryLinkageManagementUrl()
-    participantRegulatoryLinkagePage.getNoDataFoundMessage().should('be.visible')
+    participantRegulatoryLinkagePage.assertNoDataMessageFoundDisplayed()
 
     // Not working yet for first name, so lets verify this until it is fixed
     cy.log('FILTER 0')
     participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, 'Paisley')
-    participantRegulatoryLinkagePage.getNoDataFoundMessage().should('be.visible')
+    participantRegulatoryLinkagePage.assertNoDataMessageFoundDisplayed()
     participantRegulatoryLinkagePage.clearAllFilters()
 
     cy.log('FILTER 1')
@@ -192,7 +192,7 @@ describe('Statement Management tests', () => {
 
     cy.log('FILTER 13 - Empty State')
     participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, 'emptyStateTest')
-    participantRegulatoryLinkagePage.getNoDataFoundMessage().should('be.visible')
+    participantRegulatoryLinkagePage.assertNoDataMessageFoundDisplayed()
   })
 
   /**
@@ -238,7 +238,7 @@ describe('Statement Management tests', () => {
   it('C7395182_Select_Client_Without_Participants_To_Check_Empty_State', () => {
     clientStatementsPage.filterClientStatements('Mizuho International plc')
     clientStatementsPage.clickClientTable(141)
-    clientStatementsPage.getNoDataFoundMessage().should('be.visible')
+    clientStatementsPage.assertNoDataMessageFoundDisplayed()
     clientStatementsPage.clickBackToManageStatements()
     clientStatementsPage.checkClientStatementsUrl()
   })

@@ -33,6 +33,15 @@ class BaseStatementManagementPage extends BasePage {
   // --------------------------------------- ASSERTIONS --------------------------------------------- //
 
   /**
+   * Assert the "no data found" message is displayed or not
+   *
+   * @param {Boolean} displayed True to assert the "no data message" is  displayed. False, otherwise.
+   */
+  assertNoDataMessageFoundDisplayed(displayed = true) {
+    displayed ? this.getNoDataFoundMessage().should('be.visible') : this.getNoDataFoundMessage().should('not.exist')
+  }
+
+  /**
    * Checks the amount of records displayed in the table
    *
    * @param {Number} records amount of people you want to check in the records
