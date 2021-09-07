@@ -45,14 +45,17 @@ describe('Login and Logout tests', () => {
     leftMenuNavBar.assertSignOutButtonIsVisible()
     leftMenuNavBar.closeProfileLeftBar()
 
+    leftMenuNavBar.openProfileMenuBar()
     leftMenuNavBar.openProfilePersonalInformationPage()
     leftMenuNavBar.assertSignOutButtonIsVisible()
     leftMenuNavBar.closeProfileLeftBar()
 
+    leftMenuNavBar.openProfileMenuBar()()
     leftMenuNavBar.openProfileSecurityPage()
     leftMenuNavBar.assertSignOutButtonIsVisible()
     leftMenuNavBar.closeProfileLeftBar()
 
+    leftMenuNavBar.openProfileMenuBar()
     leftMenuNavBar.openProfilePreferencesPage()
     leftMenuNavBar.assertSignOutButtonIsVisible()
     leftMenuNavBar.closeProfileLeftBar()

@@ -100,7 +100,7 @@ describe('Statement Management tests', () => {
   /**
    * @chrome_only https://globalshares.atlassian.net/browse/GDP-49661
    */
-  it('C7353834_Filter_To_Check_Empty_State', { browser: '!firefox' }, () => {
+  it('C7353834_Filter_To_Check_Empty_State', () => {
     const clientName = 'None'
     const yesterdayDate = utils.getDateInFutureOrPast(-1, 0, 0, 'YYYY/MM/DD').join()
     const todayDate = utils.getDateInFutureOrPast(0, 0, 0, 'YYYY/MM/DD').join()
@@ -536,6 +536,17 @@ describe('Statement Management tests', () => {
     clientStatementsPage.clickInTheCheckboxToSelectParticipant(participantOnHoldIds[2])
     clientStatementsPage.assertParticipantStatus(participantOnHoldIds[2], 'On Hold')
     clientStatementsPage.clearAllFilters()
+  })
+
+  /**
+   * @missing_data Need to have one user without permissions to see any User Management settings (including users, groups, roles, and DAPs (access filters))
+   */
+  it.skip('C7544061_User_Does_Not_Have_View_Permissions_For_Users,_Groups,_Roles,_And_Access_Filters', () => {
+    cy.logout() && cy.login('ViewOnlyUser2@globalshares.com', 'Swordfish123!') && cy.loginSuccessfulXHRWaits() // Logout to login with the correct user without permission
+
+    leftMenuNavBar.openSettingsMenuBar()
+    leftMenuNavBar.assertGlobalSettingsMenuOpen()
+    leftMenuNavBar.assertUserManagementDisplayed(false)
   })
 
   /**

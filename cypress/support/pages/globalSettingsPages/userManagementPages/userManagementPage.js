@@ -132,7 +132,7 @@ class UserManagementPage extends BasePage {
   /**
    * Assert information contained in the User Info panel in the right nav bar (L4)
    *
-   * @param {Array} groups Array of groups to be validated, example: ['View Only', 'Global Admin Group']. Send an empty array to skip groups validation
+   * @param {Array} groupNames Array of groups to be validated, example: ['View Only', 'Global Admin Group']. Send an empty array to skip groups validation
    * @param {String} firstName User first name under Personal section
    * @param {String} lastName User last name under Personal section
    * @param {String} publicName User public name under Personal section
@@ -144,7 +144,19 @@ class UserManagementPage extends BasePage {
    * @param {String} username User username under Account Details section
    * @param {Boolean} showAll True to click in the show all button to display all the groups in case there are lots of groups registered
    */
-  assertUserInfoContentInRightNavBar(groups, firstName, lastName, publicName, jobTitle, qualifications, organization, phone, email, username, showAll = false) {
+  assertUserInfoContentInRightNavBar(
+    groupNames = [],
+    firstName = '',
+    lastName = '',
+    publicName = '',
+    jobTitle = '',
+    qualifications = '',
+    organization = '',
+    phone = '',
+    email = '',
+    username = '',
+    showAll = false
+  ) {
     // Assert User Info Header
     cy.get(userInfoNavBarSelectors.userInfoHeader).should('be.visible')
 
@@ -154,22 +166,48 @@ class UserManagementPage extends BasePage {
     }
 
     // Assert groups if groups list is not empty
-    if (groups.length > 0) {
-      for (let i = 0; i < groups.length; i++) {
-        cy.get(userInfoNavBarSelectors.groups).should('contain.text', groups[i])
+    if (groupNames.length > 0) {
+      for (let i = 0; i < groupNames.length; i++) {
+        cy.get(userInfoNavBarSelectors.groups).should('contain.text', groupNames[i])
       }
     }
 
-    // Assert User Info Header
-    cy.get(userInfoNavBarSelectors.personalFirstName).should('have.value', firstName)
-    cy.get(userInfoNavBarSelectors.personalLastName).should('have.value', lastName)
-    cy.get(userInfoNavBarSelectors.personalPublicName).should('have.value', publicName)
-    cy.get(userInfoNavBarSelectors.personalJobTitle).should('have.value', jobTitle)
-    cy.get(userInfoNavBarSelectors.personalQualifications).should('have.value', qualifications)
-    cy.get(userInfoNavBarSelectors.personalOrganization).should('have.value', organization)
-    cy.get(userInfoNavBarSelectors.contactPhone).should('have.value', phone)
-    cy.get(userInfoNavBarSelectors.contactPreferredEmail).should('have.value', email)
-    cy.get(userInfoNavBarSelectors.AccountDetailsUsername).should('have.value', username)
+    // Assert User Info Header information
+    if (firstName != '') {
+      cy.get(userInfoNavBarSelectors.personalFirstName).should('have.value', firstName)
+    }
+
+    if (lastName != '') {
+      cy.get(userInfoNavBarSelectors.personalLastName).should('have.value', lastName)
+    }
+
+    if (publicName != '') {
+      cy.get(userInfoNavBarSelectors.personalPublicName).should('have.value', publicName)
+    }
+
+    if (jobTitle != '') {
+      cy.get(userInfoNavBarSelectors.personalJobTitle).should('have.value', jobTitle)
+    }
+
+    if (qualifications != '') {
+      cy.get(userInfoNavBarSelectors.personalQualifications).should('have.value', qualifications)
+    }
+
+    if (organization != '') {
+      cy.get(userInfoNavBarSelectors.personalOrganization).should('have.value', organization)
+    }
+
+    if (phone != '') {
+      cy.get(userInfoNavBarSelectors.contactPhone).should('have.value', phone)
+    }
+
+    if (email != '') {
+      cy.get(userInfoNavBarSelectors.contactPreferredEmail).should('have.value', email)
+    }
+
+    if (username != '') {
+      cy.get(userInfoNavBarSelectors.AccountDetailsUsername).should('have.value', username)
+    }
   }
 }
 

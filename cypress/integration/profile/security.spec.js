@@ -8,6 +8,7 @@ describe('Security tests', () => {
 
   beforeEach(() => {
     cy.login() && cy.loginSuccessfulXHRWaits()
+    leftMenuNavBar.openProfileMenuBar()
     leftMenuNavBar.openProfileSecurityPage()
   })
 

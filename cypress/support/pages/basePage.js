@@ -11,7 +11,8 @@ const selectors = {
   toastNotificationXBtn: 'gs-toast gs-svg-icon svg',
   notificationError: '#notificationError',
   bulkActionsCheckbox: 'gs-grid-row gs-checkbox',
-  gsProgressBar: 'hearth-root gs-progress-indicator'
+  gsProgressBar: 'hearth-root gs-progress-indicator',
+  entireAppPage: '#sisenseApp'
 }
 
 class BasePage {
@@ -120,6 +121,10 @@ class BasePage {
     this.assertBulkOptionsDisplayed()
 
     cy.get(selectors.bulkActionsCheckbox).click()
+  }
+
+  clickOutsideToCloseL4RightWindow() {
+    cy.get(selectors.entireAppPage).click('center')
   }
 
   // --------------------------------------- ASSERTIONS --------------------------------------------- //

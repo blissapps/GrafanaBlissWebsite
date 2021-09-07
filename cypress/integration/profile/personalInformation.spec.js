@@ -7,6 +7,7 @@ describe('Personal Information tests', () => {
 
   beforeEach(() => {
     cy.login() && cy.loginSuccessfulXHRWaits()
+    leftMenuNavBar.openProfileMenuBar()
     leftMenuNavBar.openProfilePersonalInformationPage()
   })
 

@@ -1,5 +1,6 @@
 import GroupManagementPage from '../../../support/pages/globalSettingsPages/userManagementPages/groupManagementPage'
 import DapManagementPage from '../../../support/pages/globalSettingsPages/userManagementPages/dapManagementPage'
+import UserManagementPage from '../../../support/pages/globalSettingsPages/userManagementPages/userManagementPage'
 
 import LeftMenuNavBar from '../../../support/components/leftMenuNavBar'
 import SearchBar from '../../../support/components/searchBar'
@@ -10,6 +11,7 @@ describe('Group Management tests over User Management settings', () => {
   // Pages
   const groupManagementPage = new GroupManagementPage()
   const dapManagementPage = new DapManagementPage()
+  const userManagementPage = new UserManagementPage()
 
   // Components
   const leftMenuNavBar = new LeftMenuNavBar()
@@ -290,8 +292,8 @@ describe('Group Management tests over User Management settings', () => {
    * @missing_data Need to have a group. Also, it needs to have at least one user created in the environment.
    */
   it.skip('C7419658_Groups_Add_Users_To_A_Group', () => {
-    const groupId = 1008
-    const groupName = 'Add Users'
+    const groupId = 1042
+    const groupName = 'Add Users Group'
     const userName = ['dfonsecaNE', 'amulcahyNE']
     const userIds = [454293, 454292]
 
@@ -302,6 +304,20 @@ describe('Group Management tests over User Management settings', () => {
 
     groupManagementPage.assertUserAssociatedWithGroup(userIds[0])
     groupManagementPage.assertUserAssociatedWithGroup(userIds[1])
+
+    // Validates user 1 is linked to the group over User Management settings
+    leftMenuNavBar.accessGlobalSettingsMenu('', 'user', false)
+    searchBar.search(userName[0])
+    userManagementPage.clickUserTable(userIds[0])
+    userManagementPage.clickLinkToAccessUserInfoDetailsOnRightNavBar()
+    userManagementPage.assertUserInfoContentInRightNavBar([groupName])
+    userManagementPage.clickOutsideToCloseL4RightWindow()
+
+    // Validates user 2 is linked to the group over User Management settings
+    searchBar.search(userName[1])
+    userManagementPage.clickUserTable(userIds[1])
+    userManagementPage.clickLinkToAccessUserInfoDetailsOnRightNavBar()
+    userManagementPage.assertUserInfoContentInRightNavBar([groupName])
   })
 
   /**

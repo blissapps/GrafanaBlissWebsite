@@ -7,6 +7,7 @@ describe('Preferences tests', () => {
 
   beforeEach(() => {
     cy.login() && cy.loginSuccessfulXHRWaits()
+    leftMenuNavBar.openProfileMenuBar()
     leftMenuNavBar.openProfilePreferencesPage()
   })
 
@@ -46,6 +47,7 @@ describe('Preferences tests', () => {
     leftMenuNavBar.closeProfileLeftBar()
 
     // teardown
+    leftMenuNavBar.openProfileMenuBar()
     leftMenuNavBar.openProfilePreferencesPage()
     preferencesPage.changeLanguage()
     leftMenuNavBar.closeProfileLeftBar()

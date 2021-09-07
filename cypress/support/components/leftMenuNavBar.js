@@ -5,7 +5,7 @@ const selectors = {
   userEnvironment: 'div .user-environment',
   settingsButton: '#settingsLink',
   profileAvatar: '#profile-item #profileLink',
-  leftMenuOpen: '//*[@class= "ng-tns-c115-1 open"]',
+  leftMenuOpen: 'hearth-settings-navigation-bar[class*=open]',
 
   navBarHeaderClientName: '#navBarHeader',
   closeNavBarIcon: '#collapse',
@@ -30,6 +30,8 @@ const globalSettingsMenuSelectors = {
 }
 
 class LeftMenuNavBar extends BasePage {
+  // --------------------------------------- CLICKS  --------------------------------------------- //
+
   /**
    * Click in the logo to go to the home page
    */
@@ -37,6 +39,40 @@ class LeftMenuNavBar extends BasePage {
     cy.get(selectors.logo).click()
     this.checkUrl(Cypress.env('homePageURL'))
   }
+
+  // --------------------------------------- ASSERTIONS  --------------------------------------------- //
+
+  /**
+   * Check if the leftBar is open in the Global Settings menu
+   *
+   * @param {Boolean} open True to assert the menu is open, false otherwise
+   */
+  assertGlobalSettingsMenuOpen(open = true) {
+    open ? cy.get(selectors.leftMenuOpen).should('be.visible') : cy.get(selectors.leftMenuOpen).should('not.exist')
+  }
+
+  /**
+   * This method can be used to assert the Sign Out button is always visible across the menus in the left nav bar
+   * @param {Boolean} visible True (Default) to be visible and false to not visible
+   */
+  assertSignOutButtonIsVisible(visible = true) {
+    if (visible) {
+      cy.get(selectors.signOut).should('be.visible')
+    } else {
+      cy.get(selectors.signOut).should('not.exist')
+    }
+  }
+
+  /**
+   * Assert the User Management menu is displayed in the left menu bar
+   *
+   * @param {Boolean} displayed True to validate the User Management menu is available. False, otherwise.
+   */
+  assertUserManagementDisplayed(displayed = true) {
+    displayed ? cy.get(globalSettingsMenuSelectors.userManagementMenuItem).should('be.visible') : cy.get(globalSettingsMenuSelectors.userManagementMenuItem).should('not.exist')
+  }
+
+  // --------------------------------------- OTHERS  --------------------------------------------- //
 
   /**
    * Closes the Global Setting menu located in the left menu
@@ -52,15 +88,6 @@ class LeftMenuNavBar extends BasePage {
    */
   closeProfileLeftBar() {
     cy.get(selectors.closeBarArrow).click()
-  }
-
-  /**
-   * Check if the leftBar is closed
-   *
-   * @returns True if the left menu is closed
-   */
-  isLeftNavMenuClosed() {
-    return cy.xpath(selectors.leftMenuOpen).should('not.exist')
   }
 
   /**
@@ -135,7 +162,6 @@ class LeftMenuNavBar extends BasePage {
    * Open Personal Information page through left nav bar
    */
   openProfilePersonalInformationPage() {
-    this.openProfileMenuBar()
     cy.get(selectors.profilePersonalInformation).as('btnPersonalInformation')
     cy.get('@btnPersonalInformation').click()
   }
@@ -144,7 +170,6 @@ class LeftMenuNavBar extends BasePage {
    * Open Security page through left nav bar
    */
   openProfileSecurityPage() {
-    this.openProfileMenuBar()
     cy.get(selectors.profileSecurity).as('btnSecurity')
     cy.get('@btnSecurity').click()
   }
@@ -153,21 +178,8 @@ class LeftMenuNavBar extends BasePage {
    * Open Preferences page through left nav bar
    */
   openProfilePreferencesPage() {
-    this.openProfileMenuBar()
     cy.get(selectors.profilePreferences).as('btnPreferences')
     cy.get('@btnPreferences').click()
-  }
-
-  /**
-   * This method can be used to assert the Sign Out button is always visible across the menus in the left nav bar
-   * @param {Boolean} visible True (Default) to be visible and false to not visible
-   */
-  assertSignOutButtonIsVisible(visible = true) {
-    if (visible) {
-      cy.get(selectors.signOut).should('be.visible')
-    } else {
-      cy.get(selectors.signOut).should('not.exist')
-    }
   }
 }
 
