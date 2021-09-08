@@ -243,9 +243,6 @@ describe('Statement Management tests', () => {
     clientStatementsPage.checkClientStatementsUrl()
   })
 
-  /**
-   * SPIKED DUE TO https://globalshares.atlassian.net/browse/PB-898 and https://globalshares.atlassian.net/browse/PB-806
-   */
   it('C7394707_Participant_Filter_Behavior', () => {
     const clientName = 'Interxion'
     const clientID = 76
