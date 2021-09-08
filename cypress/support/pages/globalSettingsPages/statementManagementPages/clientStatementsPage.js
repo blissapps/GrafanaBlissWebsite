@@ -14,6 +14,7 @@ const selectors = {
   participantName: '#pptNameFilter input',
   participantId: '#pptIdFilter input',
   participantStatus: '#statusSelect input',
+  participantExternalId: '#pptExternalIdFilter input',
   onHoldBtn: '#onHold',
   recallBtn: 'gs-hover-icon-actions gs-svg-icon',
   approveBtn: 'gs-hover-icon-actions gs-svg-icon'
@@ -389,23 +390,36 @@ class ClientStatementsPage extends BaseStatementManagementPage {
   /**
    * Filter for a participant in the participants table inside a client
    *
-   * @param {String} participantName participant name to be searched into the participant statement filter. Send '' to not use this filter
-   * @param {Number} participantId participant id to be searched into the participant statement filter. Send -1 to not use this filter
-   * @param {String} status participant status to be searched into the participant statement filter. Send '' to not use this filter
+   * @param {String} participantName participant name to be searched into the participant statement filter. '' to skip this filter
+   * @param {Number} participantId participant id to be searched into the participant statement filter. -1 to skip this filter
+   * @param {String} status participant status to be searched into the participant statement filter. '' to skip this filter
+   * @param {Number} participantExternalId participant external id to be searched into the participant statement filter. -1 to skip this filter
+   *
+   * The Delay is necessary for Firefox only
    */
-  filterParticipantStatements(participantName = '', participantId = -1, status = '') {
+  filterParticipantStatements(participantName = '', participantId = -1, status = '', participantExternalId = -1) {
+    // Firefox delay
+    let delay = 10
+    if (Cypress.isBrowser('firefox')) {
+      delay = 100
+    }
+
     cy.log('FILTERING PARTICIPANT')
 
     if (participantName != '') {
-      cy.get(selectors.participantName).type(participantName + '{enter}')
+      cy.get(selectors.participantName).type(participantName + '{enter}', { delay: delay })
     }
 
     if (participantId != -1) {
-      cy.get(selectors.participantId).type(participantId + '{enter}')
+      cy.get(selectors.participantId).type(participantId + '{enter}', { delay: delay })
     }
 
     if (status != '') {
-      cy.get(selectors.participantStatus).type(status + '{enter}')
+      cy.get(selectors.participantStatus).type(status + '{enter}', { delay: delay })
+    }
+
+    if (participantExternalId != -1) {
+      cy.get(selectors.participantExternalId).type(participantExternalId + '{enter}', { delay: delay })
     }
 
     this.waitForTableToReloadAfterFiltering()

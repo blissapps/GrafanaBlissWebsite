@@ -246,25 +246,32 @@ describe('Statement Management tests', () => {
   /**
    * SPIKED DUE TO https://globalshares.atlassian.net/browse/PB-898 and https://globalshares.atlassian.net/browse/PB-806
    */
-  it.skip('C7394707_Participant_Filter_Behavior', () => {
+  it('C7394707_Participant_Filter_Behavior', () => {
     const clientName = 'Interxion'
     const clientID = 76
     const participantID = 406750
     const participantName = 'Rangel'
     const participantStatus = 'Published'
+    const participantExternalId = 111569
 
     clientStatementsPage.filterClientStatements(clientName)
     clientStatementsPage.clickClientTable(clientID)
     clientStatementsPage.getNumberOfRecordsDisplayed()
 
-    // By Id
+    // By Participant Name
+    clientStatementsPage.filterParticipantStatements(participantName)
+    clientStatementsPage.assertParticipantStatementDisplayed(participantID)
+    clientStatementsPage.assertAmountOfRecordsTable(1)
+    clientStatementsPage.clearAllFilters()
+
+    // By Internal Id
     clientStatementsPage.filterParticipantStatements('', participantID)
     clientStatementsPage.assertParticipantStatementDisplayed(participantID)
     clientStatementsPage.assertAmountOfRecordsTable(1)
     clientStatementsPage.clearAllFilters()
 
-    // By Name
-    clientStatementsPage.filterParticipantStatements(participantName)
+    // By External Id
+    clientStatementsPage.filterParticipantStatements('', -1, '', participantExternalId)
     clientStatementsPage.assertParticipantStatementDisplayed(participantID)
     clientStatementsPage.assertAmountOfRecordsTable(1)
     clientStatementsPage.clearAllFilters()
@@ -274,14 +281,14 @@ describe('Statement Management tests', () => {
     clientStatementsPage.assertAmountOfRecordsTable(15)
     clientStatementsPage.clearAllFilters()
 
-    // By Id and Status
-    clientStatementsPage.filterParticipantStatements('', participantID, participantStatus)
+    // By Name and Internal Id
+    clientStatementsPage.filterParticipantStatements(participantName, participantID)
     clientStatementsPage.assertParticipantStatementDisplayed(participantID)
     clientStatementsPage.assertAmountOfRecordsTable(1)
     clientStatementsPage.clearAllFilters()
 
-    // By Name and Id
-    clientStatementsPage.filterParticipantStatements(participantName, participantID)
+    // By Name External Id
+    clientStatementsPage.filterParticipantStatements(participantName, -1, '', participantExternalId)
     clientStatementsPage.assertParticipantStatementDisplayed(participantID)
     clientStatementsPage.assertAmountOfRecordsTable(1)
     clientStatementsPage.clearAllFilters()
@@ -292,8 +299,26 @@ describe('Statement Management tests', () => {
     clientStatementsPage.assertAmountOfRecordsTable(1)
     clientStatementsPage.clearAllFilters()
 
-    // By Name, Id, and Status
-    clientStatementsPage.filterParticipantStatements(participantName, participantID, participantStatus)
+    // By Internal Id and External Id
+    clientStatementsPage.filterParticipantStatements('', participantID, '', participantExternalId)
+    clientStatementsPage.assertParticipantStatementDisplayed(participantID)
+    clientStatementsPage.assertAmountOfRecordsTable(1)
+    clientStatementsPage.clearAllFilters()
+
+    // By Internal Id and Status
+    clientStatementsPage.filterParticipantStatements('', participantID, participantStatus)
+    clientStatementsPage.assertParticipantStatementDisplayed(participantID)
+    clientStatementsPage.assertAmountOfRecordsTable(1)
+    clientStatementsPage.clearAllFilters()
+
+    // By External Id and Status
+    clientStatementsPage.filterParticipantStatements('', -1, participantStatus, participantExternalId)
+    clientStatementsPage.assertParticipantStatementDisplayed(participantID)
+    clientStatementsPage.assertAmountOfRecordsTable(1)
+    clientStatementsPage.clearAllFilters()
+
+    // By Name, Internal Id, Status, and External Id
+    clientStatementsPage.filterParticipantStatements(participantName, participantID, participantStatus, participantExternalId)
     clientStatementsPage.assertParticipantStatementDisplayed(participantID)
     clientStatementsPage.assertAmountOfRecordsTable(1)
     clientStatementsPage.clearAllFilters()
