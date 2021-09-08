@@ -162,11 +162,8 @@ class BasePage {
    *
    */
   assertNumberOfRecordsDisplayed(locator, numberOfRecords) {
-    cy.get(locator)
-      .invoke('text')
-      .then(text => {
-        expect(text.trim().split(' ')[0]).equal(numberOfRecords.toString()) // compare only numbers
-      })
+    const regexRecords = `${numberOfRecords}.?`
+    cy.get(locator).contains(new RegExp(regexRecords))
   }
 
   /**

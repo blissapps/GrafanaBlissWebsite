@@ -25,7 +25,7 @@ describe('User Management tests over User Management settings', () => {
     const username = 'amulcahyNE'
     const userEmail = 'test@globalshares.com'
     const userStatus = 'Active'
-    userManagementPage.checkUserManagementUrl() // Check we are getting the correct search input in the correct page
+    userManagementPage.checkUserManagementUrl() // Check this to make sure we are getting the correct search input in the correct page
 
     cy.log('EMAIL')
     searchBar.search(userEmail)

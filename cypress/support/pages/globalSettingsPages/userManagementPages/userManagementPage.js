@@ -5,7 +5,7 @@ const properties = {
 }
 
 const selectors = {
-  numberOfSearchResultsInTable: '#recordCount .search-results-count',
+  numberOfSearchResultsInTable: '#recordCount span',
   user: '#user-',
   noUserMsg: '#noUsersMsg'
 }
