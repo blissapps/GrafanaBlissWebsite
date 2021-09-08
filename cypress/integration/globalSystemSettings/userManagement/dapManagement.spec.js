@@ -426,30 +426,29 @@ describe('Data Access Profiles tests over User Management settings', () => {
   })
 
   /**
-   *
-   * SkIPPING due to https://globalshares.atlassian.net/browse/PB-873
-   *
-   * @missing_data Need to have some daps called 'dap to search' in both active and inactive tabs. Also need to have another dap called 'other group dap' in both active and inactive tab.
+   * @missing_data Need to have some 3 daps called 'dap to search Nº' in each active and inactive tabs. Also need to have another dap called 'other group dap' in both active and inactive tab.
    *               All daps must have just one 'Business Unit' conditions added
    */
   it.skip('C7592109_DAP_Search_Functionality', () => {
     let dap = 'DAP TO SEARCH'
+    const dapIds = [6, 8, 10]
+    const dapInactiveIds = [12, 14, 16]
     const dapCondition = 'Business'
 
     // ACTIVE TAB
     searchBar.search(dap)
     dapManagementPage.assertAmountOfSearchResultsInTheList(3)
-    dapManagementPage.assertSearchResultListAccuracy([29, 30, 31])
+    dapManagementPage.assertSearchResultListAccuracy(dapIds)
 
     dap = 'dap to search'
     searchBar.search(dap)
     dapManagementPage.assertAmountOfSearchResultsInTheList(3)
-    dapManagementPage.assertSearchResultListAccuracy([29, 30, 31])
+    dapManagementPage.assertSearchResultListAccuracy(dapIds)
 
     dap = 'dAp To SEarch 1'
     searchBar.search(dap)
     dapManagementPage.assertAmountOfSearchResultsInTheList(1)
-    dapManagementPage.assertSearchResultListAccuracy([29])
+    dapManagementPage.assertSearchResultListAccuracy([dapIds[0]])
 
     dap = 'randomName' + utils.getRandomNumber()
     searchBar.search(dap)
@@ -461,7 +460,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
 
     // Verify conditions in a selected active dap
     searchBar.clearSearchBoxByXIcon()
-    dapManagementPage.clickDapById(29)
+    dapManagementPage.clickDapById(dapIds[0])
     searchBar.search(dapCondition)
     dapManagementPage.assertAmountOfSearchedConditionResults(1)
 
@@ -471,17 +470,17 @@ describe('Data Access Profiles tests over User Management settings', () => {
     dap = 'DAP TO SEARCH'
     searchBar.search(dap)
     dapManagementPage.assertAmountOfSearchResultsInTheList(3)
-    dapManagementPage.assertSearchResultListAccuracy([32, 33, 34])
+    dapManagementPage.assertSearchResultListAccuracy(dapInactiveIds)
 
     dap = 'dap to search'
     searchBar.search(dap)
     dapManagementPage.assertAmountOfSearchResultsInTheList(3)
-    dapManagementPage.assertSearchResultListAccuracy([32, 33, 34])
+    dapManagementPage.assertSearchResultListAccuracy(dapInactiveIds)
 
     dap = 'dAp To SEarch 4'
     searchBar.search(dap)
     dapManagementPage.assertAmountOfSearchResultsInTheList(1)
-    dapManagementPage.assertSearchResultListAccuracy([32])
+    dapManagementPage.assertSearchResultListAccuracy([dapInactiveIds[0]])
 
     dap = 'randomName'
     searchBar.search(dap)
@@ -493,7 +492,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
 
     // Verify conditions in a selected active dap
     searchBar.clearSearchBoxByXIcon()
-    dapManagementPage.clickDapById(32)
+    dapManagementPage.clickDapById(dapInactiveIds[0])
     searchBar.search(dapCondition)
     dapManagementPage.assertAmountOfSearchedConditionResults(1)
   })

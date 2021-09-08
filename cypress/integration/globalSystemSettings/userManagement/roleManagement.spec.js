@@ -31,13 +31,11 @@ describe('Role Management tests over User Management settings', () => {
 
   /**
    *
-   * SkIPPING due to https://globalshares.atlassian.net/browse/PB-873
-   *
    * @missing_data Besides the roles we need to search, we need to have some roles in both active and inactive tabs to be displayed in the OTHER GROUP
    */
   it.skip('C7544081_Search_Engine_Search_For_Role_With_Different_Combinations_In_Active_And_Inactive_Tabs', () => {
-    const rolesIdActiveTab = [1385, 1468, 1469]
-    const rolesIdInactiveTab = [1466, 1467]
+    const rolesIdActiveTab = [1632, 1633, 1634]
+    const rolesIdInactiveTab = [1635, 1636]
 
     let role = 'role to be searched'
     searchBar.search(role)
