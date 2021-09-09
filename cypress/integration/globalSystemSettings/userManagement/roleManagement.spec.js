@@ -511,33 +511,35 @@ describe('Role Management tests over User Management settings', () => {
   })
 
   /**
-   * @missing_data For this scenario we need to have a role called 'Activate Role' in the inactive tab
+   * @missing_data For this scenario we need to have a role called 'Activate and Inactivate' in the Active tab
    *
-   * SKIPPING also due to https://globalshares.atlassian.net/browse/PB-905
+   * SKIPPING also due to https://globalshares.atlassian.net/browse/PB-905 and https://globalshares.atlassian.net/browse/PB-963
    *
    * @missing_steps check if the role is editable or not
    */
   it.skip('C7499833_Deactivate_And_Activate_Role', () => {
-    const roleId = 1405
+    const roleId = 1677
     const roleName = 'Activate and Inactivate'
 
     // Inactivate role
+    cy.log('--------- Inactivate role ----------')
     roleManagementPage.clickRoleById(roleId)
     roleManagementPage.clickToDeactivateEntity()
     roleManagementPage.assertToastNotificationMessageIsDisplayed('Role deactivated', true, true)
     roleManagementPage.assertInactiveRolesAreDisplayed()
     roleManagementPage.assertEntityIsDisplayedInTheList(roleName)
-    // Missing step to make sure that the role is now non-editable
+    // Missing this step to make sure that the role is non-editable while deactivated
+    // roleManagementPage.assertRoleIsEditable(false)
 
     // Activate role
-    roleManagementPage.clickTabByTitle('Inactive')
+    cy.log('--------- Activate role ----------')
     roleManagementPage.clickRoleById(roleId, false)
     roleManagementPage.activateRole()
     roleManagementPage.assertToastNotificationMessageIsDisplayed('Role activated')
     roleManagementPage.assertActiveRolesAreDisplayed()
     roleManagementPage.assertEntityIsDisplayedInTheList(roleName)
-
-    // Missing step to make sure that the role can now be edited
+    roleManagementPage.clickRoleById(roleId, false)
+    roleManagementPage.assertRoleIsEditable()
   })
 
   /**

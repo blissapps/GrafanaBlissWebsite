@@ -204,14 +204,12 @@ describe('Group Management tests over User Management settings', () => {
   })
 
   /**
-   * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-875
-   *
    * @missing_data Need to have at least one active group called 'Duplicate this group'
    */
   it.skip('C7493036_Groups_Duplicate_A_Group', () => {
-    const groupId = 957
+    const groupId = 1125
     const groupName = 'Duplicate this group'
-    const newNameForDuplicatedGroup = 'Duplicated Group' + utils.getRandomNumber()
+    const newNameForDuplicatedGroup = 'Duplicated Group ' + utils.getRandomNumber()
 
     groupManagementPage.clickGroupById(groupId)
     groupManagementPage.clickToDuplicateEntity()

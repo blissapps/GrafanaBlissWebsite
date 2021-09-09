@@ -62,10 +62,7 @@ class BaseManagementPage extends BasePage {
     if (displayed) {
       cy.get(selectors.entityNameInList).as('entity')
 
-      return cy
-        .get('@entity')
-        .filter(`:contains('${entityName}')`)
-        .scrollIntoView()
+      return cy.get('@entity').filter(`:contains('${entityName}')`)
     } else {
       return cy
         .get(selectors.entityNameInList)
@@ -148,7 +145,9 @@ class BaseManagementPage extends BasePage {
    * @param {String} entityName name of the entity to be clicked
    */
   clickEntityByName(entityName) {
-    this.getEntityByName(entityName).click()
+    this.getEntityByName(entityName)
+      .scrollIntoView()
+      .click()
   }
 
   /**

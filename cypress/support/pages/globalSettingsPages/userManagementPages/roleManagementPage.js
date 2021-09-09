@@ -12,7 +12,8 @@ const selectors = {
   newRoleBtn: 'gs-button[data-test-id=create-role]',
   roleId: '*[id*=role_',
   activateRoleBtn: 'gs-button[data-test-id=activateBtn]',
-  allPermissionsHeaders: 'thead th a'
+  allPermissionsHeaders: 'thead th a',
+  roleTableNotEditable: 'hearth-role-details table.view-only'
 }
 
 const apiInterceptions = {
@@ -39,7 +40,7 @@ class RoleManagementPage extends BaseManagementPage {
    * @returns The role element
    */
   getRoleById(roleId) {
-    return cy.get(selectors.roleId + roleId).scrollIntoView()
+    return cy.get(selectors.roleId + roleId)
   }
 
   /**
@@ -233,7 +234,9 @@ class RoleManagementPage extends BaseManagementPage {
    * @param {Boolean} wait Sometimes the roles take a time to be loaded. If it does not happen, send false and the request/response will not be awaited
    */
   clickRoleById(roleId, wait = true) {
-    this.getRoleById(roleId).click()
+    this.getRoleById(roleId)
+      .scrollIntoView()
+      .click()
 
     if (wait) {
       this.waitUntilPageIsLoaded() // wait to have all permissions loaded
@@ -281,6 +284,20 @@ class RoleManagementPage extends BaseManagementPage {
    */
   assertActivateButtonDisplayed(displayed = true) {
     displayed ? cy.get('@activateBtn').should('be.visible') : cy.get('@activateBtn').should('not.exist')
+  }
+
+  /**
+   * Assert if a selected role is editable or not
+   *
+   * @param {Boolean} editable True to assert the role is editable, false otherwise
+   *
+   * @missing_steps Validate the header(role name) as well as soon as this ticket is ready: https://globalshares.atlassian.net/browse/PB-963
+   */
+  assertRoleIsEditable(editable = true) {
+    // header not editable
+
+    // table not editable
+    editable ? cy.get(selectors.roleTableNotEditable).should('not.exist') : cy.get(selectors.roleTableNotEditable).should('be.visible')
   }
 
   // ----------------------------------------------- PERMISSIONS --------------------------------------------- //
