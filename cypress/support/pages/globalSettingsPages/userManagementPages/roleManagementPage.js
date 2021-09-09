@@ -17,7 +17,8 @@ const selectors = {
 }
 
 const apiInterceptions = {
-  pageLoadedRequest: 'https://api.stonly.com/api/v2/widget/integration?*'
+  pageLoadedRequest: 'https://api.stonly.com/api/v2/widget/integration?*',
+  roleActivated: '/api/Roles/**/Activate'
 }
 
 const utils = new Utils()
@@ -491,6 +492,9 @@ class RoleManagementPage extends BaseManagementPage {
    */
   activateRole() {
     cy.get(selectors.activateRoleBtn).click()
+    this.waitRoleIsActivated()
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
+    cy.wait(300) // Necessary because the UI takes a very quick time to reload the data correctly
   }
 
   // ---------------------------------------  INTERCEPTIONS --------------------------------------------- //
@@ -500,6 +504,14 @@ class RoleManagementPage extends BaseManagementPage {
   waitUntilPageIsLoaded() {
     cy.intercept('GET', apiInterceptions.pageLoadedRequest).as('pageLoaded')
     cy.wait('@pageLoaded', { requestTimeout: 10000 })
+  }
+
+  /**
+   * Waits until the page is loaded. This is a specific behavior of this page
+   */
+  waitRoleIsActivated() {
+    cy.intercept('PATCH', apiInterceptions.roleActivated).as('roleActivated')
+    cy.wait('@roleActivated', { requestTimeout: 10000 })
   }
 }
 

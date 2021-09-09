@@ -247,7 +247,9 @@ class BaseManagementPage extends BasePage {
    */
   assertEntityIsDisplayedInTheList(entityName, displayed = true) {
     if (displayed) {
-      this.getEntityByName(entityName).should('be.visible')
+      this.getEntityByName(entityName)
+        .scrollIntoView()
+        .should('be.visible')
     } else {
       this.getEntityByName(entityName, displayed)
     }
