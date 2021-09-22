@@ -23,6 +23,9 @@ describe('Statement Management tests', () => {
     clientStatementsPage.assertClientStatementsTableInOrderById(idsClientList)
   })
 
+  /**
+   * @missing_data Need to have a clients for each possible status: INITIATED, RECONCILED, PendingValidation, PUBLISHED, and PARTIALLY PUBLISHED
+   */
   it('C7394241_Statements_Download_Button_Visibility_Behavior', () => {
     // INITIATED
     clientStatementsPage.filterClientStatements('Velocys PLC')
