@@ -564,5 +564,60 @@ describe('Role Management tests over User Management settings', () => {
     roleManagementPage.assertActivateButtonDisplayed(false)
   })
 
+  /**
+   * @missing_data Need to have a role called "Duplicate me" or something like that
+   *
+   * SKIPPING also due to https://globalshares.atlassian.net/browse/PB-906
+   */
+  it.skip('C7544052_Roles_Duplicate_A_Role', () => {
+    const roleId = 1390
+    const roleName = 'Duplicate me'
+
+    roleManagementPage.clickRoleById(roleId)
+    roleManagementPage.clickToDuplicateEntity()
+    roleManagementPage.assertEntityHeaderIsDisplayedAsExpected('Copy of ' + roleName)
+    roleManagementPage.assertEntityIsFocused()
+    roleManagementPage.saveEntityInformation()
+    roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully')
+  })
+
+  /**
+   * @missing_data Need to have a user with view only access to roles. Also, this user must have access to a group that contains this role linked, so the user can see the role
+   *
+   * @missing_steps
+   * SKIPPING also due to https://globalshares.atlassian.net/browse/PB-963 and https://globalshares.atlassian.net/browse/PB-975
+   */
+  it.skip('C7544053_Duplicate_Role_No_Permission', () => {
+    cy.logout() && cy.login('ViewOnlyUser@globalshares.com', 'Swordfish123!') && cy.loginSuccessfulXHRWaits() // Logout to login with the correct user without permission
+    leftMenuNavBar.accessGlobalSettingsMenu('user', 'role')
+
+    const roleId = 1454
+
+    roleManagementPage.clickRoleById(roleId)
+    roleManagementPage.assertThreeDotButtonDisplayed(false)
+    cy.visit(';action=duplicate', { failOnStatusCode: false })
+    // missing step to validate the user was not redirect to any ;action=duplicate panel and so the panel to duplicate the role was not displayed (waiting for PB-975)
+  })
+
+  /**
+   * @missing_data Need to have a role with 50 characters in the name
+   *
+   * SKIPPING also due to https://globalshares.atlassian.net/browse/PB-922
+   */
+  it.skip('C7544054_Duplicate_Role_Maximum_Characters_In_Name_Field', () => {
+    const roleId = 1513
+    const newRoleNameLessThan50Characters = 'Role ' + utils.getRandomNumber()
+
+    roleManagementPage.clickRoleById(roleId)
+    roleManagementPage.clickToDuplicateEntity()
+    roleManagementPage.saveEntityInformation()
+    roleManagementPage.assertNotificationErrorDisplayed('Name length must be 50 characters or fewer.')
+    roleManagementPage.modifyEntityName(newRoleNameLessThan50Characters)
+    roleManagementPage.saveEntityInformation()
+    roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully')
+    roleManagementPage.assertNotificationErrorDisplayed('Name length must be 50 characters or fewer.', false)
+    roleManagementPage.assertEntityIsDisplayedInTheList(newRoleNameLessThan50Characters)
+  })
+
   // ************************************************ TESTS AS CLIENTS ************************************************** //
 })

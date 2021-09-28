@@ -171,7 +171,7 @@ class BaseManagementPage extends BasePage {
   /**
    * Assert if the entity header/name is displayed. Also, asserts its content if the parameter headerText is sent
    *
-   * @param {String} headerText Send the name of the header if you wants to validate the header content. DO NOT sent nothing to skip the validation of the content
+   * @param {String} headerText Send the name of the header if you want to validate the header content. SEND NOTHING to skip the validation of the content
    * and just validate that the header is displayed
    */
   assertEntityHeaderIsDisplayedAsExpected(headerText = '') {
@@ -290,6 +290,21 @@ class BaseManagementPage extends BasePage {
     cy.get(selectors.searchResultAllItemsHighlighted).each($el => {
       cy.wrap($el).should('be.visible')
     })
+  }
+
+  /**
+   * Assert the action detailsActionPanelBtn (threeDotButton) in the right top corner of a selected entity is displayed or not
+   *
+   * @param {Boolean} displayed True is the default value to assert the threeDotButton is displayed
+   */
+  assertThreeDotButtonDisplayed(displayed = true) {
+    if (displayed) {
+      cy.get(selectors.threeDotBtn)
+        .scrollIntoView()
+        .should('be.visible')
+    } else {
+      cy.get(selectors.threeDotBtn).should('not.exist')
+    }
   }
 
   // ----------------------------------------------- OTHERS --------------------------------------------- //
