@@ -6,7 +6,9 @@ describe('Preferences tests', () => {
   const preferencesPage = new PreferencesPage()
 
   beforeEach(() => {
-    cy.login() && cy.loginSuccessfulXHRWaits()
+    cy.login()
+    cy.visit('/')
+    cy.loginSuccessfulXHRWaits()
     leftMenuNavBar.openProfileMenuBar()
     leftMenuNavBar.openProfilePreferencesPage()
   })

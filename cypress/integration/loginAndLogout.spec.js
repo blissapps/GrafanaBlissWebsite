@@ -14,10 +14,10 @@ describe('Login and Logout tests', () => {
   const leftMenuNavBar = new LeftMenuNavBar()
 
   // Localized data
-  const dataTestLanguage = Cypress.env('language')
+  const dataTestLanguage = Cypress.env('LANGUAGE')
 
   it('C7644497_Login_And_Logout_Functionalities_Are_Persistent', () => {
-    cy.login()
+    cy.loginWithoutSession()
     cy.loginSuccessfulXHRWaits()
     homePage.checkUrl('/home')
     cy.logout()
@@ -27,17 +27,17 @@ describe('Login and Logout tests', () => {
   })
 
   it('C7668435_Login_With_Both_Wrong_User_And_Password', () => {
-    cy.login('wronguser@glbalshares.com', '123!ABC')
+    cy.loginWithoutSession('wronguser@glbalshares.com', '123!ABC')
     authLoginPage.assertUnsuccessfulLoginErrorMessageDisplayed(dataTest[dataTestLanguage].errorMessages.loginInvalidEmailOrPassword)
   })
 
   it('C7668436_Login_With_Correct_User_And_Wrong_Password', () => {
-    cy.login('lmello@globalshares.co.uk', '123!ABC')
+    cy.loginWithoutSession('lmello@globalshares.co.uk', '123!ABC')
     authLoginPage.assertUnsuccessfulLoginErrorMessageDisplayed(dataTest[dataTestLanguage].errorMessages.loginInvalidEmailOrPassword)
   })
 
   it('C7644496_Logout_Button_Consistency', () => {
-    cy.login()
+    cy.loginWithoutSession()
     cy.loginSuccessfulXHRWaits()
     homePage.checkUrl('/home')
 

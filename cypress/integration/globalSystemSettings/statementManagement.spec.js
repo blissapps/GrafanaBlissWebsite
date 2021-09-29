@@ -11,7 +11,9 @@ describe('Statement Management tests', () => {
   const utils = new Utils()
 
   beforeEach(() => {
-    cy.login() && cy.loginSuccessfulXHRWaits()
+    cy.login()
+    cy.visit('/')
+    cy.loginSuccessfulXHRWaits()
     leftMenuNavBar.accessGlobalSettingsMenu('statement')
     clientStatementsPage.checkClientStatementsUrl()
   })
@@ -564,10 +566,13 @@ describe('Statement Management tests', () => {
   })
 
   /**
-   * @missing_data Need to have one user without permissions to see any User Management settings (including users, groups, roles, and DAPs (access filters))
+   * @missing_data Need to have one user associated with a group without permissions to see any User Management settings (including users, groups, roles, and DAPs (access filters))
    */
   it.skip('C7544061_User_Does_Not_Have_View_Permissions_For_Users,_Groups,_Roles,_And_Access_Filters', () => {
-    cy.logout() && cy.login('ViewOnlyUser2@globalshares.com', 'Swordfish123!') && cy.loginSuccessfulXHRWaits() // Logout to login with the correct user without permission
+    // Login as view only before proceeds
+    cy.login('ViewOnlyUser2@globalshares.com')
+    cy.visit('/')
+    cy.loginSuccessfulXHRWaits()
 
     leftMenuNavBar.openSettingsMenuBar()
     leftMenuNavBar.assertGlobalSettingsMenuOpen()

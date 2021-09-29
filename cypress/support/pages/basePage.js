@@ -115,6 +115,19 @@ class BasePage {
   }
 
   /**
+   * Get the current URL and add in the end of the current path. Then, visit this new url.
+   *
+   * @param {String} urlPathToAdd text to be added as a path in the end of the current url
+   *
+   * @example: use this.addPathToUrlAndVisitIt('/new-user') to visit the url "yourCurrentUrl/new-user"
+   */
+  addPathToUrlAndVisitIt(urlPathToAdd) {
+    cy.url().then(url => {
+      cy.visit(url + urlPathToAdd, { failOnStatusCode: false })
+    })
+  }
+
+  /**
    * Click in the checkbox to select all elements of table when bulk actions is available
    */
   clickToSelectAllElementsInTable() {

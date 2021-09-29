@@ -9,6 +9,7 @@ const selectors = {
   inactiveDapList: 'gs-tab[data-test-id=inactiveTab] #dapList gs-list',
   noDapExistsMessage: '#emptyList',
   addGroupsBtn: '*[data-test-id=section-group] *[data-test-id=add-entity]',
+  addGroupsBtnDisabled: '*[data-test-id=section-group] *[data-test-id=add-entity][class*=disabled]',
   dapId: 'a[data-test-id=dap-',
   groupsCardId: '*[data-test-id=section-group] gs-card[data-test-id=entity-',
   removeIconButton: 'gs-button[data-test-id=remove-entity]',
@@ -74,6 +75,7 @@ class DapManagementPage extends BaseManagementPage {
    */
   clickDapById(dapId) {
     this.getDapById(dapId).click()
+    this.scrollToTop()
   }
 
   clickCreateNewDap() {
@@ -242,7 +244,7 @@ class DapManagementPage extends BaseManagementPage {
    *
    */
   assertAddGroupsButtonIsVisible(visible = true) {
-    visible ? cy.get(selectors.addGroupsBtn).should('be.visible') : cy.get(selectors.addGroupsBtn).should('not.exist')
+    visible ? cy.get(selectors.addGroupsBtn).should('be.visible') : cy.get(selectors.addGroupsBtnDisabled).should('be.visible')
   }
 
   /**

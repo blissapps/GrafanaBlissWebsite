@@ -6,7 +6,9 @@ describe('Personal Information tests', () => {
   const personalInformationPage = new PersonalInformationPage()
 
   beforeEach(() => {
-    cy.login() && cy.loginSuccessfulXHRWaits()
+    cy.login()
+    cy.visit('/')
+    cy.loginSuccessfulXHRWaits()
     leftMenuNavBar.openProfileMenuBar()
     leftMenuNavBar.openProfilePersonalInformationPage()
   })

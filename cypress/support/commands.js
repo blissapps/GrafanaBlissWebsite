@@ -16,14 +16,33 @@ const executeCommand = command => {
 }
 
 /**
- * Login command through the application UI
+ * Login command through the application UI with SESSION STORAGE
+ *
  * @param {string} email email to login. The default variable is set in the cypress.json file
  * @param {string} password password to login. The default variable is set in the cypress.json file
  */
-Cypress.Commands.add('login', (email = Cypress.env('defaultUserAuth'), password = Cypress.env('defaultPasswordAuth')) => {
+Cypress.Commands.add('login', (email = Cypress.env('DEFAULT_USER_AUTH'), password = Cypress.env('DEFAULT_PASSWORD_AUTH')) => {
+  cy.session([email, password], () => {
+    cy.visit('/')
+    cy.get('#username-field').type(email)
+    cy.get('#password-field').type(password, { log: false })
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
+    cy.wait(500) // avoid element detached from the DOM. See https://github.com/cypress-io/cypress/issues/7306. A ticket was open https://globalshares.atlassian.net/browse/PB-828
+    cy.get('#login').click()
+    cy.url().should('contain', '/home')
+  })
+})
+
+/**
+ * Login command through the application UI without session STORAGE
+ *
+ * @param {string} email email to login. The default variable is set in the cypress.json file
+ * @param {string} password password to login. The default variable is set in the cypress.json file
+ */
+Cypress.Commands.add('loginWithoutSession', (email = Cypress.env('DEFAULT_USER_AUTH'), password = Cypress.env('DEFAULT_PASSWORD_AUTH')) => {
   cy.visit('/')
   cy.get('#username-field').type(email)
-  cy.get('#password-field').type(password)
+  cy.get('#password-field').type(password, { log: false })
   // eslint-disable-next-line cypress/no-unnecessary-waiting
   cy.wait(500) // avoid element detached from the DOM. See https://github.com/cypress-io/cypress/issues/7306. A ticket was open https://globalshares.atlassian.net/browse/PB-828
   cy.get('#login').click()

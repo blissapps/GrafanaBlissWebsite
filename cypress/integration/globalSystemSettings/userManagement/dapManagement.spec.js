@@ -21,7 +21,9 @@ describe('Data Access Profiles tests over User Management settings', () => {
   beforeEach(() => {
     cy.log(Cypress.currentTest.title)
 
-    cy.login() && cy.loginSuccessfulXHRWaits()
+    cy.login()
+    cy.visit('/')
+    cy.loginSuccessfulXHRWaits()
     leftMenuNavBar.accessGlobalSettingsMenu('user', 'dap')
     dapManagementPage.checkDapManagementUrl()
   })
@@ -181,9 +183,13 @@ describe('Data Access Profiles tests over User Management settings', () => {
    *
    */
   it.skip('C9277653_DAP_User_Does_Not_Have_Permission_Needed_To_Link_A_Group_To_The_DAP', () => {
+    // Login as view only before proceeds
+    cy.login(Cypress.env('VIEW_ONLY_DEFAULT_USER_AUTH'))
+    cy.visit('/')
+    cy.loginSuccessfulXHRWaits()
+
     const dapId = 14
 
-    cy.logout() && cy.login(Cypress.env('viewOnlyDefaultUserAuth'), Cypress.env('defaultPasswordAuth')) && cy.loginSuccessfulXHRWaits() // Logout to login with the correct user without permission
     leftMenuNavBar.accessGlobalSettingsMenu('user', 'dap')
     dapManagementPage.checkDapManagementUrl()
 

@@ -10,7 +10,11 @@
 // Ignore any warning error in namespace (It is expected to happen)
 declare namespace Cypress {
   interface Chainable {
-    login(email: String = Cypress.env('defaultUserAuth'), password: String = Cypress.env('defaultPasswordAuth')): Chainable<Element>
+    login(email: String = Cypress.env('DEFAULT_USER_AUTH'), password: String = Cypress.env('DEFAULT_PASSWORD_AUTH')): Chainable<Element>
+  }
+
+  interface Chainable {
+    loginWithoutSession(email: String = Cypress.env('DEFAULT_USER_AUTH'), password: String = Cypress.env('DEFAULT_PASSWORD_AUTH')): Chainable<Element>
   }
 
   interface Chainable {

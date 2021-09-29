@@ -17,7 +17,9 @@ describe('Role Management tests over User Management settings', () => {
   const utils = new Utils()
 
   beforeEach(() => {
-    cy.login() && cy.loginSuccessfulXHRWaits()
+    cy.login()
+    cy.visit('/')
+    cy.loginSuccessfulXHRWaits()
     leftMenuNavBar.accessGlobalSettingsMenu('user', 'role')
     roleManagementPage.checkRoleManagementUrl()
   })
@@ -262,15 +264,21 @@ describe('Role Management tests over User Management settings', () => {
 
   /**
    * @missing_data For test this scenario there should be no "Create Role" permission for the user.
+   *
+   * @missing_step What happens when the user tries do access this by the URL? Some error message?
    */
   it.skip('C7499703_User_Does_Not_Have_Permissions_To_Create_New_Role', () => {
-    cy.logout() && cy.login('UserNoCreateRolePermission@globalshares.com', '1234579846') && cy.loginSuccessfulXHRWaits() // Logout to login with the correct user without permission
+    // Login as view only before proceeds
+    cy.login(Cypress.env('VIEW_ONLY_DEFAULT_USER_AUTH'))
+    cy.visit('/')
+    cy.loginSuccessfulXHRWaits()
 
     leftMenuNavBar.accessGlobalSettingsMenu('user', 'role')
     roleManagementPage.checkRoleManagementUrl()
+    roleManagementPage.clickTabByTitle('Active')
     roleManagementPage.getNewRoleButton().should('not.exist')
 
-    cy.visit('/0')
+    roleManagementPage.addPathToUrlAndVisitIt('/0')
     // Assert in here some error message that will appears
   })
 
@@ -549,7 +557,10 @@ describe('Role Management tests over User Management settings', () => {
    * @missing_steps Assert Deactivate and Activate button are not shown
    */
   it.skip('C7499835_Activate/Deactivate_Role_No_Permission', () => {
-    cy.logout() && cy.login('userNoUpdateRolePermission@globalshares.com', '123456!') && cy.loginSuccessfulXHRWaits() // Logout to login with the correct user without permission
+    // Login as view only before proceeds
+    cy.login(Cypress.env('VIEW_ONLY_DEFAULT_USER_AUTH'))
+    cy.visit('/')
+    cy.loginSuccessfulXHRWaits()
     leftMenuNavBar.accessGlobalSettingsMenu('user', 'role')
     roleManagementPage.checkRoleManagementUrl()
 
@@ -588,7 +599,10 @@ describe('Role Management tests over User Management settings', () => {
    * SKIPPING also due to https://globalshares.atlassian.net/browse/PB-963 and https://globalshares.atlassian.net/browse/PB-975
    */
   it.skip('C7544053_Duplicate_Role_No_Permission', () => {
-    cy.logout() && cy.login('ViewOnlyUser@globalshares.com', 'Swordfish123!') && cy.loginSuccessfulXHRWaits() // Logout to login with the correct user without permission
+    // Login as view only before proceeds
+    cy.login(Cypress.env('VIEW_ONLY_DEFAULT_USER_AUTH'))
+    cy.visit('/')
+    cy.loginSuccessfulXHRWaits()
     leftMenuNavBar.accessGlobalSettingsMenu('user', 'role')
 
     const roleId = 1454

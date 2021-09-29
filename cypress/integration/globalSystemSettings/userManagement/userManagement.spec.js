@@ -9,7 +9,9 @@ describe('User Management tests over User Management settings', () => {
   const searchBar = new SearchBar()
 
   beforeEach(() => {
-    cy.login() && cy.loginSuccessfulXHRWaits()
+    cy.login()
+    cy.visit('/')
+    cy.loginSuccessfulXHRWaits()
     leftMenuNavBar.accessGlobalSettingsMenu('user', 'user')
   })
 

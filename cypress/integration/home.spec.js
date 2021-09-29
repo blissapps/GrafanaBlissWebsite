@@ -5,6 +5,7 @@ describe('Home page tests', () => {
 
   beforeEach(() => {
     cy.login()
+    cy.visit('/')
   })
 
   /**

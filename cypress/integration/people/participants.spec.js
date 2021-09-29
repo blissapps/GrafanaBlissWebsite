@@ -12,6 +12,7 @@ describe.skip('Participants tests', () => {
 
   beforeEach(() => {
     cy.login()
+    cy.visit('/')
   })
 
   /**
