@@ -28,7 +28,7 @@ describe('Statement Management tests', () => {
   /**
    * @missing_data Need to have a clients for each possible status: INITIATED, RECONCILED, PendingValidation, PUBLISHED, and PARTIALLY PUBLISHED
    */
-  it('C7394241_Statements_Download_Button_Visibility_Behavior', () => {
+  it.skip('C7394241_Statements_Download_Button_Visibility_Behavior', () => {
     // INITIATED
     clientStatementsPage.filterClientStatements('Velocys PLC')
     clientStatementsPage.clickClientTable(103)
@@ -69,7 +69,7 @@ describe('Statement Management tests', () => {
    *
    * Issue open in https://github.com/cypress-io/cypress/issues/17896
    */
-  it('C7394242_Download_Summary_Report_Functionality', () => {
+  it.skip('C7394242_Download_Summary_Report_Functionality', () => {
     // Pending Validation
     const clientName = 'Interxion'
     const clientID = 76
