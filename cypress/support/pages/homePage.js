@@ -5,14 +5,46 @@ const searchBar = new SearchBar()
 
 const selectors = {
   groupBySelector: '#clientGroupSelect .select > input',
-  groupByAlphabetical: '.select-panel > :nth-child(2) > div',
-  separatorContainerForClientsList: '//gs-preloader-container//div[@class="card-group-section ng-star-inserted"]//div[@class="section-title"]',
+  groupByAllCompanies: '#optionallclients',
+  groupByAlphabetical: '#optionalphabetical',
+  groupByStatus: '#optionstatus',
+  groupByCountry: '#optioncountry',
+  groupBySector: '#optionsector',
   favorite_icon: 'div.client-action-btn',
   clientCard: '#client-',
   clientCardHeader: '#clientCardHeader',
   clientCardCountryBadge: '#countryBadge',
   clientCardRegulatedStatus: '#regBadge',
   clientCardStatus: '#statusBadge'
+}
+
+const groupBySelectors = {
+  // Favorites
+  separatorFavorites: '#cardGroupSectionFavorites',
+
+  // All Companies
+  separatorAllCompanies: '#cardGroupSectionAllCompanies',
+
+  // Alphabetical
+  separator0_9: '#cardGroupSection0_9',
+  separatorA: '#cardGroupSectionA',
+  separatorB: '#cardGroupSectionB',
+  separatorC: '#cardGroupSectionC',
+
+  // Status
+  separatorActive: '#cardGroupSectionActive',
+  separatorDemo: '#cardGroupSectionDemo',
+  separatorImplementation: '#cardGroupSectionImplementation',
+  separatorTerminated: '#cardGroupSectionTerminated',
+
+  // Country
+  separatorAustralia: '#cardGroupSectionAustralia',
+  separatorAustria: '#cardGroupSectionAustria',
+  separatorAzerbaijan: '#cardGroupSectionAzerbaijan',
+  separatorBahrain: '#cardGroupSectionBahrain',
+
+  // Sector
+  separatorUnknown: '#cardGroupSectionUnknown'
 }
 
 class HomePage extends BasePage {
@@ -37,12 +69,19 @@ class HomePage extends BasePage {
   // --------------------------------- ASSERTIONS ----------------------------------- //
 
   /**
-   * Check the favorite status of a specific client
+   * Assert if the client is favorite
    *
    * @param {Number} clientId Client id to be checked
+   * @param {Boolean} favorite True fo assert the client is favorite, false otherwise
    */
-  assertIClientIsFavorite(clientId) {
-    return cy.get(`${selectors.clientCard}${clientId}.favoriteVisible`)
+  assertClientIsFavorite(clientId, favorite = true) {
+    favorite ? cy.get(groupBySelectors.separatorFavorites).should('exist') : true
+
+    if (favorite) {
+      cy.get(`${selectors.clientCard}${clientId}.favoriteVisible`).should('be.visible')
+    } else {
+      cy.get(`${selectors.clientCard}${clientId}.favoriteVisible`).should('not.exist')
+    }
   }
 
   /**
@@ -92,7 +131,7 @@ class HomePage extends BasePage {
   }
 
   /**
-   * Search for a client using the search bar
+   * Click in a client after using the search engine first
    *
    * @param {String} clientName Client name to search
    */
@@ -115,39 +154,68 @@ class HomePage extends BasePage {
   }
 
   /**
-   * Group By selector. If groupBy is not given, the default group method is Alphabetical
-   * Change this solution as soon as an ID is provided
+   * Group the clients in the home page by the option chosen in the Group By selector.
    *
-   * @param {String} groupBy Client name to search
+   * @param {String} groupBy The option to group the clients, it can be: alphabetical, status, country, or sector. If groupBy is not given, the default group method is All Companies
    */
-  groupByList(groupBy = '') {
+  SelectGroupByOptionForCompanies(groupBy = '') {
     cy.get(selectors.groupBySelector).click()
 
-    switch (groupBy) {
-      default:
+    switch (groupBy.toLowerCase()) {
+      case 'alphabetical':
         cy.get(selectors.groupByAlphabetical).click()
+        break
+      case 'status':
+        cy.get(selectors.groupByStatus).click()
+        break
+      case 'country':
+        cy.get(selectors.groupByCountry).click()
+        break
+      case 'sector':
+        cy.get(selectors.groupBySector).click()
+        break
+      default:
+        cy.get(selectors.groupByAllCompanies).click()
     }
-
-    this.assertGroupListOrder(groupBy)
   }
 
   /**
-   * Check if the client list is displayed correctly. If groupBy is not given, the default group method to validate is Alphabetical
+   * Check if the client list is correctly organized in the home page.
+   *
+   * @param {String} groupBy The group by to be validated. It can be: alphabetical, status, country, or sector. If groupBy is not given, the default group method to validate is All Companies
    *
    * Change this solution as soon as an ID is provided
    */
-  assertGroupListOrder(groupBy = '') {
-    switch (groupBy) {
+  assertCompaniesGroupByOrderIsCorrect(groupBy = '') {
+    switch (groupBy.toLowerCase()) {
+      case 'alphabetical':
+        cy.get(groupBySelectors.separator0_9).should('exist')
+        cy.get(groupBySelectors.separatorA).should('exist')
+        cy.get(groupBySelectors.separatorB).should('exist')
+        cy.get(groupBySelectors.separatorC).should('exist')
+        break
+
+      case 'status':
+        cy.get(groupBySelectors.separatorActive).should('exist')
+        cy.get(groupBySelectors.separatorDemo).should('exist')
+        cy.get(groupBySelectors.separatorImplementation).should('exist')
+        cy.get(groupBySelectors.separatorTerminated).should('exist')
+        break
+
+      case 'country':
+        cy.get(groupBySelectors.separatorAustralia).should('exist')
+        cy.get(groupBySelectors.separatorAustria).should('exist')
+        cy.get(groupBySelectors.separatorAzerbaijan).should('exist')
+        cy.get(groupBySelectors.separatorBahrain).should('exist')
+        break
+
+      case 'sector':
+        cy.get(groupBySelectors.separatorUnknown).should('exist')
+        break
+
+      // All Companies
       default:
-        cy.xpath(selectors.separatorContainerForClientsList)
-          .eq(0)
-          .should('contain.text', '0-9')
-        cy.xpath(selectors.separatorContainerForClientsList)
-          .eq(1)
-          .should('contain.text', 'A')
-        cy.xpath(selectors.separatorContainerForClientsList)
-          .eq(2)
-          .should('contain.text', 'B')
+        cy.get(groupBySelectors.separatorAllCompanies).should('exist')
     }
   }
 }

@@ -6,7 +6,8 @@ const selectors = {
   hoverActionsIcons: '#hover-actions-',
   noTrustsOrParticipantsCreatedMessage: 'gs-empty-container .content > div',
   customizeColumnsIcon: '#pptOpenColumn',
-  numberOfRecordsInTable: '#peopleRecordCount'
+  numberOfRecordsInTable: '#peopleRecordCount',
+  clientNameHeader: 'gs-container-l2 #navBarHeader > span'
 }
 
 const quickEditNavBarSelectors = {
@@ -119,6 +120,15 @@ class EquityPeoplePage extends BasePage {
     cy.get(quickEditNavBarSelectors.participantDetailName).contains(name)
     cy.get(quickEditNavBarSelectors.participantDetailCountry).contains(country)
     cy.get(quickEditNavBarSelectors.participantDetailStatus).contains(status)
+  }
+
+  /**
+   * Assert the name of the current client. It is located in the top left, right after the GS logo
+   *
+   * @param {String} clientName Client name to be verified
+   */
+  assertClientNameInTheHeader(clientName) {
+    cy.get(selectors.clientNameHeader).should('have.text', clientName)
   }
 
   // ------------------------------------- OTHERS ------------------------------------- //

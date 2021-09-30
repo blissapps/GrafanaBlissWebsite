@@ -1,44 +1,56 @@
 import HomePage from '../support/pages/homePage'
+import EquityPeoplePage from '../support/pages/equityPeoplePage'
 
 describe('Home page tests', () => {
   const homePage = new HomePage()
+  const equityPeoplePage = new EquityPeoplePage()
 
   beforeEach(() => {
     cy.login()
     cy.visit('/')
   })
 
-  /**
-   * Select a client using the search engine bar in the home page
-   */
-  it('C1234567_Select_Specific_Client_From_The_List_Using_The_Search_Engine', () => {
-    homePage.selectClientFromTheListBySearch('Allianz')
+  it('C10728360_Select_Specific_Client_From_The_List_Using_The_Search_Engine', () => {
+    const clientName = 'Allianz'
+
+    homePage.selectClientFromTheListBySearch(clientName)
     homePage.checkUrlByRegex(/.?client.*[0-9].?people$/)
+    equityPeoplePage.assertClientNameInTheHeader(clientName)
   })
 
-  /**
-   * Check if the Group By select is working for alphabetical order.
-   */
-  it('C1234567_Check_GroupBy_Displays_Correct_Order_For_Alphabetical', () => {
-    homePage.groupByList()
+  it('C10735651_Check_GroupBy_Displays_Correct_Order_For_AllCompanies_Alphabetical_Status_Country_Sector', () => {
+    // All Companies (default)
+    homePage.SelectGroupByOptionForCompanies()
+    homePage.assertCompaniesGroupByOrderIsCorrect()
+
+    // Alphabetical
+    homePage.SelectGroupByOptionForCompanies('alphabetical')
+    homePage.assertCompaniesGroupByOrderIsCorrect('alphabetical')
+
+    // Status
+    homePage.SelectGroupByOptionForCompanies('status')
+    homePage.assertCompaniesGroupByOrderIsCorrect('status')
+
+    // Country
+    homePage.SelectGroupByOptionForCompanies('country')
+    homePage.assertCompaniesGroupByOrderIsCorrect('country')
+
+    // Sector
+    homePage.SelectGroupByOptionForCompanies('sector')
+    homePage.assertCompaniesGroupByOrderIsCorrect('sector')
   })
 
-  /**
-   * Verify the favorite button behavior over the clients
-   */
-  it('C1234567_Favorite_And_Unfavorite_Client', () => {
+  it('C10735652_Favorite_And_Unfavorite_Client', () => {
+    // Favorite
     homePage.favoriteUnfavoriteClient(146)
-    homePage.assertIClientIsFavorite(146).should('be.visible')
+    homePage.assertClientIsFavorite(146)
 
-    //teardown
+    // Unfavorite
     homePage.favoriteUnfavoriteClient(146)
-    homePage.assertIClientIsFavorite(146).should('not.exist')
+    homePage.assertClientIsFavorite(146, false)
   })
 
-  /**
-   * Verify if the client summary information in the home card is correct for some clients
-   */
-  it('C1234567_Check_Client_Summary_Information', () => {
+  it('C10735680_Check_Client_Summary_Information_On_Cards', () => {
     homePage.assertClientCardSummaryInformation(144, '7digital', 'GBR', 'Regulated', 'Active').should('be.visible')
     homePage.assertClientCardSummaryInformation(337, '9F Group', 'CHN', 'Not Regulated', 'NOT SET').should('be.visible')
     homePage.assertClientCardSummaryInformation(162, 'Archant', 'GBR', 'Not Regulated', 'Terminated').should('be.visible')
