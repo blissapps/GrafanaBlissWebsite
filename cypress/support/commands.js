@@ -75,7 +75,7 @@ Cypress.Commands.add('loginSuccessfulXHRWaits', () => {
   cy.intercept({ method: 'POST', url: 'https://rs.fullstory.com/rec/page' }, { success: true })
 
   // eslint-disable-next-line cypress/no-unnecessary-waiting
-  cy.wait(1500) // the menu is no stable yet due tome API duplicated calls. A ticket was open https://globalshares.atlassian.net/browse/PB-828
+  cy.wait(1500) // the menu is no stable yet due to some API duplicated calls. A ticket was open https://globalshares.atlassian.net/browse/PB-828
 })
 
 /**

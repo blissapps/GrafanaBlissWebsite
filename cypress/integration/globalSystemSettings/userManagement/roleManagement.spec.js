@@ -265,6 +265,8 @@ describe('Role Management tests over User Management settings', () => {
   /**
    * @missing_data For test this scenario there should be no "Create Role" permission for the user.
    *
+   * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-979
+   *
    * @missing_step What happens when the user tries do access this by the URL? Some error message?
    */
   it.skip('C7499703_User_Does_Not_Have_Permissions_To_Create_New_Role', () => {
