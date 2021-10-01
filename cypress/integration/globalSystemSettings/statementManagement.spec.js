@@ -248,7 +248,10 @@ describe('Statement Management tests', () => {
     clientStatementsPage.checkClientStatementsUrl()
   })
 
-  it('C7394707_Participant_Filter_Behavior', () => {
+  /**
+   * @missing_data Need to have a client with some participants that meets the searches you want to do. Right now, this test is based on Interxion
+   */
+  it.skip('C7394707_Participant_Filter_Behavior', () => {
     const clientName = 'Interxion'
     const clientID = 76
     const participantID = 406750
