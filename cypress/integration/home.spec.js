@@ -1,20 +1,23 @@
 import HomePage from '../support/pages/homePage'
 import EquityPeoplePage from '../support/pages/equityPeoplePage'
+import LeftMenuNavBar from '../support/components/leftMenuNavBar'
 
 describe('Home page tests', () => {
   const homePage = new HomePage()
   const equityPeoplePage = new EquityPeoplePage()
+  const leftMenuNavBar = new LeftMenuNavBar()
 
   beforeEach(() => {
     cy.login()
     cy.visit('/')
+    cy.loginSuccessfulXHRWaits()
   })
 
   it('C10728360_Select_Specific_Client_From_The_List_Using_The_Search_Engine', () => {
     const clientName = 'Allianz'
 
     homePage.selectClientFromTheListBySearch(clientName)
-    homePage.checkUrlByRegex(/.?client.*[0-9].?people$/)
+    equityPeoplePage.checkUrlByRegex(/.?client.*[0-9].?people$/)
     equityPeoplePage.assertClientNameInTheHeader(clientName)
   })
 
@@ -56,5 +59,54 @@ describe('Home page tests', () => {
     homePage.assertClientCardSummaryInformation(162, 'Archant', 'GBR', 'Not Regulated', 'Terminated').should('be.visible')
     homePage.assertClientCardSummaryInformation(234, 'Janus Henderson', 'GBR', 'Regulated', 'Terminated').should('be.visible')
     homePage.assertClientCardSummaryInformation(381, 'GASCADE Gastransport', 'DEU', 'Regulated', 'Implementation').should('be.visible')
+  })
+
+  it('C10772388_Validate_Quick_Client_Switch_Behavior', () => {
+    const clientName = '7digital'
+    const clientId = 144
+
+    // Search for a client behavior
+    leftMenuNavBar.openSettingsMenuBar()
+    leftMenuNavBar.clickClientSwitchButton()
+    leftMenuNavBar.searchClientInSwitchClient('ClientNameThatDoesNotExists')
+    leftMenuNavBar.assertNoClientsFoundInClientSwitch()
+    leftMenuNavBar.searchClientInSwitchClient(clientName)
+    leftMenuNavBar.clickInClientInSwitchClientMenu(clientId)
+    leftMenuNavBar.closeSwitchClientMenuBar()
+    equityPeoplePage.checkUrlByRegex(/.?client.*[0-9].?people$/)
+    equityPeoplePage.assertClientNameInTheHeader(clientName)
+
+    // View all clients behavior
+    leftMenuNavBar.openSettingsMenuBar()
+    leftMenuNavBar.clickClientSwitchButton()
+    leftMenuNavBar.clickViewAllClients()
+    homePage.checkHomeUrl()
+    homePage.assertCompaniesHeaderIsDisplayed()
+  })
+
+  it('C10772389_Favorite_And_Unfavorite_A_client_In_The_Switch_Client_Menu', () => {
+    const clientId = 144
+
+    // Favorite
+    leftMenuNavBar.openSettingsMenuBar()
+    leftMenuNavBar.clickClientSwitchButton()
+    leftMenuNavBar.clickToFavoriteClientInSwitchClientMenu(clientId)
+    leftMenuNavBar.assertClientIsFavorite(clientId)
+    leftMenuNavBar.closeSwitchClientMenuBar()
+
+    homePage.reloadPage()
+    cy.loginSuccessfulXHRWaits()
+    homePage.assertClientIsFavorite(clientId)
+
+    // Unfavorite
+    leftMenuNavBar.openSettingsMenuBar()
+    leftMenuNavBar.clickClientSwitchButton()
+    leftMenuNavBar.clickToFavoriteClientInSwitchClientMenu(clientId)
+    leftMenuNavBar.assertClientIsFavorite(clientId, false)
+    leftMenuNavBar.closeSwitchClientMenuBar()
+
+    homePage.reloadPage()
+    cy.loginSuccessfulXHRWaits()
+    homePage.assertClientIsFavorite(clientId, false)
   })
 })

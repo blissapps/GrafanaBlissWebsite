@@ -49,7 +49,7 @@ Cypress.Commands.add('loginWithoutSession', (email = Cypress.env('DEFAULT_USER_A
 })
 
 /**
- * Waits for XHR requests that may generate elements detached from the DOM after a successful login
+ * Waits for XHR requests that may generate elements detached from the DOM after a successful login or in a refresh in the home page
  *
  * Even though we are using intercepts and waiting for them, these interception are being called more than 1 single time,
  * which are not sufficient because the front-end call some XHR calls twice (I don't know why).

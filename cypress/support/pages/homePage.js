@@ -15,7 +15,8 @@ const selectors = {
   clientCardHeader: '#clientCardHeader',
   clientCardCountryBadge: '#countryBadge',
   clientCardRegulatedStatus: '#regBadge',
-  clientCardStatus: '#statusBadge'
+  clientCardStatus: '#statusBadge',
+  homePageHeader: '#homepageHeader'
 }
 
 const groupBySelectors = {
@@ -52,7 +53,7 @@ class HomePage extends BasePage {
    * Check if the current page is the home URL
    */
   checkHomeUrl() {
-    this.checkUrl(Cypress.env('homePageURL'))
+    this.checkUrl(Cypress.env('HOME_PAGE_URL'))
   }
 
   // --------------------------------------- GETS --------------------------------------------- //
@@ -67,6 +68,14 @@ class HomePage extends BasePage {
   }
 
   // --------------------------------- ASSERTIONS ----------------------------------- //
+
+  /**
+   *
+   * @param {Boolean} displayed True is the default value to assert the Companies header is displayed. Send false otherwise
+   */
+  assertCompaniesHeaderIsDisplayed(displayed = true) {
+    displayed ? cy.get(selectors.homePageHeader).should('be.visible') : cy.get(selectors.homePageHeader).should('not.exist')
+  }
 
   /**
    * Assert if the client is favorite
