@@ -59,12 +59,12 @@ Cypress.Commands.add('loginWithoutSession', (email = Cypress.env('DEFAULT_USER_A
 Cypress.Commands.add('loginSuccessfulXHRWaits', () => {
   // Avoid elements detached from the DOM when loading at the home page right after the login
   cy.intercept('GET', '/api/Clients?$orderby=name**count=true').as('waitsClientsToBeLoaded')
-  // cy.intercept('GET', '/api/Tenants?$orderby=name&$top=**count=true').as('waitsTenantsToBeLoaded')
+  cy.intercept('GET', '/api/Tenants?$orderby=name&$top=**count=true').as('waitsTenantsToBeLoaded')
   cy.intercept('GET', '/api/Users/Self/Tenants/**/Permissions').as('waitsPermissionsToBeReceived')
   cy.intercept('GET', '/api/Users/Self').as('waitsUserSelf')
 
   cy.wait('@waitsClientsToBeLoaded', { timeout: 10000 })
-  // cy.wait('@waitsTenantsToBeLoaded', { timeout: 10000 })
+  cy.wait('@waitsTenantsToBeLoaded', { timeout: 10000 })
   cy.wait('@waitsPermissionsToBeReceived', { timeout: 20000 })
   cy.wait('@waitsUserSelf', { timeout: 20000 })
 
