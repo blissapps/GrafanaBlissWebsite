@@ -16,6 +16,11 @@
 /// <reference types="cypress"/>
 // @ts-nocheck
 
+// Hooks
+beforeEach(() => {
+  cy.log('Cypress test: ' + Cypress.currentTest.title)
+})
+
 // Import commands.js using ES2015 syntax:
 import './commands'
 import 'cypress-plugin-snapshots/commands'
