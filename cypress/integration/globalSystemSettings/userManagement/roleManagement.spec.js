@@ -18,7 +18,7 @@ describe('Role Management tests over User Management settings', () => {
 
   beforeEach(() => {
     cy.login()
-    cy.visit('/')
+    cy.visit('/') && cy.reload()
     cy.loginSuccessfulXHRWaits()
     leftMenuNavBar.accessGlobalSettingsMenu('user', 'role')
     roleManagementPage.checkRoleManagementUrl()
