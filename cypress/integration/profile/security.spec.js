@@ -1,9 +1,10 @@
 import SecurityPage from '../../support/pages/profilePages/securityPage'
-
 import LeftMenuNavBar from '../../support/components/leftMenuNavBar'
+import ProfileMenuNavBar from '../../support/components/profileMenuNavBar'
 
 describe('Security tests', () => {
   const leftMenuNavBar = new LeftMenuNavBar()
+  const profileMenuNavBar = new ProfileMenuNavBar()
   const securityPage = new SecurityPage()
 
   beforeEach(() => {
@@ -11,7 +12,7 @@ describe('Security tests', () => {
     cy.visit('/') && cy.reload()
     cy.loginSuccessfulXHRWaits()
     leftMenuNavBar.openProfileMenuBar()
-    leftMenuNavBar.openProfileSecurityPage()
+    profileMenuNavBar.openProfileSecurityPage()
   })
 
   /**
@@ -19,7 +20,7 @@ describe('Security tests', () => {
    */
   it('C1234567_Check_URL_Access_Over_The_Menu', () => {
     securityPage.checkProfileSecurityUrl()
-    leftMenuNavBar.closeProfileLeftBar()
+    profileMenuNavBar.closeProfileMenuNavBar()
     securityPage.checkProfileSecurityUrl()
   })
 

@@ -1,6 +1,7 @@
 import RoleManagementPage from '../../../support/pages/globalSettingsPages/userManagementPages/roleManagementPage'
 
 import LeftMenuNavBar from '../../../support/components/leftMenuNavBar'
+import SettingsMenuNavBar from '../../../support/components/settingsMenuNavBar'
 import SearchBar from '../../../support/components/searchBar'
 
 import Utils from '../../../support/utils'
@@ -11,6 +12,7 @@ describe('Role Management tests over User Management settings', () => {
 
   // Components
   const leftMenuNavBar = new LeftMenuNavBar()
+  const settingsMenuNavBar = new SettingsMenuNavBar()
   const searchBar = new SearchBar()
 
   // Others
@@ -20,14 +22,14 @@ describe('Role Management tests over User Management settings', () => {
     cy.login()
     cy.visit('/') && cy.reload()
     cy.loginSuccessfulXHRWaits()
-    leftMenuNavBar.accessGlobalSettingsMenu('user', 'role')
+    settingsMenuNavBar.accessGlobalSettingsMenu('user', 'role')
     roleManagementPage.checkRoleManagementUrl()
   })
 
   // ************************************************ TESTS AS ADMIN TENANT ************************************************** //
 
   it('C7544080_Role_Check_Behavior_When_Closing_The_Settings', () => {
-    leftMenuNavBar.closeGlobalSettingsLeftBar()
+    settingsMenuNavBar.closeGlobalSettingsNavBar()
     roleManagementPage.checkRoleManagementUrl()
   })
 
@@ -275,7 +277,7 @@ describe('Role Management tests over User Management settings', () => {
     cy.visit('/')
     cy.loginSuccessfulXHRWaits()
 
-    leftMenuNavBar.accessGlobalSettingsMenu('user', 'role')
+    settingsMenuNavBar.accessGlobalSettingsMenu('user', 'role')
     roleManagementPage.checkRoleManagementUrl()
     roleManagementPage.clickTabByTitle('Active')
     roleManagementPage.getNewRoleButton().should('not.exist')
@@ -563,7 +565,7 @@ describe('Role Management tests over User Management settings', () => {
     cy.login(Cypress.env('VIEW_ONLY_DEFAULT_USER_AUTH'))
     cy.visit('/')
     cy.loginSuccessfulXHRWaits()
-    leftMenuNavBar.accessGlobalSettingsMenu('user', 'role')
+    settingsMenuNavBar.accessGlobalSettingsMenu('user', 'role')
     roleManagementPage.checkRoleManagementUrl()
 
     const roleIdActive = 1405
@@ -605,7 +607,7 @@ describe('Role Management tests over User Management settings', () => {
     cy.login(Cypress.env('VIEW_ONLY_DEFAULT_USER_AUTH'))
     cy.visit('/')
     cy.loginSuccessfulXHRWaits()
-    leftMenuNavBar.accessGlobalSettingsMenu('user', 'role')
+    settingsMenuNavBar.accessGlobalSettingsMenu('user', 'role')
 
     const roleId = 1454
 

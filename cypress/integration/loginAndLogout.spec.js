@@ -2,6 +2,7 @@
 import AuthLoginPage from '../support/pages/authLoginPage'
 import HomePage from '../support/pages/homePage'
 import LeftMenuNavBar from '../support/components/leftMenuNavBar'
+import ProfileMenuNavBar from '../support/components/profileMenuNavBar'
 
 import dataTest from '../fixtures/data.json'
 
@@ -12,6 +13,7 @@ describe('Login and Logout tests', () => {
 
   //Components
   const leftMenuNavBar = new LeftMenuNavBar()
+  const profileMenuNavBar = new ProfileMenuNavBar()
 
   // Localized data
   const dataTestLanguage = Cypress.env('LANGUAGE')
@@ -42,25 +44,25 @@ describe('Login and Logout tests', () => {
     homePage.checkUrl('/home')
 
     leftMenuNavBar.openProfileMenuBar()
-    leftMenuNavBar.assertSignOutButtonIsVisible()
-    leftMenuNavBar.closeProfileLeftBar()
+    profileMenuNavBar.assertSignOutButtonIsVisible()
+    profileMenuNavBar.closeProfileMenuNavBar()
 
     leftMenuNavBar.openProfileMenuBar()
-    leftMenuNavBar.openProfilePersonalInformationPage()
-    leftMenuNavBar.assertSignOutButtonIsVisible()
-    leftMenuNavBar.closeProfileLeftBar()
+    profileMenuNavBar.openProfilePersonalInformationPage()
+    profileMenuNavBar.assertSignOutButtonIsVisible()
+    profileMenuNavBar.closeProfileMenuNavBar()
 
     leftMenuNavBar.openProfileMenuBar()
-    leftMenuNavBar.openProfileSecurityPage()
-    leftMenuNavBar.assertSignOutButtonIsVisible()
-    leftMenuNavBar.closeProfileLeftBar()
+    profileMenuNavBar.openProfileSecurityPage()
+    profileMenuNavBar.assertSignOutButtonIsVisible()
+    profileMenuNavBar.closeProfileMenuNavBar()
 
     leftMenuNavBar.openProfileMenuBar()
-    leftMenuNavBar.openProfilePreferencesPage()
-    leftMenuNavBar.assertSignOutButtonIsVisible()
-    leftMenuNavBar.closeProfileLeftBar()
+    profileMenuNavBar.openProfilePreferencesPage()
+    profileMenuNavBar.assertSignOutButtonIsVisible()
+    profileMenuNavBar.closeProfileMenuNavBar()
 
     leftMenuNavBar.clickLogoToGoToHomePage()
-    leftMenuNavBar.assertSignOutButtonIsVisible(false)
+    profileMenuNavBar.assertSignOutButtonIsVisible(false)
   })
 })

@@ -1,8 +1,10 @@
 import PersonalInformationPage from '../../support/pages/profilePages/personalInformationPage'
 import LeftMenuNavBar from '../../support/components/leftMenuNavBar'
+import ProfileMenuNavBar from '../../support/components/profileMenuNavBar'
 
 describe('Personal Information tests', () => {
   const leftMenuNavBar = new LeftMenuNavBar()
+  const profileMenuNavBar = new ProfileMenuNavBar()
   const personalInformationPage = new PersonalInformationPage()
 
   beforeEach(() => {
@@ -10,7 +12,7 @@ describe('Personal Information tests', () => {
     cy.visit('/') && cy.reload()
     cy.loginSuccessfulXHRWaits()
     leftMenuNavBar.openProfileMenuBar()
-    leftMenuNavBar.openProfilePersonalInformationPage()
+    profileMenuNavBar.openProfilePersonalInformationPage()
   })
 
   /**
@@ -18,7 +20,7 @@ describe('Personal Information tests', () => {
    */
   it('C1234567_Check_URL_Access_Over_The_Menu', () => {
     personalInformationPage.checkProfilePersonalInformationUrl()
-    leftMenuNavBar.closeProfileLeftBar()
+    profileMenuNavBar.closeProfileMenuNavBar()
     personalInformationPage.checkProfilePersonalInformationUrl()
   })
 

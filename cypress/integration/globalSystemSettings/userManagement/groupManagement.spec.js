@@ -2,8 +2,8 @@ import GroupManagementPage from '../../../support/pages/globalSettingsPages/user
 import DapManagementPage from '../../../support/pages/globalSettingsPages/userManagementPages/dapManagementPage'
 import UserManagementPage from '../../../support/pages/globalSettingsPages/userManagementPages/userManagementPage'
 
-import LeftMenuNavBar from '../../../support/components/leftMenuNavBar'
 import SearchBar from '../../../support/components/searchBar'
+import SettingsMenuNavBar from '../../../support/components/settingsMenuNavBar'
 
 import Utils from '../../../support/utils'
 
@@ -14,7 +14,7 @@ describe('Group Management tests over User Management settings', () => {
   const userManagementPage = new UserManagementPage()
 
   // Components
-  const leftMenuNavBar = new LeftMenuNavBar()
+  const settingsMenuNavBar = new SettingsMenuNavBar()
   const searchBar = new SearchBar()
 
   // Others
@@ -24,7 +24,7 @@ describe('Group Management tests over User Management settings', () => {
     cy.login()
     cy.visit('/') && cy.reload()
     cy.loginSuccessfulXHRWaits()
-    leftMenuNavBar.accessGlobalSettingsMenu('user', 'group')
+    settingsMenuNavBar.accessGlobalSettingsMenu('user', 'group')
     groupManagementPage.checkGroupManagementUrl()
   })
 
@@ -35,7 +35,7 @@ describe('Group Management tests over User Management settings', () => {
    *
    */
   it('C7412690_Group_Check_The_System_Behavior_When_Closing_The_Settings_Nav_Bar', () => {
-    leftMenuNavBar.closeGlobalSettingsLeftBar()
+    settingsMenuNavBar.closeGlobalSettingsNavBar()
     groupManagementPage.checkGroupManagementUrl()
   })
 
@@ -307,7 +307,7 @@ describe('Group Management tests over User Management settings', () => {
     groupManagementPage.assertUserAssociatedWithGroup(userIds[1])
 
     // Validates user 1 is linked to the group over User Management settings
-    leftMenuNavBar.accessGlobalSettingsMenu('', 'user', false)
+    settingsMenuNavBar.accessGlobalSettingsMenu('', 'user', false)
     searchBar.search(userName[0])
     userManagementPage.clickUserTable(userIds[0])
     userManagementPage.clickLinkToAccessUserInfoDetailsOnRightNavBar()
@@ -517,7 +517,7 @@ describe('Group Management tests over User Management settings', () => {
     groupManagementPage.assertDapAssociatedWithGroup(dapIds[1])
     groupManagementPage.assertDapAssociatedWithGroup(dapIds[2])
 
-    leftMenuNavBar.accessGlobalSettingsMenu('', 'dap', false)
+    settingsMenuNavBar.accessGlobalSettingsMenu('', 'dap', false)
     dapManagementPage.checkDapManagementUrl()
 
     dapManagementPage.clickDapById(dapIds[0])

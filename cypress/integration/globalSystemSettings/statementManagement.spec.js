@@ -2,19 +2,21 @@ import ClientStatementsPage from '../../support/pages/globalSettingsPages/statem
 import ParticipantRegulatoryLinkagePage from '../../support/pages/globalSettingsPages/statementManagementPages/participantRegulatoryLinkagePage'
 import Utils from '../../support/utils'
 import LeftMenuNavBar from '../../support/components/leftMenuNavBar'
+import SettingsMenuNavBar from '../../support/components/settingsMenuNavBar'
 
 describe('Statement Management tests', () => {
   const clientStatementsPage = new ClientStatementsPage()
   const participantRegulatoryLinkagePage = new ParticipantRegulatoryLinkagePage()
 
   const leftMenuNavBar = new LeftMenuNavBar()
+  const settingsMenuNavBar = new SettingsMenuNavBar()
   const utils = new Utils()
 
   beforeEach(() => {
     cy.login()
     cy.visit('/') && cy.reload()
     cy.loginSuccessfulXHRWaits()
-    leftMenuNavBar.accessGlobalSettingsMenu('statement')
+    settingsMenuNavBar.accessGlobalSettingsMenu('statement')
     clientStatementsPage.checkClientStatementsUrl()
   })
 
@@ -578,8 +580,8 @@ describe('Statement Management tests', () => {
     cy.loginSuccessfulXHRWaits()
 
     leftMenuNavBar.openSettingsMenuBar()
-    leftMenuNavBar.assertGlobalSettingsMenuOpen()
-    leftMenuNavBar.assertUserManagementDisplayed(false)
+    settingsMenuNavBar.assertGlobalSettingsMenuOpen()
+    settingsMenuNavBar.assertUserManagementDisplayed(false)
   })
 
   /**

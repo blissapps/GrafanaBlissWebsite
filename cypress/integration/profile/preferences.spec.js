@@ -1,8 +1,12 @@
 import PreferencesPage from '../../support/pages/profilePages/preferencesPage'
 import LeftMenuNavBar from '../../support/components/leftMenuNavBar'
+import ProfileMenuNavBar from '../../support/components/profileMenuNavBar'
+import SettingsMenuNavBar from '../../support/components/settingsMenuNavBar'
 
 describe('Preferences tests', () => {
   const leftMenuNavBar = new LeftMenuNavBar()
+  const profileMenuNavBar = new ProfileMenuNavBar()
+  const settingsMenuNavBar = new SettingsMenuNavBar()
   const preferencesPage = new PreferencesPage()
 
   beforeEach(() => {
@@ -10,7 +14,7 @@ describe('Preferences tests', () => {
     cy.visit('/') && cy.reload()
     cy.loginSuccessfulXHRWaits()
     leftMenuNavBar.openProfileMenuBar()
-    leftMenuNavBar.openProfilePreferencesPage()
+    profileMenuNavBar.openProfilePreferencesPage()
   })
 
   /**
@@ -18,7 +22,7 @@ describe('Preferences tests', () => {
    */
   it('C1234567_Check_URL_Access_Over_The_Menu', () => {
     preferencesPage.checkProfilePreferencesUrl()
-    leftMenuNavBar.closeProfileLeftBar()
+    profileMenuNavBar.closeProfileMenuNavBar()
     preferencesPage.checkProfilePreferencesUrl()
   })
 
@@ -33,25 +37,25 @@ describe('Preferences tests', () => {
     leftMenuNavBar.openSettingsMenuBar()
     leftMenuNavBar.getElementByText('Gestão de Utilizadores').should('be.visible')
     leftMenuNavBar.getElementByText('Gestão de Declaração').should('be.visible')
-    leftMenuNavBar.closeGlobalSettingsLeftBar()
+    settingsMenuNavBar.closeGlobalSettingsNavBar()
 
-    leftMenuNavBar.accessGlobalSettingsMenu('user')
+    settingsMenuNavBar.accessGlobalSettingsMenu('user')
     leftMenuNavBar.getElementByText('Gestão de Utilizadores').should('be.visible')
     leftMenuNavBar.getElementByText('Gestão de Grupos').should('be.visible')
     leftMenuNavBar.getElementByText('Gestão de Funções').should('be.visible')
     leftMenuNavBar.getElementByText('Filtros para Acesso de Dados').should('be.visible')
-    leftMenuNavBar.closeGlobalSettingsLeftBar()
+    settingsMenuNavBar.closeGlobalSettingsNavBar()
 
     leftMenuNavBar.openProfileMenuBar()
     leftMenuNavBar.getElementByText('Informações pessoais').should('be.visible')
     leftMenuNavBar.getElementByText('Segurança').should('be.visible')
     leftMenuNavBar.getElementByText('Preferências').should('be.visible')
-    leftMenuNavBar.closeProfileLeftBar()
+    profileMenuNavBar.closeProfileMenuNavBar()
 
     // teardown
     leftMenuNavBar.openProfileMenuBar()
-    leftMenuNavBar.openProfilePreferencesPage()
+    profileMenuNavBar.openProfilePreferencesPage()
     preferencesPage.changeLanguage()
-    leftMenuNavBar.closeProfileLeftBar()
+    profileMenuNavBar.closeProfileMenuNavBar()
   })
 })

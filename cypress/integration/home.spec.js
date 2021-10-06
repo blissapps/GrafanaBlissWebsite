@@ -1,15 +1,19 @@
 import HomePage from '../support/pages/homePage'
 import EquityPeoplePage from '../support/pages/equityPeoplePage'
 import LeftMenuNavBar from '../support/components/leftMenuNavBar'
+import SettingsMenuNavBar from '../support/components/settingsMenuNavBar'
+import ClientSwitchMenu from '../support/components/clientSwitchMenu'
 
 describe('Home page tests', () => {
   const homePage = new HomePage()
   const equityPeoplePage = new EquityPeoplePage()
   const leftMenuNavBar = new LeftMenuNavBar()
+  const settingsMenuNavBar = new SettingsMenuNavBar()
+  const clientSwitchMenu = new ClientSwitchMenu()
 
   beforeEach(() => {
     cy.login()
-    cy.visit('/')
+    cy.visit('/') && cy.reload()
     cy.loginSuccessfulXHRWaits()
   })
 
@@ -67,19 +71,19 @@ describe('Home page tests', () => {
 
     // Search for a client behavior
     leftMenuNavBar.openSettingsMenuBar()
-    leftMenuNavBar.clickClientSwitchButton()
-    leftMenuNavBar.searchClientInSwitchClient('ClientNameThatDoesNotExists')
-    leftMenuNavBar.assertNoClientsFoundInClientSwitch()
-    leftMenuNavBar.searchClientInSwitchClient(clientName)
-    leftMenuNavBar.clickInClientInSwitchClientMenu(clientId)
-    leftMenuNavBar.closeSwitchClientMenuBar()
+    settingsMenuNavBar.clickClientSwitchButton()
+    clientSwitchMenu.searchClientInSwitchClient('ClientNameThatDoesNotExists')
+    clientSwitchMenu.assertNoClientsFoundInClientSwitch()
+    clientSwitchMenu.searchClientInSwitchClient(clientName)
+    clientSwitchMenu.clickInClientInSwitchClientMenu(clientId)
+    clientSwitchMenu.closeSwitchClientMenuBar()
     equityPeoplePage.checkUrlByRegex(/.?client.*[0-9].?people$/)
     equityPeoplePage.assertClientNameInTheHeader(clientName)
 
     // View all clients behavior
     leftMenuNavBar.openSettingsMenuBar()
-    leftMenuNavBar.clickClientSwitchButton()
-    leftMenuNavBar.clickViewAllClients()
+    settingsMenuNavBar.clickClientSwitchButton()
+    clientSwitchMenu.clickViewAllClients()
     homePage.checkHomeUrl()
     homePage.assertCompaniesHeaderIsDisplayed()
   })
@@ -89,10 +93,10 @@ describe('Home page tests', () => {
 
     // Favorite
     leftMenuNavBar.openSettingsMenuBar()
-    leftMenuNavBar.clickClientSwitchButton()
-    leftMenuNavBar.clickToFavoriteClientInSwitchClientMenu(clientId)
-    leftMenuNavBar.assertClientIsFavorite(clientId)
-    leftMenuNavBar.closeSwitchClientMenuBar()
+    settingsMenuNavBar.clickClientSwitchButton()
+    clientSwitchMenu.clickToFavoriteClientInSwitchClientMenu(clientId)
+    clientSwitchMenu.assertClientIsFavorite(clientId)
+    clientSwitchMenu.closeSwitchClientMenuBar()
 
     homePage.reloadPage()
     cy.loginSuccessfulXHRWaits()
@@ -100,10 +104,10 @@ describe('Home page tests', () => {
 
     // Unfavorite
     leftMenuNavBar.openSettingsMenuBar()
-    leftMenuNavBar.clickClientSwitchButton()
-    leftMenuNavBar.clickToFavoriteClientInSwitchClientMenu(clientId)
-    leftMenuNavBar.assertClientIsFavorite(clientId, false)
-    leftMenuNavBar.closeSwitchClientMenuBar()
+    settingsMenuNavBar.clickClientSwitchButton()
+    clientSwitchMenu.clickToFavoriteClientInSwitchClientMenu(clientId)
+    clientSwitchMenu.assertClientIsFavorite(clientId, false)
+    clientSwitchMenu.closeSwitchClientMenuBar()
 
     homePage.reloadPage()
     cy.loginSuccessfulXHRWaits()

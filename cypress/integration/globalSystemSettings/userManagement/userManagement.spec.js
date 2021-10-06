@@ -1,25 +1,25 @@
 import UserManagementPage from '../../../support/pages/globalSettingsPages/userManagementPages/userManagementPage'
-import LeftMenuNavBar from '../../../support/components/leftMenuNavBar'
+import SettingsMenuNavBar from '../../../support/components/settingsMenuNavBar'
 import SearchBar from '../../../support/components/searchBar'
 
 describe('User Management tests over User Management settings', () => {
   const userManagementPage = new UserManagementPage()
 
-  const leftMenuNavBar = new LeftMenuNavBar()
+  const settingsMenuNavBar = new SettingsMenuNavBar()
   const searchBar = new SearchBar()
 
   beforeEach(() => {
     cy.login()
     cy.visit('/') && cy.reload()
     cy.loginSuccessfulXHRWaits()
-    leftMenuNavBar.accessGlobalSettingsMenu('user', 'user')
+    settingsMenuNavBar.accessGlobalSettingsMenu('user', 'user')
   })
 
   // ************************************************ TESTS AS ADMIN TENANT ************************************************** //
 
   it('C7405960_User_Check_Behavior_When_Closing_The_Settings', () => {
     userManagementPage.checkUserManagementUrl()
-    leftMenuNavBar.closeGlobalSettingsLeftBar()
+    settingsMenuNavBar.closeGlobalSettingsNavBar()
     userManagementPage.checkUserManagementUrl()
   })
 

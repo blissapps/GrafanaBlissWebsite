@@ -1,7 +1,7 @@
 import DapManagementPage from '../../../support/pages/globalSettingsPages/userManagementPages/dapManagementPage'
 import GroupManagementPage from '../../../support/pages/globalSettingsPages/userManagementPages/groupManagementPage'
 
-import LeftMenuNavBar from '../../../support/components/leftMenuNavBar'
+import SettingsMenuNavBar from '../../../support/components/settingsMenuNavBar'
 import SearchBar from '../../../support/components/searchBar'
 
 import Utils from '../../../support/utils'
@@ -12,7 +12,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
   const groupManagementPage = new GroupManagementPage()
 
   // Components
-  const leftMenuNavBar = new LeftMenuNavBar()
+  const settingsMenuNavBar = new SettingsMenuNavBar()
   const searchBar = new SearchBar()
 
   // Others
@@ -24,7 +24,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
     cy.login()
     cy.visit('/') && cy.reload()
     cy.loginSuccessfulXHRWaits()
-    leftMenuNavBar.accessGlobalSettingsMenu('user', 'dap')
+    settingsMenuNavBar.accessGlobalSettingsMenu('user', 'dap')
     dapManagementPage.checkDapManagementUrl()
   })
 
@@ -36,7 +36,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
    * Waiting for @IDS
    */
   it('C7564741_DAP_Check_The_System_Behavior_When_Closing_The_Settings_Nav_Bar', () => {
-    leftMenuNavBar.closeGlobalSettingsLeftBar()
+    settingsMenuNavBar.closeGlobalSettingsNavBar()
     dapManagementPage.checkDapManagementUrl()
   })
 
@@ -133,7 +133,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
     dapManagementPage.assertGroupAssociatedWithDap(groupIdsToAssociate[1])
 
     // So go to groups and see if the association is made
-    leftMenuNavBar.accessGlobalSettingsMenu('', 'group', false)
+    settingsMenuNavBar.accessGlobalSettingsMenu('', 'group', false)
     groupManagementPage.clickGroupById(groupIdsToAssociate[0])
     groupManagementPage.assertDapAssociatedWithGroup(dapId)
     groupManagementPage.clickGroupById(groupIdsToAssociate[1])
@@ -190,7 +190,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
 
     const dapId = 14
 
-    leftMenuNavBar.accessGlobalSettingsMenu('user', 'dap')
+    settingsMenuNavBar.accessGlobalSettingsMenu('user', 'dap')
     dapManagementPage.checkDapManagementUrl()
 
     dapManagementPage.clickDapById(dapId)
