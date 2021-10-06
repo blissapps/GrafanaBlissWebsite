@@ -7,7 +7,7 @@ describe('Preferences tests', () => {
 
   beforeEach(() => {
     cy.login()
-    cy.visit('/')
+    cy.visit('/') && cy.reload()
     cy.loginSuccessfulXHRWaits()
     leftMenuNavBar.openProfileMenuBar()
     leftMenuNavBar.openProfilePreferencesPage()
