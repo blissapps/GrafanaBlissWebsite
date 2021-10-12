@@ -19,11 +19,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
   const utils = new Utils()
 
   beforeEach(() => {
-    cy.log(Cypress.currentTest.title)
-
     cy.login()
-    cy.visit('/') && cy.reload()
-    cy.loginSuccessfulXHRWaits()
     settingsMenuNavBar.accessGlobalSettingsMenu('user', 'dap')
     dapManagementPage.checkDapManagementUrl()
   })

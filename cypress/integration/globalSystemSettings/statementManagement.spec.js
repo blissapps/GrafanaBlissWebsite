@@ -14,8 +14,6 @@ describe('Statement Management tests', () => {
 
   beforeEach(() => {
     cy.login()
-    cy.visit('/') && cy.reload()
-    cy.loginSuccessfulXHRWaits()
     settingsMenuNavBar.accessGlobalSettingsMenu('statement')
     clientStatementsPage.checkClientStatementsUrl()
   })

@@ -14,6 +14,10 @@ declare namespace Cypress {
   }
 
   interface Chainable {
+    loginWithSession(email: String = Cypress.env('DEFAULT_USER_AUTH'), password: String = Cypress.env('DEFAULT_PASSWORD_AUTH')): Chainable<Element>
+  }
+  
+  interface Chainable {
     loginWithoutSession(email: String = Cypress.env('DEFAULT_USER_AUTH'), password: String = Cypress.env('DEFAULT_PASSWORD_AUTH')): Chainable<Element>
   }
 

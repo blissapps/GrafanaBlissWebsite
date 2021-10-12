@@ -16,12 +16,24 @@ const executeCommand = command => {
 }
 
 /**
- * Login command through the application UI with SESSION STORAGE
+ * Login command through the application UI with session storage and XHR interceptions
  *
  * @param {string} email email to login. The default variable is set in the cypress.json file
  * @param {string} password password to login. The default variable is set in the cypress.json file
  */
 Cypress.Commands.add('login', (email = Cypress.env('DEFAULT_USER_AUTH'), password = Cypress.env('DEFAULT_PASSWORD_AUTH')) => {
+  cy.loginWithSession(email, password)
+  cy.visit('/') && cy.reload()
+  cy.loginSuccessfulXHRWaits()
+})
+
+/**
+ * Login command through the application UI with SESSION STORAGE
+ *
+ * @param {string} email email to login. The default variable is set in the cypress.json file
+ * @param {string} password password to login. The default variable is set in the cypress.json file
+ */
+Cypress.Commands.add('loginWithSession', (email = Cypress.env('DEFAULT_USER_AUTH'), password = Cypress.env('DEFAULT_PASSWORD_AUTH')) => {
   cy.session([email, password], () => {
     cy.visit('/')
     cy.get('#username-field').type(email)

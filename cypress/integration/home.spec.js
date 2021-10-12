@@ -13,8 +13,6 @@ describe('Home page tests', () => {
 
   beforeEach(() => {
     cy.login()
-    cy.visit('/') && cy.reload()
-    cy.loginSuccessfulXHRWaits()
   })
 
   it('C10728360_Select_Specific_Client_From_The_List_Using_The_Search_Engine', () => {

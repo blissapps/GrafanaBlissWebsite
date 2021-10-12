@@ -9,8 +9,6 @@ describe('Security tests', () => {
 
   beforeEach(() => {
     cy.login()
-    cy.visit('/') && cy.reload()
-    cy.loginSuccessfulXHRWaits()
     leftMenuNavBar.openProfileMenuBar()
     profileMenuNavBar.openProfileSecurityPage()
   })
