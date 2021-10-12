@@ -270,7 +270,9 @@ class BasePage {
       })
       .then(() => {
         listOrdered = listDisplayed.slice()
-        listOrdered = listOrdered.sort()
+        listOrdered = listOrdered.sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' })) //Not consider case sensitive, so this is a personalized sort
+        cy.log('List Displayed: ' + listDisplayed.slice().toString())
+        cy.log('List Ordered: ' + listOrdered.toString())
         expect(JSON.stringify(listOrdered) === JSON.stringify(listDisplayed)).to.be.true
         cy.log('List is alphabetically ordered')
       })
