@@ -105,10 +105,10 @@ class GroupManagementPage extends BaseManagementPage {
   /**
    * Assert if the msg about no groups selected is displayed or not
    *
-   * @param {Boolean} visible True to check if the state is visible, false otherwise
+   * @param {Boolean} displayed True to check if the message is visible, false otherwise
    */
-  assertNoGroupSelectedMessageState(visible = true) {
-    if (visible) {
+  assertNoGroupSelectedMessageDisplayed(displayed = true) {
+    if (displayed) {
       cy.get(selectors.noGroupSelectedMsg).should('be.visible')
     } else {
       cy.get(selectors.noGroupSelectedMsg).should('not.exist')

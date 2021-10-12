@@ -6,6 +6,7 @@ const properties = {
 }
 
 const selectors = {
+  noRoleSelectedMsg: '#noRoleSelectedContainer div.content',
   activeRolesList: 'gs-tab[data-test-id=activeTab] #roleList gs-list',
   inactiveRolesList: 'gs-tab[data-test-id=inactiveTab] #roleList gs-list',
   rolesDisplayed: '#roleList gs-list a[id*="role_',
@@ -256,6 +257,15 @@ class RoleManagementPage extends BaseManagementPage {
   }
 
   // --------------------------------------- ASSERTIONS --------------------------------------------- //
+
+  /**
+   * Assert the message about no role selected is displayed
+   *
+   * @param {Boolean} displayed True to verify if the message is displayed. False otherwise.
+   */
+  assertNoRoleSelectedMessageIsDisplayed(displayed = true) {
+    displayed ? cy.get(selectors.noRoleSelectedMsg).should('be.visible') : cy.get(selectors.noRoleSelectedMsg).should('not.exist')
+  }
 
   /**
    * Assert a list of roles is displayed under the correlated Active tab.

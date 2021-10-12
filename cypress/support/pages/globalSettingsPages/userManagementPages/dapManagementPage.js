@@ -5,6 +5,7 @@ const properties = {
 }
 
 const selectors = {
+  noDapSelectedMsg: 'gs-empty-container[data-test-id=no-dap-selected-message] div.content',
   activeDapList: 'gs-tab[data-test-id=activeTab] #dapList gs-list',
   inactiveDapList: 'gs-tab[data-test-id=inactiveTab] #dapList gs-list',
   noDapExistsMessage: '#emptyList',
@@ -83,6 +84,15 @@ class DapManagementPage extends BaseManagementPage {
   }
 
   // ----------------------------------------------- ASSERTS --------------------------------------------- //
+
+  /**
+   * Assert the message about no DAP selected is displayed
+   *
+   * @param {Boolean} displayed True to verify if the message is displayed. False otherwise.
+   */
+  assertNoDapSelectedMessageIsDisplayed(displayed = true) {
+    displayed ? cy.get(selectors.noDapSelectedMsg).should('be.visible') : cy.get(selectors.noDapSelectedMsg).should('not.exist')
+  }
 
   /**
    * Assert a list of daps is displayed under the correlated Active tab.

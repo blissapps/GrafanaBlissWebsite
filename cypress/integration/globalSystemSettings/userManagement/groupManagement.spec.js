@@ -43,7 +43,8 @@ describe('Group Management tests over User Management settings', () => {
   it.skip('C7412691_Search_Engine_Search_for_Groups_With_Different_Combinations_In_Active_And_Inactive_Tabs', () => {
     const groupsIdActiveTab = [1]
     const groupsIdInactiveTab = [1099, 1100]
-    groupManagementPage.assertNoGroupSelectedMessageState()
+
+    groupManagementPage.assertNoGroupSelectedMessageDisplayed()
 
     let group = 'GLOBAL'
     searchBar.search(group)

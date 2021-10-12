@@ -433,9 +433,11 @@ describe('Data Access Profiles tests over User Management settings', () => {
    */
   it.skip('C7592109_DAP_Search_Functionality', () => {
     let dap = 'DAP TO SEARCH'
-    const dapIds = [6, 8, 10]
+    const dapIds = [42, 43, 44]
     const dapInactiveIds = [12, 14, 16]
     const dapCondition = 'Business'
+
+    dapManagementPage.assertNoDapSelectedMessageIsDisplayed()
 
     // ACTIVE TAB
     searchBar.search(dap)

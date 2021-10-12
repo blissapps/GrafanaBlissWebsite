@@ -39,6 +39,8 @@ describe('Role Management tests over User Management settings', () => {
     const rolesIdActiveTab = [1632, 1633, 1634]
     const rolesIdInactiveTab = [1635, 1636]
 
+    roleManagementPage.assertNoRoleSelectedMessageIsDisplayed()
+
     let role = 'role to be searched'
     searchBar.search(role)
     roleManagementPage.assertAmountOfSearchResultsInTheList(3)
