@@ -1,11 +1,9 @@
 /**
  * Skipping until this one starts to be considered stable
  */
-describe.skip('Trusts tests', () => {
+describe.skip('Overview tests', () => {
   beforeEach(() => {
     cy.login()
     cy.visit('/')
   })
-
-  // Need clients with trusts
 })

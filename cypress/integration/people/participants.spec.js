@@ -5,7 +5,7 @@ import SearchBar from '../../support/components/searchBar'
 /**
  * Skipping until this one starts to be considered stable
  */
-describe.skip('Participants tests', () => {
+describe('Participants tests', () => {
   const homePage = new HomePage()
   const equityPeoplePage = new EquityPeoplePage()
   const searchBar = new SearchBar()
@@ -15,102 +15,67 @@ describe.skip('Participants tests', () => {
     cy.visit('/')
   })
 
-  /**
-   * Search Engine - Search for a participant using the search engine and Look for ID, name, and email to check the expected data is correct
-   */
-  it('C1234567_SearchEngine_Search_For_ID_Name_Email', () => {
+  it('C11069829_SearchEngine_Search_For_ID_Name_Email', () => {
     const participantId = 112967
     const participantName = 'Bryan'
+    const participantLastName = 'Branch'
     const participantEmail = 'SuppliedEmailAddress_'
     const participantResidency = 'LUX'
 
     homePage.selectClientById(144)
     equityPeoplePage.checkPeopleUrl() // needed to use the search engine in the correct page
 
-    searchBar.search(participantId) // by id
+    // Id
+    searchBar.search(participantId)
     equityPeoplePage.assertAmountOfPeopleTable(1)
-    equityPeoplePage.getParticipantFromTheList(participantId).should('be.visible')
+    equityPeoplePage.assertParticipantDisplayed(participantId)
+    equityPeoplePage.assertDataDisplayedOnGsGridTableIsHighlighted(participantId.toString())
 
-    searchBar.search(participantEmail) // by e-mail
+    // Email
+    searchBar.search(participantEmail)
     equityPeoplePage.assertAmountOfPeopleTable(233)
+    equityPeoplePage.assertDataDisplayedOnGsGridTableIsHighlighted(participantEmail)
 
-    searchBar.search(participantName) // by name
+    // Name
+    searchBar.search(participantName)
     equityPeoplePage.assertAmountOfPeopleTable(2)
-    equityPeoplePage.getParticipantFromTheList(participantId).should('be.visible')
+    equityPeoplePage.assertParticipantDisplayed(participantId)
+    equityPeoplePage.assertDataDisplayedOnGsGridTableIsHighlighted(participantName)
+
+    // Last name
+    searchBar.search(participantLastName)
+    equityPeoplePage.assertAmountOfPeopleTable(1)
+    equityPeoplePage.assertParticipantDisplayed(participantId)
+    equityPeoplePage.assertDataDisplayedOnGsGridTableIsHighlighted(participantName + ' ' + participantLastName)
 
     equityPeoplePage.assertParticipantDataDisplayedOnTheParticipantsList([participantId, participantName, participantEmail, participantResidency])
   })
 
-  /**
-   * Search Engine - Check the behavior of a search without returned values from Participants
-   */
-  it('C1234567_SearchEngine_Search_Without_Returned_Values', () => {
-    homePage.selectClientById(144)
-    equityPeoplePage.checkPeopleUrl() // needed to use the search engine in the correct page
-
-    searchBar.search('thereIsNoOneLikeThisTEST')
-    equityPeoplePage.getNoParticipantsOrTrustsCreatedMessage().should('be.visible')
-  })
-
-  /**
-   * Search Engine - Search for a participant with full name, example: Abel Lewis
-   *
-   * @BUG
-   */
-  it.skip('C1234567_SearchEngine_Search_ParticipantByFullName', () => {
-    const participantId = 113026
-
-    homePage.selectClientById(144)
-    equityPeoplePage.checkPeopleUrl() // needed to use the search engine in the correct page
-
-    searchBar.search('Abel Lewis')
-    equityPeoplePage.assertAmountOfPeopleTable(1)
-    equityPeoplePage.getParticipantFromTheList(participantId).should('be.visible')
-  })
-
-  /**
-   * Search Engine - Search for a participant by last name; Example: Lewis should only return names with Lewis
-   *
-   * @BUG
-   */
-  it.skip('C1234567_SearchEngine_Search_ParticipantByLastName', () => {
-    const participantId = 113026
-    const participantLastName = 'Lewis'
-
-    homePage.selectClientById(144)
-    equityPeoplePage.checkPeopleUrl() // needed to use the search engine in the correct page
-
-    searchBar.search(participantLastName)
-    equityPeoplePage.getParticipantFromTheList(participantId).should('be.visible')
-    equityPeoplePage.assertParticipantCellContent(2, participantLastName)
-  })
-
-  /**
-   * Search Engine - Test ability to reuse the search engine after a search that does not bring any values
-   *
-   * @BUG
-   */
-  it.skip('C1234567_SearchEngine_Search_Again_After_Search_That_Does_Not_Bring_Anything', () => {
+  it('C11069830_SearchEngine_Search_Without_Returned_Values', () => {
     const participantId = 113026
 
     homePage.selectClientById(144)
     equityPeoplePage.checkPeopleUrl() // needed to use the search engine in the correct page
 
     searchBar.search('thereIsNoOneLikeThisTEST')
-    equityPeoplePage.getNoParticipantsOrTrustsCreatedMessage().should('be.visible')
+    equityPeoplePage.assertNoParticipantsOrTrustsAvailableDisplayed()
     searchBar.search(participantId)
     equityPeoplePage.getParticipantFromTheList(participantId).should('be.visible')
   })
 
   /**
    * Verify client without Participants and Trusts informs correctly that there are no participants/trusts
+   *
+   * @missing_data Need to have one client without participants and trusts
+   *
    */
-  it('C1234567_Client_Without_Participants_And_Trusts', () => {
+
+  it.skip('C1234567_Client_Without_Participants_And_Trusts', () => {
     homePage.selectClientById(420)
 
-    equityPeoplePage.getNoParticipantsOrTrustsCreatedMessage().should('be.visible')
+    equityPeoplePage.assertNoParticipantsOrTrustsAvailableDisplayed()
     equityPeoplePage.clickTabByTitle('Trusts')
-    equityPeoplePage.getNoParticipantsOrTrustsCreatedMessage().should('be.visible')
+    equityPeoplePage.assertNoParticipantsOrTrustsAvailableDisplayed()
   })
 
   /**

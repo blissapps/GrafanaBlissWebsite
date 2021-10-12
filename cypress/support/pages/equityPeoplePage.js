@@ -7,7 +7,8 @@ const selectors = {
   noTrustsOrParticipantsCreatedMessage: 'gs-empty-container .content > div',
   customizeColumnsIcon: '#pptOpenColumn',
   numberOfRecordsInTable: '#peopleRecordCount',
-  clientNameHeader: 'gs-container-l2 #navBarHeader > span'
+  clientNameHeader: 'gs-container-l2 #navBarHeader > span',
+  participant: '#participant-'
 }
 
 const quickEditNavBarSelectors = {
@@ -34,22 +35,14 @@ class EquityPeoplePage extends BasePage {
   // --------------------------------------- GETS --------------------------------------------- //
 
   /**
-   * Search for a participant by Id - Directly from the table list
+   * Get a participant by Id - Directly from the table list
    *
    * @param {Number} participantId Participant id to be searched
    *
    * @example 12345 as the participantId
    */
   getParticipantFromTheList(participantId) {
-    return cy.get(`#participant-${participantId}`).scrollIntoView()
-  }
-
-  /**
-   * Get the message 'There are no participants/trusts created' if displayed
-   *
-   */
-  getNoParticipantsOrTrustsCreatedMessage() {
-    return cy.get(selectors.noTrustsOrParticipantsCreatedMessage)
+    return cy.get(selectors.participant + participantId).scrollIntoView()
   }
 
   // --------------------------------------- CLICKS --------------------------------------------- //
@@ -76,6 +69,16 @@ class EquityPeoplePage extends BasePage {
    */
   assertAmountOfPeopleTable(amount) {
     cy.get(selectors.numberOfRecordsInTable).should('contain.text', amount)
+  }
+
+  /**
+   * Assert the participant is displayed in the participants list
+   *
+   * @param {Number} participantId Participant id to be asserted
+   * @param {Boolean} displayed True is the default value to validate the participant is displayed in the list. False to otherwise validation
+   */
+  assertParticipantDisplayed(participantId, displayed = true) {
+    displayed ? this.getParticipantFromTheList(participantId).should('be.visible') : cy.get(selectors.participant + participantId).should('not.exist')
   }
 
   /**
@@ -109,7 +112,7 @@ class EquityPeoplePage extends BasePage {
   }
 
   /**
-   * Verify if the data displayed in Participant Detail container is correct
+   * Verify if the data displayed in Participant Detail container (right menu bar after clicking in a participant) is correct
    *
    * @param {String} name participant name
    * @param {String} country participant country
@@ -129,6 +132,15 @@ class EquityPeoplePage extends BasePage {
    */
   assertClientNameInTheHeader(clientName) {
     cy.get(selectors.clientNameHeader).should('have.text', clientName)
+  }
+
+  /**
+   * Assert the message 'There are no participants/trusts created' is displayed or not
+   *
+   * @param {Boolean} displayed True is the default value to validate the message is displayed. False to otherwise validation
+   */
+  assertNoParticipantsOrTrustsAvailableDisplayed(displayed = true) {
+    displayed ? cy.get(selectors.noTrustsOrParticipantsCreatedMessage).should('be.visible') : cy.get(selectors.noTrustsOrParticipantsCreatedMessage).should('not.exist')
   }
 
   // ------------------------------------- OTHERS ------------------------------------- //
