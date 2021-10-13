@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 // https://dev.to/15five/how-to-temporarily-ignore-errors-during-a-typescript-migration-doe
 module.exports = {
   suppress: [
