@@ -12,8 +12,8 @@ pipelines:
           - node
         script:
           - yarn
-          - yarn lint:fix
           - yarn compile
+          - yarn lint:fix
     - step:
         name: Cypress in Chrome only
         caches:
