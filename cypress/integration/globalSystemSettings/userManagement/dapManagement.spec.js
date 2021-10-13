@@ -75,11 +75,18 @@ describe('Data Access Profiles tests over User Management settings', () => {
 
   /**
    * @missing_data Need to have at least 1 active and 1 inactive DAP created
+   *
+   * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-926
    */
-  it.skip('C7544057_DAP_Happy_Path_List_Active_And_Inactive_Data_Access_Profile(s)', () => {
+  it.skip('C7544057_DAP_Happy_Path_Alphabetically_List_Active_And_Inactive_Data_Access_Profile(s)', () => {
+    // Active tab
     dapManagementPage.assertActiveDapsAreDisplayed()
+    dapManagementPage.assertDapsInAlphabeticalOrder()
+
+    // Inactive tab
     dapManagementPage.clickTabByTitle('Inactive')
     dapManagementPage.assertInactiveDapsAreDisplayed()
+    dapManagementPage.assertDapsInAlphabeticalOrder()
   })
 
   /**
@@ -255,7 +262,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
     dapManagementPage.modifyEntityName(dapName)
     dapManagementPage.saveEntityInformation()
 
-    dapManagementPage.assertNotificationErrorDisplayed('A DAP cannot be saved with no conditions')
+    dapManagementPage.assertNotificationErrorDisplayed('Name/Condition cannot be empty')
   })
 
   /**

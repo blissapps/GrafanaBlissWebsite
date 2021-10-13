@@ -250,8 +250,8 @@ class BasePage {
   }
 
   /**
-   * Assert a list of elements is in alphabetical order.
-   * It works by sending an locator with many similar elements, so this method can extract the text of all elements and assert they are being displayed neatly.
+   * Assert if a list of elements is in alphabetical order.
+   * It works by sending n elements with the same locator, so this method can extract the text of all elements and assert they are being neatly displayed.
    *
    * @param {Object} locator Object locator containing many elements
    */

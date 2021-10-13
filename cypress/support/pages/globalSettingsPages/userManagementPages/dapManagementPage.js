@@ -8,6 +8,7 @@ const selectors = {
   noDapSelectedMsg: 'gs-empty-container[data-test-id=no-dap-selected-message] div.content',
   activeDapList: 'gs-tab[data-test-id=activeTab] #dapList gs-list',
   inactiveDapList: 'gs-tab[data-test-id=inactiveTab] #dapList gs-list',
+  dapsDisplayed: '#dapList gs-list a[data-test-id*="dap-',
   noDapExistsMessage: '#emptyList',
   addGroupsBtn: '*[data-test-id=section-group] *[data-test-id=add-entity]',
   addGroupsBtnDisabled: '*[data-test-id=section-group] *[data-test-id=add-entity][class*=disabled]',
@@ -268,6 +269,13 @@ class DapManagementPage extends BaseManagementPage {
     showAll ? this.clickShowAll('groups') : true
 
     cy.get(selectors.groupsAllCards).should('have.length', amountOfCards)
+  }
+
+  /**
+   * Assert if the Daps are being displayed in alphabetical order by default
+   */
+  assertDapsInAlphabeticalOrder() {
+    this.assertElementsInAlphabeticalOrder(selectors.dapsDisplayed)
   }
 
   // ----------------------------------------------- OTHERS --------------------------------------------- //
