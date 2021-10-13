@@ -5,15 +5,13 @@ options:
 pipelines:
   default:
     - step:
-        name: Install dependencies and check compilation errors
+        name: Install dependencies
         caches:
           - npm
           - cypress
           - node
         script:
           - yarn
-          - yarn compile
-          - yarn lint:fix
     - step:
         name: Cypress in Chrome only
         caches:
@@ -21,6 +19,8 @@ pipelines:
           - cypress
           - node
         script:
+          - yarn compile
+          - yarn lint:fix
           - yarn cy:run:headless:mocha:chrome
           - yarn cy:posttest:results
         artifacts:
