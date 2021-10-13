@@ -5,24 +5,17 @@ options:
 pipelines:
   default:
     - step:
-        name: Install dependencies
+        name: Install dependencies and compile
         caches:
           - npm
           - cypress
           - node
         script:
           - yarn
-    - step:
-        name: Compilers verification
-        caches:
-          - npm
-          - cypress
-          - node
-        script:
           - yarn compile
           - yarn lint:fix
     - step:
-        name: Cypress in Chrome only
+        name: Cypress - Chrome browser
         caches:
           - npm
           - cypress
@@ -36,7 +29,7 @@ pipelines:
           - cypress/test-results/**
           - cypress/downloads/**
     - step:
-        name: Cypress in Firefox only
+        name: Cypress - Firefox browser
         caches:
           - npm
           - cypress
