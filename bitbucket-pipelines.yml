@@ -13,14 +13,17 @@ pipelines:
         script:
           - yarn
     - step:
+        name: Compilers verification
+        script:
+          - yarn compile
+          - yarn lint:fix
+    - step:
         name: Cypress in Chrome only
         caches:
           - npm
           - cypress
           - node
         script:
-          - yarn compile
-          - yarn lint:fix
           - yarn cy:run:headless:mocha:chrome
           - yarn cy:posttest:results
         artifacts:
