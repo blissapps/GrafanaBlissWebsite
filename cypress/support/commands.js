@@ -73,12 +73,12 @@ Cypress.Commands.add('loginSuccessfulXHRWaits', () => {
   cy.intercept('GET', '/api/Clients?$orderby=name**count=true').as('waitsClientsToBeLoaded')
   // cy.intercept('GET', '/api/Tenants?$orderby=name&$top=**count=true').as('waitsTenantsToBeLoaded')
   cy.intercept('GET', '/api/Users/Self/Tenants/**/Permissions').as('waitsPermissionsToBeReceived')
-  cy.intercept('GET', '/api/Users/Self').as('waitsUserSelf')
+  //cy.intercept('GET', '/api/Users/Self').as('waitsUserSelf')
 
   cy.wait('@waitsClientsToBeLoaded', { timeout: 10000 })
   // cy.wait('@waitsTenantsToBeLoaded', { timeout: 10000 })
   cy.wait('@waitsPermissionsToBeReceived', { timeout: 20000 })
-  cy.wait('@waitsUserSelf', { timeout: 20000 })
+  // cy.wait('@waitsUserSelf', { timeout: 20000 })
 
   cy.waitUntil(() => cy.getCookie('SERVERID').then(cookie => Boolean(cookie && cookie.value)))
   cy.waitUntil(() => cy.getCookie('idsrv').then(cookie => Boolean(cookie && cookie.value)))
