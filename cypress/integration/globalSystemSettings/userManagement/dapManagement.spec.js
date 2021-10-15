@@ -253,16 +253,34 @@ describe('Data Access Profiles tests over User Management settings', () => {
   })
 
   /**
-   * SKIPPING DUE TO: https://globalshares.atlassian.net/browse/PB-920
+   * SKIPPING DUE TO: https://globalshares.atlassian.net/browse/PB-920 and https://globalshares.atlassian.net/browse/PB-927
    */
-  it.skip('C8981127_DAP_Save_Without_Conditions', () => {
-    const dapName = 'Create without conditions '
+  it.skip('C8981127_DAP_Save_Without_Name_And_Conditions', () => {
+    const dapName = 'Created DAP ' + utils.getRandomNumber()
 
+    // Without filling a name
     dapManagementPage.clickCreateNewDap()
+    dapManagementPage.saveEntityInformation()
+    dapManagementPage.assertNotificationErrorDisplayed('Name/Condition cannot be empty')
+
+    // Without filling conditions
     dapManagementPage.modifyEntityName(dapName)
     dapManagementPage.saveEntityInformation()
-
     dapManagementPage.assertNotificationErrorDisplayed('Name/Condition cannot be empty')
+
+    // Without filling conditions and with a name with size > 50 chars
+    dapManagementPage.modifyEntityName(dapName + dapName + dapName)
+    dapManagementPage.saveEntityInformation()
+    dapManagementPage.assertNotificationErrorDisplayed('Name length must be 50 characters or fewer')
+
+    // Save now with everything all right
+    dapManagementPage.modifyEntityName(dapName)
+    dapManagementPage.modifyCondition([], [1, 'Client id'], [2, '11'])
+    dapManagementPage.saveEntityInformation()
+    dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved')
+    dapManagementPage.assertEntityIsDisplayedInTheList(dapName)
+    dapManagementPage.assertNotificationErrorDisplayed('Name/Condition cannot be empty', false)
+    dapManagementPage.assertNotificationErrorDisplayed('Name length must be 50 characters or fewer', false)
   })
 
   /**
@@ -607,7 +625,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
   })
 
   /**
-   * @missing_data Need to have a DAP with 1 role at least 8 Groups linked to a this DAP
+   * @missing_data Need to have a DAP with 1 role and with 13 Groups linked to a this DAP
    *
    * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-949
    */
