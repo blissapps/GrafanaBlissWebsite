@@ -19,7 +19,7 @@ describe('Statement Management tests', () => {
   })
 
   it('C7394715_Happy_Path_To_View_Statements_Accordingly', () => {
-    const idsClientList = [76, 77, 78, 79, 80]
+    const idsClientList = [77, 78, 79, 80, 81]
 
     clientStatementsPage.assertClientStatementsTableContainsExpectedColumns()
     clientStatementsPage.assertClientStatementsTableInOrderById(idsClientList)
@@ -88,7 +88,7 @@ describe('Statement Management tests', () => {
     const dateFrom = '20190301'
     const dateTo = '20210519'
     const clientId = 77
-    const idsClientList = [76, 77, 78, 79, 80]
+    const idsClientList = [77, 78, 79, 80, 81]
 
     clientStatementsPage.filterClientStatements(clientName, dateFrom, dateTo)
     clientStatementsPage.assertClientDisplayedOnClientStatementsTable(clientId)
