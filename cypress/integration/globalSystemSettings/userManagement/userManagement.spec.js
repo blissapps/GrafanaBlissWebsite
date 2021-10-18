@@ -45,15 +45,15 @@ describe('User Management tests over User Management settings', () => {
   })
 
   /**
-   * @missing_data Need to have proper groups registered
+   * @missing_data Need to have a user with proper groups and data registered
    */
-  it.skip('C7592114_Users_Happy_Path_View_User_Details_L4', () => {
+  it('C7592114_Users_Happy_Path_View_User_Details_L4', () => {
     const username = 'amulcahyNE'
     const userId = 454292
     const publicName = 'Gage Gilbert'
     const status = 'active'
     const email = 'test@globalshares.com'
-    const groups = ['View Only', 'Global Admin Group']
+    const groups = ['Global Admin Group']
     const firstName = 'Reagan'
     const lastName = 'Jerry'
     const jobTitle = 'Writer'

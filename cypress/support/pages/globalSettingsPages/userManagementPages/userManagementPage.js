@@ -12,31 +12,30 @@ const selectors = {
 
 // These selectors are the ones from the l4 nav bar (right nav bar)
 const userDetailNavBarSelectors = {
-  headerTitle: 'gs-container-l4 div.record-title',
-  editIconButton: 'gs-container-l4 gs-button.icon',
-  publicName: '#public-name',
-  username: 'gs-container-l4 div.small',
-  status: 'gs-container-l4 gs-badge',
-  userInfoTitle: 'gs-container-l4 div.info-col h5',
-  userInfoEmail: 'gs-container-l4 div.info-col div',
-  userInfoButtonAccess: 'gs-container-l4 a gs-svg-icon'
+  headerTitle: '#quickEditHeader',
+  publicName: '#userHeaderPublicName',
+  username: '#userHeaderUserName',
+  status: '#userHeaderStatusBadge > gs-badge',
+  userInfoTitle: '#quickEditUserInfo',
+  userInfoEmail: '#userInfoEmailAddress',
+  userLastLoginInfo: '#userInfoLastLogin',
+  userInfoButtonAccess: '#userInfoLink'
 }
 
 // These selectors are the ones from the l4 nav bar (right nav bar)
 const userInfoNavBarSelectors = {
-  userInfoHeader: 'gs-container-l4 h4',
-  groups: 'gs-container-l4 section.user-groups',
+  groups: '#quickEditGroupInfo',
   showAllGroupsBtn: 'gs-button[data-test-id=show-all]',
   showLessGroupsBtn: 'gs-button[data-test-id=hide]',
-  personalFirstName: 'gs-container-l4 gs-input-field[formcontrolname=firstName] div.input input',
-  personalLastName: 'gs-container-l4 gs-input-field[formcontrolname=lastName] div.input input',
-  personalPublicName: 'gs-container-l4 gs-input-field[formcontrolname=publicName] div.input input',
-  personalJobTitle: 'gs-container-l4 gs-input-field[formcontrolname=jobTitle] div.input input',
-  personalQualifications: 'gs-container-l4 gs-input-field[formcontrolname=qualifications] div.input input',
-  personalOrganization: 'gs-container-l4 gs-input-field[formcontrolname=organization] div.input input',
-  contactPhone: 'gs-container-l4 gs-input-field[formcontrolname=contactNumber] div.input input',
-  contactPreferredEmail: 'gs-container-l4 gs-input-field[formcontrolname=emailAddress] div.input input',
-  AccountDetailsUsername: 'gs-container-l4 gs-input-field[formcontrolname=username] div.input input'
+  personalFirstName: '#personalFirstName input',
+  personalLastName: '#personalLastName input',
+  personalPublicName: '#personalPublicName input',
+  personalJobTitle: '#personalJobTitle input',
+  personalQualifications: '#personalQualifications input',
+  personalOrganization: '#personalOrganization input',
+  contactPhone: '#contactPhone input',
+  contactPreferredEmail: '#contactEmailAddress input',
+  AccountDetailsUsername: '#accountDetailsUsername input'
 }
 
 class UserManagementPage extends BasePage {
@@ -127,6 +126,7 @@ class UserManagementPage extends BasePage {
     // General User Info assertions
     cy.get(userDetailNavBarSelectors.userInfoTitle).should('be.visible')
     cy.get(userDetailNavBarSelectors.userInfoEmail).should('contain.text', email)
+    cy.get(userDetailNavBarSelectors.userLastLoginInfo).should('be.visible')
   }
 
   /**
@@ -158,7 +158,7 @@ class UserManagementPage extends BasePage {
     showAll = false
   ) {
     // Assert User Info Header
-    cy.get(userInfoNavBarSelectors.userInfoHeader).should('be.visible')
+    cy.get(userDetailNavBarSelectors.headerTitle).should('be.visible')
 
     // Make all groups visible in order that are lots of groups registered
     if (showAll) {
