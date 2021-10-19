@@ -116,7 +116,7 @@ describe('Group Management tests over User Management settings', () => {
    * @missing_data Need to have one group with 1 role, 2 daps, 3 users and 2 companies added. Name the group, role, and daps with something that includes the searchTerm "to be searched"
    *
    *
-   * * SkIPPING due to https://globalshares.atlassian.net/browse/PB-962
+   * SkIPPING due to https://globalshares.atlassian.net/browse/PB-962
    */
   it.skip('C9277663_Groups_Happy_Path_For_Searching_Behavior_In_Groups_Roles_Daps_Clients_And_Users_Over_The_Groups_Page', () => {
     const groupId = 1101
@@ -183,7 +183,7 @@ describe('Group Management tests over User Management settings', () => {
   })
 
   /**
-   * @missing_data Need to have a group created in the Inactive tab
+   * @missing_data Need to have a group created in the active tab
    */
   it.skip('C7499679_Groups_Deactivate_And_Activate_A_Group', () => {
     const groupId = 1122
@@ -574,9 +574,23 @@ describe('Group Management tests over User Management settings', () => {
     groupManagementPage.assertRoleAssociatedWithGroup(1854, false)
   })
 
-  // ************************************************ TESTS AS CLIENTS ************************************************** //
+  /**
+   * @missing_data No active and inactive groups exist
+   */
+  it.skip('C7499685_Groups_Empty_State_Active_and_Inactive_Groups', () => {
+    // Active Tab
+    groupManagementPage.clickTabByTitle('Active')
+    groupManagementPage.assertActiveGroupsAreDisplayed(false)
+    groupManagementPage.assertNoGroupExistMessageIsDisplayed()
+
+    // Inactive Tab
+    groupManagementPage.clickTabByTitle('Inactive')
+    groupManagementPage.assertInactiveGroupsAreDisplayed(false)
+    groupManagementPage.assertNoGroupExistMessageIsDisplayed()
+  })
 })
 
+// ************************************************ TESTS AS VIEW ONLY USER ************************************************** //
 describe('Group Management tests over User Management settings - View Only User', () => {
   // Pages
   const groupManagementPage = new GroupManagementPage()
@@ -621,4 +635,45 @@ describe('Group Management tests over User Management settings - View Only User'
     groupManagementPage.assertRemoveCompanyOptionIsDisplayed(companiesIds[0], false)
     groupManagementPage.assertRemoveCompanyOptionIsDisplayed(companiesIds[1], false)
   })
+
+  /**
+   * @missing_data Need to have a group linked with a user that has all Group permissions but Delete
+   */
+  it.skip('C7499680_Groups_User_Does_Not_Have_Group_Permission_To_Deactivate_Group', () => {
+    const groupId = 1017
+
+    groupManagementPage.clickGroupById(groupId)
+    groupManagementPage.assertThreeDotButtonDisplayed()
+    groupManagementPage.clickThreeDotOptionButton()
+    groupManagementPage.assertDuplicateEntityButtonDisplayed(true)
+    groupManagementPage.assertNewGroupButtonDisplayed(true)
+    groupManagementPage.assertDeactivateEntityButtonDisplayed(false)
+  })
+
+  /**
+   * @missing_data Need to have a group linked with a user that has all Group permissions but Create
+   */
+  it.skip('C7493037_Groups_User_Does_Not_Have_Group_Permission_To_Duplicate_Group', () => {
+    const groupId = 1017
+
+    groupManagementPage.clickGroupById(groupId)
+    groupManagementPage.assertThreeDotButtonDisplayed()
+    groupManagementPage.clickThreeDotOptionButton()
+    groupManagementPage.assertDeactivateEntityButtonDisplayed(true)
+    groupManagementPage.assertNewGroupButtonDisplayed(false)
+    groupManagementPage.assertDuplicateEntityButtonDisplayed(false)
+  })
+
+  /**
+   * @missing_data Need to have a group linked with a user that has all Group permissions but Create
+   *
+   * SkIPPING due to https://globalshares.atlassian.net/browse/PB-979
+   */
+  it.skip('C7493035_Groups_User_Does_Not_Have_Group_Permission_To_Create_Group', () => {
+    groupManagementPage.assertNewGroupButtonDisplayed(false)
+    groupManagementPage.addPathToUrlAndVisitIt('/0')
+    // Need to wait for PB-979 to know what are going to be the next steps
+  })
 })
+
+// ************************************************ TESTS AS CLIENTS ************************************************** //

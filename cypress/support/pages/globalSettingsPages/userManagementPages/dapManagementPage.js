@@ -9,7 +9,7 @@ const selectors = {
   activeDapList: 'gs-tab[data-test-id=activeTab] #dapList gs-list',
   inactiveDapList: 'gs-tab[data-test-id=inactiveTab] #dapList gs-list',
   dapsDisplayed: '#dapList gs-list a[data-test-id*="dap-',
-  noDapExistsMessage: '#emptyList',
+  noDapsExistMessage: '#emptyList',
   addGroupsBtn: '*[data-test-id=section-group] *[data-test-id=add-entity]',
   addGroupsBtnDisabled: '*[data-test-id=section-group] *[data-test-id=add-entity][class*=disabled]',
   dapId: 'a[data-test-id=dap-',
@@ -116,7 +116,7 @@ class DapManagementPage extends BaseManagementPage {
   /**
    * Assert the message "There are no data access profiles" is displayed when there is no data displayed
    */
-  assertNoDapExistsMessageIsDisplayed() {
+  assertNoDapsExistMessageIsDisplayed() {
     cy.get(selectors.noDapExistsMessage).should('be.visible')
   }
 

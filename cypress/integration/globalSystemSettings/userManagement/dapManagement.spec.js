@@ -95,12 +95,12 @@ describe('Data Access Profiles tests over User Management settings', () => {
   it.skip('C7544059_DAP_Empty_State_Active_And_Inactive_Data_Access_Profile(s)', () => {
     // Active tab
     dapManagementPage.assertActiveDapsAreDisplayed(false)
-    dapManagementPage.assertNoDapExistsMessageIsDisplayed()
+    dapManagementPage.assertNoDapsExistMessageIsDisplayed()
 
     //Inactive tab
     dapManagementPage.clickTabByTitle('Inactive')
     dapManagementPage.assertInactiveDapsAreDisplayed(false)
-    dapManagementPage.assertNoDapExistsMessageIsDisplayed()
+    dapManagementPage.assertNoDapsExistMessageIsDisplayed()
   })
 
   /**

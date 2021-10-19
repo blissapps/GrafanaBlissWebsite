@@ -151,10 +151,17 @@ class BaseManagementPage extends BasePage {
   }
 
   /**
+   * Click in the 3 dot button located in the right top of a selected entity
+   */
+  clickThreeDotOptionButton() {
+    cy.get(selectors.threeDotBtn).click()
+  }
+
+  /**
    * Click to duplicate a selected entity
    */
   clickToDuplicateEntity() {
-    cy.get(selectors.threeDotBtn).click()
+    this.clickThreeDotOptionButton()
     cy.get(selectors.threeDotDuplicateBtn).click()
   }
 
@@ -162,7 +169,7 @@ class BaseManagementPage extends BasePage {
    * Click to deactivate a selected entity
    */
   clickToDeactivateEntity() {
-    cy.get(selectors.threeDotBtn).click()
+    this.clickThreeDotOptionButton()
     cy.get(selectors.threeDotDeactivateBtn).click()
   }
 
@@ -295,16 +302,28 @@ class BaseManagementPage extends BasePage {
   /**
    * Assert the action detailsActionPanelBtn (threeDotButton) in the right top corner of a selected entity is displayed or not
    *
-   * @param {Boolean} displayed True is the default value to assert the threeDotButton is displayed
+   * @param {Boolean} displayed True is the default value to assert the threeDotButton is displayed. False otherwise
    */
   assertThreeDotButtonDisplayed(displayed = true) {
-    if (displayed) {
-      cy.get(selectors.threeDotBtn)
-        .scrollIntoView()
-        .should('be.visible')
-    } else {
-      cy.get(selectors.threeDotBtn).should('not.exist')
-    }
+    displayed ? cy.get(selectors.threeDotBtn).should('be.visible') : cy.get(selectors.threeDotBtn).should('not.exist')
+  }
+
+  /**
+   * Assert the Deactivate option inside the "threeDotButton" of a selected entity is displayed or not
+   *
+   * @param {Boolean} displayed True is the default value to assert the option is displayed. False otherwise
+   */
+  assertDeactivateEntityButtonDisplayed(displayed = true) {
+    displayed ? cy.get(selectors.threeDotDeactivateBtn).should('be.visible') : cy.get(selectors.threeDotDeactivateBtn).should('not.exist')
+  }
+
+  /**
+   * Assert the Duplicate option inside the "threeDotButton" of a selected entity is displayed or not
+   *
+   * @param {Boolean} displayed True is the default value to assert the option is displayed. False otherwise
+   */
+  assertDuplicateEntityButtonDisplayed(displayed = true) {
+    displayed ? cy.get(selectors.threeDotDuplicateBtn).should('be.visible') : cy.get(selectors.threeDotDuplicateBtn).should('not.exist')
   }
 
   // ----------------------------------------------- OTHERS --------------------------------------------- //

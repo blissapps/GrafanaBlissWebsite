@@ -8,6 +8,7 @@ const selectors = {
   noGroupSelectedMsg: '#noGroupSelectedContainer div.content',
   activeGroupsList: 'gs-tab[data-test-id=activeTab] #groupList gs-list',
   inactiveGroupsList: 'gs-tab[data-test-id=inactiveTab] #groupList gs-list',
+  noGroupsExistMessage: '#emptyList',
   groupId: '#group_',
   activateGroupBtn: 'gs-button[data-test-id=activateBtn]',
   groupNameInput: 'gs-input-inline[data-test-id=name-input]',
@@ -118,16 +119,20 @@ class GroupManagementPage extends BaseManagementPage {
 
   /**
    * Assert a list of groups is displayed under the correlated Active tab.
+   *
+   * @param {Boolean} displayed True to check if there is one or more groups being displayed in the Active Tab, false otherwise
    */
-  assertActiveGroupsAreDisplayed() {
-    cy.get(selectors.activeGroupsList).should('be.visible')
+  assertActiveGroupsAreDisplayed(displayed = true) {
+    displayed ? cy.get(selectors.activeGroupsList).should('be.visible') : cy.get(selectors.activeGroupsList).should('not.exist')
   }
 
   /**
    * Assert a list of groups is displayed under the correlated Inactive tab.
+   *
+   * @param {Boolean} displayed True to check if there is one or more groups being displayed in the Inactive Tab, false otherwise
    */
-  assertInactiveGroupsAreDisplayed() {
-    cy.get(selectors.inactiveGroupsList).should('be.visible')
+  assertInactiveGroupsAreDisplayed(displayed = true) {
+    displayed ? cy.get(selectors.inactiveGroupsList).should('be.visible') : cy.get(selectors.inactiveGroupsList).should('not.exist')
   }
 
   /**
@@ -391,6 +396,22 @@ class GroupManagementPage extends BaseManagementPage {
     displayed
       ? cy.get(groupsCardsSelectors.companiesCardId + companyId + '] ' + selectors.removeIconButton).should('exist')
       : cy.get(groupsCardsSelectors.companiesCardId + companyId + '] ' + selectors.removeIconButton).should('not.exist')
+  }
+
+  /**
+   * Assert the message "There are no groups" is displayed when there is no data displayed
+   */
+  assertNoGroupExistMessageIsDisplayed() {
+    cy.get(selectors.noGroupsExistMessage).should('be.visible')
+  }
+
+  /**
+   * Assert the 'New group' button is displayed or not
+   *
+   * @param {Boolean} displayed True is the default value to assert the button is displayed. False otherwise
+   */
+  assertNewGroupButtonDisplayed(displayed = true) {
+    displayed ? cy.get(selectors.newGroupBtn).should('be.visible') : cy.get(selectors.newGroupBtn).should('not.exist')
   }
 
   // ----------------------------------------------- OTHERS --------------------------------------------- //
