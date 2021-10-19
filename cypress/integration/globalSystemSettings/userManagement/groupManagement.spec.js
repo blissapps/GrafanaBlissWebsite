@@ -379,7 +379,6 @@ describe('Group Management tests over User Management settings', () => {
     const roleId = 1397
 
     groupManagementPage.clickGroupById(groupId)
-    groupManagementPage.scrollToTop() // strategy used just to move the scroll up
 
     groupManagementPage.assertRoleAssociatedWithGroup(roleId)
 
@@ -445,7 +444,6 @@ describe('Group Management tests over User Management settings', () => {
     const groupId = 964
 
     groupManagementPage.clickGroupById(groupId)
-    groupManagementPage.scrollToTop() // strategy used just to move the scroll up
 
     // daps
     groupManagementPage.clickShowAll('daps')
@@ -475,7 +473,6 @@ describe('Group Management tests over User Management settings', () => {
     const companyIds = [144]
 
     groupManagementPage.clickGroupById(groupId)
-    groupManagementPage.scrollToTop() // strategy used just to move the scroll up
 
     groupManagementPage.removeCompaniesFromGroup(companyIds)
     groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
@@ -491,7 +488,6 @@ describe('Group Management tests over User Management settings', () => {
     const dapIds = [60]
 
     groupManagementPage.clickGroupById(groupId)
-    groupManagementPage.scrollToTop() // strategy used just to move the scroll up
 
     groupManagementPage.removeDapsFromGroup(dapIds)
     groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
@@ -571,7 +567,6 @@ describe('Group Management tests over User Management settings', () => {
     const roleId = 1854
 
     groupManagementPage.clickGroupById(groupId)
-    groupManagementPage.scrollToTop() // strategy used just to move the scroll up
 
     groupManagementPage.removeRoleFromGroup(roleId)
     groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
@@ -580,4 +575,50 @@ describe('Group Management tests over User Management settings', () => {
   })
 
   // ************************************************ TESTS AS CLIENTS ************************************************** //
+})
+
+describe('Group Management tests over User Management settings - View Only User', () => {
+  // Pages
+  const groupManagementPage = new GroupManagementPage()
+
+  // Components
+  const settingsMenuNavBar = new SettingsMenuNavBar()
+
+  beforeEach(() => {
+    cy.login(Cypress.env('VIEW_ONLY_USER_2_AUTH'))
+    settingsMenuNavBar.accessGlobalSettingsMenu('user', 'group')
+    groupManagementPage.checkGroupManagementUrl()
+  })
+
+  /**
+   * @missing_data Need to have a group with 1 Role with a "view only" access and a user with "view only" access as well.
+   */
+  it.skip('C7422807_Groups_User_Does_Not_Have_Group_Update_Permission_To_Add_DAPs_Users_Role_And_Clients', () => {
+    const groupId = 1017
+
+    groupManagementPage.clickGroupById(groupId)
+    groupManagementPage.assertChangeRoleButtonDisplayed(false)
+    groupManagementPage.assertAddDapsButtonDisplayed(false)
+    groupManagementPage.assertAddUsersButtonDisplayed(false)
+    groupManagementPage.assertAddCompaniesButtonDisplayed(false)
+  })
+
+  /**
+   * @missing_data Need to have a group linked with 1 Role ("view only" access given) and a user ("view only" access as well). Also, this group needs to have 2 DAPs and 2 companies associated
+   */
+  it.skip('C7493031_Groups_User_Does_Not_Have_Group_Permission_To_Remove_Entities', () => {
+    const groupId = 1017
+    const roleId = 1466
+    const dapIds = [6, 8]
+    const userId = 794873
+    const companiesIds = [144, 337]
+
+    groupManagementPage.clickGroupById(groupId)
+    groupManagementPage.assertRemoveRoleOptionIsDisplayed(roleId, false)
+    groupManagementPage.assertRemoveDapOptionIsDisplayed(dapIds[0], false)
+    groupManagementPage.assertRemoveDapOptionIsDisplayed(dapIds[1], false)
+    groupManagementPage.assertRemoveUserOptionIsDisplayed(userId, false)
+    groupManagementPage.assertRemoveCompanyOptionIsDisplayed(companiesIds[0], false)
+    groupManagementPage.assertRemoveCompanyOptionIsDisplayed(companiesIds[1], false)
+  })
 })

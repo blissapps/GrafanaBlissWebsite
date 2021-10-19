@@ -99,6 +99,7 @@ class GroupManagementPage extends BaseManagementPage {
    */
   clickGroupById(groupId) {
     this.getGroupById(groupId).click()
+    this.scrollToTop()
   }
 
   // --------------------------------------- ASSERTIONS --------------------------------------------- //
@@ -306,6 +307,90 @@ class GroupManagementPage extends BaseManagementPage {
       default:
         throw new Error('This section does not exists, choose among the following: roles, daps, users, or companies')
     }
+  }
+
+  /**
+   * Assert if the button "change role" is available
+   *
+   * @param {Boolean} displayed True if you want to assert the button is displayed, false otherwise
+   */
+  assertChangeRoleButtonDisplayed(displayed = true) {
+    displayed ? cy.get(selectors.changeRoleBtn).should('be.visible') : cy.get(selectors.changeRoleBtn).should('not.exist')
+  }
+
+  /**
+   * Assert if the button "Add data access profiles" is available
+   *
+   * @param {Boolean} displayed True if you want to assert the button is displayed, false otherwise
+   */
+  assertAddDapsButtonDisplayed(displayed = true) {
+    displayed ? cy.get(selectors.addDAPBtn).should('be.visible') : cy.get(selectors.addDAPBtn).should('not.exist')
+  }
+
+  /**
+   * Assert if the button "Add Users" is available
+   *
+   * @param {Boolean} displayed True if you want to assert the button is displayed, false otherwise
+   */
+  assertAddUsersButtonDisplayed(displayed = true) {
+    displayed ? cy.get(selectors.addUsersBtn).should('be.visible') : cy.get(selectors.addUsersBtn).should('not.exist')
+  }
+
+  /**
+   * Assert if the button "Add companies" is available
+   *
+   * @param {Boolean} displayed True if you want to assert the button is displayed, false otherwise
+   */
+  assertAddCompaniesButtonDisplayed(displayed = true) {
+    displayed ? cy.get(selectors.addCompaniesBtn).should('be.visible') : cy.get(selectors.addCompaniesBtn).should('not.exist')
+  }
+
+  /**
+   * Assert if the option to remove a role is available by checking if the remove role button is displayed or not
+   *
+   * @param {Number} roleId Role id number to verify if the remove button appears on it
+   * @param {Boolean} displayed True if you want to assert the button is displayed, false otherwise
+   */
+  assertRemoveRoleOptionIsDisplayed(roleId, displayed = true) {
+    displayed
+      ? cy.get(groupsCardsSelectors.roleCardId + roleId + '] ' + selectors.removeIconButton).should('exist')
+      : cy.get(groupsCardsSelectors.roleCardId + roleId + '] ' + selectors.removeIconButton).should('not.exist')
+  }
+
+  /**
+   * Assert if the option to remove a dap is available by checking if the remove role button is displayed or not
+   *
+   * @param {Number} dapId DAP id number to verify if the remove button appears on it
+   * @param {Boolean} displayed True if you want to assert the button is displayed, false otherwise
+   */
+  assertRemoveDapOptionIsDisplayed(dapId, displayed = true) {
+    displayed
+      ? cy.get(groupsCardsSelectors.dapsCardId + dapId + '] ' + selectors.removeIconButton).should('exist')
+      : cy.get(groupsCardsSelectors.dapsCardId + dapId + '] ' + selectors.removeIconButton).should('not.exist')
+  }
+
+  /**
+   * Assert if the option to remove a user is available by checking if the remove role button is displayed or not
+   *
+   * @param {Number} userId User id number to verify if the remove button appears on it
+   * @param {Boolean} displayed True if you want to assert the button is displayed, false otherwise
+   */
+  assertRemoveUserOptionIsDisplayed(userId, displayed = true) {
+    displayed
+      ? cy.get(groupsCardsSelectors.usersCardId + userId + '] ' + selectors.removeIconButton).should('exist')
+      : cy.get(groupsCardsSelectors.usersCardId + userId + '] ' + selectors.removeIconButton).should('not.exist')
+  }
+
+  /**
+   * Assert if the option to remove a company is available by checking if the remove role button is displayed or not
+   *
+   * @param {Number} companyId User id number to verify if the remove button appears on it
+   * @param {Boolean} displayed True if you want to assert the button is displayed, false otherwise
+   */
+  assertRemoveCompanyOptionIsDisplayed(companyId, displayed = true) {
+    displayed
+      ? cy.get(groupsCardsSelectors.companiesCardId + companyId + '] ' + selectors.removeIconButton).should('exist')
+      : cy.get(groupsCardsSelectors.companiesCardId + companyId + '] ' + selectors.removeIconButton).should('not.exist')
   }
 
   // ----------------------------------------------- OTHERS --------------------------------------------- //

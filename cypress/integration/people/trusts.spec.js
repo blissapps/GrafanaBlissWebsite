@@ -4,7 +4,6 @@
 describe.skip('Trusts tests', () => {
   beforeEach(() => {
     cy.login()
-    cy.visit('/')
   })
 
   // Need clients with trusts

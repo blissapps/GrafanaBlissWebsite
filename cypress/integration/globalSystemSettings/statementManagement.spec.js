@@ -573,9 +573,7 @@ describe('Statement Management tests', () => {
    */
   it.skip('C7544061_User_Does_Not_Have_View_Permissions_For_Users,_Groups,_Roles,_And_Access_Filters', () => {
     // Login as view only before proceeds
-    cy.login('ViewOnlyUser2@globalshares.com')
-    cy.visit('/')
-    cy.loginSuccessfulXHRWaits()
+    cy.login(Cypress.env('VIEW_ONLY_USER_2_AUTH'))
 
     leftMenuNavBar.openSettingsMenuBar()
     settingsMenuNavBar.assertGlobalSettingsMenuOpen()

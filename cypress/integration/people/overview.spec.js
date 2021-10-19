@@ -4,6 +4,5 @@
 describe.skip('Overview tests', () => {
   beforeEach(() => {
     cy.login()
-    cy.visit('/')
   })
 })

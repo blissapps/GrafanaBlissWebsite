@@ -265,28 +265,6 @@ describe('Role Management tests over User Management settings', () => {
   })
 
   /**
-   * @missing_data For test this scenario there should be no "Create Role" permission for the user.
-   *
-   * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-979
-   *
-   * @missing_step What happens when the user tries do access this by the URL? Some error message?
-   */
-  it.skip('C7499703_User_Does_Not_Have_Permissions_To_Create_New_Role', () => {
-    // Login as view only before proceeds
-    cy.login(Cypress.env('VIEW_ONLY_DEFAULT_USER_AUTH'))
-    cy.visit('/')
-    cy.loginSuccessfulXHRWaits()
-
-    settingsMenuNavBar.accessGlobalSettingsMenu('user', 'role')
-    roleManagementPage.checkRoleManagementUrl()
-    roleManagementPage.clickTabByTitle('Active')
-    roleManagementPage.getNewRoleButton().should('not.exist')
-
-    roleManagementPage.addPathToUrlAndVisitIt('/0')
-    // Assert in here some error message that will appears
-  })
-
-  /**
    * @missing_data For this scenario we need to have a role called 'Existing Role' (No permissions needed)
    *
    */
@@ -534,7 +512,7 @@ describe('Role Management tests over User Management settings', () => {
     const roleName = 'Activate and Inactivate'
 
     // Inactivate role
-    cy.log('--------- Inactivate role ----------')
+    cy.log('Inactivate role')
     roleManagementPage.clickRoleById(roleId)
     roleManagementPage.clickToDeactivateEntity()
     roleManagementPage.assertToastNotificationMessageIsDisplayed('Role deactivated', true, true)
@@ -544,7 +522,7 @@ describe('Role Management tests over User Management settings', () => {
     // roleManagementPage.assertRoleIsEditable(false)
 
     // Activate role
-    cy.log('--------- Activate role ----------')
+    cy.log('Activate role')
     roleManagementPage.clickRoleById(roleId, false)
     roleManagementPage.activateRole()
     roleManagementPage.assertToastNotificationMessageIsDisplayed('Role activated')
@@ -552,31 +530,6 @@ describe('Role Management tests over User Management settings', () => {
     roleManagementPage.assertEntityIsDisplayedInTheList(roleName)
     roleManagementPage.clickRoleById(roleId, false)
     roleManagementPage.assertRoleIsEditable()
-  })
-
-  /**
-   * @missing_data For test this scenario there should be no "Update Role" permission for the user.
-   * Also, two roles must be provided, one for each active and inactive states. Suggested role names: generic role active, generic role inactive
-   *
-   * @missing_steps Assert Deactivate and Activate button are not shown
-   */
-  it.skip('C7499835_Activate/Deactivate_Role_No_Permission', () => {
-    // Login as view only before proceeds
-    cy.login(Cypress.env('VIEW_ONLY_DEFAULT_USER_AUTH'))
-    cy.visit('/')
-    cy.loginSuccessfulXHRWaits()
-    settingsMenuNavBar.accessGlobalSettingsMenu('user', 'role')
-    roleManagementPage.checkRoleManagementUrl()
-
-    const roleIdActive = 1405
-    const roleIdInactive = 1407
-
-    roleManagementPage.clickRoleById(roleIdActive)
-    // Make sure that the Deactivate button is not shown
-
-    roleManagementPage.clickTabByTitle('Inactive')
-    roleManagementPage.clickRoleById(roleIdInactive)
-    roleManagementPage.assertActivateButtonDisplayed(false)
   })
 
   /**
@@ -594,27 +547,6 @@ describe('Role Management tests over User Management settings', () => {
     roleManagementPage.assertEntityIsFocused()
     roleManagementPage.saveEntityInformation()
     roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully')
-  })
-
-  /**
-   * @missing_data Need to have a user with view only access to roles. Also, this user must have access to a group that contains this role linked, so the user can see the role
-   *
-   * @missing_steps
-   * SKIPPING also due to https://globalshares.atlassian.net/browse/PB-963 and https://globalshares.atlassian.net/browse/PB-975
-   */
-  it.skip('C7544053_Duplicate_Role_No_Permission', () => {
-    // Login as view only before proceeds
-    cy.login(Cypress.env('VIEW_ONLY_DEFAULT_USER_AUTH'))
-    cy.visit('/')
-    cy.loginSuccessfulXHRWaits()
-    settingsMenuNavBar.accessGlobalSettingsMenu('user', 'role')
-
-    const roleId = 1454
-
-    roleManagementPage.clickRoleById(roleId)
-    roleManagementPage.assertThreeDotButtonDisplayed(false)
-    cy.visit(';action=duplicate', { failOnStatusCode: false })
-    // missing step to validate the user was not redirect to any ;action=duplicate panel and so the panel to duplicate the role was not displayed (waiting for PB-975)
   })
 
   /**
@@ -638,4 +570,66 @@ describe('Role Management tests over User Management settings', () => {
   })
 
   // ************************************************ TESTS AS CLIENTS ************************************************** //
+})
+
+describe('Role Management tests over User Management settings - View Only User', () => {
+  // Pages
+  const roleManagementPage = new RoleManagementPage()
+
+  // Components
+  const settingsMenuNavBar = new SettingsMenuNavBar()
+
+  beforeEach(() => {
+    cy.login(Cypress.env('VIEW_ONLY_DEFAULT_USER_AUTH'))
+    settingsMenuNavBar.accessGlobalSettingsMenu('user', 'role')
+    roleManagementPage.checkRoleManagementUrl()
+  })
+
+  /**
+   * @missing_data For test this scenario there should be no "Create Role" permission for the user.
+   *
+   * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-979
+   *
+   * @missing_step What happens when the user tries do access this by the URL? Some error message?
+   */
+  it.skip('C7499703_User_Does_Not_Have_Permissions_To_Create_New_Role', () => {
+    roleManagementPage.clickTabByTitle('Active')
+    roleManagementPage.getNewRoleButton().should('not.exist')
+
+    roleManagementPage.addPathToUrlAndVisitIt('/0')
+    // Assert in here some error message that will appears
+  })
+
+  /**
+   * @missing_data For test this scenario there should be no "Update Role" permission for the user.
+   * Also, two roles must be provided, one for each active and inactive states. Suggested role names: generic role active, generic role inactive
+   *
+   * @missing_steps Assert Deactivate and Activate button are not shown
+   */
+  it.skip('C7499835_Activate/Deactivate_Role_No_Permission', () => {
+    const roleIdActive = 1405
+    const roleIdInactive = 1407
+
+    roleManagementPage.clickRoleById(roleIdActive)
+    // Make sure that the Deactivate button is not shown
+
+    roleManagementPage.clickTabByTitle('Inactive')
+    roleManagementPage.clickRoleById(roleIdInactive)
+    roleManagementPage.assertActivateButtonDisplayed(false)
+  })
+
+  /**
+   * @missing_data Need to have a user with view only access to roles. Also, this user must have access to a group that contains this role linked, so the user can see the role
+   *
+   * @missing_steps
+   * SKIPPING also due to https://globalshares.atlassian.net/browse/PB-963 and https://globalshares.atlassian.net/browse/PB-975
+   */
+  it.skip('C7544053_Duplicate_Role_No_Permission', () => {
+    const roleId = 1454
+
+    roleManagementPage.clickRoleById(roleId)
+    roleManagementPage.assertThreeDotButtonDisplayed(false)
+    cy.visit(';action=duplicate', { failOnStatusCode: false })
+    // missing step to validate the user was not redirect to any ;action=duplicate panel and so the panel to duplicate the role was not displayed (waiting for PB-975)
+  })
 })

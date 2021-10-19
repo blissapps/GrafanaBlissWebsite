@@ -23,6 +23,7 @@ describe('Login and Logout tests', () => {
     cy.loginSuccessfulXHRWaits()
     homePage.checkUrl('/home')
     cy.logout()
+
     authLoginPage.checkUrl('/Account/Login')
     authLoginPage.goBackOrForwardInBrowser('back')
     authLoginPage.checkUrl('/Account/Login')

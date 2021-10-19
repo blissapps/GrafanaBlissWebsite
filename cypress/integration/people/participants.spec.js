@@ -12,7 +12,6 @@ describe('Participants tests', () => {
 
   beforeEach(() => {
     cy.login()
-    cy.visit('/')
   })
 
   it('C11069829_SearchEngine_Search_For_ID_Name_Email', () => {
