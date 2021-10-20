@@ -33,7 +33,7 @@ describe('Role Management tests over User Management settings', () => {
 
   /**
    *
-   * @missing_data Besides the roles we need to search, we need to have some roles in both active and inactive tabs to be displayed in the OTHER GROUP
+   * @missing_data Besides the roles we need to search, we need to have some roles in both active and inactive tabs to be displayed in the OTHER GROUP after a search
    */
   it.skip('C7544081_Search_Engine_Search_For_Role_With_Different_Combinations_In_Active_And_Inactive_Tabs', () => {
     const rolesIdActiveTab = [1632, 1633, 1634]
@@ -137,9 +137,9 @@ describe('Role Management tests over User Management settings', () => {
   })
 
   /**
-   * @missing_data Need to have some roles in the active tab
+   * @missing_data Need to have some at least one role in active tab
    */
-  it.skip('C7499693_List_Roles_Navigation_Issues)', () => {
+  it.skip('C7499693_List_Roles_Navigation_Issues', () => {
     roleManagementPage.reloadPage()
     roleManagementPage.checkRoleManagementUrl()
     roleManagementPage.assertActiveRolesAreDisplayed()

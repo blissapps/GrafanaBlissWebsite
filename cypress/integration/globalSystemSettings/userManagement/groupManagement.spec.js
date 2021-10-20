@@ -4,6 +4,7 @@ import UserManagementPage from '../../../support/pages/globalSettingsPages/userM
 
 import SearchBar from '../../../support/components/searchBar'
 import SettingsMenuNavBar from '../../../support/components/settingsMenuNavBar'
+import LeftMenuNavBar from '../../../support/components/leftMenuNavBar'
 
 import Utils from '../../../support/utils'
 
@@ -113,15 +114,16 @@ describe('Group Management tests over User Management settings', () => {
   })
 
   /**
-   * @missing_data Need to have one group with 1 role, 2 daps, 3 users and 2 companies added. Name the group, role, and daps with something that includes the searchTerm "to be searched"
+   * @missing_data Need to have one group with 1 role, 2 daps, 3 users and 2 companies added. Name the group, role, and daps with something that includes the searchTerm "To be searched"
+   * Attention the searchTerm "To be searched" needs to have at least one letter in uppercase mode, so we can catch the bug raised in PB-962
    *
    *
    * SkIPPING due to https://globalshares.atlassian.net/browse/PB-962
    */
   it.skip('C9277663_Groups_Happy_Path_For_Searching_Behavior_In_Groups_Roles_Daps_Clients_And_Users_Over_The_Groups_Page', () => {
-    const groupId = 1101
-    const roleId = [1632]
-    const dapsId = [6, 8]
+    const groupId = 1066
+    const roleId = 1468
+    const dapsId = [10, 12]
     const searchTerm = 'To be searched'
     const user = 'amulcahyNE'
     const userId = [454292]
@@ -132,6 +134,7 @@ describe('Group Management tests over User Management settings', () => {
     searchBar.search(searchTerm)
     groupManagementPage.assertSearchResultListAccuracy([groupId])
     groupManagementPage.assertOtherGroupListDisplayed()
+    searchBar.search(searchTerm)
 
     // Roles and DAPs to be found in the search
     cy.log('------ Find Roles and DAPs ------')
@@ -143,7 +146,7 @@ describe('Group Management tests over User Management settings', () => {
     groupManagementPage.assertNumberOfRecordsInASection('users', 3)
     groupManagementPage.assertNumberOfRecordsInASection('companies', 2)
     groupManagementPage.assertNumberOfSearchResultsInASection('companies', 'No')
-    groupManagementPage.assertCardsDisplayedInHighlightedMode(roleId, 'role')
+    groupManagementPage.assertCardsDisplayedInHighlightedMode([roleId], 'role')
     groupManagementPage.assertCardsDisplayedInHighlightedMode(dapsId, 'daps')
 
     // Users to be found in the search
@@ -171,6 +174,14 @@ describe('Group Management tests over User Management settings', () => {
     groupManagementPage.assertNumberOfRecordsInASection('companies', 2)
     groupManagementPage.assertNumberOfSearchResultsInASection('companies', 1)
     groupManagementPage.assertCardsDisplayedInHighlightedMode(clientId, 'daps')
+
+    // Search for text without returning any result
+    cy.log('------ No matching text ------')
+    searchBar.search('textDoesNotReturnNothingAtAll')
+    groupManagementPage.assertNumberOfSearchResultsInASection('roles', 'No')
+    groupManagementPage.assertNumberOfSearchResultsInASection('daps', 'No')
+    groupManagementPage.assertNumberOfSearchResultsInASection('users', 'No')
+    groupManagementPage.assertNumberOfSearchResultsInASection('companies', 'No')
   })
 
   /**
@@ -673,6 +684,27 @@ describe('Group Management tests over User Management settings - View Only User'
     groupManagementPage.assertNewGroupButtonDisplayed(false)
     groupManagementPage.addPathToUrlAndVisitIt('/0')
     // Need to wait for PB-979 to know what are going to be the next steps
+  })
+})
+
+describe('Group Management tests over User Management settings - Other specific tests', () => {
+  // Components
+  const settingsMenuNavBar = new SettingsMenuNavBar()
+  const leftMenuNavBar = new LeftMenuNavBar()
+
+  beforeEach(() => {
+    cy.login(Cypress.env('VIEW_ONLY_USER_2_AUTH'))
+  })
+
+  /**
+   * @missing_data Need to have a user with view permissions for all the settings but Group
+   */
+  it.skip('C9277665_User_Does_Not_Have_View_Permissions_For_Groups_Only', () => {
+    leftMenuNavBar.openSettingsMenuBar()
+    settingsMenuNavBar.assertGlobalSettingsMenuOpen()
+    settingsMenuNavBar.assertUserManagementMenuDisplayed()
+    settingsMenuNavBar.accessGlobalSettingsMenu('user', '', false)
+    settingsMenuNavBar.assertGroupSubMenuItemDisplayed(false)
   })
 })
 

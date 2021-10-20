@@ -48,8 +48,19 @@ class SettingsMenuNavBar extends BasePage {
    *
    * @param {Boolean} displayed True to validate the User Management menu is available. False, otherwise.
    */
-  assertUserManagementDisplayed(displayed = true) {
+  assertUserManagementMenuDisplayed(displayed = true) {
     displayed ? cy.get(globalSettingsMenuSelectors.userManagementMenuItem).should('be.visible') : cy.get(globalSettingsMenuSelectors.userManagementMenuItem).should('not.exist')
+  }
+
+  /**
+   * Assert the Group Management menu item is displayed within User Management settings
+   *
+   * @param {Boolean} displayed True to validate the Group Management menu is available. False, otherwise.
+   */
+  assertGroupSubMenuItemDisplayed(displayed = true) {
+    displayed
+      ? cy.get(globalSettingsMenuSelectors.groupManagementSubMenuItem).should('be.visible')
+      : cy.get(globalSettingsMenuSelectors.groupManagementSubMenuItem).should('not.exist')
   }
 
   // --------------------------------------- OTHERS  --------------------------------------------- //

@@ -5,11 +5,14 @@ import LeftMenuNavBar from '../../support/components/leftMenuNavBar'
 import SettingsMenuNavBar from '../../support/components/settingsMenuNavBar'
 
 describe('Statement Management tests', () => {
+  // Pages
   const clientStatementsPage = new ClientStatementsPage()
   const participantRegulatoryLinkagePage = new ParticipantRegulatoryLinkagePage()
 
-  const leftMenuNavBar = new LeftMenuNavBar()
+  // Components
   const settingsMenuNavBar = new SettingsMenuNavBar()
+
+  // Others
   const utils = new Utils()
 
   beforeEach(() => {
@@ -569,18 +572,6 @@ describe('Statement Management tests', () => {
   })
 
   /**
-   * @missing_data Need to have one user associated with a group without permissions to see any User Management settings (including users, groups, roles, and DAPs (access filters))
-   */
-  it.skip('C7544061_User_Does_Not_Have_View_Permissions_For_Users,_Groups,_Roles,_And_Access_Filters', () => {
-    // Login as view only before proceeds
-    cy.login(Cypress.env('VIEW_ONLY_USER_2_AUTH'))
-
-    leftMenuNavBar.openSettingsMenuBar()
-    settingsMenuNavBar.assertGlobalSettingsMenuOpen()
-    settingsMenuNavBar.assertUserManagementDisplayed(false)
-  })
-
-  /**
    * Filter a client with participants and Check search with participant name, id and status with a variety of combination, such as
    * nameXid, name vs date, id vs date, name vs id vs date.. (USE TomTom)
    *
@@ -594,4 +585,28 @@ describe('Statement Management tests', () => {
   /**
    * Reconcile a client - Successfully
    */
+})
+
+describe('Statement Management tests - View Only User', () => {
+  // Pages
+  const clientStatementsPage = new ClientStatementsPage()
+
+  // Components
+  const leftMenuNavBar = new LeftMenuNavBar()
+  const settingsMenuNavBar = new SettingsMenuNavBar()
+
+  beforeEach(() => {
+    cy.login(Cypress.env('VIEW_ONLY_USER_2_AUTH'))
+    settingsMenuNavBar.accessGlobalSettingsMenu('statement')
+    clientStatementsPage.checkClientStatementsUrl()
+  })
+
+  /**
+   * @missing_data Need to have one user associated with a group without permissions to see any User Management settings (including users, groups, roles, and DAPs (access filters))
+   */
+  it.skip('C7544061_User_Does_Not_Have_View_Permissions_For_Users,_Groups,_Roles,_And_Access_Filters', () => {
+    leftMenuNavBar.openSettingsMenuBar()
+    settingsMenuNavBar.assertGlobalSettingsMenuOpen()
+    settingsMenuNavBar.assertUserManagementMenuDisplayed(false)
+  })
 })
