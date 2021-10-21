@@ -508,7 +508,7 @@ describe('Role Management tests over User Management settings', () => {
    * @missing_steps check if the role is editable or not
    */
   it.skip('C7499833_Deactivate_And_Activate_Role', () => {
-    const roleId = 1677
+    const roleId = 1475
     const roleName = 'Activate and Inactivate'
 
     // Inactivate role
@@ -518,7 +518,7 @@ describe('Role Management tests over User Management settings', () => {
     roleManagementPage.assertToastNotificationMessageIsDisplayed('Role deactivated', true, true)
     roleManagementPage.assertInactiveRolesAreDisplayed()
     roleManagementPage.assertEntityIsDisplayedInTheList(roleName)
-    // Missing this step to make sure that the role is non-editable while deactivated
+    // Missing this step to make sure that the role is non-editable while deactivated. Uncomment it when PB-905 and PB-963 gets done
     // roleManagementPage.assertRoleIsEditable(false)
 
     // Activate role
@@ -602,20 +602,21 @@ describe('Role Management tests over User Management settings - View Only User',
 
   /**
    * @missing_data For test this scenario there should be no "Update Role" permission for the user.
-   * Also, two roles must be provided, one for each active and inactive states. Suggested role names: generic role active, generic role inactive
+   * Also, two roles must be provided, one for each active and inactive states
    *
-   * @missing_steps Assert Deactivate and Activate button are not shown
+   * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-1001
    */
   it.skip('C7499835_Activate/Deactivate_Role_No_Permission', () => {
-    const roleIdActive = 1405
-    const roleIdInactive = 1407
+    const roleIdActive = 1476
+    const roleIdInactive = 1477
 
     roleManagementPage.clickRoleById(roleIdActive)
-    // Make sure that the Deactivate button is not shown
+    roleManagementPage.assertThreeDotButtonDisplayed(false)
 
     roleManagementPage.clickTabByTitle('Inactive')
     roleManagementPage.clickRoleById(roleIdInactive)
     roleManagementPage.assertActivateButtonDisplayed(false)
+    roleManagementPage.assertThreeDotButtonDisplayed(false)
   })
 
   /**
