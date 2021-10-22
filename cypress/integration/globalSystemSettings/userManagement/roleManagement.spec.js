@@ -552,10 +552,10 @@ describe('Role Management tests over User Management settings', () => {
   /**
    * @missing_data Need to have a role with 50 characters in the name
    *
-   * SKIPPING also due to https://globalshares.atlassian.net/browse/PB-922
+   * SKIPPING also due to https://globalshares.atlassian.net/browse/PB-906 and https://globalshares.atlassian.net/browse/PB-922
    */
   it.skip('C7544054_Duplicate_Role_Maximum_Characters_In_Name_Field', () => {
-    const roleId = 1513
+    const roleId = 1483
     const newRoleNameLessThan50Characters = 'Role ' + utils.getRandomNumber()
 
     roleManagementPage.clickRoleById(roleId)
@@ -580,7 +580,7 @@ describe('Role Management tests over User Management settings - View Only User',
   const settingsMenuNavBar = new SettingsMenuNavBar()
 
   beforeEach(() => {
-    cy.login(Cypress.env('VIEW_ONLY_DEFAULT_USER_AUTH'))
+    cy.login(Cypress.env('VIEW_ONLY_USER_2_AUTH'))
     settingsMenuNavBar.accessGlobalSettingsMenu('user', 'role')
     roleManagementPage.checkRoleManagementUrl()
   })
@@ -623,14 +623,14 @@ describe('Role Management tests over User Management settings - View Only User',
    * @missing_data Need to have a user with view only access to roles. Also, this user must have access to a group that contains this role linked, so the user can see the role
    *
    * @missing_steps
-   * SKIPPING also due to https://globalshares.atlassian.net/browse/PB-963 and https://globalshares.atlassian.net/browse/PB-975
+   * SKIPPING also due to https://globalshares.atlassian.net/browse/PB-963, https://globalshares.atlassian.net/browse/PB-975 and https://globalshares.atlassian.net/browse/PB-1001
    */
   it.skip('C7544053_Duplicate_Role_No_Permission', () => {
-    const roleId = 1454
+    const roleId = 1475
 
     roleManagementPage.clickRoleById(roleId)
     roleManagementPage.assertThreeDotButtonDisplayed(false)
     cy.visit(';action=duplicate', { failOnStatusCode: false })
-    // missing step to validate the user was not redirect to any ;action=duplicate panel and so the panel to duplicate the role was not displayed (waiting for PB-975)
+    // missing step to validate the user was not redirect to any ;action=duplicate panel and so the panel to duplicate the role is not displayed (waiting for PB-975)
   })
 })

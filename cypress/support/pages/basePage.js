@@ -287,7 +287,7 @@ class BasePage {
   assertNotificationErrorDisplayed(textDisplayed = '', displayed = true) {
     displayed ? cy.get(selectors.notificationError).should('be.visible') : cy.get(selectors.notificationError).should('not.exist')
 
-    if (textDisplayed != '') {
+    if (textDisplayed != '' && displayed) {
       cy.get(selectors.notificationError)
         .invoke('text')
         .then(text => {
