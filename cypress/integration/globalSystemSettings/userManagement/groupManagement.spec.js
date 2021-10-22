@@ -687,23 +687,22 @@ describe('Group Management tests over User Management settings - View Only User'
   })
 })
 
-describe('Group Management tests over User Management settings - Other specific tests', () => {
+describe('Group Management tests over User Management settings - Other specific tests without before each hook', () => {
   // Components
   const settingsMenuNavBar = new SettingsMenuNavBar()
   const leftMenuNavBar = new LeftMenuNavBar()
 
-  beforeEach(() => {
-    cy.login(Cypress.env('VIEW_ONLY_USER_2_AUTH'))
-  })
-
   /**
    * @missing_data Need to have a user with view permissions for all the settings but Group
    */
-  it.skip('C9277665_User_Does_Not_Have_View_Permissions_For_Groups_Only', () => {
+  it.skip('C9277665_User_Does_Not_Have_View_Permission_For_Groups_Only', () => {
+    cy.login(Cypress.env('VIEW_ONLY_USER_2_AUTH'))
+
     leftMenuNavBar.openSettingsMenuBar()
     settingsMenuNavBar.assertGlobalSettingsMenuOpen()
     settingsMenuNavBar.assertUserManagementMenuDisplayed()
     settingsMenuNavBar.accessGlobalSettingsMenu('user', '', false)
+    settingsMenuNavBar.assertBackButtonDisplayed() // Assert it just to make sure we are in the correct menu
     settingsMenuNavBar.assertGroupSubMenuItemDisplayed(false)
   })
 })

@@ -634,3 +634,23 @@ describe('Role Management tests over User Management settings - View Only User',
     // missing step to validate the user was not redirect to any ;action=duplicate panel and so the panel to duplicate the role is not displayed (waiting for PB-975)
   })
 })
+
+describe('Role Management tests over User Management settings - Other specific tests without before each hook', () => {
+  // Components
+  const settingsMenuNavBar = new SettingsMenuNavBar()
+  const leftMenuNavBar = new LeftMenuNavBar()
+
+  /**
+   * @missing_data Need to have a user with view permissions for all the settings but Role
+   */
+  it.skip('C9281160_User_Does_Not_Have_View_Permissions_For_Groups_Only', () => {
+    cy.login(Cypress.env('VIEW_ONLY_USER_2_AUTH'))
+
+    leftMenuNavBar.openSettingsMenuBar()
+    settingsMenuNavBar.assertGlobalSettingsMenuOpen()
+    settingsMenuNavBar.assertUserManagementMenuDisplayed()
+    settingsMenuNavBar.accessGlobalSettingsMenu('user', '', false)
+    settingsMenuNavBar.assertBackButtonDisplayed() // Assert it just to make sure we are in the correct menu
+    settingsMenuNavBar.assertRoleSubMenuItemDisplayed(false)
+  })
+})

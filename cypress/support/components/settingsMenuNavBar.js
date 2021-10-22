@@ -13,7 +13,8 @@ const globalSettingsMenuSelectors = {
   userManagementSubMenuItem: '#userManagementChild',
   groupManagementSubMenuItem: '#groupManagementChild',
   roleManagementSubMenuItem: '#roleManagementChild',
-  dapSubMenuItem: '#dapManagementChild'
+  dapSubMenuItem: '#dapManagementChild',
+  backButton: '#navBarReturn'
 }
 
 const leftMenuNavBar = new LeftMenuNavBar()
@@ -53,6 +54,15 @@ class SettingsMenuNavBar extends BasePage {
   }
 
   /**
+   * Assert the back button is displayed within the User Management menu
+   *
+   * @param {Boolean} displayed True to validate the User Management menu is available. False, otherwise.
+   */
+  assertBackButtonDisplayed(displayed = true) {
+    displayed ? cy.get(globalSettingsMenuSelectors.backButton).should('be.visible') : cy.get(globalSettingsMenuSelectors.backButton).should('not.exist')
+  }
+
+  /**
    * Assert the Group Management menu item is displayed within User Management settings
    *
    * @param {Boolean} displayed True to validate the Group Management menu is available. False, otherwise.
@@ -61,6 +71,17 @@ class SettingsMenuNavBar extends BasePage {
     displayed
       ? cy.get(globalSettingsMenuSelectors.groupManagementSubMenuItem).should('be.visible')
       : cy.get(globalSettingsMenuSelectors.groupManagementSubMenuItem).should('not.exist')
+  }
+
+  /**
+   * Assert the Role Management menu item is displayed within User Management settings
+   *
+   * @param {Boolean} displayed True to validate the Role Management menu is available. False, otherwise.
+   */
+  assertRoleSubMenuItemDisplayed(displayed = true) {
+    displayed
+      ? cy.get(globalSettingsMenuSelectors.roleManagementSubMenuItem).should('be.visible')
+      : cy.get(globalSettingsMenuSelectors.roleManagementSubMenuItem).should('not.exist')
   }
 
   // --------------------------------------- OTHERS  --------------------------------------------- //
