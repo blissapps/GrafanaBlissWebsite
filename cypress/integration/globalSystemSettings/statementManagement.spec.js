@@ -244,8 +244,11 @@ describe('Statement Management tests', () => {
   })
 
   it('C7395182_Select_Client_Without_Participants_To_Check_Empty_State', () => {
-    clientStatementsPage.filterClientStatements('Mizuho International plc')
-    clientStatementsPage.clickClientTable(141)
+    const clientName = 'Mizuho International plc'
+    const clientId = 211
+
+    clientStatementsPage.filterClientStatements(clientName)
+    clientStatementsPage.clickClientTable(clientId)
     clientStatementsPage.assertNoDataMessageFoundDisplayed()
     clientStatementsPage.clickBackToManageStatements()
     clientStatementsPage.checkClientStatementsUrl()
