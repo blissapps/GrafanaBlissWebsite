@@ -2,7 +2,9 @@ import BasePage from '../../basePage'
 
 const selectors = {
   noDataFoundMessage: '#emptyContainer',
-  numberOfRecords: '#gridCount'
+  numberOfRecords: '#gridCount',
+  clientStatementsTab: '.tabs-bar [id*="Client Statements"]',
+  participantRegulatoryLinkageTab: '.tabs-bar [id*="Participant Regulatory Linkage"]'
 }
 
 /**
@@ -28,6 +30,30 @@ class BaseStatementManagementPage extends BasePage {
    */
   getNumberOfRecordsDisplayed() {
     return cy.get(selectors.numberOfRecords)
+  }
+
+  // --------------------------------------- CLICKS --------------------------------------------- //
+
+  /**
+   * Click in the Client Statements or Participant Regulatory Linkage tabs
+   *
+   * @param {String} tabName Tab name to click. It can be 'client statements' or 'participant regulatory linkage'
+   */
+  clickTab(tabName) {
+    tabName = tabName.toLowerCase()
+
+    switch (tabName) {
+      case 'client statements':
+        cy.get(selectors.clientStatementsTab).click()
+        break
+
+      case 'participant regulatory linkage':
+        cy.get(selectors.participantRegulatoryLinkageTab).click()
+        break
+
+      default:
+        throw new Error('Option invalid. Tabs for settings can be either "Client Statements" or "Participant Regulatory Linkage"')
+    }
   }
 
   // --------------------------------------- ASSERTIONS --------------------------------------------- //

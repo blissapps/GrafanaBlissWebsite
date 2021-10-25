@@ -128,7 +128,7 @@ describe('Statement Management tests', () => {
     const regulator = 'FINRA'
     const partner = 'Global Shares Execution Services Ltd.'
 
-    clientStatementsPage.clickTabByTitle('Participant Regulatory Linkage')
+    clientStatementsPage.clickTab('participant regulatory linkage')
     participantRegulatoryLinkagePage.checkParticipantRegulatoryLinkageManagementUrl()
     participantRegulatoryLinkagePage.assertNoDataMessageFoundDisplayed()
 

@@ -79,7 +79,7 @@ describe('Group Management tests over User Management settings', () => {
     groupManagementPage.assertOtherGroupListDisplayed()
 
     // Now on Inactive TAB
-    groupManagementPage.clickTabByTitle('Inactive')
+    groupManagementPage.clickTab('Inactive')
 
     group = 'ABC'
     searchBar.search(group)
@@ -189,7 +189,7 @@ describe('Group Management tests over User Management settings', () => {
    */
   it.skip('C7499684_Groups_Happy_Path_List_Active_And_Inactive_Groups', () => {
     groupManagementPage.assertActiveGroupsAreDisplayed()
-    groupManagementPage.clickTabByTitle('Inactive')
+    groupManagementPage.clickTab('Inactive')
     groupManagementPage.assertInactiveGroupsAreDisplayed()
   })
 
@@ -208,7 +208,7 @@ describe('Group Management tests over User Management settings', () => {
     groupManagementPage.assertEntityIsDisplayedInTheList(groupName)
 
     // Activating a group
-    groupManagementPage.clickTabByTitle('Inactive')
+    groupManagementPage.clickTab('Inactive')
     groupManagementPage.activateGroup()
     groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Activated')
     groupManagementPage.assertActiveGroupsAreDisplayed()
@@ -590,12 +590,12 @@ describe('Group Management tests over User Management settings', () => {
    */
   it.skip('C7499685_Groups_Empty_State_Active_and_Inactive_Groups', () => {
     // Active Tab
-    groupManagementPage.clickTabByTitle('Active')
+    groupManagementPage.clickTab('Active')
     groupManagementPage.assertActiveGroupsAreDisplayed(false)
     groupManagementPage.assertNoGroupExistMessageIsDisplayed()
 
     // Inactive Tab
-    groupManagementPage.clickTabByTitle('Inactive')
+    groupManagementPage.clickTab('Inactive')
     groupManagementPage.assertInactiveGroupsAreDisplayed(false)
     groupManagementPage.assertNoGroupExistMessageIsDisplayed()
   })

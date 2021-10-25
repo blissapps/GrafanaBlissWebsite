@@ -23,7 +23,9 @@ const selectors = {
   entityNameInList: 'gs-list a',
   threeDotBtn: 'gs-button[data-test-id=detailsActionPanelBtn]',
   threeDotDuplicateBtn: 'gs-action-panel-option[data-test-id=action-duplicate]',
-  threeDotDeactivateBtn: 'gs-action-panel-option[data-test-id=action-deactivate]'
+  threeDotDeactivateBtn: 'gs-action-panel-option[data-test-id=action-deactivate]',
+  activeTab: '.tabs-bar #Active',
+  inactiveTab: '.tabs-bar #Inactive'
 }
 
 // These selectors are the ones from the l4 nav bar (right nav bar)
@@ -171,6 +173,28 @@ class BaseManagementPage extends BasePage {
   clickToDeactivateEntity() {
     this.clickThreeDotOptionButton()
     cy.get(selectors.threeDotDeactivateBtn).click()
+  }
+
+  /**
+   * Click in the active or inactive tabs over all the settings
+   *
+   * @param {String} tabName Tab name to click. It can be 'active' or 'inactive'
+   */
+  clickTab(tabName) {
+    tabName = tabName.toLowerCase()
+
+    switch (tabName) {
+      case 'active':
+        cy.get(selectors.activeTab).click()
+        break
+
+      case 'inactive':
+        cy.get(selectors.inactiveTab).click()
+        break
+
+      default:
+        throw new Error('Option invalid. Tabs for settings can be either "active" or "inactive"')
+    }
   }
 
   // --------------------------------------------------------- ASSERTIONS ------------------------------------------------------------------ //

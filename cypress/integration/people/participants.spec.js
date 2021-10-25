@@ -73,7 +73,7 @@ describe('Participants tests', () => {
     homePage.selectClientById(420)
 
     equityPeoplePage.assertNoParticipantsOrTrustsAvailableDisplayed()
-    equityPeoplePage.clickTabByTitle('Trusts')
+    equityPeoplePage.clickTab('trusts')
     equityPeoplePage.assertNoParticipantsOrTrustsAvailableDisplayed()
   })
 

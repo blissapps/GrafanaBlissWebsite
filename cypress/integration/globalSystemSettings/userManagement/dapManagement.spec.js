@@ -84,7 +84,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
     dapManagementPage.assertDapsInAlphabeticalOrder()
 
     // Inactive tab
-    dapManagementPage.clickTabByTitle('Inactive')
+    dapManagementPage.clickTab('Inactive')
     dapManagementPage.assertInactiveDapsAreDisplayed()
     dapManagementPage.assertDapsInAlphabeticalOrder()
   })
@@ -98,7 +98,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
     dapManagementPage.assertNoDapsExistMessageIsDisplayed()
 
     //Inactive tab
-    dapManagementPage.clickTabByTitle('Inactive')
+    dapManagementPage.clickTab('Inactive')
     dapManagementPage.assertInactiveDapsAreDisplayed(false)
     dapManagementPage.assertNoDapsExistMessageIsDisplayed()
   })
@@ -475,7 +475,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
     dapManagementPage.assertAmountOfSearchedConditionResults(1)
 
     // INACTIVE TAB
-    dapManagementPage.clickTabByTitle('Inactive')
+    dapManagementPage.clickTab('Inactive')
 
     dap = 'DAP TO SEARCH'
     searchBar.search(dap)
@@ -542,7 +542,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
     cy.log(' ---------------- INACTIVE TAB --------------------- ')
 
     // INACTIVE TAB
-    dapManagementPage.clickTabByTitle('Inactive')
+    dapManagementPage.clickTab('Inactive')
 
     dap = '(*&!¨_}º]'
     dapId = 46
@@ -650,19 +650,32 @@ describe('Data Access Profiles tests over User Management settings - View Only U
    * @missing_data Need to have a user with only View permissions to see DAPS. Also, need to have 1 DAP available to use in the active tab, and another 1 in the inactive tab
    *
    */
-  it.skip('C8981128_DAP_User_Does_Not_Have_Permission_Create_Permission_For_AccessFilters', () => {
+  it.skip('C8981128_DAP_User_Does_Not_Have_Create_Permission_For_AccessFilters', () => {
     const dapActiveId = 7
     const dapInactiveId = 9
 
     // Active tab
+    dapManagementPage.clickTab('active')
     dapManagementPage.clickDapById(dapActiveId)
     dapManagementPage.assertThreeDotButtonDisplayed(false)
     dapManagementPage.assertCreateNewDapButtonDisplayed(false)
 
     // Inactive tab
-    dapManagementPage.clickTabByTitle('Inactive')
+    dapManagementPage.clickTab('inactive')
     dapManagementPage.clickDapById(dapInactiveId)
     dapManagementPage.assertThreeDotButtonDisplayed(false)
     dapManagementPage.assertCreateNewDapButtonDisplayed(false)
+  })
+
+  /**
+   * @missing_data Need to have a user with only view permissions to AccessFilters
+   *
+   */
+  it.skip('C8781224_DAP_User_Does_Not_Have_Update_Permission_For_AccessFilters', () => {
+    const dapId = 7
+
+    dapManagementPage.clickDapById(dapId)
+    dapManagementPage.assertDapEditable(false)
+    cy.get('gs-button[data-test-id=more-actions-button]').should('not.exist') // temporarily placed until the ids missing report 2 is finished
   })
 })

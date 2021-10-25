@@ -73,7 +73,7 @@ describe('Role Management tests over User Management settings', () => {
     roleManagementPage.assertOtherGroupListDisplayed()
 
     // Now on Inactive TAB
-    roleManagementPage.clickTabByTitle('Inactive')
+    roleManagementPage.clickTab('Inactive')
 
     role = 'ZZZ'
     searchBar.search(role)
@@ -122,7 +122,7 @@ describe('Role Management tests over User Management settings', () => {
     roleManagementPage.assertActiveRolesAreDisplayed()
     roleManagementPage.assertRolesInAlphabeticalOrder()
 
-    roleManagementPage.clickTabByTitle('Inactive')
+    roleManagementPage.clickTab('Inactive')
     roleManagementPage.assertInactiveRolesAreDisplayed()
     roleManagementPage.assertRolesInAlphabeticalOrder()
   })
@@ -132,7 +132,7 @@ describe('Role Management tests over User Management settings', () => {
    */
   it.skip('C7499690_Empty_State_Active_And_Inactive_Roles)', () => {
     roleManagementPage.assertEmptyStateMessageIsVisible()
-    roleManagementPage.clickTabByTitle('Inactive')
+    roleManagementPage.clickTab('Inactive')
     roleManagementPage.assertEmptyStateMessageIsVisible()
   })
 
@@ -605,7 +605,7 @@ describe('Role Management tests over User Management settings - View Only User',
    * @missing_step What happens when the user tries do access this by the URL? Some error message?
    */
   it.skip('C7499703_User_Does_Not_Have_Permissions_To_Create_New_Role', () => {
-    roleManagementPage.clickTabByTitle('Active')
+    roleManagementPage.clickTab('Active')
     roleManagementPage.getNewRoleButton().should('not.exist')
 
     roleManagementPage.addPathToUrlAndVisitIt('/0')
@@ -625,7 +625,7 @@ describe('Role Management tests over User Management settings - View Only User',
     roleManagementPage.clickRoleById(roleIdActive)
     roleManagementPage.assertThreeDotButtonDisplayed(false)
 
-    roleManagementPage.clickTabByTitle('Inactive')
+    roleManagementPage.clickTab('Inactive')
     roleManagementPage.clickRoleById(roleIdInactive)
     roleManagementPage.assertActivateButtonDisplayed(false)
     roleManagementPage.assertThreeDotButtonDisplayed(false)

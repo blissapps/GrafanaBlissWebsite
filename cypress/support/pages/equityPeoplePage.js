@@ -8,7 +8,10 @@ const selectors = {
   customizeColumnsIcon: '#pptOpenColumn',
   numberOfRecordsInTable: '#peopleRecordCount',
   clientNameHeader: 'gs-container-l2 #navBarHeader > span',
-  participant: '#participant-'
+  participant: '#participant-',
+  participantsTab: '.tabs-bar #Participants',
+  trustsTab: '.tabs-bar #Trusts',
+  overviewTab: '.tabs-bar #Overview'
 }
 
 const quickEditNavBarSelectors = {
@@ -56,6 +59,32 @@ class EquityPeoplePage extends BasePage {
    */
   clickParticipantFromTheList(participantId) {
     this.getParticipantFromTheList(participantId).click()
+  }
+
+  /**
+   * Click in the Participants, Trusts, or Overview tabs
+   *
+   * @param {String} tabName Tab name to click. It can be 'participants', 'trusts', or 'overview'
+   */
+  clickTab(tabName) {
+    tabName = tabName.toLowerCase()
+
+    switch (tabName) {
+      case 'participants':
+        cy.get(selectors.participantsTab).click()
+        break
+
+      case 'trusts':
+        cy.get(selectors.trustsTab).click()
+        break
+
+      case 'overview':
+        cy.get(selectors.overviewTab).click()
+        break
+
+      default:
+        throw new Error('Option invalid. Tabs for settings can be "participants", "trusts", or "overview"')
+    }
   }
 
   // -------------------------------- ASSERTIONS ------------------------------------- //

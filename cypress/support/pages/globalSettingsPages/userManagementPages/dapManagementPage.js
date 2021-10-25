@@ -211,7 +211,7 @@ class DapManagementPage extends BaseManagementPage {
   }
 
   /**
-   * Assert if a Dap is editable or not
+   * Assert if a Dap is editable or not in a selected Dap
    *
    * @param {Boolean} editable True to assert the Dap is editable, false otherwise
    */
