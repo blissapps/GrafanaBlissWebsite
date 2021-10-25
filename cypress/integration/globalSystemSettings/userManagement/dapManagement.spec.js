@@ -630,7 +630,7 @@ describe('Data Access Profiles tests over User Management settings - View Only U
   const settingsMenuNavBar = new SettingsMenuNavBar()
 
   beforeEach(() => {
-    cy.login(Cypress.env('VIEW_ONLY_DEFAULT_USER_AUTH'))
+    cy.login(Cypress.env('VIEW_ONLY_USER_2_AUTH'))
     settingsMenuNavBar.accessGlobalSettingsMenu('user', 'dap')
     dapManagementPage.checkDapManagementUrl()
   })
@@ -640,9 +640,29 @@ describe('Data Access Profiles tests over User Management settings - View Only U
    *
    */
   it.skip('C9277653_DAP_User_Does_Not_Have_Permission_Needed_To_Link_A_Group_To_The_DAP', () => {
-    const dapId = 14
+    const dapId = 7
 
     dapManagementPage.clickDapById(dapId)
     dapManagementPage.assertAddGroupsButtonIsVisible(false)
+  })
+
+  /**
+   * @missing_data Need to have a user with only View permissions to see DAPS. Also, need to have 1 DAP available to use in the active tab, and another 1 in the inactive tab
+   *
+   */
+  it.skip('C8981128_DAP_User_Does_Not_Have_Permission_Create_Permission_For_AccessFilters', () => {
+    const dapActiveId = 7
+    const dapInactiveId = 9
+
+    // Active tab
+    dapManagementPage.clickDapById(dapActiveId)
+    dapManagementPage.assertThreeDotButtonDisplayed(false)
+    dapManagementPage.assertCreateNewDapButtonDisplayed(false)
+
+    // Inactive tab
+    dapManagementPage.clickTabByTitle('Inactive')
+    dapManagementPage.clickDapById(dapInactiveId)
+    dapManagementPage.assertThreeDotButtonDisplayed(false)
+    dapManagementPage.assertCreateNewDapButtonDisplayed(false)
   })
 })

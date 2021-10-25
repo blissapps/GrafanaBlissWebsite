@@ -59,15 +59,6 @@ class DapManagementPage extends BaseManagementPage {
     return cy.get(selectors.dapId + dapId).scrollIntoView()
   }
 
-  /**
-   * Get create new Dap button
-   *
-   * @returns Button to create a new DAP
-   */
-  getCreateNewDapButton() {
-    return cy.get(selectors.createDapBtn)
-  }
-
   // ----------------------------------------------- CLICKS --------------------------------------------- //
 
   /**
@@ -81,10 +72,19 @@ class DapManagementPage extends BaseManagementPage {
   }
 
   clickCreateNewDap() {
-    this.getCreateNewDapButton().click()
+    cy.get(selectors.createDapBtn).click()
   }
 
   // ----------------------------------------------- ASSERTS --------------------------------------------- //
+
+  /**
+   * Assert the button (therefore the permission) to create a new DAP is displayed over the UI
+   *
+   * @param {Boolean} displayed True to verify if the button to create a new DAP is displayed. False otherwise.
+   */
+  assertCreateNewDapButtonDisplayed(displayed = true) {
+    displayed ? cy.get(selectors.createDapBtn).should('be.visible') : cy.get(selectors.createDapBtn).should('not.exist')
+  }
 
   /**
    * Assert the message about no DAP selected is displayed
@@ -249,7 +249,7 @@ class DapManagementPage extends BaseManagementPage {
   }
 
   /**
-   * Assert add groups button is visible
+   * Assert add groups button is visible or not
    *
    * @param {Boolean} visible True is default value to assert the add groups button is visible. False to assert otherwise
    *

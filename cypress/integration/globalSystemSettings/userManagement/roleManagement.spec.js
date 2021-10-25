@@ -159,11 +159,11 @@ describe('Role Management tests over User Management settings', () => {
     const roleName = 'Create new role ' + utils.getRandomNumber()
 
     roleManagementPage.clickToCreateRoleWithNewName(roleName)
-    roleManagementPage.insertOrRemovePermissions('accessfilters', ['view', 'update', 'create', 'delete'])
-    roleManagementPage.insertOrRemovePermissions('api', ['view'])
-    roleManagementPage.insertOrRemovePermissions('settings', ['update'])
-    roleManagementPage.insertOrRemovePermissions('settings', ['delete'])
-    roleManagementPage.insertOrRemovePermissions('groups', ['view', 'update', 'create', 'delete'])
+    roleManagementPage.addOrRemovePermissions('accessfilters', ['view', 'update', 'create', 'delete'])
+    roleManagementPage.addOrRemovePermissions('api', ['view'])
+    roleManagementPage.addOrRemovePermissions('settings', ['update'])
+    roleManagementPage.addOrRemovePermissions('settings', ['delete'])
+    roleManagementPage.addOrRemovePermissions('groups', ['view', 'update', 'create', 'delete'])
 
     roleManagementPage.saveEntityInformation()
 
@@ -176,9 +176,9 @@ describe('Role Management tests over User Management settings', () => {
     const roleName = 'Create and Discard' + utils.getRandomNumber()
 
     roleManagementPage.clickToCreateRoleWithNewName(roleName)
-    roleManagementPage.insertOrRemovePermissions('accessfilters', ['view', 'update', 'create', 'delete'])
-    roleManagementPage.insertOrRemovePermissions('api', ['view'])
-    roleManagementPage.insertOrRemovePermissions('groups', ['view', 'update', 'create', 'delete'])
+    roleManagementPage.addOrRemovePermissions('accessfilters', ['view', 'update', 'create', 'delete'])
+    roleManagementPage.addOrRemovePermissions('api', ['view'])
+    roleManagementPage.addOrRemovePermissions('groups', ['view', 'update', 'create', 'delete'])
 
     roleManagementPage.discardEntityInformation()
     roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully', false)
@@ -293,11 +293,11 @@ describe('Role Management tests over User Management settings', () => {
 
     roleManagementPage.clickRoleById(roleId)
 
-    roleManagementPage.insertOrRemovePermissions('accessfilters', ['view', 'update', 'create'])
-    roleManagementPage.insertOrRemovePermissions('api', ['view'])
-    roleManagementPage.insertOrRemovePermissions('settings', ['update', 'delete'])
-    roleManagementPage.insertOrRemovePermissions('groups', ['view', 'delete'])
-    roleManagementPage.insertOrRemoveAllPermissions('delete')
+    roleManagementPage.addOrRemovePermissions('accessfilters', ['view', 'update', 'create'])
+    roleManagementPage.addOrRemovePermissions('api', ['view'])
+    roleManagementPage.addOrRemovePermissions('settings', ['update', 'delete'])
+    roleManagementPage.addOrRemovePermissions('groups', ['view', 'delete'])
+    roleManagementPage.addOrRemoveAllPermissions('delete')
     roleManagementPage.saveEntityInformation()
     roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully', true)
 
@@ -351,13 +351,13 @@ describe('Role Management tests over User Management settings', () => {
 
     //teardown - Remove all permissions at once
     cy.log('--- TEARDOWN ---')
-    roleManagementPage.insertOrRemoveAllPermissions('view')
-    roleManagementPage.insertOrRemoveAllPermissions('view')
-    roleManagementPage.insertOrRemoveAllPermissions('update')
-    roleManagementPage.insertOrRemoveAllPermissions('update')
-    roleManagementPage.insertOrRemoveAllPermissions('create')
-    roleManagementPage.insertOrRemoveAllPermissions('create')
-    roleManagementPage.insertOrRemoveAllPermissions('delete')
+    roleManagementPage.addOrRemoveAllPermissions('view')
+    roleManagementPage.addOrRemoveAllPermissions('view')
+    roleManagementPage.addOrRemoveAllPermissions('update')
+    roleManagementPage.addOrRemoveAllPermissions('update')
+    roleManagementPage.addOrRemoveAllPermissions('create')
+    roleManagementPage.addOrRemoveAllPermissions('create')
+    roleManagementPage.addOrRemoveAllPermissions('delete')
     roleManagementPage.saveEntityInformation()
   })
 
@@ -370,10 +370,10 @@ describe('Role Management tests over User Management settings', () => {
 
     roleManagementPage.clickRoleById(roleId)
 
-    roleManagementPage.insertOrRemovePermissions('accessfilters', ['view', 'update'], false)
-    roleManagementPage.insertOrRemovePermissions('categories', ['view'], false)
-    roleManagementPage.insertOrRemovePermissions('users', ['create'], false)
-    roleManagementPage.insertOrRemoveAllPermissions('delete')
+    roleManagementPage.addOrRemovePermissions('accessfilters', ['view', 'update'], false)
+    roleManagementPage.addOrRemovePermissions('categories', ['view'], false)
+    roleManagementPage.addOrRemovePermissions('users', ['create'], false)
+    roleManagementPage.addOrRemoveAllPermissions('delete')
     roleManagementPage.saveEntityInformation()
     roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully', true)
 
@@ -422,10 +422,10 @@ describe('Role Management tests over User Management settings', () => {
 
     //teardown - Add permissions removed
     cy.log('--- TEARDOWN ---')
-    roleManagementPage.insertOrRemoveAllPermissions('delete')
-    roleManagementPage.insertOrRemovePermissions('accessfilters', ['view', 'update'], true)
-    roleManagementPage.insertOrRemovePermissions('categories', ['view'], true)
-    roleManagementPage.insertOrRemovePermissions('users', ['create'], true)
+    roleManagementPage.addOrRemoveAllPermissions('delete')
+    roleManagementPage.addOrRemovePermissions('accessfilters', ['view', 'update'], true)
+    roleManagementPage.addOrRemovePermissions('categories', ['view'], true)
+    roleManagementPage.addOrRemovePermissions('users', ['create'], true)
     roleManagementPage.saveEntityInformation()
   })
 
@@ -438,13 +438,13 @@ describe('Role Management tests over User Management settings', () => {
 
     roleManagementPage.clickRoleById(roleId)
 
-    roleManagementPage.insertOrRemovePermissions('accessfilters', ['update'], false)
-    roleManagementPage.insertOrRemovePermissions('api', ['view'], false)
-    roleManagementPage.insertOrRemovePermissions('groups', ['delete'], false)
-    roleManagementPage.insertOrRemovePermissions('settings', ['delete'], false)
-    roleManagementPage.insertOrRemovePermissions('bi', ['view'], true)
-    roleManagementPage.insertOrRemovePermissions('categories', ['update', 'delete'], true)
-    roleManagementPage.insertOrRemoveAllPermissions('create')
+    roleManagementPage.addOrRemovePermissions('accessfilters', ['update'], false)
+    roleManagementPage.addOrRemovePermissions('api', ['view'], false)
+    roleManagementPage.addOrRemovePermissions('groups', ['delete'], false)
+    roleManagementPage.addOrRemovePermissions('settings', ['delete'], false)
+    roleManagementPage.addOrRemovePermissions('bi', ['view'], true)
+    roleManagementPage.addOrRemovePermissions('categories', ['update', 'delete'], true)
+    roleManagementPage.addOrRemoveAllPermissions('create')
     roleManagementPage.discardEntityInformation()
     roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully', false)
 
@@ -567,6 +567,18 @@ describe('Role Management tests over User Management settings', () => {
     roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully')
     roleManagementPage.assertNotificationErrorDisplayed('Name length must be 50 characters or fewer.', false)
     roleManagementPage.assertEntityIsDisplayedInTheList(newRoleNameLessThan50Characters)
+  })
+
+  /**
+   * @missing_data Need to have a role registered
+   *
+   */
+  it.skip('C9281161_CRUD_Permissions_Are_Visible_While_Scrolling_Down', () => {
+    const roleId = 1468
+
+    roleManagementPage.clickRoleById(roleId)
+    roleManagementPage.addOrRemovePermissions('vestingschedules', ['delete']) //strategy to easily scroll until the bottom
+    roleManagementPage.assertCRUDColumnsDisplayed()
   })
 
   // ************************************************ TESTS AS CLIENTS ************************************************** //

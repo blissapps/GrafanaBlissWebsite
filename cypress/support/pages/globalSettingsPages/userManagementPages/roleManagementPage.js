@@ -14,7 +14,11 @@ const selectors = {
   roleId: '*[id*=role_',
   activateRoleBtn: 'gs-button[data-test-id=activateBtn]',
   allPermissionsHeaders: 'thead th a',
-  roleTableNotEditable: 'hearth-role-details table.view-only'
+  roleTableNotEditable: 'hearth-role-details table.view-only',
+  columnHeaderView: 'thead th[name=column_view]',
+  columnHeaderUpdate: 'thead th[name=column_update]',
+  columnHeaderCreate: 'thead th[name=column_create]',
+  columnHeaderDelete: 'thead th[name=column_delete]'
 }
 
 const apiInterceptions = {
@@ -311,20 +315,31 @@ class RoleManagementPage extends BaseManagementPage {
     editable ? cy.get(selectors.roleTableNotEditable).should('not.exist') : cy.get(selectors.roleTableNotEditable).should('be.visible')
   }
 
+  /**
+   * Assert if the CRUD columns with the permissions (View, Update, Create, and Delete) are displayed
+   *
+   */
+  assertCRUDColumnsDisplayed() {
+    cy.get(selectors.columnHeaderView).should('be.visible')
+    cy.get(selectors.columnHeaderUpdate).should('be.visible')
+    cy.get(selectors.columnHeaderCreate).should('be.visible')
+    cy.get(selectors.columnHeaderDelete).should('be.visible')
+  }
+
   // ----------------------------------------------- PERMISSIONS --------------------------------------------- //
 
   /**
-   * Insert or remove permissions of a selected role
+   * Add or remove permissions of a selected role
    *
    * @param {String} permissionName Permission name of a role
    * @param {Array} permissionsType Array containing the permissions, for this permission are allowed ['view', 'update', 'create', 'delete']
    * @param {Boolean} insertPermission True to insert permission, false to remove
    *
    * @example:
-   * insertOrRemovePermissions('accessfilters', ['delete']) -> It inserts the permission Delete in the Access Filter permission
-   * insertOrRemovePermissions('settings', ['update'], false) -> It removes the permission Update in the Settings permission
+   * addOrRemovePermissions('accessfilters', ['delete']) -> It inserts the permission Delete in the Access Filter permission
+   * addOrRemovePermissions('settings', ['update'], false) -> It removes the permission Update in the Settings permission
    */
-  insertOrRemovePermissions(permissionName, permissionsType, insertPermission = true) {
+  addOrRemovePermissions(permissionName, permissionsType, insertPermission = true) {
     // Manipulate permissionName and permissionsType, so we do not need to be worried about capitalization nor blank spaces
     permissionName = permissionName.replaceAll(' ', '').toLowerCase()
     permissionsType = permissionsType.map(permission => permission.replaceAll(' ', '').toLowerCase())
@@ -386,32 +401,32 @@ class RoleManagementPage extends BaseManagementPage {
    * @example:
    * insertOrRemoveAllPermissions('delete') -> It clicks on the Delete column header to insert or remove all delete permissions of all permissions
    */
-  insertOrRemoveAllPermissions(permissionsType) {
+  addOrRemoveAllPermissions(permissionsType) {
     // Manipulate permissionName and permissionsType, so we do not need to be worried about capitalization nor blank spaces
     permissionsType = permissionsType.replaceAll(' ', '').toLowerCase()
 
     cy.log('Permissions: ' + permissionsType)
     switch (permissionsType) {
       case 'view':
-        cy.get('thead th[name=column_view]')
+        cy.get(selectors.columnHeaderView)
           .scrollIntoView()
           .click()
         break
 
       case 'update':
-        cy.get('thead th[name=column_update]')
+        cy.get(selectors.columnHeaderUpdate)
           .scrollIntoView()
           .click()
         break
 
       case 'create':
-        cy.get('thead th[name=column_create]')
+        cy.get(selectors.columnHeaderCreate)
           .scrollIntoView()
           .click()
         break
 
       case 'delete':
-        cy.get('thead th[name=column_delete]')
+        cy.get(selectors.columnHeaderDelete)
           .scrollIntoView()
           .click()
         break
