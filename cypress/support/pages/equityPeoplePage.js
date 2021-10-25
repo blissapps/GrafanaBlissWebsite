@@ -83,7 +83,7 @@ class EquityPeoplePage extends BasePage {
         break
 
       default:
-        throw new Error('Option invalid. Tabs for settings can be "participants", "trusts", or "overview"')
+        throw new Error('Option invalid. Tabs can be "participants", "trusts", or "overview"')
     }
   }
 

@@ -52,7 +52,7 @@ class BaseStatementManagementPage extends BasePage {
         break
 
       default:
-        throw new Error('Option invalid. Tabs for settings can be either "Client Statements" or "Participant Regulatory Linkage"')
+        throw new Error('Option invalid. Tabs can be either "Client Statements" or "Participant Regulatory Linkage"')
     }
   }
 
