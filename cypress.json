@@ -8,6 +8,7 @@
   "numTestsKeptInMemory": 15,
   "video": false,
   "defaultCommandTimeout": 15000,
+  "slowTestThreshold": 30000,
   "viewportWidth": 1920,
   "viewportHeight": 1080,
   "ignoreTestFiles": ["**/__snapshots__/*", "**/__image_snapshots__/*"],
