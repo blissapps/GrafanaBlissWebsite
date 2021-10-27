@@ -15,9 +15,12 @@ const selectors = {
   participantId: '#pptIdFilter input',
   participantStatus: '#statusSelect input',
   participantExternalId: '#pptExternalIdFilter input',
-  onHoldBtn: '#onHold',
-  recallBtn: 'gs-hover-icon-actions gs-svg-icon',
-  approveBtn: 'gs-hover-icon-actions gs-svg-icon'
+  onHoldBtn: '#gridActionHold',
+  recallBtn: '#gridActionRecall',
+  approveBtn: '#gridActionApprove',
+  rerunBtn: '#gridActionRerun',
+  actionsButton: '.action gs-button',
+  actionsRerunButton: 'gs-action-panel-option span'
 }
 
 const reconcileStatementsSelectors = {
@@ -31,7 +34,7 @@ const reconcileStatementsSelectors = {
 
 const onHoldStatementsSelectors = {
   numberOfStatements: 'gs-container-l4 h2',
-  onHoldBtn: 'gs-container-l4 gs-button[appearance=primary]'
+  actionButton: 'gs-container-l4 #actionBtn'
 }
 
 const apiInterceptions = {
@@ -47,7 +50,7 @@ class ClientStatementsPage extends BaseStatementManagementPage {
     this.checkUrl(properties.pageURL)
   }
 
-  // --------------------------------------- GETS --------------------------------------------- //
+  // ------------------------------------------------------------------------------------------------ GETS --------------------------------------------------------------------------------------- //
 
   /**
    * Get client from the records table
@@ -80,19 +83,7 @@ class ClientStatementsPage extends BaseStatementManagementPage {
     return cy.get(`#hover-actions-${clientId} gs-svg-icon`)
   }
 
-  /**
-   * Get the participant element in the client participants statements.
-   * This one is found right after opening the participants page inside a client statement.
-   *
-   * @param {Number} participantId participant Id number
-   *
-   * @returns the client participant statement.
-   */
-  getClientParticipantStatement(participantId) {
-    return cy.get(selectors.clientParticipantStatementId + participantId).scrollIntoView()
-  }
-
-  // --------------------------------------- CLICKS --------------------------------------------- //
+  // ------------------------------------------------------------------------------------------------- CLICKS --------------------------------------------------------------------------------------- //
 
   /**
    * Select a client from the table of clients
@@ -164,18 +155,33 @@ class ClientStatementsPage extends BaseStatementManagementPage {
   }
 
   /**
-   * Click in the on hold button located in the table header when one or more participants with Pending Validation statuses are selected.
-   * After that, verify the number of participant statements that will be on hold and click in on hold
+   * Click in the buttons located in the header of the participants table right after selecting them on the checkboxes
    *
-   * @param {Number} numberOfParticipantsStatements Number of Participants Statements to be put On Hold
+   * @param {String} actionToPerform Chose the action to perform. It can be Rerun, Approve, or On Hold.
+   * @param {Number} numberOfParticipantsAffected Number of participants that are going be affected
+   *
    */
-  clickToOnHoldAllSelectedParticipants(numberOfParticipantsStatements) {
-    cy.get(selectors.onHoldBtn).click()
-    cy.get(onHoldStatementsSelectors.numberOfStatements).should('have.text', numberOfParticipantsStatements)
-    cy.get(onHoldStatementsSelectors.onHoldBtn).click()
+  clickInTableHeaderToPerformActions(actionToPerform, numberOfParticipantsAffected) {
+    actionToPerform = actionToPerform.toLowerCase()
+
+    switch (actionToPerform) {
+      case 'on hold':
+        cy.get(selectors.onHoldBtn).click()
+        break
+
+      case 'rerun':
+        cy.get(selectors.rerunBtn).click()
+        break
+
+      default:
+        throw new Error('Parameter actionToPerform is invalid')
+    }
+
+    cy.get(onHoldStatementsSelectors.numberOfStatements).should('have.text', numberOfParticipantsAffected)
+    cy.get(onHoldStatementsSelectors.actionButton).click()
   }
 
-  // --------------------------------------- ASSERTIONS --------------------------------------------- //
+  // --------------------------------------------------------------------------------- ASSERTIONS ------------------------------------------------------------------------------------------ //
 
   /**
    * Assert the client is displayed in the table on statement/clients
@@ -299,7 +305,9 @@ class ClientStatementsPage extends BaseStatementManagementPage {
    * @param {Boolean} displayed True is the default value to check the participant is visible. False, otherwise
    */
   assertParticipantStatementDisplayed(participantId, displayed = true) {
-    displayed ? this.getClientParticipantStatement(participantId).should('be.visible') : this.getClientParticipantStatement(participantId).should('not.exist')
+    displayed
+      ? cy.get(selectors.clientParticipantStatementId + participantId).should('be.visible')
+      : cy.get(selectors.clientParticipantStatementId + participantId).should('not.exist')
   }
 
   /**
@@ -359,7 +367,48 @@ class ClientStatementsPage extends BaseStatementManagementPage {
           .should('not.exist')
   }
 
-  // ----------------------------------------------------------------------OTHERS ------------------------------------------------------------------- //
+  /**
+   * Assert if the a specific button is displayed in the table header after selecting one or more participants
+   *
+   * @param {String} actionButtonName Action name. It can be approve, on hold, rerun
+   * @param {Boolean} displayed True to assert the button is displayed. False, otherwise.
+   *
+   */
+  assertActionButtonDisplayedInTableHeader(actionButtonName, displayed = true) {
+    actionButtonName = actionButtonName.toLowerCase()
+
+    switch (actionButtonName) {
+      case 'on hold':
+        displayed ? cy.get(selectors.onHoldBtn).should('be.visible') : cy.get(selectors.onHoldBtn).should('not.exist')
+        break
+
+      default:
+        throw new Error('Parameter actionToPerform is invalid')
+    }
+  }
+
+  /**
+   * Assert the button/option is available inside the Actions button for a given participant
+   *
+   * @param {Number} participantId Participant id to verify the actions available for it.
+   * @param {String} buttonName Button name to be asserted
+   */
+  assertButtonIsDisplayedInParticipantActions(participantId, buttonName) {
+    buttonName = buttonName.toLowerCase()
+
+    cy.get(selectors.clientParticipantStatementId + participantId + ' ' + selectors.actionsButton).click()
+
+    switch (buttonName) {
+      case 'rerun':
+        cy.get(selectors.actionsRerunButton).should('be.visible')
+        break
+
+      default:
+        throw new Error('The buttonName parameter is not valid!')
+    }
+  }
+
+  // -------------------------------------------------------------------------------------------- OTHERS ------------------------------------------------------------------------------------------- //
 
   /**
    * Filter data from client statements

@@ -455,7 +455,7 @@ describe('Statement Management tests', () => {
     clientStatementsPage.assertParticipantStatus(participantIDs[3], participantStatusBefore)
     clientStatementsPage.clearAllFilters()
 
-    clientStatementsPage.clickToOnHoldAllSelectedParticipants(participantIDs.length)
+    clientStatementsPage.clickInTableHeaderToPerformActions('on hold', participantIDs.length)
 
     clientStatementsPage.assertParticipantStatus(participantIDs[0], participantStatusAfter)
     clientStatementsPage.assertParticipantStatus(participantIDs[1], participantStatusAfter)
@@ -500,7 +500,7 @@ describe('Statement Management tests', () => {
     clientStatementsPage.assertParticipantStatus(participantPendingValidationIDs[0], participantStatusBefore)
     clientStatementsPage.clearAllFilters()
 
-    clientStatementsPage.clickToOnHoldAllSelectedParticipants(participantPendingValidationIDs.length)
+    clientStatementsPage.clickInTableHeaderToPerformActions('on hold', participantPendingValidationIDs.length)
 
     clientStatementsPage.assertParticipantStatus(participantOnHoldIDs[0], participantStatusAfter)
     clientStatementsPage.assertParticipantStatus(participantOnHoldIDs[1], participantStatusAfter)
@@ -572,6 +572,77 @@ describe('Statement Management tests', () => {
     clientStatementsPage.clickInTheCheckboxToSelectParticipant(participantOnHoldIds[2])
     clientStatementsPage.assertParticipantStatus(participantOnHoldIds[2], 'On Hold')
     clientStatementsPage.clearAllFilters()
+  })
+
+  /**
+   * @missing_data We need a client with at least one participant with Pending Validation status
+   */
+  it.skip('C7592120_Statements_Rerun_Button_Behavior_Over_On_Hold_Status', () => {
+    const clientPendingValidation = 'Keywords Studios plc'
+    const clientPendingValidationId = 87
+    const participantPendingValidationId = 226084
+
+    // Pick client
+    clientStatementsPage.filterClientStatements(clientPendingValidation)
+    clientStatementsPage.clickClientTable(clientPendingValidationId)
+
+    // Pick participant and ensure correct status
+    clientStatementsPage.filterParticipantStatements('', participantPendingValidationId)
+    clientStatementsPage.assertParticipantStatus(participantPendingValidationId, 'Pending Validation')
+
+    // On Hold behavior
+    clientStatementsPage.clickInTheCheckboxToSelectParticipant(participantPendingValidationId)
+    clientStatementsPage.assertActionButtonDisplayedInTableHeader('on hold')
+    clientStatementsPage.clickInTheCheckboxToSelectParticipant(participantPendingValidationId)
+    clientStatementsPage.assertActionButtonDisplayedInTableHeader('on hold', false)
+
+    // On hold participant
+    clientStatementsPage.clickInTheCheckboxToSelectParticipant(participantPendingValidationId)
+    clientStatementsPage.clickInTableHeaderToPerformActions('on hold', 1)
+
+    // Verify rerun button
+    clientStatementsPage.assertParticipantStatus(participantPendingValidationId, 'On Hold')
+    clientStatementsPage.assertButtonIsDisplayedInParticipantActions(participantPendingValidationId, 'rerun')
+    clientStatementsPage.clickInTheCheckboxToSelectParticipant(participantPendingValidationId)
+    clientStatementsPage.clickInTableHeaderToPerformActions('rerun', 1)
+    clientStatementsPage.assertParticipantStatus(participantPendingValidationId, 'Pending Validation')
+  })
+
+  /**
+   * @missing_data We need a client with at least 3 participants with On Hold status
+   */
+  it.skip('C7592122_Statements_Rerun_Multiple_Statements', () => {
+    const clientPendingValidation = 'Keywords Studios plc'
+    const clientPendingValidationId = 87
+    const participantOnHoldId = [226084, 226072, 2260865]
+
+    // Pick client
+    clientStatementsPage.filterClientStatements(clientPendingValidation)
+    clientStatementsPage.clickClientTable(clientPendingValidationId)
+
+    // Select participant 1
+    clientStatementsPage.filterParticipantStatements('', participantOnHoldId[0])
+    clientStatementsPage.assertParticipantStatus(participantOnHoldId[0], 'On Hold')
+    clientStatementsPage.clickInTheCheckboxToSelectParticipant(participantOnHoldId[0])
+    clientStatementsPage.clearAllFilters()
+
+    // Select participant 2
+    clientStatementsPage.filterParticipantStatements('', participantOnHoldId[1])
+    clientStatementsPage.assertParticipantStatus(participantOnHoldId[1], 'On Hold')
+    clientStatementsPage.clickInTheCheckboxToSelectParticipant(participantOnHoldId[1])
+    clientStatementsPage.clearAllFilters()
+
+    // Select participant 3
+    clientStatementsPage.filterParticipantStatements('', participantOnHoldId[2])
+    clientStatementsPage.assertParticipantStatus(participantOnHoldId[2], 'On Hold')
+    clientStatementsPage.clickInTheCheckboxToSelectParticipant(participantOnHoldId[2])
+    clientStatementsPage.clearAllFilters()
+
+    // Rerun participants
+    clientStatementsPage.clickInTableHeaderToPerformActions('rerun', participantOnHoldId.length)
+    clientStatementsPage.assertParticipantStatus(participantOnHoldId[0], 'Pending Validation')
+    clientStatementsPage.assertParticipantStatus(participantOnHoldId[1], 'Pending Validation')
+    clientStatementsPage.assertParticipantStatus(participantOnHoldId[2], 'Pending Validation')
   })
 
   /**
