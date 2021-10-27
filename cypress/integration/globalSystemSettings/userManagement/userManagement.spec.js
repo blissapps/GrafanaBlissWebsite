@@ -11,6 +11,7 @@ describe('User Management tests over User Management settings', () => {
   beforeEach(() => {
     cy.login()
     settingsMenuNavBar.accessGlobalSettingsMenu('user', 'user')
+    userManagementPage.checkUserManagementUrl()
   })
 
   // ************************************************ TESTS AS ADMIN TENANT ************************************************** //

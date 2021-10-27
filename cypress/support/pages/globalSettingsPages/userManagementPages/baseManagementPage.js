@@ -25,7 +25,8 @@ const selectors = {
   threeDotDuplicateBtn: 'gs-action-panel-option[data-test-id=action-duplicate]',
   threeDotDeactivateBtn: 'gs-action-panel-option[data-test-id=action-deactivate]',
   activeTab: '.tabs-bar #Active',
-  inactiveTab: '.tabs-bar #Inactive'
+  inactiveTab: '.tabs-bar #Inactive',
+  viewOnlyStatusBadge: 'div .status gs-badge'
 }
 
 // These selectors are the ones from the l4 nav bar (right nav bar)
@@ -348,6 +349,15 @@ class BaseManagementPage extends BasePage {
    */
   assertDuplicateEntityButtonDisplayed(displayed = true) {
     displayed ? cy.get(selectors.threeDotDuplicateBtn).should('be.visible') : cy.get(selectors.threeDotDuplicateBtn).should('not.exist')
+  }
+
+  /**
+   * Assert a badge with View Only is displayed next the entity header/title
+   *
+   * @param {Boolean} displayed True is the default value to assert the VIEW ONLY badge is displayed. False otherwise
+   */
+  assertViewOnlyBadgeDisplayed(displayed = true) {
+    displayed ? cy.get(selectors.viewOnlyStatusBadge).should('be.visible') : cy.get(selectors.viewOnlyStatusBadge).should('not.exist')
   }
 
   // ----------------------------------------------- OTHERS --------------------------------------------- //

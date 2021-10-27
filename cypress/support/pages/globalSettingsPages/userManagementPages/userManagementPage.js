@@ -1,4 +1,4 @@
-import BasePage from '../../basePage'
+import BaseManagementPage from './baseManagementPage'
 
 const properties = {
   pageURL: '/settings/user-management'
@@ -38,7 +38,7 @@ const userInfoNavBarSelectors = {
   AccountDetailsUsername: '#accountDetailsUsername input'
 }
 
-class UserManagementPage extends BasePage {
+class UserManagementPage extends BaseManagementPage {
   /**
    * Checks if the current page is User settings URL
    */

@@ -2,6 +2,11 @@ image: cypress/browsers:node16.5.0-chrome94-ff93
 options:
   max-time: 120
 
+definitions:
+  caches:
+    npm: $HOME/.npm
+    cypress: $HOME/.cache/Cypress
+
 pipelines:
   default:
     - step:
@@ -42,8 +47,3 @@ pipelines:
           - cypress/videos/**
           - cypress/test-results/**
           - cypress/downloads/**
-
-definitions:
-  caches:
-    npm: $HOME/.npm
-    cypress: $HOME/.cache/Cypress
