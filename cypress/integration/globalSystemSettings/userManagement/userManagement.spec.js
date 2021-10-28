@@ -67,7 +67,7 @@ describe('User Management tests over User Management settings', () => {
     searchBar.search(username, 500)
     userManagementPage.clickUserTable(userId)
 
-    userManagementPage.assertRightNavBarIsDisplayed()
+    userManagementPage.assertRightL4BarIsDisplayed()
     userManagementPage.assertUserDetailContentInRightNavBar(publicName, username, status, email)
     userManagementPage.clickLinkToAccessUserInfoDetailsOnRightNavBar()
     userManagementPage.assertUserInfoContentInRightNavBar(groups, firstName, lastName, publicName, jobTitle, qualifications, organization, phone, email, username)

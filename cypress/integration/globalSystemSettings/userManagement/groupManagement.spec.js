@@ -322,7 +322,7 @@ describe('Group Management tests over User Management settings', () => {
     userManagementPage.clickUserTable(userIds[0])
     userManagementPage.clickLinkToAccessUserInfoDetailsOnRightNavBar()
     userManagementPage.assertUserInfoContentInRightNavBar([groupName])
-    userManagementPage.clickOutsideToCloseL4RightWindow()
+    userManagementPage.clickOutsideToCloseL4RightBar()
 
     // Validates user 2 is linked to the group over User Management settings
     searchBar.search(userName[1])

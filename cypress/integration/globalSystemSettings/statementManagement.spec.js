@@ -416,7 +416,6 @@ describe('Statement Management tests', () => {
 
     clientStatementsPage.filterClientStatements(clientInitiated)
     clientStatementsPage.clickToReconcileClient(clientInitiatedId)
-    clientStatementsPage.assertReconcileStatemenRightWindowDisplayed()
     clientStatementsPage.assertReconcileStatementRightWindowDisplaysElementsAsExpected(securityIds)
   })
 
@@ -643,6 +642,43 @@ describe('Statement Management tests', () => {
     clientStatementsPage.assertParticipantStatus(participantOnHoldId[0], 'Pending Validation')
     clientStatementsPage.assertParticipantStatus(participantOnHoldId[1], 'Pending Validation')
     clientStatementsPage.assertParticipantStatus(participantOnHoldId[2], 'Pending Validation')
+  })
+
+  /**
+   * @missing_data We need a client with at participants with all status, such as Initiated, Pending Validation, On Hold, Approved, Published, Recalled...
+   *
+   * @missing_steps This one is made only for On Hold status. Need to do it for the others statuses as well
+   *
+   * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-1006
+   */
+  it.skip('C7592123_Audit_Log_Initiated,_Pending_Validation,_On_Hold,_Approved,_Published,_Recalled,_and_Viewed_Statuses', () => {
+    const clientPendingValidation = 'Keywords Studios plc'
+    const clientPendingValidationId = 87
+
+    // On Hold data
+    const participantOnHoldId = 229042
+    const participantOnHoldName = 'Ramirez'
+    const participantOnHoldAsOfDate = '2020'
+    const participantOnHoldCurrentStatus = 'On Hold'
+    const participantOnHoldAuditTrailStatuses = [participantOnHoldCurrentStatus, ' Initiated', 'Initiated']
+    const participantOnHoldAuditTrailUsers = ['UK_148_812dcf25-2f02-4400-a563-6692bd440b84', 'system', 'system']
+    const participantOnHoldAuditTrailTimestamps = ['07/09/2021 • 10:24:42', '11/05/2021 • 05:13:30', '11/05/2021 • 05:13:01']
+
+    clientStatementsPage.filterClientStatements(clientPendingValidation)
+    clientStatementsPage.clickClientTable(clientPendingValidationId)
+
+    // On Hold
+    clientStatementsPage.clickOnParticipant(participantOnHoldId)
+    clientStatementsPage.assertRightL4BarIsDisplayed()
+    clientStatementsPage.assertParticipantStatementDetailsOnL4Bar(
+      participantOnHoldName,
+      participantOnHoldAsOfDate,
+      participantOnHoldCurrentStatus,
+      participantOnHoldAuditTrailStatuses,
+      participantOnHoldAuditTrailUsers,
+      participantOnHoldAuditTrailTimestamps
+    )
+    clientStatementsPage.clickOutsideToCloseL4RightBar()
   })
 
   /**

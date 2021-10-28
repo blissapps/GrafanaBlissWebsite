@@ -6,7 +6,7 @@ const selectors = {
   clearAllFiltersButton: '#clearButton',
   gsGridTableCell: 'div.data gs-grid-cell',
   gsGridTableCellHighlighted: 'div.data gs-grid-cell gs-highlighted-text.is-matched',
-  rightNavBar: 'gs-container-l4',
+  rightNavBar: 'gs-container-l4-overlay gs-container-l4',
   toastNotification: 'gs-toast div.toast-content',
   toastNotificationXBtn: 'gs-toast gs-svg-icon svg',
   notificationError: '#notificationError',
@@ -136,11 +136,14 @@ class BasePage {
     cy.get(selectors.bulkActionsCheckbox).click()
   }
 
-  clickOutsideToCloseL4RightWindow() {
+  /**
+   * Close the L4 right bar by clicking in the middle of the current page
+   */
+  clickOutsideToCloseL4RightBar() {
     cy.get(selectors.entireAppPage).click('center')
   }
 
-  // --------------------------------------- ASSERTIONS --------------------------------------------- //
+  // ---------------------------------------------------------------------------------------- ASSERTIONS --------------------------------------------------------------------------------------------- //
   /**
    * Verify if a file was downloaded in the default 'cypress/downloads/' path
    *
@@ -216,12 +219,17 @@ class BasePage {
   }
 
   /**
-   * Assert the right nav bar (L4) containing details is displayed
+   * Assert the right nav bar (L4) is displayed
+   *
+   * @param {Boolean} displayed True to assert the L4 is displayed. False otherwise
    */
-  assertRightNavBarIsDisplayed() {
-    cy.get(selectors.rightNavBar)
-      .last()
-      .should('be.visible')
+  assertRightL4BarIsDisplayed(displayed = true) {
+    displayed
+      ? cy
+          .get(selectors.rightNavBar)
+          .last()
+          .should('be.visible')
+      : cy.get(selectors.rightNavBar).should('not.exist')
   }
 
   /**

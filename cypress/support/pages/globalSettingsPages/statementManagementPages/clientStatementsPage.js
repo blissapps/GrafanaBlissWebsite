@@ -23,7 +23,7 @@ const selectors = {
   actionsRerunButton: 'gs-action-panel-option span'
 }
 
-const reconcileStatementsSelectors = {
+const reconcileStatementsSelectorsOnL4Bar = {
   containerWindow: 'gs-container-l4-overlay gs-container-l4',
   securityCardList: 'gs-container-l4 .list',
   securityCard: 'gs-container-l4 gs-card[data-test-id*=security-',
@@ -32,9 +32,21 @@ const reconcileStatementsSelectors = {
   reconcileButton: '#client-reconcile-btn'
 }
 
-const onHoldStatementsSelectors = {
+const onHoldStatementsSelectorsOnL4Bar = {
   numberOfStatements: 'gs-container-l4 h2',
   actionButton: 'gs-container-l4 #actionBtn'
+}
+
+const statementsDetailsSelectorsOnL4Bar = {
+  nameOfParticipantHeader: 'gs-container-l4 div.statement-header',
+  participantAvatar: 'gs-container-l4 div > gs-avatar',
+  asOfDate: 'gs-container-l4 div.statement-info:nth-child(2)',
+  currentStatus: 'gs-container-l4 div.statement-info:nth-child(3) > gs-badge',
+  statementAuditTrailContainer: 'gs-container-l4 ul.audit-trail',
+  statementAuditTrailElementsHistory: 'gs-container-l4 ul.audit-trail li',
+  statementAuditTrailStatusBadge: 'gs-container-l4 ul.audit-trail li gs-badge',
+  statementAuditTrailUser: 'gs-container-l4 ul.audit-trail li *.audit-entry-user',
+  statementAuditTrailTimestamp: 'gs-container-l4 ul.audit-trail li *.audit-entry-date'
 }
 
 const apiInterceptions = {
@@ -60,7 +72,7 @@ class ClientStatementsPage extends BaseStatementManagementPage {
    * @returns client row element from table
    */
   getClientFromTable(clientId) {
-    return cy.get(selectors.clientStatementId + clientId).scrollIntoView()
+    return cy.get(selectors.clientStatementId + clientId)
   }
 
   /**
@@ -139,6 +151,14 @@ class ClientStatementsPage extends BaseStatementManagementPage {
   }
 
   /**
+   *
+   * @param {Number} clientParticipantStatementId Id of the participant that is going to be clicked in the participants table
+   */
+  clickOnParticipant(clientParticipantStatementId) {
+    cy.get(selectors.clientParticipantStatementId + clientParticipantStatementId).click()
+  }
+
+  /**
    * When bulk actions are available, click in the checkbox of a specific participant
    *
    * @param {Number} participantId Id of the participant that is going to be selected by the checkbox
@@ -177,8 +197,8 @@ class ClientStatementsPage extends BaseStatementManagementPage {
         throw new Error('Parameter actionToPerform is invalid')
     }
 
-    cy.get(onHoldStatementsSelectors.numberOfStatements).should('have.text', numberOfParticipantsAffected)
-    cy.get(onHoldStatementsSelectors.actionButton).click()
+    cy.get(onHoldStatementsSelectorsOnL4Bar.numberOfStatements).should('have.text', numberOfParticipantsAffected)
+    cy.get(onHoldStatementsSelectorsOnL4Bar.actionButton).click()
   }
 
   // --------------------------------------------------------------------------------- ASSERTIONS ------------------------------------------------------------------------------------------ //
@@ -186,7 +206,8 @@ class ClientStatementsPage extends BaseStatementManagementPage {
   /**
    * Assert the client is displayed in the table on statement/clients
    *
-   * @param {Boolean} displayed True to assert theclient is displayed. False, otherwise.
+   * @param {Number} clientId The client id number
+   * @param {Boolean} displayed True to assert the client is displayed. False, otherwise.
    *
    */
   assertClientDisplayedOnClientStatementsTable(clientId, displayed = true) {
@@ -239,63 +260,54 @@ class ClientStatementsPage extends BaseStatementManagementPage {
   }
 
   /**
-   * Assert the L4 window for RECONCILIATE STATEMENTS is visible
-   *
-   * @param {Boolean} displayed True to assert the reconcile window is displayed. False, otherwise.
-   */
-  assertReconcileStatemenRightWindowDisplayed(displayed = true) {
-    displayed ? cy.get(reconcileStatementsSelectors.containerWindow).should('be.visible') : cy.get(reconcileStatementsSelectors.containerWindow).should('not.exist')
-  }
-
-  /**
    * Assert the L4 window for RECONCILIATE STATEMENTS is visible and all components are placed as expected. It was made according to PB-612
    *
    * @param {Array} securityIds Security ids to be validated
    */
   assertReconcileStatementRightWindowDisplaysElementsAsExpected(securityIds) {
-    // Window must be open
-    this.assertReconcileStatemenRightWindowDisplayed()
+    // L4 Window must be open
+    this.assertRightL4BarIsDisplayed()
 
     // List containing cards must be displayed
-    cy.get(reconcileStatementsSelectors.securityCardList).should('be.visible')
+    cy.get(reconcileStatementsSelectorsOnL4Bar.securityCardList).should('be.visible')
 
     // Security cards must be displayed
     for (let i = 0; i < securityIds.length; i++) {
-      cy.get(reconcileStatementsSelectors.securityCard + securityIds[i]).should('be.visible')
+      cy.get(reconcileStatementsSelectorsOnL4Bar.securityCard + securityIds[i]).should('be.visible')
     }
 
     // Checkbox security must be displayed
-    cy.get(reconcileStatementsSelectors.securityCheckBox).should('be.visible')
+    cy.get(reconcileStatementsSelectorsOnL4Bar.securityCheckBox).should('be.visible')
 
     // Cancel button must be displayed
-    cy.get(reconcileStatementsSelectors.cancelButton).should('be.visible')
+    cy.get(reconcileStatementsSelectorsOnL4Bar.cancelButton).should('be.visible')
 
     // Reconcile button must be displayed but it should be disabled
-    cy.get(reconcileStatementsSelectors.reconcileButton)
+    cy.get(reconcileStatementsSelectorsOnL4Bar.reconcileButton)
       .should('be.visible')
       .should('have.class', 'default medium square primary disabled')
 
     // Reconcile button must be displayed and enabled
-    cy.get(reconcileStatementsSelectors.securityCheckBox).click()
-    cy.get(reconcileStatementsSelectors.reconcileButton)
+    cy.get(reconcileStatementsSelectorsOnL4Bar.securityCheckBox).click()
+    cy.get(reconcileStatementsSelectorsOnL4Bar.reconcileButton)
       .should('be.visible')
       .should('have.class', 'default medium square primary')
 
     // Once clicked in a security option, the Reconcile Button must also be enabled
-    cy.get(reconcileStatementsSelectors.securityCheckBox).click()
-    cy.get(reconcileStatementsSelectors.reconcileButton)
+    cy.get(reconcileStatementsSelectorsOnL4Bar.securityCheckBox).click()
+    cy.get(reconcileStatementsSelectorsOnL4Bar.reconcileButton)
       .should('be.visible')
       .should('have.class', 'default medium square primary disabled')
-    cy.get(reconcileStatementsSelectors.securityCard)
+    cy.get(reconcileStatementsSelectorsOnL4Bar.securityCard)
       .first()
       .click()
-    cy.get(reconcileStatementsSelectors.reconcileButton)
+    cy.get(reconcileStatementsSelectorsOnL4Bar.reconcileButton)
       .should('be.visible')
       .should('have.class', 'default medium square primary')
 
     // Cancel button must close the window
-    cy.get(reconcileStatementsSelectors.cancelButton).click()
-    this.assertReconcileStatemenRightWindowDisplayed(false)
+    cy.get(reconcileStatementsSelectorsOnL4Bar.cancelButton).click()
+    this.assertRightL4BarIsDisplayed(false)
   }
 
   /**
@@ -311,7 +323,7 @@ class ClientStatementsPage extends BaseStatementManagementPage {
   }
 
   /**
-   * Assert the participant status
+   * Assert the participant status in the participant table
    *
    * @param {Number} participantId Participant id number to be asserted
    * @param {String} participantStatus Status to be verified into this participant. Status can be: Pending Validation, On Hold ...
@@ -405,6 +417,61 @@ class ClientStatementsPage extends BaseStatementManagementPage {
 
       default:
         throw new Error('The buttonName parameter is not valid!')
+    }
+  }
+
+  /**
+   * Assert the details in the Statement Detail L4 bar right after selecting a participant on the participant table
+   *
+   * @param {String} participantName
+   * @param {String} participantAsOfDate
+   * @param {String} participantCurrentStatus
+   * @param {Array} statusNameTrailList
+   * @param {Array} nameUserTrailList
+   * @param {Array} timestampTrailList
+   */
+  assertParticipantStatementDetailsOnL4Bar(
+    participantName = '',
+    participantAsOfDate = '',
+    participantCurrentStatus = '',
+    statusNameTrailList = [],
+    nameUserTrailList = [],
+    timestampTrailList = []
+  ) {
+    if (participantName != '') {
+      cy.get(statementsDetailsSelectorsOnL4Bar.nameOfParticipantHeader).should('contain.text', participantName)
+    }
+
+    if (participantAsOfDate != '') {
+      cy.get(statementsDetailsSelectorsOnL4Bar.asOfDate).should('contain.text', participantAsOfDate)
+    }
+
+    if (participantCurrentStatus != '') {
+      cy.get(statementsDetailsSelectorsOnL4Bar.currentStatus).should('contain.text', participantCurrentStatus)
+    }
+
+    if (statusNameTrailList.length != 0) {
+      for (let i = 0; i < statusNameTrailList.length; i++) {
+        cy.get(statementsDetailsSelectorsOnL4Bar.statementAuditTrailStatusBadge)
+          .eq(i)
+          .should('contain.text', statusNameTrailList[i])
+      }
+    }
+
+    if (nameUserTrailList.length != 0) {
+      for (let i = 0; i < nameUserTrailList.length; i++) {
+        cy.get(statementsDetailsSelectorsOnL4Bar.statementAuditTrailUser)
+          .eq(i)
+          .should('contain.text', nameUserTrailList[i])
+      }
+    }
+
+    if (timestampTrailList.length != 0) {
+      for (let i = 0; i < timestampTrailList.length; i++) {
+        cy.get(statementsDetailsSelectorsOnL4Bar.statementAuditTrailTimestamp)
+          .eq(i)
+          .should('contain.text', timestampTrailList[i])
+      }
     }
   }
 
