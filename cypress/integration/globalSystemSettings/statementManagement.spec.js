@@ -71,8 +71,9 @@ describe('Statement Management tests', () => {
   /**
    * @firefox_limited because Firefox does not save the downloaded file in the default cypress download folder.
    * It works only in the pipeline with Linux machines. You will face an issue (running this test locally.) while this issue is not resolved by the Cypress team.
-   *
    * Issue open in https://github.com/cypress-io/cypress/issues/17896
+   *
+   * @missing_data Client with "Pending Validation", PUBLISHED, or PARTIALLY PUBLISHED statement
    */
   it.skip('C7394242_Download_Summary_Report_Functionality', () => {
     // Pending Validation
@@ -120,12 +121,12 @@ describe('Statement Management tests', () => {
   })
 
   /**
-   * SKIPPED DUE TO https://globalshares.atlassian.net/browse/PB-806
+   * SKIPPED DUE TO https://globalshares.atlassian.net/browse/PB-1008
    */
   it.skip('C7394266_Filter_Behavior_of_Participant_Regulatory_Linkage', () => {
     const clientName = 'Acacia Pharma'
     const participantName = 'Serrano'
-    //const participantId = 544545
+    const participantFirstName = 'Paisley'
     const participantExternalId = 'API-10001'
     const regulator = 'FINRA'
     const partner = 'Global Shares Execution Services Ltd.'
@@ -136,7 +137,7 @@ describe('Statement Management tests', () => {
 
     // Not working yet for first name, so lets verify this until it is fixed
     cy.log('FILTER 0')
-    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, 'Paisley')
+    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantFirstName)
     participantRegulatoryLinkagePage.assertNoDataMessageFoundDisplayed()
     participantRegulatoryLinkagePage.clearAllFilters()
 
@@ -235,7 +236,7 @@ describe('Statement Management tests', () => {
   })
 
   /**
-   * @MISSING_STEPS scroll not working properly
+   * @missing_steps scroll not working properly
    *
    */
   it('C7394265_View_Statements', () => {
@@ -688,6 +689,83 @@ describe('Statement Management tests', () => {
       participantOnHoldAuditTrailTimestamps
     )
     clientStatementsPage.clickOutsideToCloseL4RightBar()
+  })
+
+  /**
+   * @missing_data We clients with all the possible statuses
+   *
+   */
+  it.skip('C7623837_Statements_Reject_Button_Displayed_Only_For_Pending_Validation_Status', () => {
+    const clientPendingValidation = 'Keywords Studios plc'
+    const clientPendingValidationId = 87
+    const clientReconciling = 'Shelf Drilling Ltd'
+    const clientReconcilingId = 83
+    const clientPartiallyPublished = 'Cavotec'
+    const clientPartiallyPublishedId = 78
+    const clientPublished = 'Sanne Group PLC'
+    const clientPublishedId = 85
+    const clientInitiated = 'Skanska'
+    const clientInitiatedId = 119
+
+    // Pending Validation
+    clientStatementsPage.filterClientStatements(clientPendingValidation)
+    clientStatementsPage.clickClientTable(clientPendingValidationId)
+    clientStatementsPage.checkClientParticipantStatementsUrl()
+    clientStatementsPage.assertRejectButtonDisplayed()
+    clientStatementsPage.clickBackToManageStatements()
+    clientStatementsPage.clearAllFilters()
+
+    // Initiated
+    clientStatementsPage.filterClientStatements(clientInitiated)
+    clientStatementsPage.clickClientTable(clientInitiatedId)
+    clientStatementsPage.checkClientParticipantStatementsUrl()
+    clientStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
+    clientStatementsPage.assertRejectButtonDisplayed(false)
+    clientStatementsPage.clickBackToManageStatements()
+    clientStatementsPage.clearAllFilters()
+
+    // Reconciling
+    clientStatementsPage.filterClientStatements(clientReconciling)
+    clientStatementsPage.clickClientTable(clientReconcilingId)
+    clientStatementsPage.checkClientParticipantStatementsUrl()
+    clientStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
+    clientStatementsPage.assertRejectButtonDisplayed(false)
+    clientStatementsPage.clickBackToManageStatements()
+    clientStatementsPage.clearAllFilters()
+
+    // Partially Published
+    clientStatementsPage.filterClientStatements(clientPartiallyPublished)
+    clientStatementsPage.clickClientTable(clientPartiallyPublishedId)
+    clientStatementsPage.checkClientParticipantStatementsUrl()
+    clientStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
+    clientStatementsPage.assertRejectButtonDisplayed(false)
+    clientStatementsPage.clickBackToManageStatements()
+    clientStatementsPage.clearAllFilters()
+
+    // Published
+    clientStatementsPage.filterClientStatements(clientPublished)
+    clientStatementsPage.clickClientTable(clientPublishedId)
+    clientStatementsPage.checkClientParticipantStatementsUrl()
+    clientStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
+    clientStatementsPage.assertRejectButtonDisplayed(false)
+  })
+
+  /**
+   * @missing_data We a client with Pending Validation status
+   *
+   */
+  it.skip('C7623838_Statements_Reject_Function_Behavior', () => {
+    const clientPendingValidation = 'Generali Share Save Plan'
+    const clientPendingValidationId = 94
+    const clientStatus = 'Pending Validation'
+    const clientNewStatus = 'Initiated'
+
+    clientStatementsPage.filterClientStatements(clientPendingValidation)
+    clientStatementsPage.clickClientTable(clientPendingValidationId)
+    clientStatementsPage.assertClientStatus(clientStatus)
+    clientStatementsPage.clickToRejectStatement()
+    clientStatementsPage.assertClientStatus(clientNewStatus)
+    clientStatementsPage.assertRejectButtonDisplayed(false)
   })
 
   /**

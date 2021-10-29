@@ -1,7 +1,8 @@
 import BaseStatementManagementPage from './baseStatementsManagementPage'
 
 const properties = {
-  pageURL: '/statement/clients'
+  pageURL: '/statement/clients',
+  pageParticipantStatementURL: /.?statement\/*client\/*.*[0-9]\/*statement.*[0-9]\/*participants/
 }
 
 const selectors = {
@@ -22,7 +23,9 @@ const selectors = {
   actionsButton: '.action gs-button',
   actionsRerunButton: 'gs-action-panel-option span',
   participantStatementIdsInTable: '*[id*=clientParticipantStatement-] gs-grid-extension-checkable-row-number-cell span',
-  clientsStatementIdsInTable: 'gs-grid-row gs-grid-cell:nth-child(1):not([id=idColumn]) span'
+  clientsStatementIdsInTable: 'gs-grid-row gs-grid-cell:nth-child(1):not([id=idColumn]) span',
+  rejectButton: '#reject',
+  clientStatusBadge: '*.title-header-info gs-badge'
 }
 
 const tableColumnIds = {
@@ -63,7 +66,8 @@ const statementsDetailsSelectorsOnL4Bar = {
 
 const apiInterceptions = {
   tableReloadedAfterFiltering: 'https://api.stonly.com/api/v2/widget/integration**',
-  clientStatementsLoaded: 'https://api-regrep.myglobalshares.co.uk/api/v1.0/ClientStatements?limit=50&offset=0'
+  clientStatementsLoaded: 'https://api-regrep.myglobalshares.co.uk/api/v1.0/ClientStatements?limit=50&offset=0',
+  clientParticipantStatementsLoaded: 'https://api-regrep.myglobalshares.co.uk/api/v1.0/Clients/**/ParticipantStatements?clientStatementId**'
 }
 
 class ClientStatementsPage extends BaseStatementManagementPage {
@@ -72,6 +76,13 @@ class ClientStatementsPage extends BaseStatementManagementPage {
    */
   checkClientStatementsUrl() {
     this.checkUrl(properties.pageURL)
+  }
+
+  /**
+   * Checks if the current page is the one in properties.pageParticipantStatementURL
+   */
+  checkClientParticipantStatementsUrl() {
+    this.checkUrlByRegex(properties.pageParticipantStatementURL)
   }
 
   // ------------------------------------------------------------------------------------------------ GETS --------------------------------------------------------------------------------------- //
@@ -213,6 +224,13 @@ class ClientStatementsPage extends BaseStatementManagementPage {
     cy.get(onHoldStatementsSelectorsOnL4Bar.actionButton).click()
   }
 
+  /**
+   * Click in the Reject button to reject a statement
+   */
+  clickToRejectStatement() {
+    cy.get(selectors.rejectButton).click()
+  }
+
   // --------------------------------------------------------------------------------- ASSERTIONS ------------------------------------------------------------------------------------------ //
 
   /**
@@ -262,8 +280,6 @@ class ClientStatementsPage extends BaseStatementManagementPage {
    * This method will assert that the Client Statement list is being displayed in order, which is by ID
    *
    * @param {Array} idsList Ordered list of ids to validate
-   *
-   * @MISSING_IDS
    */
   assertClientStatementsTableInOrderById(idsList) {
     for (let i = 0; i < idsList.length; i++) {
@@ -277,8 +293,6 @@ class ClientStatementsPage extends BaseStatementManagementPage {
    * This method will assert that the Participant Statements list is being displayed in order, which is by ID
    *
    * @param {Array} idsList Ordered list of ids to validate
-   *
-   * @MISSING_IDS
    */
   assertClientParticipantStatementsTableInOrderById(idsList) {
     for (let i = 0; i < idsList.length; i++) {
@@ -514,6 +528,25 @@ class ClientStatementsPage extends BaseStatementManagementPage {
     }
   }
 
+  /**
+   * Assert the Reject button is displayed. Tip: so far it is only available for Pending Validation status
+   *
+   * @param {Boolean} displayed True to validate the Reject button is displayed. False otherwise
+   */
+  assertRejectButtonDisplayed(displayed = true) {
+    displayed ? cy.get(selectors.rejectButton).should('be.visible') : cy.get(selectors.rejectButton).should('not.exist')
+  }
+
+  /**
+   * Assert the participant status in the Client Participant page
+   *
+   * @param {String} statusName The name of the status
+   *
+   */
+  assertClientStatus(statusName) {
+    cy.get(selectors.clientStatusBadge).should('contain.text', statusName)
+  }
+
   // -------------------------------------------------------------------------------------------- OTHERS ------------------------------------------------------------------------------------------- //
 
   /**
@@ -597,6 +630,14 @@ class ClientStatementsPage extends BaseStatementManagementPage {
   waitForClientStatementsToBeLoaded() {
     cy.intercept('GET', apiInterceptions.clientStatementsLoaded).as('clientsLoaded')
     cy.wait('@clientsLoaded', { timeout: 10000 })
+  }
+
+  /**
+   * Waits for clients to be loaded in the table
+   */
+  waitForClientParticipantStatementsToBeLoaded() {
+    cy.intercept('GET', apiInterceptions.clientParticipantStatementsLoaded).as('participantsLoaded')
+    cy.wait('@participantsLoaded', { timeout: 10000 })
   }
 }
 
