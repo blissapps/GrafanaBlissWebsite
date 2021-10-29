@@ -42,7 +42,9 @@ describe('User Management tests over User Management settings', () => {
   })
 
   it('C7353826_List_User_Happy_Path_Contains_Expected_Columns_On_Users_Table', () => {
-    userManagementPage.assertTableContainsExpectedColumns(['username', 'email', 'status'])
+    const columnsToValidate = ['username', 'email', 'status']
+
+    userManagementPage.assertTableContainsExpectedColumnsInOrder(columnsToValidate)
   })
 
   /**

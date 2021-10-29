@@ -20,7 +20,19 @@ const selectors = {
   approveBtn: '#gridActionApprove',
   rerunBtn: '#gridActionRerun',
   actionsButton: '.action gs-button',
-  actionsRerunButton: 'gs-action-panel-option span'
+  actionsRerunButton: 'gs-action-panel-option span',
+  participantStatementIdsInTable: '*[id*=clientParticipantStatement-] gs-grid-extension-checkable-row-number-cell span',
+  clientsStatementIdsInTable: 'gs-grid-row gs-grid-cell:nth-child(1):not([id=idColumn]) span'
+}
+
+const tableColumnIds = {
+  tableIdColumn: '#idColumn',
+  tableClientColumn: '#clientColumn',
+  tableRegulatorColumn: '#regulatorColumn',
+  tableStatusColumn: '#statusColumn',
+  tableUndefinedColumn: '#undefinedColumn',
+  tableNumberColumn: '#rowNumberColumn',
+  tableParticipantColumn: '#rowNumberColumn'
 }
 
 const reconcileStatementsSelectorsOnL4Bar = {
@@ -225,13 +237,25 @@ class ClientStatementsPage extends BaseStatementManagementPage {
   }
 
   /**
-   * Assert that the table from client statements shows all expected data in the columns, which are Ids, Clients, Regulators, and Statuses.
+   * Assert the table from client statements shows all expected data in the columns, which are Ids, Clients, Regulators, Statuses and one to allocate the action items
    *
-   * @MISSING_IDS
    */
   assertClientStatementsTableContainsExpectedColumns() {
-    const columnsToValidate = ['Id', 'Client', 'Regulator', 'Status'] // necessary until ids are placed
-    this.assertTableContainsExpectedColumns(columnsToValidate)
+    cy.get(tableColumnIds.tableIdColumn).should('be.visible')
+    cy.get(tableColumnIds.tableClientColumn).should('be.visible')
+    cy.get(tableColumnIds.tableRegulatorColumn).should('be.visible')
+    cy.get(tableColumnIds.tableStatusColumn).should('be.visible')
+    cy.get(tableColumnIds.tableUndefinedColumn).should('be.visible')
+  }
+
+  /**
+   * Assert the table from participant statements shows all expected data in the columns, which are role number column, Participant, and Status
+   *
+   */
+  assertClientParticipantStatementsTableContainsExpectedColumns() {
+    cy.get(tableColumnIds.tableNumberColumn).should('be.visible')
+    cy.get(tableColumnIds.tableParticipantColumn).should('be.visible')
+    cy.get(tableColumnIds.tableStatusColumn).should('be.visible')
   }
 
   /**
@@ -242,10 +266,25 @@ class ClientStatementsPage extends BaseStatementManagementPage {
    * @MISSING_IDS
    */
   assertClientStatementsTableInOrderById(idsList) {
-    let idsListIndex = 0
-    for (let i = 6; i <= 30; i += 6) {
-      cy.xpath(`(//gs-grid//gs-grid-row-list//gs-grid-row//gs-grid-cell//span)[${i}]`).should('contain.text', idsList[idsListIndex])
-      idsListIndex++
+    for (let i = 0; i < idsList.length; i++) {
+      cy.get(selectors.clientsStatementIdsInTable)
+        .eq(i)
+        .should('contain.text', idsList[i])
+    }
+  }
+
+  /**
+   * This method will assert that the Participant Statements list is being displayed in order, which is by ID
+   *
+   * @param {Array} idsList Ordered list of ids to validate
+   *
+   * @MISSING_IDS
+   */
+  assertClientParticipantStatementsTableInOrderById(idsList) {
+    for (let i = 0; i < idsList.length; i++) {
+      cy.get(selectors.participantStatementIdsInTable)
+        .eq(i)
+        .should('contain.text', idsList[i])
     }
   }
 

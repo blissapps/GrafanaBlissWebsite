@@ -23,9 +23,11 @@ describe('Statement Management tests', () => {
 
   it('C7394715_Happy_Path_To_View_Statements_Accordingly', () => {
     const idsClientList = [77, 78, 79, 80, 81]
+    const columnsToValidate = ['Id', 'Client', 'Regulator', 'Status']
 
     clientStatementsPage.assertClientStatementsTableContainsExpectedColumns()
     clientStatementsPage.assertClientStatementsTableInOrderById(idsClientList)
+    clientStatementsPage.assertTableContainsExpectedColumnsInOrder(columnsToValidate)
   })
 
   /**
@@ -237,10 +239,17 @@ describe('Statement Management tests', () => {
    *
    */
   it('C7394265_View_Statements', () => {
-    clientStatementsPage.filterClientStatements('Repsol')
-    clientStatementsPage.clickClientTable(107)
+    const clientName = 'Hitachi'
+    const clientId = 102
+    const columnsToValidate = ['Participant', 'Status']
+    const idsParticipantsList = [1, 2]
+
+    clientStatementsPage.filterClientStatements(clientName)
+    clientStatementsPage.clickClientTable(clientId)
     clientStatementsPage.checkUrl('/participants')
-    clientStatementsPage.assertTableContainsExpectedColumns(['Participant', 'Status'])
+    clientStatementsPage.assertTableContainsExpectedColumnsInOrder(columnsToValidate)
+    clientStatementsPage.assertClientParticipantStatementsTableContainsExpectedColumns()
+    clientStatementsPage.assertClientParticipantStatementsTableInOrderById(idsParticipantsList)
   })
 
   it('C7395182_Select_Client_Without_Participants_To_Check_Empty_State', () => {

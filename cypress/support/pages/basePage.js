@@ -160,9 +160,8 @@ class BasePage {
    *
    * @param {Array} columnsToValidate column names to validate, example: columnsToValidate = [Id, Client, Regulator, Status]
    *
-   * @MISSING_IDS When ids are placed in all columns name, change this method to also receive the ids
    */
-  assertTableContainsExpectedColumns(columnsToValidate) {
+  assertTableContainsExpectedColumnsInOrder(columnsToValidate) {
     for (let i = 1; i <= columnsToValidate.length; i++) {
       cy.get('gs-grid gs-grid-row-list gs-grid-row gs-grid-cell span:not(:empty)')
         .eq(i - 1)
