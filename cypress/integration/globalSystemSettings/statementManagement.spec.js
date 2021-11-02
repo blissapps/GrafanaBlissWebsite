@@ -1,4 +1,5 @@
 import ClientStatementsPage from '../../support/pages/globalSettingsPages/statementManagementPages/clientStatementsPage'
+import ClientParticipantStatementsPage from '../../support/pages/globalSettingsPages/statementManagementPages/clientParticipantStatementsPage'
 import ParticipantRegulatoryLinkagePage from '../../support/pages/globalSettingsPages/statementManagementPages/participantRegulatoryLinkagePage'
 import Utils from '../../support/utils'
 import LeftMenuNavBar from '../../support/components/leftMenuNavBar'
@@ -7,6 +8,7 @@ import SettingsMenuNavBar from '../../support/components/settingsMenuNavBar'
 describe('Statement Management tests', () => {
   // Pages
   const clientStatementsPage = new ClientStatementsPage()
+  const clientParticipantStatementsPage = new ClientParticipantStatementsPage()
   const participantRegulatoryLinkagePage = new ParticipantRegulatoryLinkagePage()
 
   // Components
@@ -37,35 +39,35 @@ describe('Statement Management tests', () => {
     // INITIATED
     clientStatementsPage.filterClientStatements('Velocys PLC')
     clientStatementsPage.clickClientTable(103)
-    clientStatementsPage.assertSummaryButtonDisplayed(false)
-    clientStatementsPage.clickBackToManageStatements()
+    clientParticipantStatementsPage.assertSummaryButtonDisplayed(false)
+    clientParticipantStatementsPage.clickBackToManageStatements()
 
     // RECONCILED
     clientStatementsPage.clearAllFilters()
     clientStatementsPage.filterClientStatements('Mercari')
     clientStatementsPage.clickClientTable(84)
-    clientStatementsPage.assertSummaryButtonDisplayed(false)
-    clientStatementsPage.clickBackToManageStatements()
+    clientParticipantStatementsPage.assertSummaryButtonDisplayed(false)
+    clientParticipantStatementsPage.clickBackToManageStatements()
 
     // Pending Validation
     clientStatementsPage.clearAllFilters()
     clientStatementsPage.filterClientStatements('Kerry Logistics')
     clientStatementsPage.clickClientTable(97)
-    clientStatementsPage.assertSummaryButtonDisplayed()
-    clientStatementsPage.clickBackToManageStatements()
+    clientParticipantStatementsPage.assertSummaryButtonDisplayed()
+    clientParticipantStatementsPage.clickBackToManageStatements()
 
     // PUBLISHED
     clientStatementsPage.clearAllFilters()
     clientStatementsPage.filterClientStatements('Interxion')
     clientStatementsPage.clickClientTable(76)
-    clientStatementsPage.assertSummaryButtonDisplayed()
-    clientStatementsPage.clickBackToManageStatements()
+    clientParticipantStatementsPage.assertSummaryButtonDisplayed()
+    clientParticipantStatementsPage.clickBackToManageStatements()
 
     // PARTIALLY PUBLISHED
     clientStatementsPage.clearAllFilters()
     clientStatementsPage.filterClientStatements('Cavotec')
     clientStatementsPage.clickClientTable(78)
-    clientStatementsPage.assertSummaryButtonDisplayed()
+    clientParticipantStatementsPage.assertSummaryButtonDisplayed()
   })
 
   /**
@@ -82,10 +84,10 @@ describe('Statement Management tests', () => {
 
     clientStatementsPage.filterClientStatements(clientName)
     clientStatementsPage.clickClientTable(clientID)
-    clientStatementsPage.assertSummaryButtonDisplayed()
-    clientStatementsPage.clickSummaryDownloadButtonToDownloadCSVFile()
-    clientStatementsPage.assertProgressBarDisplayed()
-    clientStatementsPage.assertFileWasDownloadedSuccessfully(clientName + '_Summary.csv')
+    clientParticipantStatementsPage.assertSummaryButtonDisplayed()
+    clientParticipantStatementsPage.clickSummaryDownloadButtonToDownloadCSVFile()
+    clientParticipantStatementsPage.assertProgressBarDisplayed()
+    clientParticipantStatementsPage.assertFileWasDownloadedSuccessfully(clientName + '_Summary.csv')
   })
 
   it('C7353833_Use_Filter_To_Search_For_Client_Statements', () => {
@@ -247,10 +249,10 @@ describe('Statement Management tests', () => {
 
     clientStatementsPage.filterClientStatements(clientName)
     clientStatementsPage.clickClientTable(clientId)
-    clientStatementsPage.checkUrl('/participants')
-    clientStatementsPage.assertTableContainsExpectedColumnsInOrder(columnsToValidate)
-    clientStatementsPage.assertClientParticipantStatementsTableContainsExpectedColumns()
-    clientStatementsPage.assertClientParticipantStatementsTableInOrderById(idsParticipantsList)
+    clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
+    clientParticipantStatementsPage.assertTableContainsExpectedColumnsInOrder(columnsToValidate)
+    clientParticipantStatementsPage.assertParticipantStatementsTableContainsExpectedColumns()
+    clientParticipantStatementsPage.assertParticipantStatementsTableInOrderById(idsParticipantsList)
   })
 
   it('C7395182_Select_Client_Without_Participants_To_Check_Empty_State', () => {
@@ -259,8 +261,8 @@ describe('Statement Management tests', () => {
 
     clientStatementsPage.filterClientStatements(clientName)
     clientStatementsPage.clickClientTable(clientId)
-    clientStatementsPage.assertNoDataMessageFoundDisplayed()
-    clientStatementsPage.clickBackToManageStatements()
+    clientParticipantStatementsPage.assertNoDataMessageFoundDisplayed()
+    clientParticipantStatementsPage.clickBackToManageStatements()
     clientStatementsPage.checkClientStatementsUrl()
   })
 
@@ -280,69 +282,69 @@ describe('Statement Management tests', () => {
     clientStatementsPage.getNumberOfRecordsDisplayed()
 
     // By Participant Name
-    clientStatementsPage.filterParticipantStatements(participantName)
-    clientStatementsPage.assertParticipantStatementDisplayed(participantID)
-    clientStatementsPage.assertAmountOfRecordsTable(1)
-    clientStatementsPage.clearAllFilters()
+    clientParticipantStatementsPage.filterParticipantStatements(participantName)
+    clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
+    clientParticipantStatementsPage.assertAmountOfRecordsTable(1)
+    clientParticipantStatementsPage.clearAllFilters()
 
     // By Internal Id
-    clientStatementsPage.filterParticipantStatements('', participantID)
-    clientStatementsPage.assertParticipantStatementDisplayed(participantID)
-    clientStatementsPage.assertAmountOfRecordsTable(1)
-    clientStatementsPage.clearAllFilters()
+    clientParticipantStatementsPage.filterParticipantStatements('', participantID)
+    clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
+    clientParticipantStatementsPage.assertAmountOfRecordsTable(1)
+    clientParticipantStatementsPage.clearAllFilters()
 
     // By External Id
-    clientStatementsPage.filterParticipantStatements('', -1, '', participantExternalId)
-    clientStatementsPage.assertParticipantStatementDisplayed(participantID)
-    clientStatementsPage.assertAmountOfRecordsTable(1)
-    clientStatementsPage.clearAllFilters()
+    clientParticipantStatementsPage.filterParticipantStatements('', -1, '', participantExternalId)
+    clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
+    clientParticipantStatementsPage.assertAmountOfRecordsTable(1)
+    clientParticipantStatementsPage.clearAllFilters()
 
     // By Status
-    clientStatementsPage.filterParticipantStatements('', -1, participantStatus)
-    clientStatementsPage.assertAmountOfRecordsTable(15)
-    clientStatementsPage.clearAllFilters()
+    clientParticipantStatementsPage.filterParticipantStatements('', -1, participantStatus)
+    clientParticipantStatementsPage.assertAmountOfRecordsTable(15)
+    clientParticipantStatementsPage.clearAllFilters()
 
     // By Name and Internal Id
-    clientStatementsPage.filterParticipantStatements(participantName, participantID)
-    clientStatementsPage.assertParticipantStatementDisplayed(participantID)
-    clientStatementsPage.assertAmountOfRecordsTable(1)
-    clientStatementsPage.clearAllFilters()
+    clientParticipantStatementsPage.filterParticipantStatements(participantName, participantID)
+    clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
+    clientParticipantStatementsPage.assertAmountOfRecordsTable(1)
+    clientParticipantStatementsPage.clearAllFilters()
 
     // By Name External Id
-    clientStatementsPage.filterParticipantStatements(participantName, -1, '', participantExternalId)
-    clientStatementsPage.assertParticipantStatementDisplayed(participantID)
-    clientStatementsPage.assertAmountOfRecordsTable(1)
-    clientStatementsPage.clearAllFilters()
+    clientParticipantStatementsPage.filterParticipantStatements(participantName, -1, '', participantExternalId)
+    clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
+    clientParticipantStatementsPage.assertAmountOfRecordsTable(1)
+    clientParticipantStatementsPage.clearAllFilters()
 
     // By Name and Status
-    clientStatementsPage.filterParticipantStatements(participantName, -1, participantStatus)
-    clientStatementsPage.assertParticipantStatementDisplayed(participantID)
-    clientStatementsPage.assertAmountOfRecordsTable(1)
-    clientStatementsPage.clearAllFilters()
+    clientParticipantStatementsPage.filterParticipantStatements(participantName, -1, participantStatus)
+    clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
+    clientParticipantStatementsPage.assertAmountOfRecordsTable(1)
+    clientParticipantStatementsPage.clearAllFilters()
 
     // By Internal Id and External Id
-    clientStatementsPage.filterParticipantStatements('', participantID, '', participantExternalId)
-    clientStatementsPage.assertParticipantStatementDisplayed(participantID)
-    clientStatementsPage.assertAmountOfRecordsTable(1)
-    clientStatementsPage.clearAllFilters()
+    clientParticipantStatementsPage.filterParticipantStatements('', participantID, '', participantExternalId)
+    clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
+    clientParticipantStatementsPage.assertAmountOfRecordsTable(1)
+    clientParticipantStatementsPage.clearAllFilters()
 
     // By Internal Id and Status
-    clientStatementsPage.filterParticipantStatements('', participantID, participantStatus)
-    clientStatementsPage.assertParticipantStatementDisplayed(participantID)
-    clientStatementsPage.assertAmountOfRecordsTable(1)
-    clientStatementsPage.clearAllFilters()
+    clientParticipantStatementsPage.filterParticipantStatements('', participantID, participantStatus)
+    clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
+    clientParticipantStatementsPage.assertAmountOfRecordsTable(1)
+    clientParticipantStatementsPage.clearAllFilters()
 
     // By External Id and Status
-    clientStatementsPage.filterParticipantStatements('', -1, participantStatus, participantExternalId)
-    clientStatementsPage.assertParticipantStatementDisplayed(participantID)
-    clientStatementsPage.assertAmountOfRecordsTable(1)
-    clientStatementsPage.clearAllFilters()
+    clientParticipantStatementsPage.filterParticipantStatements('', -1, participantStatus, participantExternalId)
+    clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
+    clientParticipantStatementsPage.assertAmountOfRecordsTable(1)
+    clientParticipantStatementsPage.clearAllFilters()
 
     // By Name, Internal Id, Status, and External Id
-    clientStatementsPage.filterParticipantStatements(participantName, participantID, participantStatus, participantExternalId)
-    clientStatementsPage.assertParticipantStatementDisplayed(participantID)
-    clientStatementsPage.assertAmountOfRecordsTable(1)
-    clientStatementsPage.clearAllFilters()
+    clientParticipantStatementsPage.filterParticipantStatements(participantName, participantID, participantStatus, participantExternalId)
+    clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
+    clientParticipantStatementsPage.assertAmountOfRecordsTable(1)
+    clientParticipantStatementsPage.clearAllFilters()
   })
 
   /**
@@ -362,9 +364,9 @@ describe('Statement Management tests', () => {
 
     clientStatementsPage.filterClientStatements(clientName)
     clientStatementsPage.clickClientTable(clientID)
-    clientStatementsPage.filterParticipantStatements('', participantID)
-    clientStatementsPage.clickDownloadPDFFromParticipantStatement(participantID)
-    clientStatementsPage.assertFileWasDownloadedSuccessfully(participantName + '_Summary.pdf')
+    clientParticipantStatementsPage.filterParticipantStatements('', participantID)
+    clientParticipantStatementsPage.clickDownloadPDFFromParticipantStatement(participantID)
+    clientParticipantStatementsPage.assertFileWasDownloadedSuccessfully(participantName + '_Summary.pdf')
   })
 
   /**
@@ -444,33 +446,33 @@ describe('Statement Management tests', () => {
     clientStatementsPage.filterClientStatements(clientName)
     clientStatementsPage.clickClientTable(clientId)
 
-    clientStatementsPage.filterParticipantStatements('', participantIDs[0])
-    clientStatementsPage.clickInTheCheckboxToSelectParticipant(participantIDs[0])
-    clientStatementsPage.assertParticipantStatus(participantIDs[0], participantStatusBefore)
-    clientStatementsPage.clearAllFilters()
+    clientParticipantStatementsPage.filterParticipantStatements('', participantIDs[0])
+    clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantIDs[0])
+    clientParticipantStatementsPage.assertParticipantStatus(participantIDs[0], participantStatusBefore)
+    clientParticipantStatementsPage.clearAllFilters()
 
-    clientStatementsPage.filterParticipantStatements('', participantIDs[1])
-    clientStatementsPage.clickInTheCheckboxToSelectParticipant(participantIDs[1])
-    clientStatementsPage.assertParticipantStatus(participantIDs[1], participantStatusBefore)
-    clientStatementsPage.clearAllFilters()
+    clientParticipantStatementsPage.filterParticipantStatements('', participantIDs[1])
+    clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantIDs[1])
+    clientParticipantStatementsPage.assertParticipantStatus(participantIDs[1], participantStatusBefore)
+    clientParticipantStatementsPage.clearAllFilters()
 
-    clientStatementsPage.filterParticipantStatements('', participantIDs[2])
-    clientStatementsPage.clickInTheCheckboxToSelectParticipant(participantIDs[2])
-    clientStatementsPage.assertParticipantStatus(participantIDs[2], participantStatusBefore)
-    clientStatementsPage.clearAllFilters()
+    clientParticipantStatementsPage.filterParticipantStatements('', participantIDs[2])
+    clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantIDs[2])
+    clientParticipantStatementsPage.assertParticipantStatus(participantIDs[2], participantStatusBefore)
+    clientParticipantStatementsPage.clearAllFilters()
 
-    clientStatementsPage.filterParticipantStatements('', participantIDs[3])
-    clientStatementsPage.clickInTheCheckboxToSelectParticipant(participantIDs[3])
-    clientStatementsPage.assertParticipantStatus(participantIDs[3], participantStatusBefore)
-    clientStatementsPage.clearAllFilters()
+    clientParticipantStatementsPage.filterParticipantStatements('', participantIDs[3])
+    clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantIDs[3])
+    clientParticipantStatementsPage.assertParticipantStatus(participantIDs[3], participantStatusBefore)
+    clientParticipantStatementsPage.clearAllFilters()
 
-    clientStatementsPage.clickInTableHeaderToPerformActions('on hold', participantIDs.length)
+    clientParticipantStatementsPage.clickInTableHeaderToPerformActions('on hold', participantIDs.length)
 
-    clientStatementsPage.assertParticipantStatus(participantIDs[0], participantStatusAfter)
-    clientStatementsPage.assertParticipantStatus(participantIDs[1], participantStatusAfter)
-    clientStatementsPage.assertParticipantStatus(participantIDs[2], participantStatusAfter)
-    clientStatementsPage.assertParticipantStatus(participantIDs[3], participantStatusAfter)
-    clientStatementsPage.assertToastNotificationMessageIsDisplayed('Success')
+    clientParticipantStatementsPage.assertParticipantStatus(participantIDs[0], participantStatusAfter)
+    clientParticipantStatementsPage.assertParticipantStatus(participantIDs[1], participantStatusAfter)
+    clientParticipantStatementsPage.assertParticipantStatus(participantIDs[2], participantStatusAfter)
+    clientParticipantStatementsPage.assertParticipantStatus(participantIDs[3], participantStatusAfter)
+    clientParticipantStatementsPage.assertToastNotificationMessageIsDisplayed('Success')
   })
 
   /**
@@ -489,33 +491,33 @@ describe('Statement Management tests', () => {
     clientStatementsPage.filterClientStatements(clientName)
     clientStatementsPage.clickClientTable(clientId)
 
-    clientStatementsPage.filterParticipantStatements('', participantOnHoldIDs[0])
-    clientStatementsPage.clickInTheCheckboxToSelectParticipant(participantOnHoldIDs[0])
-    clientStatementsPage.assertParticipantStatus(participantOnHoldIDs[0], participantStatusAfter)
-    clientStatementsPage.clearAllFilters()
+    clientParticipantStatementsPage.filterParticipantStatements('', participantOnHoldIDs[0])
+    clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantOnHoldIDs[0])
+    clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldIDs[0], participantStatusAfter)
+    clientParticipantStatementsPage.clearAllFilters()
 
-    clientStatementsPage.filterParticipantStatements('', participantOnHoldIDs[1])
-    clientStatementsPage.clickInTheCheckboxToSelectParticipant(participantOnHoldIDs[1])
-    clientStatementsPage.assertParticipantStatus(participantOnHoldIDs[1], participantStatusAfter)
-    clientStatementsPage.clearAllFilters()
+    clientParticipantStatementsPage.filterParticipantStatements('', participantOnHoldIDs[1])
+    clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantOnHoldIDs[1])
+    clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldIDs[1], participantStatusAfter)
+    clientParticipantStatementsPage.clearAllFilters()
 
-    clientStatementsPage.filterParticipantStatements('', participantOnHoldIDs[2])
-    clientStatementsPage.clickInTheCheckboxToSelectParticipant(participantOnHoldIDs[2])
-    clientStatementsPage.assertParticipantStatus(participantOnHoldIDs[2], participantStatusAfter)
-    clientStatementsPage.clearAllFilters()
+    clientParticipantStatementsPage.filterParticipantStatements('', participantOnHoldIDs[2])
+    clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantOnHoldIDs[2])
+    clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldIDs[2], participantStatusAfter)
+    clientParticipantStatementsPage.clearAllFilters()
 
-    clientStatementsPage.filterParticipantStatements('', participantPendingValidationIDs[0])
-    clientStatementsPage.clickInTheCheckboxToSelectParticipant(participantPendingValidationIDs[0])
-    clientStatementsPage.assertParticipantStatus(participantPendingValidationIDs[0], participantStatusBefore)
-    clientStatementsPage.clearAllFilters()
+    clientParticipantStatementsPage.filterParticipantStatements('', participantPendingValidationIDs[0])
+    clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantPendingValidationIDs[0])
+    clientParticipantStatementsPage.assertParticipantStatus(participantPendingValidationIDs[0], participantStatusBefore)
+    clientParticipantStatementsPage.clearAllFilters()
 
-    clientStatementsPage.clickInTableHeaderToPerformActions('on hold', participantPendingValidationIDs.length)
+    clientParticipantStatementsPage.clickInTableHeaderToPerformActions('on hold', participantPendingValidationIDs.length)
 
-    clientStatementsPage.assertParticipantStatus(participantOnHoldIDs[0], participantStatusAfter)
-    clientStatementsPage.assertParticipantStatus(participantOnHoldIDs[1], participantStatusAfter)
-    clientStatementsPage.assertParticipantStatus(participantOnHoldIDs[2], participantStatusAfter)
-    clientStatementsPage.assertParticipantStatus(participantPendingValidationIDs[0], participantStatusAfter)
-    clientStatementsPage.assertToastNotificationMessageIsDisplayed('Success')
+    clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldIDs[0], participantStatusAfter)
+    clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldIDs[1], participantStatusAfter)
+    clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldIDs[2], participantStatusAfter)
+    clientParticipantStatementsPage.assertParticipantStatus(participantPendingValidationIDs[0], participantStatusAfter)
+    clientParticipantStatementsPage.assertToastNotificationMessageIsDisplayed('Success')
   })
 
   /**
@@ -531,15 +533,15 @@ describe('Statement Management tests', () => {
     clientStatementsPage.clickClientTable(clientReconciledId)
 
     // Participant with On Hold status
-    clientStatementsPage.filterParticipantStatements('', participantOnHoldId)
-    clientStatementsPage.assertParticipantStatus(participantOnHoldId, 'On Hold')
-    clientStatementsPage.assertRecallButtonDisplayedForParticipant(participantOnHoldId, false)
-    clientStatementsPage.clearAllFilters()
+    clientParticipantStatementsPage.filterParticipantStatements('', participantOnHoldId)
+    clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldId, 'On Hold')
+    clientParticipantStatementsPage.assertRecallButtonDisplayedForParticipant(participantOnHoldId, false)
+    clientParticipantStatementsPage.clearAllFilters()
 
     //Participant with Pending Validation status
-    clientStatementsPage.filterParticipantStatements('', participantPendingValidationId)
-    clientStatementsPage.assertParticipantStatus(participantPendingValidationId, 'Pending Validation')
-    clientStatementsPage.assertRecallButtonDisplayedForParticipant(participantPendingValidationId, false)
+    clientParticipantStatementsPage.filterParticipantStatements('', participantPendingValidationId)
+    clientParticipantStatementsPage.assertParticipantStatus(participantPendingValidationId, 'Pending Validation')
+    clientParticipantStatementsPage.assertRecallButtonDisplayedForParticipant(participantPendingValidationId, false)
   })
 
   /**
@@ -559,28 +561,28 @@ describe('Statement Management tests', () => {
     clientStatementsPage.clickClientTable(clientPartiallyPublishedId)
 
     // Assert approve button displayed only for specific participants
-    clientStatementsPage.assertApproveButtonDisplayedForParticipant(participantOnHoldIds[0])
-    clientStatementsPage.assertApproveButtonDisplayedForParticipant(participantOnHoldIds[1])
-    clientStatementsPage.assertApproveButtonDisplayedForParticipant(participantOnHoldIds[2])
-    clientStatementsPage.assertApproveButtonDisplayedForParticipant(participantOtherStatusesIds[0], false)
-    clientStatementsPage.assertApproveButtonDisplayedForParticipant(participantOtherStatusesIds[1], false)
-    clientStatementsPage.assertApproveButtonDisplayedForParticipant(participantOtherStatusesIds[2], false)
+    clientParticipantStatementsPage.assertApproveButtonDisplayedForParticipant(participantOnHoldIds[0])
+    clientParticipantStatementsPage.assertApproveButtonDisplayedForParticipant(participantOnHoldIds[1])
+    clientParticipantStatementsPage.assertApproveButtonDisplayedForParticipant(participantOnHoldIds[2])
+    clientParticipantStatementsPage.assertApproveButtonDisplayedForParticipant(participantOtherStatusesIds[0], false)
+    clientParticipantStatementsPage.assertApproveButtonDisplayedForParticipant(participantOtherStatusesIds[1], false)
+    clientParticipantStatementsPage.assertApproveButtonDisplayedForParticipant(participantOtherStatusesIds[2], false)
 
     // Select participants to approve
-    clientStatementsPage.filterParticipantStatements('', participantOnHoldIds[0])
-    clientStatementsPage.clickInTheCheckboxToSelectParticipant(participantOnHoldIds[0])
-    clientStatementsPage.assertParticipantStatus(participantOnHoldIds[0], 'On Hold')
-    clientStatementsPage.clearAllFilters()
+    clientParticipantStatementsPage.filterParticipantStatements('', participantOnHoldIds[0])
+    clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantOnHoldIds[0])
+    clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldIds[0], 'On Hold')
+    clientParticipantStatementsPage.clearAllFilters()
 
-    clientStatementsPage.filterParticipantStatements('', participantOnHoldIds[1])
-    clientStatementsPage.clickInTheCheckboxToSelectParticipant(participantOnHoldIds[1])
-    clientStatementsPage.assertParticipantStatus(participantOnHoldIds[1], 'On Hold')
-    clientStatementsPage.clearAllFilters()
+    clientParticipantStatementsPage.filterParticipantStatements('', participantOnHoldIds[1])
+    clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantOnHoldIds[1])
+    clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldIds[1], 'On Hold')
+    clientParticipantStatementsPage.clearAllFilters()
 
-    clientStatementsPage.filterParticipantStatements('', participantOnHoldIds[2])
-    clientStatementsPage.clickInTheCheckboxToSelectParticipant(participantOnHoldIds[2])
-    clientStatementsPage.assertParticipantStatus(participantOnHoldIds[2], 'On Hold')
-    clientStatementsPage.clearAllFilters()
+    clientParticipantStatementsPage.filterParticipantStatements('', participantOnHoldIds[2])
+    clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantOnHoldIds[2])
+    clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldIds[2], 'On Hold')
+    clientParticipantStatementsPage.clearAllFilters()
   })
 
   /**
@@ -596,25 +598,25 @@ describe('Statement Management tests', () => {
     clientStatementsPage.clickClientTable(clientPendingValidationId)
 
     // Pick participant and ensure correct status
-    clientStatementsPage.filterParticipantStatements('', participantPendingValidationId)
-    clientStatementsPage.assertParticipantStatus(participantPendingValidationId, 'Pending Validation')
+    clientParticipantStatementsPage.filterParticipantStatements('', participantPendingValidationId)
+    clientParticipantStatementsPage.assertParticipantStatus(participantPendingValidationId, 'Pending Validation')
 
     // On Hold behavior
-    clientStatementsPage.clickInTheCheckboxToSelectParticipant(participantPendingValidationId)
-    clientStatementsPage.assertActionButtonDisplayedInTableHeader('on hold')
-    clientStatementsPage.clickInTheCheckboxToSelectParticipant(participantPendingValidationId)
-    clientStatementsPage.assertActionButtonDisplayedInTableHeader('on hold', false)
+    clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantPendingValidationId)
+    clientParticipantStatementsPage.assertActionButtonDisplayedInTableHeader('on hold')
+    clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantPendingValidationId)
+    clientParticipantStatementsPage.assertActionButtonDisplayedInTableHeader('on hold', false)
 
     // On hold participant
-    clientStatementsPage.clickInTheCheckboxToSelectParticipant(participantPendingValidationId)
-    clientStatementsPage.clickInTableHeaderToPerformActions('on hold', 1)
+    clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantPendingValidationId)
+    clientParticipantStatementsPage.clickInTableHeaderToPerformActions('on hold', 1)
 
     // Verify rerun button
-    clientStatementsPage.assertParticipantStatus(participantPendingValidationId, 'On Hold')
-    clientStatementsPage.assertButtonIsDisplayedInParticipantActions(participantPendingValidationId, 'rerun')
-    clientStatementsPage.clickInTheCheckboxToSelectParticipant(participantPendingValidationId)
-    clientStatementsPage.clickInTableHeaderToPerformActions('rerun', 1)
-    clientStatementsPage.assertParticipantStatus(participantPendingValidationId, 'Pending Validation')
+    clientParticipantStatementsPage.assertParticipantStatus(participantPendingValidationId, 'On Hold')
+    clientParticipantStatementsPage.assertButtonIsDisplayedInParticipantActions(participantPendingValidationId, 'rerun')
+    clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantPendingValidationId)
+    clientParticipantStatementsPage.clickInTableHeaderToPerformActions('rerun', 1)
+    clientParticipantStatementsPage.assertParticipantStatus(participantPendingValidationId, 'Pending Validation')
   })
 
   /**
@@ -630,28 +632,28 @@ describe('Statement Management tests', () => {
     clientStatementsPage.clickClientTable(clientPendingValidationId)
 
     // Select participant 1
-    clientStatementsPage.filterParticipantStatements('', participantOnHoldId[0])
-    clientStatementsPage.assertParticipantStatus(participantOnHoldId[0], 'On Hold')
-    clientStatementsPage.clickInTheCheckboxToSelectParticipant(participantOnHoldId[0])
-    clientStatementsPage.clearAllFilters()
+    clientParticipantStatementsPage.filterParticipantStatements('', participantOnHoldId[0])
+    clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldId[0], 'On Hold')
+    clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantOnHoldId[0])
+    clientParticipantStatementsPage.clearAllFilters()
 
     // Select participant 2
-    clientStatementsPage.filterParticipantStatements('', participantOnHoldId[1])
-    clientStatementsPage.assertParticipantStatus(participantOnHoldId[1], 'On Hold')
-    clientStatementsPage.clickInTheCheckboxToSelectParticipant(participantOnHoldId[1])
-    clientStatementsPage.clearAllFilters()
+    clientParticipantStatementsPage.filterParticipantStatements('', participantOnHoldId[1])
+    clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldId[1], 'On Hold')
+    clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantOnHoldId[1])
+    clientParticipantStatementsPage.clearAllFilters()
 
     // Select participant 3
-    clientStatementsPage.filterParticipantStatements('', participantOnHoldId[2])
-    clientStatementsPage.assertParticipantStatus(participantOnHoldId[2], 'On Hold')
-    clientStatementsPage.clickInTheCheckboxToSelectParticipant(participantOnHoldId[2])
-    clientStatementsPage.clearAllFilters()
+    clientParticipantStatementsPage.filterParticipantStatements('', participantOnHoldId[2])
+    clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldId[2], 'On Hold')
+    clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantOnHoldId[2])
+    clientParticipantStatementsPage.clearAllFilters()
 
     // Rerun participants
-    clientStatementsPage.clickInTableHeaderToPerformActions('rerun', participantOnHoldId.length)
-    clientStatementsPage.assertParticipantStatus(participantOnHoldId[0], 'Pending Validation')
-    clientStatementsPage.assertParticipantStatus(participantOnHoldId[1], 'Pending Validation')
-    clientStatementsPage.assertParticipantStatus(participantOnHoldId[2], 'Pending Validation')
+    clientParticipantStatementsPage.clickInTableHeaderToPerformActions('rerun', participantOnHoldId.length)
+    clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldId[0], 'Pending Validation')
+    clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldId[1], 'Pending Validation')
+    clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldId[2], 'Pending Validation')
   })
 
   /**
@@ -678,9 +680,9 @@ describe('Statement Management tests', () => {
     clientStatementsPage.clickClientTable(clientPendingValidationId)
 
     // On Hold
-    clientStatementsPage.clickOnParticipant(participantOnHoldId)
-    clientStatementsPage.assertRightL4BarIsDisplayed()
-    clientStatementsPage.assertParticipantStatementDetailsOnL4Bar(
+    clientParticipantStatementsPage.clickOnParticipant(participantOnHoldId)
+    clientParticipantStatementsPage.assertRightL4BarIsDisplayed()
+    clientParticipantStatementsPage.assertParticipantStatementDetailsOnL4Bar(
       participantOnHoldName,
       participantOnHoldAsOfDate,
       participantOnHoldCurrentStatus,
@@ -688,7 +690,7 @@ describe('Statement Management tests', () => {
       participantOnHoldAuditTrailUsers,
       participantOnHoldAuditTrailTimestamps
     )
-    clientStatementsPage.clickOutsideToCloseL4RightBar()
+    clientParticipantStatementsPage.clickOutsideToCloseL4RightBar()
   })
 
   /**
@@ -710,48 +712,48 @@ describe('Statement Management tests', () => {
     // Pending Validation
     clientStatementsPage.filterClientStatements(clientPendingValidation)
     clientStatementsPage.clickClientTable(clientPendingValidationId)
-    clientStatementsPage.checkClientParticipantStatementsUrl()
-    clientStatementsPage.assertRejectButtonDisplayed()
-    clientStatementsPage.clickBackToManageStatements()
+    clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
+    clientParticipantStatementsPage.assertRejectButtonDisplayed()
+    clientParticipantStatementsPage.clickBackToManageStatements()
     clientStatementsPage.clearAllFilters()
 
     // Initiated
     clientStatementsPage.filterClientStatements(clientInitiated)
     clientStatementsPage.clickClientTable(clientInitiatedId)
-    clientStatementsPage.checkClientParticipantStatementsUrl()
-    clientStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
-    clientStatementsPage.assertRejectButtonDisplayed(false)
-    clientStatementsPage.clickBackToManageStatements()
+    clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
+    clientParticipantStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
+    clientParticipantStatementsPage.assertRejectButtonDisplayed(false)
+    clientParticipantStatementsPage.clickBackToManageStatements()
     clientStatementsPage.clearAllFilters()
 
     // Reconciling
     clientStatementsPage.filterClientStatements(clientReconciling)
     clientStatementsPage.clickClientTable(clientReconcilingId)
-    clientStatementsPage.checkClientParticipantStatementsUrl()
-    clientStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
-    clientStatementsPage.assertRejectButtonDisplayed(false)
-    clientStatementsPage.clickBackToManageStatements()
+    clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
+    clientParticipantStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
+    clientParticipantStatementsPage.assertRejectButtonDisplayed(false)
+    clientParticipantStatementsPage.clickBackToManageStatements()
     clientStatementsPage.clearAllFilters()
 
     // Partially Published
     clientStatementsPage.filterClientStatements(clientPartiallyPublished)
     clientStatementsPage.clickClientTable(clientPartiallyPublishedId)
-    clientStatementsPage.checkClientParticipantStatementsUrl()
-    clientStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
-    clientStatementsPage.assertRejectButtonDisplayed(false)
-    clientStatementsPage.clickBackToManageStatements()
+    clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
+    clientParticipantStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
+    clientParticipantStatementsPage.assertRejectButtonDisplayed(false)
+    clientParticipantStatementsPage.clickBackToManageStatements()
     clientStatementsPage.clearAllFilters()
 
     // Published
     clientStatementsPage.filterClientStatements(clientPublished)
     clientStatementsPage.clickClientTable(clientPublishedId)
-    clientStatementsPage.checkClientParticipantStatementsUrl()
-    clientStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
-    clientStatementsPage.assertRejectButtonDisplayed(false)
+    clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
+    clientParticipantStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
+    clientParticipantStatementsPage.assertRejectButtonDisplayed(false)
   })
 
   /**
-   * @missing_data We a client with Pending Validation status
+   * @missing_data A client with Pending Validation status
    *
    */
   it.skip('C7623838_Statements_Reject_Function_Behavior', () => {
@@ -762,10 +764,10 @@ describe('Statement Management tests', () => {
 
     clientStatementsPage.filterClientStatements(clientPendingValidation)
     clientStatementsPage.clickClientTable(clientPendingValidationId)
-    clientStatementsPage.assertClientStatus(clientStatus)
-    clientStatementsPage.clickToRejectStatement()
-    clientStatementsPage.assertClientStatus(clientNewStatus)
-    clientStatementsPage.assertRejectButtonDisplayed(false)
+    clientParticipantStatementsPage.assertClientStatus(clientStatus)
+    clientParticipantStatementsPage.clickToRejectStatement()
+    clientParticipantStatementsPage.assertClientStatus(clientNewStatus)
+    clientParticipantStatementsPage.assertRejectButtonDisplayed(false)
   })
 
   /**

@@ -72,7 +72,8 @@ class DapManagementPage extends BaseManagementPage {
   }
 
   clickCreateNewDap() {
-    cy.get(selectors.createDapBtn).click()
+    cy.get(selectors.createDapBtn).as('createNewDapButton')
+    cy.get('@createNewDapButton').click()
   }
 
   // ----------------------------------------------- ASSERTS --------------------------------------------- //
