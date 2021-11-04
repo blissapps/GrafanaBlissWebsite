@@ -58,9 +58,9 @@ describe('Home page tests', () => {
   it('C10735680_Check_Client_Summary_Information_On_Cards', () => {
     homePage.assertClientCardSummaryInformation(144, '7digital', 'GBR', 'Regulated', 'Active').should('be.visible')
     homePage.assertClientCardSummaryInformation(337, '9F Group', 'CHN', 'Not Regulated', 'NOT SET').should('be.visible')
-    homePage.assertClientCardSummaryInformation(162, 'Archant', 'GBR', 'Not Regulated', 'Terminated').should('be.visible')
+    homePage.assertClientCardSummaryInformation(361, 'Alliance Bernstein', 'USA', 'Regulated', 'Terminated').should('be.visible')
     homePage.assertClientCardSummaryInformation(234, 'Janus Henderson', 'GBR', 'Regulated', 'Terminated').should('be.visible')
-    homePage.assertClientCardSummaryInformation(381, 'GASCADE Gastransport', 'DEU', 'Regulated', 'Implementation').should('be.visible')
+    homePage.assertClientCardSummaryInformation(343, 'Vista Global', 'ARE', 'Not Regulated', 'Implementation').should('be.visible')
   })
 
   it('C10772388_Validate_Quick_Client_Switch_Behavior', () => {
