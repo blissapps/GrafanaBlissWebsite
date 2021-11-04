@@ -518,8 +518,7 @@ class RoleManagementPage extends BaseManagementPage {
   activateRole() {
     cy.get(selectors.activateRoleBtn).click()
     this.waitRoleIsActivated()
-    // eslint-disable-next-line cypress/no-unnecessary-waiting
-    cy.wait(300) // Necessary because the UI takes a very quick time to reload the data correctly
+    this.forcedWait(300) // Necessary because the UI takes a very quick time to reload the data correctly
   }
 
   // ---------------------------------------  INTERCEPTIONS --------------------------------------------- //

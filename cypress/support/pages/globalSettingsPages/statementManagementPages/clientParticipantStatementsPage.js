@@ -200,7 +200,7 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
    * Assert the participant status in the participants table
    *
    * @param {Number} participantId Participant id number to be asserted
-   * @param {String} participantStatus Status to be verified into this participant. Status can be: Pending Validation, On Hold ...
+   * @param {String} participantStatus Status to be verified into this participant. Status can be: Pending Validation, On Hold ... Check HTML to make sure
    *
    */
   assertParticipantStatus(participantId, participantStatus) {
@@ -429,6 +429,7 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
     }
 
     this.waitForTableToReloadAfterFiltering()
+    this.forcedWait(800) // Necessary to avoid any errors regarding the table being reloaded in the UI.
   }
 
   // -----------------------------------------------------------------------------------------  INTERCEPTIONS ------------------------------------------------------------------------------ //

@@ -1,10 +1,12 @@
+import BasePage from '../pages/basePage'
+
 const selectors = {
   inputBar: 'gs-global-search .input-bar input',
   searchClientButton: '.search-action',
   clearXButton: 'gs-global-search div.clear-action gs-svg-icon'
 }
 
-class SearchBar {
+class SearchBar extends BasePage {
   /**
    * Search bar
    *
@@ -18,8 +20,7 @@ class SearchBar {
     cy.get(selectors.inputBar).type(textToSearch)
     cy.get(selectors.searchClientButton).click()
 
-    // eslint-disable-next-line cypress/no-unnecessary-waiting
-    cy.wait(delay)
+    this.forcedWait(delay)
   }
 
   /**

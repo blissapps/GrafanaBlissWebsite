@@ -28,8 +28,7 @@ class SettingsMenuNavBar extends BasePage {
    * @param defaultDelay Delay because the element can be detached from the DOM and there is no XHR to intercept at this point
    */
   clickClientSwitchButton(defaultDelay = 200) {
-    // eslint-disable-next-line cypress/no-unnecessary-waiting
-    cy.wait(defaultDelay)
+    this.forcedWait(defaultDelay)
     cy.get(selectors.clientSwitchButton).click()
   }
 

@@ -330,6 +330,16 @@ class BasePage {
   assertBulkOptionsDisplayed(displayed = true) {
     displayed ? cy.get(selectors.bulkActionsCheckbox).should('exist') : cy.get(selectors.bulkActionsCheckbox).should('not.exist')
   }
+
+  // ---------------------------------------------------------------------------------------- OTHERS --------------------------------------------------------------------------------------------- //
+  /**
+   * Wait for a explicity amount of time
+   *
+   * @param {*} time Time im milliseconds to explicit wait
+   */
+  forcedWait(time) {
+    cy.wait(time)
+  }
 }
 
 export default BasePage
