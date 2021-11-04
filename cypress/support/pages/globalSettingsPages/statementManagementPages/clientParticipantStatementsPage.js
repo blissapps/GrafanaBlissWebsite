@@ -9,8 +9,9 @@ const selectors = {
   backToManageStatementsButton: '#backLink',
   clientParticipantStatementId: '#clientParticipantStatement-',
   rejectButton: '#reject',
+  recallButton: '#recall',
   participantStatementIdsInTable: '*[id*=clientParticipantStatement-] gs-grid-extension-checkable-row-number-cell span',
-  recallBtn: '#gridActionRecall',
+  actionRecallBtnForParticipant: '#gridActionRecall',
   approveBtn: '#gridActionApprove',
   onHoldBtn: '#gridActionHold',
   actionsButton: '.action gs-button',
@@ -23,7 +24,7 @@ const selectors = {
   participantExternalId: '#pptExternalIdFilter input'
 }
 
-const onHoldStatementsSelectorsOnL4Bar = {
+const selectorsOnL4Bar = {
   numberOfStatements: 'gs-container-l4 h2',
   actionButton: 'gs-container-l4 #actionBtn'
 }
@@ -125,6 +126,14 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
   }
 
   /**
+   * Click in the Recall button to recall a statement
+   */
+  clickToRecallStatement() {
+    cy.get(selectors.recallButton).click()
+    cy.get(selectorsOnL4Bar.actionButton).click()
+  }
+
+  /**
    * Click in the buttons located in the header of the participants table right after selecting them on the checkboxes
    *
    * @param {String} actionToPerform Chose the action to perform. It can be Rerun, Approve, or On Hold.
@@ -147,8 +156,8 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
         throw new Error('Parameter actionToPerform is invalid')
     }
 
-    cy.get(onHoldStatementsSelectorsOnL4Bar.numberOfStatements).should('have.text', numberOfParticipantsAffected)
-    cy.get(onHoldStatementsSelectorsOnL4Bar.actionButton).click()
+    cy.get(selectorsOnL4Bar.numberOfStatements).should('have.text', numberOfParticipantsAffected)
+    cy.get(selectorsOnL4Bar.actionButton).click()
   }
 
   // ------------------------------------------------------------------------------------------ ASSERTIONS -------------------------------------------------------------------------------- //
@@ -220,6 +229,15 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
   }
 
   /**
+   * Assert the REcall button is displayed. Tip: so far it is only available for Pending Validation status or Published
+   *
+   * @param {Boolean} displayed True to validate the Recall button is displayed. False otherwise.
+   */
+  assertRecallButtonDisplayed(displayed = true) {
+    displayed ? cy.get(selectors.recallButton).should('be.visible') : cy.get(selectors.recallButton).should('not.exist')
+  }
+
+  /**
    * Assert the recall button is available for a given participant
    *
    *
@@ -232,11 +250,11 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
   assertRecallButtonDisplayedForParticipant(participantId, displayed = true) {
     displayed
       ? cy
-          .get(selectors.clientParticipantStatementId + participantId + ' ' + selectors.recallBtn)
+          .get(selectors.clientParticipantStatementId + participantId + ' ' + selectors.actionRecallBtnForParticipant)
           .eq(1)
           .should('be.visible')
       : cy
-          .get(selectors.clientParticipantStatementId + participantId + ' ' + selectors.recallBtn)
+          .get(selectors.clientParticipantStatementId + participantId + ' ' + selectors.actionRecallBtnForParticipant)
           .eq(1)
           .should('not.exist')
   }

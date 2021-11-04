@@ -657,7 +657,7 @@ describe('Statement Management tests', () => {
   })
 
   /**
-   * @missing_data We need a client with at participants with all status, such as Initiated, Pending Validation, On Hold, Approved, Published, Recalled...
+   * @missing_data We need a client that has participants with all statuses, such as Initiated, Pending Validation, On Hold, Approved, Published, Recalled...
    *
    * @missing_steps This one is made only for On Hold status. Need to do it for the others statuses as well
    *
@@ -768,6 +768,69 @@ describe('Statement Management tests', () => {
     clientParticipantStatementsPage.clickToRejectStatement()
     clientParticipantStatementsPage.assertClientStatus(clientNewStatus)
     clientParticipantStatementsPage.assertRejectButtonDisplayed(false)
+  })
+
+  /**
+   * @missing_data We need clients with all statuses available, such as Initiated, Pending Validation, On Hold, Approved, Published, Recalled...
+   *
+   * @missing_steps Waiting for https://globalshares.atlassian.net/browse/PB-954
+   */
+  it.skip('C7623839_Statements_Partially_Published_Or_Published_States_Can_Be_Recalled', () => {
+    const clientPublished = 'Garrett Motion'
+    const clientPublishedId = 95
+    const clientPartiallyPublished = 'UDG Healthcare plc'
+    const clientPartiallyPublishedId = 88
+    const clientPendingValidation = 'Keywords Studios plc'
+    const clientPendingValidationId = 87
+    const clientInitiated = 'Skanska'
+    const clientInitiatedId = 119
+    const clientReconciling = 'Shelf Drilling Ltd'
+    const clientReconcilingId = 83
+
+    // Published
+    clientStatementsPage.filterClientStatements(clientPublished)
+    clientStatementsPage.clickClientTable(clientPublishedId)
+    clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
+    clientParticipantStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
+    clientParticipantStatementsPage.assertRecallButtonDisplayed()
+    clientParticipantStatementsPage.clickToRecallStatement()
+    clientParticipantStatementsPage.assertClientStatus('Initiated')
+    // *** Missing steps in here to validate what the recall does to the participants***
+    clientParticipantStatementsPage.clickBackToManageStatements()
+    clientStatementsPage.clearAllFilters()
+
+    // Partially Published
+    clientStatementsPage.filterClientStatements(clientPartiallyPublished)
+    clientStatementsPage.clickClientTable(clientPartiallyPublishedId)
+    clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
+    clientParticipantStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
+    clientParticipantStatementsPage.assertRecallButtonDisplayed()
+    clientParticipantStatementsPage.clickBackToManageStatements()
+    clientStatementsPage.clearAllFilters()
+
+    // Pending Validation
+    clientStatementsPage.filterClientStatements(clientPendingValidation)
+    clientStatementsPage.clickClientTable(clientPendingValidationId)
+    clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
+    clientParticipantStatementsPage.assertRecallButtonDisplayed(false)
+    clientParticipantStatementsPage.clickBackToManageStatements()
+    clientStatementsPage.clearAllFilters()
+
+    // Initiated
+    clientStatementsPage.filterClientStatements(clientInitiated)
+    clientStatementsPage.clickClientTable(clientInitiatedId)
+    clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
+    clientParticipantStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
+    clientParticipantStatementsPage.assertRecallButtonDisplayed(false)
+    clientParticipantStatementsPage.clickBackToManageStatements()
+    clientStatementsPage.clearAllFilters()
+
+    // Reconciling
+    clientStatementsPage.filterClientStatements(clientReconciling)
+    clientStatementsPage.clickClientTable(clientReconcilingId)
+    clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
+    clientParticipantStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
+    clientParticipantStatementsPage.assertRecallButtonDisplayed(false)
   })
 
   /**
