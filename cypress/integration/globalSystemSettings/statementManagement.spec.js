@@ -209,35 +209,6 @@ describe('Statement Management tests', () => {
   })
 
   /**
-   * @missing_data Need to have a clients for each possible state
-   */
-  it.skip('C7627260_Statements_Try_To_Reconcile_Single_Client_Statement_Not_In_Initiated_Status', () => {
-    // INITIATED
-    clientStatementsPage.filterClientStatements('Velocys PLC')
-    clientStatementsPage.getReconcileButton(103).should('be.visible')
-
-    // RECONCILED
-    clientStatementsPage.clearAllFilters()
-    clientStatementsPage.filterClientStatements('Mercari')
-    clientStatementsPage.getReconcileButton(84).should('not.exist')
-
-    // Pending Validation
-    clientStatementsPage.clearAllFilters()
-    clientStatementsPage.filterClientStatements('Kerry Logistics')
-    clientStatementsPage.getReconcileButton(97).should('not.exist')
-
-    // PUBLISHED
-    clientStatementsPage.clearAllFilters()
-    clientStatementsPage.filterClientStatements('Interxion')
-    clientStatementsPage.getReconcileButton(76).should('not.exist')
-
-    // PARTIALLY PUBLISHED
-    clientStatementsPage.clearAllFilters()
-    clientStatementsPage.filterClientStatements('Cavotec')
-    clientStatementsPage.getReconcileButton(78).should('not.exist')
-  })
-
-  /**
    * @missing_steps scroll not working properly
    *
    */
@@ -391,27 +362,27 @@ describe('Statement Management tests', () => {
 
     // Client status PUBLISHED
     clientStatementsPage.filterClientStatements(clientPublished)
-    clientStatementsPage.assertReconcileButtonDisplayed(clientPublishedId, false)
+    clientStatementsPage.assertReconcileButtonDisplayedForClient(clientPublishedId, false)
     clientStatementsPage.clearAllFilters()
 
     // Client status PARTIALLY PUBLISHED
     clientStatementsPage.filterClientStatements(clientPartiallyPublished)
-    clientStatementsPage.assertReconcileButtonDisplayed(clientPartiallyPublishedId, false)
+    clientStatementsPage.assertReconcileButtonDisplayedForClient(clientPartiallyPublishedId, false)
     clientStatementsPage.clearAllFilters()
 
     // Client status RECONCILED
     clientStatementsPage.filterClientStatements(clientReconciled)
-    clientStatementsPage.assertReconcileButtonDisplayed(clientReconciledId, false)
+    clientStatementsPage.assertReconcileButtonDisplayedForClient(clientReconciledId, false)
     clientStatementsPage.clearAllFilters()
 
     // Client status PENDING VALIDATION
     clientStatementsPage.filterClientStatements(clientPendingValidation)
-    clientStatementsPage.assertReconcileButtonDisplayed(clientPendingValidationId, false)
+    clientStatementsPage.assertReconcileButtonDisplayedForClient(clientPendingValidationId, false)
     clientStatementsPage.clearAllFilters()
 
     // Client status INITIATED
     clientStatementsPage.filterClientStatements(clientInitiated)
-    clientStatementsPage.assertReconcileButtonDisplayed(clientInitiatedId)
+    clientStatementsPage.assertReconcileButtonDisplayedForClient(clientInitiatedId)
   })
 
   /**
@@ -872,6 +843,58 @@ describe('Statement Management tests', () => {
     clientParticipantStatementsPage.assertParticipantStatus(participantsPendingValidationIds[2], 'On Hold')
     clientParticipantStatementsPage.assertParticipantStatus(participantsOtherStatusIds[0], 'On Hold')
     clientParticipantStatementsPage.assertParticipantStatus(participantsOtherStatusIds[1], 'On Hold')
+  })
+
+  /**
+   * @missing_data Client statement with status Initiated
+   */
+  it.skip('C7627258_Statements_Reconcile_Single_Client_Statement', () => {
+    const clientInitiated = 'Legal and General'
+    const clientInitiatedId = 148
+
+    clientStatementsPage.filterClientStatements(clientInitiated)
+    clientStatementsPage.assertClientStatus(clientInitiatedId, 'Initiated')
+    clientStatementsPage.assertReconcileButtonDisplayedForClient(clientInitiatedId)
+    clientStatementsPage.reconcileClient(clientInitiatedId, true)
+    clientStatementsPage.assertToastNotificationMessageIsDisplayed('Success')
+    clientStatementsPage.assertClientStatus(clientInitiatedId, 'Reconciling')
+  })
+
+  /**
+   * @missing_data Clients statements with all statuses but Initiated
+   */
+  it.skip('C7627260_Statements_Try_To_Reconcile_Single_Client_Statement_Not_In_Initiated_Status', () => {
+    const clientReconciled = 'Alfa Systems'
+    const clientReconciledId = 203
+    const clientPendingValidation = 'SJP Partners'
+    const clientPendingValidationId = 93
+    const clientPartiallyPublished = 'Lenovo'
+    const clientPartiallyPublishedId = 108
+    const clientPublished = 'Repsol'
+    const clientPublishedId = 107
+
+    // Reconciling
+    clientStatementsPage.filterClientStatements(clientReconciled)
+    clientStatementsPage.assertClientStatus(clientReconciledId, 'Reconciling')
+    clientStatementsPage.assertReconcileButtonDisplayedForClient(clientReconciledId, false)
+    clientStatementsPage.clearAllFilters()
+
+    // Pending Validation
+    clientStatementsPage.filterClientStatements(clientPendingValidation)
+    clientStatementsPage.assertClientStatus(clientPendingValidationId, 'Pending Validation')
+    clientStatementsPage.assertReconcileButtonDisplayedForClient(clientPendingValidationId, false)
+    clientStatementsPage.clearAllFilters()
+
+    // Partially Published
+    clientStatementsPage.filterClientStatements(clientPartiallyPublished)
+    clientStatementsPage.assertClientStatus(clientPartiallyPublishedId, 'Partially Published')
+    clientStatementsPage.assertReconcileButtonDisplayedForClient(clientPartiallyPublishedId, false)
+    clientStatementsPage.clearAllFilters()
+
+    // Published
+    clientStatementsPage.filterClientStatements(clientPublished)
+    clientStatementsPage.assertClientStatus(clientPublishedId, 'Published')
+    clientStatementsPage.assertReconcileButtonDisplayedForClient(clientPublishedId, false)
   })
 
   /**

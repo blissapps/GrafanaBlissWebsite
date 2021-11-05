@@ -78,12 +78,13 @@ class ClientStatementsPage extends BaseStatementManagementPage {
   }
 
   /**
-   * Reconcile a client statement
+   * Click in the button to reconcile a client
+   * PS: This method does not reconcile the client, it only clicks in the reconcile button so you can verify its behavior. To reconcile go to the reconcileClient method
    *
-   * @param {Number} recordId id number from the Client Statements table to reconcile
+   * @param {Number} clientId id number from the Client Statements table to reconcile
    */
-  clickToReconcileClient(recordId) {
-    this.getReconcileButton(recordId)
+  clickToReconcileClient(clientId) {
+    this.getReconcileButton(clientId)
       .scrollIntoView()
       .click()
   }
@@ -132,7 +133,7 @@ class ClientStatementsPage extends BaseStatementManagementPage {
    * @param {Number} clientId Client id number to hover in this client to make sure the reconcile button is visible or not
    * @param {Boolean} displayed True to assert the reconcile button is displayed. False, otherwise.
    */
-  assertReconcileButtonDisplayed(clientId, displayed = true) {
+  assertReconcileButtonDisplayedForClient(clientId, displayed = true) {
     displayed ? this.getReconcileButton(clientId).should('be.visible') : this.getReconcileButton(clientId).should('not.exist')
   }
 
@@ -187,6 +188,19 @@ class ClientStatementsPage extends BaseStatementManagementPage {
     this.assertRightL4BarIsDisplayed(false)
   }
 
+  /**
+   * Assert the client status in the clients table
+   *
+   * @param {Number} clientId Client id number to be asserted
+   * @param {String} clientStatus Status to be verified in this client. Status can be: Pending Validation, On Hold ... Check HTML to make sure
+   *
+   */
+  assertClientStatus(clientId, clientStatus) {
+    cy.get(selectors.clientStatementId + clientId + ' gs-grid-cell gs-badge')
+      .scrollIntoView()
+      .should('contain.text', clientStatus)
+  }
+
   // -------------------------------------------------------------------------------------------- OTHERS ------------------------------------------------------------------------------------------- //
 
   /**
@@ -213,6 +227,38 @@ class ClientStatementsPage extends BaseStatementManagementPage {
         .last()
         .type(dateTo)
     }
+  }
+
+  /**
+   * Reconcile a client given its id and the security ids
+   *
+   * @param {Number} clientId Client id number to be reconciled
+   * @param {Boolean} noSecurityConsidered True to select the checkbox to do not consider securities for IRS submission. False does not select the checkbox
+   * @param {Array} securityIds Client id number to be reconciled
+   */
+  reconcileClient(clientId, noSecurityConsidered, securityIds = []) {
+    // Make sure the data is consistent
+    if (noSecurityConsidered && securityIds.length > 0) {
+      throw new Error('It does not make sense to send securityIds and mark the checkbox (noSecurityConsidered as True). Please, choose one option only')
+    } else if (!noSecurityConsidered && securityIds.length == 0) {
+      throw new Error('In order to reconcile you need to choose to either send securityIds or to click in the checkbox by sending noSecurityConsidered as true')
+    }
+
+    this.clickToReconcileClient(clientId)
+
+    // Checkbox selection
+    if (noSecurityConsidered) {
+      cy.get(reconcileStatementsSelectorsOnL4Bar.securityCheckBox).click()
+    }
+
+    // Security cards
+    if (securityIds.length > 0) {
+      for (let i = 0; i < securityIds.length; i++) {
+        cy.get(reconcileStatementsSelectorsOnL4Bar.securityCard + securityIds[i]).click()
+      }
+    }
+
+    cy.get(reconcileStatementsSelectorsOnL4Bar.reconcileButton).click()
   }
 
   // -----------------------------------------------------------------------------------------  INTERCEPTIONS ------------------------------------------------------------------------------ //
