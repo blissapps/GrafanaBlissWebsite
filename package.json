@@ -66,6 +66,10 @@
     "prettier": "1.19.1",
     "typescript": "4.3.5",
     "dayjs": "^1.8.36",
-    "tsc-silent": "^1.2.1"
+    "tsc-silent": "^1.2.1",
+    "cypress-multi-reporters": "1.5.0",
+    "mocha-junit-reporter": "2.0.2",
+    "junit-report-merger": "3.0.2",
+    "cypress-mochawesome-reporter": "2.3.0"
   }
 }
