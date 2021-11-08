@@ -16,6 +16,9 @@
 /// <reference types="cypress"/>
 // @ts-nocheck
 
+import './commands.js'
+import 'cypress-mochawesome-reporter/register'
+
 // Hooks
 beforeEach(() => {
   cy.log('Cypress test: ' + Cypress.currentTest.title)

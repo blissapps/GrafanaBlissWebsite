@@ -25,15 +25,19 @@
 
   "include": ["./node_modules/cypress", "cypress/**/*.js"],
 
-  "reporter": "mochawesome",
+  "reporter": "cypress-multi-reporters",
   "reporterOptions": {
-    "reportDir": "cypress/test-results/",
-    "mochaFile": "cypress/test-results/my-test-output.xml",
-    "jenkinsMode": false,
-    "quite": true,
-    "overwrite": false,
-    "html": false,
-    "json": true
+    "reporterEnabled": "cypress-mochawesome-reporter, mocha-junit-reporter",
+    "cypressMochawesomeReporterReporterOptions": {
+      "reportDir": "cypress/test-results",
+      "charts": true,
+      "reportPageTitle": "Equity Admin V3 - Test results",
+      "embeddedScreenshots": true,
+      "inlineAssets": true
+    },
+    "mochaJunitReporterReporterOptions": {
+      "mochaFile": "cypress/test-results/junit/results-[hash].xml"
+    }
   },
 
   "env": {

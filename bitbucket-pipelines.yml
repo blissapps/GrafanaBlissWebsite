@@ -26,8 +26,7 @@ pipelines:
           - cypress
           - node
         script:
-          - yarn cy:run:headless:mocha:chrome
-          - yarn cy:posttest:results
+          - yarn cy:run:chrome
         artifacts:
           - cypress/screenshots/**
           - cypress/videos/**
@@ -40,8 +39,7 @@ pipelines:
           - cypress
           - node
         script:
-          - yarn cy:run:headless:mocha:firefox
-          - yarn cy:posttest:results
+          - yarn cy:run:firefox
         artifacts:
           - cypress/screenshots/**
           - cypress/videos/**
