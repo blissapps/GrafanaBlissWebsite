@@ -16,8 +16,9 @@ class SearchBar extends BasePage {
   search(textToSearch, delay = 500) {
     cy.log('SEARCHING FOR ' + textToSearch)
     this.clearSearchBox()
-    cy.waitFor(selectors.inputBar)
-    cy.get(selectors.inputBar).type(textToSearch)
+
+    cy.get(selectors.inputBar).as('inputBar')
+    cy.get('@inputBar').type(textToSearch)
     cy.get(selectors.searchClientButton).click()
 
     this.forcedWait(delay)

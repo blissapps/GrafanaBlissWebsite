@@ -80,7 +80,7 @@ We can create many personalized ways to run cypress. To do this, we need to crea
 > yarn cy:run
 >
 > # Starting the tests via CLI in headless mode with the Chrome browser by default:
-> yarn cy:run:headless
+> yarn cy:run
 >
 > # Starting the tests via CLI in headless mode with the Chrome browser:
 > cy:run:chrome
@@ -90,10 +90,6 @@ We can create many personalized ways to run cypress. To do this, we need to crea
 >
 > # Starting the tests via CLI in headless mode with the Edge browser:
 > cy:run:edge
->
-> # Starting the tests via CLI [Browser Chrome] and get reports by the end (run each command after the other):
-> cy:run:headless:mocha:chrome
-> cy:posttest:results
 > ```
 
 - Remember that all theses commands above can be totally adapted, modified, or even created according with the project current necessities

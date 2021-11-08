@@ -17,7 +17,7 @@ const { initPlugin } = require('cypress-plugin-snapshots/plugin')
 const tagify = require('cypress-tags')
 // const selectTestsWithGrep = require('cypress-select-tests/grep')
 
-// Reporter
+// Reporter necessary variables
 const { beforeRunHook, afterRunHook } = require('cypress-mochawesome-reporter/lib')
 const exec = require('child_process').execSync
 

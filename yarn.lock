@@ -2650,11 +2650,6 @@ cypress-wait-until@^1.7.1:
   resolved "https://registry.yarnpkg.com/cypress-wait-until/-/cypress-wait-until-1.7.1.tgz#3789cd18affdbb848e3cfc1f918353c7ba1de6f8"
   integrity sha512-8DL5IsBTbAxBjfYgCzdbohPq/bY+IKc63fxtso1C8RWhLnQkZbVESyaclNr76jyxfId6uyzX8+Xnt0ZwaXNtkA==
 
-cypress-waitfor@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/cypress-waitfor/-/cypress-waitfor-1.1.0.tgz#7649f966f60780c22a53f3f7472ec1fc08a111c6"
-  integrity sha512-vVEGWie0PIHA5VflmYyZyBc5a9SyfnOY07pTnOFgdxtTcFrdQqVoVmBu3nIpUIY2XgbLzypY+1HJtuA/j0mdNg==
-
 cypress-xpath@^1.6.1:
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/cypress-xpath/-/cypress-xpath-1.6.1.tgz#31b8ba3a9544b485f8d520d279a397e27748a2ef"
