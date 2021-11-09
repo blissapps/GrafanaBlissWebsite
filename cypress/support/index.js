@@ -28,12 +28,9 @@ beforeEach(() => {
 import './commands'
 import 'cypress-plugin-snapshots/commands'
 
-// Alternatively you can use CommonJS syntax:
-// require('./commands')
+// Alternatively you can use CommonJS syntax: require('./commands')
 require('cypress-xpath')
 require('@cypress/skip-test/support')
-
-const addContext = require('mochawesome/addContext')
 
 Cypress.on('test:after:run', (test, runnable) => {
   if (test.state === 'failed') {
@@ -44,6 +41,5 @@ Cypress.on('test:after:run', (test, runnable) => {
 
 // eslint-disable-next-line no-unused-vars
 Cypress.on('uncaught:exception', (err, runnable) => {
-  // returning false here prevents Cypress from failing the test
-  return false
+  return false // returning false here prevents Cypress from failing the test
 })

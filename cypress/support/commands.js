@@ -37,8 +37,7 @@ Cypress.Commands.add('loginWithSession', (email = Cypress.env('DEFAULT_USER_AUTH
     cy.visit('/')
     cy.get('#username-field').type(email)
     cy.get('#password-field').type(password, { log: false })
-    // eslint-disable-next-line cypress/no-unnecessary-waiting
-    cy.wait(500) // avoid element detached from the DOM. See https://github.com/cypress-io/cypress/issues/7306. A ticket was open https://globalshares.atlassian.net/browse/PB-828
+    cy.forcedWait(500) // avoid element detached from the DOM. See https://github.com/cypress-io/cypress/issues/7306. A ticket was open https://globalshares.atlassian.net/browse/PB-828
     cy.get('#login').click()
     cy.url().should('contain', '/home')
   })
@@ -54,8 +53,7 @@ Cypress.Commands.add('loginWithoutSession', (email = Cypress.env('DEFAULT_USER_A
   cy.visit('/')
   cy.get('#username-field').type(email)
   cy.get('#password-field').type(password, { log: false })
-  // eslint-disable-next-line cypress/no-unnecessary-waiting
-  cy.wait(500) // avoid element detached from the DOM. See https://github.com/cypress-io/cypress/issues/7306. A ticket was open https://globalshares.atlassian.net/browse/PB-828
+  cy.forcedWait(500) // avoid element detached from the DOM. See https://github.com/cypress-io/cypress/issues/7306. A ticket was open https://globalshares.atlassian.net/browse/PB-828
   cy.get('#login').click()
 })
 
@@ -85,8 +83,7 @@ Cypress.Commands.add('loginSuccessfulXHRWaits', () => {
 
   cy.intercept({ method: 'POST', url: 'https://rs.fullstory.com/rec/page' }, { success: true })
 
-  // eslint-disable-next-line cypress/no-unnecessary-waiting
-  cy.wait(1000) // the menu is no stable yet due to some API duplicated calls. A ticket was open https://globalshares.atlassian.net/browse/PB-828
+  cy.forcedWait(1000) // the menu is no stable yet due to some API duplicated calls. A ticket was open https://globalshares.atlassian.net/browse/PB-828
 })
 
 /**
@@ -95,8 +92,7 @@ Cypress.Commands.add('loginSuccessfulXHRWaits', () => {
 Cypress.Commands.add('logout', () => {
   cy.get('#profile-item').as('avatarBtn')
   cy.get('@avatarBtn').click()
-  // eslint-disable-next-line cypress/no-unnecessary-waiting
-  cy.wait(500) // avoid element detached from the DOM. See https://github.com/cypress-io/cypress/issues/7306
+  cy.forcedWait(500) // avoid element detached from the DOM. See https://github.com/cypress-io/cypress/issues/7306
   cy.get('#logoutButton').click()
 })
 
@@ -162,8 +158,7 @@ Cypress.Commands.add('network', options => {
     }
   })
 
-  // eslint-disable-next-line cypress/no-unnecessary-waiting
-  cy.wait(1000) // Just to give a time to the browser to switch the internet connection mode
+  cy.forcedWait(1000) // Just to give a time to the browser to switch the internet connection mode
 })
 
 /**
@@ -183,6 +178,15 @@ Cypress.Commands.add('assertNetworkOnline', options => {
       .its('navigator.onLine')
       .should('be.' + options.online)
   )
+})
+
+/**
+ * Wait for a explicity amount of time. It is the same as using cy.wait(), but without generating a warning
+ *
+ * @param {Number} time Time im milliseconds to explicit wait
+ */
+Cypress.Commands.add('forcedWait', time => {
+  cy.wait(time)
 })
 
 export default executeCommand

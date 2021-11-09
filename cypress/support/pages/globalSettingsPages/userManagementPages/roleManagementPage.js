@@ -518,7 +518,7 @@ class RoleManagementPage extends BaseManagementPage {
   activateRole() {
     cy.get(selectors.activateRoleBtn).click()
     this.waitRoleIsActivated()
-    this.forcedWait(300) // Necessary because the UI takes a very quick time to reload the data correctly
+    cy.forcedWait(300) // Necessary because the UI takes a very quick time to reload the data correctly
   }
 
   // ---------------------------------------  INTERCEPTIONS --------------------------------------------- //

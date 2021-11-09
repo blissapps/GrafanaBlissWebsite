@@ -79,7 +79,7 @@ class ParticipantRegulatoryLinkagePage extends BaseStatementManagementPage {
     }
 
     // Angular is taking more time than expected to render elements. So, even using intercept, it is not sufficient and we need to add this explicity waiting.
-    this.forcedWait(850)
+    cy.forcedWait(850)
   }
 
   // ---------------------------------------  INTERCEPTIONS --------------------------------------------- //

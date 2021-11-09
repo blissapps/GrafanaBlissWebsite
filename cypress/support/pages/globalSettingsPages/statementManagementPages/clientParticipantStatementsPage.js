@@ -429,7 +429,7 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
     }
 
     this.waitForTableToReloadAfterFiltering()
-    this.forcedWait(800) // Necessary to avoid any errors regarding the table being reloaded in the UI.
+    cy.forcedWait(800) // Necessary to avoid any errors regarding the table being reloaded in the UI.
   }
 
   // -----------------------------------------------------------------------------------------  INTERCEPTIONS ------------------------------------------------------------------------------ //

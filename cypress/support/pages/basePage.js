@@ -38,7 +38,7 @@ class BasePage {
     return cy.url().should('match', url)
   }
 
-  // --------------------------------------- GETS, SELECTS, AND CLICKS --------------------------------------------- //
+  // ------------------------------------------------------------------------------- GETS, SELECTS, AND CLICKS ------------------------------------------------------------------- //
 
   /**
    * Get an element by passing a text
@@ -62,88 +62,7 @@ class BasePage {
     return this.getElementByText(text).click()
   }
 
-  /**
-   * Click in a tab by the html title
-   *
-   * @param {String} tabTitle Html title of the tab you want to go in
-   *
-   * @MISSING_IDS
-   */
-  clickTabByTitle(tabTitle) {
-    cy.get(`div.tabs-bar *[title='${tabTitle}']`).click()
-  }
-
-  // ---------------------------------------  OTHERS --------------------------------------------- //
-
-  /**
-   * Clear filters in a search by pressing in the "Clear All Filters" button
-   *
-   */
-  clearAllFilters() {
-    cy.get(selectors.clearAllFiltersButton).click()
-  }
-
-  /**
-   * Move back or forward in the browser
-   *
-   * @param {String} direction 'back' or 'forward' in the browser
-   *
-   */
-  goBackOrForwardInBrowser(direction) {
-    if (direction === 'back') {
-      cy.go(-1)
-    } else if (direction === 'forward') {
-      cy.go(1)
-    }
-  }
-
-  /**
-   * Change the browser resolution
-   *
-   * @param {Number} x Number of pixels in the x coordinates (width)
-   * @param {Number} y Number of pixels in the Y coordinates (height)
-   */
-  changeBrowserResolution(x, y) {
-    cy.viewport(x, y)
-  }
-
-  /**
-   * Reload/Refresh the current page
-   */
-  reloadPage() {
-    cy.reload()
-  }
-
-  /**
-   * Get the current URL and add in the end of the current path. Then, visit this new url.
-   *
-   * @param {String} urlPathToAdd text to be added as a path in the end of the current url
-   *
-   * @example: use this.addPathToUrlAndVisitIt('/new-user') to visit the url "yourCurrentUrl/new-user"
-   */
-  addPathToUrlAndVisitIt(urlPathToAdd) {
-    cy.url().then(url => {
-      cy.visit(url + urlPathToAdd, { failOnStatusCode: false })
-    })
-  }
-
-  /**
-   * Click in the checkbox to select all elements of table when bulk actions is available
-   */
-  clickToSelectAllElementsInTable() {
-    this.assertBulkOptionsDisplayed()
-
-    cy.get(selectors.bulkActionsCheckbox).click()
-  }
-
-  /**
-   * Close the L4 right bar by clicking in the middle of the current page
-   */
-  clickOutsideToCloseL4RightBar() {
-    cy.get(selectors.entireAppPage).click('center')
-  }
-
-  // ---------------------------------------------------------------------------------------- ASSERTIONS --------------------------------------------------------------------------------------------- //
+  // --------------------------------------------------------------------------------- ASSERTIONS ------------------------------------------------------------------------------------ //
   /**
    * Verify if a file was downloaded in the default 'cypress/downloads/' path
    *
@@ -331,14 +250,74 @@ class BasePage {
     displayed ? cy.get(selectors.bulkActionsCheckbox).should('exist') : cy.get(selectors.bulkActionsCheckbox).should('not.exist')
   }
 
-  // ---------------------------------------------------------------------------------------- OTHERS --------------------------------------------------------------------------------------------- //
+  // -----------------------------------------------------------------------------------  OTHERS ---------------------------------------------------------------------------- //
+
   /**
-   * Wait for a explicity amount of time
+   * Clear filters in a search by pressing in the "Clear All Filters" button
    *
-   * @param {*} time Time im milliseconds to explicit wait
    */
-  forcedWait(time) {
-    cy.wait(time)
+  clearAllFilters() {
+    cy.get(selectors.clearAllFiltersButton).click()
+  }
+
+  /**
+   * Move back or forward in the browser
+   *
+   * @param {String} direction 'back' or 'forward' in the browser
+   *
+   */
+  goBackOrForwardInBrowser(direction) {
+    if (direction === 'back') {
+      cy.go(-1)
+    } else if (direction === 'forward') {
+      cy.go(1)
+    }
+  }
+
+  /**
+   * Change the browser resolution
+   *
+   * @param {Number} x Number of pixels in the x coordinates (width)
+   * @param {Number} y Number of pixels in the Y coordinates (height)
+   */
+  changeBrowserResolution(x, y) {
+    cy.viewport(x, y)
+  }
+
+  /**
+   * Reload/Refresh the current page
+   */
+  reloadPage() {
+    cy.reload()
+  }
+
+  /**
+   * Get the current URL and add in the end of the current path. Then, visit this new url.
+   *
+   * @param {String} urlPathToAdd text to be added as a path in the end of the current url
+   *
+   * @example: use this.addPathToUrlAndVisitIt('/new-user') to visit the url "yourCurrentUrl/new-user"
+   */
+  addPathToUrlAndVisitIt(urlPathToAdd) {
+    cy.url().then(url => {
+      cy.visit(url + urlPathToAdd, { failOnStatusCode: false })
+    })
+  }
+
+  /**
+   * Click in the checkbox to select all elements of table when bulk actions is available
+   */
+  clickToSelectAllElementsInTable() {
+    this.assertBulkOptionsDisplayed()
+
+    cy.get(selectors.bulkActionsCheckbox).click()
+  }
+
+  /**
+   * Close the L4 right bar by clicking in the middle of the current page
+   */
+  clickOutsideToCloseL4RightBar() {
+    cy.get(selectors.entireAppPage).click('center')
   }
 }
 

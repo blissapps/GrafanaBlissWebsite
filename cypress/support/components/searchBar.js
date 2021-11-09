@@ -21,7 +21,7 @@ class SearchBar extends BasePage {
     cy.get('@inputBar').type(textToSearch)
     cy.get(selectors.searchClientButton).click()
 
-    this.forcedWait(delay)
+    cy.forcedWait(delay)
   }
 
   /**

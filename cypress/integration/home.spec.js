@@ -82,7 +82,7 @@ describe('Home page tests', () => {
     leftMenuNavBar.openSettingsMenuBar()
     settingsMenuNavBar.clickClientSwitchButton()
     clientSwitchMenu.clickViewAllClients()
-    homePage.checkHomeUrl()
+    homePage.checkHomePageUrl()
     homePage.assertCompaniesHeaderIsDisplayed()
   })
 
