@@ -44,7 +44,7 @@ Cypress.Commands.add('loginWithSession', (email = Cypress.env('DEFAULT_USER_AUTH
 })
 
 /**
- * Login command through the application UI without session STORAGE
+ * Login command through the application UI without SESSION STORAGE
  *
  * @param {string} email email to login. The default variable is set in the cypress.json file
  * @param {string} password password to login. The default variable is set in the cypress.json file

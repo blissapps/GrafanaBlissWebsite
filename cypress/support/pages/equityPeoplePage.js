@@ -1,5 +1,9 @@
 import BasePage from './basePage'
 
+const properties = {
+  pageURL: '/people'
+}
+
 const selectors = {
   peopleNavBar: '#peopleItem',
   numberOfRecordsOnTable: '#peopleRecordCount',
@@ -23,10 +27,6 @@ const quickEditNavBarSelectors = {
   quickActionPanelIcon: '#quickEditActionPanel'
 }
 
-const properties = {
-  pageURL: '/people'
-}
-
 class EquityPeoplePage extends BasePage {
   /**
    * Checks if the current page is Participants/People URL
@@ -45,7 +45,7 @@ class EquityPeoplePage extends BasePage {
    * @example 12345 as the participantId
    */
   getParticipantFromTheList(participantId) {
-    return cy.get(selectors.participant + participantId).scrollIntoView()
+    return cy.get(selectors.participant + participantId)
   }
 
   // --------------------------------------- CLICKS --------------------------------------------- //
@@ -58,7 +58,9 @@ class EquityPeoplePage extends BasePage {
    * @example 12345 as the participantId
    */
   clickParticipantFromTheList(participantId) {
-    this.getParticipantFromTheList(participantId).click()
+    this.getParticipantFromTheList(participantId)
+      .scrollIntoView()
+      .click({ force: true })
   }
 
   /**

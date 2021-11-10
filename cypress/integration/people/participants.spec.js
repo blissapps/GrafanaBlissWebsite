@@ -79,8 +79,10 @@ describe('Participants tests', () => {
 
   /**
    * Verify PARTICIPANT DETAIL container data when picking a participant from the Participants table
+   *
+   * SkIPPING due to https://globalshares.atlassian.net/browse/PB-1023
    */
-  it('C1234567_Verify_Participant_Detail_Container_Data', () => {
+  it.skip('C12177200_Verify_Participant_Detail_Data_On_L4_Container', () => {
     const participantId = 113026
     homePage.selectClientById(144)
 
