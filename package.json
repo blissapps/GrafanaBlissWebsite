@@ -50,7 +50,7 @@
     "eslint-plugin-prettier": "3.1.4",
     "babel-eslint": "10.1.0",
     "prettier": "1.19.1",
-    "typescript": "4.3.5",
+    "typescript": "4.4.4",
     "tsc-silent": "1.2.1",
     "dayjs": "1.8.36",
     "cypress-multi-reporters": "1.5.0",

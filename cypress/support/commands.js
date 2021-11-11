@@ -3,6 +3,7 @@
  * DO NOT FORGET TO ADD THE METHOD SIGNATURE IN THE index.d.ts
  * FILE LOCATED IN cypress/support/
  */
+// @ts-nocheck
 
 /// <reference types="cypress" />
 
@@ -17,8 +18,8 @@ const executeCommand = command => {
 /**
  * Login command through the application UI with session storage and XHR interceptions
  *
- * @param {string} email email to login. The default variable is set in the cypress.json file
- * @param {string} password password to login. The default variable is set in the cypress.json file
+ * @param {String} email email to login. The default variable is set in the cypress.json file
+ * @param {String} password password to login. The default variable is set in the cypress.json file
  */
 Cypress.Commands.add('login', (email = Cypress.env('DEFAULT_USER_AUTH'), password = Cypress.env('DEFAULT_PASSWORD_AUTH')) => {
   cy.loginWithSession(email, password)
@@ -29,8 +30,8 @@ Cypress.Commands.add('login', (email = Cypress.env('DEFAULT_USER_AUTH'), passwor
 /**
  * Login command through the application UI with SESSION STORAGE
  *
- * @param {string} email email to login. The default variable is set in the cypress.json file
- * @param {string} password password to login. The default variable is set in the cypress.json file
+ * @param {String} email email to login. The default variable is set in the cypress.json file
+ * @param {String} password password to login. The default variable is set in the cypress.json file
  */
 Cypress.Commands.add('loginWithSession', (email = Cypress.env('DEFAULT_USER_AUTH'), password = Cypress.env('DEFAULT_PASSWORD_AUTH')) => {
   cy.session([email, password], () => {
@@ -46,8 +47,8 @@ Cypress.Commands.add('loginWithSession', (email = Cypress.env('DEFAULT_USER_AUTH
 /**
  * Login command through the application UI without SESSION STORAGE
  *
- * @param {string} email email to login. The default variable is set in the cypress.json file
- * @param {string} password password to login. The default variable is set in the cypress.json file
+ * @param {String} email email to login. The default variable is set in the cypress.json file
+ * @param {String} password password to login. The default variable is set in the cypress.json file
  */
 Cypress.Commands.add('loginWithoutSession', (email = Cypress.env('DEFAULT_USER_AUTH'), password = Cypress.env('DEFAULT_PASSWORD_AUTH')) => {
   cy.visit('/')

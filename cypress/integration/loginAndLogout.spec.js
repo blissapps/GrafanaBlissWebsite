@@ -1,9 +1,9 @@
-// @ts-nocheck
 import AuthLoginPage from '../support/pages/authLoginPage'
 import HomePage from '../support/pages/homePage'
 import LeftMenuNavBar from '../support/components/leftMenuNavBar'
 import ProfileMenuNavBar from '../support/components/profileMenuNavBar'
 
+// @ts-ignore
 import dataTest from '../fixtures/data.json'
 
 describe('Login and Logout tests', () => {
