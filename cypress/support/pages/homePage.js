@@ -1,5 +1,5 @@
 import BasePage from './basePage'
-import SearchBar from '../components/searchBar'
+import SearchBar from '../components/equityAdmin/searchBar'
 
 const searchBar = new SearchBar()
 

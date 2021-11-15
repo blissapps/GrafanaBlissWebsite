@@ -27,11 +27,11 @@ const quickEditNavBarSelectors = {
   quickActionPanelIcon: '#quickEditActionPanel'
 }
 
-class EquityPeoplePage extends BasePage {
+class EquityClientPeoplePage extends BasePage {
   /**
-   * Checks if the current page is Participants/People URL
+   * Checks if the current page is the one in properties.pageURL
    */
-  checkPeopleUrl() {
+  checkClientPeopleUrl() {
     this.checkUrl(properties.pageURL)
   }
 
@@ -187,4 +187,4 @@ class EquityPeoplePage extends BasePage {
   }
 }
 
-export default EquityPeoplePage
+export default EquityClientPeoplePage

@@ -1,15 +1,7 @@
-import HomePage from '../support/pages/homePage'
-import EquityPeoplePage from '../support/pages/equityPeoplePage'
-import LeftMenuNavBar from '../support/components/leftMenuNavBar'
-import SettingsMenuNavBar from '../support/components/settingsMenuNavBar'
-import ClientSwitchMenu from '../support/components/clientSwitchMenu'
+import EquityAdmin from '../support/pages/equityAdmin'
 
 describe('Home page tests', () => {
-  const homePage = new HomePage()
-  const equityPeoplePage = new EquityPeoplePage()
-  const leftMenuNavBar = new LeftMenuNavBar()
-  const settingsMenuNavBar = new SettingsMenuNavBar()
-  const clientSwitchMenu = new ClientSwitchMenu()
+  const equityAdmin = new EquityAdmin()
 
   beforeEach(() => {
     cy.login()
@@ -18,49 +10,49 @@ describe('Home page tests', () => {
   it('C10728360_Select_Specific_Client_From_The_List_Using_The_Search_Engine', () => {
     const clientName = 'Allianz'
 
-    homePage.selectClientFromTheListBySearch(clientName)
-    equityPeoplePage.checkUrlByRegex(/.?client.*[0-9].?people$/)
-    equityPeoplePage.assertClientNameInTheHeader(clientName)
+    equityAdmin.homePage.selectClientFromTheListBySearch(clientName)
+    equityAdmin.equityClientPeoplePage.checkUrlByRegex(/.?client.*[0-9].?people$/)
+    equityAdmin.equityClientPeoplePage.assertClientNameInTheHeader(clientName)
   })
 
   it('C10735651_Check_GroupBy_Displays_Correct_Order_For_AllCompanies_Alphabetical_Status_Country_Sector', () => {
     // All Companies (default)
-    homePage.SelectGroupByOptionForCompanies()
-    homePage.assertCompaniesGroupByOrderIsCorrect()
+    equityAdmin.homePage.SelectGroupByOptionForCompanies()
+    equityAdmin.homePage.assertCompaniesGroupByOrderIsCorrect()
 
     // Alphabetical
-    homePage.SelectGroupByOptionForCompanies('alphabetical')
-    homePage.assertCompaniesGroupByOrderIsCorrect('alphabetical')
+    equityAdmin.homePage.SelectGroupByOptionForCompanies('alphabetical')
+    equityAdmin.homePage.assertCompaniesGroupByOrderIsCorrect('alphabetical')
 
     // Status
-    homePage.SelectGroupByOptionForCompanies('status')
-    homePage.assertCompaniesGroupByOrderIsCorrect('status')
+    equityAdmin.homePage.SelectGroupByOptionForCompanies('status')
+    equityAdmin.homePage.assertCompaniesGroupByOrderIsCorrect('status')
 
     // Country
-    homePage.SelectGroupByOptionForCompanies('country')
-    homePage.assertCompaniesGroupByOrderIsCorrect('country')
+    equityAdmin.homePage.SelectGroupByOptionForCompanies('country')
+    equityAdmin.homePage.assertCompaniesGroupByOrderIsCorrect('country')
 
     // Sector
-    homePage.SelectGroupByOptionForCompanies('sector')
-    homePage.assertCompaniesGroupByOrderIsCorrect('sector')
+    equityAdmin.homePage.SelectGroupByOptionForCompanies('sector')
+    equityAdmin.homePage.assertCompaniesGroupByOrderIsCorrect('sector')
   })
 
   it('C10735652_Favorite_And_Unfavorite_Client', () => {
     // Favorite
-    homePage.favoriteUnfavoriteClient(146)
-    homePage.assertClientIsFavorite(146)
+    equityAdmin.homePage.favoriteUnfavoriteClient(146)
+    equityAdmin.homePage.assertClientIsFavorite(146)
 
     // Unfavorite
-    homePage.favoriteUnfavoriteClient(146)
-    homePage.assertClientIsFavorite(146, false)
+    equityAdmin.homePage.favoriteUnfavoriteClient(146)
+    equityAdmin.homePage.assertClientIsFavorite(146, false)
   })
 
   it('C10735680_Check_Client_Summary_Information_On_Cards', () => {
-    homePage.assertClientCardSummaryInformation(144, '7digital', 'GBR', 'Regulated', 'Active').should('be.visible')
-    homePage.assertClientCardSummaryInformation(337, '9F Group', 'CHN', 'Not Regulated', 'NOT SET').should('be.visible')
-    homePage.assertClientCardSummaryInformation(361, 'Alliance Bernstein', 'USA', 'Regulated', 'Terminated').should('be.visible')
-    homePage.assertClientCardSummaryInformation(445, 'Umicore', 'BEL', 'Not Regulated', 'Implementation').should('be.visible')
-    homePage.assertClientCardSummaryInformation(281, 'BOCI SSO', 'HKG', 'Not Regulated', 'Demo').should('be.visible')
+    equityAdmin.homePage.assertClientCardSummaryInformation(144, '7digital', 'GBR', 'Regulated', 'Active').should('be.visible')
+    equityAdmin.homePage.assertClientCardSummaryInformation(337, '9F Group', 'CHN', 'Not Regulated', 'NOT SET').should('be.visible')
+    equityAdmin.homePage.assertClientCardSummaryInformation(361, 'Alliance Bernstein', 'USA', 'Regulated', 'Terminated').should('be.visible')
+    equityAdmin.homePage.assertClientCardSummaryInformation(445, 'Umicore', 'BEL', 'Not Regulated', 'Implementation').should('be.visible')
+    equityAdmin.homePage.assertClientCardSummaryInformation(281, 'BOCI SSO', 'HKG', 'Not Regulated', 'Demo').should('be.visible')
   })
 
   it('C10772388_Validate_Quick_Client_Switch_Behavior', () => {
@@ -68,47 +60,47 @@ describe('Home page tests', () => {
     const clientId = 144
 
     // Search for a client behavior
-    leftMenuNavBar.openSettingsMenuBar()
-    settingsMenuNavBar.clickClientSwitchButton()
-    clientSwitchMenu.searchClientInSwitchClient('ClientNameThatDoesNotExists')
-    clientSwitchMenu.assertNoClientsFoundInClientSwitch()
-    clientSwitchMenu.searchClientInSwitchClient(clientName)
-    clientSwitchMenu.clickInClientInSwitchClientMenu(clientId)
-    clientSwitchMenu.closeSwitchClientMenuBar()
-    equityPeoplePage.checkUrlByRegex(/.?client.*[0-9].?people$/)
-    equityPeoplePage.assertClientNameInTheHeader(clientName)
+    equityAdmin.leftMenuNavBar.openSettingsMenuBar()
+    equityAdmin.settingsMenuNavBar.clickClientSwitchButton()
+    equityAdmin.clientSwitchMenu.searchClientInSwitchClient('ClientNameThatDoesNotExists')
+    equityAdmin.clientSwitchMenu.assertNoClientsFoundInClientSwitch()
+    equityAdmin.clientSwitchMenu.searchClientInSwitchClient(clientName)
+    equityAdmin.clientSwitchMenu.clickInClientInSwitchClientMenu(clientId)
+    equityAdmin.clientSwitchMenu.closeSwitchClientMenuBar()
+    equityAdmin.equityClientPeoplePage.checkUrlByRegex(/.?client.*[0-9].?people$/)
+    equityAdmin.equityClientPeoplePage.assertClientNameInTheHeader(clientName)
 
     // View all clients behavior
-    leftMenuNavBar.openSettingsMenuBar()
-    settingsMenuNavBar.clickClientSwitchButton()
-    clientSwitchMenu.clickViewAllClients()
-    homePage.checkHomePageUrl()
-    homePage.assertCompaniesHeaderIsDisplayed()
+    equityAdmin.leftMenuNavBar.openSettingsMenuBar()
+    equityAdmin.settingsMenuNavBar.clickClientSwitchButton()
+    equityAdmin.clientSwitchMenu.clickViewAllClients()
+    equityAdmin.homePage.checkHomePageUrl()
+    equityAdmin.homePage.assertCompaniesHeaderIsDisplayed()
   })
 
   it('C10772389_Favorite_And_Unfavorite_A_client_In_The_Switch_Client_Menu', () => {
     const clientId = 144
 
     // Favorite
-    leftMenuNavBar.openSettingsMenuBar()
-    settingsMenuNavBar.clickClientSwitchButton()
-    clientSwitchMenu.clickToFavoriteClientInSwitchClientMenu(clientId)
-    clientSwitchMenu.assertClientIsFavorite(clientId)
-    clientSwitchMenu.closeSwitchClientMenuBar()
+    equityAdmin.leftMenuNavBar.openSettingsMenuBar()
+    equityAdmin.settingsMenuNavBar.clickClientSwitchButton()
+    equityAdmin.clientSwitchMenu.clickToFavoriteClientInSwitchClientMenu(clientId)
+    equityAdmin.clientSwitchMenu.assertClientIsFavorite(clientId)
+    equityAdmin.clientSwitchMenu.closeSwitchClientMenuBar()
 
-    homePage.reloadPage()
+    equityAdmin.homePage.reloadPage()
     cy.loginSuccessfulXHRWaits()
-    homePage.assertClientIsFavorite(clientId)
+    equityAdmin.homePage.assertClientIsFavorite(clientId)
 
     // Unfavorite
-    leftMenuNavBar.openSettingsMenuBar()
-    settingsMenuNavBar.clickClientSwitchButton()
-    clientSwitchMenu.clickToFavoriteClientInSwitchClientMenu(clientId)
-    clientSwitchMenu.assertClientIsFavorite(clientId, false)
-    clientSwitchMenu.closeSwitchClientMenuBar()
+    equityAdmin.leftMenuNavBar.openSettingsMenuBar()
+    equityAdmin.settingsMenuNavBar.clickClientSwitchButton()
+    equityAdmin.clientSwitchMenu.clickToFavoriteClientInSwitchClientMenu(clientId)
+    equityAdmin.clientSwitchMenu.assertClientIsFavorite(clientId, false)
+    equityAdmin.clientSwitchMenu.closeSwitchClientMenuBar()
 
-    homePage.reloadPage()
+    equityAdmin.homePage.reloadPage()
     cy.loginSuccessfulXHRWaits()
-    homePage.assertClientIsFavorite(clientId, false)
+    equityAdmin.homePage.assertClientIsFavorite(clientId, false)
   })
 })

@@ -1,50 +1,45 @@
-import UserManagementPage from '../../../support/pages/globalSettingsPages/userManagementPages/userManagementPage'
-import SettingsMenuNavBar from '../../../support/components/settingsMenuNavBar'
-import SearchBar from '../../../support/components/searchBar'
+import EquityAdmin from '../../../support/pages/equityAdmin'
 
 describe('User Management tests over User Management settings', () => {
-  const userManagementPage = new UserManagementPage()
-
-  const settingsMenuNavBar = new SettingsMenuNavBar()
-  const searchBar = new SearchBar()
+  const equityAdmin = new EquityAdmin()
 
   beforeEach(() => {
     cy.login()
-    settingsMenuNavBar.accessGlobalSettingsMenu('user', 'user')
-    userManagementPage.checkUserManagementUrl()
+    equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'user')
+    equityAdmin.userManagementPage.checkUserManagementUrl()
   })
 
   // ************************************************ TESTS AS ADMIN TENANT ************************************************** //
 
   it('C7405960_User_Check_Behavior_When_Closing_The_Settings', () => {
-    userManagementPage.checkUserManagementUrl()
-    settingsMenuNavBar.closeGlobalSettingsNavBar()
-    userManagementPage.checkUserManagementUrl()
+    equityAdmin.userManagementPage.checkUserManagementUrl()
+    equityAdmin.settingsMenuNavBar.closeGlobalSettingsNavBar()
+    equityAdmin.userManagementPage.checkUserManagementUrl()
   })
 
   it('C7592116_Users_Search_For_Username_/_Email_And_Check_Highlighted_Data', () => {
     const username = 'amulcahyNE'
     const userEmail = 'test@globalshares.com'
     const userStatus = 'Active'
-    userManagementPage.checkUserManagementUrl() // Check this to make sure we are getting the correct search input in the correct page
+    equityAdmin.userManagementPage.checkUserManagementUrl() // Check this to make sure we are getting the correct search input in the correct page
 
     cy.log('EMAIL')
-    searchBar.search(userEmail)
-    userManagementPage.assertAmountOfSearchResults(10)
-    userManagementPage.assertDataDisplayedOnGsGridTableIsHighlighted(userEmail)
+    equityAdmin.searchBar.search(userEmail)
+    equityAdmin.userManagementPage.assertAmountOfSearchResults(10)
+    equityAdmin.userManagementPage.assertDataDisplayedOnGsGridTableIsHighlighted(userEmail)
 
     cy.log('USERNAME')
-    searchBar.search(username)
-    userManagementPage.assertAmountOfSearchResults(1)
-    userManagementPage.assertDataDisplayedOnGsGridTableIsHighlighted(username)
+    equityAdmin.searchBar.search(username)
+    equityAdmin.userManagementPage.assertAmountOfSearchResults(1)
+    equityAdmin.userManagementPage.assertDataDisplayedOnGsGridTableIsHighlighted(username)
 
-    userManagementPage.assertDataDisplayedOnGsGridTable([username, userEmail, userStatus])
+    equityAdmin.userManagementPage.assertDataDisplayedOnGsGridTable([username, userEmail, userStatus])
   })
 
   it('C7353826_List_User_Happy_Path_Contains_Expected_Columns_On_Users_Table', () => {
     const columnsToValidate = ['username', 'email', 'status']
 
-    userManagementPage.assertTableContainsExpectedColumnsInOrder(columnsToValidate)
+    equityAdmin.userManagementPage.assertTableContainsExpectedColumnsInOrder(columnsToValidate)
   })
 
   /**
@@ -64,29 +59,29 @@ describe('User Management tests over User Management settings', () => {
     const organization = 'Global Shares'
     const phone = '99123'
 
-    userManagementPage.checkUserManagementUrl() // Check we are getting the correct search input in the correct page
+    equityAdmin.userManagementPage.checkUserManagementUrl() // Check we are getting the correct search input in the correct page
 
-    searchBar.search(username, 500)
-    userManagementPage.clickUserTable(userId)
+    equityAdmin.searchBar.search(username, 500)
+    equityAdmin.userManagementPage.clickUserTable(userId)
 
-    userManagementPage.assertRightL4BarIsDisplayed()
-    userManagementPage.assertUserDetailContentInRightNavBar(publicName, username, status, email)
-    userManagementPage.clickLinkToAccessUserInfoDetailsOnRightNavBar()
-    userManagementPage.assertUserInfoContentInRightNavBar(groups, firstName, lastName, publicName, jobTitle, qualifications, organization, phone, email, username)
+    equityAdmin.userManagementPage.assertRightL4BarIsDisplayed()
+    equityAdmin.userManagementPage.assertUserDetailContentInRightNavBar(publicName, username, status, email)
+    equityAdmin.userManagementPage.clickLinkToAccessUserInfoDetailsOnRightNavBar()
+    equityAdmin.userManagementPage.assertUserInfoContentInRightNavBar(groups, firstName, lastName, publicName, jobTitle, qualifications, organization, phone, email, username)
   })
 
   it('C7592117_Users_No_Users_Match_Search', () => {
-    userManagementPage.checkUserManagementUrl() // Check we are getting the correct search input in the correct page
+    equityAdmin.userManagementPage.checkUserManagementUrl() // Check we are getting the correct search input in the correct page
 
-    searchBar.search('test_empty_state')
-    userManagementPage.assertNoUserMsgIdDisplayed()
+    equityAdmin.searchBar.search('test_empty_state')
+    equityAdmin.userManagementPage.assertNoUserMsgIdDisplayed()
   })
 
   it('C7592119_User_pastes_SQL_Code_Into_The_Search_Box', () => {
-    userManagementPage.checkUserManagementUrl() // Check we are getting the correct search input in the correct page
+    equityAdmin.userManagementPage.checkUserManagementUrl() // Check we are getting the correct search input in the correct page
 
-    searchBar.search('SELECT * FROM users')
-    userManagementPage.assertNoUserMsgIdDisplayed()
+    equityAdmin.searchBar.search('SELECT * FROM users')
+    equityAdmin.userManagementPage.assertNoUserMsgIdDisplayed()
   })
 
   // Verify USER DETAIL container data when picking a user from the Participants table

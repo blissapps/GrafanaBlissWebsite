@@ -1,30 +1,14 @@
-import GroupManagementPage from '../../../support/pages/globalSettingsPages/userManagementPages/groupManagementPage'
-import DapManagementPage from '../../../support/pages/globalSettingsPages/userManagementPages/dapManagementPage'
-import UserManagementPage from '../../../support/pages/globalSettingsPages/userManagementPages/userManagementPage'
-
-import SearchBar from '../../../support/components/searchBar'
-import SettingsMenuNavBar from '../../../support/components/settingsMenuNavBar'
-import LeftMenuNavBar from '../../../support/components/leftMenuNavBar'
-
+import EquityAdmin from '../../../support/pages/equityAdmin'
 import Utils from '../../../support/utils'
 
 describe('Group Management tests over User Management settings', () => {
-  // Pages
-  const groupManagementPage = new GroupManagementPage()
-  const dapManagementPage = new DapManagementPage()
-  const userManagementPage = new UserManagementPage()
-
-  // Components
-  const settingsMenuNavBar = new SettingsMenuNavBar()
-  const searchBar = new SearchBar()
-
-  // Others
+  const equityAdmin = new EquityAdmin()
   const utils = new Utils()
 
   beforeEach(() => {
     cy.login()
-    settingsMenuNavBar.accessGlobalSettingsMenu('user', 'group')
-    groupManagementPage.checkGroupManagementUrl()
+    equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'group')
+    equityAdmin.groupManagementPage.checkGroupManagementUrl()
   })
 
   // ************************************************ TESTS AS ADMIN TENANT ************************************************** //
@@ -34,8 +18,8 @@ describe('Group Management tests over User Management settings', () => {
    *
    */
   it('C7412690_Group_Check_The_System_Behavior_When_Closing_The_Settings_Nav_Bar', () => {
-    settingsMenuNavBar.closeGlobalSettingsNavBar()
-    groupManagementPage.checkGroupManagementUrl()
+    equityAdmin.settingsMenuNavBar.closeGlobalSettingsNavBar()
+    equityAdmin.groupManagementPage.checkGroupManagementUrl()
   })
 
   /**
@@ -45,72 +29,72 @@ describe('Group Management tests over User Management settings', () => {
     const groupsIdActiveTab = [1]
     const groupsIdInactiveTab = [1099, 1100]
 
-    groupManagementPage.assertNoGroupSelectedMessageDisplayed()
+    equityAdmin.groupManagementPage.assertNoGroupSelectedMessageDisplayed()
 
     let group = 'GLOBAL'
-    searchBar.search(group)
-    groupManagementPage.assertAmountOfSearchResultsInTheList(1)
-    groupManagementPage.assertSearchResultListAccuracy(groupsIdActiveTab)
-    groupManagementPage.assertOtherGroupListDisplayed()
-    groupManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
+    equityAdmin.searchBar.search(group)
+    equityAdmin.groupManagementPage.assertAmountOfSearchResultsInTheList(1)
+    equityAdmin.groupManagementPage.assertSearchResultListAccuracy(groupsIdActiveTab)
+    equityAdmin.groupManagementPage.assertOtherGroupListDisplayed()
+    equityAdmin.groupManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
     group = 'global'
-    searchBar.search(group)
-    groupManagementPage.assertAmountOfSearchResultsInTheList(1)
-    groupManagementPage.assertSearchResultListAccuracy(groupsIdActiveTab)
-    groupManagementPage.assertOtherGroupListDisplayed()
-    groupManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
+    equityAdmin.searchBar.search(group)
+    equityAdmin.groupManagementPage.assertAmountOfSearchResultsInTheList(1)
+    equityAdmin.groupManagementPage.assertSearchResultListAccuracy(groupsIdActiveTab)
+    equityAdmin.groupManagementPage.assertOtherGroupListDisplayed()
+    equityAdmin.groupManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
     group = 'GLObal'
-    searchBar.search(group)
-    groupManagementPage.assertAmountOfSearchResultsInTheList(1)
-    groupManagementPage.assertSearchResultListAccuracy(groupsIdActiveTab)
-    groupManagementPage.assertOtherGroupListDisplayed()
-    groupManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
+    equityAdmin.searchBar.search(group)
+    equityAdmin.groupManagementPage.assertAmountOfSearchResultsInTheList(1)
+    equityAdmin.groupManagementPage.assertSearchResultListAccuracy(groupsIdActiveTab)
+    equityAdmin.groupManagementPage.assertOtherGroupListDisplayed()
+    equityAdmin.groupManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
     group = 'randomName'
-    searchBar.search(group)
-    groupManagementPage.assertNoResultFoundIsVisible()
-    groupManagementPage.assertOtherGroupListDisplayed()
+    equityAdmin.searchBar.search(group)
+    equityAdmin.groupManagementPage.assertNoResultFoundIsVisible()
+    equityAdmin.groupManagementPage.assertOtherGroupListDisplayed()
 
     group = 'SELECT * FROM groups'
-    searchBar.search(group)
-    groupManagementPage.assertNoResultFoundIsVisible()
-    groupManagementPage.assertOtherGroupListDisplayed()
+    equityAdmin.searchBar.search(group)
+    equityAdmin.groupManagementPage.assertNoResultFoundIsVisible()
+    equityAdmin.groupManagementPage.assertOtherGroupListDisplayed()
 
     // Now on Inactive TAB
-    groupManagementPage.clickTab('Inactive')
+    equityAdmin.groupManagementPage.clickTab('Inactive')
 
     group = 'ABC'
-    searchBar.search(group)
-    groupManagementPage.assertAmountOfSearchResultsInTheList(2)
-    groupManagementPage.assertSearchResultListAccuracy(groupsIdInactiveTab)
-    groupManagementPage.assertOtherGroupListDisplayed()
-    groupManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
+    equityAdmin.searchBar.search(group)
+    equityAdmin.groupManagementPage.assertAmountOfSearchResultsInTheList(2)
+    equityAdmin.groupManagementPage.assertSearchResultListAccuracy(groupsIdInactiveTab)
+    equityAdmin.groupManagementPage.assertOtherGroupListDisplayed()
+    equityAdmin.groupManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
     group = 'abc'
-    searchBar.search(group)
-    groupManagementPage.assertAmountOfSearchResultsInTheList(2)
-    groupManagementPage.assertSearchResultListAccuracy(groupsIdInactiveTab)
-    groupManagementPage.assertOtherGroupListDisplayed()
-    groupManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
+    equityAdmin.searchBar.search(group)
+    equityAdmin.groupManagementPage.assertAmountOfSearchResultsInTheList(2)
+    equityAdmin.groupManagementPage.assertSearchResultListAccuracy(groupsIdInactiveTab)
+    equityAdmin.groupManagementPage.assertOtherGroupListDisplayed()
+    equityAdmin.groupManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
     group = 'AbC'
-    searchBar.search(group)
-    groupManagementPage.assertAmountOfSearchResultsInTheList(2)
-    groupManagementPage.assertSearchResultListAccuracy(groupsIdInactiveTab)
-    groupManagementPage.assertOtherGroupListDisplayed()
-    groupManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
+    equityAdmin.searchBar.search(group)
+    equityAdmin.groupManagementPage.assertAmountOfSearchResultsInTheList(2)
+    equityAdmin.groupManagementPage.assertSearchResultListAccuracy(groupsIdInactiveTab)
+    equityAdmin.groupManagementPage.assertOtherGroupListDisplayed()
+    equityAdmin.groupManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
     group = 'randomName'
-    searchBar.search(group)
-    groupManagementPage.assertNoResultFoundIsVisible()
-    groupManagementPage.assertOtherGroupListDisplayed()
+    equityAdmin.searchBar.search(group)
+    equityAdmin.groupManagementPage.assertNoResultFoundIsVisible()
+    equityAdmin.groupManagementPage.assertOtherGroupListDisplayed()
 
     group = 'SELECT * FROM groups'
-    searchBar.search(group)
-    groupManagementPage.assertNoResultFoundIsVisible()
-    groupManagementPage.assertOtherGroupListDisplayed()
+    equityAdmin.searchBar.search(group)
+    equityAdmin.groupManagementPage.assertNoResultFoundIsVisible()
+    equityAdmin.groupManagementPage.assertOtherGroupListDisplayed()
   })
 
   /**
@@ -130,67 +114,67 @@ describe('Group Management tests over User Management settings', () => {
     const client = '7Digital'
     const clientId = [144]
 
-    groupManagementPage.clickGroupById(groupId)
-    searchBar.search(searchTerm)
-    groupManagementPage.assertSearchResultListAccuracy([groupId])
-    groupManagementPage.assertOtherGroupListDisplayed()
-    searchBar.search(searchTerm)
+    equityAdmin.groupManagementPage.clickGroupById(groupId)
+    equityAdmin.searchBar.search(searchTerm)
+    equityAdmin.groupManagementPage.assertSearchResultListAccuracy([groupId])
+    equityAdmin.groupManagementPage.assertOtherGroupListDisplayed()
+    equityAdmin.searchBar.search(searchTerm)
 
     // Roles and DAPs to be found in the search
     cy.log('------ Find Roles and DAPs ------')
-    groupManagementPage.assertNumberOfRecordsInASection('roles', 1)
-    groupManagementPage.assertNumberOfSearchResultsInASection('roles', 1)
-    groupManagementPage.assertNumberOfRecordsInASection('daps', 2)
-    groupManagementPage.assertNumberOfSearchResultsInASection('daps', 2)
-    groupManagementPage.assertNumberOfSearchResultsInASection('users', 'No')
-    groupManagementPage.assertNumberOfRecordsInASection('users', 3)
-    groupManagementPage.assertNumberOfRecordsInASection('companies', 2)
-    groupManagementPage.assertNumberOfSearchResultsInASection('companies', 'No')
-    groupManagementPage.assertCardsDisplayedInHighlightedMode([roleId], 'role')
-    groupManagementPage.assertCardsDisplayedInHighlightedMode(dapsId, 'daps')
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('roles', 1)
+    equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('roles', 1)
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 2)
+    equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('daps', 2)
+    equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('users', 'No')
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('users', 3)
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('companies', 2)
+    equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('companies', 'No')
+    equityAdmin.groupManagementPage.assertCardsDisplayedInHighlightedMode([roleId], 'role')
+    equityAdmin.groupManagementPage.assertCardsDisplayedInHighlightedMode(dapsId, 'daps')
 
     // Users to be found in the search
     cy.log('------ Find Users ------')
-    searchBar.search(user)
-    groupManagementPage.assertNumberOfRecordsInASection('roles', 1)
-    groupManagementPage.assertNumberOfSearchResultsInASection('roles', 'No')
-    groupManagementPage.assertNumberOfRecordsInASection('daps', 2)
-    groupManagementPage.assertNumberOfSearchResultsInASection('daps', 'No')
-    groupManagementPage.assertNumberOfRecordsInASection('users', 3)
-    groupManagementPage.assertNumberOfSearchResultsInASection('users', 1)
-    groupManagementPage.assertNumberOfRecordsInASection('companies', 2)
-    groupManagementPage.assertNumberOfSearchResultsInASection('companies', 'No')
-    groupManagementPage.assertCardsDisplayedInHighlightedMode(userId, 'daps')
+    equityAdmin.searchBar.search(user)
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('roles', 1)
+    equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('roles', 'No')
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 2)
+    equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('daps', 'No')
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('users', 3)
+    equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('users', 1)
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('companies', 2)
+    equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('companies', 'No')
+    equityAdmin.groupManagementPage.assertCardsDisplayedInHighlightedMode(userId, 'daps')
 
     // Clients to be found in the search
     cy.log('------ Find Clients ------')
-    searchBar.search(client)
-    groupManagementPage.assertNumberOfRecordsInASection('roles', 1)
-    groupManagementPage.assertNumberOfSearchResultsInASection('roles', 'No')
-    groupManagementPage.assertNumberOfRecordsInASection('daps', 2)
-    groupManagementPage.assertNumberOfSearchResultsInASection('daps', 'No')
-    groupManagementPage.assertNumberOfRecordsInASection('users', 3)
-    groupManagementPage.assertNumberOfSearchResultsInASection('users', 'No')
-    groupManagementPage.assertNumberOfRecordsInASection('companies', 2)
-    groupManagementPage.assertNumberOfSearchResultsInASection('companies', 1)
-    groupManagementPage.assertCardsDisplayedInHighlightedMode(clientId, 'daps')
+    equityAdmin.searchBar.search(client)
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('roles', 1)
+    equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('roles', 'No')
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 2)
+    equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('daps', 'No')
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('users', 3)
+    equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('users', 'No')
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('companies', 2)
+    equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('companies', 1)
+    equityAdmin.groupManagementPage.assertCardsDisplayedInHighlightedMode(clientId, 'daps')
 
     // Search for text without returning any result
     cy.log('------ No matching text ------')
-    searchBar.search('textDoesNotReturnNothingAtAll')
-    groupManagementPage.assertNumberOfSearchResultsInASection('roles', 'No')
-    groupManagementPage.assertNumberOfSearchResultsInASection('daps', 'No')
-    groupManagementPage.assertNumberOfSearchResultsInASection('users', 'No')
-    groupManagementPage.assertNumberOfSearchResultsInASection('companies', 'No')
+    equityAdmin.searchBar.search('textDoesNotReturnNothingAtAll')
+    equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('roles', 'No')
+    equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('daps', 'No')
+    equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('users', 'No')
+    equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('companies', 'No')
   })
 
   /**
    * @missing_data Need to have some groups in both active and inactive tabs
    */
   it.skip('C7499684_Groups_Happy_Path_List_Active_And_Inactive_Groups', () => {
-    groupManagementPage.assertActiveGroupsAreDisplayed()
-    groupManagementPage.clickTab('Inactive')
-    groupManagementPage.assertInactiveGroupsAreDisplayed()
+    equityAdmin.groupManagementPage.assertActiveGroupsAreDisplayed()
+    equityAdmin.groupManagementPage.clickTab('Inactive')
+    equityAdmin.groupManagementPage.assertInactiveGroupsAreDisplayed()
   })
 
   /**
@@ -201,18 +185,18 @@ describe('Group Management tests over User Management settings', () => {
     const groupName = 'Active and Inactive'
 
     // Inactivating a group
-    groupManagementPage.clickGroupById(groupId)
-    groupManagementPage.clickToDeactivateEntity()
-    groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Deactivated')
-    groupManagementPage.assertInactiveGroupsAreDisplayed()
-    groupManagementPage.assertEntityIsDisplayedInTheList(groupName)
+    equityAdmin.groupManagementPage.clickGroupById(groupId)
+    equityAdmin.groupManagementPage.clickToDeactivateEntity()
+    equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Deactivated')
+    equityAdmin.groupManagementPage.assertInactiveGroupsAreDisplayed()
+    equityAdmin.groupManagementPage.assertEntityIsDisplayedInTheList(groupName)
 
     // Activating a group
-    groupManagementPage.clickTab('Inactive')
-    groupManagementPage.activateGroup()
-    groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Activated')
-    groupManagementPage.assertActiveGroupsAreDisplayed()
-    groupManagementPage.assertEntityIsDisplayedInTheList(groupName)
+    equityAdmin.groupManagementPage.clickTab('Inactive')
+    equityAdmin.groupManagementPage.activateGroup()
+    equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Activated')
+    equityAdmin.groupManagementPage.assertActiveGroupsAreDisplayed()
+    equityAdmin.groupManagementPage.assertEntityIsDisplayedInTheList(groupName)
   })
 
   /**
@@ -223,15 +207,15 @@ describe('Group Management tests over User Management settings', () => {
     const groupName = 'Duplicate this group'
     const newNameForDuplicatedGroup = 'Duplicated Group ' + utils.getRandomNumber()
 
-    groupManagementPage.clickGroupById(groupId)
-    groupManagementPage.clickToDuplicateEntity()
-    groupManagementPage.assertEntityHeaderIsDisplayedAsExpected('Copy of ' + groupName)
-    groupManagementPage.modifyEntityName(newNameForDuplicatedGroup)
-    groupManagementPage.saveEntityInformation()
+    equityAdmin.groupManagementPage.clickGroupById(groupId)
+    equityAdmin.groupManagementPage.clickToDuplicateEntity()
+    equityAdmin.groupManagementPage.assertEntityHeaderIsDisplayedAsExpected('Copy of ' + groupName)
+    equityAdmin.groupManagementPage.modifyEntityName(newNameForDuplicatedGroup)
+    equityAdmin.groupManagementPage.saveEntityInformation()
 
-    groupManagementPage.assertToastNotificationMessageIsDisplayed(newNameForDuplicatedGroup + ' Saved')
-    groupManagementPage.assertInactiveGroupsAreDisplayed()
-    groupManagementPage.assertEntityIsDisplayedInTheList(newNameForDuplicatedGroup)
+    equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(newNameForDuplicatedGroup + ' Saved')
+    equityAdmin.groupManagementPage.assertInactiveGroupsAreDisplayed()
+    equityAdmin.groupManagementPage.assertEntityIsDisplayedInTheList(newNameForDuplicatedGroup)
   })
 
   /**
@@ -248,7 +232,7 @@ describe('Group Management tests over User Management settings', () => {
     const companyName = ['7Digital', '9F Group']
     const companyIds = [144, 337]
 
-    groupManagementPage.createGroup(groupName, roleName, roleId, dapNames, dapIds, userNames, userIds, companyName, companyIds)
+    equityAdmin.groupManagementPage.createGroup(groupName, roleName, roleId, dapNames, dapIds, userNames, userIds, companyName, companyIds)
   })
 
   /**
@@ -260,12 +244,12 @@ describe('Group Management tests over User Management settings', () => {
     const roleName = 'View Only'
     const roleId = 1655
 
-    groupManagementPage.clickGroupById(groupId)
-    groupManagementPage.selectRoleToGroup(roleName, roleId)
-    groupManagementPage.saveEntityInformation()
-    groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
+    equityAdmin.groupManagementPage.clickGroupById(groupId)
+    equityAdmin.groupManagementPage.selectRoleToGroup(roleName, roleId)
+    equityAdmin.groupManagementPage.saveEntityInformation()
+    equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
 
-    groupManagementPage.assertRoleAssociatedWithGroup(roleId)
+    equityAdmin.groupManagementPage.assertRoleAssociatedWithGroup(roleId)
   })
 
   /**
@@ -277,11 +261,11 @@ describe('Group Management tests over User Management settings', () => {
     const roleName = 'View Only'
     const roleId = 1397
 
-    groupManagementPage.clickGroupById(groupId)
-    groupManagementPage.selectRoleToGroup(roleName, roleId)
-    groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
+    equityAdmin.groupManagementPage.clickGroupById(groupId)
+    equityAdmin.groupManagementPage.selectRoleToGroup(roleName, roleId)
+    equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
 
-    groupManagementPage.assertRoleAssociatedWithGroup(roleId)
+    equityAdmin.groupManagementPage.assertRoleAssociatedWithGroup(roleId)
   })
 
   /**
@@ -292,11 +276,11 @@ describe('Group Management tests over User Management settings', () => {
     const roleName = 'View Only'
     const roleId = 1397
 
-    groupManagementPage.clickGroupById(groupId)
-    groupManagementPage.selectRoleToGroup(roleName, roleId)
-    groupManagementPage.discardEntityInformation()
+    equityAdmin.groupManagementPage.clickGroupById(groupId)
+    equityAdmin.groupManagementPage.selectRoleToGroup(roleName, roleId)
+    equityAdmin.groupManagementPage.discardEntityInformation()
 
-    groupManagementPage.assertRoleAssociatedWithGroup(1397, false)
+    equityAdmin.groupManagementPage.assertRoleAssociatedWithGroup(1397, false)
   })
 
   /**
@@ -308,27 +292,27 @@ describe('Group Management tests over User Management settings', () => {
     const userName = ['dfonsecaNE', 'amulcahyNE']
     const userIds = [454293, 454292]
 
-    groupManagementPage.clickGroupById(groupId)
-    groupManagementPage.addUsersToGroup(userName, userIds)
-    groupManagementPage.saveEntityInformation()
-    groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
+    equityAdmin.groupManagementPage.clickGroupById(groupId)
+    equityAdmin.groupManagementPage.addUsersToGroup(userName, userIds)
+    equityAdmin.groupManagementPage.saveEntityInformation()
+    equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
 
-    groupManagementPage.assertUserAssociatedWithGroup(userIds[0])
-    groupManagementPage.assertUserAssociatedWithGroup(userIds[1])
+    equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userIds[0])
+    equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userIds[1])
 
     // Validates user 1 is linked to the group over User Management settings
-    settingsMenuNavBar.accessGlobalSettingsMenu('', 'user', false)
-    searchBar.search(userName[0])
-    userManagementPage.clickUserTable(userIds[0])
-    userManagementPage.clickLinkToAccessUserInfoDetailsOnRightNavBar()
-    userManagementPage.assertUserInfoContentInRightNavBar([groupName])
-    userManagementPage.clickOutsideToCloseL4RightBar()
+    equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'user', false)
+    equityAdmin.searchBar.search(userName[0])
+    equityAdmin.userManagementPage.clickUserTable(userIds[0])
+    equityAdmin.userManagementPage.clickLinkToAccessUserInfoDetailsOnRightNavBar()
+    equityAdmin.userManagementPage.assertUserInfoContentInRightNavBar([groupName])
+    equityAdmin.userManagementPage.clickOutsideToCloseL4RightBar()
 
     // Validates user 2 is linked to the group over User Management settings
-    searchBar.search(userName[1])
-    userManagementPage.clickUserTable(userIds[1])
-    userManagementPage.clickLinkToAccessUserInfoDetailsOnRightNavBar()
-    userManagementPage.assertUserInfoContentInRightNavBar([groupName])
+    equityAdmin.searchBar.search(userName[1])
+    equityAdmin.userManagementPage.clickUserTable(userIds[1])
+    equityAdmin.userManagementPage.clickLinkToAccessUserInfoDetailsOnRightNavBar()
+    equityAdmin.userManagementPage.assertUserInfoContentInRightNavBar([groupName])
   })
 
   /**
@@ -339,12 +323,12 @@ describe('Group Management tests over User Management settings', () => {
     const userName = ['carolyn_giles', 'amulcahyNE']
     const userIds = [754546, 454292]
 
-    groupManagementPage.clickGroupById(groupId)
-    groupManagementPage.addUsersToGroup(userName, userIds)
-    groupManagementPage.discardEntityInformation()
+    equityAdmin.groupManagementPage.clickGroupById(groupId)
+    equityAdmin.groupManagementPage.addUsersToGroup(userName, userIds)
+    equityAdmin.groupManagementPage.discardEntityInformation()
 
-    groupManagementPage.assertUserAssociatedWithGroup(userIds[0], false)
-    groupManagementPage.assertUserAssociatedWithGroup(userIds[1], false)
+    equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userIds[0], false)
+    equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userIds[1], false)
   })
 
   /**
@@ -356,14 +340,14 @@ describe('Group Management tests over User Management settings', () => {
     const companyNames = ['7Digital', '9F Group', 'Allianz']
     const companyIds = [144, 337, 55]
 
-    groupManagementPage.clickGroupById(groupId)
-    groupManagementPage.addCompaniesToGroup(companyNames, companyIds)
-    groupManagementPage.saveEntityInformation()
-    groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
+    equityAdmin.groupManagementPage.clickGroupById(groupId)
+    equityAdmin.groupManagementPage.addCompaniesToGroup(companyNames, companyIds)
+    equityAdmin.groupManagementPage.saveEntityInformation()
+    equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
 
-    groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[0])
-    groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[1])
-    groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[2])
+    equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[0])
+    equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[1])
+    equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[2])
   })
 
   /**
@@ -374,12 +358,12 @@ describe('Group Management tests over User Management settings', () => {
     const companyNames = ['7Digital', '9F Group', 'Allianz']
     const companyIds = [144, 337, 55]
 
-    groupManagementPage.clickGroupById(groupId)
-    groupManagementPage.addCompaniesToGroup(companyNames, companyIds)
-    groupManagementPage.discardEntityInformation()
+    equityAdmin.groupManagementPage.clickGroupById(groupId)
+    equityAdmin.groupManagementPage.addCompaniesToGroup(companyNames, companyIds)
+    equityAdmin.groupManagementPage.discardEntityInformation()
 
-    groupManagementPage.assertUserAssociatedWithGroup(companyIds[0], false)
-    groupManagementPage.assertUserAssociatedWithGroup(companyIds[1], false)
+    equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(companyIds[0], false)
+    equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(companyIds[1], false)
   })
 
   /**
@@ -389,63 +373,63 @@ describe('Group Management tests over User Management settings', () => {
     const groupId = 1219
     const roleId = 1397
 
-    groupManagementPage.clickGroupById(groupId)
+    equityAdmin.groupManagementPage.clickGroupById(groupId)
 
-    groupManagementPage.assertRoleAssociatedWithGroup(roleId)
+    equityAdmin.groupManagementPage.assertRoleAssociatedWithGroup(roleId)
 
     // roles
-    groupManagementPage.assertNumberOfCardsDisplayedInASection('roles', 1)
-    groupManagementPage.assertNumberOfRecordsInASection('roles', 1)
+    equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('roles', 1)
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('roles', 1)
 
     // daps
-    groupManagementPage.assertNumberOfCardsDisplayedInASection('daps', 8)
-    groupManagementPage.assertNumberOfRecordsInASection('daps', 9)
+    equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('daps', 8)
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 9)
 
     // users
-    groupManagementPage.assertNumberOfCardsDisplayedInASection('users', 8)
-    groupManagementPage.assertNumberOfRecordsInASection('users', 17)
+    equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('users', 8)
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('users', 17)
 
     // companies
-    groupManagementPage.assertNumberOfCardsDisplayedInASection('companies', 8)
-    groupManagementPage.assertNumberOfRecordsInASection('companies', 18)
+    equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('companies', 8)
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('companies', 18)
 
     // CHANGE RESOLUTION
-    groupManagementPage.changeBrowserResolution(1500, 1080)
+    equityAdmin.groupManagementPage.changeBrowserResolution(1500, 1080)
 
     // roles
-    groupManagementPage.assertNumberOfCardsDisplayedInASection('roles', 1)
-    groupManagementPage.assertNumberOfRecordsInASection('roles', 1)
+    equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('roles', 1)
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('roles', 1)
 
     // daps
-    groupManagementPage.assertNumberOfCardsDisplayedInASection('daps', 4)
-    groupManagementPage.assertNumberOfRecordsInASection('daps', 9)
+    equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('daps', 4)
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 9)
 
     // users
-    groupManagementPage.assertNumberOfCardsDisplayedInASection('users', 4)
-    groupManagementPage.assertNumberOfRecordsInASection('users', 17)
+    equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('users', 4)
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('users', 17)
 
     // companies
-    groupManagementPage.assertNumberOfCardsDisplayedInASection('companies', 4)
-    groupManagementPage.assertNumberOfRecordsInASection('companies', 18)
+    equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('companies', 4)
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('companies', 18)
 
     // CHANGE RESOLUTION
-    groupManagementPage.changeBrowserResolution(1200, 960)
+    equityAdmin.groupManagementPage.changeBrowserResolution(1200, 960)
 
     // roles
-    groupManagementPage.assertNumberOfCardsDisplayedInASection('roles', 1)
-    groupManagementPage.assertNumberOfRecordsInASection('roles', 1)
+    equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('roles', 1)
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('roles', 1)
 
     // daps
-    groupManagementPage.assertNumberOfCardsDisplayedInASection('daps', 2)
-    groupManagementPage.assertNumberOfRecordsInASection('daps', 9)
+    equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('daps', 2)
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 9)
 
     // users
-    groupManagementPage.assertNumberOfCardsDisplayedInASection('users', 2)
-    groupManagementPage.assertNumberOfRecordsInASection('users', 17)
+    equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('users', 2)
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('users', 17)
 
     // companies
-    groupManagementPage.assertNumberOfCardsDisplayedInASection('companies', 2)
-    groupManagementPage.assertNumberOfRecordsInASection('companies', 18)
+    equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('companies', 2)
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('companies', 18)
   })
 
   /**
@@ -454,25 +438,25 @@ describe('Group Management tests over User Management settings', () => {
   it.skip('C7462615_Groups_Expand_DAPs_Users_And_Clients', () => {
     const groupId = 964
 
-    groupManagementPage.clickGroupById(groupId)
+    equityAdmin.groupManagementPage.clickGroupById(groupId)
 
     // daps
-    groupManagementPage.clickShowAll('daps')
-    groupManagementPage.assertNumberOfCardsDisplayedInASection('daps', 13)
-    groupManagementPage.clickHide('daps')
-    groupManagementPage.assertNumberOfCardsDisplayedInASection('daps', 8)
+    equityAdmin.groupManagementPage.clickShowAll('daps')
+    equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('daps', 13)
+    equityAdmin.groupManagementPage.clickHide('daps')
+    equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('daps', 8)
 
     // users
-    groupManagementPage.clickShowAll('users')
-    groupManagementPage.assertNumberOfCardsDisplayedInASection('users', 11)
-    groupManagementPage.clickHide('users')
-    groupManagementPage.assertNumberOfCardsDisplayedInASection('users', 8)
+    equityAdmin.groupManagementPage.clickShowAll('users')
+    equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('users', 11)
+    equityAdmin.groupManagementPage.clickHide('users')
+    equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('users', 8)
 
     // clients
-    groupManagementPage.clickShowAll('companies')
-    groupManagementPage.assertNumberOfCardsDisplayedInASection('companies', 15)
-    groupManagementPage.clickHide('companies')
-    groupManagementPage.assertNumberOfCardsDisplayedInASection('companies', 8)
+    equityAdmin.groupManagementPage.clickShowAll('companies')
+    equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('companies', 15)
+    equityAdmin.groupManagementPage.clickHide('companies')
+    equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('companies', 8)
   })
 
   /**
@@ -483,11 +467,11 @@ describe('Group Management tests over User Management settings', () => {
     const groupName = 'Remove company'
     const companyIds = [144]
 
-    groupManagementPage.clickGroupById(groupId)
+    equityAdmin.groupManagementPage.clickGroupById(groupId)
 
-    groupManagementPage.removeCompaniesFromGroup(companyIds)
-    groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
-    groupManagementPage.assertUserAssociatedWithGroup(companyIds[0], false)
+    equityAdmin.groupManagementPage.removeCompaniesFromGroup(companyIds)
+    equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
+    equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(companyIds[0], false)
   })
 
   /**
@@ -498,11 +482,11 @@ describe('Group Management tests over User Management settings', () => {
     const groupName = 'Remove dap'
     const dapIds = [60]
 
-    groupManagementPage.clickGroupById(groupId)
+    equityAdmin.groupManagementPage.clickGroupById(groupId)
 
-    groupManagementPage.removeDapsFromGroup(dapIds)
-    groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
-    groupManagementPage.assertDapAssociatedWithGroup(dapIds[0], false)
+    equityAdmin.groupManagementPage.removeDapsFromGroup(dapIds)
+    equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
+    equityAdmin.groupManagementPage.assertDapAssociatedWithGroup(dapIds[0], false)
   })
 
   /**
@@ -514,24 +498,24 @@ describe('Group Management tests over User Management settings', () => {
     const dapNames = ['DAP 1', 'DAP 2', 'DAP 3']
     const dapIds = [41, 42, 43]
 
-    groupManagementPage.clickGroupById(groupId)
-    groupManagementPage.addDapsToGroup(dapNames, dapIds)
-    groupManagementPage.saveEntityInformation()
-    groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
+    equityAdmin.groupManagementPage.clickGroupById(groupId)
+    equityAdmin.groupManagementPage.addDapsToGroup(dapNames, dapIds)
+    equityAdmin.groupManagementPage.saveEntityInformation()
+    equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
 
-    groupManagementPage.assertDapAssociatedWithGroup(dapIds[0])
-    groupManagementPage.assertDapAssociatedWithGroup(dapIds[1])
-    groupManagementPage.assertDapAssociatedWithGroup(dapIds[2])
+    equityAdmin.groupManagementPage.assertDapAssociatedWithGroup(dapIds[0])
+    equityAdmin.groupManagementPage.assertDapAssociatedWithGroup(dapIds[1])
+    equityAdmin.groupManagementPage.assertDapAssociatedWithGroup(dapIds[2])
 
-    settingsMenuNavBar.accessGlobalSettingsMenu('', 'dap', false)
-    dapManagementPage.checkDapManagementUrl()
+    equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'dap', false)
+    equityAdmin.dapManagementPage.checkDapManagementUrl()
 
-    dapManagementPage.clickDapById(dapIds[0])
-    dapManagementPage.assertGroupAssociatedWithDap(groupId)
-    dapManagementPage.clickDapById(dapIds[1])
-    dapManagementPage.assertGroupAssociatedWithDap(groupId)
-    dapManagementPage.clickDapById(dapIds[2])
-    dapManagementPage.assertGroupAssociatedWithDap(groupId)
+    equityAdmin.dapManagementPage.clickDapById(dapIds[0])
+    equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupId)
+    equityAdmin.dapManagementPage.clickDapById(dapIds[1])
+    equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupId)
+    equityAdmin.dapManagementPage.clickDapById(dapIds[2])
+    equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupId)
   })
 
   /**
@@ -542,13 +526,13 @@ describe('Group Management tests over User Management settings', () => {
     const dapNames = ['Test', 'Test', 'Test3']
     const dapIds = [60, 77, 78]
 
-    groupManagementPage.clickGroupById(groupId)
-    groupManagementPage.addDapsToGroup(dapNames, dapIds)
-    groupManagementPage.discardEntityInformation()
+    equityAdmin.groupManagementPage.clickGroupById(groupId)
+    equityAdmin.groupManagementPage.addDapsToGroup(dapNames, dapIds)
+    equityAdmin.groupManagementPage.discardEntityInformation()
 
-    groupManagementPage.assertDapAssociatedWithGroup(dapIds[0], false)
-    groupManagementPage.assertDapAssociatedWithGroup(dapIds[1], false)
-    groupManagementPage.assertDapAssociatedWithGroup(dapIds[2], false)
+    equityAdmin.groupManagementPage.assertDapAssociatedWithGroup(dapIds[0], false)
+    equityAdmin.groupManagementPage.assertDapAssociatedWithGroup(dapIds[1], false)
+    equityAdmin.groupManagementPage.assertDapAssociatedWithGroup(dapIds[2], false)
   })
 
   /**
@@ -559,14 +543,14 @@ describe('Group Management tests over User Management settings', () => {
     const groupName = 'Remove user'
     const userIds = [754546, 754556]
 
-    groupManagementPage.clickGroupById(groupId)
-    groupManagementPage.scrollToTop() // strategy used just to move the scroll up
+    equityAdmin.groupManagementPage.clickGroupById(groupId)
+    equityAdmin.groupManagementPage.scrollToTop() // strategy used just to move the scroll up
 
-    groupManagementPage.removeUsersFromGroup(userIds)
-    groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
+    equityAdmin.groupManagementPage.removeUsersFromGroup(userIds)
+    equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
 
-    groupManagementPage.assertUserAssociatedWithGroup(userIds[0], false)
-    groupManagementPage.assertUserAssociatedWithGroup(userIds[1], false)
+    equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userIds[0], false)
+    equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userIds[1], false)
   })
 
   /**
@@ -577,12 +561,12 @@ describe('Group Management tests over User Management settings', () => {
     const groupName = 'Remove role'
     const roleId = 1854
 
-    groupManagementPage.clickGroupById(groupId)
+    equityAdmin.groupManagementPage.clickGroupById(groupId)
 
-    groupManagementPage.removeRoleFromGroup(roleId)
-    groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
+    equityAdmin.groupManagementPage.removeRoleFromGroup(roleId)
+    equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
 
-    groupManagementPage.assertRoleAssociatedWithGroup(1854, false)
+    equityAdmin.groupManagementPage.assertRoleAssociatedWithGroup(1854, false)
   })
 
   /**
@@ -590,29 +574,25 @@ describe('Group Management tests over User Management settings', () => {
    */
   it.skip('C7499685_Groups_Empty_State_Active_and_Inactive_Groups', () => {
     // Active Tab
-    groupManagementPage.clickTab('Active')
-    groupManagementPage.assertActiveGroupsAreDisplayed(false)
-    groupManagementPage.assertNoGroupExistMessageIsDisplayed()
+    equityAdmin.groupManagementPage.clickTab('Active')
+    equityAdmin.groupManagementPage.assertActiveGroupsAreDisplayed(false)
+    equityAdmin.groupManagementPage.assertNoGroupExistMessageIsDisplayed()
 
     // Inactive Tab
-    groupManagementPage.clickTab('Inactive')
-    groupManagementPage.assertInactiveGroupsAreDisplayed(false)
-    groupManagementPage.assertNoGroupExistMessageIsDisplayed()
+    equityAdmin.groupManagementPage.clickTab('Inactive')
+    equityAdmin.groupManagementPage.assertInactiveGroupsAreDisplayed(false)
+    equityAdmin.groupManagementPage.assertNoGroupExistMessageIsDisplayed()
   })
 })
 
 // ************************************************ TESTS AS VIEW ONLY USER ************************************************** //
 describe('Group Management tests over User Management settings - View Only User', () => {
-  // Pages
-  const groupManagementPage = new GroupManagementPage()
-
-  // Components
-  const settingsMenuNavBar = new SettingsMenuNavBar()
+  const equityAdmin = new EquityAdmin()
 
   beforeEach(() => {
     cy.login(Cypress.env('VIEW_ONLY_USER_2_AUTH'))
-    settingsMenuNavBar.accessGlobalSettingsMenu('user', 'group')
-    groupManagementPage.checkGroupManagementUrl()
+    equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'group')
+    equityAdmin.groupManagementPage.checkGroupManagementUrl()
   })
 
   /**
@@ -621,11 +601,11 @@ describe('Group Management tests over User Management settings - View Only User'
   it.skip('C7422807_Groups_User_Does_Not_Have_Group_Update_Permission_To_Add_DAPs_Users_Role_And_Clients', () => {
     const groupId = 1017
 
-    groupManagementPage.clickGroupById(groupId)
-    groupManagementPage.assertChangeRoleButtonDisplayed(false)
-    groupManagementPage.assertAddDapsButtonDisplayed(false)
-    groupManagementPage.assertAddUsersButtonDisplayed(false)
-    groupManagementPage.assertAddCompaniesButtonDisplayed(false)
+    equityAdmin.groupManagementPage.clickGroupById(groupId)
+    equityAdmin.groupManagementPage.assertChangeRoleButtonDisplayed(false)
+    equityAdmin.groupManagementPage.assertAddDapsButtonDisplayed(false)
+    equityAdmin.groupManagementPage.assertAddUsersButtonDisplayed(false)
+    equityAdmin.groupManagementPage.assertAddCompaniesButtonDisplayed(false)
   })
 
   /**
@@ -638,13 +618,13 @@ describe('Group Management tests over User Management settings - View Only User'
     const userId = 794873
     const companiesIds = [144, 337]
 
-    groupManagementPage.clickGroupById(groupId)
-    groupManagementPage.assertRemoveRoleOptionIsDisplayed(roleId, false)
-    groupManagementPage.assertRemoveDapOptionIsDisplayed(dapIds[0], false)
-    groupManagementPage.assertRemoveDapOptionIsDisplayed(dapIds[1], false)
-    groupManagementPage.assertRemoveUserOptionIsDisplayed(userId, false)
-    groupManagementPage.assertRemoveCompanyOptionIsDisplayed(companiesIds[0], false)
-    groupManagementPage.assertRemoveCompanyOptionIsDisplayed(companiesIds[1], false)
+    equityAdmin.groupManagementPage.clickGroupById(groupId)
+    equityAdmin.groupManagementPage.assertRemoveRoleOptionIsDisplayed(roleId, false)
+    equityAdmin.groupManagementPage.assertRemoveDapOptionIsDisplayed(dapIds[0], false)
+    equityAdmin.groupManagementPage.assertRemoveDapOptionIsDisplayed(dapIds[1], false)
+    equityAdmin.groupManagementPage.assertRemoveUserOptionIsDisplayed(userId, false)
+    equityAdmin.groupManagementPage.assertRemoveCompanyOptionIsDisplayed(companiesIds[0], false)
+    equityAdmin.groupManagementPage.assertRemoveCompanyOptionIsDisplayed(companiesIds[1], false)
   })
 
   /**
@@ -653,12 +633,12 @@ describe('Group Management tests over User Management settings - View Only User'
   it.skip('C7499680_Groups_User_Does_Not_Have_Group_Permission_To_Deactivate_Group', () => {
     const groupId = 1017
 
-    groupManagementPage.clickGroupById(groupId)
-    groupManagementPage.assertThreeDotButtonDisplayed()
-    groupManagementPage.clickThreeDotOptionButton()
-    groupManagementPage.assertDuplicateEntityButtonDisplayed(true)
-    groupManagementPage.assertNewGroupButtonDisplayed(true)
-    groupManagementPage.assertDeactivateEntityButtonDisplayed(false)
+    equityAdmin.groupManagementPage.clickGroupById(groupId)
+    equityAdmin.groupManagementPage.assertThreeDotButtonDisplayed()
+    equityAdmin.groupManagementPage.clickThreeDotOptionButton()
+    equityAdmin.groupManagementPage.assertDuplicateEntityButtonDisplayed(true)
+    equityAdmin.groupManagementPage.assertNewGroupButtonDisplayed(true)
+    equityAdmin.groupManagementPage.assertDeactivateEntityButtonDisplayed(false)
   })
 
   /**
@@ -667,12 +647,12 @@ describe('Group Management tests over User Management settings - View Only User'
   it.skip('C7493037_Groups_User_Does_Not_Have_Group_Permission_To_Duplicate_Group', () => {
     const groupId = 1017
 
-    groupManagementPage.clickGroupById(groupId)
-    groupManagementPage.assertThreeDotButtonDisplayed()
-    groupManagementPage.clickThreeDotOptionButton()
-    groupManagementPage.assertDeactivateEntityButtonDisplayed(true)
-    groupManagementPage.assertNewGroupButtonDisplayed(false)
-    groupManagementPage.assertDuplicateEntityButtonDisplayed(false)
+    equityAdmin.groupManagementPage.clickGroupById(groupId)
+    equityAdmin.groupManagementPage.assertThreeDotButtonDisplayed()
+    equityAdmin.groupManagementPage.clickThreeDotOptionButton()
+    equityAdmin.groupManagementPage.assertDeactivateEntityButtonDisplayed(true)
+    equityAdmin.groupManagementPage.assertNewGroupButtonDisplayed(false)
+    equityAdmin.groupManagementPage.assertDuplicateEntityButtonDisplayed(false)
   })
 
   /**
@@ -681,16 +661,14 @@ describe('Group Management tests over User Management settings - View Only User'
    * SkIPPING due to https://globalshares.atlassian.net/browse/PB-979
    */
   it.skip('C7493035_Groups_User_Does_Not_Have_Group_Permission_To_Create_Group', () => {
-    groupManagementPage.assertNewGroupButtonDisplayed(false)
-    groupManagementPage.addPathToUrlAndVisitIt('/0')
+    equityAdmin.groupManagementPage.assertNewGroupButtonDisplayed(false)
+    equityAdmin.groupManagementPage.addPathToUrlAndVisitIt('/0')
     // Need to wait for PB-979 to know what are going to be the next steps
   })
 })
 
 describe('Group Management tests over User Management settings - Other specific tests without before each hook', () => {
-  // Components
-  const settingsMenuNavBar = new SettingsMenuNavBar()
-  const leftMenuNavBar = new LeftMenuNavBar()
+  const equityAdmin = new EquityAdmin()
 
   /**
    * @missing_data Need to have a user with view permissions for all the settings but Group
@@ -698,12 +676,12 @@ describe('Group Management tests over User Management settings - Other specific 
   it.skip('C9277665_User_Does_Not_Have_View_Permission_For_Groups_Only', () => {
     cy.login(Cypress.env('VIEW_ONLY_USER_2_AUTH'))
 
-    leftMenuNavBar.openSettingsMenuBar()
-    settingsMenuNavBar.assertGlobalSettingsMenuOpen()
-    settingsMenuNavBar.assertUserManagementMenuDisplayed()
-    settingsMenuNavBar.accessGlobalSettingsMenu('user', '', false)
-    settingsMenuNavBar.assertBackButtonDisplayed() // Assert it just to make sure we are in the correct menu
-    settingsMenuNavBar.assertGroupSubMenuItemDisplayed(false)
+    equityAdmin.leftMenuNavBar.openSettingsMenuBar()
+    equityAdmin.settingsMenuNavBar.assertGlobalSettingsMenuOpen()
+    equityAdmin.settingsMenuNavBar.assertUserManagementMenuDisplayed()
+    equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', '', false)
+    equityAdmin.settingsMenuNavBar.assertBackButtonDisplayed() // Assert it just to make sure we are in the correct menu
+    equityAdmin.settingsMenuNavBar.assertGroupSubMenuItemDisplayed(false)
   })
 })
 

@@ -1,4 +1,4 @@
-import BasePage from '../pages/basePage'
+import BasePage from '../../pages/basePage'
 
 const selectors = {
   inputBar: 'gs-global-search .input-bar input',

@@ -1,14 +1,10 @@
-import HomePage from '../../support/pages/homePage'
-import EquityPeoplePage from '../../support/pages/equityPeoplePage'
-import SearchBar from '../../support/components/searchBar'
+import EquityAdmin from '../../support/pages/equityAdmin'
 
 /**
  * Skipping until this one starts to be considered stable
  */
 describe('Participants tests', () => {
-  const homePage = new HomePage()
-  const equityPeoplePage = new EquityPeoplePage()
-  const searchBar = new SearchBar()
+  const equityAdmin = new EquityAdmin()
 
   beforeEach(() => {
     cy.login()
@@ -21,45 +17,45 @@ describe('Participants tests', () => {
     const participantEmail = 'SuppliedEmailAddress_'
     const participantResidency = 'LUX'
 
-    homePage.selectClientById(144)
-    equityPeoplePage.checkPeopleUrl() // needed to use the search engine in the correct page
+    equityAdmin.homePage.selectClientById(144)
+    equityAdmin.equityClientPeoplePage.checkClientPeopleUrl() // needed to use the search engine in the correct page
 
     // Id
-    searchBar.search(participantId)
-    equityPeoplePage.assertAmountOfPeopleTable(1)
-    equityPeoplePage.assertParticipantDisplayed(participantId)
-    equityPeoplePage.assertDataDisplayedOnGsGridTableIsHighlighted(participantId.toString())
+    equityAdmin.searchBar.search(participantId)
+    equityAdmin.equityClientPeoplePage.assertAmountOfPeopleTable(1)
+    equityAdmin.equityClientPeoplePage.assertParticipantDisplayed(participantId)
+    equityAdmin.equityClientPeoplePage.assertDataDisplayedOnGsGridTableIsHighlighted(participantId.toString())
 
     // Email
-    searchBar.search(participantEmail)
-    equityPeoplePage.assertAmountOfPeopleTable(233)
-    equityPeoplePage.assertDataDisplayedOnGsGridTableIsHighlighted(participantEmail)
+    equityAdmin.searchBar.search(participantEmail)
+    equityAdmin.equityClientPeoplePage.assertAmountOfPeopleTable(233)
+    equityAdmin.equityClientPeoplePage.assertDataDisplayedOnGsGridTableIsHighlighted(participantEmail)
 
     // Name
-    searchBar.search(participantName)
-    equityPeoplePage.assertAmountOfPeopleTable(2)
-    equityPeoplePage.assertParticipantDisplayed(participantId)
-    equityPeoplePage.assertDataDisplayedOnGsGridTableIsHighlighted(participantName)
+    equityAdmin.searchBar.search(participantName)
+    equityAdmin.equityClientPeoplePage.assertAmountOfPeopleTable(2)
+    equityAdmin.equityClientPeoplePage.assertParticipantDisplayed(participantId)
+    equityAdmin.equityClientPeoplePage.assertDataDisplayedOnGsGridTableIsHighlighted(participantName)
 
     // Last name
-    searchBar.search(participantLastName)
-    equityPeoplePage.assertAmountOfPeopleTable(1)
-    equityPeoplePage.assertParticipantDisplayed(participantId)
-    equityPeoplePage.assertDataDisplayedOnGsGridTableIsHighlighted(participantName + ' ' + participantLastName)
+    equityAdmin.searchBar.search(participantLastName)
+    equityAdmin.equityClientPeoplePage.assertAmountOfPeopleTable(1)
+    equityAdmin.equityClientPeoplePage.assertParticipantDisplayed(participantId)
+    equityAdmin.equityClientPeoplePage.assertDataDisplayedOnGsGridTableIsHighlighted(participantName + ' ' + participantLastName)
 
-    equityPeoplePage.assertParticipantDataDisplayedOnTheParticipantsList([participantId, participantName, participantEmail, participantResidency])
+    equityAdmin.equityClientPeoplePage.assertParticipantDataDisplayedOnTheParticipantsList([participantId, participantName, participantEmail, participantResidency])
   })
 
   it('C11069830_SearchEngine_Search_Without_Returned_Values', () => {
     const participantId = 113026
 
-    homePage.selectClientById(144)
-    equityPeoplePage.checkPeopleUrl() // needed to use the search engine in the correct page
+    equityAdmin.homePage.selectClientById(144)
+    equityAdmin.equityClientPeoplePage.checkClientPeopleUrl() // needed to use the search engine in the correct page
 
-    searchBar.search('thereIsNoOneLikeThisTEST')
-    equityPeoplePage.assertNoParticipantsOrTrustsAvailableDisplayed()
-    searchBar.search(participantId)
-    equityPeoplePage.getParticipantFromTheList(participantId).should('be.visible')
+    equityAdmin.searchBar.search('thereIsNoOneLikeThisTEST')
+    equityAdmin.equityClientPeoplePage.assertNoParticipantsOrTrustsAvailableDisplayed()
+    equityAdmin.searchBar.search(participantId)
+    equityAdmin.equityClientPeoplePage.getParticipantFromTheList(participantId).should('be.visible')
   })
 
   /**
@@ -70,11 +66,11 @@ describe('Participants tests', () => {
    */
 
   it.skip('C1234567_Client_Without_Participants_And_Trusts', () => {
-    homePage.selectClientById(420)
+    equityAdmin.homePage.selectClientById(420)
 
-    equityPeoplePage.assertNoParticipantsOrTrustsAvailableDisplayed()
-    equityPeoplePage.clickTab('trusts')
-    equityPeoplePage.assertNoParticipantsOrTrustsAvailableDisplayed()
+    equityAdmin.equityClientPeoplePage.assertNoParticipantsOrTrustsAvailableDisplayed()
+    equityAdmin.equityClientPeoplePage.clickTab('trusts')
+    equityAdmin.equityClientPeoplePage.assertNoParticipantsOrTrustsAvailableDisplayed()
   })
 
   /**
@@ -84,10 +80,10 @@ describe('Participants tests', () => {
    */
   it.skip('C12177200_Verify_Participant_Detail_Data_On_L4_Container', () => {
     const participantId = 113026
-    homePage.selectClientById(144)
+    equityAdmin.homePage.selectClientById(144)
 
-    equityPeoplePage.clickParticipantFromTheList(participantId)
-    equityPeoplePage.assertParticipantDetailContent('Abel Lewis', 'New Zealand', 'ACTIVE')
+    equityAdmin.equityClientPeoplePage.clickParticipantFromTheList(participantId)
+    equityAdmin.equityClientPeoplePage.assertParticipantDetailContent('Abel Lewis', 'New Zealand', 'ACTIVE')
   })
 
   /**

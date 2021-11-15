@@ -1,10 +1,7 @@
-import UserManagementPage from '../../../support/pages/globalSettingsPages/userManagementPages/userManagementPage'
-import SettingsMenuNavBar from '../../../support/components/settingsMenuNavBar'
+import EquityAdmin from '../../../support/pages/equityAdmin'
 
 describe('User Management tests over User Management settings', () => {
-  const userManagementPage = new UserManagementPage()
-
-  const settingsMenuNavBar = new SettingsMenuNavBar()
+  const equityAdmin = new EquityAdmin()
 
   /**
    * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-1005
@@ -13,19 +10,19 @@ describe('User Management tests over User Management settings', () => {
     cy.login(Cypress.env('VIEW_ONLY_USER_2_AUTH'))
 
     // User
-    settingsMenuNavBar.accessGlobalSettingsMenu('user', 'user')
-    userManagementPage.checkUserManagementUrl()
+    equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'user')
+    equityAdmin.userManagementPage.checkUserManagementUrl()
     // userManagementPage.assertViewOnlyBadgeDisplayed()
     // Group
-    settingsMenuNavBar.accessGlobalSettingsMenu('', 'group', false)
-    userManagementPage.assertViewOnlyBadgeDisplayed()
+    equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'group', false)
+    equityAdmin.userManagementPage.assertViewOnlyBadgeDisplayed()
 
     // Role
-    settingsMenuNavBar.accessGlobalSettingsMenu('', 'role', false)
-    userManagementPage.assertViewOnlyBadgeDisplayed()
+    equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'role', false)
+    equityAdmin.userManagementPage.assertViewOnlyBadgeDisplayed()
 
     // DAP
-    settingsMenuNavBar.accessGlobalSettingsMenu('', 'dap', false)
-    userManagementPage.assertViewOnlyBadgeDisplayed()
+    equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'dap', false)
+    equityAdmin.userManagementPage.assertViewOnlyBadgeDisplayed()
   })
 })

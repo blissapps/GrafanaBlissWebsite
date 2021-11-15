@@ -1,35 +1,23 @@
-import ClientStatementsPage from '../../support/pages/globalSettingsPages/statementManagementPages/clientStatementsPage'
-import ClientParticipantStatementsPage from '../../support/pages/globalSettingsPages/statementManagementPages/clientParticipantStatementsPage'
-import ParticipantRegulatoryLinkagePage from '../../support/pages/globalSettingsPages/statementManagementPages/participantRegulatoryLinkagePage'
+import EquityAdmin from '../../support/pages/equityAdmin'
 import Utils from '../../support/utils'
-import LeftMenuNavBar from '../../support/components/leftMenuNavBar'
-import SettingsMenuNavBar from '../../support/components/settingsMenuNavBar'
 
 describe('Statement Management tests', () => {
-  // Pages
-  const clientStatementsPage = new ClientStatementsPage()
-  const clientParticipantStatementsPage = new ClientParticipantStatementsPage()
-  const participantRegulatoryLinkagePage = new ParticipantRegulatoryLinkagePage()
-
-  // Components
-  const settingsMenuNavBar = new SettingsMenuNavBar()
-
-  // Others
+  const equityAdmin = new EquityAdmin()
   const utils = new Utils()
 
   beforeEach(() => {
     cy.login()
-    settingsMenuNavBar.accessGlobalSettingsMenu('statement')
-    clientStatementsPage.checkClientStatementsUrl()
+    equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('statement')
+    equityAdmin.clientStatementsPage.checkClientStatementsUrl()
   })
 
   it('C7394715_Happy_Path_To_View_Statements_Accordingly', () => {
     const idsClientList = [77, 78, 79, 80, 81]
     const columnsToValidate = ['Id', 'Client', 'Regulator', 'Status']
 
-    clientStatementsPage.assertClientStatementsTableContainsExpectedColumns()
-    clientStatementsPage.assertClientStatementsTableInOrderById(idsClientList)
-    clientStatementsPage.assertTableContainsExpectedColumnsInOrder(columnsToValidate)
+    equityAdmin.clientStatementsPage.assertClientStatementsTableContainsExpectedColumns()
+    equityAdmin.clientStatementsPage.assertClientStatementsTableInOrderById(idsClientList)
+    equityAdmin.clientStatementsPage.assertTableContainsExpectedColumnsInOrder(columnsToValidate)
   })
 
   /**
@@ -37,37 +25,37 @@ describe('Statement Management tests', () => {
    */
   it.skip('C7394241_Statements_Download_Button_Visibility_Behavior', () => {
     // INITIATED
-    clientStatementsPage.filterClientStatements('Velocys PLC')
-    clientStatementsPage.clickClientTable(103)
-    clientParticipantStatementsPage.assertSummaryButtonDisplayed(false)
-    clientParticipantStatementsPage.clickBackToManageStatements()
+    equityAdmin.clientStatementsPage.filterClientStatements('Velocys PLC')
+    equityAdmin.clientStatementsPage.clickClientTable(103)
+    equityAdmin.clientParticipantStatementsPage.assertSummaryButtonDisplayed(false)
+    equityAdmin.clientParticipantStatementsPage.clickBackToManageStatements()
 
     // RECONCILED
-    clientStatementsPage.clearAllFilters()
-    clientStatementsPage.filterClientStatements('Mercari')
-    clientStatementsPage.clickClientTable(84)
-    clientParticipantStatementsPage.assertSummaryButtonDisplayed(false)
-    clientParticipantStatementsPage.clickBackToManageStatements()
+    equityAdmin.clientStatementsPage.clearAllFilters()
+    equityAdmin.clientStatementsPage.filterClientStatements('Mercari')
+    equityAdmin.clientStatementsPage.clickClientTable(84)
+    equityAdmin.clientParticipantStatementsPage.assertSummaryButtonDisplayed(false)
+    equityAdmin.clientParticipantStatementsPage.clickBackToManageStatements()
 
     // Pending Validation
-    clientStatementsPage.clearAllFilters()
-    clientStatementsPage.filterClientStatements('Kerry Logistics')
-    clientStatementsPage.clickClientTable(97)
-    clientParticipantStatementsPage.assertSummaryButtonDisplayed()
-    clientParticipantStatementsPage.clickBackToManageStatements()
+    equityAdmin.clientStatementsPage.clearAllFilters()
+    equityAdmin.clientStatementsPage.filterClientStatements('Kerry Logistics')
+    equityAdmin.clientStatementsPage.clickClientTable(97)
+    equityAdmin.clientParticipantStatementsPage.assertSummaryButtonDisplayed()
+    equityAdmin.clientParticipantStatementsPage.clickBackToManageStatements()
 
     // PUBLISHED
-    clientStatementsPage.clearAllFilters()
-    clientStatementsPage.filterClientStatements('Interxion')
-    clientStatementsPage.clickClientTable(76)
-    clientParticipantStatementsPage.assertSummaryButtonDisplayed()
-    clientParticipantStatementsPage.clickBackToManageStatements()
+    equityAdmin.clientStatementsPage.clearAllFilters()
+    equityAdmin.clientStatementsPage.filterClientStatements('Interxion')
+    equityAdmin.clientStatementsPage.clickClientTable(76)
+    equityAdmin.clientParticipantStatementsPage.assertSummaryButtonDisplayed()
+    equityAdmin.clientParticipantStatementsPage.clickBackToManageStatements()
 
     // PARTIALLY PUBLISHED
-    clientStatementsPage.clearAllFilters()
-    clientStatementsPage.filterClientStatements('Cavotec')
-    clientStatementsPage.clickClientTable(78)
-    clientParticipantStatementsPage.assertSummaryButtonDisplayed()
+    equityAdmin.clientStatementsPage.clearAllFilters()
+    equityAdmin.clientStatementsPage.filterClientStatements('Cavotec')
+    equityAdmin.clientStatementsPage.clickClientTable(78)
+    equityAdmin.clientParticipantStatementsPage.assertSummaryButtonDisplayed()
   })
 
   /**
@@ -82,12 +70,12 @@ describe('Statement Management tests', () => {
     const clientName = 'Interxion'
     const clientID = 76
 
-    clientStatementsPage.filterClientStatements(clientName)
-    clientStatementsPage.clickClientTable(clientID)
-    clientParticipantStatementsPage.assertSummaryButtonDisplayed()
-    clientParticipantStatementsPage.clickSummaryDownloadButtonToDownloadCSVFile()
-    clientParticipantStatementsPage.assertProgressBarDisplayed()
-    clientParticipantStatementsPage.assertFileWasDownloadedSuccessfully(clientName + '_Summary.csv')
+    equityAdmin.clientStatementsPage.filterClientStatements(clientName)
+    equityAdmin.clientStatementsPage.clickClientTable(clientID)
+    equityAdmin.clientParticipantStatementsPage.assertSummaryButtonDisplayed()
+    equityAdmin.clientParticipantStatementsPage.clickSummaryDownloadButtonToDownloadCSVFile()
+    equityAdmin.clientParticipantStatementsPage.assertProgressBarDisplayed()
+    equityAdmin.clientParticipantStatementsPage.assertFileWasDownloadedSuccessfully(clientName + '_Summary.csv')
   })
 
   it('C7353833_Use_Filter_To_Search_For_Client_Statements', () => {
@@ -98,16 +86,16 @@ describe('Statement Management tests', () => {
     const clientId = 77
     const idsClientList = [77, 78, 79, 80, 81]
 
-    clientStatementsPage.filterClientStatements(clientName, dateFrom, dateTo)
-    clientStatementsPage.assertClientDisplayedOnClientStatementsTable(clientId)
-    clientStatementsPage.assertAmountOfRecordsTable(1)
-    clientStatementsPage.clearAllFilters()
-    clientStatementsPage.assertClientStatementsTableInOrderById(idsClientList)
+    equityAdmin.clientStatementsPage.filterClientStatements(clientName, dateFrom, dateTo)
+    equityAdmin.clientStatementsPage.assertClientDisplayedOnClientStatementsTable(clientId)
+    equityAdmin.clientStatementsPage.assertAmountOfRecordsTable(1)
+    equityAdmin.clientStatementsPage.clearAllFilters()
+    equityAdmin.clientStatementsPage.assertClientStatementsTableInOrderById(idsClientList)
 
     // only name
-    clientStatementsPage.filterClientStatements('TomTom')
-    clientStatementsPage.assertClientDisplayedOnClientStatementsTable(clientId)
-    clientStatementsPage.assertAmountOfRecordsTable(1)
+    equityAdmin.clientStatementsPage.filterClientStatements('TomTom')
+    equityAdmin.clientStatementsPage.assertClientDisplayedOnClientStatementsTable(clientId)
+    equityAdmin.clientStatementsPage.assertAmountOfRecordsTable(1)
   })
 
   /**
@@ -118,8 +106,8 @@ describe('Statement Management tests', () => {
     const yesterdayDate = utils.getDateInFutureOrPast(-1, 0, 0, 'YYYY/MM/DD').join()
     const todayDate = utils.getDateInFutureOrPast(0, 0, 0, 'YYYY/MM/DD').join()
 
-    clientStatementsPage.filterClientStatements(clientName, yesterdayDate, todayDate)
-    clientStatementsPage.assertNoDataMessageFoundDisplayed()
+    equityAdmin.clientStatementsPage.filterClientStatements(clientName, yesterdayDate, todayDate)
+    equityAdmin.clientStatementsPage.assertNoDataMessageFoundDisplayed()
   })
 
   /**
@@ -133,79 +121,79 @@ describe('Statement Management tests', () => {
     const regulator = 'FINRA'
     const partner = 'Global Shares Execution Services Ltd.'
 
-    clientStatementsPage.clickTab('participant regulatory linkage')
-    participantRegulatoryLinkagePage.checkParticipantRegulatoryLinkageManagementUrl()
-    participantRegulatoryLinkagePage.assertNoDataMessageFoundDisplayed()
+    equityAdmin.clientStatementsPage.clickTab('participant regulatory linkage')
+    equityAdmin.participantRegulatoryLinkagePage.checkParticipantRegulatoryLinkageManagementUrl()
+    equityAdmin.participantRegulatoryLinkagePage.assertNoDataMessageFoundDisplayed()
 
     // Not working yet for first name, so lets verify this until it is fixed
     cy.log('FILTER 0')
-    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantFirstName)
-    participantRegulatoryLinkagePage.assertNoDataMessageFoundDisplayed()
-    participantRegulatoryLinkagePage.clearAllFilters()
+    equityAdmin.participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantFirstName)
+    equityAdmin.participantRegulatoryLinkagePage.assertNoDataMessageFoundDisplayed()
+    equityAdmin.participantRegulatoryLinkagePage.clearAllFilters()
 
     cy.log('FILTER 1')
-    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName)
-    participantRegulatoryLinkagePage.assertAmountOfRecordsTable(125)
-    participantRegulatoryLinkagePage.clearAllFilters()
+    equityAdmin.participantRegulatoryLinkagePage.filterParticipantsStatements(clientName)
+    equityAdmin.participantRegulatoryLinkagePage.assertAmountOfRecordsTable(125)
+    equityAdmin.participantRegulatoryLinkagePage.clearAllFilters()
 
     cy.log('FILTER 2')
-    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName)
-    participantRegulatoryLinkagePage.assertAmountOfRecordsTable(2)
-    participantRegulatoryLinkagePage.clearAllFilters()
+    equityAdmin.participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName)
+    equityAdmin.participantRegulatoryLinkagePage.assertAmountOfRecordsTable(2)
+    equityAdmin.participantRegulatoryLinkagePage.clearAllFilters()
 
     cy.log('FILTER 3')
-    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName, participantExternalId)
-    participantRegulatoryLinkagePage.assertAmountOfRecordsTable(2)
-    participantRegulatoryLinkagePage.clearAllFilters()
+    equityAdmin.participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName, participantExternalId)
+    equityAdmin.participantRegulatoryLinkagePage.assertAmountOfRecordsTable(2)
+    equityAdmin.participantRegulatoryLinkagePage.clearAllFilters()
 
     cy.log('FILTER 4')
-    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName, participantExternalId, regulator)
-    participantRegulatoryLinkagePage.assertAmountOfRecordsTable(1)
-    participantRegulatoryLinkagePage.clearAllFilters()
+    equityAdmin.participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName, participantExternalId, regulator)
+    equityAdmin.participantRegulatoryLinkagePage.assertAmountOfRecordsTable(1)
+    equityAdmin.participantRegulatoryLinkagePage.clearAllFilters()
 
     cy.log('FILTER 5')
-    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName, participantExternalId, regulator, partner)
-    participantRegulatoryLinkagePage.assertAmountOfRecordsTable(1)
-    participantRegulatoryLinkagePage.clearAllFilters()
+    equityAdmin.participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName, participantExternalId, regulator, partner)
+    equityAdmin.participantRegulatoryLinkagePage.assertAmountOfRecordsTable(1)
+    equityAdmin.participantRegulatoryLinkagePage.clearAllFilters()
 
     cy.log('FILTER 6')
-    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, '', participantExternalId, '', '')
-    participantRegulatoryLinkagePage.assertAmountOfRecordsTable(2)
-    participantRegulatoryLinkagePage.clearAllFilters()
+    equityAdmin.participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, '', participantExternalId, '', '')
+    equityAdmin.participantRegulatoryLinkagePage.assertAmountOfRecordsTable(2)
+    equityAdmin.participantRegulatoryLinkagePage.clearAllFilters()
 
     cy.log('FILTER 7')
-    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, '', -1, regulator, '')
-    participantRegulatoryLinkagePage.assertAmountOfRecordsTable(42)
-    participantRegulatoryLinkagePage.clearAllFilters()
+    equityAdmin.participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, '', -1, regulator, '')
+    equityAdmin.participantRegulatoryLinkagePage.assertAmountOfRecordsTable(42)
+    equityAdmin.participantRegulatoryLinkagePage.clearAllFilters()
 
     cy.log('FILTER 8')
-    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, '', -1, '', partner)
-    participantRegulatoryLinkagePage.assertAmountOfRecordsTable(97)
-    participantRegulatoryLinkagePage.clearAllFilters()
+    equityAdmin.participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, '', -1, '', partner)
+    equityAdmin.participantRegulatoryLinkagePage.assertAmountOfRecordsTable(97)
+    equityAdmin.participantRegulatoryLinkagePage.clearAllFilters()
 
     cy.log('FILTER 9')
-    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, '', -1, regulator, partner)
-    participantRegulatoryLinkagePage.assertAmountOfRecordsTable(42)
-    participantRegulatoryLinkagePage.clearAllFilters()
+    equityAdmin.participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, '', -1, regulator, partner)
+    equityAdmin.participantRegulatoryLinkagePage.assertAmountOfRecordsTable(42)
+    equityAdmin.participantRegulatoryLinkagePage.clearAllFilters()
 
     cy.log('FILTER 10')
-    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName, -1, regulator, partner)
-    participantRegulatoryLinkagePage.assertAmountOfRecordsTable(1)
-    participantRegulatoryLinkagePage.clearAllFilters()
+    equityAdmin.participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName, -1, regulator, partner)
+    equityAdmin.participantRegulatoryLinkagePage.assertAmountOfRecordsTable(1)
+    equityAdmin.participantRegulatoryLinkagePage.clearAllFilters()
 
     cy.log('FILTER 11')
-    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName, participantExternalId, '', partner)
-    participantRegulatoryLinkagePage.assertAmountOfRecordsTable(2)
-    participantRegulatoryLinkagePage.clearAllFilters()
+    equityAdmin.participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName, participantExternalId, '', partner)
+    equityAdmin.participantRegulatoryLinkagePage.assertAmountOfRecordsTable(2)
+    equityAdmin.participantRegulatoryLinkagePage.clearAllFilters()
 
     cy.log('FILTER 12')
-    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName, participantExternalId, '', partner)
-    participantRegulatoryLinkagePage.assertAmountOfRecordsTable(2)
-    participantRegulatoryLinkagePage.clearAllFilters()
+    equityAdmin.participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, participantName, participantExternalId, '', partner)
+    equityAdmin.participantRegulatoryLinkagePage.assertAmountOfRecordsTable(2)
+    equityAdmin.participantRegulatoryLinkagePage.clearAllFilters()
 
     cy.log('FILTER 13 - Empty State')
-    participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, 'emptyStateTest')
-    participantRegulatoryLinkagePage.assertNoDataMessageFoundDisplayed()
+    equityAdmin.participantRegulatoryLinkagePage.filterParticipantsStatements(clientName, 'emptyStateTest')
+    equityAdmin.participantRegulatoryLinkagePage.assertNoDataMessageFoundDisplayed()
   })
 
   /**
@@ -218,23 +206,23 @@ describe('Statement Management tests', () => {
     const columnsToValidate = ['Participant', 'Status']
     const idsParticipantsList = [1, 2]
 
-    clientStatementsPage.filterClientStatements(clientName)
-    clientStatementsPage.clickClientTable(clientId)
-    clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
-    clientParticipantStatementsPage.assertTableContainsExpectedColumnsInOrder(columnsToValidate)
-    clientParticipantStatementsPage.assertParticipantStatementsTableContainsExpectedColumns()
-    clientParticipantStatementsPage.assertParticipantStatementsTableInOrderById(idsParticipantsList)
+    equityAdmin.clientStatementsPage.filterClientStatements(clientName)
+    equityAdmin.clientStatementsPage.clickClientTable(clientId)
+    equityAdmin.clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
+    equityAdmin.clientParticipantStatementsPage.assertTableContainsExpectedColumnsInOrder(columnsToValidate)
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatementsTableContainsExpectedColumns()
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatementsTableInOrderById(idsParticipantsList)
   })
 
   it('C7395182_Select_Client_Without_Participants_To_Check_Empty_State', () => {
     const clientName = 'Mizuho International plc'
     const clientId = 211
 
-    clientStatementsPage.filterClientStatements(clientName)
-    clientStatementsPage.clickClientTable(clientId)
-    clientParticipantStatementsPage.assertNoDataMessageFoundDisplayed()
-    clientParticipantStatementsPage.clickBackToManageStatements()
-    clientStatementsPage.checkClientStatementsUrl()
+    equityAdmin.clientStatementsPage.filterClientStatements(clientName)
+    equityAdmin.clientStatementsPage.clickClientTable(clientId)
+    equityAdmin.clientParticipantStatementsPage.assertNoDataMessageFoundDisplayed()
+    equityAdmin.clientParticipantStatementsPage.clickBackToManageStatements()
+    equityAdmin.clientStatementsPage.checkClientStatementsUrl()
   })
 
   /**
@@ -248,74 +236,74 @@ describe('Statement Management tests', () => {
     const participantStatus = 'Published'
     const participantExternalId = 111569
 
-    clientStatementsPage.filterClientStatements(clientName)
-    clientStatementsPage.clickClientTable(clientID)
-    clientStatementsPage.getNumberOfRecordsDisplayed()
+    equityAdmin.clientStatementsPage.filterClientStatements(clientName)
+    equityAdmin.clientStatementsPage.clickClientTable(clientID)
+    equityAdmin.clientStatementsPage.getNumberOfRecordsDisplayed()
 
     // By Participant Name
-    clientParticipantStatementsPage.filterParticipantStatements(participantName)
-    clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
-    clientParticipantStatementsPage.assertAmountOfRecordsTable(1)
-    clientParticipantStatementsPage.clearAllFilters()
+    equityAdmin.clientParticipantStatementsPage.filterParticipantStatements(participantName)
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
+    equityAdmin.clientParticipantStatementsPage.assertAmountOfRecordsTable(1)
+    equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
     // By Internal Id
-    clientParticipantStatementsPage.filterParticipantStatements('', participantID)
-    clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
-    clientParticipantStatementsPage.assertAmountOfRecordsTable(1)
-    clientParticipantStatementsPage.clearAllFilters()
+    equityAdmin.clientParticipantStatementsPage.filterParticipantStatements('', participantID)
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
+    equityAdmin.clientParticipantStatementsPage.assertAmountOfRecordsTable(1)
+    equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
     // By External Id
-    clientParticipantStatementsPage.filterParticipantStatements('', -1, '', participantExternalId)
-    clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
-    clientParticipantStatementsPage.assertAmountOfRecordsTable(1)
-    clientParticipantStatementsPage.clearAllFilters()
+    equityAdmin.clientParticipantStatementsPage.filterParticipantStatements('', -1, '', participantExternalId)
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
+    equityAdmin.clientParticipantStatementsPage.assertAmountOfRecordsTable(1)
+    equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
     // By Status
-    clientParticipantStatementsPage.filterParticipantStatements('', -1, participantStatus)
-    clientParticipantStatementsPage.assertAmountOfRecordsTable(15)
-    clientParticipantStatementsPage.clearAllFilters()
+    equityAdmin.clientParticipantStatementsPage.filterParticipantStatements('', -1, participantStatus)
+    equityAdmin.clientParticipantStatementsPage.assertAmountOfRecordsTable(15)
+    equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
     // By Name and Internal Id
-    clientParticipantStatementsPage.filterParticipantStatements(participantName, participantID)
-    clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
-    clientParticipantStatementsPage.assertAmountOfRecordsTable(1)
-    clientParticipantStatementsPage.clearAllFilters()
+    equityAdmin.clientParticipantStatementsPage.filterParticipantStatements(participantName, participantID)
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
+    equityAdmin.clientParticipantStatementsPage.assertAmountOfRecordsTable(1)
+    equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
     // By Name External Id
-    clientParticipantStatementsPage.filterParticipantStatements(participantName, -1, '', participantExternalId)
-    clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
-    clientParticipantStatementsPage.assertAmountOfRecordsTable(1)
-    clientParticipantStatementsPage.clearAllFilters()
+    equityAdmin.clientParticipantStatementsPage.filterParticipantStatements(participantName, -1, '', participantExternalId)
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
+    equityAdmin.clientParticipantStatementsPage.assertAmountOfRecordsTable(1)
+    equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
     // By Name and Status
-    clientParticipantStatementsPage.filterParticipantStatements(participantName, -1, participantStatus)
-    clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
-    clientParticipantStatementsPage.assertAmountOfRecordsTable(1)
-    clientParticipantStatementsPage.clearAllFilters()
+    equityAdmin.clientParticipantStatementsPage.filterParticipantStatements(participantName, -1, participantStatus)
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
+    equityAdmin.clientParticipantStatementsPage.assertAmountOfRecordsTable(1)
+    equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
     // By Internal Id and External Id
-    clientParticipantStatementsPage.filterParticipantStatements('', participantID, '', participantExternalId)
-    clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
-    clientParticipantStatementsPage.assertAmountOfRecordsTable(1)
-    clientParticipantStatementsPage.clearAllFilters()
+    equityAdmin.clientParticipantStatementsPage.filterParticipantStatements('', participantID, '', participantExternalId)
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
+    equityAdmin.clientParticipantStatementsPage.assertAmountOfRecordsTable(1)
+    equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
     // By Internal Id and Status
-    clientParticipantStatementsPage.filterParticipantStatements('', participantID, participantStatus)
-    clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
-    clientParticipantStatementsPage.assertAmountOfRecordsTable(1)
-    clientParticipantStatementsPage.clearAllFilters()
+    equityAdmin.clientParticipantStatementsPage.filterParticipantStatements('', participantID, participantStatus)
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
+    equityAdmin.clientParticipantStatementsPage.assertAmountOfRecordsTable(1)
+    equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
     // By External Id and Status
-    clientParticipantStatementsPage.filterParticipantStatements('', -1, participantStatus, participantExternalId)
-    clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
-    clientParticipantStatementsPage.assertAmountOfRecordsTable(1)
-    clientParticipantStatementsPage.clearAllFilters()
+    equityAdmin.clientParticipantStatementsPage.filterParticipantStatements('', -1, participantStatus, participantExternalId)
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
+    equityAdmin.clientParticipantStatementsPage.assertAmountOfRecordsTable(1)
+    equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
     // By Name, Internal Id, Status, and External Id
-    clientParticipantStatementsPage.filterParticipantStatements(participantName, participantID, participantStatus, participantExternalId)
-    clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
-    clientParticipantStatementsPage.assertAmountOfRecordsTable(1)
-    clientParticipantStatementsPage.clearAllFilters()
+    equityAdmin.clientParticipantStatementsPage.filterParticipantStatements(participantName, participantID, participantStatus, participantExternalId)
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
+    equityAdmin.clientParticipantStatementsPage.assertAmountOfRecordsTable(1)
+    equityAdmin.clientParticipantStatementsPage.clearAllFilters()
   })
 
   /**
@@ -333,11 +321,11 @@ describe('Statement Management tests', () => {
     const participantID = 32512
     const participantName = 'Pacheco'
 
-    clientStatementsPage.filterClientStatements(clientName)
-    clientStatementsPage.clickClientTable(clientID)
-    clientParticipantStatementsPage.filterParticipantStatements('', participantID)
-    clientParticipantStatementsPage.clickDownloadPDFFromParticipantStatement(participantID)
-    clientParticipantStatementsPage.assertFileWasDownloadedSuccessfully(participantName + '_Summary.pdf')
+    equityAdmin.clientStatementsPage.filterClientStatements(clientName)
+    equityAdmin.clientStatementsPage.clickClientTable(clientID)
+    equityAdmin.clientParticipantStatementsPage.filterParticipantStatements('', participantID)
+    equityAdmin.clientParticipantStatementsPage.clickDownloadPDFFromParticipantStatement(participantID)
+    equityAdmin.clientParticipantStatementsPage.assertFileWasDownloadedSuccessfully(participantName + '_Summary.pdf')
   })
 
   /**
@@ -357,32 +345,32 @@ describe('Statement Management tests', () => {
     const clientInitiated = 'Dimension Data'
     const clientInitiatedId = 117
 
-    clientStatementsPage.waitForClientStatementsToBeLoaded() // First make sure the clients were loaded before testing that the bulk actions are not displayed
-    clientStatementsPage.assertBulkOptionsDisplayed(false)
+    equityAdmin.clientStatementsPage.waitForClientStatementsToBeLoaded() // First make sure the clients were loaded before testing that the bulk actions are not displayed
+    equityAdmin.clientStatementsPage.assertBulkOptionsDisplayed(false)
 
     // Client status PUBLISHED
-    clientStatementsPage.filterClientStatements(clientPublished)
-    clientStatementsPage.assertReconcileButtonDisplayedForClient(clientPublishedId, false)
-    clientStatementsPage.clearAllFilters()
+    equityAdmin.clientStatementsPage.filterClientStatements(clientPublished)
+    equityAdmin.clientStatementsPage.assertReconcileButtonDisplayedForClient(clientPublishedId, false)
+    equityAdmin.clientStatementsPage.clearAllFilters()
 
     // Client status PARTIALLY PUBLISHED
-    clientStatementsPage.filterClientStatements(clientPartiallyPublished)
-    clientStatementsPage.assertReconcileButtonDisplayedForClient(clientPartiallyPublishedId, false)
-    clientStatementsPage.clearAllFilters()
+    equityAdmin.clientStatementsPage.filterClientStatements(clientPartiallyPublished)
+    equityAdmin.clientStatementsPage.assertReconcileButtonDisplayedForClient(clientPartiallyPublishedId, false)
+    equityAdmin.clientStatementsPage.clearAllFilters()
 
     // Client status RECONCILED
-    clientStatementsPage.filterClientStatements(clientReconciled)
-    clientStatementsPage.assertReconcileButtonDisplayedForClient(clientReconciledId, false)
-    clientStatementsPage.clearAllFilters()
+    equityAdmin.clientStatementsPage.filterClientStatements(clientReconciled)
+    equityAdmin.clientStatementsPage.assertReconcileButtonDisplayedForClient(clientReconciledId, false)
+    equityAdmin.clientStatementsPage.clearAllFilters()
 
     // Client status PENDING VALIDATION
-    clientStatementsPage.filterClientStatements(clientPendingValidation)
-    clientStatementsPage.assertReconcileButtonDisplayedForClient(clientPendingValidationId, false)
-    clientStatementsPage.clearAllFilters()
+    equityAdmin.clientStatementsPage.filterClientStatements(clientPendingValidation)
+    equityAdmin.clientStatementsPage.assertReconcileButtonDisplayedForClient(clientPendingValidationId, false)
+    equityAdmin.clientStatementsPage.clearAllFilters()
 
     // Client status INITIATED
-    clientStatementsPage.filterClientStatements(clientInitiated)
-    clientStatementsPage.assertReconcileButtonDisplayedForClient(clientInitiatedId)
+    equityAdmin.clientStatementsPage.filterClientStatements(clientInitiated)
+    equityAdmin.clientStatementsPage.assertReconcileButtonDisplayedForClient(clientInitiatedId)
   })
 
   /**
@@ -397,9 +385,9 @@ describe('Statement Management tests', () => {
     const clientInitiatedId = 140
     const securityIds = [795]
 
-    clientStatementsPage.filterClientStatements(clientInitiated)
-    clientStatementsPage.clickToReconcileClient(clientInitiatedId)
-    clientStatementsPage.assertReconcileStatementRightWindowDisplaysElementsAsExpected(securityIds)
+    equityAdmin.clientStatementsPage.filterClientStatements(clientInitiated)
+    equityAdmin.clientStatementsPage.clickToReconcileClient(clientInitiatedId)
+    equityAdmin.clientStatementsPage.assertReconcileStatementRightWindowDisplaysElementsAsExpected(securityIds)
   })
 
   /**
@@ -414,36 +402,36 @@ describe('Statement Management tests', () => {
     const participantStatusBefore = 'Pending Validation'
     const participantStatusAfter = 'On Hold'
 
-    clientStatementsPage.filterClientStatements(clientName)
-    clientStatementsPage.clickClientTable(clientId)
+    equityAdmin.clientStatementsPage.filterClientStatements(clientName)
+    equityAdmin.clientStatementsPage.clickClientTable(clientId)
 
-    clientParticipantStatementsPage.filterParticipantStatements('', participantIDs[0])
-    clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantIDs[0])
-    clientParticipantStatementsPage.assertParticipantStatus(participantIDs[0], participantStatusBefore)
-    clientParticipantStatementsPage.clearAllFilters()
+    equityAdmin.clientParticipantStatementsPage.filterParticipantStatements('', participantIDs[0])
+    equityAdmin.clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantIDs[0])
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantIDs[0], participantStatusBefore)
+    equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
-    clientParticipantStatementsPage.filterParticipantStatements('', participantIDs[1])
-    clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantIDs[1])
-    clientParticipantStatementsPage.assertParticipantStatus(participantIDs[1], participantStatusBefore)
-    clientParticipantStatementsPage.clearAllFilters()
+    equityAdmin.clientParticipantStatementsPage.filterParticipantStatements('', participantIDs[1])
+    equityAdmin.clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantIDs[1])
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantIDs[1], participantStatusBefore)
+    equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
-    clientParticipantStatementsPage.filterParticipantStatements('', participantIDs[2])
-    clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantIDs[2])
-    clientParticipantStatementsPage.assertParticipantStatus(participantIDs[2], participantStatusBefore)
-    clientParticipantStatementsPage.clearAllFilters()
+    equityAdmin.clientParticipantStatementsPage.filterParticipantStatements('', participantIDs[2])
+    equityAdmin.clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantIDs[2])
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantIDs[2], participantStatusBefore)
+    equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
-    clientParticipantStatementsPage.filterParticipantStatements('', participantIDs[3])
-    clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantIDs[3])
-    clientParticipantStatementsPage.assertParticipantStatus(participantIDs[3], participantStatusBefore)
-    clientParticipantStatementsPage.clearAllFilters()
+    equityAdmin.clientParticipantStatementsPage.filterParticipantStatements('', participantIDs[3])
+    equityAdmin.clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantIDs[3])
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantIDs[3], participantStatusBefore)
+    equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
-    clientParticipantStatementsPage.clickInTableHeaderToPerformActions('on hold', participantIDs.length)
+    equityAdmin.clientParticipantStatementsPage.clickInTableHeaderToPerformActions('on hold', participantIDs.length)
 
-    clientParticipantStatementsPage.assertParticipantStatus(participantIDs[0], participantStatusAfter)
-    clientParticipantStatementsPage.assertParticipantStatus(participantIDs[1], participantStatusAfter)
-    clientParticipantStatementsPage.assertParticipantStatus(participantIDs[2], participantStatusAfter)
-    clientParticipantStatementsPage.assertParticipantStatus(participantIDs[3], participantStatusAfter)
-    clientParticipantStatementsPage.assertToastNotificationMessageIsDisplayed('Success')
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantIDs[0], participantStatusAfter)
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantIDs[1], participantStatusAfter)
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantIDs[2], participantStatusAfter)
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantIDs[3], participantStatusAfter)
+    equityAdmin.clientParticipantStatementsPage.assertToastNotificationMessageIsDisplayed('Success')
   })
 
   /**
@@ -459,36 +447,36 @@ describe('Statement Management tests', () => {
     const participantStatusBefore = 'Pending Validation'
     const participantStatusAfter = 'On Hold'
 
-    clientStatementsPage.filterClientStatements(clientName)
-    clientStatementsPage.clickClientTable(clientId)
+    equityAdmin.clientStatementsPage.filterClientStatements(clientName)
+    equityAdmin.clientStatementsPage.clickClientTable(clientId)
 
-    clientParticipantStatementsPage.filterParticipantStatements('', participantOnHoldIDs[0])
-    clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantOnHoldIDs[0])
-    clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldIDs[0], participantStatusAfter)
-    clientParticipantStatementsPage.clearAllFilters()
+    equityAdmin.clientParticipantStatementsPage.filterParticipantStatements('', participantOnHoldIDs[0])
+    equityAdmin.clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantOnHoldIDs[0])
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldIDs[0], participantStatusAfter)
+    equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
-    clientParticipantStatementsPage.filterParticipantStatements('', participantOnHoldIDs[1])
-    clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantOnHoldIDs[1])
-    clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldIDs[1], participantStatusAfter)
-    clientParticipantStatementsPage.clearAllFilters()
+    equityAdmin.clientParticipantStatementsPage.filterParticipantStatements('', participantOnHoldIDs[1])
+    equityAdmin.clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantOnHoldIDs[1])
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldIDs[1], participantStatusAfter)
+    equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
-    clientParticipantStatementsPage.filterParticipantStatements('', participantOnHoldIDs[2])
-    clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantOnHoldIDs[2])
-    clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldIDs[2], participantStatusAfter)
-    clientParticipantStatementsPage.clearAllFilters()
+    equityAdmin.clientParticipantStatementsPage.filterParticipantStatements('', participantOnHoldIDs[2])
+    equityAdmin.clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantOnHoldIDs[2])
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldIDs[2], participantStatusAfter)
+    equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
-    clientParticipantStatementsPage.filterParticipantStatements('', participantPendingValidationIDs[0])
-    clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantPendingValidationIDs[0])
-    clientParticipantStatementsPage.assertParticipantStatus(participantPendingValidationIDs[0], participantStatusBefore)
-    clientParticipantStatementsPage.clearAllFilters()
+    equityAdmin.clientParticipantStatementsPage.filterParticipantStatements('', participantPendingValidationIDs[0])
+    equityAdmin.clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantPendingValidationIDs[0])
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantPendingValidationIDs[0], participantStatusBefore)
+    equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
-    clientParticipantStatementsPage.clickInTableHeaderToPerformActions('on hold', participantPendingValidationIDs.length)
+    equityAdmin.clientParticipantStatementsPage.clickInTableHeaderToPerformActions('on hold', participantPendingValidationIDs.length)
 
-    clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldIDs[0], participantStatusAfter)
-    clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldIDs[1], participantStatusAfter)
-    clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldIDs[2], participantStatusAfter)
-    clientParticipantStatementsPage.assertParticipantStatus(participantPendingValidationIDs[0], participantStatusAfter)
-    clientParticipantStatementsPage.assertToastNotificationMessageIsDisplayed('Success')
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldIDs[0], participantStatusAfter)
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldIDs[1], participantStatusAfter)
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldIDs[2], participantStatusAfter)
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantPendingValidationIDs[0], participantStatusAfter)
+    equityAdmin.clientParticipantStatementsPage.assertToastNotificationMessageIsDisplayed('Success')
   })
 
   /**
@@ -500,19 +488,19 @@ describe('Statement Management tests', () => {
     const participantOnHoldId = 251656
     const participantPendingValidationId = 251654
 
-    clientStatementsPage.filterClientStatements(clientReconciledName)
-    clientStatementsPage.clickClientTable(clientReconciledId)
+    equityAdmin.clientStatementsPage.filterClientStatements(clientReconciledName)
+    equityAdmin.clientStatementsPage.clickClientTable(clientReconciledId)
 
     // Participant with On Hold status
-    clientParticipantStatementsPage.filterParticipantStatements('', participantOnHoldId)
-    clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldId, 'On Hold')
-    clientParticipantStatementsPage.assertRecallButtonDisplayedForParticipant(participantOnHoldId, false)
-    clientParticipantStatementsPage.clearAllFilters()
+    equityAdmin.clientParticipantStatementsPage.filterParticipantStatements('', participantOnHoldId)
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldId, 'On Hold')
+    equityAdmin.clientParticipantStatementsPage.assertRecallButtonDisplayedForParticipant(participantOnHoldId, false)
+    equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
     //Participant with Pending Validation status
-    clientParticipantStatementsPage.filterParticipantStatements('', participantPendingValidationId)
-    clientParticipantStatementsPage.assertParticipantStatus(participantPendingValidationId, 'Pending Validation')
-    clientParticipantStatementsPage.assertRecallButtonDisplayedForParticipant(participantPendingValidationId, false)
+    equityAdmin.clientParticipantStatementsPage.filterParticipantStatements('', participantPendingValidationId)
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantPendingValidationId, 'Pending Validation')
+    equityAdmin.clientParticipantStatementsPage.assertRecallButtonDisplayedForParticipant(participantPendingValidationId, false)
   })
 
   /**
@@ -528,32 +516,32 @@ describe('Statement Management tests', () => {
     const participantOnHoldIds = [251656, 251597, 251654]
     const participantOtherStatusesIds = [251593, 251613, 251629]
 
-    clientStatementsPage.filterClientStatements(clientPartiallyPublished)
-    clientStatementsPage.clickClientTable(clientPartiallyPublishedId)
+    equityAdmin.clientStatementsPage.filterClientStatements(clientPartiallyPublished)
+    equityAdmin.clientStatementsPage.clickClientTable(clientPartiallyPublishedId)
 
     // Assert approve button displayed only for specific participants
-    clientParticipantStatementsPage.assertApproveButtonDisplayedForParticipant(participantOnHoldIds[0])
-    clientParticipantStatementsPage.assertApproveButtonDisplayedForParticipant(participantOnHoldIds[1])
-    clientParticipantStatementsPage.assertApproveButtonDisplayedForParticipant(participantOnHoldIds[2])
-    clientParticipantStatementsPage.assertApproveButtonDisplayedForParticipant(participantOtherStatusesIds[0], false)
-    clientParticipantStatementsPage.assertApproveButtonDisplayedForParticipant(participantOtherStatusesIds[1], false)
-    clientParticipantStatementsPage.assertApproveButtonDisplayedForParticipant(participantOtherStatusesIds[2], false)
+    equityAdmin.clientParticipantStatementsPage.assertApproveButtonDisplayedForParticipant(participantOnHoldIds[0])
+    equityAdmin.clientParticipantStatementsPage.assertApproveButtonDisplayedForParticipant(participantOnHoldIds[1])
+    equityAdmin.clientParticipantStatementsPage.assertApproveButtonDisplayedForParticipant(participantOnHoldIds[2])
+    equityAdmin.clientParticipantStatementsPage.assertApproveButtonDisplayedForParticipant(participantOtherStatusesIds[0], false)
+    equityAdmin.clientParticipantStatementsPage.assertApproveButtonDisplayedForParticipant(participantOtherStatusesIds[1], false)
+    equityAdmin.clientParticipantStatementsPage.assertApproveButtonDisplayedForParticipant(participantOtherStatusesIds[2], false)
 
     // Select participants to approve
-    clientParticipantStatementsPage.filterParticipantStatements('', participantOnHoldIds[0])
-    clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantOnHoldIds[0])
-    clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldIds[0], 'On Hold')
-    clientParticipantStatementsPage.clearAllFilters()
+    equityAdmin.clientParticipantStatementsPage.filterParticipantStatements('', participantOnHoldIds[0])
+    equityAdmin.clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantOnHoldIds[0])
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldIds[0], 'On Hold')
+    equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
-    clientParticipantStatementsPage.filterParticipantStatements('', participantOnHoldIds[1])
-    clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantOnHoldIds[1])
-    clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldIds[1], 'On Hold')
-    clientParticipantStatementsPage.clearAllFilters()
+    equityAdmin.clientParticipantStatementsPage.filterParticipantStatements('', participantOnHoldIds[1])
+    equityAdmin.clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantOnHoldIds[1])
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldIds[1], 'On Hold')
+    equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
-    clientParticipantStatementsPage.filterParticipantStatements('', participantOnHoldIds[2])
-    clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantOnHoldIds[2])
-    clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldIds[2], 'On Hold')
-    clientParticipantStatementsPage.clearAllFilters()
+    equityAdmin.clientParticipantStatementsPage.filterParticipantStatements('', participantOnHoldIds[2])
+    equityAdmin.clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantOnHoldIds[2])
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldIds[2], 'On Hold')
+    equityAdmin.clientParticipantStatementsPage.clearAllFilters()
   })
 
   /**
@@ -565,29 +553,29 @@ describe('Statement Management tests', () => {
     const participantPendingValidationId = 226084
 
     // Pick client
-    clientStatementsPage.filterClientStatements(clientPendingValidation)
-    clientStatementsPage.clickClientTable(clientPendingValidationId)
+    equityAdmin.clientStatementsPage.filterClientStatements(clientPendingValidation)
+    equityAdmin.clientStatementsPage.clickClientTable(clientPendingValidationId)
 
     // Pick participant and ensure correct status
-    clientParticipantStatementsPage.filterParticipantStatements('', participantPendingValidationId)
-    clientParticipantStatementsPage.assertParticipantStatus(participantPendingValidationId, 'Pending Validation')
+    equityAdmin.clientParticipantStatementsPage.filterParticipantStatements('', participantPendingValidationId)
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantPendingValidationId, 'Pending Validation')
 
     // On Hold behavior
-    clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantPendingValidationId)
-    clientParticipantStatementsPage.assertActionButtonDisplayedInTableHeader('on hold')
-    clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantPendingValidationId)
-    clientParticipantStatementsPage.assertActionButtonDisplayedInTableHeader('on hold', false)
+    equityAdmin.clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantPendingValidationId)
+    equityAdmin.clientParticipantStatementsPage.assertActionButtonDisplayedInTableHeader('on hold')
+    equityAdmin.clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantPendingValidationId)
+    equityAdmin.clientParticipantStatementsPage.assertActionButtonDisplayedInTableHeader('on hold', false)
 
     // On hold participant
-    clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantPendingValidationId)
-    clientParticipantStatementsPage.clickInTableHeaderToPerformActions('on hold', 1)
+    equityAdmin.clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantPendingValidationId)
+    equityAdmin.clientParticipantStatementsPage.clickInTableHeaderToPerformActions('on hold', 1)
 
     // Verify rerun button
-    clientParticipantStatementsPage.assertParticipantStatus(participantPendingValidationId, 'On Hold')
-    clientParticipantStatementsPage.assertButtonIsDisplayedInParticipantActions(participantPendingValidationId, 'rerun')
-    clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantPendingValidationId)
-    clientParticipantStatementsPage.clickInTableHeaderToPerformActions('rerun', 1)
-    clientParticipantStatementsPage.assertParticipantStatus(participantPendingValidationId, 'Pending Validation')
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantPendingValidationId, 'On Hold')
+    equityAdmin.clientParticipantStatementsPage.assertButtonIsDisplayedInParticipantActions(participantPendingValidationId, 'rerun')
+    equityAdmin.clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantPendingValidationId)
+    equityAdmin.clientParticipantStatementsPage.clickInTableHeaderToPerformActions('rerun', 1)
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantPendingValidationId, 'Pending Validation')
   })
 
   /**
@@ -599,32 +587,32 @@ describe('Statement Management tests', () => {
     const participantOnHoldId = [226084, 226072, 2260865]
 
     // Pick client
-    clientStatementsPage.filterClientStatements(clientPendingValidation)
-    clientStatementsPage.clickClientTable(clientPendingValidationId)
+    equityAdmin.clientStatementsPage.filterClientStatements(clientPendingValidation)
+    equityAdmin.clientStatementsPage.clickClientTable(clientPendingValidationId)
 
     // Select participant 1
-    clientParticipantStatementsPage.filterParticipantStatements('', participantOnHoldId[0])
-    clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldId[0], 'On Hold')
-    clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantOnHoldId[0])
-    clientParticipantStatementsPage.clearAllFilters()
+    equityAdmin.clientParticipantStatementsPage.filterParticipantStatements('', participantOnHoldId[0])
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldId[0], 'On Hold')
+    equityAdmin.clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantOnHoldId[0])
+    equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
     // Select participant 2
-    clientParticipantStatementsPage.filterParticipantStatements('', participantOnHoldId[1])
-    clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldId[1], 'On Hold')
-    clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantOnHoldId[1])
-    clientParticipantStatementsPage.clearAllFilters()
+    equityAdmin.clientParticipantStatementsPage.filterParticipantStatements('', participantOnHoldId[1])
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldId[1], 'On Hold')
+    equityAdmin.clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantOnHoldId[1])
+    equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
     // Select participant 3
-    clientParticipantStatementsPage.filterParticipantStatements('', participantOnHoldId[2])
-    clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldId[2], 'On Hold')
-    clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantOnHoldId[2])
-    clientParticipantStatementsPage.clearAllFilters()
+    equityAdmin.clientParticipantStatementsPage.filterParticipantStatements('', participantOnHoldId[2])
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldId[2], 'On Hold')
+    equityAdmin.clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantOnHoldId[2])
+    equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
     // Rerun participants
-    clientParticipantStatementsPage.clickInTableHeaderToPerformActions('rerun', participantOnHoldId.length)
-    clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldId[0], 'Pending Validation')
-    clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldId[1], 'Pending Validation')
-    clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldId[2], 'Pending Validation')
+    equityAdmin.clientParticipantStatementsPage.clickInTableHeaderToPerformActions('rerun', participantOnHoldId.length)
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldId[0], 'Pending Validation')
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldId[1], 'Pending Validation')
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldId[2], 'Pending Validation')
   })
 
   /**
@@ -647,13 +635,13 @@ describe('Statement Management tests', () => {
     const participantOnHoldAuditTrailUsers = ['UK_148_812dcf25-2f02-4400-a563-6692bd440b84', 'system', 'system']
     const participantOnHoldAuditTrailTimestamps = ['07/09/2021 • 10:24:42', '11/05/2021 • 05:13:30', '11/05/2021 • 05:13:01']
 
-    clientStatementsPage.filterClientStatements(clientPendingValidation)
-    clientStatementsPage.clickClientTable(clientPendingValidationId)
+    equityAdmin.clientStatementsPage.filterClientStatements(clientPendingValidation)
+    equityAdmin.clientStatementsPage.clickClientTable(clientPendingValidationId)
 
     // On Hold
-    clientParticipantStatementsPage.clickOnParticipant(participantOnHoldId)
-    clientParticipantStatementsPage.assertRightL4BarIsDisplayed()
-    clientParticipantStatementsPage.assertParticipantStatementDetailsOnL4Bar(
+    equityAdmin.clientParticipantStatementsPage.clickOnParticipant(participantOnHoldId)
+    equityAdmin.clientParticipantStatementsPage.assertRightL4BarIsDisplayed()
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatementDetailsOnL4Bar(
       participantOnHoldName,
       participantOnHoldAsOfDate,
       participantOnHoldCurrentStatus,
@@ -661,7 +649,7 @@ describe('Statement Management tests', () => {
       participantOnHoldAuditTrailUsers,
       participantOnHoldAuditTrailTimestamps
     )
-    clientParticipantStatementsPage.clickOutsideToCloseL4RightBar()
+    equityAdmin.clientParticipantStatementsPage.clickOutsideToCloseL4RightBar()
   })
 
   /**
@@ -681,46 +669,46 @@ describe('Statement Management tests', () => {
     const clientInitiatedId = 119
 
     // Pending Validation
-    clientStatementsPage.filterClientStatements(clientPendingValidation)
-    clientStatementsPage.clickClientTable(clientPendingValidationId)
-    clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
-    clientParticipantStatementsPage.assertRejectButtonDisplayed()
-    clientParticipantStatementsPage.clickBackToManageStatements()
-    clientStatementsPage.clearAllFilters()
+    equityAdmin.clientStatementsPage.filterClientStatements(clientPendingValidation)
+    equityAdmin.clientStatementsPage.clickClientTable(clientPendingValidationId)
+    equityAdmin.clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
+    equityAdmin.clientParticipantStatementsPage.assertRejectButtonDisplayed()
+    equityAdmin.clientParticipantStatementsPage.clickBackToManageStatements()
+    equityAdmin.clientStatementsPage.clearAllFilters()
 
     // Initiated
-    clientStatementsPage.filterClientStatements(clientInitiated)
-    clientStatementsPage.clickClientTable(clientInitiatedId)
-    clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
-    clientParticipantStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
-    clientParticipantStatementsPage.assertRejectButtonDisplayed(false)
-    clientParticipantStatementsPage.clickBackToManageStatements()
-    clientStatementsPage.clearAllFilters()
+    equityAdmin.clientStatementsPage.filterClientStatements(clientInitiated)
+    equityAdmin.clientStatementsPage.clickClientTable(clientInitiatedId)
+    equityAdmin.clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
+    equityAdmin.clientParticipantStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
+    equityAdmin.clientParticipantStatementsPage.assertRejectButtonDisplayed(false)
+    equityAdmin.clientParticipantStatementsPage.clickBackToManageStatements()
+    equityAdmin.clientStatementsPage.clearAllFilters()
 
     // Reconciling
-    clientStatementsPage.filterClientStatements(clientReconciling)
-    clientStatementsPage.clickClientTable(clientReconcilingId)
-    clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
-    clientParticipantStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
-    clientParticipantStatementsPage.assertRejectButtonDisplayed(false)
-    clientParticipantStatementsPage.clickBackToManageStatements()
-    clientStatementsPage.clearAllFilters()
+    equityAdmin.clientStatementsPage.filterClientStatements(clientReconciling)
+    equityAdmin.clientStatementsPage.clickClientTable(clientReconcilingId)
+    equityAdmin.clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
+    equityAdmin.clientParticipantStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
+    equityAdmin.clientParticipantStatementsPage.assertRejectButtonDisplayed(false)
+    equityAdmin.clientParticipantStatementsPage.clickBackToManageStatements()
+    equityAdmin.clientStatementsPage.clearAllFilters()
 
     // Partially Published
-    clientStatementsPage.filterClientStatements(clientPartiallyPublished)
-    clientStatementsPage.clickClientTable(clientPartiallyPublishedId)
-    clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
-    clientParticipantStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
-    clientParticipantStatementsPage.assertRejectButtonDisplayed(false)
-    clientParticipantStatementsPage.clickBackToManageStatements()
-    clientStatementsPage.clearAllFilters()
+    equityAdmin.clientStatementsPage.filterClientStatements(clientPartiallyPublished)
+    equityAdmin.clientStatementsPage.clickClientTable(clientPartiallyPublishedId)
+    equityAdmin.clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
+    equityAdmin.clientParticipantStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
+    equityAdmin.clientParticipantStatementsPage.assertRejectButtonDisplayed(false)
+    equityAdmin.clientParticipantStatementsPage.clickBackToManageStatements()
+    equityAdmin.clientStatementsPage.clearAllFilters()
 
     // Published
-    clientStatementsPage.filterClientStatements(clientPublished)
-    clientStatementsPage.clickClientTable(clientPublishedId)
-    clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
-    clientParticipantStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
-    clientParticipantStatementsPage.assertRejectButtonDisplayed(false)
+    equityAdmin.clientStatementsPage.filterClientStatements(clientPublished)
+    equityAdmin.clientStatementsPage.clickClientTable(clientPublishedId)
+    equityAdmin.clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
+    equityAdmin.clientParticipantStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
+    equityAdmin.clientParticipantStatementsPage.assertRejectButtonDisplayed(false)
   })
 
   /**
@@ -733,12 +721,12 @@ describe('Statement Management tests', () => {
     const clientStatus = 'Pending Validation'
     const clientNewStatus = 'Initiated'
 
-    clientStatementsPage.filterClientStatements(clientPendingValidation)
-    clientStatementsPage.clickClientTable(clientPendingValidationId)
-    clientParticipantStatementsPage.assertClientStatus(clientStatus)
-    clientParticipantStatementsPage.clickToRejectStatement()
-    clientParticipantStatementsPage.assertClientStatus(clientNewStatus)
-    clientParticipantStatementsPage.assertRejectButtonDisplayed(false)
+    equityAdmin.clientStatementsPage.filterClientStatements(clientPendingValidation)
+    equityAdmin.clientStatementsPage.clickClientTable(clientPendingValidationId)
+    equityAdmin.clientParticipantStatementsPage.assertClientStatus(clientStatus)
+    equityAdmin.clientParticipantStatementsPage.clickToRejectStatement()
+    equityAdmin.clientParticipantStatementsPage.assertClientStatus(clientNewStatus)
+    equityAdmin.clientParticipantStatementsPage.assertRejectButtonDisplayed(false)
   })
 
   /**
@@ -759,49 +747,49 @@ describe('Statement Management tests', () => {
     const clientReconcilingId = 83
 
     // Published
-    clientStatementsPage.filterClientStatements(clientPublished)
-    clientStatementsPage.clickClientTable(clientPublishedId)
-    clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
-    clientParticipantStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
-    clientParticipantStatementsPage.assertRecallButtonDisplayed()
-    clientParticipantStatementsPage.clickToRecallStatement()
-    clientParticipantStatementsPage.assertClientStatus('Initiated')
+    equityAdmin.clientStatementsPage.filterClientStatements(clientPublished)
+    equityAdmin.clientStatementsPage.clickClientTable(clientPublishedId)
+    equityAdmin.clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
+    equityAdmin.clientParticipantStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
+    equityAdmin.clientParticipantStatementsPage.assertRecallButtonDisplayed()
+    equityAdmin.clientParticipantStatementsPage.clickToRecallStatement()
+    equityAdmin.clientParticipantStatementsPage.assertClientStatus('Initiated')
     // *** Missing steps in here to validate what the recall does to the participants***
-    clientParticipantStatementsPage.clickBackToManageStatements()
-    clientStatementsPage.clearAllFilters()
+    equityAdmin.clientParticipantStatementsPage.clickBackToManageStatements()
+    equityAdmin.clientStatementsPage.clearAllFilters()
 
     // Partially Published
-    clientStatementsPage.filterClientStatements(clientPartiallyPublished)
-    clientStatementsPage.clickClientTable(clientPartiallyPublishedId)
-    clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
-    clientParticipantStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
-    clientParticipantStatementsPage.assertRecallButtonDisplayed()
-    clientParticipantStatementsPage.clickBackToManageStatements()
-    clientStatementsPage.clearAllFilters()
+    equityAdmin.clientStatementsPage.filterClientStatements(clientPartiallyPublished)
+    equityAdmin.clientStatementsPage.clickClientTable(clientPartiallyPublishedId)
+    equityAdmin.clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
+    equityAdmin.clientParticipantStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
+    equityAdmin.clientParticipantStatementsPage.assertRecallButtonDisplayed()
+    equityAdmin.clientParticipantStatementsPage.clickBackToManageStatements()
+    equityAdmin.clientStatementsPage.clearAllFilters()
 
     // Pending Validation
-    clientStatementsPage.filterClientStatements(clientPendingValidation)
-    clientStatementsPage.clickClientTable(clientPendingValidationId)
-    clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
-    clientParticipantStatementsPage.assertRecallButtonDisplayed(false)
-    clientParticipantStatementsPage.clickBackToManageStatements()
-    clientStatementsPage.clearAllFilters()
+    equityAdmin.clientStatementsPage.filterClientStatements(clientPendingValidation)
+    equityAdmin.clientStatementsPage.clickClientTable(clientPendingValidationId)
+    equityAdmin.clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
+    equityAdmin.clientParticipantStatementsPage.assertRecallButtonDisplayed(false)
+    equityAdmin.clientParticipantStatementsPage.clickBackToManageStatements()
+    equityAdmin.clientStatementsPage.clearAllFilters()
 
     // Initiated
-    clientStatementsPage.filterClientStatements(clientInitiated)
-    clientStatementsPage.clickClientTable(clientInitiatedId)
-    clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
-    clientParticipantStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
-    clientParticipantStatementsPage.assertRecallButtonDisplayed(false)
-    clientParticipantStatementsPage.clickBackToManageStatements()
-    clientStatementsPage.clearAllFilters()
+    equityAdmin.clientStatementsPage.filterClientStatements(clientInitiated)
+    equityAdmin.clientStatementsPage.clickClientTable(clientInitiatedId)
+    equityAdmin.clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
+    equityAdmin.clientParticipantStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
+    equityAdmin.clientParticipantStatementsPage.assertRecallButtonDisplayed(false)
+    equityAdmin.clientParticipantStatementsPage.clickBackToManageStatements()
+    equityAdmin.clientStatementsPage.clearAllFilters()
 
     // Reconciling
-    clientStatementsPage.filterClientStatements(clientReconciling)
-    clientStatementsPage.clickClientTable(clientReconcilingId)
-    clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
-    clientParticipantStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
-    clientParticipantStatementsPage.assertRecallButtonDisplayed(false)
+    equityAdmin.clientStatementsPage.filterClientStatements(clientReconciling)
+    equityAdmin.clientStatementsPage.clickClientTable(clientReconcilingId)
+    equityAdmin.clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
+    equityAdmin.clientParticipantStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
+    equityAdmin.clientParticipantStatementsPage.assertRecallButtonDisplayed(false)
   })
 
   /**
@@ -814,35 +802,35 @@ describe('Statement Management tests', () => {
     const participantsPendingValidationIds = [226330, 226625, 226331]
     const participantsOtherStatusIds = [229042, 226082]
 
-    clientStatementsPage.filterClientStatements(clientPendingValidation)
-    clientStatementsPage.clickClientTable(clientPendingValidationId)
+    equityAdmin.clientStatementsPage.filterClientStatements(clientPendingValidation)
+    equityAdmin.clientStatementsPage.clickClientTable(clientPendingValidationId)
 
-    clientParticipantStatementsPage.filterParticipantStatements('', participantsPendingValidationIds[0])
-    clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantsPendingValidationIds[0])
-    clientParticipantStatementsPage.clearAllFilters()
+    equityAdmin.clientParticipantStatementsPage.filterParticipantStatements('', participantsPendingValidationIds[0])
+    equityAdmin.clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantsPendingValidationIds[0])
+    equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
-    clientParticipantStatementsPage.filterParticipantStatements('', participantsPendingValidationIds[1])
-    clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantsPendingValidationIds[1])
-    clientParticipantStatementsPage.clearAllFilters()
+    equityAdmin.clientParticipantStatementsPage.filterParticipantStatements('', participantsPendingValidationIds[1])
+    equityAdmin.clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantsPendingValidationIds[1])
+    equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
-    clientParticipantStatementsPage.filterParticipantStatements('', participantsPendingValidationIds[2])
-    clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantsPendingValidationIds[2])
-    clientParticipantStatementsPage.clearAllFilters()
+    equityAdmin.clientParticipantStatementsPage.filterParticipantStatements('', participantsPendingValidationIds[2])
+    equityAdmin.clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantsPendingValidationIds[2])
+    equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
-    clientParticipantStatementsPage.filterParticipantStatements('', participantsOtherStatusIds[0])
-    clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantsOtherStatusIds[0])
-    clientParticipantStatementsPage.clearAllFilters()
+    equityAdmin.clientParticipantStatementsPage.filterParticipantStatements('', participantsOtherStatusIds[0])
+    equityAdmin.clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantsOtherStatusIds[0])
+    equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
-    clientParticipantStatementsPage.filterParticipantStatements('', participantsOtherStatusIds[1])
-    clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantsOtherStatusIds[1])
-    clientParticipantStatementsPage.clearAllFilters()
+    equityAdmin.clientParticipantStatementsPage.filterParticipantStatements('', participantsOtherStatusIds[1])
+    equityAdmin.clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantsOtherStatusIds[1])
+    equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
-    clientParticipantStatementsPage.clickInTableHeaderToPerformActions('on hold', 3)
-    clientParticipantStatementsPage.assertParticipantStatus(participantsPendingValidationIds[0], 'On Hold')
-    clientParticipantStatementsPage.assertParticipantStatus(participantsPendingValidationIds[1], 'On Hold')
-    clientParticipantStatementsPage.assertParticipantStatus(participantsPendingValidationIds[2], 'On Hold')
-    clientParticipantStatementsPage.assertParticipantStatus(participantsOtherStatusIds[0], 'On Hold')
-    clientParticipantStatementsPage.assertParticipantStatus(participantsOtherStatusIds[1], 'On Hold')
+    equityAdmin.clientParticipantStatementsPage.clickInTableHeaderToPerformActions('on hold', 3)
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantsPendingValidationIds[0], 'On Hold')
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantsPendingValidationIds[1], 'On Hold')
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantsPendingValidationIds[2], 'On Hold')
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantsOtherStatusIds[0], 'On Hold')
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantsOtherStatusIds[1], 'On Hold')
   })
 
   /**
@@ -852,12 +840,12 @@ describe('Statement Management tests', () => {
     const clientInitiated = 'Legal and General'
     const clientInitiatedId = 148
 
-    clientStatementsPage.filterClientStatements(clientInitiated)
-    clientStatementsPage.assertClientStatus(clientInitiatedId, 'Initiated')
-    clientStatementsPage.assertReconcileButtonDisplayedForClient(clientInitiatedId)
-    clientStatementsPage.reconcileClient(clientInitiatedId, true)
-    clientStatementsPage.assertToastNotificationMessageIsDisplayed('Success')
-    clientStatementsPage.assertClientStatus(clientInitiatedId, 'Reconciling')
+    equityAdmin.clientStatementsPage.filterClientStatements(clientInitiated)
+    equityAdmin.clientStatementsPage.assertClientStatus(clientInitiatedId, 'Initiated')
+    equityAdmin.clientStatementsPage.assertReconcileButtonDisplayedForClient(clientInitiatedId)
+    equityAdmin.clientStatementsPage.reconcileClient(clientInitiatedId, true)
+    equityAdmin.clientStatementsPage.assertToastNotificationMessageIsDisplayed('Success')
+    equityAdmin.clientStatementsPage.assertClientStatus(clientInitiatedId, 'Reconciling')
   })
 
   /**
@@ -874,27 +862,27 @@ describe('Statement Management tests', () => {
     const clientPublishedId = 107
 
     // Reconciling
-    clientStatementsPage.filterClientStatements(clientReconciled)
-    clientStatementsPage.assertClientStatus(clientReconciledId, 'Reconciling')
-    clientStatementsPage.assertReconcileButtonDisplayedForClient(clientReconciledId, false)
-    clientStatementsPage.clearAllFilters()
+    equityAdmin.clientStatementsPage.filterClientStatements(clientReconciled)
+    equityAdmin.clientStatementsPage.assertClientStatus(clientReconciledId, 'Reconciling')
+    equityAdmin.clientStatementsPage.assertReconcileButtonDisplayedForClient(clientReconciledId, false)
+    equityAdmin.clientStatementsPage.clearAllFilters()
 
     // Pending Validation
-    clientStatementsPage.filterClientStatements(clientPendingValidation)
-    clientStatementsPage.assertClientStatus(clientPendingValidationId, 'Pending Validation')
-    clientStatementsPage.assertReconcileButtonDisplayedForClient(clientPendingValidationId, false)
-    clientStatementsPage.clearAllFilters()
+    equityAdmin.clientStatementsPage.filterClientStatements(clientPendingValidation)
+    equityAdmin.clientStatementsPage.assertClientStatus(clientPendingValidationId, 'Pending Validation')
+    equityAdmin.clientStatementsPage.assertReconcileButtonDisplayedForClient(clientPendingValidationId, false)
+    equityAdmin.clientStatementsPage.clearAllFilters()
 
     // Partially Published
-    clientStatementsPage.filterClientStatements(clientPartiallyPublished)
-    clientStatementsPage.assertClientStatus(clientPartiallyPublishedId, 'Partially Published')
-    clientStatementsPage.assertReconcileButtonDisplayedForClient(clientPartiallyPublishedId, false)
-    clientStatementsPage.clearAllFilters()
+    equityAdmin.clientStatementsPage.filterClientStatements(clientPartiallyPublished)
+    equityAdmin.clientStatementsPage.assertClientStatus(clientPartiallyPublishedId, 'Partially Published')
+    equityAdmin.clientStatementsPage.assertReconcileButtonDisplayedForClient(clientPartiallyPublishedId, false)
+    equityAdmin.clientStatementsPage.clearAllFilters()
 
     // Published
-    clientStatementsPage.filterClientStatements(clientPublished)
-    clientStatementsPage.assertClientStatus(clientPublishedId, 'Published')
-    clientStatementsPage.assertReconcileButtonDisplayedForClient(clientPublishedId, false)
+    equityAdmin.clientStatementsPage.filterClientStatements(clientPublished)
+    equityAdmin.clientStatementsPage.assertClientStatus(clientPublishedId, 'Published')
+    equityAdmin.clientStatementsPage.assertReconcileButtonDisplayedForClient(clientPublishedId, false)
   })
 
   /**
@@ -915,24 +903,20 @@ describe('Statement Management tests', () => {
 
 describe('Statement Management tests - View Only User', () => {
   // Pages
-  const clientStatementsPage = new ClientStatementsPage()
-
-  // Components
-  const leftMenuNavBar = new LeftMenuNavBar()
-  const settingsMenuNavBar = new SettingsMenuNavBar()
+  const equityAdmin = new EquityAdmin()
 
   beforeEach(() => {
     cy.login(Cypress.env('VIEW_ONLY_USER_2_AUTH'))
-    settingsMenuNavBar.accessGlobalSettingsMenu('statement')
-    clientStatementsPage.checkClientStatementsUrl()
+    equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('statement')
+    equityAdmin.clientStatementsPage.checkClientStatementsUrl()
   })
 
   /**
    * @missing_data Need to have one user associated with a group without permissions to see any User Management settings (including users, groups, roles, and DAPs (access filters))
    */
   it.skip('C7544061_User_Does_Not_Have_View_Permissions_For_Users,_Groups,_Roles,_And_Access_Filters', () => {
-    leftMenuNavBar.openSettingsMenuBar()
-    settingsMenuNavBar.assertGlobalSettingsMenuOpen()
-    settingsMenuNavBar.assertUserManagementMenuDisplayed(false)
+    equityAdmin.leftMenuNavBar.openSettingsMenuBar()
+    equityAdmin.settingsMenuNavBar.assertGlobalSettingsMenuOpen()
+    equityAdmin.settingsMenuNavBar.assertUserManagementMenuDisplayed(false)
   })
 })

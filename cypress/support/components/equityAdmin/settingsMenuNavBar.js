@@ -1,4 +1,4 @@
-import BasePage from '../pages/basePage'
+import BasePage from '../../pages/basePage'
 import LeftMenuNavBar from './leftMenuNavBar'
 
 const selectors = {

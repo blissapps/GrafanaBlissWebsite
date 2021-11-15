@@ -1,5 +1,5 @@
 import BaseManagementPage from './baseManagementPage'
-import Utils from '../../../utils'
+import Utils from '../../../../utils'
 
 const properties = {
   pageURL: '/settings/role-management'

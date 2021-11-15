@@ -1,27 +1,14 @@
-import DapManagementPage from '../../../support/pages/globalSettingsPages/userManagementPages/dapManagementPage'
-import GroupManagementPage from '../../../support/pages/globalSettingsPages/userManagementPages/groupManagementPage'
-
-import SettingsMenuNavBar from '../../../support/components/settingsMenuNavBar'
-import SearchBar from '../../../support/components/searchBar'
-
+import EquityAdmin from '../../../support/pages/equityAdmin'
 import Utils from '../../../support/utils'
 
 describe('Data Access Profiles tests over User Management settings', () => {
-  // Pages
-  const dapManagementPage = new DapManagementPage()
-  const groupManagementPage = new GroupManagementPage()
-
-  // Components
-  const settingsMenuNavBar = new SettingsMenuNavBar()
-  const searchBar = new SearchBar()
-
-  // Others
+  const equityAdmin = new EquityAdmin()
   const utils = new Utils()
 
   beforeEach(() => {
     cy.login()
-    settingsMenuNavBar.accessGlobalSettingsMenu('user', 'dap')
-    dapManagementPage.checkDapManagementUrl()
+    equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'dap')
+    equityAdmin.dapManagementPage.checkDapManagementUrl()
   })
 
   // ************************************************ TESTS AS ADMIN TENANT ************************************************** //
@@ -32,8 +19,8 @@ describe('Data Access Profiles tests over User Management settings', () => {
    * Waiting for @IDS
    */
   it('C7564741_DAP_Check_The_System_Behavior_When_Closing_The_Settings_Nav_Bar', () => {
-    settingsMenuNavBar.closeGlobalSettingsNavBar()
-    dapManagementPage.checkDapManagementUrl()
+    equityAdmin.settingsMenuNavBar.closeGlobalSettingsNavBar()
+    equityAdmin.dapManagementPage.checkDapManagementUrl()
   })
 
   /**
@@ -45,32 +32,32 @@ describe('Data Access Profiles tests over User Management settings', () => {
     const groupName = ['Add 1', 'Add 2']
     const groupIds = [1124, 1090]
 
-    dapManagementPage.clickDapById(dapId)
-    dapManagementPage.addGroupsToDap(groupName, groupIds)
-    dapManagementPage.saveEntityInformation()
-    dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved', true, true)
-    dapManagementPage.assertGroupAssociatedWithDap(groupIds[0])
-    dapManagementPage.assertGroupAssociatedWithDap(groupIds[1])
+    equityAdmin.dapManagementPage.clickDapById(dapId)
+    equityAdmin.dapManagementPage.addGroupsToDap(groupName, groupIds)
+    equityAdmin.dapManagementPage.saveEntityInformation()
+    equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved', true, true)
+    equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupIds[0])
+    equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupIds[1])
 
-    dapManagementPage.removeGroupFromDap([groupIds[0]])
-    dapManagementPage.saveEntityInformation()
-    dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved', true, true)
-    dapManagementPage.assertGroupAssociatedWithDap(groupIds[0], false)
+    equityAdmin.dapManagementPage.removeGroupFromDap([groupIds[0]])
+    equityAdmin.dapManagementPage.saveEntityInformation()
+    equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved', true, true)
+    equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupIds[0], false)
 
-    dapManagementPage.removeGroupFromDap([groupIds[1]])
-    dapManagementPage.assertGroupAssociatedWithDap(groupIds[1], false)
-    dapManagementPage.discardEntityInformation()
-    dapManagementPage.assertGroupAssociatedWithDap(groupIds[1])
-    dapManagementPage.assertToastNotificationMessageIsDisplayed('Changes to data access profile were discard', true, true)
+    equityAdmin.dapManagementPage.removeGroupFromDap([groupIds[1]])
+    equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupIds[1], false)
+    equityAdmin.dapManagementPage.discardEntityInformation()
+    equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupIds[1])
+    equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed('Changes to data access profile were discard', true, true)
 
-    dapManagementPage.addGroupsToDap([groupName[0]], [groupIds[0]])
-    dapManagementPage.discardEntityInformation()
-    dapManagementPage.assertGroupAssociatedWithDap(groupIds[0], false)
-    dapManagementPage.assertToastNotificationMessageIsDisplayed('Changes to data access profile were discard')
+    equityAdmin.dapManagementPage.addGroupsToDap([groupName[0]], [groupIds[0]])
+    equityAdmin.dapManagementPage.discardEntityInformation()
+    equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupIds[0], false)
+    equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed('Changes to data access profile were discard')
 
     //teardown
-    dapManagementPage.removeGroupFromDap([groupIds[1]])
-    dapManagementPage.saveEntityInformation()
+    equityAdmin.dapManagementPage.removeGroupFromDap([groupIds[1]])
+    equityAdmin.dapManagementPage.saveEntityInformation()
   })
 
   /**
@@ -80,13 +67,13 @@ describe('Data Access Profiles tests over User Management settings', () => {
    */
   it.skip('C7544057_DAP_Happy_Path_Alphabetically_List_Active_And_Inactive_Data_Access_Profile(s)', () => {
     // Active tab
-    dapManagementPage.assertActiveDapsAreDisplayed()
-    dapManagementPage.assertDapsInAlphabeticalOrder()
+    equityAdmin.dapManagementPage.assertActiveDapsAreDisplayed()
+    equityAdmin.dapManagementPage.assertDapsInAlphabeticalOrder()
 
     // Inactive tab
-    dapManagementPage.clickTab('Inactive')
-    dapManagementPage.assertInactiveDapsAreDisplayed()
-    dapManagementPage.assertDapsInAlphabeticalOrder()
+    equityAdmin.dapManagementPage.clickTab('Inactive')
+    equityAdmin.dapManagementPage.assertInactiveDapsAreDisplayed()
+    equityAdmin.dapManagementPage.assertDapsInAlphabeticalOrder()
   })
 
   /**
@@ -94,13 +81,13 @@ describe('Data Access Profiles tests over User Management settings', () => {
    */
   it.skip('C7544059_DAP_Empty_State_Active_And_Inactive_Data_Access_Profile(s)', () => {
     // Active tab
-    dapManagementPage.assertActiveDapsAreDisplayed(false)
-    dapManagementPage.assertNoDapsExistMessageIsDisplayed()
+    equityAdmin.dapManagementPage.assertActiveDapsAreDisplayed(false)
+    equityAdmin.dapManagementPage.assertNoDapsExistMessageIsDisplayed()
 
     //Inactive tab
-    dapManagementPage.clickTab('Inactive')
-    dapManagementPage.assertInactiveDapsAreDisplayed(false)
-    dapManagementPage.assertNoDapsExistMessageIsDisplayed()
+    equityAdmin.dapManagementPage.clickTab('Inactive')
+    equityAdmin.dapManagementPage.assertInactiveDapsAreDisplayed(false)
+    equityAdmin.dapManagementPage.assertNoDapsExistMessageIsDisplayed()
   })
 
   /**
@@ -110,11 +97,11 @@ describe('Data Access Profiles tests over User Management settings', () => {
     const dapId = 7
     const groupIdAssociated = [963, 964, 965]
 
-    dapManagementPage.clickDapById(dapId)
-    dapManagementPage.assertNumberOfGroupRecordsAssociatedWithDap(3)
-    dapManagementPage.assertGroupAssociatedWithDap(groupIdAssociated[0])
-    dapManagementPage.assertGroupAssociatedWithDap(groupIdAssociated[1])
-    dapManagementPage.assertGroupAssociatedWithDap(groupIdAssociated[2])
+    equityAdmin.dapManagementPage.clickDapById(dapId)
+    equityAdmin.dapManagementPage.assertNumberOfGroupRecordsAssociatedWithDap(3)
+    equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupIdAssociated[0])
+    equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupIdAssociated[1])
+    equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupIdAssociated[2])
   })
 
   /**
@@ -126,21 +113,21 @@ describe('Data Access Profiles tests over User Management settings', () => {
     const groupName = ['Group to be added in DAP 1', 'Group to be added in DAP 2']
     const groupIdsToAssociate = [966, 967]
 
-    dapManagementPage.clickDapById(dapId)
-    dapManagementPage.addGroupsToDap(groupName, groupIdsToAssociate)
-    dapManagementPage.saveEntityInformation()
+    equityAdmin.dapManagementPage.clickDapById(dapId)
+    equityAdmin.dapManagementPage.addGroupsToDap(groupName, groupIdsToAssociate)
+    equityAdmin.dapManagementPage.saveEntityInformation()
 
-    dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved')
-    dapManagementPage.assertNumberOfGroupRecordsAssociatedWithDap(2)
-    dapManagementPage.assertGroupAssociatedWithDap(groupIdsToAssociate[0])
-    dapManagementPage.assertGroupAssociatedWithDap(groupIdsToAssociate[1])
+    equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved')
+    equityAdmin.dapManagementPage.assertNumberOfGroupRecordsAssociatedWithDap(2)
+    equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupIdsToAssociate[0])
+    equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupIdsToAssociate[1])
 
     // So go to groups and see if the association is made
-    settingsMenuNavBar.accessGlobalSettingsMenu('', 'group', false)
-    groupManagementPage.clickGroupById(groupIdsToAssociate[0])
-    groupManagementPage.assertDapAssociatedWithGroup(dapId)
-    groupManagementPage.clickGroupById(groupIdsToAssociate[1])
-    groupManagementPage.assertDapAssociatedWithGroup(dapId)
+    equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'group', false)
+    equityAdmin.groupManagementPage.clickGroupById(groupIdsToAssociate[0])
+    equityAdmin.groupManagementPage.assertDapAssociatedWithGroup(dapId)
+    equityAdmin.groupManagementPage.clickGroupById(groupIdsToAssociate[1])
+    equityAdmin.groupManagementPage.assertDapAssociatedWithGroup(dapId)
   })
 
   /**
@@ -151,14 +138,14 @@ describe('Data Access Profiles tests over User Management settings', () => {
     const groupName = ['Group to be added in DAP 1', 'Group to be added in DAP 2']
     const groupIdsToAssociate = [966, 967]
 
-    dapManagementPage.clickDapById(dapId)
-    dapManagementPage.addGroupsToDap(groupName, groupIdsToAssociate)
-    dapManagementPage.discardEntityInformation()
+    equityAdmin.dapManagementPage.clickDapById(dapId)
+    equityAdmin.dapManagementPage.addGroupsToDap(groupName, groupIdsToAssociate)
+    equityAdmin.dapManagementPage.discardEntityInformation()
 
-    dapManagementPage.assertToastNotificationMessageIsDisplayed('Changes to data access profile were discard')
-    dapManagementPage.assertNumberOfGroupRecordsAssociatedWithDap(0)
-    dapManagementPage.assertGroupAssociatedWithDap(groupIdsToAssociate[0], false)
-    dapManagementPage.assertGroupAssociatedWithDap(groupIdsToAssociate[1], false)
+    equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed('Changes to data access profile were discard')
+    equityAdmin.dapManagementPage.assertNumberOfGroupRecordsAssociatedWithDap(0)
+    equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupIdsToAssociate[0], false)
+    equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupIdsToAssociate[1], false)
   })
 
   /**
@@ -171,66 +158,66 @@ describe('Data Access Profiles tests over User Management settings', () => {
     const groupName = ['Group to be added in DAP 1', 'Group to be added in DAP 2']
     const groupIdsToAssociate = [966, 967]
 
-    dapManagementPage.clickDapById(dapId)
-    dapManagementPage.addGroupsToDap(groupName, groupIdsToAssociate)
+    equityAdmin.dapManagementPage.clickDapById(dapId)
+    equityAdmin.dapManagementPage.addGroupsToDap(groupName, groupIdsToAssociate)
 
     cy.network({ offline: true }) && cy.assertNetworkOnline({ online: false })
 
-    dapManagementPage.saveEntityInformation()
-    dapManagementPage.assertNotificationErrorDisplayed()
+    equityAdmin.dapManagementPage.saveEntityInformation()
+    equityAdmin.dapManagementPage.assertNotificationErrorDisplayed()
     cy.network({ offline: false }) && cy.assertNetworkOnline({ online: true })
   })
 
   it('C8981124_DAP_Create_DAP_With_No_Nested_Conditions', () => {
     const dapName = 'Create new DAP no nested ' + utils.getRandomNumber()
 
-    dapManagementPage.clickCreateNewDap()
-    dapManagementPage.modifyEntityName(dapName)
-    dapManagementPage.modifyCondition([], [1, 'Client id'], [2, '11'])
-    dapManagementPage.saveEntityInformation()
+    equityAdmin.dapManagementPage.clickCreateNewDap()
+    equityAdmin.dapManagementPage.modifyEntityName(dapName)
+    equityAdmin.dapManagementPage.modifyCondition([], [1, 'Client id'], [2, '11'])
+    equityAdmin.dapManagementPage.saveEntityInformation()
 
-    dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved')
-    dapManagementPage.assertEntityIsDisplayedInTheList(dapName)
+    equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved')
+    equityAdmin.dapManagementPage.assertEntityIsDisplayedInTheList(dapName)
 
-    dapManagementPage.reloadPage()
-    dapManagementPage.clickEntityByName(dapName)
-    dapManagementPage.assertConditionValue(1, 'Client id')
-    dapManagementPage.assertConditionValue(2, '11')
+    equityAdmin.dapManagementPage.reloadPage()
+    equityAdmin.dapManagementPage.clickEntityByName(dapName)
+    equityAdmin.dapManagementPage.assertConditionValue(1, 'Client id')
+    equityAdmin.dapManagementPage.assertConditionValue(2, '11')
   })
 
   it('C8981125_DAP_Create_DAP_With_Nested_Conditions', () => {
     const dapName = 'Create new DAP NESTED ' + utils.getRandomNumber()
 
-    dapManagementPage.clickCreateNewDap()
-    dapManagementPage.modifyEntityName(dapName)
-    dapManagementPage.modifyCondition([], [1, 'Client id'], [2, '11'])
-    dapManagementPage.addCondition(1, 2)
-    dapManagementPage.modifyCondition([3, 'or'], [4, 'Client id'], [5, '11'])
-    dapManagementPage.saveEntityInformation()
+    equityAdmin.dapManagementPage.clickCreateNewDap()
+    equityAdmin.dapManagementPage.modifyEntityName(dapName)
+    equityAdmin.dapManagementPage.modifyCondition([], [1, 'Client id'], [2, '11'])
+    equityAdmin.dapManagementPage.addCondition(1, 2)
+    equityAdmin.dapManagementPage.modifyCondition([3, 'or'], [4, 'Client id'], [5, '11'])
+    equityAdmin.dapManagementPage.saveEntityInformation()
 
-    dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved')
-    dapManagementPage.assertEntityIsDisplayedInTheList(dapName)
+    equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved')
+    equityAdmin.dapManagementPage.assertEntityIsDisplayedInTheList(dapName)
 
-    dapManagementPage.reloadPage()
-    dapManagementPage.clickEntityByName(dapName)
-    dapManagementPage.assertConditionValue(1, 'Client id')
-    dapManagementPage.assertConditionValue(2, '11')
-    dapManagementPage.assertConditionValue(3, 'or')
-    dapManagementPage.assertConditionValue(4, 'Client id')
-    dapManagementPage.assertConditionValue(5, '11')
+    equityAdmin.dapManagementPage.reloadPage()
+    equityAdmin.dapManagementPage.clickEntityByName(dapName)
+    equityAdmin.dapManagementPage.assertConditionValue(1, 'Client id')
+    equityAdmin.dapManagementPage.assertConditionValue(2, '11')
+    equityAdmin.dapManagementPage.assertConditionValue(3, 'or')
+    equityAdmin.dapManagementPage.assertConditionValue(4, 'Client id')
+    equityAdmin.dapManagementPage.assertConditionValue(5, '11')
   })
 
   it('C8981126_DAP_Discard_Unsaved_DAP', () => {
     const dapName = 'Create and Discard DAP ' + utils.getRandomNumber()
 
-    dapManagementPage.clickCreateNewDap()
-    dapManagementPage.modifyEntityName(dapName)
-    dapManagementPage.modifyCondition([], [1, 'Client id'], [2, '11'])
-    dapManagementPage.discardEntityInformation()
+    equityAdmin.dapManagementPage.clickCreateNewDap()
+    equityAdmin.dapManagementPage.modifyEntityName(dapName)
+    equityAdmin.dapManagementPage.modifyCondition([], [1, 'Client id'], [2, '11'])
+    equityAdmin.dapManagementPage.discardEntityInformation()
 
-    dapManagementPage.assertDapDetailsContainerDisplayed(false)
-    dapManagementPage.assertToastNotificationMessageIsDisplayed('New data access profile was discarded')
-    dapManagementPage.assertEntityIsDisplayedInTheList(dapName, false)
+    equityAdmin.dapManagementPage.assertDapDetailsContainerDisplayed(false)
+    equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed('New data access profile was discarded')
+    equityAdmin.dapManagementPage.assertEntityIsDisplayedInTheList(dapName, false)
   })
 
   /**
@@ -240,28 +227,28 @@ describe('Data Access Profiles tests over User Management settings', () => {
     const dapName = 'Created DAP ' + utils.getRandomNumber()
 
     // Without filling a name
-    dapManagementPage.clickCreateNewDap()
-    dapManagementPage.saveEntityInformation()
-    dapManagementPage.assertNotificationErrorDisplayed('Name/Condition cannot be empty')
+    equityAdmin.dapManagementPage.clickCreateNewDap()
+    equityAdmin.dapManagementPage.saveEntityInformation()
+    equityAdmin.dapManagementPage.assertNotificationErrorDisplayed('Name/Condition cannot be empty')
 
     // Without filling conditions
-    dapManagementPage.modifyEntityName(dapName)
-    dapManagementPage.saveEntityInformation()
-    dapManagementPage.assertNotificationErrorDisplayed('Name/Condition cannot be empty')
+    equityAdmin.dapManagementPage.modifyEntityName(dapName)
+    equityAdmin.dapManagementPage.saveEntityInformation()
+    equityAdmin.dapManagementPage.assertNotificationErrorDisplayed('Name/Condition cannot be empty')
 
     // Without filling conditions and with a name with size > 50 chars
-    dapManagementPage.modifyEntityName(dapName + dapName + dapName)
-    dapManagementPage.saveEntityInformation()
-    dapManagementPage.assertNotificationErrorDisplayed('Name length must be 50 characters or fewer')
+    equityAdmin.dapManagementPage.modifyEntityName(dapName + dapName + dapName)
+    equityAdmin.dapManagementPage.saveEntityInformation()
+    equityAdmin.dapManagementPage.assertNotificationErrorDisplayed('Name length must be 50 characters or fewer')
 
     // Save now with everything all right
-    dapManagementPage.modifyEntityName(dapName)
-    dapManagementPage.modifyCondition([], [1, 'Client id'], [2, '11'])
-    dapManagementPage.saveEntityInformation()
-    dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved')
-    dapManagementPage.assertEntityIsDisplayedInTheList(dapName)
-    dapManagementPage.assertNotificationErrorDisplayed('Name/Condition cannot be empty', false)
-    dapManagementPage.assertNotificationErrorDisplayed('Name length must be 50 characters or fewer', false)
+    equityAdmin.dapManagementPage.modifyEntityName(dapName)
+    equityAdmin.dapManagementPage.modifyCondition([], [1, 'Client id'], [2, '11'])
+    equityAdmin.dapManagementPage.saveEntityInformation()
+    equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved')
+    equityAdmin.dapManagementPage.assertEntityIsDisplayedInTheList(dapName)
+    equityAdmin.dapManagementPage.assertNotificationErrorDisplayed('Name/Condition cannot be empty', false)
+    equityAdmin.dapManagementPage.assertNotificationErrorDisplayed('Name length must be 50 characters or fewer', false)
   })
 
   /**
@@ -272,10 +259,10 @@ describe('Data Access Profiles tests over User Management settings', () => {
     const dapName = 'Dap1'
     const groupIds = [957]
 
-    dapManagementPage.clickDapById(dapId)
-    dapManagementPage.assertEntityHeaderIsDisplayedAsExpected(dapName)
-    dapManagementPage.assertConditionsContainerDisplayedWithExpectedValues()
-    dapManagementPage.assertGroupAssociatedWithDap(groupIds[0])
+    equityAdmin.dapManagementPage.clickDapById(dapId)
+    equityAdmin.dapManagementPage.assertEntityHeaderIsDisplayedAsExpected(dapName)
+    equityAdmin.dapManagementPage.assertConditionsContainerDisplayedWithExpectedValues()
+    equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupIds[0])
   })
 
   /**
@@ -285,11 +272,11 @@ describe('Data Access Profiles tests over User Management settings', () => {
     const dapId = 20
     const newDapName = 'DAP was renamed'
 
-    dapManagementPage.clickDapById(dapId)
-    dapManagementPage.modifyEntityName(newDapName)
-    dapManagementPage.assertEntityHeaderIsDisplayedAsExpected(newDapName)
-    dapManagementPage.saveEntityInformation()
-    dapManagementPage.assertToastNotificationMessageIsDisplayed(newDapName + ' Saved')
+    equityAdmin.dapManagementPage.clickDapById(dapId)
+    equityAdmin.dapManagementPage.modifyEntityName(newDapName)
+    equityAdmin.dapManagementPage.assertEntityHeaderIsDisplayedAsExpected(newDapName)
+    equityAdmin.dapManagementPage.saveEntityInformation()
+    equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed(newDapName + ' Saved')
   })
 
   /**
@@ -299,14 +286,14 @@ describe('Data Access Profiles tests over User Management settings', () => {
     const dapId = 30
     const dapName = 'Change condition'
 
-    dapManagementPage.clickDapById(dapId)
-    dapManagementPage.modifyCondition([], [1, 'Client id'], [2, '11'])
-    dapManagementPage.saveEntityInformation()
+    equityAdmin.dapManagementPage.clickDapById(dapId)
+    equityAdmin.dapManagementPage.modifyCondition([], [1, 'Client id'], [2, '11'])
+    equityAdmin.dapManagementPage.saveEntityInformation()
 
-    dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved')
-    dapManagementPage.reloadPage()
-    dapManagementPage.assertConditionValue(1, 'Client id')
-    dapManagementPage.assertConditionValue(2, '11')
+    equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved')
+    equityAdmin.dapManagementPage.reloadPage()
+    equityAdmin.dapManagementPage.assertConditionValue(1, 'Client id')
+    equityAdmin.dapManagementPage.assertConditionValue(2, '11')
   })
 
   /**
@@ -316,18 +303,18 @@ describe('Data Access Profiles tests over User Management settings', () => {
     const dapId = 3
     const dapName = 'Add condition same level'
 
-    dapManagementPage.clickDapById(dapId)
+    equityAdmin.dapManagementPage.clickDapById(dapId)
 
-    dapManagementPage.addCondition(1, 1)
-    dapManagementPage.modifyCondition([3, 'or'], [4, 'Client id'], [5, '11'])
-    dapManagementPage.saveEntityInformation()
-    dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved')
+    equityAdmin.dapManagementPage.addCondition(1, 1)
+    equityAdmin.dapManagementPage.modifyCondition([3, 'or'], [4, 'Client id'], [5, '11'])
+    equityAdmin.dapManagementPage.saveEntityInformation()
+    equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved')
 
-    dapManagementPage.reloadPage()
-    dapManagementPage.clickDapById(dapId)
-    dapManagementPage.assertConditionValue(3, 'or')
-    dapManagementPage.assertConditionValue(4, 'Client id')
-    dapManagementPage.assertConditionValue(5, '11')
+    equityAdmin.dapManagementPage.reloadPage()
+    equityAdmin.dapManagementPage.clickDapById(dapId)
+    equityAdmin.dapManagementPage.assertConditionValue(3, 'or')
+    equityAdmin.dapManagementPage.assertConditionValue(4, 'Client id')
+    equityAdmin.dapManagementPage.assertConditionValue(5, '11')
   })
 
   /**
@@ -337,17 +324,17 @@ describe('Data Access Profiles tests over User Management settings', () => {
     const dapId = 4
     const dapName = 'Add nested condition'
 
-    dapManagementPage.clickDapById(dapId)
+    equityAdmin.dapManagementPage.clickDapById(dapId)
 
-    dapManagementPage.addCondition(1, 2)
-    dapManagementPage.modifyCondition([], [4, 'Client id'], [5, '11'])
-    dapManagementPage.saveEntityInformation()
-    dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved')
+    equityAdmin.dapManagementPage.addCondition(1, 2)
+    equityAdmin.dapManagementPage.modifyCondition([], [4, 'Client id'], [5, '11'])
+    equityAdmin.dapManagementPage.saveEntityInformation()
+    equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved')
 
-    dapManagementPage.reloadPage()
-    dapManagementPage.clickDapById(dapId)
-    dapManagementPage.assertConditionValue(4, 'Client id')
-    dapManagementPage.assertConditionValue(5, '11')
+    equityAdmin.dapManagementPage.reloadPage()
+    equityAdmin.dapManagementPage.clickDapById(dapId)
+    equityAdmin.dapManagementPage.assertConditionValue(4, 'Client id')
+    equityAdmin.dapManagementPage.assertConditionValue(5, '11')
   })
 
   /**
@@ -357,16 +344,16 @@ describe('Data Access Profiles tests over User Management settings', () => {
     const dapId = 5
     const dapName = 'Remove condition'
 
-    dapManagementPage.clickDapById(dapId)
+    equityAdmin.dapManagementPage.clickDapById(dapId)
 
-    dapManagementPage.removeCondition(2)
-    dapManagementPage.saveEntityInformation()
-    dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved')
+    equityAdmin.dapManagementPage.removeCondition(2)
+    equityAdmin.dapManagementPage.saveEntityInformation()
+    equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved')
 
-    dapManagementPage.reloadPage()
-    dapManagementPage.clickDapById(dapId)
-    dapManagementPage.assertConditionValue(4, 'Client id', false)
-    dapManagementPage.assertConditionValue(5, '11', false)
+    equityAdmin.dapManagementPage.reloadPage()
+    equityAdmin.dapManagementPage.clickDapById(dapId)
+    equityAdmin.dapManagementPage.assertConditionValue(4, 'Client id', false)
+    equityAdmin.dapManagementPage.assertConditionValue(5, '11', false)
   })
 
   /**
@@ -375,12 +362,12 @@ describe('Data Access Profiles tests over User Management settings', () => {
   it.skip('C7564749_DAP_Discard_Changes_Condition', () => {
     const dapId = 6
 
-    dapManagementPage.clickDapById(dapId)
+    equityAdmin.dapManagementPage.clickDapById(dapId)
 
-    dapManagementPage.addCondition(1, 2)
-    dapManagementPage.modifyCondition([], [4, 'Client id'], [5, '11'])
-    dapManagementPage.discardEntityInformation()
-    dapManagementPage.assertToastNotificationMessageIsDisplayed('Changes to data access profile were discard')
+    equityAdmin.dapManagementPage.addCondition(1, 2)
+    equityAdmin.dapManagementPage.modifyCondition([], [4, 'Client id'], [5, '11'])
+    equityAdmin.dapManagementPage.discardEntityInformation()
+    equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed('Changes to data access profile were discard')
   })
 
   /**
@@ -392,15 +379,15 @@ describe('Data Access Profiles tests over User Management settings', () => {
     const dapName = 'Existing DAP name blank'
     const dapIdToChangeFocus = 8
 
-    dapManagementPage.clickDapById(dapId)
-    dapManagementPage.modifyEntityName('{backspace}')
-    dapManagementPage.saveEntityInformation()
-    dapManagementPage.assertNotificationErrorDisplayed('Name should not be empty.')
+    equityAdmin.dapManagementPage.clickDapById(dapId)
+    equityAdmin.dapManagementPage.modifyEntityName('{backspace}')
+    equityAdmin.dapManagementPage.saveEntityInformation()
+    equityAdmin.dapManagementPage.assertNotificationErrorDisplayed('Name should not be empty.')
 
-    dapManagementPage.clickDapById(dapIdToChangeFocus)
-    dapManagementPage.assertEntityHeaderIsDisplayedAsExpected() // This assertion in here just make sure the second dap was loaded
-    dapManagementPage.clickDapById(dapId)
-    dapManagementPage.assertEntityHeaderIsDisplayedAsExpected(dapName)
+    equityAdmin.dapManagementPage.clickDapById(dapIdToChangeFocus)
+    equityAdmin.dapManagementPage.assertEntityHeaderIsDisplayedAsExpected() // This assertion in here just make sure the second dap was loaded
+    equityAdmin.dapManagementPage.clickDapById(dapId)
+    equityAdmin.dapManagementPage.assertEntityHeaderIsDisplayedAsExpected(dapName)
   })
 
   /**
@@ -414,23 +401,23 @@ describe('Data Access Profiles tests over User Management settings', () => {
     const dapName = 'Deactivate me'
 
     // Deactivate DAP
-    dapManagementPage.clickDapById(dapId)
-    //dapManagementPage.clickToDeactivateEntity() // uncomment as soon as ids missing report 2 is finished
+    equityAdmin.dapManagementPage.clickDapById(dapId)
+    //equityAdmin.dapManagementPage.clickToDeactivateEntity() // uncomment as soon as ids missing report 2 is finished
     cy.get('gs-button[data-test-id=more-actions-button]').click() // temporarily placed until the ids missing report 2 is finished
     cy.get('gs-action-panel-option[data-test-id=deactivate-button]').click() // temporarily placed until the ids missing report 2 is finished
 
-    dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Deactivated', true, true)
-    dapManagementPage.assertInactiveDapsAreDisplayed()
-    dapManagementPage.assertEntityIsDisplayedInTheList(dapName)
-    dapManagementPage.assertDapEditable(false)
+    equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Deactivated', true, true)
+    equityAdmin.dapManagementPage.assertInactiveDapsAreDisplayed()
+    equityAdmin.dapManagementPage.assertEntityIsDisplayedInTheList(dapName)
+    equityAdmin.dapManagementPage.assertDapEditable(false)
 
     // Activate DAP
-    dapManagementPage.activateDap()
+    equityAdmin.dapManagementPage.activateDap()
 
-    dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Activated')
-    dapManagementPage.assertActiveDapsAreDisplayed()
-    dapManagementPage.assertEntityIsDisplayedInTheList(dapName)
-    dapManagementPage.assertDapEditable()
+    equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Activated')
+    equityAdmin.dapManagementPage.assertActiveDapsAreDisplayed()
+    equityAdmin.dapManagementPage.assertEntityIsDisplayedInTheList(dapName)
+    equityAdmin.dapManagementPage.assertDapEditable()
   })
 
   /**
@@ -443,68 +430,68 @@ describe('Data Access Profiles tests over User Management settings', () => {
     const dapInactiveIds = [12, 14, 16]
     const dapCondition = 'Business'
 
-    dapManagementPage.assertNoDapSelectedMessageIsDisplayed()
+    equityAdmin.dapManagementPage.assertNoDapSelectedMessageIsDisplayed()
 
     // ACTIVE TAB
-    searchBar.search(dap)
-    dapManagementPage.assertAmountOfSearchResultsInTheList(3)
-    dapManagementPage.assertSearchResultListAccuracy(dapIds)
+    equityAdmin.searchBar.search(dap)
+    equityAdmin.dapManagementPage.assertAmountOfSearchResultsInTheList(3)
+    equityAdmin.dapManagementPage.assertSearchResultListAccuracy(dapIds)
 
     dap = 'dap to search'
-    searchBar.search(dap)
-    dapManagementPage.assertAmountOfSearchResultsInTheList(3)
-    dapManagementPage.assertSearchResultListAccuracy(dapIds)
+    equityAdmin.searchBar.search(dap)
+    equityAdmin.dapManagementPage.assertAmountOfSearchResultsInTheList(3)
+    equityAdmin.dapManagementPage.assertSearchResultListAccuracy(dapIds)
 
     dap = 'dAp To SEarch 1'
-    searchBar.search(dap)
-    dapManagementPage.assertAmountOfSearchResultsInTheList(1)
-    dapManagementPage.assertSearchResultListAccuracy([dapIds[0]])
+    equityAdmin.searchBar.search(dap)
+    equityAdmin.dapManagementPage.assertAmountOfSearchResultsInTheList(1)
+    equityAdmin.dapManagementPage.assertSearchResultListAccuracy([dapIds[0]])
 
     dap = 'randomName' + utils.getRandomNumber()
-    searchBar.search(dap)
-    dapManagementPage.assertNoResultFoundIsVisible()
+    equityAdmin.searchBar.search(dap)
+    equityAdmin.dapManagementPage.assertNoResultFoundIsVisible()
 
     dap = 'SELECT * FROM daps'
-    searchBar.search(dap)
-    dapManagementPage.assertNoResultFoundIsVisible()
+    equityAdmin.searchBar.search(dap)
+    equityAdmin.dapManagementPage.assertNoResultFoundIsVisible()
 
     // Verify conditions in a selected active dap
-    searchBar.clearSearchBoxByXIcon()
-    dapManagementPage.clickDapById(dapIds[0])
-    searchBar.search(dapCondition)
-    dapManagementPage.assertAmountOfSearchedConditionResults(1)
+    equityAdmin.searchBar.clearSearchBoxByXIcon()
+    equityAdmin.dapManagementPage.clickDapById(dapIds[0])
+    equityAdmin.searchBar.search(dapCondition)
+    equityAdmin.dapManagementPage.assertAmountOfSearchedConditionResults(1)
 
     // INACTIVE TAB
-    dapManagementPage.clickTab('Inactive')
+    equityAdmin.dapManagementPage.clickTab('Inactive')
 
     dap = 'DAP TO SEARCH'
-    searchBar.search(dap)
-    dapManagementPage.assertAmountOfSearchResultsInTheList(3)
-    dapManagementPage.assertSearchResultListAccuracy(dapInactiveIds)
+    equityAdmin.searchBar.search(dap)
+    equityAdmin.dapManagementPage.assertAmountOfSearchResultsInTheList(3)
+    equityAdmin.dapManagementPage.assertSearchResultListAccuracy(dapInactiveIds)
 
     dap = 'dap to search'
-    searchBar.search(dap)
-    dapManagementPage.assertAmountOfSearchResultsInTheList(3)
-    dapManagementPage.assertSearchResultListAccuracy(dapInactiveIds)
+    equityAdmin.searchBar.search(dap)
+    equityAdmin.dapManagementPage.assertAmountOfSearchResultsInTheList(3)
+    equityAdmin.dapManagementPage.assertSearchResultListAccuracy(dapInactiveIds)
 
     dap = 'dAp To SEarch 4'
-    searchBar.search(dap)
-    dapManagementPage.assertAmountOfSearchResultsInTheList(1)
-    dapManagementPage.assertSearchResultListAccuracy([dapInactiveIds[0]])
+    equityAdmin.searchBar.search(dap)
+    equityAdmin.dapManagementPage.assertAmountOfSearchResultsInTheList(1)
+    equityAdmin.dapManagementPage.assertSearchResultListAccuracy([dapInactiveIds[0]])
 
     dap = 'randomName'
-    searchBar.search(dap)
-    dapManagementPage.assertNoResultFoundIsVisible()
+    equityAdmin.searchBar.search(dap)
+    equityAdmin.dapManagementPage.assertNoResultFoundIsVisible()
 
     dap = 'SELECT * FROM daps'
-    searchBar.search(dap)
-    dapManagementPage.assertNoResultFoundIsVisible()
+    equityAdmin.searchBar.search(dap)
+    equityAdmin.dapManagementPage.assertNoResultFoundIsVisible()
 
     // Verify conditions in a selected active dap
-    searchBar.clearSearchBoxByXIcon()
-    dapManagementPage.clickDapById(dapInactiveIds[0])
-    searchBar.search(dapCondition)
-    dapManagementPage.assertAmountOfSearchedConditionResults(1)
+    equityAdmin.searchBar.clearSearchBoxByXIcon()
+    equityAdmin.dapManagementPage.clickDapById(dapInactiveIds[0])
+    equityAdmin.searchBar.search(dapCondition)
+    equityAdmin.dapManagementPage.assertAmountOfSearchedConditionResults(1)
   })
 
   /**
@@ -517,56 +504,56 @@ describe('Data Access Profiles tests over User Management settings', () => {
 
     cy.log(' ---------------- ACTIVE TAB --------------------- ')
 
-    searchBar.search(dap)
-    dapManagementPage.assertAmountOfSearchResultsInTheList(1)
-    dapManagementPage.assertSearchResultListAccuracy([dapId])
+    equityAdmin.searchBar.search(dap)
+    equityAdmin.dapManagementPage.assertAmountOfSearchResultsInTheList(1)
+    equityAdmin.dapManagementPage.assertSearchResultListAccuracy([dapId])
 
     dap = '1$¨'
-    searchBar.search(dap)
-    dapManagementPage.assertAmountOfSearchResultsInTheList(1)
-    dapManagementPage.assertSearchResultListAccuracy([dapId])
+    equityAdmin.searchBar.search(dap)
+    equityAdmin.dapManagementPage.assertAmountOfSearchResultsInTheList(1)
+    equityAdmin.dapManagementPage.assertSearchResultListAccuracy([dapId])
 
     dap = '£`¬'
-    searchBar.search(dap)
-    dapManagementPage.assertAmountOfSearchResultsInTheList(1)
-    dapManagementPage.assertSearchResultListAccuracy([dapId])
+    equityAdmin.searchBar.search(dap)
+    equityAdmin.dapManagementPage.assertAmountOfSearchResultsInTheList(1)
+    equityAdmin.dapManagementPage.assertSearchResultListAccuracy([dapId])
 
     dap = '[d]'
-    searchBar.search(dap)
-    dapManagementPage.assertNoResultFoundIsVisible()
+    equityAdmin.searchBar.search(dap)
+    equityAdmin.dapManagementPage.assertNoResultFoundIsVisible()
 
     dap = '1$¨(*&!¨_}º]+£`¬'.repeat(25) // huge amount of chars to search
-    searchBar.search(dap)
-    dapManagementPage.assertNoResultFoundIsVisible()
+    equityAdmin.searchBar.search(dap)
+    equityAdmin.dapManagementPage.assertNoResultFoundIsVisible()
 
     cy.log(' ---------------- INACTIVE TAB --------------------- ')
 
     // INACTIVE TAB
-    dapManagementPage.clickTab('Inactive')
+    equityAdmin.dapManagementPage.clickTab('Inactive')
 
     dap = '(*&!¨_}º]'
     dapId = 46
-    searchBar.search(dap)
-    dapManagementPage.assertAmountOfSearchResultsInTheList(1)
-    dapManagementPage.assertSearchResultListAccuracy([dapId])
+    equityAdmin.searchBar.search(dap)
+    equityAdmin.dapManagementPage.assertAmountOfSearchResultsInTheList(1)
+    equityAdmin.dapManagementPage.assertSearchResultListAccuracy([dapId])
 
     dap = '(*&'
-    searchBar.search(dap)
-    dapManagementPage.assertAmountOfSearchResultsInTheList(1)
-    dapManagementPage.assertSearchResultListAccuracy([dapId])
+    equityAdmin.searchBar.search(dap)
+    equityAdmin.dapManagementPage.assertAmountOfSearchResultsInTheList(1)
+    equityAdmin.dapManagementPage.assertSearchResultListAccuracy([dapId])
 
     dap = '}º]'
-    searchBar.search(dap)
-    dapManagementPage.assertAmountOfSearchResultsInTheList(1)
-    dapManagementPage.assertSearchResultListAccuracy([dapId])
+    equityAdmin.searchBar.search(dap)
+    equityAdmin.dapManagementPage.assertAmountOfSearchResultsInTheList(1)
+    equityAdmin.dapManagementPage.assertSearchResultListAccuracy([dapId])
 
     dap = '[d]'
-    searchBar.search(dap)
-    dapManagementPage.assertNoResultFoundIsVisible()
+    equityAdmin.searchBar.search(dap)
+    equityAdmin.dapManagementPage.assertNoResultFoundIsVisible()
 
     dap = '(*&!¨_}º]'.repeat(40) // huge amount of chars to search
-    searchBar.search(dap)
-    dapManagementPage.assertNoResultFoundIsVisible()
+    equityAdmin.searchBar.search(dap)
+    equityAdmin.dapManagementPage.assertNoResultFoundIsVisible()
   })
 
   /**
@@ -582,27 +569,27 @@ describe('Data Access Profiles tests over User Management settings', () => {
     const groupIdAssociated = 957
 
     // Duplicate DAP
-    dapManagementPage.clickDapById(dapId)
-    dapManagementPage.assertNumberOfGroupRecordsAssociatedWithDap(1)
-    dapManagementPage.assertNumberOfGroupCardsAssociatedWithDap(1)
-    // dapManagementPage.clickToDuplicateEntity() // uncomment as soon as ids missing report 2 is finished
+    equityAdmin.dapManagementPage.clickDapById(dapId)
+    equityAdmin.dapManagementPage.assertNumberOfGroupRecordsAssociatedWithDap(1)
+    equityAdmin.dapManagementPage.assertNumberOfGroupCardsAssociatedWithDap(1)
+    // equityAdmin.dapManagementPage.clickToDuplicateEntity() // uncomment as soon as ids missing report 2 is finished
     cy.get('gs-button[data-test-id=more-actions-button]').click() // temporarily placed until the ids missing report 2 is finished
     cy.get('gs-action-panel-option[data-test-id=duplicate-button]').click() // temporarily placed until the ids missing report 2 is finished
 
-    dapManagementPage.assertEntityIsFocused()
-    dapManagementPage.assertEntityHeaderIsDisplayedAsExpected('Copy of ' + dapName)
+    equityAdmin.dapManagementPage.assertEntityIsFocused()
+    equityAdmin.dapManagementPage.assertEntityHeaderIsDisplayedAsExpected('Copy of ' + dapName)
 
-    dapManagementPage.modifyEntityName(newDapName)
-    dapManagementPage.saveEntityInformation()
+    equityAdmin.dapManagementPage.modifyEntityName(newDapName)
+    equityAdmin.dapManagementPage.saveEntityInformation()
 
-    dapManagementPage.assertToastNotificationMessageIsDisplayed(newDapName + ' Saved', true, true)
-    dapManagementPage.assertEntityIsDisplayedInTheList(newDapName)
-    dapManagementPage.assertConditionValue(1, 'Business Unit')
-    dapManagementPage.assertConditionValue(2, '1')
-    dapManagementPage.assertGroupAssociatedWithDap(groupIdAssociated, false)
-    dapManagementPage.assertNumberOfGroupRecordsAssociatedWithDap(0)
-    dapManagementPage.assertNumberOfGroupCardsAssociatedWithDap(0)
-    dapManagementPage.assertEntityIsFocused(false)
+    equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed(newDapName + ' Saved', true, true)
+    equityAdmin.dapManagementPage.assertEntityIsDisplayedInTheList(newDapName)
+    equityAdmin.dapManagementPage.assertConditionValue(1, 'Business Unit')
+    equityAdmin.dapManagementPage.assertConditionValue(2, '1')
+    equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupIdAssociated, false)
+    equityAdmin.dapManagementPage.assertNumberOfGroupRecordsAssociatedWithDap(0)
+    equityAdmin.dapManagementPage.assertNumberOfGroupCardsAssociatedWithDap(0)
+    equityAdmin.dapManagementPage.assertEntityIsFocused(false)
   })
 
   /**
@@ -613,26 +600,22 @@ describe('Data Access Profiles tests over User Management settings', () => {
   it.skip('C9446198_Groups_Expand_And_Collapse_DAP_With_Many_Groups_added', () => {
     const dapId = 58
 
-    dapManagementPage.clickDapById(dapId)
-    dapManagementPage.assertNumberOfGroupCardsDisplayedInASection(13, true)
-    dapManagementPage.clickHide('groups')
-    dapManagementPage.assertNumberOfGroupCardsDisplayedInASection(8)
+    equityAdmin.dapManagementPage.clickDapById(dapId)
+    equityAdmin.dapManagementPage.assertNumberOfGroupCardsDisplayedInASection(13, true)
+    equityAdmin.dapManagementPage.clickHide('groups')
+    equityAdmin.dapManagementPage.assertNumberOfGroupCardsDisplayedInASection(8)
   })
 
   // ************************************************ TESTS AS CLIENTS ************************************************** //
 })
 
 describe('Data Access Profiles tests over User Management settings - View Only User', () => {
-  // Pages
-  const dapManagementPage = new DapManagementPage()
-
-  // Components
-  const settingsMenuNavBar = new SettingsMenuNavBar()
+  const equityAdmin = new EquityAdmin()
 
   beforeEach(() => {
     cy.login(Cypress.env('VIEW_ONLY_USER_2_AUTH'))
-    settingsMenuNavBar.accessGlobalSettingsMenu('user', 'dap')
-    dapManagementPage.checkDapManagementUrl()
+    equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'dap')
+    equityAdmin.dapManagementPage.checkDapManagementUrl()
   })
 
   /**
@@ -642,8 +625,8 @@ describe('Data Access Profiles tests over User Management settings - View Only U
   it.skip('C9277653_DAP_User_Does_Not_Have_Permission_Needed_To_Link_A_Group_To_The_DAP', () => {
     const dapId = 7
 
-    dapManagementPage.clickDapById(dapId)
-    dapManagementPage.assertAddGroupsButtonIsVisible(false)
+    equityAdmin.dapManagementPage.clickDapById(dapId)
+    equityAdmin.dapManagementPage.assertAddGroupsButtonIsVisible(false)
   })
 
   /**
@@ -655,16 +638,16 @@ describe('Data Access Profiles tests over User Management settings - View Only U
     const dapInactiveId = 9
 
     // Active tab
-    dapManagementPage.clickTab('active')
-    dapManagementPage.clickDapById(dapActiveId)
-    dapManagementPage.assertThreeDotButtonDisplayed(false)
-    dapManagementPage.assertCreateNewDapButtonDisplayed(false)
+    equityAdmin.dapManagementPage.clickTab('active')
+    equityAdmin.dapManagementPage.clickDapById(dapActiveId)
+    equityAdmin.dapManagementPage.assertThreeDotButtonDisplayed(false)
+    equityAdmin.dapManagementPage.assertCreateNewDapButtonDisplayed(false)
 
     // Inactive tab
-    dapManagementPage.clickTab('inactive')
-    dapManagementPage.clickDapById(dapInactiveId)
-    dapManagementPage.assertThreeDotButtonDisplayed(false)
-    dapManagementPage.assertCreateNewDapButtonDisplayed(false)
+    equityAdmin.dapManagementPage.clickTab('inactive')
+    equityAdmin.dapManagementPage.clickDapById(dapInactiveId)
+    equityAdmin.dapManagementPage.assertThreeDotButtonDisplayed(false)
+    equityAdmin.dapManagementPage.assertCreateNewDapButtonDisplayed(false)
   })
 
   /**
@@ -674,8 +657,8 @@ describe('Data Access Profiles tests over User Management settings - View Only U
   it.skip('C8781224_DAP_User_Does_Not_Have_Update_Permission_For_AccessFilters', () => {
     const dapId = 7
 
-    dapManagementPage.clickDapById(dapId)
-    dapManagementPage.assertDapEditable(false)
+    equityAdmin.dapManagementPage.clickDapById(dapId)
+    equityAdmin.dapManagementPage.assertDapEditable(false)
     cy.get('gs-button[data-test-id=more-actions-button]').should('not.exist') // temporarily placed until the ids missing report 2 is finished
   })
 })

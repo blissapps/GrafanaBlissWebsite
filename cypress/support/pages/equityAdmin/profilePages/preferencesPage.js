@@ -1,4 +1,4 @@
-import BasePage from '../basePage'
+import BasePage from '../../basePage'
 
 const selectors = {
   englishCard: '#langCarden-US',
@@ -11,7 +11,7 @@ const properties = {
   pageURL: '/profile/preferences'
 }
 
-class SecurityPage extends BasePage {
+class PreferencesPage extends BasePage {
   /**
    * Checks if the current page is the one in the properties
    */
@@ -47,4 +47,4 @@ class SecurityPage extends BasePage {
   }
 }
 
-export default SecurityPage
+export default PreferencesPage

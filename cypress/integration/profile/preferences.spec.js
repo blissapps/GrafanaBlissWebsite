@@ -1,27 +1,21 @@
-import PreferencesPage from '../../support/pages/profilePages/preferencesPage'
-import LeftMenuNavBar from '../../support/components/leftMenuNavBar'
-import ProfileMenuNavBar from '../../support/components/profileMenuNavBar'
-import SettingsMenuNavBar from '../../support/components/settingsMenuNavBar'
+import EquityAdmin from '../../support/pages/equityAdmin'
 
 describe('Preferences tests', () => {
-  const leftMenuNavBar = new LeftMenuNavBar()
-  const profileMenuNavBar = new ProfileMenuNavBar()
-  const settingsMenuNavBar = new SettingsMenuNavBar()
-  const preferencesPage = new PreferencesPage()
+  const equityAdmin = new EquityAdmin()
 
   beforeEach(() => {
     cy.login()
-    leftMenuNavBar.openProfileMenuBar()
-    profileMenuNavBar.openProfilePreferencesPage()
+    equityAdmin.leftMenuNavBar.openProfileMenuBar()
+    equityAdmin.profileMenuNavBar.openProfilePreferencesPage()
   })
 
   /**
    * Test if the menu link sends to the correct page and it gets back to the home screen if closed
    */
   it('C1234567_Check_URL_Access_Over_The_Menu', () => {
-    preferencesPage.checkProfilePreferencesUrl()
-    profileMenuNavBar.closeProfileMenuNavBar()
-    preferencesPage.checkProfilePreferencesUrl()
+    equityAdmin.preferencesPage.checkProfilePreferencesUrl()
+    equityAdmin.profileMenuNavBar.closeProfileMenuNavBar()
+    equityAdmin.preferencesPage.checkProfilePreferencesUrl()
   })
 
   /**
@@ -29,31 +23,31 @@ describe('Preferences tests', () => {
    *
    */
   it('C1234567_Change_Language_Successfully_To_Portuguese', () => {
-    preferencesPage.changeLanguage('portuguese')
-    leftMenuNavBar.clickLogoToGoToHomePage()
+    equityAdmin.preferencesPage.changeLanguage('portuguese')
+    equityAdmin.leftMenuNavBar.clickLogoToGoToHomePage()
 
-    leftMenuNavBar.openSettingsMenuBar()
-    leftMenuNavBar.getElementByText('Gestão de Utilizadores').should('be.visible')
-    leftMenuNavBar.getElementByText('Gestão de Declaração').should('be.visible')
-    settingsMenuNavBar.closeGlobalSettingsNavBar()
+    equityAdmin.leftMenuNavBar.openSettingsMenuBar()
+    equityAdmin.leftMenuNavBar.getElementByText('Gestão de Utilizadores').should('be.visible')
+    equityAdmin.leftMenuNavBar.getElementByText('Gestão de Declaração').should('be.visible')
+    equityAdmin.settingsMenuNavBar.closeGlobalSettingsNavBar()
 
-    settingsMenuNavBar.accessGlobalSettingsMenu('user')
-    leftMenuNavBar.getElementByText('Gestão de Utilizadores').should('be.visible')
-    leftMenuNavBar.getElementByText('Gestão de Grupos').should('be.visible')
-    leftMenuNavBar.getElementByText('Gestão de Funções').should('be.visible')
-    leftMenuNavBar.getElementByText('Filtros para Acesso de Dados').should('be.visible')
-    settingsMenuNavBar.closeGlobalSettingsNavBar()
+    equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user')
+    equityAdmin.leftMenuNavBar.getElementByText('Gestão de Utilizadores').should('be.visible')
+    equityAdmin.leftMenuNavBar.getElementByText('Gestão de Grupos').should('be.visible')
+    equityAdmin.leftMenuNavBar.getElementByText('Gestão de Funções').should('be.visible')
+    equityAdmin.leftMenuNavBar.getElementByText('Filtros para Acesso de Dados').should('be.visible')
+    equityAdmin.settingsMenuNavBar.closeGlobalSettingsNavBar()
 
-    leftMenuNavBar.openProfileMenuBar()
-    leftMenuNavBar.getElementByText('Informações pessoais').should('be.visible')
-    leftMenuNavBar.getElementByText('Segurança').should('be.visible')
-    leftMenuNavBar.getElementByText('Preferências').should('be.visible')
-    profileMenuNavBar.closeProfileMenuNavBar()
+    equityAdmin.leftMenuNavBar.openProfileMenuBar()
+    equityAdmin.leftMenuNavBar.getElementByText('Informações pessoais').should('be.visible')
+    equityAdmin.leftMenuNavBar.getElementByText('Segurança').should('be.visible')
+    equityAdmin.leftMenuNavBar.getElementByText('Preferências').should('be.visible')
+    equityAdmin.profileMenuNavBar.closeProfileMenuNavBar()
 
     // teardown
-    leftMenuNavBar.openProfileMenuBar()
-    profileMenuNavBar.openProfilePreferencesPage()
-    preferencesPage.changeLanguage()
-    profileMenuNavBar.closeProfileMenuNavBar()
+    equityAdmin.leftMenuNavBar.openProfileMenuBar()
+    equityAdmin.profileMenuNavBar.openProfilePreferencesPage()
+    equityAdmin.preferencesPage.changeLanguage()
+    equityAdmin.profileMenuNavBar.closeProfileMenuNavBar()
   })
 })
