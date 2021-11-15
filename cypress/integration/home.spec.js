@@ -59,8 +59,8 @@ describe('Home page tests', () => {
     homePage.assertClientCardSummaryInformation(144, '7digital', 'GBR', 'Regulated', 'Active').should('be.visible')
     homePage.assertClientCardSummaryInformation(337, '9F Group', 'CHN', 'Not Regulated', 'NOT SET').should('be.visible')
     homePage.assertClientCardSummaryInformation(361, 'Alliance Bernstein', 'USA', 'Regulated', 'Terminated').should('be.visible')
-    homePage.assertClientCardSummaryInformation(234, 'Janus Henderson', 'GBR', 'Regulated', 'Terminated').should('be.visible')
-    homePage.assertClientCardSummaryInformation(343, 'Vista Global', 'ARE', 'Not Regulated', 'Implementation').should('be.visible')
+    homePage.assertClientCardSummaryInformation(445, 'Umicore', 'BEL', 'Not Regulated', 'Implementation').should('be.visible')
+    homePage.assertClientCardSummaryInformation(281, 'BOCI SSO', 'HKG', 'Not Regulated', 'Demo').should('be.visible')
   })
 
   it('C10772388_Validate_Quick_Client_Switch_Behavior', () => {
