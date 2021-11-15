@@ -4,7 +4,7 @@ describe('Home page tests', () => {
   const equityAdmin = new EquityAdmin()
 
   beforeEach(() => {
-    cy.login()
+    equityAdmin.loginPage.login()
   })
 
   it('C10728360_Select_Specific_Client_From_The_List_Using_The_Search_Engine', () => {

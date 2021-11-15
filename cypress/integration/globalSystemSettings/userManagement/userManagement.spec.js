@@ -4,7 +4,7 @@ describe('User Management tests over User Management settings', () => {
   const equityAdmin = new EquityAdmin()
 
   beforeEach(() => {
-    cy.login()
+    equityAdmin.loginPage.login()
     equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'user')
     equityAdmin.userManagementPage.checkUserManagementUrl()
   })

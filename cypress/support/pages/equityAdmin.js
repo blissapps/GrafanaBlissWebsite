@@ -23,7 +23,7 @@ import PreferencesPage from './equityAdmin/profilePages/preferencesPage'
 import SecurityPage from './equityAdmin/profilePages/securityPage'
 
 // Others
-import AuthLoginPage from './authLoginPage'
+import LoginPage from './loginPage'
 import EquityClientPeoplePage from './equityClientPeoplePage'
 import HomePage from './homePage'
 
@@ -61,7 +61,7 @@ class EquityAdmin {
     this.securityPage = new SecurityPage()
 
     // Others
-    this.authLoginPage = new AuthLoginPage()
+    this.loginPage = new LoginPage()
     this.equityClientPeoplePage = new EquityClientPeoplePage()
     this.homePage = new HomePage()
   }

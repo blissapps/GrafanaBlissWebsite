@@ -7,7 +7,7 @@ describe('Participants tests', () => {
   const equityAdmin = new EquityAdmin()
 
   beforeEach(() => {
-    cy.login()
+    equityAdmin.loginPage.login()
   })
 
   it('C11069829_SearchEngine_Search_For_ID_Name_Email', () => {

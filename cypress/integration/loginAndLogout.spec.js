@@ -8,28 +8,28 @@ describe('Login and Logout tests', () => {
   const dataTestLanguage = Cypress.env('LANGUAGE')
 
   it('C7644497_Login_And_Logout_Functionalities_Are_Persistent', () => {
-    cy.loginWithoutSession()
+    equityAdmin.loginPage.loginWithoutSession()
     cy.loginSuccessfulXHRWaits()
     equityAdmin.homePage.checkUrl('/home')
-    cy.logout()
+    equityAdmin.profileMenuNavBar.logout()
 
-    equityAdmin.authLoginPage.checkUrl('/Account/Login')
-    equityAdmin.authLoginPage.goBackOrForwardInBrowser('back')
-    equityAdmin.authLoginPage.checkUrl('/Account/Login')
+    equityAdmin.loginPage.checkUrl('/Account/Login')
+    equityAdmin.loginPage.goBackOrForwardInBrowser('back')
+    equityAdmin.loginPage.checkUrl('/Account/Login')
   })
 
   it('C7668435_Login_With_Both_Wrong_User_And_Password', () => {
-    cy.loginWithoutSession('wronguser@glbalshares.com', '123!ABC')
-    equityAdmin.authLoginPage.assertUnsuccessfulLoginErrorMessageDisplayed(dataTest[dataTestLanguage].errorMessages.loginInvalidEmailOrPassword)
+    equityAdmin.loginPage.loginWithoutSession('wronguser@glbalshares.com', '123!ABC')
+    equityAdmin.loginPage.assertUnsuccessfulLoginErrorMessageDisplayed(dataTest[dataTestLanguage].errorMessages.loginInvalidEmailOrPassword)
   })
 
   it('C7668436_Login_With_Correct_User_And_Wrong_Password', () => {
-    cy.loginWithoutSession('lmello@globalshares.co.uk', '123!ABC')
-    equityAdmin.authLoginPage.assertUnsuccessfulLoginErrorMessageDisplayed(dataTest[dataTestLanguage].errorMessages.loginInvalidEmailOrPassword)
+    equityAdmin.loginPage.loginWithoutSession('lmello@globalshares.co.uk', '123!ABC')
+    equityAdmin.loginPage.assertUnsuccessfulLoginErrorMessageDisplayed(dataTest[dataTestLanguage].errorMessages.loginInvalidEmailOrPassword)
   })
 
   it('C7644496_Logout_Button_Consistency', () => {
-    cy.loginWithoutSession()
+    equityAdmin.loginPage.loginWithoutSession()
     cy.loginSuccessfulXHRWaits()
     equityAdmin.homePage.checkUrl('/home')
 

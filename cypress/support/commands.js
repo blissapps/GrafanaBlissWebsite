@@ -16,50 +16,7 @@ const executeCommand = command => {
 }
 
 /**
- * Login command through the application UI with session storage and XHR interceptions
- *
- * @param {String} email email to login. The default variable is set in the cypress.json file
- * @param {String} password password to login. The default variable is set in the cypress.json file
- */
-Cypress.Commands.add('login', (email = Cypress.env('DEFAULT_USER_AUTH'), password = Cypress.env('DEFAULT_PASSWORD_AUTH')) => {
-  cy.loginWithSession(email, password)
-  cy.visit('/') && cy.reload()
-  cy.loginSuccessfulXHRWaits()
-})
-
-/**
- * Login command through the application UI with SESSION STORAGE
- *
- * @param {String} email email to login. The default variable is set in the cypress.json file
- * @param {String} password password to login. The default variable is set in the cypress.json file
- */
-Cypress.Commands.add('loginWithSession', (email = Cypress.env('DEFAULT_USER_AUTH'), password = Cypress.env('DEFAULT_PASSWORD_AUTH')) => {
-  cy.session([email, password], () => {
-    cy.visit('/')
-    cy.get('#username-field').type(email)
-    cy.get('#password-field').type(password, { log: false })
-    cy.forcedWait(500) // avoid element detached from the DOM. See https://github.com/cypress-io/cypress/issues/7306. A ticket was open https://globalshares.atlassian.net/browse/PB-828
-    cy.get('#login').click()
-    cy.url().should('contain', '/home')
-  })
-})
-
-/**
- * Login command through the application UI without SESSION STORAGE
- *
- * @param {String} email email to login. The default variable is set in the cypress.json file
- * @param {String} password password to login. The default variable is set in the cypress.json file
- */
-Cypress.Commands.add('loginWithoutSession', (email = Cypress.env('DEFAULT_USER_AUTH'), password = Cypress.env('DEFAULT_PASSWORD_AUTH')) => {
-  cy.visit('/')
-  cy.get('#username-field').type(email)
-  cy.get('#password-field').type(password, { log: false })
-  cy.forcedWait(500) // avoid element detached from the DOM. See https://github.com/cypress-io/cypress/issues/7306. A ticket was open https://globalshares.atlassian.net/browse/PB-828
-  cy.get('#login').click()
-})
-
-/**
- * Waits for XHR requests that may generate elements detached from the DOM after a successful login or in a refresh in the home page
+ * Waits for XHR requests that may generate elements detached from the DOM after a successful login or in a refresh in the home page for the Equity Admin
  *
  * Even though we are using intercepts and waiting for them, these interception are being called more than 1 single time,
  * which are not sufficient because the front-end call some XHR calls twice (I don't know why).
@@ -85,16 +42,6 @@ Cypress.Commands.add('loginSuccessfulXHRWaits', () => {
   cy.intercept({ method: 'POST', url: 'https://rs.fullstory.com/rec/page' }, { success: true })
 
   cy.forcedWait(1000) // the menu is no stable yet due to some API duplicated calls. A ticket was open https://globalshares.atlassian.net/browse/PB-828
-})
-
-/**
- * Logout command through the application UI
- */
-Cypress.Commands.add('logout', () => {
-  cy.get('#profile-item').as('avatarBtn')
-  cy.get('@avatarBtn').click()
-  cy.forcedWait(500) // avoid element detached from the DOM. See https://github.com/cypress-io/cypress/issues/7306
-  cy.get('#logoutButton').click()
 })
 
 /**

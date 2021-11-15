@@ -4,7 +4,7 @@ describe('Personal Information tests', () => {
   const equityAdmin = new EquityAdmin()
 
   beforeEach(() => {
-    cy.login()
+    equityAdmin.loginPage.login()
     equityAdmin.leftMenuNavBar.openProfileMenuBar()
     equityAdmin.profileMenuNavBar.openProfilePersonalInformationPage()
   })

@@ -6,7 +6,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
   const utils = new Utils()
 
   beforeEach(() => {
-    cy.login()
+    equityAdmin.loginPage.login()
     equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'dap')
     equityAdmin.dapManagementPage.checkDapManagementUrl()
   })
@@ -613,7 +613,7 @@ describe('Data Access Profiles tests over User Management settings - View Only U
   const equityAdmin = new EquityAdmin()
 
   beforeEach(() => {
-    cy.login(Cypress.env('VIEW_ONLY_USER_2_AUTH'))
+    equityAdmin.loginPage.login(Cypress.env('VIEW_ONLY_USER_2_AUTH'))
     equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'dap')
     equityAdmin.dapManagementPage.checkDapManagementUrl()
   })

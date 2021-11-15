@@ -29,6 +29,16 @@ class ProfileMenuNavBar extends BasePage {
   // --------------------------------------- OTHERS  --------------------------------------------- //
 
   /**
+   * Logout command through the application UI
+   */
+  logout() {
+    cy.get('#profile-item').as('avatarBtn')
+    cy.get('@avatarBtn').click()
+    cy.forcedWait(500) // avoid element detached from the DOM. See https://github.com/cypress-io/cypress/issues/7306
+    cy.get('#logoutButton').click()
+  }
+
+  /**
    * Closes the Profile menu by clicking in the '<' button
    */
   closeProfileMenuNavBar() {

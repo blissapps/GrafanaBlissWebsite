@@ -6,7 +6,7 @@ describe('Statement Management tests', () => {
   const utils = new Utils()
 
   beforeEach(() => {
-    cy.login()
+    equityAdmin.loginPage.login()
     equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('statement')
     equityAdmin.clientStatementsPage.checkClientStatementsUrl()
   })
@@ -906,7 +906,7 @@ describe('Statement Management tests - View Only User', () => {
   const equityAdmin = new EquityAdmin()
 
   beforeEach(() => {
-    cy.login(Cypress.env('VIEW_ONLY_USER_2_AUTH'))
+    equityAdmin.loginPage.login(Cypress.env('VIEW_ONLY_USER_2_AUTH'))
     equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('statement')
     equityAdmin.clientStatementsPage.checkClientStatementsUrl()
   })

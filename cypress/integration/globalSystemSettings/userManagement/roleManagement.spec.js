@@ -6,7 +6,7 @@ describe('Role Management tests over User Management settings', () => {
   const utils = new Utils()
 
   beforeEach(() => {
-    cy.login()
+    equityAdmin.loginPage.login()
     equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'role')
     equityAdmin.roleManagementPage.checkRoleManagementUrl()
   })
@@ -575,7 +575,7 @@ describe('Role Management tests over User Management settings - View Only User',
   const equityAdmin = new EquityAdmin()
 
   beforeEach(() => {
-    cy.login(Cypress.env('VIEW_ONLY_USER_2_AUTH'))
+    equityAdmin.loginPage.login(Cypress.env('VIEW_ONLY_USER_2_AUTH'))
     equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'role')
     equityAdmin.roleManagementPage.checkRoleManagementUrl()
   })
@@ -637,7 +637,7 @@ describe('Role Management tests over User Management settings - Other specific t
    * @missing_data Need to have a user with view permissions for all the settings but Role
    */
   it.skip('C9281160_User_Does_Not_Have_View_Permissions_For_Groups_Only', () => {
-    cy.login(Cypress.env('VIEW_ONLY_USER_2_AUTH'))
+    equityAdmin.loginPage.login(Cypress.env('VIEW_ONLY_USER_2_AUTH'))
 
     equityAdmin.leftMenuNavBar.openSettingsMenuBar()
     equityAdmin.settingsMenuNavBar.assertGlobalSettingsMenuOpen()
