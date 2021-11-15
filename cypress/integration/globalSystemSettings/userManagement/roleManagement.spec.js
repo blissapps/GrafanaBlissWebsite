@@ -29,33 +29,33 @@ describe('Role Management tests over User Management settings', () => {
     equityAdmin.roleManagementPage.assertNoRoleSelectedMessageIsDisplayed()
 
     let role = 'role to be searched'
-    equityAdmin.searchBar.search(role)
+    equityAdmin.searchEngine.search(role)
     equityAdmin.roleManagementPage.assertAmountOfSearchResultsInTheList(3)
     equityAdmin.roleManagementPage.assertSearchResultListAccuracy(rolesIdActiveTab)
     equityAdmin.roleManagementPage.assertOtherGroupListDisplayed()
     equityAdmin.roleManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
     role = 'ROLE TO BE SEARCHED'
-    equityAdmin.searchBar.search(role)
+    equityAdmin.searchEngine.search(role)
     equityAdmin.roleManagementPage.assertAmountOfSearchResultsInTheList(3)
     equityAdmin.roleManagementPage.assertSearchResultListAccuracy(rolesIdActiveTab)
     equityAdmin.roleManagementPage.assertOtherGroupListDisplayed()
     equityAdmin.roleManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
     role = 'role To Be searchEd'
-    equityAdmin.searchBar.search(role)
+    equityAdmin.searchEngine.search(role)
     equityAdmin.roleManagementPage.assertAmountOfSearchResultsInTheList(3)
     equityAdmin.roleManagementPage.assertSearchResultListAccuracy(rolesIdActiveTab)
     equityAdmin.roleManagementPage.assertOtherGroupListDisplayed()
     equityAdmin.roleManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
     role = 'randomName'
-    equityAdmin.searchBar.search(role)
+    equityAdmin.searchEngine.search(role)
     equityAdmin.roleManagementPage.assertNoResultFoundIsVisible()
     equityAdmin.roleManagementPage.assertOtherGroupListDisplayed()
 
     role = 'SELECT * FROM groups'
-    equityAdmin.searchBar.search(role)
+    equityAdmin.searchEngine.search(role)
     equityAdmin.roleManagementPage.assertNoResultFoundIsVisible()
     equityAdmin.roleManagementPage.assertOtherGroupListDisplayed()
 
@@ -63,33 +63,33 @@ describe('Role Management tests over User Management settings', () => {
     equityAdmin.roleManagementPage.clickTab('Inactive')
 
     role = 'ZZZ'
-    equityAdmin.searchBar.search(role)
+    equityAdmin.searchEngine.search(role)
     equityAdmin.roleManagementPage.assertAmountOfSearchResultsInTheList(2)
     equityAdmin.roleManagementPage.assertSearchResultListAccuracy(rolesIdInactiveTab)
     equityAdmin.roleManagementPage.assertOtherGroupListDisplayed()
     equityAdmin.roleManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
     role = 'zzz'
-    equityAdmin.searchBar.search(role)
+    equityAdmin.searchEngine.search(role)
     equityAdmin.roleManagementPage.assertAmountOfSearchResultsInTheList(2)
     equityAdmin.roleManagementPage.assertSearchResultListAccuracy(rolesIdInactiveTab)
     equityAdmin.roleManagementPage.assertOtherGroupListDisplayed()
     equityAdmin.roleManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
     role = 'ZzZ'
-    equityAdmin.searchBar.search(role)
+    equityAdmin.searchEngine.search(role)
     equityAdmin.roleManagementPage.assertAmountOfSearchResultsInTheList(2)
     equityAdmin.roleManagementPage.assertSearchResultListAccuracy(rolesIdInactiveTab)
     equityAdmin.roleManagementPage.assertOtherGroupListDisplayed()
     equityAdmin.roleManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
     role = 'randomName'
-    equityAdmin.searchBar.search(role)
+    equityAdmin.searchEngine.search(role)
     equityAdmin.roleManagementPage.assertNoResultFoundIsVisible()
     equityAdmin.roleManagementPage.assertOtherGroupListDisplayed()
 
     role = 'SELECT * FROM roles'
-    equityAdmin.searchBar.search(role)
+    equityAdmin.searchEngine.search(role)
     equityAdmin.roleManagementPage.assertNoResultFoundIsVisible()
     equityAdmin.roleManagementPage.assertOtherGroupListDisplayed()
   })
@@ -131,12 +131,12 @@ describe('Role Management tests over User Management settings', () => {
     equityAdmin.roleManagementPage.checkRoleManagementUrl()
     equityAdmin.roleManagementPage.assertActiveRolesAreDisplayed()
 
-    equityAdmin.leftMenuNavBar.clickLogoToGoToHomePage()
+    equityAdmin.applicationLeftMenuBar.clickLogoToGoToHomePage()
     equityAdmin.roleManagementPage.goBackOrForwardInBrowser('back')
     equityAdmin.roleManagementPage.checkRoleManagementUrl()
     equityAdmin.roleManagementPage.assertActiveRolesAreDisplayed()
 
-    equityAdmin.leftMenuNavBar.clickLogoToGoToHomePage()
+    equityAdmin.applicationLeftMenuBar.clickLogoToGoToHomePage()
     cy.visit('/tenant/1/settings/role-management', { failOnStatusCode: false })
     equityAdmin.roleManagementPage.checkRoleManagementUrl()
     equityAdmin.roleManagementPage.assertActiveRolesAreDisplayed()
@@ -639,7 +639,7 @@ describe('Role Management tests over User Management settings - Other specific t
   it.skip('C9281160_User_Does_Not_Have_View_Permissions_For_Groups_Only', () => {
     equityAdmin.loginPage.login(Cypress.env('VIEW_ONLY_USER_2_AUTH'))
 
-    equityAdmin.leftMenuNavBar.openSettingsMenuBar()
+    equityAdmin.applicationLeftMenuBar.openSettingsMenuBar()
     equityAdmin.settingsMenuNavBar.assertGlobalSettingsMenuOpen()
     equityAdmin.settingsMenuNavBar.assertUserManagementMenuDisplayed()
     equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', '', false)

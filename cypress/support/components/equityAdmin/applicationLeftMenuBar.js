@@ -9,7 +9,7 @@ const selectors = {
 /**
  * Main left nav bar that contains all the others navigation menus, such as Profile and Settings
  */
-class LeftMenuNavBar extends BasePage {
+class ApplicationLeftMenuBar extends BasePage {
   /**
    * Click in the logo to go to the home page
    */
@@ -35,4 +35,4 @@ class LeftMenuNavBar extends BasePage {
   }
 }
 
-export default LeftMenuNavBar
+export default ApplicationLeftMenuBar

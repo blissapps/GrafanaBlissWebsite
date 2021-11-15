@@ -24,12 +24,12 @@ describe('User Management tests over User Management settings', () => {
     equityAdmin.userManagementPage.checkUserManagementUrl() // Check this to make sure we are getting the correct search input in the correct page
 
     cy.log('EMAIL')
-    equityAdmin.searchBar.search(userEmail)
+    equityAdmin.searchEngine.search(userEmail)
     equityAdmin.userManagementPage.assertAmountOfSearchResults(10)
     equityAdmin.userManagementPage.assertDataDisplayedOnGsGridTableIsHighlighted(userEmail)
 
     cy.log('USERNAME')
-    equityAdmin.searchBar.search(username)
+    equityAdmin.searchEngine.search(username)
     equityAdmin.userManagementPage.assertAmountOfSearchResults(1)
     equityAdmin.userManagementPage.assertDataDisplayedOnGsGridTableIsHighlighted(username)
 
@@ -61,7 +61,7 @@ describe('User Management tests over User Management settings', () => {
 
     equityAdmin.userManagementPage.checkUserManagementUrl() // Check we are getting the correct search input in the correct page
 
-    equityAdmin.searchBar.search(username, 500)
+    equityAdmin.searchEngine.search(username, 500)
     equityAdmin.userManagementPage.clickUserTable(userId)
 
     equityAdmin.userManagementPage.assertRightL4BarIsDisplayed()
@@ -73,14 +73,14 @@ describe('User Management tests over User Management settings', () => {
   it('C7592117_Users_No_Users_Match_Search', () => {
     equityAdmin.userManagementPage.checkUserManagementUrl() // Check we are getting the correct search input in the correct page
 
-    equityAdmin.searchBar.search('test_empty_state')
+    equityAdmin.searchEngine.search('test_empty_state')
     equityAdmin.userManagementPage.assertNoUserMsgIdDisplayed()
   })
 
   it('C7592119_User_pastes_SQL_Code_Into_The_Search_Box', () => {
     equityAdmin.userManagementPage.checkUserManagementUrl() // Check we are getting the correct search input in the correct page
 
-    equityAdmin.searchBar.search('SELECT * FROM users')
+    equityAdmin.searchEngine.search('SELECT * FROM users')
     equityAdmin.userManagementPage.assertNoUserMsgIdDisplayed()
   })
 

@@ -1,8 +1,8 @@
 // ---------------------- Components --------------------------//
 import ClientSwitchMenu from '../components/equityAdmin/clientSwitchMenu'
-import LeftMenuNavBar from '../components/equityAdmin/leftMenuNavBar'
+import ApplicationLeftMenuBar from '../components/equityAdmin/applicationLeftMenuBar'
 import ProfileMenuNavBar from '../components/equityAdmin/profileMenuNavBar'
-import SearchBar from '../components/equityAdmin/searchBar'
+import SearchEngine from '../components/equityAdmin/searchEngine'
 import SettingsMenuNavBar from '../components/equityAdmin/settingsMenuNavBar'
 
 // --------------------------Pages ----------------------------//
@@ -38,9 +38,9 @@ class EquityAdmin {
   constructor() {
     // ---------------------- Components --------------------------//
     this.clientSwitchMenu = new ClientSwitchMenu()
-    this.leftMenuNavBar = new LeftMenuNavBar()
+    this.applicationLeftMenuBar = new ApplicationLeftMenuBar()
     this.profileMenuNavBar = new ProfileMenuNavBar()
-    this.searchBar = new SearchBar()
+    this.searchEngine = new SearchEngine()
     this.settingsMenuNavBar = new SettingsMenuNavBar()
 
     // --------------------------Pages ----------------------------//

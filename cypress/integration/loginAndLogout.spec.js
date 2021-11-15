@@ -33,26 +33,26 @@ describe('Login and Logout tests', () => {
     cy.loginSuccessfulXHRWaits()
     equityAdmin.homePage.checkUrl('/home')
 
-    equityAdmin.leftMenuNavBar.openProfileMenuBar()
+    equityAdmin.applicationLeftMenuBar.openProfileMenuBar()
     equityAdmin.profileMenuNavBar.assertSignOutButtonIsVisible()
     equityAdmin.profileMenuNavBar.closeProfileMenuNavBar()
 
-    equityAdmin.leftMenuNavBar.openProfileMenuBar()
+    equityAdmin.applicationLeftMenuBar.openProfileMenuBar()
     equityAdmin.profileMenuNavBar.openProfilePersonalInformationPage()
     equityAdmin.profileMenuNavBar.assertSignOutButtonIsVisible()
     equityAdmin.profileMenuNavBar.closeProfileMenuNavBar()
 
-    equityAdmin.leftMenuNavBar.openProfileMenuBar()
+    equityAdmin.applicationLeftMenuBar.openProfileMenuBar()
     equityAdmin.profileMenuNavBar.openProfileSecurityPage()
     equityAdmin.profileMenuNavBar.assertSignOutButtonIsVisible()
     equityAdmin.profileMenuNavBar.closeProfileMenuNavBar()
 
-    equityAdmin.leftMenuNavBar.openProfileMenuBar()
+    equityAdmin.applicationLeftMenuBar.openProfileMenuBar()
     equityAdmin.profileMenuNavBar.openProfilePreferencesPage()
     equityAdmin.profileMenuNavBar.assertSignOutButtonIsVisible()
     equityAdmin.profileMenuNavBar.closeProfileMenuNavBar()
 
-    equityAdmin.leftMenuNavBar.clickLogoToGoToHomePage()
+    equityAdmin.applicationLeftMenuBar.clickLogoToGoToHomePage()
     equityAdmin.profileMenuNavBar.assertSignOutButtonIsVisible(false)
   })
 })

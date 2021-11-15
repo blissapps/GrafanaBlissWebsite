@@ -5,7 +5,7 @@ describe('Security tests', () => {
 
   beforeEach(() => {
     equityAdmin.loginPage.login()
-    equityAdmin.leftMenuNavBar.openProfileMenuBar()
+    equityAdmin.applicationLeftMenuBar.openProfileMenuBar()
     equityAdmin.profileMenuNavBar.openProfileSecurityPage()
   })
 

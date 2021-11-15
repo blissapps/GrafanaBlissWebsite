@@ -5,7 +5,7 @@ describe('Personal Information tests', () => {
 
   beforeEach(() => {
     equityAdmin.loginPage.login()
-    equityAdmin.leftMenuNavBar.openProfileMenuBar()
+    equityAdmin.applicationLeftMenuBar.openProfileMenuBar()
     equityAdmin.profileMenuNavBar.openProfilePersonalInformationPage()
   })
 

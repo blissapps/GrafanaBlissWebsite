@@ -6,7 +6,7 @@ const selectors = {
   clearXButton: 'gs-global-search div.clear-action gs-svg-icon'
 }
 
-class SearchBar extends BasePage {
+class SearchEngine extends BasePage {
   /**
    * Search bar
    *
@@ -40,4 +40,4 @@ class SearchBar extends BasePage {
   }
 }
 
-export default SearchBar
+export default SearchEngine

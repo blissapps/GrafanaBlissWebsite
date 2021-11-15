@@ -1,7 +1,7 @@
 import BasePage from './basePage'
-import SearchBar from '../components/equityAdmin/searchBar'
+import SearchEngine from '../components/equityAdmin/searchEngine'
 
-const searchBar = new SearchBar()
+const searchEngine = new SearchEngine()
 
 const selectors = {
   groupBySelector: '#clientGroupSelect .select > input',
@@ -145,8 +145,8 @@ class HomePage extends BasePage {
    * @param {String} clientName Client name to search
    */
   selectClientFromTheListBySearch(clientName) {
-    searchBar.search(clientName)
-    searchBar.clearSearchBox()
+    searchEngine.search(clientName)
+    searchEngine.clearSearchBox()
     cy.contains(clientName) // avoid element detached from the DOM
     cy.xpath(`//gs-card//h4[normalize-space(text()) = '${clientName}']`).click()
   }

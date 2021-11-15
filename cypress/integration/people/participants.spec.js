@@ -21,24 +21,24 @@ describe('Participants tests', () => {
     equityAdmin.equityClientPeoplePage.checkClientPeopleUrl() // needed to use the search engine in the correct page
 
     // Id
-    equityAdmin.searchBar.search(participantId)
+    equityAdmin.searchEngine.search(participantId)
     equityAdmin.equityClientPeoplePage.assertAmountOfPeopleTable(1)
     equityAdmin.equityClientPeoplePage.assertParticipantDisplayed(participantId)
     equityAdmin.equityClientPeoplePage.assertDataDisplayedOnGsGridTableIsHighlighted(participantId.toString())
 
     // Email
-    equityAdmin.searchBar.search(participantEmail)
+    equityAdmin.searchEngine.search(participantEmail)
     equityAdmin.equityClientPeoplePage.assertAmountOfPeopleTable(233)
     equityAdmin.equityClientPeoplePage.assertDataDisplayedOnGsGridTableIsHighlighted(participantEmail)
 
     // Name
-    equityAdmin.searchBar.search(participantName)
+    equityAdmin.searchEngine.search(participantName)
     equityAdmin.equityClientPeoplePage.assertAmountOfPeopleTable(2)
     equityAdmin.equityClientPeoplePage.assertParticipantDisplayed(participantId)
     equityAdmin.equityClientPeoplePage.assertDataDisplayedOnGsGridTableIsHighlighted(participantName)
 
     // Last name
-    equityAdmin.searchBar.search(participantLastName)
+    equityAdmin.searchEngine.search(participantLastName)
     equityAdmin.equityClientPeoplePage.assertAmountOfPeopleTable(1)
     equityAdmin.equityClientPeoplePage.assertParticipantDisplayed(participantId)
     equityAdmin.equityClientPeoplePage.assertDataDisplayedOnGsGridTableIsHighlighted(participantName + ' ' + participantLastName)
@@ -52,9 +52,9 @@ describe('Participants tests', () => {
     equityAdmin.homePage.selectClientById(144)
     equityAdmin.equityClientPeoplePage.checkClientPeopleUrl() // needed to use the search engine in the correct page
 
-    equityAdmin.searchBar.search('thereIsNoOneLikeThisTEST')
+    equityAdmin.searchEngine.search('thereIsNoOneLikeThisTEST')
     equityAdmin.equityClientPeoplePage.assertNoParticipantsOrTrustsAvailableDisplayed()
-    equityAdmin.searchBar.search(participantId)
+    equityAdmin.searchEngine.search(participantId)
     equityAdmin.equityClientPeoplePage.getParticipantFromTheList(participantId).should('be.visible')
   })
 

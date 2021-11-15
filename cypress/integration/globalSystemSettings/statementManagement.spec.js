@@ -915,7 +915,7 @@ describe('Statement Management tests - View Only User', () => {
    * @missing_data Need to have one user associated with a group without permissions to see any User Management settings (including users, groups, roles, and DAPs (access filters))
    */
   it.skip('C7544061_User_Does_Not_Have_View_Permissions_For_Users,_Groups,_Roles,_And_Access_Filters', () => {
-    equityAdmin.leftMenuNavBar.openSettingsMenuBar()
+    equityAdmin.applicationLeftMenuBar.openSettingsMenuBar()
     equityAdmin.settingsMenuNavBar.assertGlobalSettingsMenuOpen()
     equityAdmin.settingsMenuNavBar.assertUserManagementMenuDisplayed(false)
   })

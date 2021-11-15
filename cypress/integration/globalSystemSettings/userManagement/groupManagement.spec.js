@@ -32,33 +32,33 @@ describe('Group Management tests over User Management settings', () => {
     equityAdmin.groupManagementPage.assertNoGroupSelectedMessageDisplayed()
 
     let group = 'GLOBAL'
-    equityAdmin.searchBar.search(group)
+    equityAdmin.searchEngine.search(group)
     equityAdmin.groupManagementPage.assertAmountOfSearchResultsInTheList(1)
     equityAdmin.groupManagementPage.assertSearchResultListAccuracy(groupsIdActiveTab)
     equityAdmin.groupManagementPage.assertOtherGroupListDisplayed()
     equityAdmin.groupManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
     group = 'global'
-    equityAdmin.searchBar.search(group)
+    equityAdmin.searchEngine.search(group)
     equityAdmin.groupManagementPage.assertAmountOfSearchResultsInTheList(1)
     equityAdmin.groupManagementPage.assertSearchResultListAccuracy(groupsIdActiveTab)
     equityAdmin.groupManagementPage.assertOtherGroupListDisplayed()
     equityAdmin.groupManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
     group = 'GLObal'
-    equityAdmin.searchBar.search(group)
+    equityAdmin.searchEngine.search(group)
     equityAdmin.groupManagementPage.assertAmountOfSearchResultsInTheList(1)
     equityAdmin.groupManagementPage.assertSearchResultListAccuracy(groupsIdActiveTab)
     equityAdmin.groupManagementPage.assertOtherGroupListDisplayed()
     equityAdmin.groupManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
     group = 'randomName'
-    equityAdmin.searchBar.search(group)
+    equityAdmin.searchEngine.search(group)
     equityAdmin.groupManagementPage.assertNoResultFoundIsVisible()
     equityAdmin.groupManagementPage.assertOtherGroupListDisplayed()
 
     group = 'SELECT * FROM groups'
-    equityAdmin.searchBar.search(group)
+    equityAdmin.searchEngine.search(group)
     equityAdmin.groupManagementPage.assertNoResultFoundIsVisible()
     equityAdmin.groupManagementPage.assertOtherGroupListDisplayed()
 
@@ -66,33 +66,33 @@ describe('Group Management tests over User Management settings', () => {
     equityAdmin.groupManagementPage.clickTab('Inactive')
 
     group = 'ABC'
-    equityAdmin.searchBar.search(group)
+    equityAdmin.searchEngine.search(group)
     equityAdmin.groupManagementPage.assertAmountOfSearchResultsInTheList(2)
     equityAdmin.groupManagementPage.assertSearchResultListAccuracy(groupsIdInactiveTab)
     equityAdmin.groupManagementPage.assertOtherGroupListDisplayed()
     equityAdmin.groupManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
     group = 'abc'
-    equityAdmin.searchBar.search(group)
+    equityAdmin.searchEngine.search(group)
     equityAdmin.groupManagementPage.assertAmountOfSearchResultsInTheList(2)
     equityAdmin.groupManagementPage.assertSearchResultListAccuracy(groupsIdInactiveTab)
     equityAdmin.groupManagementPage.assertOtherGroupListDisplayed()
     equityAdmin.groupManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
     group = 'AbC'
-    equityAdmin.searchBar.search(group)
+    equityAdmin.searchEngine.search(group)
     equityAdmin.groupManagementPage.assertAmountOfSearchResultsInTheList(2)
     equityAdmin.groupManagementPage.assertSearchResultListAccuracy(groupsIdInactiveTab)
     equityAdmin.groupManagementPage.assertOtherGroupListDisplayed()
     equityAdmin.groupManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
 
     group = 'randomName'
-    equityAdmin.searchBar.search(group)
+    equityAdmin.searchEngine.search(group)
     equityAdmin.groupManagementPage.assertNoResultFoundIsVisible()
     equityAdmin.groupManagementPage.assertOtherGroupListDisplayed()
 
     group = 'SELECT * FROM groups'
-    equityAdmin.searchBar.search(group)
+    equityAdmin.searchEngine.search(group)
     equityAdmin.groupManagementPage.assertNoResultFoundIsVisible()
     equityAdmin.groupManagementPage.assertOtherGroupListDisplayed()
   })
@@ -115,10 +115,10 @@ describe('Group Management tests over User Management settings', () => {
     const clientId = [144]
 
     equityAdmin.groupManagementPage.clickGroupById(groupId)
-    equityAdmin.searchBar.search(searchTerm)
+    equityAdmin.searchEngine.search(searchTerm)
     equityAdmin.groupManagementPage.assertSearchResultListAccuracy([groupId])
     equityAdmin.groupManagementPage.assertOtherGroupListDisplayed()
-    equityAdmin.searchBar.search(searchTerm)
+    equityAdmin.searchEngine.search(searchTerm)
 
     // Roles and DAPs to be found in the search
     cy.log('------ Find Roles and DAPs ------')
@@ -135,7 +135,7 @@ describe('Group Management tests over User Management settings', () => {
 
     // Users to be found in the search
     cy.log('------ Find Users ------')
-    equityAdmin.searchBar.search(user)
+    equityAdmin.searchEngine.search(user)
     equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('roles', 1)
     equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('roles', 'No')
     equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 2)
@@ -148,7 +148,7 @@ describe('Group Management tests over User Management settings', () => {
 
     // Clients to be found in the search
     cy.log('------ Find Clients ------')
-    equityAdmin.searchBar.search(client)
+    equityAdmin.searchEngine.search(client)
     equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('roles', 1)
     equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('roles', 'No')
     equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 2)
@@ -161,7 +161,7 @@ describe('Group Management tests over User Management settings', () => {
 
     // Search for text without returning any result
     cy.log('------ No matching text ------')
-    equityAdmin.searchBar.search('textDoesNotReturnNothingAtAll')
+    equityAdmin.searchEngine.search('textDoesNotReturnNothingAtAll')
     equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('roles', 'No')
     equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('daps', 'No')
     equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('users', 'No')
@@ -302,14 +302,14 @@ describe('Group Management tests over User Management settings', () => {
 
     // Validates user 1 is linked to the group over User Management settings
     equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'user', false)
-    equityAdmin.searchBar.search(userName[0])
+    equityAdmin.searchEngine.search(userName[0])
     equityAdmin.userManagementPage.clickUserTable(userIds[0])
     equityAdmin.userManagementPage.clickLinkToAccessUserInfoDetailsOnRightNavBar()
     equityAdmin.userManagementPage.assertUserInfoContentInRightNavBar([groupName])
     equityAdmin.userManagementPage.clickOutsideToCloseL4RightBar()
 
     // Validates user 2 is linked to the group over User Management settings
-    equityAdmin.searchBar.search(userName[1])
+    equityAdmin.searchEngine.search(userName[1])
     equityAdmin.userManagementPage.clickUserTable(userIds[1])
     equityAdmin.userManagementPage.clickLinkToAccessUserInfoDetailsOnRightNavBar()
     equityAdmin.userManagementPage.assertUserInfoContentInRightNavBar([groupName])
@@ -676,7 +676,7 @@ describe('Group Management tests over User Management settings - Other specific 
   it.skip('C9277665_User_Does_Not_Have_View_Permission_For_Groups_Only', () => {
     equityAdmin.loginPage.login(Cypress.env('VIEW_ONLY_USER_2_AUTH'))
 
-    equityAdmin.leftMenuNavBar.openSettingsMenuBar()
+    equityAdmin.applicationLeftMenuBar.openSettingsMenuBar()
     equityAdmin.settingsMenuNavBar.assertGlobalSettingsMenuOpen()
     equityAdmin.settingsMenuNavBar.assertUserManagementMenuDisplayed()
     equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', '', false)

@@ -1,5 +1,5 @@
 import BasePage from '../../pages/basePage'
-import LeftMenuNavBar from './leftMenuNavBar'
+import ApplicationLeftMenuBar from './applicationLeftMenuBar'
 
 const selectors = {
   clientSwitchButton: '#clientSwitchClick',
@@ -17,7 +17,7 @@ const globalSettingsMenuSelectors = {
   backButton: '#navBarReturn'
 }
 
-const leftMenuNavBar = new LeftMenuNavBar()
+const applicationLeftMenuNavBar = new ApplicationLeftMenuBar()
 
 class SettingsMenuNavBar extends BasePage {
   // --------------------------------------- CLICKS  --------------------------------------------- //
@@ -100,7 +100,7 @@ class SettingsMenuNavBar extends BasePage {
     item = item.toLowerCase()
     subItem = subItem.toLowerCase()
 
-    openLeftBar ? leftMenuNavBar.openSettingsMenuBar() : true
+    openLeftBar ? applicationLeftMenuNavBar.openSettingsMenuBar() : true
 
     // Menus
     if (item === 'user') {

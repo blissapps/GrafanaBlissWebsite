@@ -433,64 +433,64 @@ describe('Data Access Profiles tests over User Management settings', () => {
     equityAdmin.dapManagementPage.assertNoDapSelectedMessageIsDisplayed()
 
     // ACTIVE TAB
-    equityAdmin.searchBar.search(dap)
+    equityAdmin.searchEngine.search(dap)
     equityAdmin.dapManagementPage.assertAmountOfSearchResultsInTheList(3)
     equityAdmin.dapManagementPage.assertSearchResultListAccuracy(dapIds)
 
     dap = 'dap to search'
-    equityAdmin.searchBar.search(dap)
+    equityAdmin.searchEngine.search(dap)
     equityAdmin.dapManagementPage.assertAmountOfSearchResultsInTheList(3)
     equityAdmin.dapManagementPage.assertSearchResultListAccuracy(dapIds)
 
     dap = 'dAp To SEarch 1'
-    equityAdmin.searchBar.search(dap)
+    equityAdmin.searchEngine.search(dap)
     equityAdmin.dapManagementPage.assertAmountOfSearchResultsInTheList(1)
     equityAdmin.dapManagementPage.assertSearchResultListAccuracy([dapIds[0]])
 
     dap = 'randomName' + utils.getRandomNumber()
-    equityAdmin.searchBar.search(dap)
+    equityAdmin.searchEngine.search(dap)
     equityAdmin.dapManagementPage.assertNoResultFoundIsVisible()
 
     dap = 'SELECT * FROM daps'
-    equityAdmin.searchBar.search(dap)
+    equityAdmin.searchEngine.search(dap)
     equityAdmin.dapManagementPage.assertNoResultFoundIsVisible()
 
     // Verify conditions in a selected active dap
-    equityAdmin.searchBar.clearSearchBoxByXIcon()
+    equityAdmin.searchEngine.clearSearchBoxByXIcon()
     equityAdmin.dapManagementPage.clickDapById(dapIds[0])
-    equityAdmin.searchBar.search(dapCondition)
+    equityAdmin.searchEngine.search(dapCondition)
     equityAdmin.dapManagementPage.assertAmountOfSearchedConditionResults(1)
 
     // INACTIVE TAB
     equityAdmin.dapManagementPage.clickTab('Inactive')
 
     dap = 'DAP TO SEARCH'
-    equityAdmin.searchBar.search(dap)
+    equityAdmin.searchEngine.search(dap)
     equityAdmin.dapManagementPage.assertAmountOfSearchResultsInTheList(3)
     equityAdmin.dapManagementPage.assertSearchResultListAccuracy(dapInactiveIds)
 
     dap = 'dap to search'
-    equityAdmin.searchBar.search(dap)
+    equityAdmin.searchEngine.search(dap)
     equityAdmin.dapManagementPage.assertAmountOfSearchResultsInTheList(3)
     equityAdmin.dapManagementPage.assertSearchResultListAccuracy(dapInactiveIds)
 
     dap = 'dAp To SEarch 4'
-    equityAdmin.searchBar.search(dap)
+    equityAdmin.searchEngine.search(dap)
     equityAdmin.dapManagementPage.assertAmountOfSearchResultsInTheList(1)
     equityAdmin.dapManagementPage.assertSearchResultListAccuracy([dapInactiveIds[0]])
 
     dap = 'randomName'
-    equityAdmin.searchBar.search(dap)
+    equityAdmin.searchEngine.search(dap)
     equityAdmin.dapManagementPage.assertNoResultFoundIsVisible()
 
     dap = 'SELECT * FROM daps'
-    equityAdmin.searchBar.search(dap)
+    equityAdmin.searchEngine.search(dap)
     equityAdmin.dapManagementPage.assertNoResultFoundIsVisible()
 
     // Verify conditions in a selected active dap
-    equityAdmin.searchBar.clearSearchBoxByXIcon()
+    equityAdmin.searchEngine.clearSearchBoxByXIcon()
     equityAdmin.dapManagementPage.clickDapById(dapInactiveIds[0])
-    equityAdmin.searchBar.search(dapCondition)
+    equityAdmin.searchEngine.search(dapCondition)
     equityAdmin.dapManagementPage.assertAmountOfSearchedConditionResults(1)
   })
 
@@ -504,26 +504,26 @@ describe('Data Access Profiles tests over User Management settings', () => {
 
     cy.log(' ---------------- ACTIVE TAB --------------------- ')
 
-    equityAdmin.searchBar.search(dap)
+    equityAdmin.searchEngine.search(dap)
     equityAdmin.dapManagementPage.assertAmountOfSearchResultsInTheList(1)
     equityAdmin.dapManagementPage.assertSearchResultListAccuracy([dapId])
 
     dap = '1$¨'
-    equityAdmin.searchBar.search(dap)
+    equityAdmin.searchEngine.search(dap)
     equityAdmin.dapManagementPage.assertAmountOfSearchResultsInTheList(1)
     equityAdmin.dapManagementPage.assertSearchResultListAccuracy([dapId])
 
     dap = '£`¬'
-    equityAdmin.searchBar.search(dap)
+    equityAdmin.searchEngine.search(dap)
     equityAdmin.dapManagementPage.assertAmountOfSearchResultsInTheList(1)
     equityAdmin.dapManagementPage.assertSearchResultListAccuracy([dapId])
 
     dap = '[d]'
-    equityAdmin.searchBar.search(dap)
+    equityAdmin.searchEngine.search(dap)
     equityAdmin.dapManagementPage.assertNoResultFoundIsVisible()
 
     dap = '1$¨(*&!¨_}º]+£`¬'.repeat(25) // huge amount of chars to search
-    equityAdmin.searchBar.search(dap)
+    equityAdmin.searchEngine.search(dap)
     equityAdmin.dapManagementPage.assertNoResultFoundIsVisible()
 
     cy.log(' ---------------- INACTIVE TAB --------------------- ')
@@ -533,26 +533,26 @@ describe('Data Access Profiles tests over User Management settings', () => {
 
     dap = '(*&!¨_}º]'
     dapId = 46
-    equityAdmin.searchBar.search(dap)
+    equityAdmin.searchEngine.search(dap)
     equityAdmin.dapManagementPage.assertAmountOfSearchResultsInTheList(1)
     equityAdmin.dapManagementPage.assertSearchResultListAccuracy([dapId])
 
     dap = '(*&'
-    equityAdmin.searchBar.search(dap)
+    equityAdmin.searchEngine.search(dap)
     equityAdmin.dapManagementPage.assertAmountOfSearchResultsInTheList(1)
     equityAdmin.dapManagementPage.assertSearchResultListAccuracy([dapId])
 
     dap = '}º]'
-    equityAdmin.searchBar.search(dap)
+    equityAdmin.searchEngine.search(dap)
     equityAdmin.dapManagementPage.assertAmountOfSearchResultsInTheList(1)
     equityAdmin.dapManagementPage.assertSearchResultListAccuracy([dapId])
 
     dap = '[d]'
-    equityAdmin.searchBar.search(dap)
+    equityAdmin.searchEngine.search(dap)
     equityAdmin.dapManagementPage.assertNoResultFoundIsVisible()
 
     dap = '(*&!¨_}º]'.repeat(40) // huge amount of chars to search
-    equityAdmin.searchBar.search(dap)
+    equityAdmin.searchEngine.search(dap)
     equityAdmin.dapManagementPage.assertNoResultFoundIsVisible()
   })
 

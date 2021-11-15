@@ -60,7 +60,7 @@ describe('Home page tests', () => {
     const clientId = 144
 
     // Search for a client behavior
-    equityAdmin.leftMenuNavBar.openSettingsMenuBar()
+    equityAdmin.applicationLeftMenuBar.openSettingsMenuBar()
     equityAdmin.settingsMenuNavBar.clickClientSwitchButton()
     equityAdmin.clientSwitchMenu.searchClientInSwitchClient('ClientNameThatDoesNotExists')
     equityAdmin.clientSwitchMenu.assertNoClientsFoundInClientSwitch()
@@ -71,7 +71,7 @@ describe('Home page tests', () => {
     equityAdmin.equityClientPeoplePage.assertClientNameInTheHeader(clientName)
 
     // View all clients behavior
-    equityAdmin.leftMenuNavBar.openSettingsMenuBar()
+    equityAdmin.applicationLeftMenuBar.openSettingsMenuBar()
     equityAdmin.settingsMenuNavBar.clickClientSwitchButton()
     equityAdmin.clientSwitchMenu.clickViewAllClients()
     equityAdmin.homePage.checkHomePageUrl()
@@ -82,7 +82,7 @@ describe('Home page tests', () => {
     const clientId = 144
 
     // Favorite
-    equityAdmin.leftMenuNavBar.openSettingsMenuBar()
+    equityAdmin.applicationLeftMenuBar.openSettingsMenuBar()
     equityAdmin.settingsMenuNavBar.clickClientSwitchButton()
     equityAdmin.clientSwitchMenu.clickToFavoriteClientInSwitchClientMenu(clientId)
     equityAdmin.clientSwitchMenu.assertClientIsFavorite(clientId)
@@ -93,7 +93,7 @@ describe('Home page tests', () => {
     equityAdmin.homePage.assertClientIsFavorite(clientId)
 
     // Unfavorite
-    equityAdmin.leftMenuNavBar.openSettingsMenuBar()
+    equityAdmin.applicationLeftMenuBar.openSettingsMenuBar()
     equityAdmin.settingsMenuNavBar.clickClientSwitchButton()
     equityAdmin.clientSwitchMenu.clickToFavoriteClientInSwitchClientMenu(clientId)
     equityAdmin.clientSwitchMenu.assertClientIsFavorite(clientId, false)

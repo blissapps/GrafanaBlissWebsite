@@ -5,7 +5,7 @@ describe('Preferences tests', () => {
 
   beforeEach(() => {
     equityAdmin.loginPage.login()
-    equityAdmin.leftMenuNavBar.openProfileMenuBar()
+    equityAdmin.applicationLeftMenuBar.openProfileMenuBar()
     equityAdmin.profileMenuNavBar.openProfilePreferencesPage()
   })
 
@@ -24,28 +24,28 @@ describe('Preferences tests', () => {
    */
   it('C1234567_Change_Language_Successfully_To_Portuguese', () => {
     equityAdmin.preferencesPage.changeLanguage('portuguese')
-    equityAdmin.leftMenuNavBar.clickLogoToGoToHomePage()
+    equityAdmin.applicationLeftMenuBar.clickLogoToGoToHomePage()
 
-    equityAdmin.leftMenuNavBar.openSettingsMenuBar()
-    equityAdmin.leftMenuNavBar.getElementByText('Gestão de Utilizadores').should('be.visible')
-    equityAdmin.leftMenuNavBar.getElementByText('Gestão de Declaração').should('be.visible')
+    equityAdmin.applicationLeftMenuBar.openSettingsMenuBar()
+    equityAdmin.applicationLeftMenuBar.getElementByText('Gestão de Utilizadores').should('be.visible')
+    equityAdmin.applicationLeftMenuBar.getElementByText('Gestão de Declaração').should('be.visible')
     equityAdmin.settingsMenuNavBar.closeGlobalSettingsNavBar()
 
     equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user')
-    equityAdmin.leftMenuNavBar.getElementByText('Gestão de Utilizadores').should('be.visible')
-    equityAdmin.leftMenuNavBar.getElementByText('Gestão de Grupos').should('be.visible')
-    equityAdmin.leftMenuNavBar.getElementByText('Gestão de Funções').should('be.visible')
-    equityAdmin.leftMenuNavBar.getElementByText('Filtros para Acesso de Dados').should('be.visible')
+    equityAdmin.applicationLeftMenuBar.getElementByText('Gestão de Utilizadores').should('be.visible')
+    equityAdmin.applicationLeftMenuBar.getElementByText('Gestão de Grupos').should('be.visible')
+    equityAdmin.applicationLeftMenuBar.getElementByText('Gestão de Funções').should('be.visible')
+    equityAdmin.applicationLeftMenuBar.getElementByText('Filtros para Acesso de Dados').should('be.visible')
     equityAdmin.settingsMenuNavBar.closeGlobalSettingsNavBar()
 
-    equityAdmin.leftMenuNavBar.openProfileMenuBar()
-    equityAdmin.leftMenuNavBar.getElementByText('Informações pessoais').should('be.visible')
-    equityAdmin.leftMenuNavBar.getElementByText('Segurança').should('be.visible')
-    equityAdmin.leftMenuNavBar.getElementByText('Preferências').should('be.visible')
+    equityAdmin.applicationLeftMenuBar.openProfileMenuBar()
+    equityAdmin.applicationLeftMenuBar.getElementByText('Informações pessoais').should('be.visible')
+    equityAdmin.applicationLeftMenuBar.getElementByText('Segurança').should('be.visible')
+    equityAdmin.applicationLeftMenuBar.getElementByText('Preferências').should('be.visible')
     equityAdmin.profileMenuNavBar.closeProfileMenuNavBar()
 
     // teardown
-    equityAdmin.leftMenuNavBar.openProfileMenuBar()
+    equityAdmin.applicationLeftMenuBar.openProfileMenuBar()
     equityAdmin.profileMenuNavBar.openProfilePreferencesPage()
     equityAdmin.preferencesPage.changeLanguage()
     equityAdmin.profileMenuNavBar.closeProfileMenuNavBar()
