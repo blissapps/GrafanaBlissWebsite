@@ -1,7 +1,7 @@
 import EquityAdmin from '../../support/pages/equityAdmin'
 
 /**
- * Skipping until this one starts to be considered stable
+ * * Skipping until this one starts to be considered stable
  */
 describe('Participants tests', () => {
   const equityAdmin = new EquityAdmin()
@@ -76,7 +76,7 @@ describe('Participants tests', () => {
   /**
    * Verify PARTICIPANT DETAIL container data when picking a participant from the Participants table
    *
-   * SkIPPING due to https://globalshares.atlassian.net/browse/PB-1023
+   * * SkIPPING DEU TO https://globalshares.atlassian.net/browse/PB-1023
    */
   it.skip('C12177200_Verify_Participant_Detail_Data_On_L4_Container', () => {
     const participantId = 113026

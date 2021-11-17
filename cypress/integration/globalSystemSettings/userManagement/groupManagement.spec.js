@@ -102,7 +102,7 @@ describe('Group Management tests over User Management settings', () => {
    * Attention the searchTerm "To be searched" needs to have at least one letter in uppercase mode, so we can catch the bug raised in PB-962
    *
    *
-   * SkIPPING due to https://globalshares.atlassian.net/browse/PB-962
+   * * SkIPPING due to https://globalshares.atlassian.net/browse/PB-962
    */
   it.skip('C9277663_Groups_Happy_Path_For_Searching_Behavior_In_Groups_Roles_Daps_Clients_And_Users_Over_The_Groups_Page', () => {
     const groupId = 1066
@@ -658,7 +658,7 @@ describe('Group Management tests over User Management settings - View Only User'
   /**
    * @missing_data Need to have a group linked with a user that has all Group permissions but Create
    *
-   * SkIPPING due to https://globalshares.atlassian.net/browse/PB-979
+   * * SkIPPING due to https://globalshares.atlassian.net/browse/PB-979
    */
   it.skip('C7493035_Groups_User_Does_Not_Have_Group_Permission_To_Create_Group', () => {
     equityAdmin.groupManagementPage.assertCreateNewGroupButtonDisplayed(false)

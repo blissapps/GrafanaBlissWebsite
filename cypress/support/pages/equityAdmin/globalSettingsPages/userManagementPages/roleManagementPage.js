@@ -306,7 +306,7 @@ class RoleManagementPage extends BaseManagementPage {
    *
    * @param {Boolean} editable True to assert the role is editable, false otherwise
    *
-   * @missing_steps Validate the header(role name) as well as soon as this ticket is ready: https://globalshares.atlassian.net/browse/PB-963
+   * TODO: @missing_steps Validate the header(role name) as well as soon as this ticket is ready: https://globalshares.atlassian.net/browse/PB-963
    */
   assertRoleIsEditable(editable = true) {
     // header not editable

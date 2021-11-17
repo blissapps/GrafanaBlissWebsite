@@ -173,7 +173,7 @@ describe('Role Management tests over User Management settings', () => {
   })
 
   /**
-   * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-922
+   * * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-922
    */
   it.skip('C7499702_Create_A_New_Role_Mandatory_Fields_Are_Not_Populated', () => {
     const roleName = 'Filling Mandatory Fields ' + utils.getRandomNumber()
@@ -194,7 +194,7 @@ describe('Role Management tests over User Management settings', () => {
   })
 
   /**
-   * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-922
+   * * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-922
    */
   it.skip('C7499704_Create_A_New_Role_Name_Character_Limit_When_Creating', () => {
     let roleName = utils.generateRandomString(51)
@@ -220,7 +220,7 @@ describe('Role Management tests over User Management settings', () => {
   /**
    * @missing_data Need to have a role created
    *
-   * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-922
+   * * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-922
    */
   it.skip('C7499705_Create_A_New_Role_Name_Character_Limit_When_Editing', () => {
     const roleId = 1375
@@ -490,9 +490,9 @@ describe('Role Management tests over User Management settings', () => {
   /**
    * @missing_data For this scenario we need to have a role called 'Activate and Inactivate' in the Active tab
    *
-   * SKIPPING also due to https://globalshares.atlassian.net/browse/PB-905 and https://globalshares.atlassian.net/browse/PB-963
+   * * SKIPPING also due to https://globalshares.atlassian.net/browse/PB-905 and https://globalshares.atlassian.net/browse/PB-963
    *
-   * @missing_steps check if the role is editable or not
+   * TODO: @missing_steps check if the role is editable or not
    */
   it.skip('C7499833_Deactivate_And_Activate_Role', () => {
     const roleId = 1475
@@ -522,7 +522,7 @@ describe('Role Management tests over User Management settings', () => {
   /**
    * @missing_data Need to have a role called "Duplicate me" or something like that
    *
-   * SKIPPING also due to https://globalshares.atlassian.net/browse/PB-906
+   * * SKIPPING also due to https://globalshares.atlassian.net/browse/PB-906
    */
   it.skip('C7544052_Roles_Duplicate_A_Role', () => {
     const roleId = 1390
@@ -539,7 +539,7 @@ describe('Role Management tests over User Management settings', () => {
   /**
    * @missing_data Need to have a role with 50 characters in the name
    *
-   * SKIPPING also due to https://globalshares.atlassian.net/browse/PB-906 and https://globalshares.atlassian.net/browse/PB-922
+   * * SKIPPING also due to https://globalshares.atlassian.net/browse/PB-906 and https://globalshares.atlassian.net/browse/PB-922
    */
   it.skip('C7544054_Duplicate_Role_Maximum_Characters_In_Name_Field', () => {
     const roleId = 1483
@@ -583,9 +583,9 @@ describe('Role Management tests over User Management settings - View Only User',
   /**
    * @missing_data For test this scenario there should be no "Create Role" permission for the user.
    *
-   * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-979
+   * * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-979
    *
-   * @missing_step What happens when the user tries do access this by the URL? Some error message?
+   * TODO: @missing_steps What happens when the user tries do access this by the URL? Some error message?
    */
   it.skip('C7499703_User_Does_Not_Have_Permissions_To_Create_New_Role', () => {
     equityAdmin.roleManagementPage.clickTab('Active')
@@ -611,8 +611,8 @@ describe('Role Management tests over User Management settings - View Only User',
   /**
    * @missing_data Need to have a user with view only access to roles. Also, this user must have access to a group that contains this role linked, so the user can see the role
    *
-   * @missing_steps
-   * SKIPPING also due to https://globalshares.atlassian.net/browse/PB-963, https://globalshares.atlassian.net/browse/PB-975 and https://globalshares.atlassian.net/browse/PB-1001
+   * TODO: @missing_steps
+   * * SKIPPING also due to https://globalshares.atlassian.net/browse/PB-963, https://globalshares.atlassian.net/browse/PB-975 and https://globalshares.atlassian.net/browse/PB-1001
    */
   it.skip('C7544053_Duplicate_Role_No_Permission', () => {
     const roleId = 1475

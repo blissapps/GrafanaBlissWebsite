@@ -63,7 +63,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
   /**
    * @missing_data Need to have at least 1 active and 1 inactive DAP created
    *
-   * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-926
+   * * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-926
    */
   it.skip('C7544057_DAP_Happy_Path_Alphabetically_List_Active_And_Inactive_Data_Access_Profile(s)', () => {
     // Active tab
@@ -151,7 +151,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
   /**
    * @missing_data Need to have a DAP and any 2 groups available with 2 existing groups linked
    *
-   * @chrome_only
+   * ! @chrome_only Network commands are only manageable for chrome based browsers
    */
   it.skip('C9277652_DAP_Error_Linked_Groups_To_DAPs_Cannot_Connect_API_Timeout', { browser: '!firefox' }, () => {
     const dapId = 14
@@ -221,7 +221,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
   })
 
   /**
-   * SKIPPING DUE TO: https://globalshares.atlassian.net/browse/PB-920 and https://globalshares.atlassian.net/browse/PB-927
+   * * SKIPPING DUE TO: https://globalshares.atlassian.net/browse/PB-920 and https://globalshares.atlassian.net/browse/PB-927
    */
   it.skip('C8981127_DAP_Save_Without_Name_And_Conditions', () => {
     const dapName = 'Created DAP ' + utils.getRandomNumber()
@@ -595,7 +595,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
   /**
    * @missing_data Need to have a DAP with 1 role and with 13 Groups linked to a this DAP
    *
-   * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-949
+   * * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-949
    */
   it.skip('C9446198_Groups_Expand_And_Collapse_DAP_With_Many_Groups_added', () => {
     const dapId = 58

@@ -59,9 +59,9 @@ describe('Statement Management tests', () => {
   })
 
   /**
-   * @firefox_limited because Firefox does not save the downloaded file in the default cypress download folder.
-   * It works only in the pipeline with Linux machines. You will face an issue (running this test locally.) while this issue is not resolved by the Cypress team.
-   * Issue open in https://github.com/cypress-io/cypress/issues/17896
+   * ! @firefox_limited because Firefox does not save the downloaded file in the default cypress download folder:
+   * * It works only in the pipeline with Linux machines. You will face an issue (running this test locally.) while this issue is not resolved by the Cypress team.
+   * * Issue open in https://github.com/cypress-io/cypress/issues/17896
    *
    * @missing_data Client with "Pending Validation", PUBLISHED, or PARTIALLY PUBLISHED statement
    */
@@ -99,7 +99,7 @@ describe('Statement Management tests', () => {
   })
 
   /**
-   * @chrome_only https://globalshares.atlassian.net/browse/GDP-49661
+   * ! @chrome_only https://globalshares.atlassian.net/browse/GDP-49661
    */
   it('C7353834_Filter_To_Check_Empty_State', () => {
     const clientName = 'None'
@@ -111,7 +111,7 @@ describe('Statement Management tests', () => {
   })
 
   /**
-   * SkIPPING DUE TO https://globalshares.atlassian.net/browse/PB-1008
+   * * SkIPPING DUE TO https://globalshares.atlassian.net/browse/PB-1008
    */
   it.skip('C7394266_Filter_Behavior_of_Participant_Regulatory_Linkage', () => {
     const clientName = 'Acacia Pharma'
@@ -197,7 +197,7 @@ describe('Statement Management tests', () => {
   })
 
   /**
-   * @missing_steps scroll not working properly
+   * TODO: @missing_steps scroll not working properly
    *
    */
   it('C7394265_View_Statements', () => {
@@ -307,12 +307,11 @@ describe('Statement Management tests', () => {
   })
 
   /**
-   * @firefox_limited because Firefox does not save the downloaded file in the default cypress download folder.
-   * It works only in the pipeline with Linux machines. You will face an issue (running this test locally.) while this issue is not resolved by the Cypress team.
+   * ! @firefox_limited because Firefox does not save the downloaded file in the default cypress download folder.
+   * * It works only in the pipeline with Linux machines. You will face an issue (running this test locally.) while this issue is not resolved by the Cypress team.
+   * * Issue open in https://github.com/cypress-io/cypress/issues/17896
    *
-   * Issue open in https://github.com/cypress-io/cypress/issues/17896
-   *
-   * SKIPPED because this test will have a different behavior
+   * * SKIPPED because this test will have a different behavior
    *
    */
   it.skip('C7395183_download_PDF_File_From_Participant', () => {
@@ -377,7 +376,7 @@ describe('Statement Management tests', () => {
    *
    * @missing_data Need to have one client Initiated to be able to Reconcile it
    *
-   * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-912
+   * * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-912
    *
    */
   it.skip('C9281170_Statements_L4_Window', () => {
@@ -507,7 +506,7 @@ describe('Statement Management tests', () => {
    *
    * @missing_data Need to have one client with PARTIALLY PUBLISHED status and at least 3 participants into it with ON HOLD status and 3 with other statuses
    *
-   * @missing_steps
+   * TODO: @missing_steps
    *
    */
   it.skip('C9324992_Publish_Participant_Statements_Not_On_Hold', () => {
@@ -618,7 +617,7 @@ describe('Statement Management tests', () => {
   /**
    * @missing_data We need a client that has participants with all statuses, such as Initiated, Pending Validation, On Hold, Approved, Published, Recalled...
    *
-   * @missing_steps This one is made only for On Hold status. Need to do it for the others statuses as well when proper new data is provided
+   * TODO: @missing_steps This one is made only for On Hold status. Need to do it for the others statuses as well when proper new data is provided
    */
   it.skip('C7592123_Audit_Log_Initiated,_Pending_Validation,_On_Hold,_Approved,_Published,_Recalled,_and_Viewed_Statuses', () => {
     const clientPendingValidation = 'Keywords Studios plc'
@@ -730,7 +729,7 @@ describe('Statement Management tests', () => {
   /**
    * @missing_data We need clients with all statuses available, such as Initiated, Pending Validation, On Hold, Approved, Published, Recalled...
    *
-   * @missing_steps Waiting for https://globalshares.atlassian.net/browse/PB-954
+   * TODO: @missing_steps Waiting for https://globalshares.atlassian.net/browse/PB-954
    */
   it.skip('C7623839_Statements_Partially_Published_Or_Published_States_Can_Be_Recalled', () => {
     const clientPublished = 'Garrett Motion'

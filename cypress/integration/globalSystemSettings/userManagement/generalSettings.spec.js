@@ -8,7 +8,7 @@ describe('User Management tests over User Management settings - View Only User',
   })
 
   /**
-   * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-1005
+   * * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-1005
    */
   it.skip('C11649850_Assert_View_Only_Status_Badge_Displayed_Next_To_Settings_Titles', () => {
     // User
