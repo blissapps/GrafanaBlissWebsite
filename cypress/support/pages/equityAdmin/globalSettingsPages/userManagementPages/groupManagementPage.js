@@ -410,7 +410,7 @@ class GroupManagementPage extends BaseManagementPage {
    *
    * @param {Boolean} displayed True is the default value to assert the button is displayed. False otherwise
    */
-  assertNewGroupButtonDisplayed(displayed = true) {
+  assertCreateNewGroupButtonDisplayed(displayed = true) {
     displayed ? cy.get(selectors.newGroupBtn).should('be.visible') : cy.get(selectors.newGroupBtn).should('not.exist')
   }
 

@@ -599,19 +599,13 @@ describe('Role Management tests over User Management settings - View Only User',
    * @missing_data For test this scenario there should be no "Update Role" permission for the user.
    * Also, two roles must be provided, one for each active and inactive states
    *
-   * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-1001
    */
   it.skip('C7499835_Activate/Deactivate_Role_No_Permission', () => {
-    const roleIdActive = 1476
-    const roleIdInactive = 1477
+    const roleIdActive = 1574
 
     equityAdmin.roleManagementPage.clickRoleById(roleIdActive)
     equityAdmin.roleManagementPage.assertThreeDotButtonDisplayed(false)
-
-    equityAdmin.roleManagementPage.clickTab('Inactive')
-    equityAdmin.roleManagementPage.clickRoleById(roleIdInactive)
-    equityAdmin.roleManagementPage.assertActivateButtonDisplayed(false)
-    equityAdmin.roleManagementPage.assertThreeDotButtonDisplayed(false)
+    equityAdmin.roleManagementPage.assertRoleIsEditable(false)
   })
 
   /**

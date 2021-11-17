@@ -1,14 +1,16 @@
 import EquityAdmin from '../../../support/pages/equityAdmin'
 
-describe('User Management tests over User Management settings', () => {
+describe('User Management tests over User Management settings - View Only User', () => {
   const equityAdmin = new EquityAdmin()
+
+  beforeEach(() => {
+    equityAdmin.loginPage.login(Cypress.env('VIEW_ONLY_USER_2_AUTH'))
+  })
 
   /**
    * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-1005
    */
   it.skip('C11649850_Assert_View_Only_Status_Badge_Displayed_Next_To_Settings_Titles', () => {
-    equityAdmin.loginPage.login(Cypress.env('VIEW_ONLY_USER_2_AUTH'))
-
     // User
     equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'user')
     equityAdmin.userManagementPage.checkUserManagementUrl()
@@ -16,14 +18,37 @@ describe('User Management tests over User Management settings', () => {
 
     // Group
     equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'group', false)
-    equityAdmin.userManagementPage.assertViewOnlyBadgeDisplayed()
+    equityAdmin.groupManagementPage.checkGroupManagementUrl()
+    equityAdmin.groupManagementPage.assertViewOnlyBadgeDisplayed()
 
     // Role
     equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'role', false)
-    equityAdmin.userManagementPage.assertViewOnlyBadgeDisplayed()
+    equityAdmin.roleManagementPage.checkRoleManagementUrl()
+    equityAdmin.roleManagementPage.assertViewOnlyBadgeDisplayed()
 
     // DAP
     equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'dap', false)
-    equityAdmin.userManagementPage.assertViewOnlyBadgeDisplayed()
+    equityAdmin.dapManagementPage.checkDapManagementUrl()
+    equityAdmin.dapManagementPage.assertViewOnlyBadgeDisplayed()
+  })
+
+  it('C12324915_Create_New_Group/role/dap_Button_Should_Not_Be_Available_In_The_Ui_For_A_User_With_Only_View_Permissions', () => {
+    // Group
+    equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'group')
+    equityAdmin.groupManagementPage.checkGroupManagementUrl()
+    cy.forcedWait(1000)
+    equityAdmin.groupManagementPage.assertCreateNewGroupButtonDisplayed(false)
+
+    // Role
+    equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'role', false)
+    equityAdmin.roleManagementPage.checkRoleManagementUrl()
+    cy.forcedWait(1000)
+    equityAdmin.roleManagementPage.assertCreateNewRoleButtonDisplayed(false)
+
+    // DAP
+    equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'dap', false)
+    equityAdmin.dapManagementPage.checkDapManagementUrl()
+    cy.forcedWait(1000)
+    equityAdmin.dapManagementPage.assertCreateNewDapButtonDisplayed(false)
   })
 })

@@ -637,7 +637,7 @@ describe('Group Management tests over User Management settings - View Only User'
     equityAdmin.groupManagementPage.assertThreeDotButtonDisplayed()
     equityAdmin.groupManagementPage.clickThreeDotOptionButton()
     equityAdmin.groupManagementPage.assertDuplicateEntityButtonDisplayed(true)
-    equityAdmin.groupManagementPage.assertNewGroupButtonDisplayed(true)
+    equityAdmin.groupManagementPage.assertCreateNewGroupButtonDisplayed(true)
     equityAdmin.groupManagementPage.assertDeactivateEntityButtonDisplayed(false)
   })
 
@@ -651,7 +651,7 @@ describe('Group Management tests over User Management settings - View Only User'
     equityAdmin.groupManagementPage.assertThreeDotButtonDisplayed()
     equityAdmin.groupManagementPage.clickThreeDotOptionButton()
     equityAdmin.groupManagementPage.assertDeactivateEntityButtonDisplayed(true)
-    equityAdmin.groupManagementPage.assertNewGroupButtonDisplayed(false)
+    equityAdmin.groupManagementPage.assertCreateNewGroupButtonDisplayed(false)
     equityAdmin.groupManagementPage.assertDuplicateEntityButtonDisplayed(false)
   })
 
@@ -661,7 +661,7 @@ describe('Group Management tests over User Management settings - View Only User'
    * SkIPPING due to https://globalshares.atlassian.net/browse/PB-979
    */
   it.skip('C7493035_Groups_User_Does_Not_Have_Group_Permission_To_Create_Group', () => {
-    equityAdmin.groupManagementPage.assertNewGroupButtonDisplayed(false)
+    equityAdmin.groupManagementPage.assertCreateNewGroupButtonDisplayed(false)
     equityAdmin.groupManagementPage.addPathToUrlAndVisitIt('/0')
     // Need to wait for PB-979 to know what are going to be the next steps
   })

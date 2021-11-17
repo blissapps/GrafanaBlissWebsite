@@ -99,7 +99,9 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
    * @param {Number} participantId Id of the participant that is going to be clicked in the participants table
    */
   clickOnParticipant(participantId) {
-    cy.get(selectors.clientParticipantStatementId + participantId).click()
+    cy.get(selectors.clientParticipantStatementId + participantId)
+      .scrollIntoView()
+      .click({ force: true })
   }
 
   /**

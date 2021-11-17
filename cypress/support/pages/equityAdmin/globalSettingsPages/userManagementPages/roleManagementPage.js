@@ -510,6 +510,15 @@ class RoleManagementPage extends BaseManagementPage {
     })
   }
 
+  /**
+   * Assert the 'New role' button is displayed or not
+   *
+   * @param {Boolean} displayed True is the default value to assert the button is displayed. False otherwise
+   */
+  assertCreateNewRoleButtonDisplayed(displayed = true) {
+    displayed ? cy.get(selectors.newRoleBtn).should('be.visible') : cy.get(selectors.newRoleBtn).should('not.exist')
+  }
+
   // -------------------------------------------- OTHERS -------------------------------------------------//
 
   /**

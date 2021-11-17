@@ -618,9 +618,7 @@ describe('Statement Management tests', () => {
   /**
    * @missing_data We need a client that has participants with all statuses, such as Initiated, Pending Validation, On Hold, Approved, Published, Recalled...
    *
-   * @missing_steps This one is made only for On Hold status. Need to do it for the others statuses as well
-   *
-   * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-1006
+   * @missing_steps This one is made only for On Hold status. Need to do it for the others statuses as well when proper new data is provided
    */
   it.skip('C7592123_Audit_Log_Initiated,_Pending_Validation,_On_Hold,_Approved,_Published,_Recalled,_and_Viewed_Statuses', () => {
     const clientPendingValidation = 'Keywords Studios plc'
@@ -631,9 +629,9 @@ describe('Statement Management tests', () => {
     const participantOnHoldName = 'Ramirez'
     const participantOnHoldAsOfDate = '2020'
     const participantOnHoldCurrentStatus = 'On Hold'
-    const participantOnHoldAuditTrailStatuses = [participantOnHoldCurrentStatus, ' Initiated', 'Initiated']
-    const participantOnHoldAuditTrailUsers = ['UK_148_812dcf25-2f02-4400-a563-6692bd440b84', 'system', 'system']
-    const participantOnHoldAuditTrailTimestamps = ['07/09/2021 • 10:24:42', '11/05/2021 • 05:13:30', '11/05/2021 • 05:13:01']
+    const participantOnHoldAuditTrailStatuses = [participantOnHoldCurrentStatus, ' Pending Validation', 'On Hold', 'Initiated']
+    const participantOnHoldAuditTrailUsers = ['lmello@globalshares.com', 'UK_311_44b4e03f-7c57-4c65-aa53-e63604d57775', 'UK_148_812dcf25-2f02-4400-a563-6692bd440b84', 'system']
+    const participantOnHoldAuditTrailTimestamps = ['17/11/2021 • 08:54:05', '09/11/2021 • 02:54:04', '07/09/2021 • 10:24:42', '11/05/2021 • 05:13:30']
 
     equityAdmin.clientStatementsPage.filterClientStatements(clientPendingValidation)
     equityAdmin.clientStatementsPage.clickClientTable(clientPendingValidationId)
