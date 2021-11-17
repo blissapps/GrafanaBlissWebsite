@@ -78,6 +78,9 @@ describe('Statement Management tests', () => {
     equityAdmin.clientParticipantStatementsPage.assertFileWasDownloadedSuccessfully(clientName + '_Summary.csv')
   })
 
+  /**
+   * TODO: @missing steps to add filter by status and Regulator
+   */
   it('C7353833_Use_Filter_To_Search_For_Client_Statements', () => {
     // name and date
     const clientName = 'TomTom'
@@ -86,16 +89,21 @@ describe('Statement Management tests', () => {
     const clientId = 77
     const idsClientList = [77, 78, 79, 80, 81]
 
+    // Initial verification
     equityAdmin.clientStatementsPage.filterClientStatements(clientName, dateFrom, dateTo)
     equityAdmin.clientStatementsPage.assertClientDisplayedOnClientStatementsTable(clientId)
     equityAdmin.clientStatementsPage.assertAmountOfRecordsTable(1)
     equityAdmin.clientStatementsPage.clearAllFilters()
     equityAdmin.clientStatementsPage.assertClientStatementsTableInOrderById(idsClientList)
 
-    // only name
+    // By Name
     equityAdmin.clientStatementsPage.filterClientStatements('TomTom')
     equityAdmin.clientStatementsPage.assertClientDisplayedOnClientStatementsTable(clientId)
     equityAdmin.clientStatementsPage.assertAmountOfRecordsTable(1)
+
+    // By Status
+
+    // By Reporter
   })
 
   /**
@@ -197,12 +205,11 @@ describe('Statement Management tests', () => {
   })
 
   /**
-   * TODO: @missing_steps scroll not working properly
-   *
+   * TODO: @missing_steps scroll not working properly. Need to investigate why it does not work in our website
    */
   it('C7394265_View_Statements', () => {
-    const clientName = 'Hitachi'
-    const clientId = 102
+    const clientName = 'Keywords Studios plc'
+    const clientId = 87
     const columnsToValidate = ['Participant', 'Status']
     const idsParticipantsList = [1, 2]
 

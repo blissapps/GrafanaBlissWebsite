@@ -10,6 +10,9 @@ describe('Participants tests', () => {
     equityAdmin.loginPage.login()
   })
 
+  /**
+   * TODO: @missing_steps Search for numbers is missing to cover PB-829
+   */
   it('C11069829_SearchEngine_Search_For_ID_Name_Email', () => {
     const participantId = 112967
     const participantName = 'Bryan'
@@ -42,6 +45,8 @@ describe('Participants tests', () => {
     equityAdmin.equityClientPeoplePage.assertAmountOfPeopleTable(1)
     equityAdmin.equityClientPeoplePage.assertParticipantDisplayed(participantId)
     equityAdmin.equityClientPeoplePage.assertDataDisplayedOnGsGridTableIsHighlighted(participantName + ' ' + participantLastName)
+
+    // Test with numbers
 
     equityAdmin.equityClientPeoplePage.assertParticipantDataDisplayedOnTheParticipantsList([participantId, participantName, participantEmail, participantResidency])
   })

@@ -284,7 +284,7 @@ describe('Group Management tests over User Management settings', () => {
   })
 
   /**
-   * @missing_data Need to have a group. Also, it needs to have at least one user created in the environment.
+   * @missing_data Need to have a group. Also, it needs to have 2 users created in the environment.
    */
   it.skip('C7419658_Groups_Add_Users_To_A_Group', () => {
     const groupId = 1042

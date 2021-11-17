@@ -521,8 +521,6 @@ describe('Role Management tests over User Management settings', () => {
 
   /**
    * @missing_data Need to have a role called "Duplicate me" or something like that
-   *
-   * * SKIPPING also due to https://globalshares.atlassian.net/browse/PB-906
    */
   it.skip('C7544052_Roles_Duplicate_A_Role', () => {
     const roleId = 1390
