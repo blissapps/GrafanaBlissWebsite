@@ -74,7 +74,7 @@ describe('Home page tests', () => {
     equityAdmin.applicationLeftMenuBar.openSettingsMenuBar()
     equityAdmin.settingsMenuNavBar.clickClientSwitchButton()
     equityAdmin.clientSwitchMenu.clickViewAllClients()
-    equityAdmin.homePage.checkHomePageUrl()
+    equityAdmin.homePage.checkPageUrl()
     equityAdmin.homePage.assertCompaniesHeaderIsDisplayed()
   })
 

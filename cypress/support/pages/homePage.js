@@ -50,9 +50,9 @@ const groupBySelectors = {
 
 class HomePage extends BasePage {
   /**
-   * Check if the current page is the home URL
+   * Checks if the current page is the home page
    */
-  checkHomePageUrl() {
+  checkPageUrl() {
     this.checkUrl(Cypress.env('HOME_PAGE_URL'))
   }
 

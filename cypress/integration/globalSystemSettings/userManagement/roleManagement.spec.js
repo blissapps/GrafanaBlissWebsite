@@ -8,14 +8,14 @@ describe('Role Management tests over User Management settings', () => {
   beforeEach(() => {
     equityAdmin.loginPage.login()
     equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'role')
-    equityAdmin.roleManagementPage.checkRoleManagementUrl()
+    equityAdmin.roleManagementPage.checkPageUrl()
   })
 
   // ************************************************ TESTS AS ADMIN TENANT ************************************************** //
 
   it('C7544080_Role_Check_Behavior_When_Closing_The_Settings', () => {
     equityAdmin.settingsMenuNavBar.closeGlobalSettingsNavBar()
-    equityAdmin.roleManagementPage.checkRoleManagementUrl()
+    equityAdmin.roleManagementPage.checkPageUrl()
   })
 
   /**
@@ -128,17 +128,17 @@ describe('Role Management tests over User Management settings', () => {
    */
   it.skip('C7499693_List_Roles_Navigation_Issues', () => {
     equityAdmin.roleManagementPage.reloadPage()
-    equityAdmin.roleManagementPage.checkRoleManagementUrl()
+    equityAdmin.roleManagementPage.checkPageUrl()
     equityAdmin.roleManagementPage.assertActiveRolesAreDisplayed()
 
     equityAdmin.applicationLeftMenuBar.clickLogoToGoToHomePage()
     equityAdmin.roleManagementPage.goBackOrForwardInBrowser('back')
-    equityAdmin.roleManagementPage.checkRoleManagementUrl()
+    equityAdmin.roleManagementPage.checkPageUrl()
     equityAdmin.roleManagementPage.assertActiveRolesAreDisplayed()
 
     equityAdmin.applicationLeftMenuBar.clickLogoToGoToHomePage()
     cy.visit('/tenant/1/settings/role-management', { failOnStatusCode: false })
-    equityAdmin.roleManagementPage.checkRoleManagementUrl()
+    equityAdmin.roleManagementPage.checkPageUrl()
     equityAdmin.roleManagementPage.assertActiveRolesAreDisplayed()
   })
 
@@ -575,7 +575,7 @@ describe('Role Management tests over User Management settings - View Only User',
   beforeEach(() => {
     equityAdmin.loginPage.login(Cypress.env('VIEW_ONLY_USER_2_AUTH'))
     equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'role')
-    equityAdmin.roleManagementPage.checkRoleManagementUrl()
+    equityAdmin.roleManagementPage.checkPageUrl()
   })
 
   /**

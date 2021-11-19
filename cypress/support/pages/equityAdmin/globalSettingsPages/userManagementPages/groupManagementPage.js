@@ -43,9 +43,9 @@ const groupsCardsSelectors = {
 
 class GroupManagementPage extends BaseManagementPage {
   /**
-   * Checks if the current page is Group management URL
+   * Checks if the current page is the one in properties.pageURL
    */
-  checkGroupManagementUrl() {
+  checkPageUrl() {
     this.checkUrl(properties.pageURL)
   }
 

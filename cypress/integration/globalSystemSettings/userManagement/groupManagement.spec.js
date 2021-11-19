@@ -8,7 +8,7 @@ describe('Group Management tests over User Management settings', () => {
   beforeEach(() => {
     equityAdmin.loginPage.login()
     equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'group')
-    equityAdmin.groupManagementPage.checkGroupManagementUrl()
+    equityAdmin.groupManagementPage.checkPageUrl()
   })
 
   // ************************************************ TESTS AS ADMIN TENANT ************************************************** //
@@ -19,7 +19,7 @@ describe('Group Management tests over User Management settings', () => {
    */
   it('C7412690_Group_Check_The_System_Behavior_When_Closing_The_Settings_Nav_Bar', () => {
     equityAdmin.settingsMenuNavBar.closeGlobalSettingsNavBar()
-    equityAdmin.groupManagementPage.checkGroupManagementUrl()
+    equityAdmin.groupManagementPage.checkPageUrl()
   })
 
   /**
@@ -508,7 +508,7 @@ describe('Group Management tests over User Management settings', () => {
     equityAdmin.groupManagementPage.assertDapAssociatedWithGroup(dapIds[2])
 
     equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'dap', false)
-    equityAdmin.dapManagementPage.checkDapManagementUrl()
+    equityAdmin.dapManagementPage.checkPageUrl()
 
     equityAdmin.dapManagementPage.clickDapById(dapIds[0])
     equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupId)
@@ -592,7 +592,7 @@ describe('Group Management tests over User Management settings - View Only User'
   beforeEach(() => {
     equityAdmin.loginPage.login(Cypress.env('VIEW_ONLY_USER_2_AUTH'))
     equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'group')
-    equityAdmin.groupManagementPage.checkGroupManagementUrl()
+    equityAdmin.groupManagementPage.checkPageUrl()
   })
 
   /**

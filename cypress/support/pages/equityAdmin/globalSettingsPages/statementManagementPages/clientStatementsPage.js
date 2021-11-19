@@ -36,7 +36,7 @@ class ClientStatementsPage extends BaseStatementManagementPage {
   /**
    * Checks if the current page is the one in properties.pageURL
    */
-  checkClientStatementsUrl() {
+  checkPageUrl() {
     this.checkUrl(properties.pageURL)
   }
 

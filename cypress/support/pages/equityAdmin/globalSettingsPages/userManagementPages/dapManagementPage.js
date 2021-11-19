@@ -40,9 +40,9 @@ const conditionsSelectors = {
 
 class DapManagementPage extends BaseManagementPage {
   /**
-   * Checks if the current page is Data Access Profile management URL
+   * Checks if the current page is the one in properties.pageURL
    */
-  checkDapManagementUrl() {
+  checkPageUrl() {
     this.checkUrl(properties.pageURL)
   }
 

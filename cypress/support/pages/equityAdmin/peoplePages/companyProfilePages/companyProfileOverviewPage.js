@@ -6,9 +6,9 @@ const properties = {
 
 class CompanyProfileOverviewPage extends BasePage {
   /**
-   * Checks if the current page is the Company Profile URL, which is accessed through Equity People page
+   * Checks if the current page is the one in properties.pageURL
    */
-  checkCompanyProfileURL() {
+  checkPageUrl() {
     this.checkUrl(properties.pageURL)
   }
 }

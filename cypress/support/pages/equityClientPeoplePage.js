@@ -33,7 +33,7 @@ class EquityClientPeoplePage extends BasePage {
   /**
    * Checks if the current page is the one in properties.pageURL
    */
-  checkClientPeopleUrl() {
+  checkPageUrl() {
     this.checkUrl(properties.pageURL)
   }
 

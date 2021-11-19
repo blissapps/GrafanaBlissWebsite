@@ -40,9 +40,9 @@ const userInfoNavBarSelectors = {
 
 class UserManagementPage extends BaseManagementPage {
   /**
-   * Checks if the current page is User settings URL
+   * Checks if the current page is the one in properties.pageURL
    */
-  checkUserManagementUrl() {
+  checkPageUrl() {
     this.checkUrl(properties.pageURL)
   }
 

@@ -1,8 +1,5 @@
 import EquityAdmin from '../../support/pages/equityAdmin'
 
-/**
- * * Skipping until this one starts to be considered stable
- */
 describe('Participants tests', () => {
   const equityAdmin = new EquityAdmin()
 
@@ -21,7 +18,7 @@ describe('Participants tests', () => {
     const participantResidency = 'LUX'
 
     equityAdmin.homePage.selectClientById(144)
-    equityAdmin.equityClientPeoplePage.checkClientPeopleUrl() // needed to use the search engine in the correct page
+    equityAdmin.equityClientPeoplePage.checkPageUrl() // needed to use the search engine in the correct page
 
     // Id
     equityAdmin.searchEngine.search(participantId)
@@ -56,7 +53,7 @@ describe('Participants tests', () => {
     const participantId = 113026
 
     equityAdmin.homePage.selectClientById(clientId)
-    equityAdmin.equityClientPeoplePage.checkClientPeopleUrl() // needed to use the search engine in the correct page
+    equityAdmin.equityClientPeoplePage.checkPageUrl() // needed to use the search engine in the correct page
 
     equityAdmin.searchEngine.search('thereIsNoOneLikeThisTEST')
     equityAdmin.equityClientPeoplePage.assertNoParticipantsOrTrustsAvailableDisplayed()

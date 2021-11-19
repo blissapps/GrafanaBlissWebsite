@@ -8,7 +8,7 @@ describe('Statement Management tests', () => {
   beforeEach(() => {
     equityAdmin.loginPage.login()
     equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('statement')
-    equityAdmin.clientStatementsPage.checkClientStatementsUrl()
+    equityAdmin.clientStatementsPage.checkPageUrl()
   })
 
   it('C7394715_Happy_Path_To_View_Statements_Accordingly', () => {
@@ -130,7 +130,7 @@ describe('Statement Management tests', () => {
     const partner = 'Global Shares Execution Services Ltd.'
 
     equityAdmin.clientStatementsPage.clickTab('participant regulatory linkage')
-    equityAdmin.participantRegulatoryLinkagePage.checkParticipantRegulatoryLinkageManagementUrl()
+    equityAdmin.participantRegulatoryLinkagePage.checkPageUrl()
     equityAdmin.participantRegulatoryLinkagePage.assertNoDataMessageFoundDisplayed()
 
     // Not working yet for first name, so lets verify this until it is fixed
@@ -215,7 +215,7 @@ describe('Statement Management tests', () => {
 
     equityAdmin.clientStatementsPage.filterClientStatements(clientName)
     equityAdmin.clientStatementsPage.clickClientTable(clientId)
-    equityAdmin.clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
+    equityAdmin.clientParticipantStatementsPage.checkPageUrl()
     equityAdmin.clientParticipantStatementsPage.assertTableContainsExpectedColumnsInOrder(columnsToValidate)
     equityAdmin.clientParticipantStatementsPage.assertParticipantStatementsTableContainsExpectedColumns()
     equityAdmin.clientParticipantStatementsPage.assertParticipantStatementsTableInOrderById(idsParticipantsList)
@@ -229,7 +229,7 @@ describe('Statement Management tests', () => {
     equityAdmin.clientStatementsPage.clickClientTable(clientId)
     equityAdmin.clientParticipantStatementsPage.assertNoDataMessageFoundDisplayed()
     equityAdmin.clientParticipantStatementsPage.clickBackToManageStatements()
-    equityAdmin.clientStatementsPage.checkClientStatementsUrl()
+    equityAdmin.clientStatementsPage.checkPageUrl()
   })
 
   /**
@@ -675,7 +675,7 @@ describe('Statement Management tests', () => {
     // Pending Validation
     equityAdmin.clientStatementsPage.filterClientStatements(clientPendingValidation)
     equityAdmin.clientStatementsPage.clickClientTable(clientPendingValidationId)
-    equityAdmin.clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
+    equityAdmin.clientParticipantStatementsPage.checkPageUrl()
     equityAdmin.clientParticipantStatementsPage.assertRejectButtonDisplayed()
     equityAdmin.clientParticipantStatementsPage.clickBackToManageStatements()
     equityAdmin.clientStatementsPage.clearAllFilters()
@@ -683,7 +683,7 @@ describe('Statement Management tests', () => {
     // Initiated
     equityAdmin.clientStatementsPage.filterClientStatements(clientInitiated)
     equityAdmin.clientStatementsPage.clickClientTable(clientInitiatedId)
-    equityAdmin.clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
+    equityAdmin.clientParticipantStatementsPage.checkPageUrl()
     equityAdmin.clientParticipantStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
     equityAdmin.clientParticipantStatementsPage.assertRejectButtonDisplayed(false)
     equityAdmin.clientParticipantStatementsPage.clickBackToManageStatements()
@@ -692,7 +692,7 @@ describe('Statement Management tests', () => {
     // Reconciling
     equityAdmin.clientStatementsPage.filterClientStatements(clientReconciling)
     equityAdmin.clientStatementsPage.clickClientTable(clientReconcilingId)
-    equityAdmin.clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
+    equityAdmin.clientParticipantStatementsPage.checkPageUrl()
     equityAdmin.clientParticipantStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
     equityAdmin.clientParticipantStatementsPage.assertRejectButtonDisplayed(false)
     equityAdmin.clientParticipantStatementsPage.clickBackToManageStatements()
@@ -701,7 +701,7 @@ describe('Statement Management tests', () => {
     // Partially Published
     equityAdmin.clientStatementsPage.filterClientStatements(clientPartiallyPublished)
     equityAdmin.clientStatementsPage.clickClientTable(clientPartiallyPublishedId)
-    equityAdmin.clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
+    equityAdmin.clientParticipantStatementsPage.checkPageUrl()
     equityAdmin.clientParticipantStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
     equityAdmin.clientParticipantStatementsPage.assertRejectButtonDisplayed(false)
     equityAdmin.clientParticipantStatementsPage.clickBackToManageStatements()
@@ -710,7 +710,7 @@ describe('Statement Management tests', () => {
     // Published
     equityAdmin.clientStatementsPage.filterClientStatements(clientPublished)
     equityAdmin.clientStatementsPage.clickClientTable(clientPublishedId)
-    equityAdmin.clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
+    equityAdmin.clientParticipantStatementsPage.checkPageUrl()
     equityAdmin.clientParticipantStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
     equityAdmin.clientParticipantStatementsPage.assertRejectButtonDisplayed(false)
   })
@@ -753,7 +753,7 @@ describe('Statement Management tests', () => {
     // Published
     equityAdmin.clientStatementsPage.filterClientStatements(clientPublished)
     equityAdmin.clientStatementsPage.clickClientTable(clientPublishedId)
-    equityAdmin.clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
+    equityAdmin.clientParticipantStatementsPage.checkPageUrl()
     equityAdmin.clientParticipantStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
     equityAdmin.clientParticipantStatementsPage.assertRecallButtonDisplayed()
     equityAdmin.clientParticipantStatementsPage.clickToRecallStatement()
@@ -765,7 +765,7 @@ describe('Statement Management tests', () => {
     // Partially Published
     equityAdmin.clientStatementsPage.filterClientStatements(clientPartiallyPublished)
     equityAdmin.clientStatementsPage.clickClientTable(clientPartiallyPublishedId)
-    equityAdmin.clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
+    equityAdmin.clientParticipantStatementsPage.checkPageUrl()
     equityAdmin.clientParticipantStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
     equityAdmin.clientParticipantStatementsPage.assertRecallButtonDisplayed()
     equityAdmin.clientParticipantStatementsPage.clickBackToManageStatements()
@@ -774,7 +774,7 @@ describe('Statement Management tests', () => {
     // Pending Validation
     equityAdmin.clientStatementsPage.filterClientStatements(clientPendingValidation)
     equityAdmin.clientStatementsPage.clickClientTable(clientPendingValidationId)
-    equityAdmin.clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
+    equityAdmin.clientParticipantStatementsPage.checkPageUrl()
     equityAdmin.clientParticipantStatementsPage.assertRecallButtonDisplayed(false)
     equityAdmin.clientParticipantStatementsPage.clickBackToManageStatements()
     equityAdmin.clientStatementsPage.clearAllFilters()
@@ -782,7 +782,7 @@ describe('Statement Management tests', () => {
     // Initiated
     equityAdmin.clientStatementsPage.filterClientStatements(clientInitiated)
     equityAdmin.clientStatementsPage.clickClientTable(clientInitiatedId)
-    equityAdmin.clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
+    equityAdmin.clientParticipantStatementsPage.checkPageUrl()
     equityAdmin.clientParticipantStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
     equityAdmin.clientParticipantStatementsPage.assertRecallButtonDisplayed(false)
     equityAdmin.clientParticipantStatementsPage.clickBackToManageStatements()
@@ -791,7 +791,7 @@ describe('Statement Management tests', () => {
     // Reconciling
     equityAdmin.clientStatementsPage.filterClientStatements(clientReconciling)
     equityAdmin.clientStatementsPage.clickClientTable(clientReconcilingId)
-    equityAdmin.clientParticipantStatementsPage.checkClientParticipantStatementsUrl()
+    equityAdmin.clientParticipantStatementsPage.checkPageUrl()
     equityAdmin.clientParticipantStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
     equityAdmin.clientParticipantStatementsPage.assertRecallButtonDisplayed(false)
   })
@@ -912,7 +912,7 @@ describe('Statement Management tests - View Only User', () => {
   beforeEach(() => {
     equityAdmin.loginPage.login(Cypress.env('VIEW_ONLY_USER_2_AUTH'))
     equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('statement')
-    equityAdmin.clientStatementsPage.checkClientStatementsUrl()
+    equityAdmin.clientStatementsPage.checkPageUrl()
   })
 
   /**

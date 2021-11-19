@@ -8,7 +8,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
   beforeEach(() => {
     equityAdmin.loginPage.login()
     equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'dap')
-    equityAdmin.dapManagementPage.checkDapManagementUrl()
+    equityAdmin.dapManagementPage.checkPageUrl()
   })
 
   // ************************************************ TESTS AS ADMIN TENANT ************************************************** //
@@ -20,7 +20,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
    */
   it('C7564741_DAP_Check_The_System_Behavior_When_Closing_The_Settings_Nav_Bar', () => {
     equityAdmin.settingsMenuNavBar.closeGlobalSettingsNavBar()
-    equityAdmin.dapManagementPage.checkDapManagementUrl()
+    equityAdmin.dapManagementPage.checkPageUrl()
   })
 
   /**
@@ -621,7 +621,7 @@ describe('Data Access Profiles tests over User Management settings - View Only U
   beforeEach(() => {
     equityAdmin.loginPage.login(Cypress.env('VIEW_ONLY_USER_2_AUTH'))
     equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'dap')
-    equityAdmin.dapManagementPage.checkDapManagementUrl()
+    equityAdmin.dapManagementPage.checkPageUrl()
   })
 
   /**

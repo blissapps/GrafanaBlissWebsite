@@ -20,7 +20,7 @@ class ParticipantRegulatoryLinkagePage extends BaseStatementManagementPage {
   /**
    * Checks if the current page is the one in properties.pageURL
    */
-  checkParticipantRegulatoryLinkageManagementUrl() {
+  checkPageUrl() {
     this.checkUrl(properties.pageURL)
   }
 

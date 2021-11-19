@@ -13,41 +13,41 @@ describe('User Management tests over User Management settings - View Only User',
   it.skip('C11649850_Assert_View_Only_Status_Badge_Displayed_Next_To_Settings_Titles', () => {
     // User
     equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'user')
-    equityAdmin.userManagementPage.checkUserManagementUrl()
+    equityAdmin.userManagementPage.checkPageUrl()
     // userManagementPage.assertViewOnlyBadgeDisplayed()
 
     // Group
     equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'group', false)
-    equityAdmin.groupManagementPage.checkGroupManagementUrl()
+    equityAdmin.groupManagementPage.checkPageUrl()
     equityAdmin.groupManagementPage.assertViewOnlyBadgeDisplayed()
 
     // Role
     equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'role', false)
-    equityAdmin.roleManagementPage.checkRoleManagementUrl()
+    equityAdmin.roleManagementPage.checkPageUrl()
     equityAdmin.roleManagementPage.assertViewOnlyBadgeDisplayed()
 
     // DAP
     equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'dap', false)
-    equityAdmin.dapManagementPage.checkDapManagementUrl()
+    equityAdmin.dapManagementPage.checkPageUrl()
     equityAdmin.dapManagementPage.assertViewOnlyBadgeDisplayed()
   })
 
   it('C12324915_Create_New_Group/role/dap_Button_Should_Not_Be_Available_In_The_Ui_For_A_User_With_Only_View_Permissions', () => {
     // Group
     equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'group')
-    equityAdmin.groupManagementPage.checkGroupManagementUrl()
+    equityAdmin.groupManagementPage.checkPageUrl()
     cy.forcedWait(1000)
     equityAdmin.groupManagementPage.assertCreateNewGroupButtonDisplayed(false)
 
     // Role
     equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'role', false)
-    equityAdmin.roleManagementPage.checkRoleManagementUrl()
+    equityAdmin.roleManagementPage.checkPageUrl()
     cy.forcedWait(1000)
     equityAdmin.roleManagementPage.assertCreateNewRoleButtonDisplayed(false)
 
     // DAP
     equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'dap', false)
-    equityAdmin.dapManagementPage.checkDapManagementUrl()
+    equityAdmin.dapManagementPage.checkPageUrl()
     cy.forcedWait(1000)
     equityAdmin.dapManagementPage.assertCreateNewDapButtonDisplayed(false)
   })

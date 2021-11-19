@@ -13,9 +13,9 @@ describe('Preferences tests', () => {
    * Test if the menu link sends to the correct page and it gets back to the home screen if closed
    */
   it('C1234567_Check_URL_Access_Over_The_Menu', () => {
-    equityAdmin.preferencesPage.checkProfilePreferencesUrl()
+    equityAdmin.preferencesPage.checkPageUrl()
     equityAdmin.profileMenuNavBar.closeProfileMenuNavBar()
-    equityAdmin.preferencesPage.checkProfilePreferencesUrl()
+    equityAdmin.preferencesPage.checkPageUrl()
   })
 
   /**

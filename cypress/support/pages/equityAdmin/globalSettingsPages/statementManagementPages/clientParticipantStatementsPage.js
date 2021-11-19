@@ -56,7 +56,7 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
   /**
    * Checks if the current page is the one in properties.pageURL
    */
-  checkClientParticipantStatementsUrl() {
+  checkPageUrl() {
     this.checkUrlByRegex(properties.pageURL)
   }
 

@@ -1,8 +1,5 @@
 import EquityAdmin from '../../../support/pages/equityAdmin'
 
-/**
- * * Skipping until this one starts to be considered stable
- */
 describe('Personal profile tests for Participants', () => {
   const equityAdmin = new EquityAdmin()
 

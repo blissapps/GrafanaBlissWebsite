@@ -6,22 +6,22 @@ describe('User Management tests over User Management settings', () => {
   beforeEach(() => {
     equityAdmin.loginPage.login()
     equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'user')
-    equityAdmin.userManagementPage.checkUserManagementUrl()
+    equityAdmin.userManagementPage.checkPageUrl()
   })
 
   // ************************************************ TESTS AS ADMIN TENANT ************************************************** //
 
   it('C7405960_User_Check_Behavior_When_Closing_The_Settings', () => {
-    equityAdmin.userManagementPage.checkUserManagementUrl()
+    equityAdmin.userManagementPage.checkPageUrl()
     equityAdmin.settingsMenuNavBar.closeGlobalSettingsNavBar()
-    equityAdmin.userManagementPage.checkUserManagementUrl()
+    equityAdmin.userManagementPage.checkPageUrl()
   })
 
   it('C7592116_Users_Search_For_Username_/_Email_And_Check_Highlighted_Data', () => {
     const username = 'amulcahyNE'
     const userEmail = 'test@globalshares.com'
     const userStatus = 'Active'
-    equityAdmin.userManagementPage.checkUserManagementUrl() // Check this to make sure we are getting the correct search input in the correct page
+    equityAdmin.userManagementPage.checkPageUrl() // Check this to make sure we are getting the correct search input in the correct page
 
     cy.log('EMAIL')
     equityAdmin.searchEngine.search(userEmail)
@@ -59,7 +59,7 @@ describe('User Management tests over User Management settings', () => {
     const organization = 'Global Shares'
     const phone = '99123'
 
-    equityAdmin.userManagementPage.checkUserManagementUrl() // Check we are getting the correct search input in the correct page
+    equityAdmin.userManagementPage.checkPageUrl() // Check we are getting the correct search input in the correct page
 
     equityAdmin.searchEngine.search(username, 500)
     equityAdmin.userManagementPage.clickUserTable(userId)
@@ -71,14 +71,14 @@ describe('User Management tests over User Management settings', () => {
   })
 
   it('C7592117_Users_No_Users_Match_Search', () => {
-    equityAdmin.userManagementPage.checkUserManagementUrl() // Check we are getting the correct search input in the correct page
+    equityAdmin.userManagementPage.checkPageUrl() // Check we are getting the correct search input in the correct page
 
     equityAdmin.searchEngine.search('test_empty_state')
     equityAdmin.userManagementPage.assertNoUserMsgIdDisplayed()
   })
 
   it('C7592119_User_pastes_SQL_Code_Into_The_Search_Box', () => {
-    equityAdmin.userManagementPage.checkUserManagementUrl() // Check we are getting the correct search input in the correct page
+    equityAdmin.userManagementPage.checkPageUrl() // Check we are getting the correct search input in the correct page
 
     equityAdmin.searchEngine.search('SELECT * FROM users')
     equityAdmin.userManagementPage.assertNoUserMsgIdDisplayed()

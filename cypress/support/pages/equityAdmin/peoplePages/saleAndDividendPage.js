@@ -6,9 +6,9 @@ const properties = {
 
 class SaleAndDividendPage extends BasePage {
   /**
-   * Checks if the current page is the Sale & Dividend URL, which is accessed through Equity People page
+   * Checks if the current page is the one in properties.pageURL
    */
-  checkSaleAndDividendURL() {
+  checkPageUrl() {
     this.checkUrl(properties.pageURL)
   }
 }

@@ -30,9 +30,9 @@ const utils = new Utils()
 
 class RoleManagementPage extends BaseManagementPage {
   /**
-   * Checks if the current pageLoad is Role management URL
+   * Checks if the current page is the one in properties.pageURL
    */
-  checkRoleManagementUrl() {
+  checkPageUrl() {
     this.checkUrl(properties.pageURL)
   }
 

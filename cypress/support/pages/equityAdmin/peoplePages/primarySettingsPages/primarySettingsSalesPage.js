@@ -6,9 +6,9 @@ const properties = {
 
 class PrimarySettingsSalesPage extends BasePage {
   /**
-   * Checks if the current page is the Primary Settings URL, which is accessed through Equity People page
+   * Checks if the current page is the one in properties.pageURL
    */
-  checkPrimarySettingsSalesURL() {
+  checkPageUrl() {
     this.checkUrl(properties.pageURL)
   }
 }

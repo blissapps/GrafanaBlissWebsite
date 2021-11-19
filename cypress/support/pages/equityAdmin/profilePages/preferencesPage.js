@@ -13,9 +13,9 @@ const properties = {
 
 class PreferencesPage extends BasePage {
   /**
-   * Checks if the current page is the one in the properties
+   * Checks if the current page is the one in properties.pageURL
    */
-  checkProfilePreferencesUrl() {
+  checkPageUrl() {
     this.checkUrl(properties.pageURL)
   }
 

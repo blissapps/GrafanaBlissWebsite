@@ -6,9 +6,9 @@ const properties = {
 
 class TaxAndCommissionPage extends BasePage {
   /**
-   * Checks if the current page is the Tax & Commission URL, which is accessed through Equity People page
+   * Checks if the current page is the one in properties.pageURL
    */
-  checkPeopleAndCommissionURL() {
+  checkPageUrl() {
     this.checkUrl(properties.pageURL)
   }
 }

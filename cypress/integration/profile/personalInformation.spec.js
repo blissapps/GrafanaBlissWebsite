@@ -13,9 +13,9 @@ describe('Personal Information tests', () => {
    * Test if the menu link sends to the correct page and it gets back to the home screen if closed
    */
   it('C1234567_Check_URL_Access_Over_The_Menu', () => {
-    equityAdmin.personalInformationPage.checkProfilePersonalInformationUrl()
+    equityAdmin.personalInformationPage.checkPageUrl()
     equityAdmin.profileMenuNavBar.closeProfileMenuNavBar()
-    equityAdmin.personalInformationPage.checkProfilePersonalInformationUrl()
+    equityAdmin.personalInformationPage.checkPageUrl()
   })
 
   /**
