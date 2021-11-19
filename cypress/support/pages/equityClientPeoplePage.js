@@ -15,7 +15,9 @@ const selectors = {
   participant: '#participant-',
   participantsTab: '.tabs-bar #Participants',
   trustsTab: '.tabs-bar #Trusts',
-  overviewTab: '.tabs-bar #Overview'
+  overviewTab: '.tabs-bar #Overview',
+  editButton: '#cell-actions-',
+  editActionButton: '*[id*=cdk-overlay-] gs-action-panel-option:nth-child(1)'
 }
 
 const quickEditNavBarSelectors = {
@@ -44,7 +46,7 @@ class EquityClientPeoplePage extends BasePage {
    *
    * @example 12345 as the participantId
    */
-  getParticipantFromTheList(participantId) {
+  getParticipantById(participantId) {
     return cy.get(selectors.participant + participantId)
   }
 
@@ -57,8 +59,8 @@ class EquityClientPeoplePage extends BasePage {
    *
    * @example 12345 as the participantId
    */
-  clickParticipantFromTheList(participantId) {
-    this.getParticipantFromTheList(participantId)
+  clickParticipantById(participantId) {
+    this.getParticipantById(participantId)
       .scrollIntoView()
       .click({ force: true })
   }
@@ -89,6 +91,22 @@ class EquityClientPeoplePage extends BasePage {
     }
   }
 
+  /**
+   * Click to edit a participant from the list by clicking in the edit button
+   * The subsequent pages are located in Cypress/support/pages/peoplePages
+   *
+   * @param {Number} participantId Participant id to be searched
+   * @param {Boolean} actionButton True is the default value to click in an action button before click in the edit button. Send false in case the edit button is directly available
+   */
+  clickToEditParticipant(participantId, actionButton = true) {
+    if (actionButton) {
+      cy.get(selectors.participant + participantId + ' gs-button').click()
+      cy.get(selectors.editActionButton).click()
+    } else {
+      cy.get(selectors.editButton + participantId + ' gs-button').click()
+    }
+  }
+
   // -------------------------------- ASSERTIONS ------------------------------------- //
 
   /**
@@ -109,7 +127,7 @@ class EquityClientPeoplePage extends BasePage {
    * @param {Boolean} displayed True is the default value to validate the participant is displayed in the list. False to otherwise validation
    */
   assertParticipantDisplayed(participantId, displayed = true) {
-    displayed ? this.getParticipantFromTheList(participantId).should('be.visible') : cy.get(selectors.participant + participantId).should('not.exist')
+    displayed ? this.getParticipantById(participantId).should('be.visible') : cy.get(selectors.participant + participantId).should('not.exist')
   }
 
   /**
@@ -175,16 +193,6 @@ class EquityClientPeoplePage extends BasePage {
   }
 
   // ------------------------------------- OTHERS ------------------------------------- //
-
-  /**
-   * Edit a participant from the list and go to Peoples page details >> Cypress/support/pages/peoplePages
-   *
-   * @param {Number} participantId Participant id to be searched
-   */
-  openEditParticipantDetails(participantId) {
-    this.getParticipantFromTheList(participantId).click()
-    cy.get(quickEditNavBarSelectors.editIconButton).click()
-  }
 }
 
 export default EquityClientPeoplePage

@@ -22,6 +22,14 @@ import PersonalInformationPage from './equityAdmin/profilePages/personalInformat
 import PreferencesPage from './equityAdmin/profilePages/preferencesPage'
 import SecurityPage from './equityAdmin/profilePages/securityPage'
 
+// People
+import PersonalProfileOverviewPage from './equityAdmin/peoplePages/personalProfilePages/personalProfileOverviewPage'
+import PersonalProfileAddressAndContactPage from './equityAdmin/peoplePages/personalProfilePages/personalProfileAddressAndContactPage'
+import CompanyProfileOverviewPage from './equityAdmin/peoplePages/companyProfilePages/companyProfileOverviewPage'
+import PrimarySettingsSalesPage from './equityAdmin/peoplePages/primarySettingsPages/primarySettingsSalesPage'
+import SaleAndDividendPage from './equityAdmin/peoplePages/saleAndDividendPage'
+import TaxAndCommissionPage from './equityAdmin/peoplePages/taxAndCommissionPage'
+
 // Others
 import LoginPage from './loginPage'
 import EquityClientPeoplePage from './equityClientPeoplePage'
@@ -59,6 +67,14 @@ class EquityAdmin {
     this.personalInformationPage = new PersonalInformationPage()
     this.preferencesPage = new PreferencesPage()
     this.securityPage = new SecurityPage()
+
+    // People
+    this.personalProfileOverviewPage = new PersonalProfileOverviewPage()
+    this.personalProfileAddressAndContactPage = new PersonalProfileAddressAndContactPage()
+    this.companyProfileOverviewPage = new CompanyProfileOverviewPage()
+    this.primarySettingsSalesPage = new PrimarySettingsSalesPage()
+    this.saleAndDividendPage = new SaleAndDividendPage()
+    this.taxAndCommissionPage = new TaxAndCommissionPage()
 
     // Others
     this.loginPage = new LoginPage()

@@ -25,7 +25,7 @@ describe('User Management tests over User Management settings', () => {
 
     cy.log('EMAIL')
     equityAdmin.searchEngine.search(userEmail)
-    equityAdmin.userManagementPage.assertAmountOfSearchResults(10)
+    equityAdmin.userManagementPage.assertAmountOfSearchResults(11)
     equityAdmin.userManagementPage.assertDataDisplayedOnGsGridTableIsHighlighted(userEmail)
 
     cy.log('USERNAME')

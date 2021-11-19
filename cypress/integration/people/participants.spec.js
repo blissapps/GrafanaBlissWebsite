@@ -46,21 +46,22 @@ describe('Participants tests', () => {
     equityAdmin.equityClientPeoplePage.assertParticipantDisplayed(participantId)
     equityAdmin.equityClientPeoplePage.assertDataDisplayedOnGsGridTableIsHighlighted(participantName + ' ' + participantLastName)
 
-    // Test with numbers
+    // Test with numbers - missing
 
     equityAdmin.equityClientPeoplePage.assertParticipantDataDisplayedOnTheParticipantsList([participantId, participantName, participantEmail, participantResidency])
   })
 
   it('C11069830_SearchEngine_Search_Without_Returned_Values', () => {
+    const clientId = 144
     const participantId = 113026
 
-    equityAdmin.homePage.selectClientById(144)
+    equityAdmin.homePage.selectClientById(clientId)
     equityAdmin.equityClientPeoplePage.checkClientPeopleUrl() // needed to use the search engine in the correct page
 
     equityAdmin.searchEngine.search('thereIsNoOneLikeThisTEST')
     equityAdmin.equityClientPeoplePage.assertNoParticipantsOrTrustsAvailableDisplayed()
     equityAdmin.searchEngine.search(participantId)
-    equityAdmin.equityClientPeoplePage.getParticipantFromTheList(participantId).should('be.visible')
+    equityAdmin.equityClientPeoplePage.assertParticipantDisplayed(participantId)
   })
 
   /**
@@ -71,8 +72,9 @@ describe('Participants tests', () => {
    */
 
   it.skip('C1234567_Client_Without_Participants_And_Trusts', () => {
-    equityAdmin.homePage.selectClientById(420)
+    const clientId = 420
 
+    equityAdmin.homePage.selectClientById(clientId)
     equityAdmin.equityClientPeoplePage.assertNoParticipantsOrTrustsAvailableDisplayed()
     equityAdmin.equityClientPeoplePage.clickTab('trusts')
     equityAdmin.equityClientPeoplePage.assertNoParticipantsOrTrustsAvailableDisplayed()
@@ -84,11 +86,15 @@ describe('Participants tests', () => {
    * * SkIPPING DEU TO https://globalshares.atlassian.net/browse/PB-1023
    */
   it.skip('C12177200_Verify_Participant_Detail_Data_On_L4_Container', () => {
+    const clientId = 144
     const participantId = 113026
-    equityAdmin.homePage.selectClientById(144)
+    const participantName = 'Abel Lewis'
+    const participantCountry = 'New Zealand'
+    const participantStatus = 'ACTIVE'
 
-    equityAdmin.equityClientPeoplePage.clickParticipantFromTheList(participantId)
-    equityAdmin.equityClientPeoplePage.assertParticipantDetailContent('Abel Lewis', 'New Zealand', 'ACTIVE')
+    equityAdmin.homePage.selectClientById(clientId)
+    equityAdmin.equityClientPeoplePage.clickParticipantById(participantId)
+    equityAdmin.equityClientPeoplePage.assertParticipantDetailContent(participantName, participantCountry, participantStatus)
   })
 
   /**

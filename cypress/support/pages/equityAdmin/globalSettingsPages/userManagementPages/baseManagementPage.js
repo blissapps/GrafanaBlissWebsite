@@ -39,6 +39,7 @@ const groupsNavBarSelectors = {
 }
 
 /**
+ *
  * This class is a common page for all common methods and/or locators over User Management, Group Management, Role Management, and Data Access Profiles.
  *
  */

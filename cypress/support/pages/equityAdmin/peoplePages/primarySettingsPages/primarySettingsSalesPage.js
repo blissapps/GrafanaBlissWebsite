@@ -1,16 +1,16 @@
-import BasePage from '../../basePage'
+import BasePage from '../../../basePage'
 
 const properties = {
   pageURL: '/primary-settings'
 }
 
-class PeoplePrimarySettingsPage extends BasePage {
+class PrimarySettingsSalesPage extends BasePage {
   /**
    * Checks if the current page is the Primary Settings URL, which is accessed through Equity People page
    */
-  checkPeoplePrimarySettingsURL() {
+  checkPrimarySettingsSalesURL() {
     this.checkUrl(properties.pageURL)
   }
 }
 
-export default PeoplePrimarySettingsPage
+export default PrimarySettingsSalesPage
