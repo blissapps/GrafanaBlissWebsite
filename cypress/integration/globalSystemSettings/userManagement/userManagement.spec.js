@@ -45,7 +45,7 @@ describe('User Management tests over User Management settings', () => {
   /**
    * @missing_data Need to have a user with proper groups and data registered
    */
-  it('C7592114_Users_Happy_Path_View_User_Details_L4', () => {
+  it.skip('C7592114_Users_Happy_Path_View_User_Details_L4', () => {
     const username = 'amulcahyNE'
     const userId = 454292
     const publicName = 'Gage Gilbert'
