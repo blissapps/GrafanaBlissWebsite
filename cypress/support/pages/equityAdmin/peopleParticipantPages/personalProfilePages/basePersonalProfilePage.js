@@ -1,4 +1,4 @@
-import BasePage from '../../../basePage'
+import BasePeopleParticipantPage from '../basePeopleParticipantPage'
 
 const selectors = {
   overviewTab: 'div[id*=Overview]',
@@ -12,7 +12,7 @@ const selectors = {
  * This class is a common page for all common methods and/or locators over the pages located in the same level of this file (inside personalProfilePages folder)
  *
  */
-class BasePersonalProfilePage extends BasePage {
+class BasePersonalProfilePage extends BasePeopleParticipantPage {
   /**
    * Click in a tab by passing the first tab name
    *
@@ -37,15 +37,6 @@ class BasePersonalProfilePage extends BasePage {
       default:
         throw new Error('Option invalid. Tabs can be either "overview", "address", or "bank"')
     }
-  }
-
-  /**
-   * Click in the "Save Changes" button to save all the changes made in the personal-profile pages
-   */
-  clickToSaveChanges() {
-    cy.get(selectors.saveChangesButton)
-      .scrollIntoView()
-      .click()
   }
 }
 

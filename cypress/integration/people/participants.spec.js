@@ -18,34 +18,34 @@ describe('Participants tests', () => {
     const participantResidency = 'LUX'
 
     equityAdmin.homePage.selectClientById(144)
-    equityAdmin.equityClientPeoplePage.checkPageUrl() // needed to use the search engine in the correct page
+    equityAdmin.clientPeoplePage.checkPageUrl() // needed to use the search engine in the correct page
 
     // Id
     equityAdmin.searchEngine.search(participantId)
-    equityAdmin.equityClientPeoplePage.assertAmountOfPeopleTable(1)
-    equityAdmin.equityClientPeoplePage.assertParticipantDisplayed(participantId)
-    equityAdmin.equityClientPeoplePage.assertDataDisplayedOnGsGridTableIsHighlighted(participantId.toString())
+    equityAdmin.clientPeoplePage.assertAmountOfPeopleTable(1)
+    equityAdmin.clientPeoplePage.assertParticipantDisplayed(participantId)
+    equityAdmin.clientPeoplePage.assertDataDisplayedOnGsGridTableIsHighlighted(participantId.toString())
 
     // Email
     equityAdmin.searchEngine.search(participantEmail)
-    equityAdmin.equityClientPeoplePage.assertAmountOfPeopleTable(233)
-    equityAdmin.equityClientPeoplePage.assertDataDisplayedOnGsGridTableIsHighlighted(participantEmail)
+    equityAdmin.clientPeoplePage.assertAmountOfPeopleTable(233)
+    equityAdmin.clientPeoplePage.assertDataDisplayedOnGsGridTableIsHighlighted(participantEmail)
 
     // Name
     equityAdmin.searchEngine.search(participantName)
-    equityAdmin.equityClientPeoplePage.assertAmountOfPeopleTable(2)
-    equityAdmin.equityClientPeoplePage.assertParticipantDisplayed(participantId)
-    equityAdmin.equityClientPeoplePage.assertDataDisplayedOnGsGridTableIsHighlighted(participantName)
+    equityAdmin.clientPeoplePage.assertAmountOfPeopleTable(2)
+    equityAdmin.clientPeoplePage.assertParticipantDisplayed(participantId)
+    equityAdmin.clientPeoplePage.assertDataDisplayedOnGsGridTableIsHighlighted(participantName)
 
     // Last name
     equityAdmin.searchEngine.search(participantLastName)
-    equityAdmin.equityClientPeoplePage.assertAmountOfPeopleTable(1)
-    equityAdmin.equityClientPeoplePage.assertParticipantDisplayed(participantId)
-    equityAdmin.equityClientPeoplePage.assertDataDisplayedOnGsGridTableIsHighlighted(participantName + ' ' + participantLastName)
+    equityAdmin.clientPeoplePage.assertAmountOfPeopleTable(1)
+    equityAdmin.clientPeoplePage.assertParticipantDisplayed(participantId)
+    equityAdmin.clientPeoplePage.assertDataDisplayedOnGsGridTableIsHighlighted(participantName + ' ' + participantLastName)
 
     // Test with numbers - missing
 
-    equityAdmin.equityClientPeoplePage.assertParticipantDataDisplayedOnTheParticipantsList([participantId, participantName, participantEmail, participantResidency])
+    equityAdmin.clientPeoplePage.assertParticipantDataDisplayedOnTheParticipantsList([participantId, participantName, participantEmail, participantResidency])
   })
 
   it('C11069830_SearchEngine_Search_Without_Returned_Values', () => {
@@ -53,12 +53,12 @@ describe('Participants tests', () => {
     const participantId = 113026
 
     equityAdmin.homePage.selectClientById(clientId)
-    equityAdmin.equityClientPeoplePage.checkPageUrl() // needed to use the search engine in the correct page
+    equityAdmin.clientPeoplePage.checkPageUrl() // needed to use the search engine in the correct page
 
     equityAdmin.searchEngine.search('thereIsNoOneLikeThisTEST')
-    equityAdmin.equityClientPeoplePage.assertNoParticipantsOrTrustsAvailableDisplayed()
+    equityAdmin.clientPeoplePage.assertNoParticipantsOrTrustsAvailableDisplayed()
     equityAdmin.searchEngine.search(participantId)
-    equityAdmin.equityClientPeoplePage.assertParticipantDisplayed(participantId)
+    equityAdmin.clientPeoplePage.assertParticipantDisplayed(participantId)
   })
 
   /**
@@ -72,9 +72,9 @@ describe('Participants tests', () => {
     const clientId = 420
 
     equityAdmin.homePage.selectClientById(clientId)
-    equityAdmin.equityClientPeoplePage.assertNoParticipantsOrTrustsAvailableDisplayed()
-    equityAdmin.equityClientPeoplePage.clickTab('trusts')
-    equityAdmin.equityClientPeoplePage.assertNoParticipantsOrTrustsAvailableDisplayed()
+    equityAdmin.clientPeoplePage.assertNoParticipantsOrTrustsAvailableDisplayed()
+    equityAdmin.clientPeoplePage.clickTab('trusts')
+    equityAdmin.clientPeoplePage.assertNoParticipantsOrTrustsAvailableDisplayed()
   })
 
   /**
@@ -90,8 +90,8 @@ describe('Participants tests', () => {
     const participantStatus = 'ACTIVE'
 
     equityAdmin.homePage.selectClientById(clientId)
-    equityAdmin.equityClientPeoplePage.clickParticipantById(participantId)
-    equityAdmin.equityClientPeoplePage.assertParticipantDetailContent(participantName, participantCountry, participantStatus)
+    equityAdmin.clientPeoplePage.clickParticipantById(participantId)
+    equityAdmin.clientPeoplePage.assertParticipantDetailContent(participantName, participantCountry, participantStatus)
   })
 
   /**

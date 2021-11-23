@@ -22,21 +22,21 @@ import PersonalInformationPage from './equityAdmin/profilePages/personalInformat
 import PreferencesPage from './equityAdmin/profilePages/preferencesPage'
 import SecurityPage from './equityAdmin/profilePages/securityPage'
 
-// People
-import PersonalProfileOverviewPage from './equityAdmin/peoplePages/personalProfilePages/personalProfileOverviewPage'
-import PersonalProfileAddressAndContactPage from './equityAdmin/peoplePages/personalProfilePages/personalProfileAddressAndContactPage'
-import CompanyProfileOverviewPage from './equityAdmin/peoplePages/companyProfilePages/companyProfileOverviewPage'
-import PrimarySettingsSalesPage from './equityAdmin/peoplePages/primarySettingsPages/primarySettingsSalesPage'
-import SaleAndDividendPage from './equityAdmin/peoplePages/saleAndDividendPage'
-import TaxAndCommissionPage from './equityAdmin/peoplePages/taxAndCommissionPage'
+// People Participants
+import PersonalProfileOverviewPage from './equityAdmin/peopleParticipantPages/personalProfilePages/personalProfileOverviewPage'
+import PersonalProfileAddressAndContactPage from './equityAdmin/peopleParticipantPages/personalProfilePages/personalProfileAddressAndContactPage'
+import CompanyProfileOverviewPage from './equityAdmin/peopleParticipantPages/companyProfilePages/companyProfileOverviewPage'
+import PrimarySettingsSalesPage from './equityAdmin/peopleParticipantPages/primarySettingsPages/primarySettingsSalesPage'
+import SaleAndDividendPage from './equityAdmin/peopleParticipantPages/saleAndDividendPage'
+import TaxAndCommissionPage from './equityAdmin/peopleParticipantPages/taxAndCommissionPage'
 
 // Others
 import LoginPage from './loginPage'
-import EquityClientPeoplePage from './equityClientPeoplePage'
+import ClientPeoplePage from './clientPeoplePage'
 import HomePage from './homePage'
 
 /**
- * This is the main class the encapsulates all pages regarding the Equity Admin portal.
+ * This is the main class the encapsulates all pages regarding the Equity Admin portal (Except base pages since they are not meant to be directly called).
  *
  * Because of this class, you don't need to import and create objects to all the pages, so you can just call this EquityAdmin class instead.
  *
@@ -78,7 +78,7 @@ class EquityAdmin {
 
     // Others
     this.loginPage = new LoginPage()
-    this.equityClientPeoplePage = new EquityClientPeoplePage()
+    this.clientPeoplePage = new ClientPeoplePage()
     this.homePage = new HomePage()
   }
 }

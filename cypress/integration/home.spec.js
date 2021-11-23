@@ -11,8 +11,8 @@ describe('Home page tests', () => {
     const clientName = 'Allianz'
 
     equityAdmin.homePage.selectClientFromTheListBySearch(clientName)
-    equityAdmin.equityClientPeoplePage.checkUrlByRegex(/.?client.*[0-9].?people$/)
-    equityAdmin.equityClientPeoplePage.assertClientNameInTheHeader(clientName)
+    equityAdmin.clientPeoplePage.checkPageUrl()
+    equityAdmin.clientPeoplePage.assertClientNameInTheHeader(clientName)
   })
 
   it('C10735651_Check_GroupBy_Displays_Correct_Order_For_AllCompanies_Alphabetical_Status_Country_Sector', () => {
@@ -67,8 +67,8 @@ describe('Home page tests', () => {
     equityAdmin.clientSwitchMenu.searchClientInSwitchClient(clientName)
     equityAdmin.clientSwitchMenu.clickInClientInSwitchClientMenu(clientId)
     equityAdmin.clientSwitchMenu.closeSwitchClientMenuBar()
-    equityAdmin.equityClientPeoplePage.checkUrlByRegex(/.?client.*[0-9].?people$/)
-    equityAdmin.equityClientPeoplePage.assertClientNameInTheHeader(clientName)
+    equityAdmin.clientPeoplePage.checkPageUrl()
+    equityAdmin.clientPeoplePage.assertClientNameInTheHeader(clientName)
 
     // View all clients behavior
     equityAdmin.applicationLeftMenuBar.openSettingsMenuBar()

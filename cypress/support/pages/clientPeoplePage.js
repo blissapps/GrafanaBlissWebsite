@@ -1,7 +1,7 @@
 import BasePage from './basePage'
 
 const properties = {
-  pageURL: '/people'
+  pageURL: /.?client.*[0-9].?people$/
 }
 
 const selectors = {
@@ -34,7 +34,7 @@ class EquityClientPeoplePage extends BasePage {
    * Checks if the current page is the one in properties.pageURL
    */
   checkPageUrl() {
-    this.checkUrl(properties.pageURL)
+    this.checkUrlByRegex(properties.pageURL)
   }
 
   // --------------------------------------- GETS --------------------------------------------- //
