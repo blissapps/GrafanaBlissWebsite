@@ -172,10 +172,7 @@ describe('Role Management tests over User Management settings', () => {
     equityAdmin.roleManagementPage.assertEntityIsDisplayedInTheList(roleName, false)
   })
 
-  /**
-   * * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-922
-   */
-  it.skip('C7499702_Create_A_New_Role_Mandatory_Fields_Are_Not_Populated', () => {
+  it('C7499702_Create_A_New_Role_Mandatory_Fields_Are_Not_Populated', () => {
     const roleName = 'Filling Mandatory Fields ' + utils.getRandomNumber()
 
     equityAdmin.roleManagementPage.clickToCreateRoleWithNewName('{backspace}') // just to save the role with empty name
@@ -193,10 +190,7 @@ describe('Role Management tests over User Management settings', () => {
     equityAdmin.roleManagementPage.assertEntityIsDisplayedInTheList(roleName)
   })
 
-  /**
-   * * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-922
-   */
-  it.skip('C7499704_Create_A_New_Role_Name_Character_Limit_When_Creating', () => {
+  it('C7499704_Create_A_New_Role_Name_Character_Limit_When_Creating', () => {
     let roleName = utils.generateRandomString(51)
 
     // 51 chars
@@ -218,13 +212,10 @@ describe('Role Management tests over User Management settings', () => {
   })
 
   /**
-   * @missing_data Need to have a role created
-   *
-   * * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-922
+   * @missing_data Need to have a role created in order to edit it
    */
   it.skip('C7499705_Create_A_New_Role_Name_Character_Limit_When_Editing', () => {
-    const roleId = 1375
-    const roleName = 'Edit me'
+    const roleId = 1494
     let newRoleName = utils.generateRandomString(51)
 
     // 51 chars
@@ -244,11 +235,6 @@ describe('Role Management tests over User Management settings', () => {
     equityAdmin.roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully')
     equityAdmin.roleManagementPage.assertNotificationErrorDisplayed('Name length must be 50 characters or fewer.', false)
     equityAdmin.roleManagementPage.assertEntityIsDisplayedInTheList(newRoleName)
-
-    // tearDown
-    cy.log('TEARDOWN')
-    equityAdmin.roleManagementPage.modifyEntityName(roleName)
-    equityAdmin.roleManagementPage.saveEntityInformation()
   })
 
   /**
@@ -490,12 +476,12 @@ describe('Role Management tests over User Management settings', () => {
   /**
    * @missing_data For this scenario we need to have a role called 'Activate and Inactivate' in the Active tab
    *
-   * * SKIPPING also due to https://globalshares.atlassian.net/browse/PB-905 and https://globalshares.atlassian.net/browse/PB-963
+   * * SKIPPING due to https://globalshares.atlassian.net/browse/PB-963
    *
-   * TODO: @missing_steps check if the role is editable or not
+   * TODO: @missing_steps check if the role name is editable or not
    */
   it.skip('C7499833_Deactivate_And_Activate_Role', () => {
-    const roleId = 1475
+    const roleId = 1645
     const roleName = 'Activate and Inactivate'
 
     // Inactivate role
@@ -505,8 +491,7 @@ describe('Role Management tests over User Management settings', () => {
     equityAdmin.roleManagementPage.assertToastNotificationMessageIsDisplayed('Role deactivated', true, true)
     equityAdmin.roleManagementPage.assertInactiveRolesAreDisplayed()
     equityAdmin.roleManagementPage.assertEntityIsDisplayedInTheList(roleName)
-    // Missing this step to make sure that the role is non-editable while deactivated. Uncomment it when PB-905 and PB-963 gets done
-    // equityAdmin.roleManagementPage.assertRoleIsEditable(false)
+    equityAdmin.roleManagementPage.assertRoleIsEditable(false) // go inside to complete the method as soon as PB-963 gets done
 
     // Activate role
     cy.log('Activate role')
@@ -523,12 +508,12 @@ describe('Role Management tests over User Management settings', () => {
    * @missing_data Need to have a role called "Duplicate me" or something like that
    */
   it.skip('C7544052_Roles_Duplicate_A_Role', () => {
-    const roleId = 1390
+    const roleId = 1493
     const roleName = 'Duplicate me'
 
     equityAdmin.roleManagementPage.clickRoleById(roleId)
     equityAdmin.roleManagementPage.clickToDuplicateEntity()
-    equityAdmin.roleManagementPage.assertEntityHeaderIsDisplayedAsExpected('Copy of ' + roleName)
+    equityAdmin.roleManagementPage.assertEntityHeaderIsDisplayedAsExpected('Copy Of ' + roleName)
     equityAdmin.roleManagementPage.assertEntityIsFocused()
     equityAdmin.roleManagementPage.saveEntityInformation()
     equityAdmin.roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully')
@@ -536,11 +521,9 @@ describe('Role Management tests over User Management settings', () => {
 
   /**
    * @missing_data Need to have a role with 50 characters in the name
-   *
-   * * SKIPPING also due to https://globalshares.atlassian.net/browse/PB-906 and https://globalshares.atlassian.net/browse/PB-922
    */
   it.skip('C7544054_Duplicate_Role_Maximum_Characters_In_Name_Field', () => {
-    const roleId = 1483
+    const roleId = 1495
     const newRoleNameLessThan50Characters = 'Role ' + utils.getRandomNumber()
 
     equityAdmin.roleManagementPage.clickRoleById(roleId)

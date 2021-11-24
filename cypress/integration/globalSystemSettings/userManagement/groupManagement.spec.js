@@ -203,13 +203,13 @@ describe('Group Management tests over User Management settings', () => {
    * @missing_data Need to have at least one active group called 'Duplicate this group'
    */
   it.skip('C7493036_Groups_Duplicate_A_Group', () => {
-    const groupId = 1125
+    const groupId = 1097
     const groupName = 'Duplicate this group'
     const newNameForDuplicatedGroup = 'Duplicated Group ' + utils.getRandomNumber()
 
     equityAdmin.groupManagementPage.clickGroupById(groupId)
     equityAdmin.groupManagementPage.clickToDuplicateEntity()
-    equityAdmin.groupManagementPage.assertEntityHeaderIsDisplayedAsExpected('Copy of ' + groupName)
+    equityAdmin.groupManagementPage.assertEntityHeaderIsDisplayedAsExpected('Copy Of ' + groupName)
     equityAdmin.groupManagementPage.modifyEntityName(newNameForDuplicatedGroup)
     equityAdmin.groupManagementPage.saveEntityInformation()
 
@@ -287,7 +287,7 @@ describe('Group Management tests over User Management settings', () => {
    * @missing_data Need to have a group. Also, it needs to have 2 users created in the environment.
    */
   it.skip('C7419658_Groups_Add_Users_To_A_Group', () => {
-    const groupId = 1042
+    const groupId = 1095
     const groupName = 'Add Users Group'
     const userName = ['dfonsecaNE', 'amulcahyNE']
     const userIds = [454293, 454292]
@@ -302,7 +302,7 @@ describe('Group Management tests over User Management settings', () => {
 
     // Validates user 1 is linked to the group over User Management settings
     equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'user', false)
-    equityAdmin.searchEngine.search(userName[0])
+    equityAdmin.searchEngine.search(userName[0], 500)
     equityAdmin.userManagementPage.clickUserTable(userIds[0])
     equityAdmin.userManagementPage.clickLinkToAccessUserInfoDetailsOnRightNavBar()
     equityAdmin.userManagementPage.assertUserInfoContentInRightNavBar([groupName])

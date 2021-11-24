@@ -61,9 +61,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
   })
 
   /**
-   * @missing_data Need to have at least 1 active and 1 inactive DAP created
-   *
-   * * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-926
+   * @missing_data Need to have at least 2 active and 2 inactive DAP created
    */
   it.skip('C7544057_DAP_Happy_Path_Alphabetically_List_Active_And_Inactive_Data_Access_Profile(s)', () => {
     // Active tab

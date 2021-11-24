@@ -904,23 +904,3 @@ describe('Statement Management tests', () => {
    * Reconcile a client - Successfully
    */
 })
-
-describe('Statement Management tests - View Only User', () => {
-  // Pages
-  const equityAdmin = new EquityAdmin()
-
-  beforeEach(() => {
-    equityAdmin.loginPage.login(Cypress.env('VIEW_ONLY_USER_2_AUTH'))
-    equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('statement')
-    equityAdmin.clientStatementsPage.checkPageUrl()
-  })
-
-  /**
-   * @missing_data Need to have one user associated with a group without permissions to see any User Management settings (including users, groups, roles, and DAPs (access filters))
-   */
-  it.skip('C7544061_User_Does_Not_Have_View_Permissions_For_Users,_Groups,_Roles,_And_Access_Filters', () => {
-    equityAdmin.applicationLeftMenuBar.openSettingsMenuBar()
-    equityAdmin.settingsMenuNavBar.assertGlobalSettingsMenuOpen()
-    equityAdmin.settingsMenuNavBar.assertUserManagementMenuDisplayed(false)
-  })
-})
