@@ -1,10 +1,10 @@
-import BasePage from '../../basePage'
+import BasePage from '../../../basePage'
 
 const properties = {
-  pageURL: '/sale-and-dividend'
+  pageURL: '/tax-and-commission'
 }
 
-class SaleAndDividendPage extends BasePage {
+class TaxAndCommissionPage extends BasePage {
   /**
    * Checks if the current page is the one in properties.pageURL
    */
@@ -13,4 +13,4 @@ class SaleAndDividendPage extends BasePage {
   }
 }
 
-export default SaleAndDividendPage
+export default TaxAndCommissionPage

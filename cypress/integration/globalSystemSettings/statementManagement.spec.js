@@ -233,15 +233,15 @@ describe('Statement Management tests', () => {
   })
 
   /**
-   * @missing_data Need to have a client with some participants that meets the searches you want to do. Right now, this test is based on Interxion
+   * @missing_data Need to have a client with some participants that meets the searches you want to do.
    */
   it.skip('C7394707_Participant_Filter_Behavior', () => {
-    const clientName = 'Interxion'
-    const clientID = 76
-    const participantID = 406750
-    const participantName = 'Rangel'
+    const clientName = 'Amadeus'
+    const clientID = 81
+    const participantID = 273850
+    const participantName = 'Cisneros'
     const participantStatus = 'Published'
-    const participantExternalId = 111569
+    const participantExternalId = '49071'
 
     equityAdmin.clientStatementsPage.filterClientStatements(clientName)
     equityAdmin.clientStatementsPage.clickClientTable(clientID)
@@ -250,7 +250,7 @@ describe('Statement Management tests', () => {
     // By Participant Name
     equityAdmin.clientParticipantStatementsPage.filterParticipantStatements(participantName)
     equityAdmin.clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
-    equityAdmin.clientParticipantStatementsPage.assertAmountOfRecordsTable(1)
+    equityAdmin.clientParticipantStatementsPage.assertAmountOfRecordsTable(4)
     equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
     // By Internal Id
@@ -267,7 +267,7 @@ describe('Statement Management tests', () => {
 
     // By Status
     equityAdmin.clientParticipantStatementsPage.filterParticipantStatements('', -1, participantStatus)
-    equityAdmin.clientParticipantStatementsPage.assertAmountOfRecordsTable(15)
+    equityAdmin.clientParticipantStatementsPage.assertAmountOfRecordsTable(908)
     equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
     // By Name and Internal Id

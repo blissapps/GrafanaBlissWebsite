@@ -23,16 +23,16 @@ import PreferencesPage from './equityAdmin/profilePages/preferencesPage'
 import SecurityPage from './equityAdmin/profilePages/securityPage'
 
 // People Participants
-import PersonalProfileOverviewPage from './equityAdmin/peopleParticipantPages/personalProfilePages/personalProfileOverviewPage'
-import PersonalProfileAddressAndContactPage from './equityAdmin/peopleParticipantPages/personalProfilePages/personalProfileAddressAndContactPage'
-import CompanyProfileOverviewPage from './equityAdmin/peopleParticipantPages/companyProfilePages/companyProfileOverviewPage'
-import PrimarySettingsSalesPage from './equityAdmin/peopleParticipantPages/primarySettingsPages/primarySettingsSalesPage'
-import SaleAndDividendPage from './equityAdmin/peopleParticipantPages/saleAndDividendPage'
-import TaxAndCommissionPage from './equityAdmin/peopleParticipantPages/taxAndCommissionPage'
+import ClientPeoplePage from './equityAdmin/clientPeoplePages/clientPeoplePage'
+import PersonalProfileOverviewPage from './equityAdmin/clientPeoplePages/peopleParticipantPages/personalProfilePages/personalProfileOverviewPage'
+import PersonalProfileAddressAndContactPage from './equityAdmin/clientPeoplePages/peopleParticipantPages/personalProfilePages/personalProfileAddressAndContactPage'
+import CompanyProfileOverviewPage from './equityAdmin/clientPeoplePages/peopleParticipantPages/companyProfilePages/companyProfileOverviewPage'
+import PrimarySettingsSalesPage from './equityAdmin/clientPeoplePages/peopleParticipantPages/primarySettingsPages/primarySettingsSalesPage'
+import SaleAndDividendPage from './equityAdmin/clientPeoplePages/peopleParticipantPages/saleAndDividendPage'
+import TaxAndCommissionPage from './equityAdmin/clientPeoplePages/peopleParticipantPages/taxAndCommissionPage'
 
 // Others
 import LoginPage from './loginPage'
-import ClientPeoplePage from './clientPeoplePage'
 import HomePage from './homePage'
 
 /**

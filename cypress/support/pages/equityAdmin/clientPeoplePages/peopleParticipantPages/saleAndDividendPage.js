@@ -1,10 +1,10 @@
 import BasePage from '../../../basePage'
 
 const properties = {
-  pageURL: '/primary-settings'
+  pageURL: '/sale-and-dividend'
 }
 
-class PrimarySettingsSalesPage extends BasePage {
+class SaleAndDividendPage extends BasePage {
   /**
    * Checks if the current page is the one in properties.pageURL
    */
@@ -13,4 +13,4 @@ class PrimarySettingsSalesPage extends BasePage {
   }
 }
 
-export default PrimarySettingsSalesPage
+export default SaleAndDividendPage

@@ -401,11 +401,11 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
    * @param {String} participantName participant name to be searched into the participant statement filter. '' to skip this filter
    * @param {Number} participantId participant id to be searched into the participant statement filter. -1 to skip this filter
    * @param {String} status participant status to be searched into the participant statement filter. '' to skip this filter
-   * @param {Number} participantExternalId participant external id to be searched into the participant statement filter. -1 to skip this filter
+   * @param {String} participantExternalId participant external id to be searched into the participant statement filter. -1 to skip this filter
    *
    * The Delay is necessary for Firefox only
    */
-  filterParticipantStatements(participantName = '', participantId = -1, status = '', participantExternalId = -1) {
+  filterParticipantStatements(participantName = '', participantId = -1, status = '', participantExternalId = '') {
     // Firefox delay
     let delay = 10
     if (Cypress.isBrowser('firefox')) {
@@ -426,7 +426,7 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
       cy.get(selectors.participantStatus).type(status + '{enter}', { delay: delay })
     }
 
-    if (participantExternalId != -1) {
+    if (participantExternalId != '') {
       cy.get(selectors.participantExternalId).type(participantExternalId + '{enter}', { delay: delay })
     }
 

@@ -1,4 +1,4 @@
-import BasePage from '../../basePage'
+import BasePage from '../../../basePage'
 
 const selectors = {
   companyNavigationMenuButton: 'hearth-participant-record-navigation a:nth-child(3)'

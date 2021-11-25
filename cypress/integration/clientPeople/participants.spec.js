@@ -28,7 +28,7 @@ describe('Participants tests', () => {
 
     // Email
     equityAdmin.searchEngine.search(participantEmail)
-    equityAdmin.clientPeoplePage.assertAmountOfPeopleTable(233)
+    equityAdmin.clientPeoplePage.assertAmountOfPeopleTable(232)
     equityAdmin.clientPeoplePage.assertDataDisplayedOnGsGridTableIsHighlighted(participantEmail)
 
     // Name
