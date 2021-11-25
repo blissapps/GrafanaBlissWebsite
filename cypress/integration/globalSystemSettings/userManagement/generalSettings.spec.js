@@ -32,7 +32,10 @@ describe('User Management tests over User Management settings - View Only User',
     equityAdmin.dapManagementPage.assertViewOnlyBadgeDisplayed()
   })
 
-  it('C12324915_Create_New_Group/role/dap_Button_Should_Not_Be_Available_In_The_Ui_For_A_User_With_Only_View_Permissions', () => {
+  /**
+   * @missing_data need a user for that
+   */
+  it.skip('C12324915_Create_New_Group/role/dap_Button_Should_Not_Be_Available_In_The_Ui_For_A_User_With_Only_View_Permissions', () => {
     // Group
     equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'group')
     equityAdmin.groupManagementPage.checkPageUrl()

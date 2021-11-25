@@ -11,7 +11,7 @@ describe('Statement Management tests', () => {
     equityAdmin.clientStatementsPage.checkPageUrl()
   })
 
-  it('C7394715_Happy_Path_To_View_Statements_Accordingly', () => {
+  it.skip('C7394715_Happy_Path_To_View_Statements_Accordingly', () => {
     const idsClientList = [77, 78, 79, 80, 81]
     const columnsToValidate = ['Id', 'Client', 'Regulator', 'Status']
 
@@ -79,9 +79,9 @@ describe('Statement Management tests', () => {
   })
 
   /**
-   * TODO: @missing steps to add filter by status and Regulator
+   * * SKIPPED DUE TO https://globalshares.atlassian.net/browse/PB-1040
    */
-  it('C7353833_Use_Filter_To_Search_For_Client_Statements', () => {
+  it.skip('C7353833_Use_Filter_To_Search_For_Client_Statements', () => {
     // name and date
     const clientName = 'TomTom'
     const dateFrom = '20190301'
@@ -101,9 +101,15 @@ describe('Statement Management tests', () => {
     equityAdmin.clientStatementsPage.assertClientDisplayedOnClientStatementsTable(clientId)
     equityAdmin.clientStatementsPage.assertAmountOfRecordsTable(1)
 
-    // By Status
+    // By Regulator
+    equityAdmin.clientStatementsPage.filterClientStatements('', '', '', 'Form 1099')
+    equityAdmin.clientStatementsPage.assertClientDisplayedOnClientStatementsTable(clientId)
+    equityAdmin.clientStatementsPage.assertAmountOfRecordsTable(1)
 
-    // By Reporter
+    // By Status
+    equityAdmin.clientStatementsPage.filterClientStatements('', '', '', '', 'Published')
+    equityAdmin.clientStatementsPage.assertClientDisplayedOnClientStatementsTable(clientId)
+    equityAdmin.clientStatementsPage.assertAmountOfRecordsTable(3)
   })
 
   /**
@@ -206,8 +212,10 @@ describe('Statement Management tests', () => {
 
   /**
    * TODO: @missing_steps scroll not working properly. Need to investigate why it does not work in our website
+   *
+   * @missing_data Need a client statement
    */
-  it('C7394265_View_Statements', () => {
+  it.skip('C7394265_View_Statements', () => {
     const clientName = 'Keywords Studios plc'
     const clientId = 87
     const columnsToValidate = ['Participant', 'Status']

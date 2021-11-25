@@ -6,6 +6,8 @@ const properties = {
 
 const selectors = {
   clientFilterStatementInput: '#clientSelect input',
+  regulatorFilterStatementInput: '#regulatorSelect input',
+  statusFilterStatementInput: '#statusSelect input',
   dateFilterStatementInput: '#date-range-input input',
   clientStatementId: '#clientStatement-',
   clientsStatementIdsInTable: 'gs-grid-row gs-grid-cell:nth-child(1):not([id=idColumn]) span'
@@ -212,7 +214,7 @@ class ClientStatementsPage extends BaseStatementManagementPage {
    *
    * @example ('TomTom', '20190301', '20210519') for TomTom client with date range from 2019-03-01 up to 2021-05-19
    */
-  filterClientStatements(clientName = '', dateFrom = '', dateTo = '') {
+  filterClientStatements(clientName = '', dateFrom = '', dateTo = '', regulator = '', status = '') {
     if (clientName != '') {
       cy.get(selectors.clientFilterStatementInput).as('clientFilterInput')
       cy.get('@clientFilterInput').type(clientName)
@@ -226,6 +228,18 @@ class ClientStatementsPage extends BaseStatementManagementPage {
       cy.get(selectors.dateFilterStatementInput)
         .last()
         .type(dateTo)
+    }
+
+    if (regulator != '') {
+      cy.get(selectors.regulatorFilterStatementInput).as('regulatorFilterInput')
+      cy.get('@regulatorFilterInput').type(regulator)
+      cy.get('@regulatorFilterInput').type('{enter}')
+    }
+
+    if (status != '') {
+      cy.get(selectors.statusFilterStatementInput).as('statusFilterStatementInput')
+      cy.get('@statusFilterStatementInput').type(status)
+      cy.get('@statusFilterStatementInput').type('{enter}')
     }
   }
 
