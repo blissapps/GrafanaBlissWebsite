@@ -47,7 +47,10 @@ describe('Home page tests', () => {
     equityAdmin.homePage.assertClientIsFavorite(146, false)
   })
 
-  it('C10735680_Check_Client_Summary_Information_On_Cards', () => {
+  /**
+   * @missing_data We need to have the clients in an proper state
+   */
+  it.skip('C10735680_Check_Client_Summary_Information_On_Cards', () => {
     equityAdmin.homePage.assertClientCardSummaryInformation(144, '7digital', 'GBR', 'Regulated', 'Active').should('be.visible')
     equityAdmin.homePage.assertClientCardSummaryInformation(337, '9F Group', 'CHN', 'Not Regulated', 'NOT SET').should('be.visible')
     equityAdmin.homePage.assertClientCardSummaryInformation(361, 'Alliance Bernstein', 'USA', 'Regulated', 'Terminated').should('be.visible')

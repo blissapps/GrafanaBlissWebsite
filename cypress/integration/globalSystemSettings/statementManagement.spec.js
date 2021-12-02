@@ -230,8 +230,8 @@ describe('Statement Management tests', () => {
   })
 
   it('C7395182_Select_Client_Without_Participants_To_Check_Empty_State', () => {
-    const clientName = 'Mizuho International plc'
-    const clientId = 211
+    const clientName = 'Global Ports'
+    const clientId = 655
 
     equityAdmin.clientStatementsPage.filterClientStatements(clientName)
     equityAdmin.clientStatementsPage.clickClientTable(clientId)
