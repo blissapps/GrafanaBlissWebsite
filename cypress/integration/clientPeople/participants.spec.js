@@ -9,8 +9,10 @@ describe('Participants tests', () => {
 
   /**
    * TODO: @missing_steps Search for numbers is missing to cover PB-829
+   *
+   * @missing_data The number of records needs to be known, so we can assert the search results
    */
-  it('C11069829_SearchEngine_Search_For_ID_Name_Email', () => {
+  it.skip('C11069829_SearchEngine_Search_For_ID_Name_Email', () => {
     const participantId = 112967
     const participantName = 'Bryan'
     const participantLastName = 'Branch'

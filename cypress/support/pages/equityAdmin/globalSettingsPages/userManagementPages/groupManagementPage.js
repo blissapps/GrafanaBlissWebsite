@@ -497,31 +497,51 @@ class GroupManagementPage extends BaseManagementPage {
    * For example: dapNames=['dap1', 'dap2'] needs to match the exactly order in dapIds=[1, 2]
    *
    */
-  createGroup(groupName, roleName, roleId, dapNames, dapIds, userNames, userIds, companyNames, companyIds) {
+  createGroup(groupName, roleName = '', roleId = 0, dapNames = [], dapIds = [], userNames = [], userIds = [], companyNames = [], companyIds = []) {
+    // ********* Validating if the data is consistent *********** //
+    // DAPs
+    if (dapNames.length == dapIds.length) {
+      cy.log('Daps are valid, moving on...')
+    } else {
+      throw new Error('Dap names and Dap ids need to have the same length')
+    }
+    // Users
+    if (userNames.length == userIds.length) {
+      cy.log('Users are valid, moving on...')
+    } else {
+      throw new Error('User names and User ids need to have the same length')
+    }
+    // Companies
+    if (companyNames.length == companyIds.length) {
+      cy.log('Companies are valid, moving on...')
+    } else {
+      throw new Error('Company names and Company ids need to have the same length')
+    }
+
+    cy.log('All necessary data looks good, moving forward to group creation')
     cy.get(selectors.newGroupBtn).click()
 
     // Make sure the default value is 'New Group' before renaming it
     this.assertEntityHeaderIsDisplayedAsExpected('New Group')
     this.modifyEntityName(groupName)
 
-    if (roleName) {
+    if (roleName != '' && roleId != 0) {
       this.selectRoleToGroup(roleName, roleId)
     }
 
-    if (dapNames.length > 0) {
+    if (dapNames.length > 0 && dapIds.length > 0) {
       this.addDapsToGroup(dapNames, dapIds)
     }
 
-    if (userNames.length > 0) {
+    if (userNames.length > 0 && userIds.length > 0) {
       this.addUsersToGroup(userNames, userIds)
     }
 
-    if (companyNames.length > 0) {
+    if (companyNames.length > 0 && companyIds.length > 0) {
       this.addCompaniesToGroup(companyNames, companyIds)
     }
 
     this.saveEntityInformation()
-    this.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
   }
 
   /**

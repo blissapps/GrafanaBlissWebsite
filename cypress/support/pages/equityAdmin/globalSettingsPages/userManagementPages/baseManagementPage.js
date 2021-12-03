@@ -276,7 +276,7 @@ class BaseManagementPage extends BasePage {
    * Assert a entity is displayed under the entity list. Entities are 'roles', 'daps', or 'groups'
    *
    * @param {String} entityName Entity name
-   * @param {Boolean} displayed True to assert the entity is displayed. False otherwise.
+   * @param {Boolean} displayed True is the default to assert the entity is displayed. False otherwise.
    */
   assertEntityIsDisplayedInTheList(entityName, displayed = true) {
     if (displayed) {
@@ -284,7 +284,7 @@ class BaseManagementPage extends BasePage {
         .scrollIntoView()
         .should('be.visible')
     } else {
-      this.getEntityByName(entityName, displayed)
+      this.getEntityByName(entityName, displayed).should('not.exist')
     }
   }
 

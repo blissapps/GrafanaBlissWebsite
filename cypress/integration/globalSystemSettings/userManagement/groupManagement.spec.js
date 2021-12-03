@@ -218,6 +218,13 @@ describe('Group Management tests over User Management settings', () => {
     equityAdmin.groupManagementPage.assertEntityIsDisplayedInTheList(newNameForDuplicatedGroup)
   })
 
+  it('C12925306_Groups_Create_A_New_Group_Without_Entities_Associated', () => {
+    const groupName = 'Created Group ' + utils.getRandomNumber()
+    equityAdmin.groupManagementPage.createGroup(groupName)
+    equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
+    equityAdmin.groupManagementPage.assertEntityIsDisplayedInTheList(groupName)
+  })
+
   /**
    * @missing_data Need to have at least one group and roles, daps, users, and companies to associate
    */
@@ -233,6 +240,8 @@ describe('Group Management tests over User Management settings', () => {
     const companyIds = [144, 337]
 
     equityAdmin.groupManagementPage.createGroup(groupName, roleName, roleId, dapNames, dapIds, userNames, userIds, companyName, companyIds)
+    equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
+    equityAdmin.groupManagementPage.assertEntityIsDisplayedInTheList(groupName)
   })
 
   /**
