@@ -1,12 +1,13 @@
 {
-  "projectId": "15zcyz",
+  "projectId": "3dnjt3",
   "baseUrl": "https://ea-v3.myglobalshares.co.uk/",
   "chromeWebSecurity": false,
   "trashAssetsBeforeRuns": true,
   "integrationFolder": "cypress/integration/",
   "testFiles": ["**/*.feature", "**/*.spec.js"],
   "numTestsKeptInMemory": 15,
-  "video": false,
+  "video": true,
+  "videoCompression": 32,
   "defaultCommandTimeout": 15000,
   "slowTestThreshold": 30000,
   "viewportWidth": 1920,
@@ -18,7 +19,7 @@
   },
   "experimentalSessionSupport": true,
 
-  "screenshotOnRunFailure": false,
+  "screenshotOnRunFailure": true,
   "screenshotConfig": {
     "scale": false
   },

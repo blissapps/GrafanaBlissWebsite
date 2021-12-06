@@ -13,6 +13,7 @@
     "cy:run:chrome": "cypress run --browser chrome --spec 'cypress/integration/**/*.spec.js'",
     "cy:run:firefox": "cypress run --browser firefox --spec 'cypress/integration/**/*.spec.js'",
     "cy:run:edge": "cypress run --browser edge",
+    "cy:run:dashboard": "cypress run --record --key 73fca1ca-1496-4c9f-b521-102037cdb733 --tag 'staging,testing dashboard'",
     " --- Formatting: ESLint and Prettier + Typescript compiler to support JS code ---- ": "",
     "eslint": "eslint --report-unused-disable-directives --max-warnings=0 -c .eslintrc.json .",
     "eslint:fix": "yarn eslint --fix",
