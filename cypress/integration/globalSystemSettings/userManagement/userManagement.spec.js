@@ -17,7 +17,10 @@ describe('User Management tests over User Management settings', () => {
     equityAdmin.userManagementPage.checkPageUrl()
   })
 
-  it('C7592116_Users_Search_For_Username_/_Email_And_Check_Highlighted_Data', () => {
+  /**
+   * @missing_data We need to make sure about the current total of clients that has the same userEmail
+   */
+  it.skip('C7592116_Users_Search_For_Username_/_Email_And_Check_Highlighted_Data', () => {
     const username = 'amulcahyNE'
     const userEmail = 'test@globalshares.com'
     const userStatus = 'Active'
