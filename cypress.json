@@ -3,28 +3,32 @@
   "baseUrl": "https://ea-v3.myglobalshares.co.uk/",
   "chromeWebSecurity": false,
   "trashAssetsBeforeRuns": true,
+  "numTestsKeptInMemory": 15,
   "integrationFolder": "cypress/integration/",
   "testFiles": ["**/*.feature", "**/*.spec.js"],
-  "numTestsKeptInMemory": 15,
+  "ignoreTestFiles": ["**/__snapshots__/*", "**/__image_snapshots__/*"],
+  "include": ["./node_modules/cypress", "cypress/**/*.js"],
+
+  "experimentalSessionSupport": true,
+
   "video": true,
-  "videoCompression": 32,
+  "videoCompression": false,
+  "videoUploadOnPasses": true,
+
   "defaultCommandTimeout": 15000,
   "slowTestThreshold": 30000,
   "viewportWidth": 1920,
   "viewportHeight": 1080,
-  "ignoreTestFiles": ["**/__snapshots__/*", "**/__image_snapshots__/*"],
+
   "retries": {
     "runMode": 2,
     "openMode": 0
   },
-  "experimentalSessionSupport": true,
 
   "screenshotOnRunFailure": true,
   "screenshotConfig": {
     "scale": false
   },
-
-  "include": ["./node_modules/cypress", "cypress/**/*.js"],
 
   "reporter": "cypress-multi-reporters",
   "reporterOptions": {
