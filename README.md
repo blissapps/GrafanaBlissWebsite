@@ -92,7 +92,25 @@ We can create many personalized ways to run cypress. To do this, we need to crea
 > cy:run:edge
 > ```
 
-- Remember that all theses commands above can be totally adapted, modified, or even created according with the project current necessities
+Remember that all theses commands above can be totally adapted, modified, or even created according with the project current necessities
+
+## Compilers and linters
+
+Basically, we need to make sure we do not have any issue raised by the compilers before committing any code. So, we need to run all the compilers in this order:
+
+``` bash
+# Run this typescript compiler first, if some error is found, fix it and it run again:
+yarn compile
+
+# Now, with no more errors from the previous one, run the ESLint and prettier:
+yarn lint:fix
+
+# Then, fix any issue raised and rerun the scripts above again just to make you are okay.
+
+# If no issues were found, you can move forward to commit your code.
+```
+
+Please refer to this link to more information regarding compilers and linters details in this project: https://globalshares.atlassian.net/wiki/spaces/GCE/pages/2826076557/Compilers
 
 ## Cypress with Docker
 
