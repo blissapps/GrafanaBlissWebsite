@@ -15,26 +15,29 @@ describe('Home page tests', () => {
     equityAdmin.clientPeoplePage.assertClientNameInTheHeader(clientName)
   })
 
+  /**
+   * TODO Need refactoring to check the orders independently of the database
+   */
   it('C10735651_Check_GroupBy_Displays_Correct_Order_For_AllCompanies_Alphabetical_Status_Country_Sector', () => {
     // All Companies (default)
     equityAdmin.homePage.SelectGroupByOptionForCompanies()
-    equityAdmin.homePage.assertCompaniesGroupByOrderIsCorrect()
+    equityAdmin.homePage.assertCompaniesAreOrdered()
 
     // Alphabetical
     equityAdmin.homePage.SelectGroupByOptionForCompanies('alphabetical')
-    equityAdmin.homePage.assertCompaniesGroupByOrderIsCorrect('alphabetical')
+    equityAdmin.homePage.assertCompaniesAreOrdered()
 
     // Status
     equityAdmin.homePage.SelectGroupByOptionForCompanies('status')
-    equityAdmin.homePage.assertCompaniesGroupByOrderIsCorrect('status')
+    equityAdmin.homePage.assertCompaniesAreOrdered()
 
     // Country
     equityAdmin.homePage.SelectGroupByOptionForCompanies('country')
-    equityAdmin.homePage.assertCompaniesGroupByOrderIsCorrect('country')
+    equityAdmin.homePage.assertCompaniesAreOrdered()
 
     // Sector
     equityAdmin.homePage.SelectGroupByOptionForCompanies('sector')
-    equityAdmin.homePage.assertCompaniesGroupByOrderIsCorrect('sector')
+    equityAdmin.homePage.assertCompaniesAreOrdered()
   })
 
   it('C10735652_Favorite_And_Unfavorite_Client', () => {

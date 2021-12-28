@@ -16,36 +16,9 @@ const selectors = {
   clientCardCountryBadge: '#countryBadge',
   clientCardRegulatedStatus: '#regBadge',
   clientCardStatus: '#statusBadge',
-  homePageHeader: '#homepageHeader'
-}
-
-const groupBySelectors = {
-  // Favorites
+  homePageHeader: '#homepageHeader',
   separatorFavorites: '#cardGroupSectionFavorites',
-
-  // All Companies
-  separatorAllCompanies: '#cardGroupSectionAllCompanies',
-
-  // Alphabetical
-  separator0_9: '#cardGroupSection0_9',
-  separatorA: '#cardGroupSectionA',
-  separatorB: '#cardGroupSectionB',
-  separatorC: '#cardGroupSectionC',
-
-  // Status
-  separatorActive: '#cardGroupSectionActive',
-  separatorDemo: '#cardGroupSectionDemo',
-  separatorImplementation: '#cardGroupSectionImplementation',
-  separatorTerminated: '#cardGroupSectionTerminated',
-
-  // Country
-  separatorAustralia: '#cardGroupSectionAustralia',
-  separatorAustria: '#cardGroupSectionAustria',
-  separatorAzerbaijan: '#cardGroupSectionAzerbaijan',
-  separatorBahrain: '#cardGroupSectionBahrain',
-
-  // Sector
-  separatorUnknown: '#cardGroupSectionUnknown'
+  groupSections: '*[id*=cardGroupSection]'
 }
 
 class HomePage extends BasePage {
@@ -84,7 +57,7 @@ class HomePage extends BasePage {
    * @param {Boolean} favorite True fo assert the client is favorite, false otherwise
    */
   assertClientIsFavorite(clientId, favorite = true) {
-    favorite ? cy.get(groupBySelectors.separatorFavorites).should('exist') : true
+    favorite ? cy.get(selectors.separatorFavorites).should('exist') : true
 
     if (favorite) {
       cy.get(`${selectors.clientCard}${clientId}.favoriteVisible`).should('be.visible')
@@ -171,61 +144,36 @@ class HomePage extends BasePage {
     cy.get(selectors.groupBySelector).click()
 
     switch (groupBy.toLowerCase()) {
+      case '':
+        cy.get(selectors.groupByAllCompanies).click()
+        break
+
       case 'alphabetical':
         cy.get(selectors.groupByAlphabetical).click()
         break
+
       case 'status':
         cy.get(selectors.groupByStatus).click()
         break
+
       case 'country':
         cy.get(selectors.groupByCountry).click()
         break
+
       case 'sector':
         cy.get(selectors.groupBySector).click()
         break
+
       default:
-        cy.get(selectors.groupByAllCompanies).click()
+        throw new Error('The Group by option' + groupBy + ' is not valid, please fix it!')
     }
   }
 
   /**
-   * Check if the client list is correctly organized in the home page.
-   *
-   * @param {String} groupBy The group by to be validated. It can be: alphabetical, status, country, or sector. If groupBy is not given, the default group method to validate is All Companies
-   *
-   * Change this solution as soon as an ID is provided
+   * Check if the client list is correctly organized in the home page
    */
-  assertCompaniesGroupByOrderIsCorrect(groupBy = '') {
-    switch (groupBy.toLowerCase()) {
-      case 'alphabetical':
-        cy.get(groupBySelectors.separator0_9).should('exist')
-        cy.get(groupBySelectors.separatorA).should('exist')
-        cy.get(groupBySelectors.separatorB).should('exist')
-        cy.get(groupBySelectors.separatorC).should('exist')
-        break
-
-      case 'status':
-        cy.get(groupBySelectors.separatorActive).should('exist')
-        cy.get(groupBySelectors.separatorDemo).should('exist')
-        cy.get(groupBySelectors.separatorImplementation).should('exist')
-        cy.get(groupBySelectors.separatorTerminated).should('exist')
-        break
-
-      case 'country':
-        cy.get(groupBySelectors.separatorAustralia).should('exist')
-        cy.get(groupBySelectors.separatorAustria).should('exist')
-        cy.get(groupBySelectors.separatorAzerbaijan).should('exist')
-        cy.get(groupBySelectors.separatorBahrain).should('exist')
-        break
-
-      case 'sector':
-        cy.get(groupBySelectors.separatorUnknown).should('exist')
-        break
-
-      // All Companies
-      default:
-        cy.get(groupBySelectors.separatorAllCompanies).should('exist')
-    }
+  assertCompaniesAreOrdered() {
+    this.assertElementsInAlphabeticalOrder(selectors.groupSections)
   }
 }
 
