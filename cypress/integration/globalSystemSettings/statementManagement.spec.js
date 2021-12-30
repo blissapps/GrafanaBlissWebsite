@@ -229,7 +229,10 @@ describe('Statement Management tests', () => {
     equityAdmin.clientParticipantStatementsPage.assertParticipantStatementsTableInOrderById(idsParticipantsList)
   })
 
-  it('C7395182_Select_Client_Without_Participants_To_Check_Empty_State', () => {
+  /**
+   * @missing_data Need to have a proper client without any participants
+   */
+  it.skip('C7395182_Select_Client_Without_Participants_To_Check_Empty_State', () => {
     const clientName = 'Global Ports'
     const clientId = 655
 

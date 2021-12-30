@@ -7,7 +7,10 @@ describe('Home page tests', () => {
     equityAdmin.loginPage.login()
   })
 
-  it('C10728360_Select_Specific_Client_From_The_List_Using_The_Search_Engine', () => {
+  /**
+   * @missing_data We need to have a proper registered client to be searched
+   */
+  it.skip('C10728360_Select_Specific_Client_From_The_List_Using_The_Search_Engine', () => {
     const clientName = 'Allianz'
 
     equityAdmin.homePage.selectClientFromTheListBySearch(clientName)
@@ -20,23 +23,23 @@ describe('Home page tests', () => {
    */
   it('C10735651_Check_GroupBy_Displays_Correct_Order_For_AllCompanies_Alphabetical_Status_Country_Sector', () => {
     // All Companies (default)
-    equityAdmin.homePage.SelectGroupByOptionForCompanies()
+    equityAdmin.homePage.selectGroupByOptionForCompanies()
     equityAdmin.homePage.assertCompaniesAreOrdered()
 
     // Alphabetical
-    equityAdmin.homePage.SelectGroupByOptionForCompanies('alphabetical')
+    equityAdmin.homePage.selectGroupByOptionForCompanies('alphabetical')
     equityAdmin.homePage.assertCompaniesAreOrdered()
 
     // Status
-    equityAdmin.homePage.SelectGroupByOptionForCompanies('status')
+    equityAdmin.homePage.selectGroupByOptionForCompanies('status')
     equityAdmin.homePage.assertCompaniesAreOrdered()
 
     // Country
-    equityAdmin.homePage.SelectGroupByOptionForCompanies('country')
+    equityAdmin.homePage.selectGroupByOptionForCompanies('country')
     equityAdmin.homePage.assertCompaniesAreOrdered()
 
     // Sector
-    equityAdmin.homePage.SelectGroupByOptionForCompanies('sector')
+    equityAdmin.homePage.selectGroupByOptionForCompanies('sector')
     equityAdmin.homePage.assertCompaniesAreOrdered()
   })
 
@@ -61,7 +64,10 @@ describe('Home page tests', () => {
     equityAdmin.homePage.assertClientCardSummaryInformation(281, 'BOCI SSO', 'HKG', 'Not Regulated', 'Demo').should('be.visible')
   })
 
-  it('C10772388_Validate_Quick_Client_Switch_Behavior', () => {
+  /**
+   * @missing_data We need to have a proper registered client to verify the client switch behavior
+   */
+  it.skip('C10772388_Validate_Quick_Client_Switch_Behavior', () => {
     const clientName = '7digital'
     const clientId = 144
 

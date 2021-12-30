@@ -9,7 +9,10 @@ describe('Personal profile tests for Participants', () => {
     equityAdmin.loginPage.login()
   })
 
-  it('C12590100_Company_Overview_fields_max_characters_limit_per_fields', () => {
+  /**
+   * @missing_data Need to have a proper client and a proper participant
+   */
+  it.skip('C12590100_Company_Overview_fields_max_characters_limit_per_fields', () => {
     const clientId = 144
     const participantId = 113026
     const randomTextWith10Chars = utils.generateRandomString(10)

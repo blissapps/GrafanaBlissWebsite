@@ -140,7 +140,7 @@ class HomePage extends BasePage {
    *
    * @param {String} groupBy The option to group the clients, it can be: alphabetical, status, country, or sector. If groupBy is not given, the default group method is All Companies
    */
-  SelectGroupByOptionForCompanies(groupBy = '') {
+  selectGroupByOptionForCompanies(groupBy = '') {
     cy.get(selectors.groupBySelector).click()
 
     switch (groupBy.toLowerCase()) {

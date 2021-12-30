@@ -50,7 +50,10 @@ describe('Participants tests', () => {
     equityAdmin.clientPeoplePage.assertParticipantDataDisplayedOnTheParticipantsList([participantId, participantName, participantEmail, participantResidency])
   })
 
-  it('C11069830_SearchEngine_Search_Without_Returned_Values', () => {
+  /**
+   * @missing_data Need to have a proper client and a proper participant to be searched
+   */
+  it.skip('C11069830_SearchEngine_Search_Without_Returned_Values', () => {
     const clientId = 144
     const participantId = 113026
 
@@ -69,7 +72,6 @@ describe('Participants tests', () => {
    * @missing_data Need to have one client without participants and trusts
    *
    */
-
   it.skip('C1234567_Client_Without_Participants_And_Trusts', () => {
     const clientId = 420
 
