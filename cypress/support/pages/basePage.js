@@ -43,7 +43,7 @@ class BasePage {
   /**
    * Get an element by passing a text
    *
-   * @param {string} text text to get the element
+   * @param {String} text text to get the element
    *
    * @returns the element if found
    */
@@ -55,7 +55,7 @@ class BasePage {
   /**
    * Click in a element by passing the element text
    *
-   * @param {*} text element text to be clicked
+   * @param {String} text element text to be clicked
 
    */
   clickElementByText(text) {

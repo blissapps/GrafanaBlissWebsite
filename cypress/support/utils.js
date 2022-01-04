@@ -8,10 +8,10 @@ class Utils {
    * You can use the parameters to get a future date or a past date.
    * If you do not want to shift date, just send 0,0,0 in the parameters and you will get current day
    *
-   * @param {number} days amount of days to shift
-   * @param {number} months amount of months to shift
-   * @param {number} years amount of years to shift
-   * @param {string} format date format, example: MM/DD/YYYY, YYYY/MM/DD
+   * @param {Number} days amount of days to shift
+   * @param {Number} months amount of months to shift
+   * @param {Number} years amount of years to shift
+   * @param {String} format date format, example: MM/DD/YYYY, YYYY/MM/DD
    *
    */
   getDateInFutureOrPast(days, months, years, format) {
@@ -51,7 +51,7 @@ class Utils {
   /**
    * Generates a random string of a given length
    *
-   * @param {*} length Length of the string
+   * @param {Number} length Length of the string
    *
    * @returns String with the length provided
    */
