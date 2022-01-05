@@ -43,7 +43,7 @@
     "@4tw/cypress-drag-drop": "2.0.0",
     "mocha": "8.2.1",
     "eslint": "7.22.0",
-    "eslint-plugin-cypress": "2.11.2",
+    "eslint-plugin-cypress": "2.12.1",
     "eslint-config-prettier": "6.4.0",
     "eslint-plugin-eslint-plugin": "2.1.0",
     "eslint-plugin-import": "2.20.0",
