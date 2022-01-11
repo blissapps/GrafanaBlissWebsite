@@ -31,7 +31,7 @@
     "cypress"
   ],
   "devDependencies": {
-    "cypress": "9.2.0",
+    "cypress": "9.2.1",
     "cypress-plugin-snapshots": "1.4.4",
     "cypress-select-tests": "1.7.1",
     "cypress-tags": "0.0.21",
