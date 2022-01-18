@@ -17,14 +17,13 @@ const selectors = {
 
 class BasePage {
   /**
-   * Check url
+   * Check the current url
    *
    * @param {string} url The entire url or a part of it
    *
-   * @returns The assertion if the url exists or not
    */
   checkUrl(url) {
-    return cy.url().should('include', url)
+    cy.url().should('include', url)
   }
 
   /**
@@ -32,10 +31,9 @@ class BasePage {
    *
    * @param {RegExp} url The entire url or a part of it. Is is a string like this: /regex/
    *
-   * @returns The assertion if the url exists or not
    */
   checkUrlByRegex(url) {
-    return cy.url().should('match', url)
+    cy.url().should('match', url)
   }
 
   // ------------------------------------------------------------------------------- GETS, SELECTS, AND CLICKS ------------------------------------------------------------------- //
@@ -59,7 +57,7 @@ class BasePage {
 
    */
   clickElementByText(text) {
-    return this.getElementByText(text).click()
+    this.getElementByText(text).click()
   }
 
   // --------------------------------------------------------------------------------- ASSERTIONS ------------------------------------------------------------------------------------ //

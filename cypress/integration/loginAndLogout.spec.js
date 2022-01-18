@@ -13,9 +13,9 @@ describe('Login and Logout tests', () => {
     equityAdmin.homePage.checkUrl('/home')
     equityAdmin.profileMenuNavBar.logout()
 
-    equityAdmin.loginPage.checkUrl('/Account/Login')
+    equityAdmin.loginPage.checkUrl('/Account/Log')
     equityAdmin.loginPage.goBackOrForwardInBrowser('back')
-    equityAdmin.loginPage.checkUrl('/Account/Login')
+    equityAdmin.loginPage.checkUrl('/Account/Log')
   })
 
   it('C7668435_Login_With_Both_Wrong_User_And_Password', () => {
