@@ -116,9 +116,7 @@ class BasePage {
    */
   assertDataDisplayedOnGsGridTable(data) {
     for (let i = 0; i < data.length; i++) {
-      cy.get(selectors.gsGridTableCell)
-        .eq(i)
-        .should('contain.text', data[i])
+      cy.get(selectors.gsGridTableCell).eq(i).should('contain.text', data[i])
     }
   }
 
@@ -129,9 +127,7 @@ class BasePage {
    */
   assertDataDisplayedOnGsGridTableIsHighlighted(dataHighlighted) {
     cy.get(selectors.gsGridTableCellHighlighted).should('be.visible')
-    cy.get(selectors.gsGridTableCellHighlighted)
-      .first()
-      .should('contain.text', dataHighlighted)
+    cy.get(selectors.gsGridTableCellHighlighted).first().should('contain.text', dataHighlighted)
   }
 
   /**
@@ -140,12 +136,7 @@ class BasePage {
    * @param {Boolean} displayed True to assert the L4 is displayed. False otherwise
    */
   assertRightL4BarIsDisplayed(displayed = true) {
-    displayed
-      ? cy
-          .get(selectors.rightNavBar)
-          .last()
-          .should('be.visible')
-      : cy.get(selectors.rightNavBar).should('not.exist')
+    displayed ? cy.get(selectors.rightNavBar).last().should('be.visible') : cy.get(selectors.rightNavBar).should('not.exist')
   }
 
   /**
@@ -161,9 +152,7 @@ class BasePage {
     }
 
     if (displayed) {
-      cy.get(selectors.toastNotification)
-        .should('be.visible')
-        .should('contain.text', toastMsg)
+      cy.get(selectors.toastNotification).should('be.visible').should('contain.text', toastMsg)
     } else {
       cy.get(selectors.toastNotification).should('not.exist')
     }
@@ -187,7 +176,7 @@ class BasePage {
       .each(($el, index) => {
         cy.wrap($el)
           .invoke('text')
-          .then(text => {
+          .then((text) => {
             listDisplayed.push(text)
             cy.log('Element added in the list to compare: ' + listDisplayed[index])
           })
@@ -214,7 +203,7 @@ class BasePage {
     if (textDisplayed != '' && displayed) {
       cy.get(selectors.notificationError)
         .invoke('text')
-        .then(text => {
+        .then((text) => {
           expect(text.trim()).equal(textDisplayed)
         })
     }
@@ -297,7 +286,7 @@ class BasePage {
    * @example: use this.addPathToUrlAndVisitIt('/new-user') to visit the url "yourCurrentUrl/new-user"
    */
   addPathToUrlAndVisitIt(urlPathToAdd) {
-    cy.url().then(url => {
+    cy.url().then((url) => {
       cy.visit(url + urlPathToAdd, { failOnStatusCode: false })
     })
   }

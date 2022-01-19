@@ -240,9 +240,7 @@ class RoleManagementPage extends BaseManagementPage {
    * @param {Boolean} wait Sometimes the roles take a time to be loaded. If it does not happen, send false and the request/response will not be awaited
    */
   clickRoleById(roleId, wait = true) {
-    this.getRoleById(roleId)
-      .scrollIntoView()
-      .click()
+    this.getRoleById(roleId).scrollIntoView().click()
 
     if (wait) {
       this.waitUntilPageIsLoaded() // wait to have all permissions loaded
@@ -254,10 +252,7 @@ class RoleManagementPage extends BaseManagementPage {
    *
    */
   clickLastRole() {
-    cy.get(selectors.roleId)
-      .last()
-      .scrollIntoView()
-      .click()
+    cy.get(selectors.roleId).last().scrollIntoView().click()
   }
 
   // --------------------------------------- ASSERTIONS --------------------------------------------- //
@@ -342,7 +337,7 @@ class RoleManagementPage extends BaseManagementPage {
   addOrRemovePermissions(permissionName, permissionsType, insertPermission = true) {
     // Manipulate permissionName and permissionsType, so we do not need to be worried about capitalization nor blank spaces
     permissionName = permissionName.replaceAll(' ', '').toLowerCase()
-    permissionsType = permissionsType.map(permission => permission.replaceAll(' ', '').toLowerCase())
+    permissionsType = permissionsType.map((permission) => permission.replaceAll(' ', '').toLowerCase())
 
     // Verify array integrity
     if (utils.arrayHasDuplicates(permissionsType) || permissionsType.length > 4) {
@@ -408,27 +403,19 @@ class RoleManagementPage extends BaseManagementPage {
     cy.log('Permissions: ' + permissionsType)
     switch (permissionsType) {
       case 'view':
-        cy.get(selectors.columnHeaderView)
-          .scrollIntoView()
-          .click()
+        cy.get(selectors.columnHeaderView).scrollIntoView().click()
         break
 
       case 'update':
-        cy.get(selectors.columnHeaderUpdate)
-          .scrollIntoView()
-          .click()
+        cy.get(selectors.columnHeaderUpdate).scrollIntoView().click()
         break
 
       case 'create':
-        cy.get(selectors.columnHeaderCreate)
-          .scrollIntoView()
-          .click()
+        cy.get(selectors.columnHeaderCreate).scrollIntoView().click()
         break
 
       case 'delete':
-        cy.get(selectors.columnHeaderDelete)
-          .scrollIntoView()
-          .click()
+        cy.get(selectors.columnHeaderDelete).scrollIntoView().click()
         break
 
       default:
@@ -450,7 +437,7 @@ class RoleManagementPage extends BaseManagementPage {
   assertPermissionState(permissionName, permissionsType, activeState) {
     // Manipulate permissionName and permissionsType, so we do not need to be worried about capitalization nor blank spaces
     permissionName = permissionName.replaceAll(' ', '').toLowerCase()
-    permissionsType = permissionsType.map(permission => permission.replaceAll(' ', '').toLowerCase())
+    permissionsType = permissionsType.map((permission) => permission.replaceAll(' ', '').toLowerCase())
 
     // Verify array integrity
     if (utils.arrayHasDuplicates(permissionsType) || permissionsType.length > 4) {
@@ -505,7 +492,7 @@ class RoleManagementPage extends BaseManagementPage {
    * Assert the permissions headers View, Update, Create, and Delete are displayed
    */
   assertPermissionsHeadersAreDisplayed() {
-    cy.get(selectors.allPermissionsHeaders).each($header => {
+    cy.get(selectors.allPermissionsHeaders).each(($header) => {
       cy.wrap($header).should('be.visible')
     })
   }

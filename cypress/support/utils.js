@@ -18,10 +18,7 @@ class Utils {
     const dayjs = require('dayjs')
 
     const now = dayjs()
-    const date = now
-      .add(days, 'day')
-      .add(months, 'month')
-      .add(years, 'year')
+    const date = now.add(days, 'day').add(months, 'month').add(years, 'year')
     const date_formatted = date.format(format)
 
     return date_formatted.split('/')

@@ -11,7 +11,7 @@ import 'cypress-file-upload'
 import 'cypress-iframe'
 import 'cypress-wait-until'
 
-const executeCommand = command => {
+const executeCommand = (command) => {
   cy.task('pluginExecuteCommand', command)
 }
 
@@ -35,9 +35,9 @@ Cypress.Commands.add('loginSuccessfulXHRWaits', () => {
   cy.wait('@waitsPermissionsToBeReceived', { timeout: 20000 })
   // cy.wait('@waitsUserSelf', { timeout: 20000 })
 
-  cy.waitUntil(() => cy.getCookie('SERVERID').then(cookie => Boolean(cookie && cookie.value)))
-  cy.waitUntil(() => cy.getCookie('idsrv').then(cookie => Boolean(cookie && cookie.value)))
-  cy.waitUntil(() => cy.getCookie('idsrv.session').then(cookie => Boolean(cookie && cookie.value)))
+  cy.waitUntil(() => cy.getCookie('SERVERID').then((cookie) => Boolean(cookie && cookie.value)))
+  cy.waitUntil(() => cy.getCookie('idsrv').then((cookie) => Boolean(cookie && cookie.value)))
+  cy.waitUntil(() => cy.getCookie('idsrv.session').then((cookie) => Boolean(cookie && cookie.value)))
 
   cy.intercept({ method: 'POST', url: 'https://rs.fullstory.com/rec/page' }, { success: true })
 
@@ -89,7 +89,7 @@ Cypress.Commands.add('changeNetworkLatency', (latencyTime = -1) => {
  * cy.network({ offline: true }) => Goes offline
  * cy.network({ offline: false }) => Goes Online
  */
-Cypress.Commands.add('network', options => {
+Cypress.Commands.add('network', (options) => {
   cy.log('***************** Go offline: ' + options.offline + ' ********************')
   Cypress.automation('remote:debugger:protocol', {
     command: 'Network.enable'
@@ -118,7 +118,7 @@ Cypress.Commands.add('network', options => {
  * cy.network({ online: true }) => Assert the browser is connected
  * cy.network({ online: false }) => Assert the browser is NOT connected
  */
-Cypress.Commands.add('assertNetworkOnline', options => {
+Cypress.Commands.add('assertNetworkOnline', (options) => {
   return (
     cy
       // @ts-ignore
@@ -133,7 +133,7 @@ Cypress.Commands.add('assertNetworkOnline', options => {
  *
  * @param {Number} time Time im milliseconds to explicit wait
  */
-Cypress.Commands.add('forcedWait', time => {
+Cypress.Commands.add('forcedWait', (time) => {
   cy.wait(time)
 })
 

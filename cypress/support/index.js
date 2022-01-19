@@ -48,7 +48,7 @@ Cypress.Commands.overwrite('log', (originalFn, message) => {
 })
 
 // In case a test fails, always display all the logs as a workflow in the end (In case logs are being used)
-Cypress.on('fail', error => {
+Cypress.on('fail', (error) => {
   throw new Error(error + '\n\nTest flow:\n' + window.testFlow.join('\n'))
 })
 

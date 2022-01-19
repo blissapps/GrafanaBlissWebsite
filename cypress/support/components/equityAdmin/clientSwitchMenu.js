@@ -71,18 +71,14 @@ class ClientSwitchMenu extends BasePage {
    * @param {String} clientName Client name to be searched
    */
   searchClientInSwitchClient(clientName) {
-    cy.get(clientSwitchSelectors.searchClientsInput)
-      .clear()
-      .type(clientName)
+    cy.get(clientSwitchSelectors.searchClientsInput).clear().type(clientName)
   }
 
   /**
    * Close the Switch Client menu bar by clicking on the X button
    */
   closeSwitchClientMenuBar() {
-    cy.get(clientSwitchSelectors.closeXButton)
-      .eq(0)
-      .click()
+    cy.get(clientSwitchSelectors.closeXButton).eq(0).click()
   }
 }
 

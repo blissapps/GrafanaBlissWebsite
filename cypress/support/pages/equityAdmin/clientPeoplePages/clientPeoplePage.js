@@ -60,9 +60,7 @@ class EquityClientPeoplePage extends BasePage {
    * @example 12345 as the participantId
    */
   clickParticipantById(participantId) {
-    this.getParticipantById(participantId)
-      .scrollIntoView()
-      .click({ force: true })
+    this.getParticipantById(participantId).scrollIntoView().click({ force: true })
   }
 
   /**
@@ -155,7 +153,7 @@ class EquityClientPeoplePage extends BasePage {
    * @param {any} value This is the value supposed to be in the cell you choose
    */
   assertParticipantCellContent(columnToVerify, value) {
-    cy.xpath(`//div[@class='data']//gs-grid-cell[${columnToVerify}]//span[@class='subtitled-cell-title']`).each($el => {
+    cy.xpath(`//div[@class='data']//gs-grid-cell[${columnToVerify}]//span[@class='subtitled-cell-title']`).each(($el) => {
       cy.wrap($el).should('contain.text', value)
     })
   }

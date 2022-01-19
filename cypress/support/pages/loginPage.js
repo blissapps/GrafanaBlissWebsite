@@ -59,9 +59,7 @@ class LoginPage extends BasePage {
    * @param {String} errorMessage error message to be validated
    */
   assertUnsuccessfulLoginErrorMessageDisplayed(errorMessage) {
-    cy.get(selectors.errorMessageNotification)
-      .should('be.visible')
-      .contains(errorMessage)
+    cy.get(selectors.errorMessageNotification).should('be.visible').contains(errorMessage)
   }
 }
 

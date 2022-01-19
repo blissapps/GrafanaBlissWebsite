@@ -94,72 +94,52 @@ class CompanyProfileOverviewPage extends BasePeopleParticipantPage {
 
     // Hire Date
     if (hireDate != '') {
-      cy.get(selectors.hireDateInputField)
-        .clear()
-        .type(hireDate)
+      cy.get(selectors.hireDateInputField).clear().type(hireDate)
     }
 
     // Department
     if (department != '') {
-      cy.get(selectors.departmentInputField)
-        .clear()
-        .type(department)
+      cy.get(selectors.departmentInputField).clear().type(department)
     }
 
     // Section
     if (section != '') {
-      cy.get(selectors.sectionInputField)
-        .clear()
-        .type(section)
+      cy.get(selectors.sectionInputField).clear().type(section)
     }
 
     // Branch
     if (branch != '') {
-      cy.get(selectors.branchInputField)
-        .clear()
-        .type(branch)
+      cy.get(selectors.branchInputField).clear().type(branch)
     }
 
     // Business Unit
     if (businessUnit != '') {
-      cy.get(selectors.businessUnitInputField)
-        .clear()
-        .type(businessUnit)
+      cy.get(selectors.businessUnitInputField).clear().type(businessUnit)
     }
 
     // Company Location
     if (companyLocation != '') {
-      cy.get(selectors.companyLocationInputField)
-        .clear()
-        .type(companyLocation)
+      cy.get(selectors.companyLocationInputField).clear().type(companyLocation)
     }
 
     // Company Code
     if (companyCode != '') {
-      cy.get(selectors.companyCodeInputField)
-        .clear()
-        .type(companyCode)
+      cy.get(selectors.companyCodeInputField).clear().type(companyCode)
     }
 
     // Subsidiary Name
     if (subsidiaryName != '') {
-      cy.get(selectors.subsidiaryNameInputField)
-        .clear()
-        .type(subsidiaryName)
+      cy.get(selectors.subsidiaryNameInputField).clear().type(subsidiaryName)
     }
 
     // Subsidiary Code
     if (subsidiaryCode != '') {
-      cy.get(selectors.subsidiaryCodeInputField)
-        .clear()
-        .type(subsidiaryCode)
+      cy.get(selectors.subsidiaryCodeInputField).clear().type(subsidiaryCode)
     }
 
     // Billing Code
     if (billingCode != '') {
-      cy.get(selectors.billingCodeInputField)
-        .clear()
-        .type(billingCode)
+      cy.get(selectors.billingCodeInputField).clear().type(billingCode)
     }
   }
 
@@ -195,16 +175,12 @@ class CompanyProfileOverviewPage extends BasePeopleParticipantPage {
   ) {
     // Job Title
     if (jobTitle != '') {
-      cy.get(selectors.jobTitleInputField)
-        .clear()
-        .type(jobTitle)
+      cy.get(selectors.jobTitleInputField).clear().type(jobTitle)
     }
 
     // Broker Officer Code
     if (brokerOfficerCode != '') {
-      cy.get(selectors.brokerOfficerCodeInputField)
-        .clear()
-        .type(brokerOfficerCode)
+      cy.get(selectors.brokerOfficerCodeInputField).clear().type(brokerOfficerCode)
     }
 
     // Founder

@@ -68,9 +68,7 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
    */
   clickSummaryDownloadButtonToDownloadCSVFile() {
     this.getNumberOfRecordsDisplayed() //make sure we have data, so we can continue to download. Otherwise, summary button may fail
-    cy.get(selectors.summaryDownloadButton)
-      .should('be.visible')
-      .as('summaryBtn')
+    cy.get(selectors.summaryDownloadButton).should('be.visible').as('summaryBtn')
     cy.get('@summaryBtn').click()
   }
 
@@ -114,9 +112,7 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
       .invoke('hover')
       .then(() => {
         cy.get(selectors.clientParticipantStatementId + participantId + ' gs-grid-cell').as('checkbox')
-        cy.get('@checkbox')
-          .first()
-          .click()
+        cy.get('@checkbox').first().click()
       })
   }
 
@@ -180,9 +176,7 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
    */
   assertParticipantStatementsTableInOrderById(idsList) {
     for (let i = 0; i < idsList.length; i++) {
-      cy.get(selectors.participantStatementIdsInTable)
-        .eq(i)
-        .should('contain.text', idsList[i])
+      cy.get(selectors.participantStatementIdsInTable).eq(i).should('contain.text', idsList[i])
     }
   }
 
@@ -360,25 +354,19 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
 
     if (statusNameTrailList.length != 0) {
       for (let i = 0; i < statusNameTrailList.length; i++) {
-        cy.get(statementsDetailsSelectorsOnL4Bar.statementAuditTrailStatusBadge)
-          .eq(i)
-          .should('contain.text', statusNameTrailList[i])
+        cy.get(statementsDetailsSelectorsOnL4Bar.statementAuditTrailStatusBadge).eq(i).should('contain.text', statusNameTrailList[i])
       }
     }
 
     if (nameUserTrailList.length != 0) {
       for (let i = 0; i < nameUserTrailList.length; i++) {
-        cy.get(statementsDetailsSelectorsOnL4Bar.statementAuditTrailUser)
-          .eq(i)
-          .should('contain.text', nameUserTrailList[i])
+        cy.get(statementsDetailsSelectorsOnL4Bar.statementAuditTrailUser).eq(i).should('contain.text', nameUserTrailList[i])
       }
     }
 
     if (timestampTrailList.length != 0) {
       for (let i = 0; i < timestampTrailList.length; i++) {
-        cy.get(statementsDetailsSelectorsOnL4Bar.statementAuditTrailTimestamp)
-          .eq(i)
-          .should('contain.text', timestampTrailList[i])
+        cy.get(statementsDetailsSelectorsOnL4Bar.statementAuditTrailTimestamp).eq(i).should('contain.text', timestampTrailList[i])
       }
     }
   }

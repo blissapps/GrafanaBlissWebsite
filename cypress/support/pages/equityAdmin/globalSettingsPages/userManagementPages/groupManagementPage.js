@@ -143,9 +143,7 @@ class GroupManagementPage extends BaseManagementPage {
    */
   assertRoleAssociatedWithGroup(roleId, displayed = true) {
     if (displayed) {
-      this.getCardByEntityAndId('roles', roleId)
-        .scrollIntoView()
-        .should('be.visible')
+      this.getCardByEntityAndId('roles', roleId).scrollIntoView().should('be.visible')
     } else {
       this.getCardByEntityAndId('roles', roleId).should('not.exist')
     }
@@ -164,9 +162,7 @@ class GroupManagementPage extends BaseManagementPage {
     }
 
     if (displayed) {
-      this.getCardByEntityAndId('daps', dapId)
-        .scrollIntoView()
-        .should('be.visible')
+      this.getCardByEntityAndId('daps', dapId).scrollIntoView().should('be.visible')
     } else {
       this.getCardByEntityAndId('daps', dapId).should('not.exist')
     }
@@ -185,9 +181,7 @@ class GroupManagementPage extends BaseManagementPage {
     }
 
     if (displayed) {
-      this.getCardByEntityAndId('users', userId)
-        .scrollIntoView()
-        .should('be.visible')
+      this.getCardByEntityAndId('users', userId).scrollIntoView().should('be.visible')
     } else {
       this.getCardByEntityAndId('users', userId).should('not.exist')
     }
@@ -206,9 +200,7 @@ class GroupManagementPage extends BaseManagementPage {
     }
 
     if (displayed) {
-      this.getCardByEntityAndId('companies', companyId)
-        .scrollIntoView()
-        .should('be.visible')
+      this.getCardByEntityAndId('companies', companyId).scrollIntoView().should('be.visible')
     } else {
       this.getCardByEntityAndId('companies', companyId).should('not.exist')
     }

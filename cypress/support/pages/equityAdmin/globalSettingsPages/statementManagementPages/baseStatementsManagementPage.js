@@ -75,9 +75,7 @@ class BaseStatementManagementPage extends BasePage {
    * @example 'records = 1 for '1 record(s)' being displayed in the table
    */
   assertAmountOfRecordsTable(records) {
-    cy.xpath(`//*[@id="gridCount"][normalize-space(text())="${records} record(s)"]`)
-      .scrollIntoView()
-      .should('be.visible')
+    cy.xpath(`//*[@id="gridCount"][normalize-space(text())="${records} record(s)"]`).scrollIntoView().should('be.visible')
   }
 }
 

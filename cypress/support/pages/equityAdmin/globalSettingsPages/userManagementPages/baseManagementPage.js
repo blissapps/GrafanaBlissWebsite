@@ -68,10 +68,7 @@ class BaseManagementPage extends BasePage {
 
       return cy.get('@entity').filter(`:contains('${entityName}')`)
     } else {
-      return cy
-        .get(selectors.entityNameInList)
-        .filter(`:contains('${entityName}')`)
-        .should('not.exist')
+      return cy.get(selectors.entityNameInList).filter(`:contains('${entityName}')`).should('not.exist')
     }
   }
 
@@ -104,10 +101,7 @@ class BaseManagementPage extends BasePage {
         throw new Error('This section does not exists, choose among the following: daps, users, or companies')
     }
 
-    cy.get('@showAllButton')
-      .scrollIntoView()
-      .should('contain.text', 'Show all')
-      .click()
+    cy.get('@showAllButton').scrollIntoView().should('contain.text', 'Show all').click()
   }
 
   /**
@@ -137,10 +131,7 @@ class BaseManagementPage extends BasePage {
         throw new Error('This section does not exists, choose among the following: daps, users, or companies')
     }
 
-    cy.get('@hideButton')
-      .scrollIntoView()
-      .should('contain.text', 'Hide')
-      .click()
+    cy.get('@hideButton').scrollIntoView().should('contain.text', 'Hide').click()
   }
 
   /**
@@ -149,9 +140,7 @@ class BaseManagementPage extends BasePage {
    * @param {String} entityName name of the entity to be clicked
    */
   clickEntityByName(entityName) {
-    this.getEntityByName(entityName)
-      .scrollIntoView()
-      .click()
+    this.getEntityByName(entityName).scrollIntoView().click()
   }
 
   /**
@@ -280,9 +269,7 @@ class BaseManagementPage extends BasePage {
    */
   assertEntityIsDisplayedInTheList(entityName, displayed = true) {
     if (displayed) {
-      this.getEntityByName(entityName)
-        .scrollIntoView()
-        .should('be.visible')
+      this.getEntityByName(entityName).scrollIntoView().should('be.visible')
     } else {
       this.getEntityByName(entityName, displayed).should('not.exist')
     }
@@ -309,9 +296,7 @@ class BaseManagementPage extends BasePage {
 
     for (let i = 0; i < entitiesIds.length; i++) {
       cy.get(`gs-card[data-test-id="entity-${entitiesIds[i]}"] gs-highlighted-text mark:not(:empty)`).as('entityCard')
-      cy.get('@entityCard')
-        .scrollIntoView()
-        .should('be.visible')
+      cy.get('@entityCard').scrollIntoView().should('be.visible')
     }
   }
 
@@ -320,7 +305,7 @@ class BaseManagementPage extends BasePage {
    *
    */
   assertAllSearchResultItensAreDisplayedInHighlightedMode() {
-    cy.get(selectors.searchResultAllItemsHighlighted).each($el => {
+    cy.get(selectors.searchResultAllItemsHighlighted).each(($el) => {
       cy.wrap($el).should('be.visible')
     })
   }
@@ -381,27 +366,21 @@ class BaseManagementPage extends BasePage {
     this.getEntityHeader().as('input')
 
     cy.get('@input').clear()
-    cy.get('@input')
-      .type(entityName)
-      .blur() // remove focus from element
+    cy.get('@input').type(entityName).blur() // remove focus from element
   }
 
   /**
    * Save all updates made in the selected entity by clicking in the Save button. The entity can be groups, roles, or daps
    */
   saveEntityInformation() {
-    cy.get(selectors.saveBtn)
-      .scrollIntoView()
-      .click()
+    cy.get(selectors.saveBtn).scrollIntoView().click()
   }
 
   /**
    * Discard all updates in the selected entity by clicking in the Discard button. The entity can be groups, roles, or daps
    */
   discardEntityInformation() {
-    cy.get(selectors.discardBtn)
-      .scrollIntoView()
-      .click()
+    cy.get(selectors.discardBtn).scrollIntoView().click()
   }
 
   /**

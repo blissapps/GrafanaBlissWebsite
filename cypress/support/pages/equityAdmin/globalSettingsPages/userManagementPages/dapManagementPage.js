@@ -148,30 +148,20 @@ class DapManagementPage extends BaseManagementPage {
    */
   assertConditionsContainerDisplayedWithExpectedValues() {
     // Container visible
-    cy.get(conditionsSelectors.conditionsContainer)
-      .scrollIntoView()
-      .should('be.visible')
+    cy.get(conditionsSelectors.conditionsContainer).scrollIntoView().should('be.visible')
 
     // Initial conditional
-    cy.get(conditionsSelectors.initialCondition)
-      .first()
-      .should('be.visible')
+    cy.get(conditionsSelectors.initialCondition).first().should('be.visible')
 
     // Select options
     const optionsAvailable = ['Business Unit', 'Client id', 'Is international mobile?', 'Participant id', 'Payroll id', 'Residency', 'Tax status']
-    cy.get(conditionsSelectors.generalSelect)
-      .first()
-      .click()
+    cy.get(conditionsSelectors.generalSelect).first().click()
 
     for (let i = 0; i < optionsAvailable.length; i++) {
-      cy.get(conditionsSelectors.generalSelectOptions)
-        .eq(i)
-        .should('have.text', optionsAvailable[i])
+      cy.get(conditionsSelectors.generalSelectOptions).eq(i).should('have.text', optionsAvailable[i])
     }
 
-    cy.get(conditionsSelectors.inputs)
-      .first()
-      .should('be.visible')
+    cy.get(conditionsSelectors.inputs).first().should('be.visible')
   }
 
   /**
@@ -292,9 +282,7 @@ class DapManagementPage extends BaseManagementPage {
    * For example: dapNames=['dap1', 'dap2'] needs to match the exactly order in dapIds=[1, 2]
    */
   addGroupsToDap(groupNames, groupIds) {
-    cy.get(selectors.addGroupsBtn)
-      .scrollIntoView()
-      .click()
+    cy.get(selectors.addGroupsBtn).scrollIntoView().click()
     this.addEntitiesInTheRightNavBar('group', groupNames, groupIds)
   }
 
@@ -345,9 +333,7 @@ class DapManagementPage extends BaseManagementPage {
         .scrollIntoView()
         .click()
         .then(() => {
-          cy.get(conditionsSelectors.generalSelectOptions)
-            .filter(`:contains('${conditionType[1]}')`)
-            .click()
+          cy.get(conditionsSelectors.generalSelectOptions).filter(`:contains('${conditionType[1]}')`).click()
         })
     }
 
@@ -359,9 +345,7 @@ class DapManagementPage extends BaseManagementPage {
         .scrollIntoView()
         .click()
         .then(() => {
-          cy.get(conditionsSelectors.generalSelectOptions)
-            .filter(`:contains('${condition[1]}')`)
-            .click()
+          cy.get(conditionsSelectors.generalSelectOptions).filter(`:contains('${condition[1]}')`).click()
         })
     }
 
@@ -380,9 +364,7 @@ class DapManagementPage extends BaseManagementPage {
           .scrollIntoView()
           .click()
           .then(() => {
-            cy.get(conditionsSelectors.generalSelectOptions)
-              .filter(`:contains('${value[1]}')`)
-              .click()
+            cy.get(conditionsSelectors.generalSelectOptions).filter(`:contains('${value[1]}')`).click()
           })
       }
     }
@@ -426,9 +408,7 @@ class DapManagementPage extends BaseManagementPage {
       .eq(conditionIndex - 1)
       .click({ force: true })
       .then(() => {
-        cy.get(locator)
-          .trigger('mouseover')
-          .click()
+        cy.get(locator).trigger('mouseover').click()
       })
   }
 

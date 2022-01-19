@@ -38,7 +38,7 @@ module.exports = (on, config) => {
     }
   })
 
-  on('before:run', async details => {
+  on('before:run', async (details) => {
     console.log('override before:run')
     await beforeRunHook(details)
   })

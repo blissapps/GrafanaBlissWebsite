@@ -74,9 +74,7 @@ class ClientStatementsPage extends BaseStatementManagementPage {
    * @param {Number} clientStatementId clientId number to be searched in the client statements table
    */
   clickClientTable(clientStatementId) {
-    this.getClientFromTable(clientStatementId)
-      .scrollIntoView()
-      .click()
+    this.getClientFromTable(clientStatementId).scrollIntoView().click()
   }
 
   /**
@@ -86,9 +84,7 @@ class ClientStatementsPage extends BaseStatementManagementPage {
    * @param {Number} clientId id number from the Client Statements table to reconcile
    */
   clickToReconcileClient(clientId) {
-    this.getReconcileButton(clientId)
-      .scrollIntoView()
-      .click()
+    this.getReconcileButton(clientId).scrollIntoView().click()
   }
 
   // --------------------------------------------------------------------------------- ASSERTIONS ------------------------------------------------------------------------------------------ //
@@ -123,9 +119,7 @@ class ClientStatementsPage extends BaseStatementManagementPage {
    */
   assertClientStatementsTableInOrderById(idsList) {
     for (let i = 0; i < idsList.length; i++) {
-      cy.get(selectors.clientsStatementIdsInTable)
-        .eq(i)
-        .should('contain.text', idsList[i])
+      cy.get(selectors.clientsStatementIdsInTable).eq(i).should('contain.text', idsList[i])
     }
   }
 
@@ -163,27 +157,17 @@ class ClientStatementsPage extends BaseStatementManagementPage {
     cy.get(reconcileStatementsSelectorsOnL4Bar.cancelButton).should('be.visible')
 
     // Reconcile button must be displayed but it should be disabled
-    cy.get(reconcileStatementsSelectorsOnL4Bar.reconcileButton)
-      .should('be.visible')
-      .should('have.class', 'default medium square primary disabled')
+    cy.get(reconcileStatementsSelectorsOnL4Bar.reconcileButton).should('be.visible').should('have.class', 'default medium square primary disabled')
 
     // Reconcile button must be displayed and enabled
     cy.get(reconcileStatementsSelectorsOnL4Bar.securityCheckBox).click()
-    cy.get(reconcileStatementsSelectorsOnL4Bar.reconcileButton)
-      .should('be.visible')
-      .should('have.class', 'default medium square primary')
+    cy.get(reconcileStatementsSelectorsOnL4Bar.reconcileButton).should('be.visible').should('have.class', 'default medium square primary')
 
     // Once clicked in a security option, the Reconcile Button must also be enabled
     cy.get(reconcileStatementsSelectorsOnL4Bar.securityCheckBox).click()
-    cy.get(reconcileStatementsSelectorsOnL4Bar.reconcileButton)
-      .should('be.visible')
-      .should('have.class', 'default medium square primary disabled')
-    cy.get(reconcileStatementsSelectorsOnL4Bar.securityCard)
-      .first()
-      .click()
-    cy.get(reconcileStatementsSelectorsOnL4Bar.reconcileButton)
-      .should('be.visible')
-      .should('have.class', 'default medium square primary')
+    cy.get(reconcileStatementsSelectorsOnL4Bar.reconcileButton).should('be.visible').should('have.class', 'default medium square primary disabled')
+    cy.get(reconcileStatementsSelectorsOnL4Bar.securityCard).first().click()
+    cy.get(reconcileStatementsSelectorsOnL4Bar.reconcileButton).should('be.visible').should('have.class', 'default medium square primary')
 
     // Cancel button must close the window
     cy.get(reconcileStatementsSelectorsOnL4Bar.cancelButton).click()
@@ -222,12 +206,8 @@ class ClientStatementsPage extends BaseStatementManagementPage {
     }
 
     if (dateFrom != '' && dateTo != '') {
-      cy.get(selectors.dateFilterStatementInput)
-        .first()
-        .type(dateFrom)
-      cy.get(selectors.dateFilterStatementInput)
-        .last()
-        .type(dateTo)
+      cy.get(selectors.dateFilterStatementInput).first().type(dateFrom)
+      cy.get(selectors.dateFilterStatementInput).last().type(dateTo)
     }
 
     if (regulator != '') {

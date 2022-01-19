@@ -107,9 +107,7 @@ class HomePage extends BasePage {
    * @param {Number} clientId Client name to search
    */
   selectClientById(clientId) {
-    this.getClientCard(clientId)
-      .scrollIntoView()
-      .click()
+    this.getClientCard(clientId).scrollIntoView().click()
   }
 
   /**
@@ -130,9 +128,7 @@ class HomePage extends BasePage {
    * @param {Number} clientId Client id to be favored
    */
   favoriteUnfavoriteClient(clientId) {
-    cy.get(`${selectors.clientCard}${clientId} ${selectors.favorite_icon}`)
-      .first()
-      .click({ force: true })
+    cy.get(`${selectors.clientCard}${clientId} ${selectors.favorite_icon}`).first().click({ force: true })
   }
 
   /**

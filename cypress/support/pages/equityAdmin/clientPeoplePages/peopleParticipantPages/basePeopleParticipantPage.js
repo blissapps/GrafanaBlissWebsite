@@ -47,9 +47,7 @@ class BasePeopleParticipantPage extends BasePage {
    * Click in the "Save Changes" button to save all the changes made in the personal-profile pages
    */
   clickToSaveChanges() {
-    cy.get(selectors.saveChangesButton)
-      .scrollIntoView()
-      .click()
+    cy.get(selectors.saveChangesButton).scrollIntoView().click()
   }
 
   /**
