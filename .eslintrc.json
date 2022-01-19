@@ -1,11 +1,12 @@
 {
   "extends": ["eslint:recommended", "prettier", "plugin:cypress/recommended"],
   "plugins": ["eslint-plugin", "cypress"],
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "parserOptions": {
     "ecmaVersion": 2018,
     "sourceType": "module",
-    "ecmaFeatures": {}
+    "ecmaFeatures": {},
+    "requireConfigFile": false
   },
   "rules": {
     "cypress/no-unnecessary-waiting": "error",
