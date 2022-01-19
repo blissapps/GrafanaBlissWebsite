@@ -49,12 +49,12 @@
     "eslint-plugin-prettier": "3.1.4",
     "babel-eslint": "10.1.0",
     "prettier": "1.19.1",
-    "typescript": "4.4.4",
+    "typescript": "4.5.4",
     "tsc-silent": "1.2.1",
-    "dayjs": "1.8.36",
+    "dayjs": "1.10.7",
     "cypress-multi-reporters": "1.5.0",
     "mocha-junit-reporter": "2.0.2",
-    "junit-report-merger": "3.0.2",
+    "junit-report-merger": "3.0.5",
     "cypress-mochawesome-reporter": "2.3.0"
   }
 }
