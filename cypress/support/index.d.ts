@@ -5,8 +5,6 @@
  * THEREFORE, FOR EACH COMMAND CREATED IN cypress/support/commands.js, we need to add this interface in here with the same method name and parameters.
  */
 
-/// <reference types='cypress-tags' />
-
 // Ignore any warning error in namespace (It is expected to happen due to the TS compiler we are using in this project)
 declare namespace Cypress {
   interface Chainable {

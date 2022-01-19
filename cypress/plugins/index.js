@@ -13,10 +13,6 @@
 // Plugin snapshot variables:
 const { initPlugin } = require('cypress-plugin-snapshots/plugin')
 
-// Tags variables:
-const tagify = require('cypress-tags')
-// const selectTestsWithGrep = require('cypress-select-tests/grep')
-
 // Reporter necessary variables
 const { beforeRunHook, afterRunHook } = require('cypress-mochawesome-reporter/lib')
 const exec = require('child_process').execSync
@@ -25,9 +21,6 @@ const exec = require('child_process').execSync
  * @type {Cypress.PluginConfig}
  */
 module.exports = (on, config) => {
-  //on('file:preprocessor', selectTestsWithGrep(config))
-  on('file:preprocessor', tagify(config))
-
   on('before:browser:launch', (launchOptions, browser = {}) => {
     if (browser.family === 'chromium') {
       launchOptions.args.push(

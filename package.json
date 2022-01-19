@@ -33,8 +33,6 @@
   "devDependencies": {
     "cypress": "9.2.1",
     "cypress-plugin-snapshots": "1.4.4",
-    "cypress-select-tests": "1.7.1",
-    "cypress-tags": "0.0.21",
     "cypress-xpath": "1.6.1",
     "cypress-file-upload": "5.0.2",
     "cypress-iframe": "1.0.1",
