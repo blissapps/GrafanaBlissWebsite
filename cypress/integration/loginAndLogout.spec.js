@@ -3,7 +3,7 @@ import EquityAdmin from '../support/pages/equityAdmin'
 // @ts-ignore
 import dataTest from '../fixtures/data.json'
 
-describe('Login and Logout tests', () => {
+describe('Login and Logout tests', { tags: ['@smoke'] }, () => {
   const equityAdmin = new EquityAdmin()
   const dataTestLanguage = Cypress.env('LANGUAGE')
 

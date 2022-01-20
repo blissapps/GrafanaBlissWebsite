@@ -17,7 +17,10 @@
 // References for autocomplete
 /// <reference types="cypress"/>
 
+// Import all commands before running
 import './commands.js'
+
+// Reporter artifact
 import 'cypress-mochawesome-reporter/register'
 
 // Hooks
@@ -31,9 +34,10 @@ beforeEach(() => {
 import './commands'
 import 'cypress-plugin-snapshots/commands'
 
-// Alternatively you can use CommonJS syntax: require('./commands')
+// Plugins
 require('cypress-xpath')
 require('@cypress/skip-test/support')
+require('cypress-grep')()
 
 // Personalized logs
 Cypress.Commands.overwrite('log', (originalFn, message) => {
