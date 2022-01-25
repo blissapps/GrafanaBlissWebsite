@@ -19,6 +19,8 @@ pipelines:
           - yarn
           - yarn compile
           - yarn lint:fix
+          - yarn cy:list:spec:by:names
+          - yarn cy:list:spec:by:tags
     - step:
         name: Cypress - Chrome browser
         caches:
