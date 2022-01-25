@@ -21,6 +21,8 @@ const exec = require('child_process').execSync
  * @type {Cypress.PluginConfig}
  */
 module.exports = (on, config) => {
+  require('cypress-grep/src/plugin')(config)
+
   on('before:browser:launch', (launchOptions, browser = {}) => {
     if (browser.family === 'chromium') {
       launchOptions.args.push(
@@ -50,4 +52,6 @@ module.exports = (on, config) => {
   })
 
   initPlugin(on, config)
+
+  return config
 }
