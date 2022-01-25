@@ -20,9 +20,9 @@ class PersonalInformationPage extends BasePage {
 
   /**
    * Edit personal info
-   * @param {String} name Name to replace the current name
-   * @param {String} contact Contact number to replace the current contact number
-   * @param {String} email Email address to replace the current email address
+   * @param {string} name Name to replace the current name
+   * @param {string} contact Contact number to replace the current contact number
+   * @param {string} email Email address to replace the current email address
    */
   editPersonalInfo(name = '', contact = '', email = '') {
     if (name != '') {

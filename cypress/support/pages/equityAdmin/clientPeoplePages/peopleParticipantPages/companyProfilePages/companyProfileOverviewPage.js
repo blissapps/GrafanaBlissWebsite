@@ -54,17 +54,17 @@ class CompanyProfileOverviewPage extends BasePeopleParticipantPage {
   /**
    * Fill out the company info of a participant in the Company Overview page
    *
-   * @param {String} relationshipToCompany Relationship to Company field
-   * @param {String} hireDate Hire Date field
-   * @param {String} department Department field
-   * @param {String} section Section field
-   * @param {String} branch Branch field
-   * @param {String} businessUnit Business Unit field
-   * @param {String} companyLocation Company Location field
-   * @param {String} companyCode Company code field
-   * @param {String} subsidiaryName Subsidiary Name field
-   * @param {String} subsidiaryCode Subsidiary Code field
-   * @param {String} billingCode Billing Code field
+   * @param {string} relationshipToCompany Relationship to Company field
+   * @param {string} hireDate Hire Date field
+   * @param {string} department Department field
+   * @param {string} section Section field
+   * @param {string} branch Branch field
+   * @param {string} businessUnit Business Unit field
+   * @param {string} companyLocation Company Location field
+   * @param {string} companyCode Company code field
+   * @param {string} subsidiaryName Subsidiary Name field
+   * @param {string} subsidiaryCode Subsidiary Code field
+   * @param {string} billingCode Billing Code field
    */
   fillOutCompanyInfo(
     relationshipToCompany = '',
@@ -146,18 +146,18 @@ class CompanyProfileOverviewPage extends BasePeopleParticipantPage {
   /**
    * Fill out the Role section fields of a participant in the Company Overview page
    *
-   * @param {String} jobTitle Job Title field
-   * @param {String} brokerOfficerCode Broker Officer Code field. Max 10 chars
-   * @param {Boolean} founder True to click in the Founder checkbox, false is the default value to skip (to don't click on it)
-   * @param {Boolean} officer True to click in the Officer checkbox, false is the default value to skip (to don't click on it)
-   * @param {Boolean} director True to click in the Director checkbox, false is the default value to skip (to don't click on it)
-   * @param {Boolean} namedExecutive True to click in the Named Executive checkbox, false is the default value to skip (to don't click on it)
-   * @param {Boolean} blackoutInsider True to click in the Blackout Insider checkbox, false is the default value to skip (to don't click on it)
-   * @param {Boolean} internationalMobileEmployee True to click in the International Mobile Employee checkbox, false is the default value to skip (to don't click on it)
-   * @param {Boolean} section16Insider True to click in the Section 16 Insider checkbox, false is the default value to skip (to don't click on it)
-   * @param {Boolean} codeStaff True to click in the Code Staff checkbox, false is the default value to skip (to don't click on it)
-   * @param {Boolean} PDMR True to click in the PDMR checkbox, false is the default value to skip (to don't click on it)
-   * @param {Boolean} OSA True to click in the OSA checkbox, false is the default value to skip (to don't click on it)
+   * @param {string} jobTitle Job Title field
+   * @param {string} brokerOfficerCode Broker Officer Code field. Max 10 chars
+   * @param {boolean} founder True to click in the Founder checkbox, false is the default value to skip (to don't click on it)
+   * @param {boolean} officer True to click in the Officer checkbox, false is the default value to skip (to don't click on it)
+   * @param {boolean} director True to click in the Director checkbox, false is the default value to skip (to don't click on it)
+   * @param {boolean} namedExecutive True to click in the Named Executive checkbox, false is the default value to skip (to don't click on it)
+   * @param {boolean} blackoutInsider True to click in the Blackout Insider checkbox, false is the default value to skip (to don't click on it)
+   * @param {boolean} internationalMobileEmployee True to click in the International Mobile Employee checkbox, false is the default value to skip (to don't click on it)
+   * @param {boolean} section16Insider True to click in the Section 16 Insider checkbox, false is the default value to skip (to don't click on it)
+   * @param {boolean} codeStaff True to click in the Code Staff checkbox, false is the default value to skip (to don't click on it)
+   * @param {boolean} PDMR True to click in the PDMR checkbox, false is the default value to skip (to don't click on it)
+   * @param {boolean} OSA True to click in the OSA checkbox, false is the default value to skip (to don't click on it)
    */
   fillOutRole(
     jobTitle = '',
@@ -237,9 +237,9 @@ class CompanyProfileOverviewPage extends BasePeopleParticipantPage {
   /**
    * Assert if an error message is displayed for a field in the company page
    *
-   * @param {String} inputFieldName Input field name to validate if there is an error message for it
-   * @param {String} errorMessage  Send the error message text in case you want to validate the content of the message. Send nothing to not validate the content
-   * @param {Boolean} displayed True to validate if the error message is displayed, and false for otherwise
+   * @param {string} inputFieldName Input field name to validate if there is an error message for it
+   * @param {string} errorMessage  Send the error message text in case you want to validate the content of the message. Send nothing to not validate the content
+   * @param {boolean} displayed True to validate if the error message is displayed, and false for otherwise
    */
   assertErrorMessageIsDisplayedInCompanyFields(inputFieldName, errorMessage = '', displayed = true) {
     inputFieldName = inputFieldName.toLowerCase()

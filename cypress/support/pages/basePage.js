@@ -41,7 +41,7 @@ class BasePage {
   /**
    * Get an element by passing a text
    *
-   * @param {String} text text to get the element
+   * @param {string} text text to get the element
    *
    * @returns the element if found
    */
@@ -53,7 +53,7 @@ class BasePage {
   /**
    * Click in a element by passing the element text
    *
-   * @param {String} text element text to be clicked
+   * @param {string} text element text to be clicked
 
    */
   clickElementByText(text) {
@@ -64,18 +64,18 @@ class BasePage {
   /**
    * Verify if a file was downloaded in the default 'cypress/downloads/' path
    *
-   * @param {String} filename name of the file we want to verify if it was downloaded
+   * @param {string} filename name of the file we want to verify if it was downloaded
    */
   assertFileWasDownloadedSuccessfully(filename) {
-    // Browser might take a while to download the file, so use "cy.readFile" to retry until the file exists and has length - and we assume that it has finished downloading then
-    return cy.readFile('cypress/downloads/' + filename, { timeout: 15000 }).should('have.length.gt', 50)
+    cy.readFile('cypress/downloads/' + filename, { timeout: 15000 }).should('exist')
+    cy.readFile('cypress/downloads/' + filename, { timeout: 15000 }).should('have.length.gt', 50)
   }
 
   /**
    * Assert that a table shows all expected data supposed to be in the columns. The order is taken in consideration.
    * In case the first column is a checkbox, it will be ignored, so just send the other columns in order
    *
-   * @param {Array} columnsToValidate column names to validate, example: columnsToValidate = [Id, Client, Regulator, Status]
+   * @param {array} columnsToValidate column names to validate, example: columnsToValidate = [Id, Client, Regulator, Status]
    *
    */
   assertTableContainsExpectedColumnsInOrder(columnsToValidate) {
@@ -89,8 +89,8 @@ class BasePage {
   /**
    * Assert the number of records displayed. It is shown in the top like this: 'X record(s)' or 'X SEARCH RESULT(S)'
    *
-   * @param {Object} locator Object locator where this method will extract the text from this locator
-   * @param {Number} numberOfRecords amount of people you want to check in the records
+   * @param {object} locator Object locator where this method will extract the text from this locator
+   * @param {number} numberOfRecords amount of people you want to check in the records
    *
    */
   assertNumberOfRecordsDisplayed(locator, numberOfRecords) {
@@ -102,7 +102,7 @@ class BasePage {
    * Check the data in a row listed in a table of type gs-grid
    * It is possible to validate multiple rows, just sent the data one after the other (check last example)
    *
-   * @param {Array} data Array with the data needed to be validated. The correct order is the ORDER displayed in the UI,
+   * @param {array} data Array with the data needed to be validated. The correct order is the ORDER displayed in the UI,
    * example [username, email, and status].
    *
    * @example: send ['amulcahyNE', 'test@globalshares.com', 'Active'] to validate the data from user amulcahyNE is
@@ -123,7 +123,7 @@ class BasePage {
   /**
    * Assert a data is highlighted in a GS Table
    *
-   * @param {String} dataHighlighted Element text to check if it is highlighted
+   * @param {string} dataHighlighted Element text to check if it is highlighted
    */
   assertDataDisplayedOnGsGridTableIsHighlighted(dataHighlighted) {
     cy.get(selectors.gsGridTableCellHighlighted).should('be.visible')
@@ -133,7 +133,7 @@ class BasePage {
   /**
    * Assert the right nav bar (L4) is displayed
    *
-   * @param {Boolean} displayed True to assert the L4 is displayed. False otherwise
+   * @param {boolean} displayed True to assert the L4 is displayed. False otherwise
    */
   assertRightL4BarIsDisplayed(displayed = true) {
     displayed ? cy.get(selectors.rightNavBar).last().should('be.visible') : cy.get(selectors.rightNavBar).should('not.exist')
@@ -142,9 +142,9 @@ class BasePage {
   /**
    * Assert a toast notification is displayed alongside a given message
    *
-   * @param {String} toastMsg Toast message text
-   * @param {Boolean} displayed True to assert the entity is displayed. False otherwise.
-   * @param {Boolean} displayed True to close the toastNotification right after it is displayed
+   * @param {string} toastMsg Toast message text
+   * @param {boolean} displayed True to assert the entity is displayed. False otherwise.
+   * @param {boolean} displayed True to close the toastNotification right after it is displayed
    */
   assertToastNotificationMessageIsDisplayed(toastMsg, displayed = true, close = false) {
     if (!displayed && close) {
@@ -166,7 +166,7 @@ class BasePage {
    * Assert if a list of elements is in alphabetical order.
    * It works by sending n elements with the same locator, so this method can extract the text of all elements and assert they are being neatly displayed.
    *
-   * @param {Object} locator Object locator containing many elements
+   * @param {object} locator Object locator containing many elements
    */
   assertElementsInAlphabeticalOrder(locator) {
     const listDisplayed = []
@@ -194,8 +194,8 @@ class BasePage {
   /**
    * Assert the notificationError message is displayed
    *
-   * @param {String} textDisplayed Text to be validated in the error notification
-   * @param {Boolean} displayed True is the default value to validate if the notification error message is displayed. False otherwise.
+   * @param {string} textDisplayed Text to be validated in the error notification
+   * @param {boolean} displayed True is the default value to validate if the notification error message is displayed. False otherwise.
    */
   assertNotificationErrorDisplayed(textDisplayed = '', displayed = true) {
     displayed ? cy.get(selectors.notificationError).should('be.visible') : cy.get(selectors.notificationError).should('not.exist')
@@ -212,7 +212,7 @@ class BasePage {
   /**
    * Assert if an element is focused
    *
-   * @param {String} elementSelector element selector to be validated
+   * @param {string} elementSelector element selector to be validated
    * @param {boolean} focused True is default to validate if the element is focused. False to assert otherwise.
    */
   assertElementIsFocused(elementSelector, focused = true) {
@@ -222,7 +222,7 @@ class BasePage {
   /**
    * Assert if the gs progress bar is displayed on the top of a page
    *
-   * @param {Boolean} displayed True is default value to check if the progress bar is being displayed. False to assert otherwise.
+   * @param {boolean} displayed True is default value to check if the progress bar is being displayed. False to assert otherwise.
    */
   assertProgressBarDisplayed(displayed = true) {
     displayed ? cy.get(selectors.gsProgressBar).should('be.visible') : cy.get(selectors.gsProgressBar).should('not.exist')
@@ -231,7 +231,7 @@ class BasePage {
   /**
    * Assert if the bulk actions (checkbox to select more than 1 element in a table) is displayed
    *
-   * @param {Boolean} displayed True is default value to check if the checkbox exists. False to assert otherwise.
+   * @param {boolean} displayed True is default value to check if the checkbox exists. False to assert otherwise.
    */
   assertBulkOptionsDisplayed(displayed = true) {
     displayed ? cy.get(selectors.bulkActionsCheckbox).should('exist') : cy.get(selectors.bulkActionsCheckbox).should('not.exist')
@@ -250,7 +250,7 @@ class BasePage {
   /**
    * Move back or forward in the browser
    *
-   * @param {String} direction 'back' or 'forward' in the browser
+   * @param {string} direction 'back' or 'forward' in the browser
    *
    */
   goBackOrForwardInBrowser(direction) {
@@ -264,8 +264,8 @@ class BasePage {
   /**
    * Change the browser resolution
    *
-   * @param {Number} x Number of pixels in the x coordinates (width)
-   * @param {Number} y Number of pixels in the Y coordinates (height)
+   * @param {number} x Number of pixels in the x coordinates (width)
+   * @param {number} y Number of pixels in the Y coordinates (height)
    */
   changeBrowserResolution(x, y) {
     cy.viewport(x, y)
@@ -281,7 +281,7 @@ class BasePage {
   /**
    * Get the current URL and add in the end of the current path. Then, visit this new url.
    *
-   * @param {String} urlPathToAdd text to be added as a path in the end of the current url
+   * @param {string} urlPathToAdd text to be added as a path in the end of the current url
    *
    * @example: use this.addPathToUrlAndVisitIt('/new-user') to visit the url "yourCurrentUrl/new-user"
    */

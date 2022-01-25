@@ -37,7 +37,7 @@ class BaseStatementManagementPage extends BasePage {
   /**
    * Click in the Client Statements or Participant Regulatory Linkage tabs
    *
-   * @param {String} tabName Tab name to click. It can be 'client statements' or 'participant regulatory linkage'
+   * @param {string} tabName Tab name to click. It can be 'client statements' or 'participant regulatory linkage'
    */
   clickTab(tabName) {
     tabName = tabName.toLowerCase()
@@ -61,7 +61,7 @@ class BaseStatementManagementPage extends BasePage {
   /**
    * Assert the "no data found" message is displayed or not
    *
-   * @param {Boolean} displayed True to assert the "no data message" is  displayed. False, otherwise.
+   * @param {boolean} displayed True to assert the "no data message" is  displayed. False, otherwise.
    */
   assertNoDataMessageFoundDisplayed(displayed = true) {
     displayed ? this.getNoDataFoundMessage().should('be.visible') : this.getNoDataFoundMessage().should('not.exist')
@@ -70,7 +70,7 @@ class BaseStatementManagementPage extends BasePage {
   /**
    * Checks the amount of records displayed in the table
    *
-   * @param {Number} records amount of people you want to check in the records
+   * @param {number} records amount of people you want to check in the records
    *
    * @example 'records = 1 for '1 record(s)' being displayed in the table
    */

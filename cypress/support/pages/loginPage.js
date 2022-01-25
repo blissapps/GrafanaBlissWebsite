@@ -11,8 +11,8 @@ class LoginPage extends BasePage {
   /**
    * Login command through the application UI with session storage and XHR interceptions
    *
-   * @param {String} email email to login. The default variable is set in the cypress.json file
-   * @param {String} password password to login. The default variable is set in the cypress.json file
+   * @param {string} email email to login. The default variable is set in the cypress.json file
+   * @param {string} password password to login. The default variable is set in the cypress.json file
    */
   login(email = Cypress.env('DEFAULT_USER_AUTH'), password = Cypress.env('DEFAULT_PASSWORD_AUTH')) {
     this.loginWithSession(email, password)
@@ -23,8 +23,8 @@ class LoginPage extends BasePage {
   /**
    * Login command through the application UI with SESSION STORAGE
    *
-   * @param {String} email email to login. The default variable is set in the cypress.json file
-   * @param {String} password password to login. The default variable is set in the cypress.json file
+   * @param {string} email email to login. The default variable is set in the cypress.json file
+   * @param {string} password password to login. The default variable is set in the cypress.json file
    */
   loginWithSession(email = Cypress.env('DEFAULT_USER_AUTH'), password = Cypress.env('DEFAULT_PASSWORD_AUTH')) {
     cy.session([email, password], () => {
@@ -40,8 +40,8 @@ class LoginPage extends BasePage {
   /**
    * Login command through the application UI without SESSION STORAGE
    *
-   * @param {String} email email to login. The default variable is set in the cypress.json file
-   * @param {String} password password to login. The default variable is set in the cypress.json file
+   * @param {string} email email to login. The default variable is set in the cypress.json file
+   * @param {string} password password to login. The default variable is set in the cypress.json file
    */
   loginWithoutSession(email = Cypress.env('DEFAULT_USER_AUTH'), password = Cypress.env('DEFAULT_PASSWORD_AUTH')) {
     cy.visit('/')
@@ -56,7 +56,7 @@ class LoginPage extends BasePage {
   /**
    * Assert the error message is displayed when a unsuccessful login is made for an valid email
    *
-   * @param {String} errorMessage error message to be validated
+   * @param {string} errorMessage error message to be validated
    */
   assertUnsuccessfulLoginErrorMessageDisplayed(errorMessage) {
     cy.get(selectors.errorMessageNotification).should('be.visible').contains(errorMessage)

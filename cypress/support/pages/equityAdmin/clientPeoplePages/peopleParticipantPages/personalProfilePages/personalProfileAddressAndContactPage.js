@@ -19,13 +19,13 @@ class PersonalProfileAddressAndContactPage extends BasePersonalProfilePage {
   /**
    * Fill out all the section Address of Residence with given parameters
    *
-   * @param {String} address Address field to be filled. Send '' for don't fill nothing in this field
-   * @param {String} addressLine2 Address Line 2 field to be filled. Send '' for don't fill nothing in this field
-   * @param {String} addressLine3 Address Line 3 field to be filled. Send '' for don't fill nothing in this field
-   * @param {String} postCode Post Code field to be filled. Send '' for don't fill nothing in this field
-   * @param {String} city City field to be filled. Send '' for don't fill nothing in this field
-   * @param {String} state State field to be filled. Send '' for don't fill nothing in this field
-   * @param {String} country Country field to be filled. Send '' for don't fill nothing in this field
+   * @param {string} address Address field to be filled. Send '' for don't fill nothing in this field
+   * @param {string} addressLine2 Address Line 2 field to be filled. Send '' for don't fill nothing in this field
+   * @param {string} addressLine3 Address Line 3 field to be filled. Send '' for don't fill nothing in this field
+   * @param {string} postCode Post Code field to be filled. Send '' for don't fill nothing in this field
+   * @param {string} city City field to be filled. Send '' for don't fill nothing in this field
+   * @param {string} state State field to be filled. Send '' for don't fill nothing in this field
+   * @param {string} country Country field to be filled. Send '' for don't fill nothing in this field
    */
   fillOutAddressOfResidenceSection(address = '', addressLine2 = '', addressLine3 = '', postCode = '', city = '', state = '', country = '') {
     if (address != '') {

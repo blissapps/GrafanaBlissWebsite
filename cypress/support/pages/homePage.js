@@ -34,7 +34,7 @@ class HomePage extends BasePage {
   /**
    * Get client from the cards list
    *
-   * @param {Number} clientId Client name to search
+   * @param {number} clientId Client name to search
    */
   getClientCard(clientId) {
     return cy.get(`${selectors.clientCard}${clientId}`)
@@ -44,7 +44,7 @@ class HomePage extends BasePage {
 
   /**
    *
-   * @param {Boolean} displayed True is the default value to assert the Companies header is displayed. Send false otherwise
+   * @param {boolean} displayed True is the default value to assert the Companies header is displayed. Send false otherwise
    */
   assertCompaniesHeaderIsDisplayed(displayed = true) {
     displayed ? cy.get(selectors.homePageHeader).should('be.visible') : cy.get(selectors.homePageHeader).should('not.exist')
@@ -53,8 +53,8 @@ class HomePage extends BasePage {
   /**
    * Assert if the client is favorite
    *
-   * @param {Number} clientId Client id to be checked
-   * @param {Boolean} favorite True fo assert the client is favorite, false otherwise
+   * @param {number} clientId Client id to be checked
+   * @param {boolean} favorite True fo assert the client is favorite, false otherwise
    */
   assertClientIsFavorite(clientId, favorite = true) {
     favorite ? cy.get(selectors.separatorFavorites).should('exist') : true
@@ -70,11 +70,11 @@ class HomePage extends BasePage {
    * Validate basic information for the client. This information is the one displayed in the home page for each client
    * Example: Ex: 7digital => {GBR, REGULATED, ACTIVE}
    *
-   * @param {Number} clientId Client id to verify the summary information
-   * @param {String} clientName Client name to verify the summary information
-   * @param {String} location Client location, example 'GBR' for UK clients
-   * @param {String} regulated Client information about if it is regulated. Accepted parameters: 'Regulated' and 'Not Regulated'
-   * @param {String} status Client status. Accepted parameters includes: 'Active', 'NOT SET', 'Terminated', 'Implementation'
+   * @param {number} clientId Client id to verify the summary information
+   * @param {string} clientName Client name to verify the summary information
+   * @param {string} location Client location, example 'GBR' for UK clients
+   * @param {string} regulated Client information about if it is regulated. Accepted parameters: 'Regulated' and 'Not Regulated'
+   * @param {string} status Client status. Accepted parameters includes: 'Active', 'NOT SET', 'Terminated', 'Implementation'
    *
    * @example validateClientCardSummaryInformation('144', 'GBR', 'Regulated', 'Active')
    */
@@ -104,7 +104,7 @@ class HomePage extends BasePage {
   /**
    * Search for a client by ID
    *
-   * @param {Number} clientId Client name to search
+   * @param {number} clientId Client name to search
    */
   selectClientById(clientId) {
     this.getClientCard(clientId).scrollIntoView().click()
@@ -113,7 +113,7 @@ class HomePage extends BasePage {
   /**
    * Click in a client after using the search engine first
    *
-   * @param {String} clientName Client name to search
+   * @param {string} clientName Client name to search
    */
   selectClientFromTheListBySearch(clientName) {
     searchEngine.search(clientName)
@@ -125,7 +125,7 @@ class HomePage extends BasePage {
   /**
    * Favorite/Unfavorite a client from the home client list
    *
-   * @param {Number} clientId Client id to be favored
+   * @param {number} clientId Client id to be favored
    */
   favoriteUnfavoriteClient(clientId) {
     cy.get(`${selectors.clientCard}${clientId} ${selectors.favorite_icon}`).first().click({ force: true })
@@ -134,7 +134,7 @@ class HomePage extends BasePage {
   /**
    * Group the clients in the home page by the option chosen in the Group By selector.
    *
-   * @param {String} groupBy The option to group the clients, it can be: alphabetical, status, country, or sector. If groupBy is not given, the default group method is All Companies
+   * @param {string} groupBy The option to group the clients, it can be: alphabetical, status, country, or sector. If groupBy is not given, the default group method is All Companies
    */
   selectGroupByOptionForCompanies(groupBy = '') {
     cy.get(selectors.groupBySelector).click()

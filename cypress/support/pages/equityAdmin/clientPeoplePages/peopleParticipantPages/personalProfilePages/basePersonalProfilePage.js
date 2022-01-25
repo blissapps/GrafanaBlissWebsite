@@ -16,7 +16,7 @@ class BasePersonalProfilePage extends BasePeopleParticipantPage {
   /**
    * Click in a tab by passing the first tab name
    *
-   * @param {String} firstTabName Tabs can be either "overview", "address", or "bank"
+   * @param {string} firstTabName Tabs can be either "overview", "address", or "bank"
    */
   clickTab(firstTabName) {
     firstTabName = firstTabName.toLowerCase()

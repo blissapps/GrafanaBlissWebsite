@@ -48,7 +48,7 @@ Cypress.Commands.add('loginSuccessfulXHRWaits', () => {
  * PS: When using this, you modify all chrome session.
  * So, remember to call the method again with latency = -1 in case you want to remove the latency for all tests in sequence
  *
- * @param {Number} latencyTime Time of latency to simulate a slow connection
+ * @param {number} latencyTime Time of latency to simulate a slow connection
  *
  * Only works on Chrome
  */
@@ -80,7 +80,7 @@ Cypress.Commands.add('changeNetworkLatency', (latencyTime = -1) => {
 /**
  * Go online or offline
  *
- * @param {Object} options Object to control the network behavior. See examples.
+ * @param {object} options Object to control the network behavior. See examples.
  *
  * Only works on Chrome
  *
@@ -130,7 +130,7 @@ Cypress.Commands.add('assertNetworkOnline', (options) => {
 /**
  * Wait for a explicity amount of time. It is the same as using cy.wait(), but without generating a warning
  *
- * @param {Number} time Time im milliseconds to explicit wait
+ * @param {number} time Time im milliseconds to explicit wait
  */
 Cypress.Commands.add('forcedWait', (time) => {
   cy.wait(time)

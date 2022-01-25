@@ -42,7 +42,7 @@ class EquityClientPeoplePage extends BasePage {
   /**
    * Get a participant by Id - Directly from the table list
    *
-   * @param {Number} participantId Participant id to be searched
+   * @param {number} participantId Participant id to be searched
    *
    * @example 12345 as the participantId
    */
@@ -55,7 +55,7 @@ class EquityClientPeoplePage extends BasePage {
   /**
    * Click in a Participant by Id - Directly from the table list
    *
-   * @param {Number} participantId Participant id to be searched
+   * @param {number} participantId Participant id to be searched
    *
    * @example 12345 as the participantId
    */
@@ -66,7 +66,7 @@ class EquityClientPeoplePage extends BasePage {
   /**
    * Click in the Participants, Trusts, or Overview tabs
    *
-   * @param {String} tabName Tab name to click. It can be 'participants', 'trusts', or 'overview'
+   * @param {string} tabName Tab name to click. It can be 'participants', 'trusts', or 'overview'
    */
   clickTab(tabName) {
     tabName = tabName.toLowerCase()
@@ -93,8 +93,8 @@ class EquityClientPeoplePage extends BasePage {
    * Click to edit a participant from the list by clicking in the edit button
    * The subsequent pages are located in Cypress/support/pages/peoplePages
    *
-   * @param {Number} participantId Participant id to be searched
-   * @param {Boolean} actionButton True is the default value to click in an action button before click in the edit button. Send false in case the edit button is directly available
+   * @param {number} participantId Participant id to be searched
+   * @param {boolean} actionButton True is the default value to click in an action button before click in the edit button. Send false in case the edit button is directly available
    */
   clickToEditParticipant(participantId, actionButton = true) {
     if (actionButton) {
@@ -110,7 +110,7 @@ class EquityClientPeoplePage extends BasePage {
   /**
    * Assert the amount of records displayed in the People table
    *
-   * @param {Number} amount amount of people you want to check in the records
+   * @param {number} amount amount of people you want to check in the records
    *
    * @example 'amount = 1 for '1 record(s)' being displayed in the table
    */
@@ -121,8 +121,8 @@ class EquityClientPeoplePage extends BasePage {
   /**
    * Assert the participant is displayed in the participants list
    *
-   * @param {Number} participantId Participant id to be asserted
-   * @param {Boolean} displayed True is the default value to validate the participant is displayed in the list. False to otherwise validation
+   * @param {number} participantId Participant id to be asserted
+   * @param {boolean} displayed True is the default value to validate the participant is displayed in the list. False to otherwise validation
    */
   assertParticipantDisplayed(participantId, displayed = true) {
     displayed ? this.getParticipantById(participantId).should('be.visible') : cy.get(selectors.participant + participantId).should('not.exist')
@@ -131,7 +131,7 @@ class EquityClientPeoplePage extends BasePage {
   /**
    * Check the data listed in a participant [Id, name, email, and residency] over the Participants table
    *
-   * @param {Array} data Array with the data needed to be validated. The correct order is the ORDER displayed in the UI,
+   * @param {array} data Array with the data needed to be validated. The correct order is the ORDER displayed in the UI,
    * which actually is [id, name, email, residency]
    *
    * @example: send [123456, 'Bryan', 'SuppliedEmailAddress_169769_112967@myglobalshares.com', 'LUX'] to validate the participant 12345 data is
@@ -149,7 +149,7 @@ class EquityClientPeoplePage extends BasePage {
    *                         2 - NAME;
    *                         3 - EMAIL;
    *
-   * @param {Number} columnToVerify this is the column name you want to verity the content of this cell
+   * @param {number} columnToVerify this is the column name you want to verity the content of this cell
    * @param {any} value This is the value supposed to be in the cell you choose
    */
   assertParticipantCellContent(columnToVerify, value) {
@@ -161,9 +161,9 @@ class EquityClientPeoplePage extends BasePage {
   /**
    * Verify if the data displayed in Participant Detail container (right menu bar after clicking in a participant) is correct
    *
-   * @param {String} name participant name
-   * @param {String} country participant country
-   * @param {String} status participant status
+   * @param {string} name participant name
+   * @param {string} country participant country
+   * @param {string} status participant status
    */
   assertParticipantDetailContent(name, country, status) {
     cy.get(quickEditNavBarSelectors.participantDetailTitle).should('be.visible')
@@ -175,7 +175,7 @@ class EquityClientPeoplePage extends BasePage {
   /**
    * Assert the name of the current client. It is located in the top left, right after the GS logo
    *
-   * @param {String} clientName Client name to be verified
+   * @param {string} clientName Client name to be verified
    */
   assertClientNameInTheHeader(clientName) {
     cy.get(selectors.clientNameHeader).should('have.text', clientName)
@@ -184,7 +184,7 @@ class EquityClientPeoplePage extends BasePage {
   /**
    * Assert the message 'There are no participants/trusts created' is displayed or not
    *
-   * @param {Boolean} displayed True is the default value to validate the message is displayed. False to otherwise validation
+   * @param {boolean} displayed True is the default value to validate the message is displayed. False to otherwise validation
    */
   assertNoParticipantsOrTrustsAvailableDisplayed(displayed = true) {
     displayed ? cy.get(selectors.noTrustsOrParticipantsCreatedMessage).should('be.visible') : cy.get(selectors.noTrustsOrParticipantsCreatedMessage).should('not.exist')

@@ -41,7 +41,7 @@ class RoleManagementPage extends BaseManagementPage {
   /**
    * Get a role by sending the role ID.
    *
-   * @param {Number} roleId role id number.
+   * @param {number} roleId role id number.
    *
    * @returns The role element
    */
@@ -59,7 +59,7 @@ class RoleManagementPage extends BaseManagementPage {
   /**
    * Get all types of permissions [view, update ...] associated with a permission
    *
-   * @param {String} permissionName name of the permission
+   * @param {string} permissionName name of the permission
    * @returns array of type of permissions associated with the permissionName given
    */
   getPermissionsByName(permissionName) {
@@ -223,7 +223,7 @@ class RoleManagementPage extends BaseManagementPage {
   /**
    * Click in the new role button and change the current default role name
    *
-   * @param {String} roleName Name given to replace the default 'New Role' name that comes by default
+   * @param {string} roleName Name given to replace the default 'New Role' name that comes by default
    */
   clickToCreateRoleWithNewName(roleName) {
     this.getNewRoleButton().click()
@@ -236,8 +236,8 @@ class RoleManagementPage extends BaseManagementPage {
   /**
    * Click in a role by sending the role ID.
    *
-   * @param {Number} roleId Role id number.
-   * @param {Boolean} wait Sometimes the roles take a time to be loaded. If it does not happen, send false and the request/response will not be awaited
+   * @param {number} roleId Role id number.
+   * @param {boolean} wait Sometimes the roles take a time to be loaded. If it does not happen, send false and the request/response will not be awaited
    */
   clickRoleById(roleId, wait = true) {
     this.getRoleById(roleId).scrollIntoView().click()
@@ -260,7 +260,7 @@ class RoleManagementPage extends BaseManagementPage {
   /**
    * Assert the message about no role selected is displayed
    *
-   * @param {Boolean} displayed True to verify if the message is displayed. False otherwise.
+   * @param {boolean} displayed True to verify if the message is displayed. False otherwise.
    */
   assertNoRoleSelectedMessageIsDisplayed(displayed = true) {
     displayed ? cy.get(selectors.noRoleSelectedMsg).should('be.visible') : cy.get(selectors.noRoleSelectedMsg).should('not.exist')
@@ -290,7 +290,7 @@ class RoleManagementPage extends BaseManagementPage {
   /**
    * Assert the Activate button is displayed
    *
-   * @param {Boolean} displayed Send false to verify the Activate Button is not displayed. True is the default for otherwise
+   * @param {boolean} displayed Send false to verify the Activate Button is not displayed. True is the default for otherwise
    */
   assertActivateButtonDisplayed(displayed = true) {
     displayed ? cy.get('@activateBtn').should('be.visible') : cy.get('@activateBtn').should('not.exist')
@@ -299,7 +299,7 @@ class RoleManagementPage extends BaseManagementPage {
   /**
    * Assert if a selected role is editable or not
    *
-   * @param {Boolean} editable True to assert the role is editable, false otherwise
+   * @param {boolean} editable True to assert the role is editable, false otherwise
    *
    * TODO: @missing_steps Validate the header(role name) as well as soon as this ticket is ready: https://globalshares.atlassian.net/browse/PB-963
    */
@@ -326,9 +326,9 @@ class RoleManagementPage extends BaseManagementPage {
   /**
    * Add or remove permissions of a selected role
    *
-   * @param {String} permissionName Permission name of a role
-   * @param {Array} permissionsType Array containing the permissions, for this permission are allowed ['view', 'update', 'create', 'delete']
-   * @param {Boolean} insertPermission True to insert permission, false to remove
+   * @param {string} permissionName Permission name of a role
+   * @param {array} permissionsType Array containing the permissions, for this permission are allowed ['view', 'update', 'create', 'delete']
+   * @param {boolean} insertPermission True to insert permission, false to remove
    *
    * @example:
    * addOrRemovePermissions('accessfilters', ['delete']) -> It inserts the permission Delete in the Access Filter permission
@@ -391,7 +391,7 @@ class RoleManagementPage extends BaseManagementPage {
   /**
    * Insert or remove ALL permissions at once of a selected role
    *
-   * @param {String} permissionsType Permissions type, in which are are allowed ['view', 'update', 'create', 'delete']
+   * @param {string} permissionsType Permissions type, in which are are allowed ['view', 'update', 'create', 'delete']
    *
    * @example:
    * insertOrRemoveAllPermissions('delete') -> It clicks on the Delete column header to insert or remove all delete permissions of all permissions
@@ -426,9 +426,9 @@ class RoleManagementPage extends BaseManagementPage {
   /**
    * Assert a given permission is active or not of a selected role
    *
-   * @param {String} permissionName Permission name of a role
-   * @param {Array} permissionsType Array containing the permissions, for this permission are allowed ['view', 'update', 'create', 'delete']
-   * @param {Boolean} activeState True to assert the permission is selected, false otherwise
+   * @param {string} permissionName Permission name of a role
+   * @param {array} permissionsType Array containing the permissions, for this permission are allowed ['view', 'update', 'create', 'delete']
+   * @param {boolean} activeState True to assert the permission is selected, false otherwise
    *
    * @example:
    * assertPermissionState('accessfilters', ['delete'], true) -> It asserts the permission Delete in the Access Filter permission is active
@@ -500,7 +500,7 @@ class RoleManagementPage extends BaseManagementPage {
   /**
    * Assert the 'New role' button is displayed or not
    *
-   * @param {Boolean} displayed True is the default value to assert the button is displayed. False otherwise
+   * @param {boolean} displayed True is the default value to assert the button is displayed. False otherwise
    */
   assertCreateNewRoleButtonDisplayed(displayed = true) {
     displayed ? cy.get(selectors.newRoleBtn).should('be.visible') : cy.get(selectors.newRoleBtn).should('not.exist')

@@ -47,7 +47,7 @@ class ClientStatementsPage extends BaseStatementManagementPage {
   /**
    * Get client from the records table
    *
-   * @param {Number} clientId clientId number to be searched in the client statements table
+   * @param {number} clientId clientId number to be searched in the client statements table
    *
    * @returns client row element from table
    */
@@ -71,7 +71,7 @@ class ClientStatementsPage extends BaseStatementManagementPage {
   /**
    * Select a client from the table of clients
    *
-   * @param {Number} clientStatementId clientId number to be searched in the client statements table
+   * @param {number} clientStatementId clientId number to be searched in the client statements table
    */
   clickClientTable(clientStatementId) {
     this.getClientFromTable(clientStatementId).scrollIntoView().click()
@@ -81,7 +81,7 @@ class ClientStatementsPage extends BaseStatementManagementPage {
    * Click in the button to reconcile a client
    * PS: This method does not reconcile the client, it only clicks in the reconcile button so you can verify its behavior. To reconcile go to the reconcileClient method
    *
-   * @param {Number} clientId id number from the Client Statements table to reconcile
+   * @param {number} clientId id number from the Client Statements table to reconcile
    */
   clickToReconcileClient(clientId) {
     this.getReconcileButton(clientId).scrollIntoView().click()
@@ -92,8 +92,8 @@ class ClientStatementsPage extends BaseStatementManagementPage {
   /**
    * Assert the client is displayed in the table on statement/clients
    *
-   * @param {Number} clientId The client id number
-   * @param {Boolean} displayed True to assert the client is displayed. False, otherwise.
+   * @param {number} clientId The client id number
+   * @param {boolean} displayed True to assert the client is displayed. False, otherwise.
    *
    */
   assertClientDisplayedOnClientStatementsTable(clientId, displayed = true) {
@@ -115,7 +115,7 @@ class ClientStatementsPage extends BaseStatementManagementPage {
   /**
    * This method will assert that the Client Statement list is being displayed in order, which is by ID
    *
-   * @param {Array} idsList Ordered list of ids to validate
+   * @param {array} idsList Ordered list of ids to validate
    */
   assertClientStatementsTableInOrderById(idsList) {
     for (let i = 0; i < idsList.length; i++) {
@@ -126,8 +126,8 @@ class ClientStatementsPage extends BaseStatementManagementPage {
   /**
    * Assert the state of the reconcile button.
    *
-   * @param {Number} clientId Client id number to hover in this client to make sure the reconcile button is visible or not
-   * @param {Boolean} displayed True to assert the reconcile button is displayed. False, otherwise.
+   * @param {number} clientId Client id number to hover in this client to make sure the reconcile button is visible or not
+   * @param {boolean} displayed True to assert the reconcile button is displayed. False, otherwise.
    */
   assertReconcileButtonDisplayedForClient(clientId, displayed = true) {
     displayed ? this.getReconcileButton(clientId).should('be.visible') : this.getReconcileButton(clientId).should('not.exist')
@@ -136,7 +136,7 @@ class ClientStatementsPage extends BaseStatementManagementPage {
   /**
    * Assert the L4 window for RECONCILIATE STATEMENTS is visible and all components are placed as expected. It was made according to PB-612
    *
-   * @param {Array} securityIds Security ids to be validated
+   * @param {array} securityIds Security ids to be validated
    */
   assertReconcileStatementRightWindowDisplaysElementsAsExpected(securityIds) {
     // L4 Window must be open
@@ -177,8 +177,8 @@ class ClientStatementsPage extends BaseStatementManagementPage {
   /**
    * Assert the client status in the clients table
    *
-   * @param {Number} clientId Client id number to be asserted
-   * @param {String} clientStatus Status to be verified in this client. Status can be: Pending Validation, On Hold ... Check HTML to make sure
+   * @param {number} clientId Client id number to be asserted
+   * @param {string} clientStatus Status to be verified in this client. Status can be: Pending Validation, On Hold ... Check HTML to make sure
    *
    */
   assertClientStatus(clientId, clientStatus) {
@@ -192,9 +192,9 @@ class ClientStatementsPage extends BaseStatementManagementPage {
   /**
    * Filter data from client statements
    *
-   * @param {String} clientName client name to be filtered in the client input field
-   * @param {String} dateFrom initial date to be filtered in the As of Date input field
-   * @param {String} dateTo final date to be filtered in the As of Date input field
+   * @param {string} clientName client name to be filtered in the client input field
+   * @param {string} dateFrom initial date to be filtered in the As of Date input field
+   * @param {string} dateTo final date to be filtered in the As of Date input field
    *
    * @example ('TomTom', '20190301', '20210519') for TomTom client with date range from 2019-03-01 up to 2021-05-19
    */
@@ -226,9 +226,9 @@ class ClientStatementsPage extends BaseStatementManagementPage {
   /**
    * Reconcile a client given its id and the security ids
    *
-   * @param {Number} clientId Client id number to be reconciled
-   * @param {Boolean} noSecurityConsidered True to select the checkbox to do not consider securities for IRS submission. False does not select the checkbox
-   * @param {Array} securityIds Client id number to be reconciled
+   * @param {number} clientId Client id number to be reconciled
+   * @param {boolean} noSecurityConsidered True to select the checkbox to do not consider securities for IRS submission. False does not select the checkbox
+   * @param {array} securityIds Client id number to be reconciled
    */
   reconcileClient(clientId, noSecurityConsidered, securityIds = []) {
     // Make sure the data is consistent

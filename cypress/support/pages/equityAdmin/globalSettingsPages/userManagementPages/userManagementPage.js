@@ -51,7 +51,7 @@ class UserManagementPage extends BaseManagementPage {
   /**
    * Get a user from the table of users
    *
-   * @param {Number} userId User id for the user to be searched
+   * @param {number} userId User id for the user to be searched
    *
    * @example send userId = 454292 to select this user from the table
    */
@@ -68,7 +68,7 @@ class UserManagementPage extends BaseManagementPage {
   /**
    * Select a user from the table of users
    *
-   * @param {Number} userId User id for the user to be searched
+   * @param {number} userId User id for the user to be searched
    *
    */
   clickUserTable(userId) {
@@ -87,7 +87,7 @@ class UserManagementPage extends BaseManagementPage {
   /**
    * Assert the msg about empty user state is visible or not
    *
-   * @param {Boolean} visible True to check if the state is visible, false otherwise
+   * @param {boolean} visible True to check if the state is visible, false otherwise
    */
   assertNoUserMsgIdDisplayed(visible = true) {
     if (visible) {
@@ -100,7 +100,7 @@ class UserManagementPage extends BaseManagementPage {
   /**
    * Checks the amount of results displayed in the Users table after using the search engine
    *
-   * @param {Number} results amount of people you want to check after a search
+   * @param {number} results amount of people you want to check after a search
    *
    * @example 'results = 2 for '2 SEARCH RESULT(S)' being displayed in the table
    */
@@ -111,10 +111,10 @@ class UserManagementPage extends BaseManagementPage {
   /**
    * Verify if the data displayed in User Detail container is correct
    *
-   * @param {String} publicName User public name
-   * @param {String} username Username
-   * @param {String} status User status
-   * @param {String} email User email
+   * @param {string} publicName User public name
+   * @param {string} username Username
+   * @param {string} status User status
+   * @param {string} email User email
    */
   assertUserDetailContentInRightNavBar(publicName, username, status, email) {
     // General User Details assertions
@@ -132,17 +132,17 @@ class UserManagementPage extends BaseManagementPage {
   /**
    * Assert information contained in the User Info panel in the right nav bar (L4)
    *
-   * @param {Array} groupNames Array of groups to be validated, example: ['View Only', 'Global Admin Group']. Send an empty array to skip groups validation
-   * @param {String} firstName User first name under Personal section
-   * @param {String} lastName User last name under Personal section
-   * @param {String} publicName User public name under Personal section
-   * @param {String} jobTitle User job title under Personal section
-   * @param {String} qualifications User qualifications under Personal section
-   * @param {String} organization User organization under Personal section
-   * @param {String} phone User phone under Contact section
-   * @param {String} email User email under Contact section
-   * @param {String} username User username under Account Details section
-   * @param {Boolean} showAll True to click in the show all button to display all the groups in case there are lots of groups registered
+   * @param {array} groupNames Array of groups to be validated, example: ['View Only', 'Global Admin Group']. Send an empty array to skip groups validation
+   * @param {string} firstName User first name under Personal section
+   * @param {string} lastName User last name under Personal section
+   * @param {string} publicName User public name under Personal section
+   * @param {string} jobTitle User job title under Personal section
+   * @param {string} qualifications User qualifications under Personal section
+   * @param {string} organization User organization under Personal section
+   * @param {string} phone User phone under Contact section
+   * @param {string} email User email under Contact section
+   * @param {string} username User username under Account Details section
+   * @param {boolean} showAll True to click in the show all button to display all the groups in case there are lots of groups registered
    */
   assertUserInfoContentInRightNavBar(
     groupNames = [],

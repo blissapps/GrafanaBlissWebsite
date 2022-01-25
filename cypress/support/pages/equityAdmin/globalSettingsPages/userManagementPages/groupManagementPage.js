@@ -54,7 +54,7 @@ class GroupManagementPage extends BaseManagementPage {
   /**
    * Get a group by sending the group ID.
    *
-   * @param {Number} groupId Group id number.
+   * @param {number} groupId Group id number.
    *
    * @returns The group element
    */
@@ -65,8 +65,8 @@ class GroupManagementPage extends BaseManagementPage {
   /**
    * Get a specific card of a selected group
    *
-   * @param {String} sectionName Choose one of these: roles, daps, users, or companies
-   * @param {Number} entityId Id number of the entity
+   * @param {string} sectionName Choose one of these: roles, daps, users, or companies
+   * @param {number} entityId Id number of the entity
    *
    * @returns The relative card of a role, dap, user, or client
    */
@@ -94,7 +94,7 @@ class GroupManagementPage extends BaseManagementPage {
   /**
    * Click in a group by sending the group ID.
    *
-   * @param {Number} groupId Group id number.
+   * @param {number} groupId Group id number.
    *
    * @returns The group element
    */
@@ -107,7 +107,7 @@ class GroupManagementPage extends BaseManagementPage {
   /**
    * Assert if the msg about no groups selected is displayed or not
    *
-   * @param {Boolean} displayed True to check if the message is visible, false otherwise
+   * @param {boolean} displayed True to check if the message is visible, false otherwise
    */
   assertNoGroupSelectedMessageDisplayed(displayed = true) {
     if (displayed) {
@@ -120,7 +120,7 @@ class GroupManagementPage extends BaseManagementPage {
   /**
    * Assert a list of groups is displayed under the correlated Active tab.
    *
-   * @param {Boolean} displayed True to check if there is one or more groups being displayed in the Active Tab, false otherwise
+   * @param {boolean} displayed True to check if there is one or more groups being displayed in the Active Tab, false otherwise
    */
   assertActiveGroupsAreDisplayed(displayed = true) {
     displayed ? cy.get(selectors.activeGroupsList).should('be.visible') : cy.get(selectors.activeGroupsList).should('not.exist')
@@ -129,7 +129,7 @@ class GroupManagementPage extends BaseManagementPage {
   /**
    * Assert a list of groups is displayed under the correlated Inactive tab.
    *
-   * @param {Boolean} displayed True to check if there is one or more groups being displayed in the Inactive Tab, false otherwise
+   * @param {boolean} displayed True to check if there is one or more groups being displayed in the Inactive Tab, false otherwise
    */
   assertInactiveGroupsAreDisplayed(displayed = true) {
     displayed ? cy.get(selectors.inactiveGroupsList).should('be.visible') : cy.get(selectors.inactiveGroupsList).should('not.exist')
@@ -138,8 +138,8 @@ class GroupManagementPage extends BaseManagementPage {
   /**
    * Assert the role is associated with the selected group
    *
-   * @param {Number} roleId Role id number to assert the association with a selected group
-   * @param {Boolean} displayed true to validate if the role is associated with the group, false otherwise
+   * @param {number} roleId Role id number to assert the association with a selected group
+   * @param {boolean} displayed true to validate if the role is associated with the group, false otherwise
    */
   assertRoleAssociatedWithGroup(roleId, displayed = true) {
     if (displayed) {
@@ -152,9 +152,9 @@ class GroupManagementPage extends BaseManagementPage {
   /**
    * Assert if an DAP is associated with the selected group
    *
-   * @param {Number} dapId DAP Id
-   * @param {Boolean} displayed True if you want to assert the dap is associated with the group, false otherwise
-   * @param {Boolean} showAll True to click in the showAll buttons for the case where we have lots of users associated
+   * @param {number} dapId DAP Id
+   * @param {boolean} displayed True if you want to assert the dap is associated with the group, false otherwise
+   * @param {boolean} showAll True to click in the showAll buttons for the case where we have lots of users associated
    */
   assertDapAssociatedWithGroup(dapId, displayed = true, showAll = false) {
     if (showAll) {
@@ -171,9 +171,9 @@ class GroupManagementPage extends BaseManagementPage {
   /**
    * Assert if an user is associated with the selected group
    *
-   * @param {Number} userId User Id
-   * @param {Boolean} displayed True if you want to assert the user is associated with the group, false otherwise
-   * @param {Boolean} showAll True to click in the showAll buttons for the case where we have lots of users associated
+   * @param {number} userId User Id
+   * @param {boolean} displayed True if you want to assert the user is associated with the group, false otherwise
+   * @param {boolean} showAll True to click in the showAll buttons for the case where we have lots of users associated
    */
   assertUserAssociatedWithGroup(userId, displayed = true, showAll = false) {
     if (showAll) {
@@ -190,9 +190,9 @@ class GroupManagementPage extends BaseManagementPage {
   /**
    * Assert if an client/company is associated with the selected group
    *
-   * @param {Number} companyId Company/client id
-   * @param {Boolean} displayed True if you want to assert the client is associated with the group, false otherwise
-   * @param {Boolean} showAll True to click in the showAll buttons for the case where we have lots of clients associated
+   * @param {number} companyId Company/client id
+   * @param {boolean} displayed True if you want to assert the client is associated with the group, false otherwise
+   * @param {boolean} showAll True to click in the showAll buttons for the case where we have lots of clients associated
    */
   assertCompanyAssociatedWithGroup(companyId, displayed = true, showAll = false) {
     if (showAll) {
@@ -209,9 +209,9 @@ class GroupManagementPage extends BaseManagementPage {
   /**
    * Assert if the amount of cards displayed in a section (roles, daps, users, or companies) is corrected
    *
-   * @param {String} sectionName Choose one of these: roles, daps, users, or companies
-   * @param {Number} amountOfCards Amount of cards supposed to be displayed in a group section
-   * @param {Boolean} showAll False to not click in the showAll in case it is not displayed. True otherwise
+   * @param {string} sectionName Choose one of these: roles, daps, users, or companies
+   * @param {number} amountOfCards Amount of cards supposed to be displayed in a group section
+   * @param {boolean} showAll False to not click in the showAll in case it is not displayed. True otherwise
    */
   assertNumberOfCardsDisplayedInASection(sectionName, amountOfCards, showAll = false) {
     // clicks in show all in case we have lots of cards
@@ -244,8 +244,8 @@ class GroupManagementPage extends BaseManagementPage {
   /**
    * Assert the number of records displayed in the group sections (roles, daps, users, or companies) is correct
    *
-   * @param {String} sectionName Choose one of these: roles, daps, users, or companies
-   * @param {Number} numberOrRecords Amount of records supposed to be displayed in a group section
+   * @param {string} sectionName Choose one of these: roles, daps, users, or companies
+   * @param {number} numberOrRecords Amount of records supposed to be displayed in a group section
    */
   assertNumberOfRecordsInASection(sectionName, numberOrRecords) {
     switch (sectionName) {
@@ -274,7 +274,7 @@ class GroupManagementPage extends BaseManagementPage {
    * Assert the number of search results displayed in the group sections (roles, daps, users, or companies) is correct.
    * This number is shown right after a searching over the search engine. The result follows this format: "X SEARCH RESULT(S)"
    *
-   * @param {String} sectionName Choose one of these: roles, daps, users, or companies.
+   * @param {string} sectionName Choose one of these: roles, daps, users, or companies.
    * @param {any} numberOfSearchResults Amount of search results supposed to be displayed in a group section. For "NO MATCHING USERS FOUND", send 'No'.
    *
    * @example
@@ -309,7 +309,7 @@ class GroupManagementPage extends BaseManagementPage {
   /**
    * Assert if the button "change role" is available
    *
-   * @param {Boolean} displayed True if you want to assert the button is displayed, false otherwise
+   * @param {boolean} displayed True if you want to assert the button is displayed, false otherwise
    */
   assertChangeRoleButtonDisplayed(displayed = true) {
     displayed ? cy.get(selectors.changeRoleBtn).should('be.visible') : cy.get(selectors.changeRoleBtn).should('not.exist')
@@ -318,7 +318,7 @@ class GroupManagementPage extends BaseManagementPage {
   /**
    * Assert if the button "Add data access profiles" is available
    *
-   * @param {Boolean} displayed True if you want to assert the button is displayed, false otherwise
+   * @param {boolean} displayed True if you want to assert the button is displayed, false otherwise
    */
   assertAddDapsButtonDisplayed(displayed = true) {
     displayed ? cy.get(selectors.addDAPBtn).should('be.visible') : cy.get(selectors.addDAPBtn).should('not.exist')
@@ -327,7 +327,7 @@ class GroupManagementPage extends BaseManagementPage {
   /**
    * Assert if the button "Add Users" is available
    *
-   * @param {Boolean} displayed True if you want to assert the button is displayed, false otherwise
+   * @param {boolean} displayed True if you want to assert the button is displayed, false otherwise
    */
   assertAddUsersButtonDisplayed(displayed = true) {
     displayed ? cy.get(selectors.addUsersBtn).should('be.visible') : cy.get(selectors.addUsersBtn).should('not.exist')
@@ -336,7 +336,7 @@ class GroupManagementPage extends BaseManagementPage {
   /**
    * Assert if the button "Add companies" is available
    *
-   * @param {Boolean} displayed True if you want to assert the button is displayed, false otherwise
+   * @param {boolean} displayed True if you want to assert the button is displayed, false otherwise
    */
   assertAddCompaniesButtonDisplayed(displayed = true) {
     displayed ? cy.get(selectors.addCompaniesBtn).should('be.visible') : cy.get(selectors.addCompaniesBtn).should('not.exist')
@@ -345,8 +345,8 @@ class GroupManagementPage extends BaseManagementPage {
   /**
    * Assert if the option to remove a role is available by checking if the remove role button is displayed or not
    *
-   * @param {Number} roleId Role id number to verify if the remove button appears on it
-   * @param {Boolean} displayed True if you want to assert the button is displayed, false otherwise
+   * @param {number} roleId Role id number to verify if the remove button appears on it
+   * @param {boolean} displayed True if you want to assert the button is displayed, false otherwise
    */
   assertRemoveRoleOptionIsDisplayed(roleId, displayed = true) {
     displayed
@@ -357,8 +357,8 @@ class GroupManagementPage extends BaseManagementPage {
   /**
    * Assert if the option to remove a dap is available by checking if the remove role button is displayed or not
    *
-   * @param {Number} dapId DAP id number to verify if the remove button appears on it
-   * @param {Boolean} displayed True if you want to assert the button is displayed, false otherwise
+   * @param {number} dapId DAP id number to verify if the remove button appears on it
+   * @param {boolean} displayed True if you want to assert the button is displayed, false otherwise
    */
   assertRemoveDapOptionIsDisplayed(dapId, displayed = true) {
     displayed
@@ -369,8 +369,8 @@ class GroupManagementPage extends BaseManagementPage {
   /**
    * Assert if the option to remove a user is available by checking if the remove role button is displayed or not
    *
-   * @param {Number} userId User id number to verify if the remove button appears on it
-   * @param {Boolean} displayed True if you want to assert the button is displayed, false otherwise
+   * @param {number} userId User id number to verify if the remove button appears on it
+   * @param {boolean} displayed True if you want to assert the button is displayed, false otherwise
    */
   assertRemoveUserOptionIsDisplayed(userId, displayed = true) {
     displayed
@@ -381,8 +381,8 @@ class GroupManagementPage extends BaseManagementPage {
   /**
    * Assert if the option to remove a company is available by checking if the remove role button is displayed or not
    *
-   * @param {Number} companyId User id number to verify if the remove button appears on it
-   * @param {Boolean} displayed True if you want to assert the button is displayed, false otherwise
+   * @param {number} companyId User id number to verify if the remove button appears on it
+   * @param {boolean} displayed True if you want to assert the button is displayed, false otherwise
    */
   assertRemoveCompanyOptionIsDisplayed(companyId, displayed = true) {
     displayed
@@ -400,7 +400,7 @@ class GroupManagementPage extends BaseManagementPage {
   /**
    * Assert the 'New group' button is displayed or not
    *
-   * @param {Boolean} displayed True is the default value to assert the button is displayed. False otherwise
+   * @param {boolean} displayed True is the default value to assert the button is displayed. False otherwise
    */
   assertCreateNewGroupButtonDisplayed(displayed = true) {
     displayed ? cy.get(selectors.newGroupBtn).should('be.visible') : cy.get(selectors.newGroupBtn).should('not.exist')
@@ -418,8 +418,8 @@ class GroupManagementPage extends BaseManagementPage {
   /**
    * Select a role to a selected group
    *
-   * @param {String} roleName Role name that is going to be added into this group.
-   * @param {Number} roleId Role id number that is going to be added into this group.
+   * @param {string} roleName Role name that is going to be added into this group.
+   * @param {number} roleId Role id number that is going to be added into this group.
    */
   selectRoleToGroup(roleName, roleId) {
     cy.get(selectors.selectRoleBtn).click()
@@ -429,8 +429,8 @@ class GroupManagementPage extends BaseManagementPage {
   /**
    * Add Daps to a selected group
    *
-   * @param {Array} dapNames Array of name of data access profiles that are going to be added into this group.
-   * @param {Array} dapIds Array of id of data access profiles that are going to be added into this group.
+   * @param {array} dapNames Array of name of data access profiles that are going to be added into this group.
+   * @param {array} dapIds Array of id of data access profiles that are going to be added into this group.
    *
    * @example
    * All dapNames and dapIds need to be placed in order.
@@ -444,8 +444,8 @@ class GroupManagementPage extends BaseManagementPage {
   /**
    * Add Users to a selected group
    *
-   * @param {Array} userNames Array of names of users that are going to be added into this group.
-   * @param {Array} userIds Array of ids of users that are going to be added into this group.
+   * @param {array} userNames Array of names of users that are going to be added into this group.
+   * @param {array} userIds Array of ids of users that are going to be added into this group.
    *
    * @example
    * All userNames and userIds need to be placed in order.
@@ -459,8 +459,8 @@ class GroupManagementPage extends BaseManagementPage {
   /**
    * Add Companies to a selected group
    *
-   * @param {Array} companyNames Array of names of companies that are going to be added into this group.
-   * @param {Array} companyIds Array of ids of companies  that are going to be added into this group.
+   * @param {array} companyNames Array of names of companies that are going to be added into this group.
+   * @param {array} companyIds Array of ids of companies  that are going to be added into this group.
    *
    * @example
    * All companyNames and companyIds need to be placed in order.
@@ -474,15 +474,15 @@ class GroupManagementPage extends BaseManagementPage {
   /**
    * Given you are in the groups main page, create a group by calling this method
    *
-   * @param {String} groupName Name of the group that is going to be created.
-   * @param {String} roleName Role name that is going to be added into this group.
-   * @param {Number} roleId Role id number that is going to be added into this group.
-   * @param {Array} dapNames Array of name of data access profiles that are going to be added into this group.
-   * @param {Array} dapIds Array of if of data access profiles that are going to be added into this group.
-   * @param {Array} userNames Array of names of users that are going to be added into this group.
-   * @param {Array} userIds Array of ids of users that are going to be added into this group.
-   * @param {Array} companyNames Array of names of companies that are going to be added into this group.
-   * @param {Array} companyIds Array of ids of companies  that are going to be added into this group.
+   * @param {string} groupName Name of the group that is going to be created.
+   * @param {string} roleName Role name that is going to be added into this group.
+   * @param {number} roleId Role id number that is going to be added into this group.
+   * @param {array} dapNames Array of name of data access profiles that are going to be added into this group.
+   * @param {array} dapIds Array of if of data access profiles that are going to be added into this group.
+   * @param {array} userNames Array of names of users that are going to be added into this group.
+   * @param {array} userIds Array of ids of users that are going to be added into this group.
+   * @param {array} companyNames Array of names of companies that are going to be added into this group.
+   * @param {array} companyIds Array of ids of companies  that are going to be added into this group.
    *
    * @example
    * All names and ids need to be placed in order for all parameters that it is applied.
@@ -539,7 +539,7 @@ class GroupManagementPage extends BaseManagementPage {
   /**
    * Remove a role from a selected group
    *
-   * @param {Number} roleId Role Id number that is going to be removed of the selected group.
+   * @param {number} roleId Role Id number that is going to be removed of the selected group.
    */
   removeRoleFromGroup(roleId) {
     cy.get(groupsCardsSelectors.roleCardId + roleId + '] ' + selectors.removeIconButton)
@@ -550,8 +550,8 @@ class GroupManagementPage extends BaseManagementPage {
   /**
    * Remove DAPs from a selected group
    *
-   * @param {Array} dapIds Array of ids of daps that are going to be removed of the selected group.
-   * @param {Boolean} showAll True to click in the showAll buttons for the case where we have lots of daps associated
+   * @param {array} dapIds Array of ids of daps that are going to be removed of the selected group.
+   * @param {boolean} showAll True to click in the showAll buttons for the case where we have lots of daps associated
    */
   removeDapsFromGroup(dapIds, showAll = false) {
     if (showAll) {
@@ -568,8 +568,8 @@ class GroupManagementPage extends BaseManagementPage {
   /**
    * Remove Users from a selected group
    *
-   * @param {Array} userIds Array of ids of users that are going to be removed of the selected group.
-   * @param {Boolean} showAll True to click in the showAll buttons for the case where we have lots of users associated
+   * @param {array} userIds Array of ids of users that are going to be removed of the selected group.
+   * @param {boolean} showAll True to click in the showAll buttons for the case where we have lots of users associated
    */
   removeUsersFromGroup(userIds, showAll = false) {
     if (showAll) {
@@ -586,8 +586,8 @@ class GroupManagementPage extends BaseManagementPage {
   /**
    * Remove Companies from a selected group
    *
-   * @param {Array} companyIds Array of ids of companies that are going to be removed of the selected group.
-   * @param {Boolean} showAll True to click in the showAll buttons for the case where we have lots of clients associated
+   * @param {array} companyIds Array of ids of companies that are going to be removed of the selected group.
+   * @param {boolean} showAll True to click in the showAll buttons for the case where we have lots of clients associated
    */
   removeCompaniesFromGroup(companyIds, showAll = false) {
     if (showAll) {

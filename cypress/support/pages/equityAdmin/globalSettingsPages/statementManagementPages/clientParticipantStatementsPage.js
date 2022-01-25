@@ -83,7 +83,7 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
   /**
    * Click to download a PDF file of a specific participant
    *
-   * @param {Number} participantId clientId number to be searched in the client statements table
+   * @param {number} participantId clientId number to be searched in the client statements table
    *
    */
   clickDownloadPDFFromParticipantStatement(participantId) {
@@ -94,7 +94,7 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
   /**
    * Click on a participant
    *
-   * @param {Number} participantId Id of the participant that is going to be clicked in the participants table
+   * @param {number} participantId Id of the participant that is going to be clicked in the participants table
    */
   clickOnParticipant(participantId) {
     cy.get(selectors.clientParticipantStatementId + participantId)
@@ -105,7 +105,7 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
   /**
    * When bulk actions are available, click in the checkbox of a specific participant
    *
-   * @param {Number} participantId Id of the participant that is going to be selected by the checkbox
+   * @param {number} participantId Id of the participant that is going to be selected by the checkbox
    */
   clickOnTheCheckboxToSelectParticipant(participantId) {
     cy.get(selectors.clientParticipantStatementId + participantId)
@@ -134,8 +134,8 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
   /**
    * Click in the buttons located in the header of the participants table right after selecting them on the checkboxes
    *
-   * @param {String} actionToPerform Chose the action to perform. It can be Rerun, Approve, or On Hold.
-   * @param {Number} numberOfParticipantsAffected Number of participants that are going be affected
+   * @param {string} actionToPerform Chose the action to perform. It can be Rerun, Approve, or On Hold.
+   * @param {number} numberOfParticipantsAffected Number of participants that are going be affected
    *
    */
   clickInTableHeaderToPerformActions(actionToPerform, numberOfParticipantsAffected) {
@@ -172,7 +172,7 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
   /**
    * This method will assert that the Participant Statements list is being displayed in order, which is by ID
    *
-   * @param {Array} idsList Ordered list of ids to validate
+   * @param {array} idsList Ordered list of ids to validate
    */
   assertParticipantStatementsTableInOrderById(idsList) {
     for (let i = 0; i < idsList.length; i++) {
@@ -183,8 +183,8 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
   /**
    * Assert the participant is displayed or not in the participants table
    *
-   * @param {Number} participantId The id of the participant
-   * @param {Boolean} displayed True is the default value to check the participant is visible. False, otherwise
+   * @param {number} participantId The id of the participant
+   * @param {boolean} displayed True is the default value to check the participant is visible. False, otherwise
    */
   assertParticipantStatementDisplayed(participantId, displayed = true) {
     displayed
@@ -195,8 +195,8 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
   /**
    * Assert the participant status in the participants table
    *
-   * @param {Number} participantId Participant id number to be asserted
-   * @param {String} participantStatus Status to be verified into this participant. Status can be: Pending Validation, On Hold ... Check HTML to make sure
+   * @param {number} participantId Participant id number to be asserted
+   * @param {string} participantStatus Status to be verified into this participant. Status can be: Pending Validation, On Hold ... Check HTML to make sure
    *
    */
   assertParticipantStatus(participantId, participantStatus) {
@@ -208,7 +208,7 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
   /**
    * Assert the summary button is correctly displayed
    *
-   * @param {Boolean} displayed True to assert the summary button is displayed. False, otherwise.
+   * @param {boolean} displayed True to assert the summary button is displayed. False, otherwise.
    *
    */
   assertSummaryButtonDisplayed(displayed = true) {
@@ -218,7 +218,7 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
   /**
    * Assert the Reject button is displayed. Tip: so far it is only available for Pending Validation status
    *
-   * @param {Boolean} displayed True to validate the Reject button is displayed. False otherwise.
+   * @param {boolean} displayed True to validate the Reject button is displayed. False otherwise.
    */
   assertRejectButtonDisplayed(displayed = true) {
     displayed ? cy.get(selectors.rejectButton).should('be.visible') : cy.get(selectors.rejectButton).should('not.exist')
@@ -227,7 +227,7 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
   /**
    * Assert the REcall button is displayed. Tip: so far it is only available for Pending Validation status or Published
    *
-   * @param {Boolean} displayed True to validate the Recall button is displayed. False otherwise.
+   * @param {boolean} displayed True to validate the Recall button is displayed. False otherwise.
    */
   assertRecallButtonDisplayed(displayed = true) {
     displayed ? cy.get(selectors.recallButton).should('be.visible') : cy.get(selectors.recallButton).should('not.exist')
@@ -237,8 +237,8 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
    * Assert the recall button is available for a given participant
    *
    *
-   * @param {Number} participantId The participant id to check if the recall button is available for it
-   * @param {Boolean} displayed True to assert the recall button is displayed. False, otherwise.
+   * @param {number} participantId The participant id to check if the recall button is available for it
+   * @param {boolean} displayed True to assert the recall button is displayed. False, otherwise.
    *
    *
    * @missing_ids
@@ -259,8 +259,8 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
    * Assert the approve button is available for a given participant
    *
    *
-   * @param {Number} participantId The participant id to check if the approve button is available for it
-   * @param {Boolean} displayed True to assert the approve button is displayed. False, otherwise.
+   * @param {number} participantId The participant id to check if the approve button is available for it
+   * @param {boolean} displayed True to assert the approve button is displayed. False, otherwise.
    *
    *
    * @missing_ids
@@ -280,8 +280,8 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
   /**
    * Assert if the a specific button is displayed in the table header after selecting one or more participants
    *
-   * @param {String} actionButtonName Action name. It can be approve, on hold, rerun
-   * @param {Boolean} displayed True to assert the button is displayed. False, otherwise.
+   * @param {string} actionButtonName Action name. It can be approve, on hold, rerun
+   * @param {boolean} displayed True to assert the button is displayed. False, otherwise.
    *
    */
   assertActionButtonDisplayedInTableHeader(actionButtonName, displayed = true) {
@@ -300,8 +300,8 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
   /**
    * Assert the button/option is available inside the Actions button for a given participant
    *
-   * @param {Number} participantId Participant id to verify the actions available for it.
-   * @param {String} buttonName Button name to be asserted
+   * @param {number} participantId Participant id to verify the actions available for it.
+   * @param {string} buttonName Button name to be asserted
    */
   assertButtonIsDisplayedInParticipantActions(participantId, buttonName) {
     buttonName = buttonName.toLowerCase()
@@ -321,12 +321,12 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
   /**
    * Assert the details in the Statement Detail L4 bar right after selecting a participant on the participant table
    *
-   * @param {String} participantName Name of the participant
-   * @param {String} participantAsOfDate Participant as of date
-   * @param {String} participantCurrentStatus Participant current status displayed in the Badge. Attention: It is not in uppercase, so take a look in the HTML
-   * @param {Array} statusNameTrailList List of status to be verified in order decrescent
-   * @param {Array} nameUserTrailList List of names to be verified in order decrescent
-   * @param {Array} timestampTrailList List of timestamps to be verified in order decrescent
+   * @param {string} participantName Name of the participant
+   * @param {string} participantAsOfDate Participant as of date
+   * @param {string} participantCurrentStatus Participant current status displayed in the Badge. Attention: It is not in uppercase, so take a look in the HTML
+   * @param {array} statusNameTrailList List of status to be verified in order decrescent
+   * @param {array} nameUserTrailList List of names to be verified in order decrescent
+   * @param {array} timestampTrailList List of timestamps to be verified in order decrescent
    *
    * @examples
    * assertParticipantStatementDetailsOnL4Bar('', '', '', [' Initiated', 'Initiated'], ['system', 'system'], ['07/09/2021 • 10:24:42', '11/05/2021 • 05:13:30'])
@@ -374,7 +374,7 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
   /**
    * Assert the client status badge displayed in the top
    *
-   * @param {String} statusName The name of the status
+   * @param {string} statusName The name of the status
    *
    */
   assertClientStatus(statusName) {
@@ -386,10 +386,10 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
   /**
    * Filter for a participant in the participants table
    *
-   * @param {String} participantName participant name to be searched into the participant statement filter. '' to skip this filter
-   * @param {Number} participantId participant id to be searched into the participant statement filter. -1 to skip this filter
-   * @param {String} status participant status to be searched into the participant statement filter. '' to skip this filter
-   * @param {String} participantExternalId participant external id to be searched into the participant statement filter. -1 to skip this filter
+   * @param {string} participantName participant name to be searched into the participant statement filter. '' to skip this filter
+   * @param {number} participantId participant id to be searched into the participant statement filter. -1 to skip this filter
+   * @param {string} status participant status to be searched into the participant statement filter. '' to skip this filter
+   * @param {string} participantExternalId participant external id to be searched into the participant statement filter. -1 to skip this filter
    *
    * The Delay is necessary for Firefox only
    */

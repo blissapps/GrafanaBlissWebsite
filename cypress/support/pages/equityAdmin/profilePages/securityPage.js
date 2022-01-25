@@ -21,8 +21,8 @@ class SecurityPage extends BasePage {
   /**
    * Change the password in Profile Security page
    *
-   * @param {String} currentPassword Current password
-   * @param {String} newPassword New password
+   * @param {string} currentPassword Current password
+   * @param {string} newPassword New password
    */
   changePassword(currentPassword = '', newPassword = '') {
     if (currentPassword != '') {

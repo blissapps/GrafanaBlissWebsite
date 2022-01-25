@@ -51,7 +51,7 @@ class DapManagementPage extends BaseManagementPage {
   /**
    * Get a DAP by sending the DAP ID.
    *
-   * @param {Number} dapId DAP id number.
+   * @param {number} dapId DAP id number.
    *
    * @returns The DAP element
    */
@@ -64,7 +64,7 @@ class DapManagementPage extends BaseManagementPage {
   /**
    * Click in a DAP by sending the DAP ID.
    *
-   * @param {Number} dapId DAP id number.
+   * @param {number} dapId DAP id number.
    */
   clickDapById(dapId) {
     this.getDapById(dapId).click()
@@ -81,7 +81,7 @@ class DapManagementPage extends BaseManagementPage {
   /**
    * Assert the button (therefore the permission) to create a new DAP is displayed over the UI
    *
-   * @param {Boolean} displayed True to verify if the button to create a new DAP is displayed. False otherwise.
+   * @param {boolean} displayed True to verify if the button to create a new DAP is displayed. False otherwise.
    */
   assertCreateNewDapButtonDisplayed(displayed = true) {
     displayed ? cy.get(selectors.createDapBtn).should('be.visible') : cy.get(selectors.createDapBtn).should('not.exist')
@@ -90,7 +90,7 @@ class DapManagementPage extends BaseManagementPage {
   /**
    * Assert the message about no DAP selected is displayed
    *
-   * @param {Boolean} displayed True to verify if the message is displayed. False otherwise.
+   * @param {boolean} displayed True to verify if the message is displayed. False otherwise.
    */
   assertNoDapSelectedMessageIsDisplayed(displayed = true) {
     displayed ? cy.get(selectors.noDapSelectedMsg).should('be.visible') : cy.get(selectors.noDapSelectedMsg).should('not.exist')
@@ -99,7 +99,7 @@ class DapManagementPage extends BaseManagementPage {
   /**
    * Assert a list of daps is displayed under the correlated Active tab.
    *
-   * @param {Boolean} displayed True to validate if the list is displayed. False otherwise
+   * @param {boolean} displayed True to validate if the list is displayed. False otherwise
    */
   assertActiveDapsAreDisplayed(displayed = true) {
     displayed ? cy.get(selectors.activeDapList).should('be.visible') : cy.get(selectors.activeDapList).should('not.exist')
@@ -108,7 +108,7 @@ class DapManagementPage extends BaseManagementPage {
   /**
    * Assert a list of daps is displayed under the correlated Inactive tab.
    *
-   * @param {Boolean} displayed True to validate if the list is displayed. False otherwise
+   * @param {boolean} displayed True to validate if the list is displayed. False otherwise
    */
   assertInactiveDapsAreDisplayed(displayed = true) {
     displayed ? cy.get(selectors.inactiveDapList).should('be.visible') : cy.get(selectors.inactiveDapList).should('not.exist')
@@ -124,9 +124,9 @@ class DapManagementPage extends BaseManagementPage {
   /**
    * Assert if an group is associated with the selected dap
    *
-   * @param {Number} groupId Group Id
-   * @param {Boolean} displayed True if you want to assert the group is associated with the dap, false otherwise
-   * @param {Boolean} showAll True to click in the showAll buttons for the case where we have lots of groups associated
+   * @param {number} groupId Group Id
+   * @param {boolean} displayed True if you want to assert the group is associated with the dap, false otherwise
+   * @param {boolean} showAll True to click in the showAll buttons for the case where we have lots of groups associated
    */
   assertGroupAssociatedWithDap(groupId, displayed = true, showAll = false) {
     if (showAll) {
@@ -170,9 +170,9 @@ class DapManagementPage extends BaseManagementPage {
    *
    * Assert the value of a condition element
    *
-   * @param {Number} elementPosition The element position of the 'div.conditions input' locator
-   * @param {String} conditionValue The value to assert in the elementPosition
-   * @param {Boolean} displayed Send to false to assert the condition does not exists or if it was removed
+   * @param {number} elementPosition The element position of the 'div.conditions input' locator
+   * @param {string} conditionValue The value to assert in the elementPosition
+   * @param {boolean} displayed Send to false to assert the condition does not exists or if it was removed
    *
    * @example
    * assertConditionValue(1, 'Client id') to assert the element 'div.conditions input' in position 1 is equal to  'Client id'
@@ -195,7 +195,7 @@ class DapManagementPage extends BaseManagementPage {
   /**
    * Assert the DAP container with dap details is displayed or not
    *
-   * @param {Boolean} displayed True to assert de DAP details are displayed, False otherwise
+   * @param {boolean} displayed True to assert de DAP details are displayed, False otherwise
    */
   assertDapDetailsContainerDisplayed(displayed = true) {
     displayed ? cy.get(selectors.dapDetailsContainer).should('be.visible') : cy.get(selectors.dapDetailsContainer).should('not.exist')
@@ -204,7 +204,7 @@ class DapManagementPage extends BaseManagementPage {
   /**
    * Assert if a Dap is editable or not in a selected Dap
    *
-   * @param {Boolean} editable True to assert the Dap is editable, false otherwise
+   * @param {boolean} editable True to assert the Dap is editable, false otherwise
    */
   assertDapEditable(editable = true) {
     editable ? cy.get(selectors.selectNotEditable).should('not.exist') : cy.get(selectors.selectNotEditable).should('exist')
@@ -213,7 +213,7 @@ class DapManagementPage extends BaseManagementPage {
   /**
    * Assert the amount of results displayed for conditions after using the search engine to look for conditions
    *
-   * @param {Number} results amount of results you want to check after a search
+   * @param {number} results amount of results you want to check after a search
    *
    * @example Send 'results = 2' to validate the '2 SEARCH RESULT(S)' is being displayed in the condition search result
    */
@@ -224,7 +224,7 @@ class DapManagementPage extends BaseManagementPage {
   /**
    * Assert if the number of groups of a selected DAP is displayed correct
    *
-   * @param {Number} numberOrRecords Amount of records supposed to be displayed in a group section
+   * @param {number} numberOrRecords Amount of records supposed to be displayed in a group section
    */
   assertNumberOfGroupRecordsAssociatedWithDap(numberOrRecords) {
     this.assertNumberOfRecordsDisplayed(selectors.groupsRecordsCounter, numberOrRecords)
@@ -233,7 +233,7 @@ class DapManagementPage extends BaseManagementPage {
   /**
    * Assert if the amount of cards displayed in the group section is corrected
    *
-   * @param {Number} amountOfCards Amount of cards supposed to be displayed in a group section
+   * @param {number} amountOfCards Amount of cards supposed to be displayed in a group section
    */
   assertNumberOfGroupCardsAssociatedWithDap(amountOfCards) {
     cy.get(selectors.groupsAllCards).should('have.length', amountOfCards)
@@ -242,7 +242,7 @@ class DapManagementPage extends BaseManagementPage {
   /**
    * Assert add groups button is visible or not
    *
-   * @param {Boolean} visible True is default value to assert the add groups button is visible. False to assert otherwise
+   * @param {boolean} visible True is default value to assert the add groups button is visible. False to assert otherwise
    *
    */
   assertAddGroupsButtonIsVisible(visible = true) {
@@ -252,8 +252,8 @@ class DapManagementPage extends BaseManagementPage {
   /**
    * Assert if the amount of group cards displayed is corrected
    *
-   * @param {Number} amountOfCards Amount of cards supposed to be displayed in groups
-   * @param {Boolean} showAll False to not click in the showAll button in case it is not displayed. True otherwise
+   * @param {number} amountOfCards Amount of cards supposed to be displayed in groups
+   * @param {boolean} showAll False to not click in the showAll button in case it is not displayed. True otherwise
    */
   assertNumberOfGroupCardsDisplayedInASection(amountOfCards, showAll = false) {
     // clicks in show all in case we have lots of cards
@@ -274,8 +274,8 @@ class DapManagementPage extends BaseManagementPage {
   /**
    * Add Groups to a selected DAP
    *
-   * @param {Array} groupNames Array of name of groups that are going to be added into this dap.
-   * @param {Array} groupIds Array of id of groups that are going to be added into this dap.
+   * @param {array} groupNames Array of name of groups that are going to be added into this dap.
+   * @param {array} groupIds Array of id of groups that are going to be added into this dap.
    *
    * @example
    * All dapNames and dapIds need to be placed in order.
@@ -289,8 +289,8 @@ class DapManagementPage extends BaseManagementPage {
   /**
    * Remove Groups from a selected dap
    *
-   * @param {Array} groupsIds Array of ids of groups that are going to be removed of the selected DAP.
-   * @param {Boolean} showAll True to click in the showAll buttons for the case where we have lots of groups associated
+   * @param {array} groupsIds Array of ids of groups that are going to be removed of the selected DAP.
+   * @param {boolean} showAll True to click in the showAll buttons for the case where we have lots of groups associated
    */
   removeGroupFromDap(groupsIds, showAll = false) {
     if (showAll) {
@@ -311,10 +311,10 @@ class DapManagementPage extends BaseManagementPage {
    * Modifies conditions of a select dap
    * The method gets a array of selectors based on 'div.conditions input', so it is necessary to send the element position to be used in the eq() filter
    *
-   * @param {Array} conditionType Send a array containing the position and the option to choose in a condition and/or. Example: [3, 'or'] means the element 'div.conditions input' in position 3 will be selected as 'or'
-   * @param {Array} condition Send a array containing the position and the option to choose in a condition type like 'Business Unit', 'Client id', 'Is international mobile?', and etc.. Example: [3, 'Client id'] means the element 'div.conditions input' in position 3 will be selected as 'Client id'
-   * @param {Array} value Send a array containing the position and the option to choose/typed in a as the value of a condition. Example: [3, 'Brasil'] means the element 'div.conditions input' in position 3 will be selected as 'Brasil'
-   * @param {Boolean} valueIsInput True if the value of a condition is an input field. False when it is a select box
+   * @param {array} conditionType Send a array containing the position and the option to choose in a condition and/or. Example: [3, 'or'] means the element 'div.conditions input' in position 3 will be selected as 'or'
+   * @param {array} condition Send a array containing the position and the option to choose in a condition type like 'Business Unit', 'Client id', 'Is international mobile?', and etc.. Example: [3, 'Client id'] means the element 'div.conditions input' in position 3 will be selected as 'Client id'
+   * @param {array} value Send a array containing the position and the option to choose/typed in a as the value of a condition. Example: [3, 'Brasil'] means the element 'div.conditions input' in position 3 will be selected as 'Brasil'
+   * @param {boolean} valueIsInput True if the value of a condition is an input field. False when it is a select box
    *
    * @examples
    * modifyCondition([9, 'or'], [10, 'Business Unit'], [11, '2'])
@@ -374,8 +374,8 @@ class DapManagementPage extends BaseManagementPage {
    * Add a condition into a DAP
    * PS: It only adds the elements without the possibility to insert the proper values on them. For that, use the modifyCondition method right after using this one
    *
-   * @param {Number} conditionIndex As we may have lots of if/and/or boxes, send the index of the one you want to add a condition. The locator is located in "conditionsSelectors.conditionalElements"
-   * @param {Number} level Level 1, 2, or 3 to choose in which level the condition is going to be added.
+   * @param {number} conditionIndex As we may have lots of if/and/or boxes, send the index of the one you want to add a condition. The locator is located in "conditionsSelectors.conditionalElements"
+   * @param {number} level Level 1, 2, or 3 to choose in which level the condition is going to be added.
    *
    * @example
    * addCondition(1, 1) -> first conditional element adding a condition in the level 1
@@ -415,7 +415,7 @@ class DapManagementPage extends BaseManagementPage {
   /**
    * Remove a condition
    *
-   * @param {Number} lineToRemove Line number to remove the condition
+   * @param {number} lineToRemove Line number to remove the condition
    *
    * @example:
    * removeCondition(2) -> Removes the condition of line 2

@@ -13,7 +13,7 @@ class BasePeopleParticipantPage extends BasePage {
   /**
    * Click in some item in the participant navigation menu
    *
-   * @param {String} menuName The name of the menu that it is going to be clicked. It can be personal, company, tax, sale, or primary
+   * @param {string} menuName The name of the menu that it is going to be clicked. It can be personal, company, tax, sale, or primary
    */
   clickOnTheParticipantNavigationMenu(menuName) {
     menuName = menuName.toLowerCase()
@@ -53,9 +53,9 @@ class BasePeopleParticipantPage extends BasePage {
   /**
    * Assert if an error message is displayed for a field given an element locator
    *
-   * @param {String} elementLocator Element locator to assert if there is a error message to it or not
-   * @param {String} textToBeValidated Send a text in this parameter to also validate the content of the error message.
-   * @param {Boolean} displayed True to validate if the error message is displayed, and false for otherwise
+   * @param {string} elementLocator Element locator to assert if there is a error message to it or not
+   * @param {string} textToBeValidated Send a text in this parameter to also validate the content of the error message.
+   * @param {boolean} displayed True to validate if the error message is displayed, and false for otherwise
    * @returns
    */
   assertErrorMessageDisplayedInParticipantField(elementLocator, textToBeValidated = '', displayed = true) {

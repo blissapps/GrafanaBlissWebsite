@@ -16,7 +16,7 @@ class ProfileMenuNavBar extends BasePage {
 
   /**
    * This method can be used to assert the Sign Out button is always visible across the menus in the profile nav bar
-   * @param {Boolean} visible True (Default) to be visible and false to not visible
+   * @param {boolean} visible True (Default) to be visible and false to not visible
    */
   assertSignOutButtonIsVisible(visible = true) {
     if (visible) {

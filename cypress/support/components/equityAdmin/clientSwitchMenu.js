@@ -25,7 +25,7 @@ class ClientSwitchMenu extends BasePage {
   /**
    * Click in a client in the Switch Client list
    *
-   * @param {Number} clientId Client id number to be searched
+   * @param {number} clientId Client id number to be searched
    */
   clickInClientInSwitchClientMenu(clientId) {
     cy.get(clientSwitchSelectors.clientsListed + clientId).click()
@@ -34,7 +34,7 @@ class ClientSwitchMenu extends BasePage {
   /**
    * Click to favorite a client in the Switch Client list
    *
-   * @param {Number} clientId Client id number to be favorite
+   * @param {number} clientId Client id number to be favorite
    */
   clickToFavoriteClientInSwitchClientMenu(clientId) {
     cy.get(clientSwitchSelectors.clientsListed + clientId + ']+' + clientSwitchSelectors.favoriteIcon)
@@ -47,8 +47,8 @@ class ClientSwitchMenu extends BasePage {
   /**
    * Assert if a client is favorite in Client Switch
    *
-   * @param {Number} clientId Client add to be verified
-   * @param {Boolean} favorite True to validate if the client is favorite, false otherwise.
+   * @param {number} clientId Client add to be verified
+   * @param {boolean} favorite True to validate if the client is favorite, false otherwise.
    */
   assertClientIsFavorite(clientId, favorite = true) {
     favorite ? cy.get(clientSwitchSelectors.favoriteClient + clientId).should('be.visible') : cy.get(clientSwitchSelectors.favoriteClient + clientId).should('not.exist')
@@ -57,7 +57,7 @@ class ClientSwitchMenu extends BasePage {
   /**
    * Validate the "No clients found" message is displayed after the user searches for a client that does not exists
    *
-   * @param {Boolean} displayed True to validate the 'No Clients found' message is displayed. False, otherwise.
+   * @param {boolean} displayed True to validate the 'No Clients found' message is displayed. False, otherwise.
    */
   assertNoClientsFoundInClientSwitch(displayed = true) {
     displayed ? cy.get(clientSwitchSelectors.noClientsFoundMsg).should('be.visible') : cy.get(clientSwitchSelectors.noClientsFoundMsg).should('not.exist')
@@ -68,7 +68,7 @@ class ClientSwitchMenu extends BasePage {
   /**
    * Search for a client in the Switch Client menu bar
    *
-   * @param {String} clientName Client name to be searched
+   * @param {string} clientName Client name to be searched
    */
   searchClientInSwitchClient(clientName) {
     cy.get(clientSwitchSelectors.searchClientsInput).clear().type(clientName)

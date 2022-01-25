@@ -57,8 +57,8 @@ class BaseManagementPage extends BasePage {
   /**
    * Get a entity by its name while sending the entity name.
    *
-   * @param {String} entityName Entity name.
-   * @param {Boolean} displayed True to assert the entity is displayed by name in the list of entities. False otherwise.
+   * @param {string} entityName Entity name.
+   * @param {boolean} displayed True to assert the entity is displayed by name in the list of entities. False otherwise.
    *
    * @returns The entity element located in the entity list
    */
@@ -77,7 +77,7 @@ class BaseManagementPage extends BasePage {
   /**
    * Click in the Show All button of a given entity/section
    *
-   * @param {String} entity It can be 'daps', 'users', 'companies', or 'groups'
+   * @param {string} entity It can be 'daps', 'users', 'companies', or 'groups'
    */
   clickShowAll(entity) {
     switch (entity) {
@@ -107,7 +107,7 @@ class BaseManagementPage extends BasePage {
   /**
    * Click in the Hide button of a given entity/section
    *
-   * @param {String} entity It can be 'daps', 'users', 'companies', or 'groups'
+   * @param {string} entity It can be 'daps', 'users', 'companies', or 'groups'
    */
   clickHide(entity) {
     switch (entity) {
@@ -137,7 +137,7 @@ class BaseManagementPage extends BasePage {
   /**
    * Click in a entity in the list of entities by sending the entity name
    *
-   * @param {String} entityName name of the entity to be clicked
+   * @param {string} entityName name of the entity to be clicked
    */
   clickEntityByName(entityName) {
     this.getEntityByName(entityName).scrollIntoView().click()
@@ -169,7 +169,7 @@ class BaseManagementPage extends BasePage {
   /**
    * Click in the active or inactive tabs over all the settings
    *
-   * @param {String} tabName Tab name to click. It can be 'active' or 'inactive'
+   * @param {string} tabName Tab name to click. It can be 'active' or 'inactive'
    */
   clickTab(tabName) {
     tabName = tabName.toLowerCase()
@@ -193,7 +193,7 @@ class BaseManagementPage extends BasePage {
   /**
    * Assert if the entity header/name is displayed. Also, asserts its content if the parameter headerText is sent
    *
-   * @param {String} headerText Send the name of the header if you want to validate the header content. SEND NOTHING to skip the validation of the content
+   * @param {string} headerText Send the name of the header if you want to validate the header content. SEND NOTHING to skip the validation of the content
    * and just validate that the header is displayed
    */
   assertEntityHeaderIsDisplayedAsExpected(headerText = '') {
@@ -209,7 +209,7 @@ class BaseManagementPage extends BasePage {
   /**
    * Assert the amount of results displayed in the Search Results list, after using the search engine
    *
-   * @param {Number} results amount of results you want to check after a search
+   * @param {number} results amount of results you want to check after a search
    *
    * @example Send 'results = 2' to validate the '2 SEARCH RESULT(S)' is being displayed in the Search Results list
    */
@@ -220,7 +220,7 @@ class BaseManagementPage extends BasePage {
   /**
    * Assert if the OTHER GROUP list is displayed right after searching for an entity in the search bar
    *
-   * @param {Boolean} displayed True is default value to make sure the OTHER GROUP list is displayed. False to assert otherwise
+   * @param {boolean} displayed True is default value to make sure the OTHER GROUP list is displayed. False to assert otherwise
    */
   assertOtherGroupListDisplayed(displayed = true) {
     displayed ? cy.get(selectors.otherGroupList).should('be.visible') : cy.get(selectors.otherGroupList).should('not.exist')
@@ -229,7 +229,7 @@ class BaseManagementPage extends BasePage {
   /**
    * Assert the Search Results list is displayed with the given ids.
    *
-   * @param {Array} entityId Array containing the ids of groups, roles, or daps that are supposed to be displayed in the search result list.
+   * @param {array} entityId Array containing the ids of groups, roles, or daps that are supposed to be displayed in the search result list.
    *
    * @example Send entityId=[1] to assert if the group with id 1 was correctly found in the results list, after using the search engine.
    */
@@ -251,7 +251,7 @@ class BaseManagementPage extends BasePage {
   /**
    * Assert if the message in the gs-empty-container, regarding a empty state (when no data is loaded), is displayed
    *
-   * @param {Boolean} visible True to check if the state is visible, false otherwise
+   * @param {boolean} visible True to check if the state is visible, false otherwise
    */
   assertEmptyStateMessageIsVisible(visible = true) {
     if (visible) {
@@ -264,8 +264,8 @@ class BaseManagementPage extends BasePage {
   /**
    * Assert a entity is displayed under the entity list. Entities are 'roles', 'daps', or 'groups'
    *
-   * @param {String} entityName Entity name
-   * @param {Boolean} displayed True is the default to assert the entity is displayed. False otherwise.
+   * @param {string} entityName Entity name
+   * @param {boolean} displayed True is the default to assert the entity is displayed. False otherwise.
    */
   assertEntityIsDisplayedInTheList(entityName, displayed = true) {
     if (displayed) {
@@ -278,7 +278,7 @@ class BaseManagementPage extends BasePage {
   /**
    * Assert the entity is being focused by checking the entity name
    *
-   * @param {Boolean} focused True is default to validate if the entity is focused. False, otherwise.
+   * @param {boolean} focused True is default to validate if the entity is focused. False, otherwise.
    */
   assertEntityIsFocused(focused = true) {
     this.assertElementIsFocused(selectors.entityNameInput, focused)
@@ -287,9 +287,9 @@ class BaseManagementPage extends BasePage {
   /**
    * Assert a card is being highlighted displayed. It usually happens after searching for it in the search bar
    *
-   * @param {Array} entitiesIds Entities ids to be verified. This is how this method locates the cards
-   * @param {String} entityType If this card is a role, dap, user, group, or company
-   * @param {Boolean} showAll False is the default value to NOT click in the 'show all button'. Sent True to click in the 'show all' button in case there are many entities
+   * @param {array} entitiesIds Entities ids to be verified. This is how this method locates the cards
+   * @param {string} entityType If this card is a role, dap, user, group, or company
+   * @param {boolean} showAll False is the default value to NOT click in the 'show all button'. Sent True to click in the 'show all' button in case there are many entities
    */
   assertCardsDisplayedInHighlightedMode(entitiesIds, entityType, showAll = false) {
     showAll ? this.clickShowAll(entityType) : true
@@ -313,7 +313,7 @@ class BaseManagementPage extends BasePage {
   /**
    * Assert the action detailsActionPanelBtn (threeDotButton) in the right top corner of a selected entity is displayed or not
    *
-   * @param {Boolean} displayed True is the default value to assert the threeDotButton is displayed. False otherwise
+   * @param {boolean} displayed True is the default value to assert the threeDotButton is displayed. False otherwise
    */
   assertThreeDotButtonDisplayed(displayed = true) {
     displayed ? cy.get(selectors.threeDotBtn).should('be.visible') : cy.get(selectors.threeDotBtn).should('not.exist')
@@ -322,7 +322,7 @@ class BaseManagementPage extends BasePage {
   /**
    * Assert the Deactivate option inside the "threeDotButton" of a selected entity is displayed or not
    *
-   * @param {Boolean} displayed True is the default value to assert the option is displayed. False otherwise
+   * @param {boolean} displayed True is the default value to assert the option is displayed. False otherwise
    */
   assertDeactivateEntityButtonDisplayed(displayed = true) {
     displayed ? cy.get(selectors.threeDotDeactivateBtn).should('be.visible') : cy.get(selectors.threeDotDeactivateBtn).should('not.exist')
@@ -331,7 +331,7 @@ class BaseManagementPage extends BasePage {
   /**
    * Assert the Duplicate option inside the "threeDotButton" of a selected entity is displayed or not
    *
-   * @param {Boolean} displayed True is the default value to assert the option is displayed. False otherwise
+   * @param {boolean} displayed True is the default value to assert the option is displayed. False otherwise
    */
   assertDuplicateEntityButtonDisplayed(displayed = true) {
     displayed ? cy.get(selectors.threeDotDuplicateBtn).should('be.visible') : cy.get(selectors.threeDotDuplicateBtn).should('not.exist')
@@ -340,7 +340,7 @@ class BaseManagementPage extends BasePage {
   /**
    * Assert a badge with View Only is displayed next the entity header/title
    *
-   * @param {Boolean} displayed True is the default value to assert the VIEW ONLY badge is displayed. False otherwise
+   * @param {boolean} displayed True is the default value to assert the VIEW ONLY badge is displayed. False otherwise
    */
   assertViewOnlyBadgeDisplayed(displayed = true) {
     displayed ? cy.get(selectors.viewOnlyStatusBadge).should('be.visible') : cy.get(selectors.viewOnlyStatusBadge).should('not.exist')
@@ -360,7 +360,7 @@ class BaseManagementPage extends BasePage {
   /**
    * Modify a entity (group role, or dap) name from a selected entity. It also can verify the current name of the entity, right before changing it.
    *
-   * @param {String} entityName Name of the role that is going to be modified.
+   * @param {string} entityName Name of the role that is going to be modified.
    */
   modifyEntityName(entityName) {
     this.getEntityHeader().as('input')
@@ -387,9 +387,9 @@ class BaseManagementPage extends BasePage {
    * Add entities in the nav right bar After clicking the "+ Add entity" button.
    * This is valid for adding groups, daps, users, clients and roles
    *
-   * @param {String} entityType Type of the entity that is going to be added. It can be = group, role, dap, user, client
-   * @param {Array} entityNames Array containing the names of the entities that are going to be added into this entity.
-   * @param {Array} entityIds Array containing the ids of the entities that are going to be added into this entity.
+   * @param {string} entityType Type of the entity that is going to be added. It can be = group, role, dap, user, client
+   * @param {array} entityNames Array containing the names of the entities that are going to be added into this entity.
+   * @param {array} entityIds Array containing the ids of the entities that are going to be added into this entity.
    *
    * @example
    * All entityNames and entityIds need to be placed in order.

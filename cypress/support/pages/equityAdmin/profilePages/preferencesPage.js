@@ -21,7 +21,7 @@ class PreferencesPage extends BasePage {
 
   /**
    *
-   * @param {String} language language name to change.
+   * @param {string} language language name to change.
    *
    * @example List currently available: english (default), portuguese, chinese, and japanese
    */

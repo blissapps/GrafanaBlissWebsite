@@ -11,7 +11,7 @@ class SearchEngine extends BasePage {
    * Search bar
    *
    * @param {any} textToSearch Param to search in the search bar
-   * @param {Number} delay Delay in milliseconds to wait. Sometimes, there are no XHR requests to intercept, so it is necessary to have a quick delay after using the search engine.
+   * @param {number} delay Delay in milliseconds to wait. Sometimes, there are no XHR requests to intercept, so it is necessary to have a quick delay after using the search engine.
    */
   search(textToSearch, delay = 500) {
     cy.log('SEARCHING FOR ' + textToSearch)

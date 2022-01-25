@@ -29,11 +29,11 @@ class ParticipantRegulatoryLinkagePage extends BaseStatementManagementPage {
   /**
    * Filter data from participant regulatory linkage
    *
-   * @param {String} clientName client name to be filtered in the client input field
-   * @param {String} participantName participant name to be filtered in the Participant Name input field
+   * @param {string} clientName client name to be filtered in the client input field
+   * @param {string} participantName participant name to be filtered in the Participant Name input field
    * @param {any} participantId participant id to be filtered in the Participant Id input field
-   * @param {String} regulator regulator name to be filtered in the Regulator input field
-   * @param {String} partner partner name to be filtered in the Partner input field
+   * @param {string} regulator regulator name to be filtered in the Regulator input field
+   * @param {string} partner partner name to be filtered in the Partner input field
    *
    * @example ('Acacia Pharma', '', '', 'FINRA', '') for Acacia Pharma client with regulator as FINRA
    */

@@ -37,7 +37,7 @@ class SettingsMenuNavBar extends BasePage {
   /**
    * Check if the Settings Menu Nav Bar is open
    *
-   * @param {Boolean} open True to assert the menu is open, false otherwise
+   * @param {boolean} open True to assert the menu is open, false otherwise
    */
   assertGlobalSettingsMenuOpen(open = true) {
     open ? cy.get(selectors.settingsMenuOpen).should('be.visible') : cy.get(selectors.settingsMenuOpen).should('not.exist')
@@ -46,7 +46,7 @@ class SettingsMenuNavBar extends BasePage {
   /**
    * Assert the User Management menu is displayed in the Settings menu bar
    *
-   * @param {Boolean} displayed True to validate the User Management menu is available. False, otherwise.
+   * @param {boolean} displayed True to validate the User Management menu is available. False, otherwise.
    */
   assertUserManagementMenuDisplayed(displayed = true) {
     displayed ? cy.get(globalSettingsMenuSelectors.userManagementMenuItem).should('be.visible') : cy.get(globalSettingsMenuSelectors.userManagementMenuItem).should('not.exist')
@@ -55,7 +55,7 @@ class SettingsMenuNavBar extends BasePage {
   /**
    * Assert the back button is displayed within the User Management menu
    *
-   * @param {Boolean} displayed True to validate the User Management menu is available. False, otherwise.
+   * @param {boolean} displayed True to validate the User Management menu is available. False, otherwise.
    */
   assertBackButtonDisplayed(displayed = true) {
     displayed ? cy.get(globalSettingsMenuSelectors.backButton).should('be.visible') : cy.get(globalSettingsMenuSelectors.backButton).should('not.exist')
@@ -64,7 +64,7 @@ class SettingsMenuNavBar extends BasePage {
   /**
    * Assert the Group Management menu item is displayed within User Management settings
    *
-   * @param {Boolean} displayed True to validate the Group Management menu is available. False, otherwise.
+   * @param {boolean} displayed True to validate the Group Management menu is available. False, otherwise.
    */
   assertGroupSubMenuItemDisplayed(displayed = true) {
     displayed
@@ -75,7 +75,7 @@ class SettingsMenuNavBar extends BasePage {
   /**
    * Assert the Role Management menu item is displayed within User Management settings
    *
-   * @param {Boolean} displayed True to validate the Role Management menu is available. False, otherwise.
+   * @param {boolean} displayed True to validate the Role Management menu is available. False, otherwise.
    */
   assertRoleSubMenuItemDisplayed(displayed = true) {
     displayed
@@ -88,9 +88,9 @@ class SettingsMenuNavBar extends BasePage {
   /**
    * Navigation menu
    *
-   * @param {String} item Main menu item, available options are: user, statement
-   * @param {String} subItem Submenu item if available. If not, passes nothing like the examples provided
-   * @param {Boolean} openLeftBar True is the default value to open the left bar. Send False in case it is already open
+   * @param {string} item Main menu item, available options are: user, statement
+   * @param {string} subItem Submenu item if available. If not, passes nothing like the examples provided
+   * @param {boolean} openLeftBar True is the default value to open the left bar. Send False in case it is already open
    *
    * @example: accessGlobalSettingsMenu("user", "dap")
    * @example: accessGlobalSettingsMenu("statement")
