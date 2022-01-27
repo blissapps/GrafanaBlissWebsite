@@ -42,7 +42,7 @@
     "cypress-wait-until": "1.7.2",
     "@4tw/cypress-drag-drop": "2.1.0",
     "cypress-grep": "2.13.1",
-    "find-cypress-specs": "1.7.0",
+    "find-cypress-specs": "1.10.0",
     "mocha": "9.1.4",
     "eslint": "8.7.0",
     "eslint-plugin-cypress": "2.12.1",
