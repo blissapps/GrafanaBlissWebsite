@@ -1,0 +1,41 @@
+{
+  "@odata.context": "https://api-business.myglobalshares.co.uk/api/$metadata#Participants",
+  "@odata.count": 233,
+  "value": [
+    {
+      "id": 113026,
+      "clientId": 144,
+      "firstName": "Cypress",
+      "middleName": "",
+      "lastName": "Framework",
+      "alternateName": "",
+      "fullName": "Abel Lewis",
+      "externalSystemId": "7dig_0082",
+      "ssnId": "",
+      "dateOfBirth": "1930-12-14T00:00:00Z",
+      "primaryNationality": null,
+      "gender": "Female",
+      "languagePreference": null,
+      "isTrustParticipant": false,
+      "isActivated": false,
+      "dateTimeModified": "2022-01-13T12:58:37.157Z",
+      "relationshipToCompany": "Employee",
+      "personalEmailAddress": "PersonalEmailAddress_1229737_113026@myglobalshares.com",
+      "suppliedEmailAddress": "SuppliedEmailAddress_1229741_113026@myglobalshares.com",
+      "preferredEmailAddress": "PreferredEmailAddress_1229739_113026@myglobalshares.com",
+      "primaryCitizenship": "UNK",
+      "search": [],
+      "version": 7,
+      "status": "Terminated",
+      "residency": {
+        "addressLine1": "96 South Parkway",
+        "addressLine2": "Block A",
+        "addressLine3": "Apartment 126",
+        "city": "Tynemouth Ward",
+        "state": "",
+        "postCode": "NE30 2NB",
+        "country": "NZL"
+      }
+    }
+  ]
+}
