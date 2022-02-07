@@ -1,10 +1,12 @@
+// @ts-nocheck
+
 /**
  * TO AVOID ANY ERRORS WHEN CREATING A COMMAND,
  * DO NOT FORGET TO ADD THE METHOD SIGNATURE IN THE index.d.ts
  * FILE LOCATED IN cypress/support/
  */
-// @ts-nocheck
 
+// References for global autocomplete
 /// <reference types="cypress" />
 
 import 'cypress-iframe'
