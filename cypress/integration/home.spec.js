@@ -18,9 +18,6 @@ describe('Home page tests', () => {
     equityAdmin.clientPeoplePage.assertClientNameInTheHeader(clientName)
   })
 
-  /**
-   * TODO Need refactoring to check the orders independently of the database
-   */
   it('C10735651_Check_GroupBy_Displays_Correct_Order_For_AllCompanies_Alphabetical_Status_Country_Sector', () => {
     // All Companies (default)
     equityAdmin.homePage.selectGroupByOptionForCompanies()
@@ -44,13 +41,15 @@ describe('Home page tests', () => {
   })
 
   it('C10735652_Favorite_And_Unfavorite_Client', () => {
+    const clientId = 146
+
     // Favorite
-    equityAdmin.homePage.favoriteUnfavoriteClient(146)
-    equityAdmin.homePage.assertClientIsFavorite(146)
+    equityAdmin.homePage.favoriteUnfavoriteClient(clientId)
+    equityAdmin.homePage.assertClientIsFavorite(clientId)
 
     // Unfavorite
-    equityAdmin.homePage.favoriteUnfavoriteClient(146)
-    equityAdmin.homePage.assertClientIsFavorite(146, false)
+    equityAdmin.homePage.favoriteUnfavoriteClient(clientId)
+    equityAdmin.homePage.assertClientIsFavorite(clientId, false)
   })
 
   /**
