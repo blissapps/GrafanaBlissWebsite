@@ -32,8 +32,8 @@ import SaleAndDividendPage from './equityAdmin/clientPeoplePages/peopleParticipa
 import TaxAndCommissionPage from './equityAdmin/clientPeoplePages/peopleParticipantPages/taxAndCommissionPage'
 
 // Others
-import LoginPage from './loginPage'
-import HomePage from './homePage'
+import LoginPage from './equityAdmin/loginPage'
+import HomePage from './equityAdmin/homePage'
 
 /**
  * This is the main class the encapsulates all pages regarding the Equity Admin portal (Except base pages since they are not meant to be directly called).

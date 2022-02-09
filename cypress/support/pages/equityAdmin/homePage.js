@@ -1,5 +1,5 @@
-import BasePage from './basePage'
-import SearchEngine from '../components/equityAdmin/searchEngine'
+import BasePage from '../basePage'
+import SearchEngine from '../../components/equityAdmin/searchEngine'
 
 const searchEngine = new SearchEngine()
 
