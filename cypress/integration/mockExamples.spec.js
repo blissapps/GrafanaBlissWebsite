@@ -34,4 +34,14 @@ describe.skip('Mock examples tests', () => {
       cy.contains('test2@globalshares.com')
     })
   })
+
+  context('Turn EA developer mocks', () => {
+    it('Turn EA toggle mocks on', () => {
+      // @ts-ignore
+      cy.window().then((win) => win.eaToggleMocks()) // this works
+      cy.reload()
+      equityAdmin.applicationLeftMenuBar.openProfileMenuBar()
+      cy.get('#profileFullName > span').should('contain.text', 'Gui')
+    })
+  })
 })
