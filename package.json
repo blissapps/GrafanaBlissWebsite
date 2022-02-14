@@ -1,9 +1,16 @@
 {
   "name": "gs-cypress-automation-framework",
-  "version": "0.0.1",
-  "description": "Cypress framework for the new admin portal",
+  "version": "0.0.2",
+  "description": "Cypress framework for the new Equity Admin Portal",
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/globalshares/gscypressautomationframework"
+  },
   "author": "Global Shares",
   "license": "ISC",
+  "engines": {
+    "node": ">=12.22.0"
+  },
   "scripts": {
     "clean": "rm -rf ./node_modules/",
     " --- CYPRESS DEV SCRIPTS ---- ": "",
@@ -14,7 +21,8 @@
     "cy:run:firefox": "cypress run --browser firefox --spec 'cypress/integration/**/*.spec.js'",
     "cy:run:edge": "cypress run --browser edge",
     "cy:run:dashboard": "cypress run --record --key a0b2d38f-1ea0-4639-8bb7-c74bdb76591e --tag 'staging,dashboard'",
-    "cy:run:tag": "yarn cy:run --env grepTags=@smoke",
+    "cy:run:tag:chrome": "cypress run --env grepTags=@smoke --browser chrome",
+    "cy:run:tag:firefox": "cypress run --env grepTags=@smoke --browser chrome",
     "cy:list:spec:by:names": "find-cypress-specs --names",
     "cy:list:spec:by:tags": "find-cypress-specs --tags",
     " --- Formatting: ESLint and Prettier + Typescript compiler to support JS code ---- ": "",
@@ -22,9 +30,9 @@
     "eslint:fix": "yarn eslint --fix",
     "lint": "yarn eslint && yarn prettier:check",
     "lint:fix": "yarn ts:clear && yarn eslint:fix && yarn prettier:fix",
-    "prettier:cli": "prettier \"**/*.js\"",
+    "prettier:cli": "prettier \"**/**.{ts,js,tsx}\"",
     "prettier:check": "yarn prettier:cli -l",
-    "prettier:fix": "yarn prettier:cli --write --single-quote",
+    "prettier:fix": "yarn prettier:cli --write --single-quote \"**/**.{ts,js,tsx}\"",
     "ts:clear": "rm -rf dist",
     "compile": "tsc && rm -rf dist"
   },
