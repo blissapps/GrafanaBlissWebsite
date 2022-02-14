@@ -1,11 +1,9 @@
-# Node modules and configs
+# Node modules (dependencies)
 node_modules
 
 # Cypress local files:
-cypress/screenshots/*
+cypress/screenshots/
 cypress/test-results/
-test-results.xml
-results
 videos
 downloads
 
@@ -18,5 +16,10 @@ yarn-error.log
 # Compiler report files
 dist
 
-# MAC files
+#Debug erros and logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# MAC files - misc
 **/.DS_Store
