@@ -30,9 +30,9 @@
     "eslint:fix": "yarn eslint --fix",
     "lint": "yarn eslint && yarn prettier:check",
     "lint:fix": "yarn ts:clear && yarn eslint:fix && yarn prettier:fix",
-    "prettier:cli": "prettier \"**/**.{ts,js,tsx}\"",
+    "prettier:cli": "prettier \"**/**.{ts,js,tsx}\" \"**/**.{json,md,yml}\"",
     "prettier:check": "yarn prettier:cli -l",
-    "prettier:fix": "yarn prettier:cli --write --single-quote \"**/**.{ts,js,tsx}\"",
+    "prettier:fix": "yarn prettier:cli --write \"**/**.{ts,js,tsx}\" \"**/**.{json,md,yml}\"",
     "ts:clear": "rm -rf dist",
     "compile": "tsc && rm -rf dist"
   },

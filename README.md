@@ -98,7 +98,7 @@ Remember that all theses commands above can be totally adapted, modified, or eve
 
 Basically, we need to make sure we do not have any issue raised by the compilers before committing any code. So, we need to run all the compilers in this order:
 
-``` bash
+```bash
 # Run this typescript compiler first, if some error is found, fix it and it run again:
 yarn compile
 
