@@ -98,38 +98,8 @@ describe('Participants tests', () => {
     equityAdmin.clientPeoplePage.assertParticipantDetailContent(participantName, participantCountry, participantStatus)
   })
 
-  /**
-   * Check if the Id, name, email, and residency are being displayed correctly and in order in the Participants tab.
-   *
-   * Waiting for @IDS
-   */
-
-  /**
-   * Customized Columns behavior -  Verify Participants and Trusts Customized Columns behavior by adding more columns
-   * Waiting for @IDS
-   */
-
-  /**
-   * Customized Columns behavior -  Verify Participants and Trusts Customized Columns behavior by adding more columns and changing the order of the columns
-   * Waiting for @IDS
-   */
-
-  /**
-   * Accessing participant admin directly from URL https://ea-v3.myglobalshares.co.uk/client/1/people
-   * Waiting for @IDS since the gs-notification message is not localized.
-   */
-
-  // ************** TESTS BELLOW MODIFY DATA DEFINITELY ***************
-
-  // Edit participant - Personal - Check mandatory fields and behavior over all the tabs (Overview, Address and Contact, and Bank Accounts)
-
-  // Edit participant - Company - Check mandatory fields and behavior over all the tabs (Overview, and Payroll Information)
-
-  // Edit participant - Tax & Commission - Check mandatory fields and behavior.
-
-  // Edit participant - Sale & Dividend - Check mandatory fields and behavior.
-
-  // Edit participant - Primary Settings - Check mandatory fields and behavior over all the tabs (Sales, Transfers, Dividends, Financial Reporting, Exchange, and Adjustments)
-
-  // Terminate a participant
+  it('C15166048_Not possible to navigate to participants page when there is no client selected', () => {
+    equityAdmin.homePage.navigateToUrl('/client/people/people')
+    equityAdmin.homePage.checkPageUrl()
+  })
 })

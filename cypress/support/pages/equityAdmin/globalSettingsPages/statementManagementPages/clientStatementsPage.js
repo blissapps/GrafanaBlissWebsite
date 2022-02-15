@@ -195,6 +195,8 @@ class ClientStatementsPage extends BaseStatementManagementPage {
    * @param {string} clientName client name to be filtered in the client input field
    * @param {string} dateFrom initial date to be filtered in the As of Date input field
    * @param {string} dateTo final date to be filtered in the As of Date input field
+   * @param {string} regulator regulator to be filtered in the Regulator input field
+   * @param {string} status status to be filtered in the Status field
    *
    * @example ('TomTom', '20190301', '20210519') for TomTom client with date range from 2019-03-01 up to 2021-05-19
    */

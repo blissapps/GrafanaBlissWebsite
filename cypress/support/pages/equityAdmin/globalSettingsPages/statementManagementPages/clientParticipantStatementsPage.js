@@ -150,6 +150,10 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
         cy.get(selectors.rerunBtn).click()
         break
 
+      case 'approve':
+        cy.get(selectors.approveBtn).click()
+        break
+
       default:
         throw new Error('Parameter actionToPerform is invalid')
     }

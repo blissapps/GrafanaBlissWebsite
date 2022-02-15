@@ -346,7 +346,18 @@ class BaseManagementPage extends BasePage {
     displayed ? cy.get(selectors.viewOnlyStatusBadge).should('be.visible') : cy.get(selectors.viewOnlyStatusBadge).should('not.exist')
   }
 
-  // ----------------------------------------------- OTHERS --------------------------------------------- //
+  /**
+   * Assert if the name of the entity in the header is editable or not over the UI
+   *
+   * @param {boolean} editable True to assert the entity name is editable, false otherwise
+   */
+  assertEntityNameEditable(editable) {
+    this.getEntityHeader().as('input')
+
+    editable ? cy.get('@input').should('not.have.class', 'disabled**') : cy.get('@input').should('have.class', 'disabled**')
+  }
+
+  // ----------------------------------------------------------------- OTHERS ------------------------------------------------------------- //
 
   /**
    * This method has the exactly implementation of the method getEntityHeader()

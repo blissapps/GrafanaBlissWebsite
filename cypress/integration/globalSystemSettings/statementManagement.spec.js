@@ -901,17 +901,25 @@ describe('Statement Management tests', () => {
   })
 
   /**
-   * Filter a client with participants and Check search with participant name, id and status with a variety of combination, such as
-   * nameXid, name vs date, id vs date, name vs id vs date.. (USE TomTom)
-   *
-   * missing @IDS
+   * @missing_data Clients statements with Pending Validation status and with participants with Pending Validation status inside it.
    */
+  it.skip('C15166057_Verify bulk approval when selecting multiple participants with an "On Hold" status in Statement Management', () => {
+    const clientPendingValidation = 'Renesas'
+    const clientPendingValidationId = 688
+    const participantsPendingValidationIds = [546452, 546400]
 
-  /**
-   * Reconcile a client - cancel the reconciliation
-   */
+    equityAdmin.clientStatementsPage.filterClientStatements(clientPendingValidation)
+    equityAdmin.clientStatementsPage.clickClientTable(clientPendingValidationId)
 
-  /**
-   * Reconcile a client - Successfully
-   */
+    // On Hold participants
+    equityAdmin.clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantsPendingValidationIds[0])
+    equityAdmin.clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantsPendingValidationIds[1])
+    equityAdmin.clientParticipantStatementsPage.clickInTableHeaderToPerformActions('on hold', participantsPendingValidationIds.length)
+    equityAdmin.clientParticipantStatementsPage.assertToastNotificationMessageIsDisplayed('Success', true, true)
+
+    // Approve participants
+    equityAdmin.clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantsPendingValidationIds[0])
+    equityAdmin.clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantsPendingValidationIds[1])
+    equityAdmin.clientParticipantStatementsPage.clickInTableHeaderToPerformActions('Approve', participantsPendingValidationIds.length)
+  })
 })

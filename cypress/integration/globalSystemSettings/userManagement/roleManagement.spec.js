@@ -138,7 +138,7 @@ describe('Role Management tests over User Management settings', () => {
       equityAdmin.roleManagementPage.assertActiveRolesAreDisplayed()
 
       equityAdmin.applicationLeftMenuBar.clickLogoToGoToHomePage()
-      cy.visit('/tenant/1/settings/role-management', { failOnStatusCode: false })
+      equityAdmin.homePage.navigateToUrl('/tenant/1/settings/role-management')
       equityAdmin.roleManagementPage.checkPageUrl()
       equityAdmin.roleManagementPage.assertActiveRolesAreDisplayed()
     })
@@ -492,7 +492,7 @@ describe('Role Management tests over User Management settings', () => {
       equityAdmin.roleManagementPage.assertToastNotificationMessageIsDisplayed('Role deactivated', true, true)
       equityAdmin.roleManagementPage.assertInactiveRolesAreDisplayed()
       equityAdmin.roleManagementPage.assertEntityIsDisplayedInTheList(roleName)
-      equityAdmin.roleManagementPage.assertRoleIsEditable(false) // go inside to complete the method as soon as PB-963 gets done
+      equityAdmin.roleManagementPage.assertRoleIsEditable(false)
 
       // Activate role
       cy.log('Activate role')
@@ -599,8 +599,20 @@ describe('Role Management tests over User Management settings', () => {
 
       equityAdmin.roleManagementPage.clickRoleById(roleId)
       equityAdmin.roleManagementPage.assertThreeDotButtonDisplayed(false)
-      cy.visit(';action=duplicate', { failOnStatusCode: false })
+      equityAdmin.roleManagementPage.addPathToUrlAndVisitIt(';action=duplicate')
       // missing step to validate the user was not redirect to any ;action=duplicate panel and so the panel to duplicate the role is not displayed (waiting for PB-975)
+    })
+
+    /**
+     * @missing_data Need to have a user with view only access to roles
+     *
+     * SKIPPING due to https://globalshares.atlassian.net/browse/PB-963
+     */
+    it.skip('C15166080_View Only Role name text field must not be editable', () => {
+      const roleId = 1475
+
+      equityAdmin.roleManagementPage.clickRoleById(roleId)
+      equityAdmin.roleManagementPage.assertEntityNameEditable(false)
     })
   })
 

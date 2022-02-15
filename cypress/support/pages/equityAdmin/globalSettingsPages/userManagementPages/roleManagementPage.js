@@ -301,10 +301,10 @@ class RoleManagementPage extends BaseManagementPage {
    *
    * @param {boolean} editable True to assert the role is editable, false otherwise
    *
-   * TODO: @missing_steps Validate the header(role name) as well as soon as this ticket is ready: https://globalshares.atlassian.net/browse/PB-963
    */
   assertRoleIsEditable(editable = true) {
     // header not editable
+    editable ? this.assertEntityNameEditable(true) : this.assertEntityNameEditable(false)
 
     // table not editable
     editable ? cy.get(selectors.roleTableNotEditable).should('not.exist') : cy.get(selectors.roleTableNotEditable).should('be.visible')

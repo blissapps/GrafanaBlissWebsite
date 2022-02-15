@@ -240,7 +240,7 @@ class BasePage {
   // -----------------------------------------------------------------------------------  OTHERS ---------------------------------------------------------------------------- //
 
   /**
-   * Clear filters in a search by pressing in the "Clear All Filters" button
+   * Clear filters in a search by pressing in the "Clear All Filters" button when available in the UI
    *
    */
   clearAllFilters() {
@@ -279,7 +279,19 @@ class BasePage {
   }
 
   /**
-   * Get the current URL and add in the end of the current path. Then, visit this new url.
+   * Navigate to an URL
+   *
+   * @param {string} url url to navigate. If you have a baseUrl defined in the cypress.json file, just send the endpoint instead of the entire URL.
+   *
+   * @example
+   * baseURL is https://ea-v3.myglobalshares.co.uk/, just send something like /client/431/people
+   */
+  navigateToUrl(url) {
+    cy.visit(url, { failOnStatusCode: false })
+  }
+
+  /**
+   * Get the current URL and add a text (urlPathToAdd) in the end of the current path. Then, visit this new url.
    *
    * @param {string} urlPathToAdd text to be added as a path in the end of the current url
    *
