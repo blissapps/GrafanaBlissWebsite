@@ -11,12 +11,6 @@ describe('User Management tests over User Management settings', () => {
 
   // ************************************************ TESTS AS ADMIN TENANT ************************************************** //
 
-  it('C7405960_User_Check_Behavior_When_Closing_The_Settings', () => {
-    equityAdmin.userManagementPage.checkPageUrl()
-    equityAdmin.settingsMenuNavBar.closeGlobalSettingsNavBar()
-    equityAdmin.userManagementPage.checkPageUrl()
-  })
-
   /**
    * @missing_data We need to make sure about the current total of clients that has the same userEmail
    */

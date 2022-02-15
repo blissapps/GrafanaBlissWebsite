@@ -34,6 +34,7 @@ import TaxAndCommissionPage from './equityAdmin/clientPeoplePages/peopleParticip
 // Others
 import LoginPage from './equityAdmin/loginPage'
 import HomePage from './equityAdmin/homePage'
+import UnauthorizedPage from './equityAdmin/unauthorizedPage'
 
 /**
  * This is the main class the encapsulates all pages regarding the Equity Admin portal (Except base pages since they are not meant to be directly called).
@@ -80,6 +81,7 @@ class EquityAdmin {
     this.loginPage = new LoginPage()
     this.clientPeoplePage = new ClientPeoplePage()
     this.homePage = new HomePage()
+    this.unauthorizedPage = new UnauthorizedPage()
   }
 }
 

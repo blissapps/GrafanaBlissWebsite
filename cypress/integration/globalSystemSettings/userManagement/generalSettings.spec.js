@@ -3,6 +3,19 @@ import EquityAdmin from '../../../support/pages/equityAdmin'
 describe('User Management settings - User, Group, Role, and DAP', () => {
   const equityAdmin = new EquityAdmin()
 
+  context('Standard User', () => {
+    beforeEach(() => {
+      equityAdmin.loginPage.login()
+    })
+
+    it('C7405960_User_Check_Behavior_When_Closing_The_Settings', () => {
+      equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'user')
+      equityAdmin.userManagementPage.checkPageUrl()
+      equityAdmin.settingsMenuNavBar.closeGlobalSettingsNavBar()
+      equityAdmin.userManagementPage.checkPageUrl()
+    })
+  })
+
   context('View Only User', () => {
     beforeEach(() => {
       equityAdmin.loginPage.login(Cypress.env('VIEW_ONLY_USER_2_AUTH'))
@@ -40,19 +53,19 @@ describe('User Management settings - User, Group, Role, and DAP', () => {
       // Group
       equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'group')
       equityAdmin.groupManagementPage.checkPageUrl()
-      cy.forcedWait(1000)
+      cy.forcedWait(1000) // Needs to wait to the UI to reload
       equityAdmin.groupManagementPage.assertCreateNewGroupButtonDisplayed(false)
 
       // Role
       equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'role', false)
       equityAdmin.roleManagementPage.checkPageUrl()
-      cy.forcedWait(1000)
+      cy.forcedWait(1000) // Needs to wait to the UI to reload
       equityAdmin.roleManagementPage.assertCreateNewRoleButtonDisplayed(false)
 
       // DAP
       equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'dap', false)
       equityAdmin.dapManagementPage.checkPageUrl()
-      cy.forcedWait(1000)
+      cy.forcedWait(1000) // Needs to wait to the UI to reload
       equityAdmin.dapManagementPage.assertCreateNewDapButtonDisplayed(false)
     })
 
@@ -63,6 +76,26 @@ describe('User Management settings - User, Group, Role, and DAP', () => {
       equityAdmin.applicationLeftMenuBar.openSettingsMenuBar()
       equityAdmin.settingsMenuNavBar.assertGlobalSettingsMenuOpen()
       equityAdmin.settingsMenuNavBar.assertUserManagementMenuDisplayed(false)
+
+      // User Management tentative access
+      equityAdmin.homePage.navigateToUrl('/tenant/1/settings/user-management')
+      equityAdmin.unauthorizedPage.checkPageUrl()
+      equityAdmin.unauthorizedPage.assertYouAreRestrictedToAccessMessageIsDisplayed('Unfortunately, you are restricted to access this page.')
+
+      // Group Management tentative access
+      equityAdmin.homePage.navigateToUrl('/tenant/1/settings/group-management')
+      equityAdmin.unauthorizedPage.checkPageUrl()
+      equityAdmin.unauthorizedPage.assertYouAreRestrictedToAccessMessageIsDisplayed('Unfortunately, you are restricted to access this page.')
+
+      // Role Management tentative access
+      equityAdmin.homePage.navigateToUrl('/tenant/1/settings/role-management')
+      equityAdmin.unauthorizedPage.checkPageUrl()
+      equityAdmin.unauthorizedPage.assertYouAreRestrictedToAccessMessageIsDisplayed('Unfortunately, you are restricted to access this page.')
+
+      // Data Access Profiles tentative access
+      equityAdmin.homePage.navigateToUrl('/tenant/1/settings/dap-management')
+      equityAdmin.unauthorizedPage.checkPageUrl()
+      equityAdmin.unauthorizedPage.assertYouAreRestrictedToAccessMessageIsDisplayed('Unfortunately, you are restricted to access this page.')
     })
   })
 })
