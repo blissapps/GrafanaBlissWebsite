@@ -18,7 +18,6 @@ describe('User Management tests over User Management settings', () => {
     const username = 'amulcahyNE'
     const userEmail = 'test@globalshares.com'
     const userStatus = 'Active'
-    equityAdmin.userManagementPage.checkPageUrl() // Check this to make sure we are getting the correct search input in the correct page
 
     cy.log('EMAIL')
     equityAdmin.searchEngine.search(userEmail)
@@ -56,8 +55,6 @@ describe('User Management tests over User Management settings', () => {
     const organization = 'Global Shares'
     const phone = '99123'
 
-    equityAdmin.userManagementPage.checkPageUrl() // Check we are getting the correct search input in the correct page
-
     equityAdmin.searchEngine.search(username, 500)
     equityAdmin.userManagementPage.clickUserTable(userId)
 
@@ -68,32 +65,43 @@ describe('User Management tests over User Management settings', () => {
   })
 
   it('C7592117_Users_No_Users_Match_Search', () => {
-    equityAdmin.userManagementPage.checkPageUrl() // Check we are getting the correct search input in the correct page
-
     equityAdmin.searchEngine.search('test_empty_state')
     equityAdmin.userManagementPage.assertNoUserMsgIdDisplayed()
   })
 
   it('C7592119_User_pastes_SQL_Code_Into_The_Search_Box', () => {
-    equityAdmin.userManagementPage.checkPageUrl() // Check we are getting the correct search input in the correct page
-
     equityAdmin.searchEngine.search('SELECT * FROM users')
     equityAdmin.userManagementPage.assertNoUserMsgIdDisplayed()
   })
 
-  // Verify USER DETAIL container data when picking a user from the Participants table
+  /**
+   * @missing_data Need to have the exactly same users registered in order to validate this load behavior
+   */
+  it.skip('C7353827_List User - Lazy Load Test', () => {
+    const usersIdListToCheckLoading = [454295, 941741, 454300, 941765, 836495]
 
-  // Go to user management, pick a user, then User Info flow, check information over there, as well as the if the 'back button' is working
+    equityAdmin.userManagementPage.interceptUsersLoadingRequest()
 
-  //  ************** TESTS BELLOW MODIFY DATA DEFINITELY ***************
+    // eoindeasyNE
+    equityAdmin.userManagementPage.getUserInTable(usersIdListToCheckLoading[0])
+    cy.forcedWait(500) // The UI takes a time to load, so this wait is really necessary
 
-  // Go to user management, pick a user, then Reset Password flow
+    // jachas@globalshares.com
+    equityAdmin.userManagementPage.getUserInTable(usersIdListToCheckLoading[1])
+    cy.forcedWait(500) // The UI takes a time to load, so this wait is really necessary
+    equityAdmin.userManagementPage.waitForUsersLoadingRequest()
 
-  // Go to user management, pick a user, then Reset MFA flow
+    // mpurcellNE
+    equityAdmin.userManagementPage.getUserInTable(usersIdListToCheckLoading[2])
+    cy.forcedWait(500) // The UI takes a time to load, so this wait is really necessary
+    equityAdmin.userManagementPage.waitForUsersLoadingRequest()
 
-  // Go to user management, pick a user, check password Reset Required behavior
+    // Piotr Litwinski
+    equityAdmin.userManagementPage.getUserInTable(usersIdListToCheckLoading[3])
+    cy.forcedWait(500) // The UI takes a time to load, so this wait is really necessary
 
-  // Go to user management, pick a user, check unlock account behavior
-
-  // ************************************************ TESTS AS CLIENTS ************************************************** //
+    // ZoeLewis_NE - Last User in the table
+    equityAdmin.userManagementPage.getUserInTable(usersIdListToCheckLoading[4])
+    equityAdmin.userManagementPage.assertUserIsVisibleOnTable(usersIdListToCheckLoading[4])
+  })
 })

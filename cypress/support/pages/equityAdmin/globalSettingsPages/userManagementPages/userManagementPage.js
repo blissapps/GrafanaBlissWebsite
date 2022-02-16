@@ -38,6 +38,10 @@ const userInfoNavBarSelectors = {
   AccountDetailsUsername: '#accountDetailsUsername input'
 }
 
+const apiInterceptions = {
+  usersLoading: '/api/Users?**'
+}
+
 class UserManagementPage extends BaseManagementPage {
   /**
    * Checks if the current page is the one in properties.pageURL
@@ -55,8 +59,11 @@ class UserManagementPage extends BaseManagementPage {
    *
    * @example send userId = 454292 to select this user from the table
    */
-  getUserTable(userId) {
-    return cy.get(selectors.user + userId).first()
+  getUserInTable(userId) {
+    return cy
+      .get(selectors.user + userId + ' gs-grid-cell')
+      .first()
+      .scrollIntoView()
   }
 
   getNoUserMessage() {
@@ -72,7 +79,7 @@ class UserManagementPage extends BaseManagementPage {
    *
    */
   clickUserTable(userId) {
-    this.getUserTable(userId).click('left')
+    this.getUserInTable(userId).click('left')
   }
 
   /**
@@ -83,6 +90,16 @@ class UserManagementPage extends BaseManagementPage {
   }
 
   // --------------------------------------- ASSERTIONS AND OTHERS --------------------------------------------- //
+
+  /**
+   * Assert if a given user is visible in the table of Users
+   *
+   * @param {number} userId user id to validate its visibility
+   * @param {boolean} displayed True is the default value to see if the user is visible. Send false to validate the contrary
+   */
+  assertUserIsVisibleOnTable(userId, displayed = true) {
+    displayed ? this.getUserInTable(userId).should('be.visible') : this.getUserInTable(userId).should('not.be.visible')
+  }
 
   /**
    * Assert the msg about empty user state is visible or not
@@ -208,6 +225,22 @@ class UserManagementPage extends BaseManagementPage {
     if (username != '') {
       cy.get(userInfoNavBarSelectors.AccountDetailsUsername).should('have.value', username)
     }
+  }
+
+  // -----------------------------------------------------------------------------------------  INTERCEPTIONS ------------------------------------------------------------------------------ //
+
+  /**
+   * Intercept the usersLoading request located in the object apiInterceptions. You need to user the method waitForUsersToBeLoaded to wait for this interception
+   */
+  interceptUsersLoadingRequest() {
+    cy.intercept('GET', apiInterceptions.usersLoading).as('waitsUsersToBeLoaded')
+  }
+
+  /**
+   * This method waits for the interception in the interceptUsersLoadingRequest method
+   */
+  waitForUsersLoadingRequest() {
+    cy.wait('@waitsUsersToBeLoaded', { timeout: 5000 })
   }
 }
 

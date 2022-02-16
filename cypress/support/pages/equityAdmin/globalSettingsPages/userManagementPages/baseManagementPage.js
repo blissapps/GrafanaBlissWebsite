@@ -262,7 +262,7 @@ class BaseManagementPage extends BasePage {
   }
 
   /**
-   * Assert a entity is displayed under the entity list. Entities are 'roles', 'daps', or 'groups'
+   * Assert a entity is displayed under the entity list. Entities can be 'roles', 'daps', or 'groups' (not applied for users)
    *
    * @param {string} entityName Entity name
    * @param {boolean} displayed True is the default to assert the entity is displayed. False otherwise.
