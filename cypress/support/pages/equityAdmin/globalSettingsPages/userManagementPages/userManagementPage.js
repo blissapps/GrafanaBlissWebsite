@@ -7,7 +7,7 @@ const properties = {
 const selectors = {
   numberOfSearchResultsInTable: '#recordCount span',
   user: '#user-',
-  noUserMsg: '#noUsersMsg'
+  noUserExistsMessage: '#noUsersMsg'
 }
 
 // These selectors are the ones from the l4 nav bar (right nav bar)
@@ -66,10 +66,6 @@ class UserManagementPage extends BaseManagementPage {
       .scrollIntoView()
   }
 
-  getNoUserMessage() {
-    return cy.get(selectors.noUserMsg)
-  }
-
   // --------------------------------------- CLICKS --------------------------------------------- //
 
   /**
@@ -102,16 +98,12 @@ class UserManagementPage extends BaseManagementPage {
   }
 
   /**
-   * Assert the msg about empty user state is visible or not
+   * Assert if the message informing that "There are no users" is displayed or not.
    *
-   * @param {boolean} visible True to check if the state is visible, false otherwise
+   * @param {boolean} displayed True to check if the empty state message is visible, false otherwise
    */
-  assertNoUserMsgIdDisplayed(visible = true) {
-    if (visible) {
-      this.getNoUserMessage().should('be.visible')
-    } else {
-      this.getNoUserMessage().should('not.exist')
-    }
+  assertNoUserExistsMessageIsDisplayed(displayed = true) {
+    displayed ? cy.get(selectors.noUserExistsMessage).should('be.visible') : cy.get(selectors.noUserExistsMessage).should('not.exist')
   }
 
   /**
@@ -234,6 +226,15 @@ class UserManagementPage extends BaseManagementPage {
    */
   interceptUsersLoadingRequest() {
     cy.intercept('GET', apiInterceptions.usersLoading).as('waitsUsersToBeLoaded')
+  }
+
+  /**
+   * Intercept the usersLoading request located in the object apiInterceptions and mock the data with a given fixture file.
+   *
+   * @param {string} fixtureFile name or path for the fixture file located inside the fixtures folder
+   */
+  interceptAndMockUsersLoadingRequest(fixtureFile) {
+    cy.intercept('GET', apiInterceptions.usersLoading, { fixture: fixtureFile }).as('emptyUserList')
   }
 
   /**

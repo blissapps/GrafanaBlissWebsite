@@ -1,8 +1,8 @@
 import EquityAdmin from '../../../support/pages/equityAdmin'
 
-describe('User Management tests over User Management settings', () => {
-  const equityAdmin = new EquityAdmin()
+const equityAdmin = new EquityAdmin()
 
+describe('User Management tests over User Management settings', () => {
   beforeEach(() => {
     equityAdmin.loginPage.login()
     equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'user')
@@ -66,12 +66,12 @@ describe('User Management tests over User Management settings', () => {
 
   it('C7592117_Users_No_Users_Match_Search', () => {
     equityAdmin.searchEngine.search('test_empty_state')
-    equityAdmin.userManagementPage.assertNoUserMsgIdDisplayed()
+    equityAdmin.userManagementPage.assertNoUserExistsMessageIsDisplayed()
   })
 
   it('C7592119_User_pastes_SQL_Code_Into_The_Search_Box', () => {
     equityAdmin.searchEngine.search('SELECT * FROM users')
-    equityAdmin.userManagementPage.assertNoUserMsgIdDisplayed()
+    equityAdmin.userManagementPage.assertNoUserExistsMessageIsDisplayed()
   })
 
   /**
@@ -103,5 +103,20 @@ describe('User Management tests over User Management settings', () => {
     // ZoeLewis_NE - Last User in the table
     equityAdmin.userManagementPage.getUserInTable(usersIdListToCheckLoading[4])
     equityAdmin.userManagementPage.assertUserIsVisibleOnTable(usersIdListToCheckLoading[4])
+  })
+})
+
+describe('More User Management tests', () => {
+  beforeEach(() => {
+    equityAdmin.loginPage.login()
+    equityAdmin.userManagementPage.interceptAndMockUsersLoadingRequest('usersManagement_EmptyUserList.json')
+    equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'user')
+    equityAdmin.userManagementPage.checkPageUrl()
+  })
+
+  context('Mocked data tests', () => {
+    it('C7353828_List User - Empty State)', () => {
+      equityAdmin.userManagementPage.assertNoUserExistsMessageIsDisplayed()
+    })
   })
 })

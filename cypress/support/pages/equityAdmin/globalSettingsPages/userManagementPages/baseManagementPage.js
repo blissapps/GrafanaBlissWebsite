@@ -8,7 +8,7 @@ const selectors = {
   otherGroupList: 'gs-list[data-test-id=searchListing-other]',
   otherItem: '#otherItem_',
   noResultsFound: '#emptyRecordCount',
-  noRecordsFoundEmptyState: 'gs-empty-container .content > div',
+  noRecordsFoundEmptyState: 'gs-empty-container[data-test-id="list-empty-container"] .content > div',
   entityNameInput: 'gs-input-inline[data-test-id=name-input]',
   saveBtn: 'gs-button[data-test-id=save-button]',
   discardBtn: 'gs-button[data-test-id=discard-button]',
