@@ -1,10 +1,10 @@
 import EquityAdmin from '../../support/pages/equityAdmin'
 import Utils from '../../support/utils'
 
-describe('Statement Management tests', () => {
-  const equityAdmin = new EquityAdmin()
-  const utils = new Utils()
+const equityAdmin = new EquityAdmin()
+const utils = new Utils()
 
+describe('Statement Management tests', () => {
   beforeEach(() => {
     equityAdmin.loginPage.login()
     equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('statement')

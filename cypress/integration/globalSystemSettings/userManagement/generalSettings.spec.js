@@ -1,8 +1,8 @@
 import EquityAdmin from '../../../support/pages/equityAdmin'
 
-describe('User Management settings - User, Group, Role, and DAP', () => {
-  const equityAdmin = new EquityAdmin()
+const equityAdmin = new EquityAdmin()
 
+describe('User Management settings - User, Group, Role, and DAP', () => {
   context('Standard User', () => {
     beforeEach(() => {
       equityAdmin.loginPage.login()

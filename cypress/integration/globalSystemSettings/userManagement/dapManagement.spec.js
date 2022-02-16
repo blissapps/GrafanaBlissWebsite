@@ -1,10 +1,10 @@
 import EquityAdmin from '../../../support/pages/equityAdmin'
 import Utils from '../../../support/utils'
 
-describe('Data Access Profiles tests over User Management settings', () => {
-  const equityAdmin = new EquityAdmin()
-  const utils = new Utils()
+const equityAdmin = new EquityAdmin()
+const utils = new Utils()
 
+describe('Data Access Profiles tests over User Management settings', () => {
   context('Default user', () => {
     beforeEach(() => {
       equityAdmin.loginPage.login()
@@ -435,19 +435,19 @@ describe('Data Access Profiles tests over User Management settings', () => {
       equityAdmin.searchEngine.search(dap)
       equityAdmin.dapManagementPage.assertAmountOfSearchResultsInTheList(3)
       equityAdmin.dapManagementPage.assertSearchResultListAccuracy(dapIds)
-      equityAdmin.dapManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
+      equityAdmin.dapManagementPage.assertAllSearchResultItemsAreDisplayedInHighlightedMode()
 
       dap = 'dap to search'
       equityAdmin.searchEngine.search(dap)
       equityAdmin.dapManagementPage.assertAmountOfSearchResultsInTheList(3)
       equityAdmin.dapManagementPage.assertSearchResultListAccuracy(dapIds)
-      equityAdmin.dapManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
+      equityAdmin.dapManagementPage.assertAllSearchResultItemsAreDisplayedInHighlightedMode()
 
       dap = 'dAp To SEarch 1'
       equityAdmin.searchEngine.search(dap)
       equityAdmin.dapManagementPage.assertAmountOfSearchResultsInTheList(1)
       equityAdmin.dapManagementPage.assertSearchResultListAccuracy([dapIds[0]])
-      equityAdmin.dapManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
+      equityAdmin.dapManagementPage.assertAllSearchResultItemsAreDisplayedInHighlightedMode()
 
       dap = 'randomName' + utils.getRandomNumber()
       equityAdmin.searchEngine.search(dap)
@@ -470,19 +470,19 @@ describe('Data Access Profiles tests over User Management settings', () => {
       equityAdmin.searchEngine.search(dap)
       equityAdmin.dapManagementPage.assertAmountOfSearchResultsInTheList(3)
       equityAdmin.dapManagementPage.assertSearchResultListAccuracy(dapInactiveIds)
-      equityAdmin.dapManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
+      equityAdmin.dapManagementPage.assertAllSearchResultItemsAreDisplayedInHighlightedMode()
 
       dap = 'dap to search'
       equityAdmin.searchEngine.search(dap)
       equityAdmin.dapManagementPage.assertAmountOfSearchResultsInTheList(3)
       equityAdmin.dapManagementPage.assertSearchResultListAccuracy(dapInactiveIds)
-      equityAdmin.dapManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
+      equityAdmin.dapManagementPage.assertAllSearchResultItemsAreDisplayedInHighlightedMode()
 
       dap = 'dAp To SEarch 4'
       equityAdmin.searchEngine.search(dap)
       equityAdmin.dapManagementPage.assertAmountOfSearchResultsInTheList(1)
       equityAdmin.dapManagementPage.assertSearchResultListAccuracy([dapInactiveIds[0]])
-      equityAdmin.dapManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
+      equityAdmin.dapManagementPage.assertAllSearchResultItemsAreDisplayedInHighlightedMode()
 
       dap = 'randomName'
       equityAdmin.searchEngine.search(dap)

@@ -304,7 +304,7 @@ class BaseManagementPage extends BasePage {
    * Assert a search result is being highlighted displayed. It usually happens after searching for it in the search bar
    *
    */
-  assertAllSearchResultItensAreDisplayedInHighlightedMode() {
+  assertAllSearchResultItemsAreDisplayedInHighlightedMode() {
     cy.get(selectors.searchResultAllItemsHighlighted).each(($el) => {
       cy.wrap($el).should('be.visible')
     })

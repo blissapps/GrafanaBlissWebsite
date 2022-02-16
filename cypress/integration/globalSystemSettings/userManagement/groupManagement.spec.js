@@ -1,10 +1,10 @@
 import EquityAdmin from '../../../support/pages/equityAdmin'
 import Utils from '../../../support/utils'
 
-describe('Group Management tests over User Management settings', () => {
-  const equityAdmin = new EquityAdmin()
-  const utils = new Utils()
+const equityAdmin = new EquityAdmin()
+const utils = new Utils()
 
+describe('Group Management tests over User Management settings', () => {
   context('Default User', () => {
     beforeEach(() => {
       equityAdmin.loginPage.login()
@@ -37,21 +37,21 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertAmountOfSearchResultsInTheList(1)
       equityAdmin.groupManagementPage.assertSearchResultListAccuracy(groupsIdActiveTab)
       equityAdmin.groupManagementPage.assertOtherGroupListDisplayed()
-      equityAdmin.groupManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
+      equityAdmin.groupManagementPage.assertAllSearchResultItemsAreDisplayedInHighlightedMode()
 
       group = 'global'
       equityAdmin.searchEngine.search(group)
       equityAdmin.groupManagementPage.assertAmountOfSearchResultsInTheList(1)
       equityAdmin.groupManagementPage.assertSearchResultListAccuracy(groupsIdActiveTab)
       equityAdmin.groupManagementPage.assertOtherGroupListDisplayed()
-      equityAdmin.groupManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
+      equityAdmin.groupManagementPage.assertAllSearchResultItemsAreDisplayedInHighlightedMode()
 
       group = 'GLObal'
       equityAdmin.searchEngine.search(group)
       equityAdmin.groupManagementPage.assertAmountOfSearchResultsInTheList(1)
       equityAdmin.groupManagementPage.assertSearchResultListAccuracy(groupsIdActiveTab)
       equityAdmin.groupManagementPage.assertOtherGroupListDisplayed()
-      equityAdmin.groupManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
+      equityAdmin.groupManagementPage.assertAllSearchResultItemsAreDisplayedInHighlightedMode()
 
       group = 'randomName'
       equityAdmin.searchEngine.search(group)
@@ -71,21 +71,21 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertAmountOfSearchResultsInTheList(2)
       equityAdmin.groupManagementPage.assertSearchResultListAccuracy(groupsIdInactiveTab)
       equityAdmin.groupManagementPage.assertOtherGroupListDisplayed()
-      equityAdmin.groupManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
+      equityAdmin.groupManagementPage.assertAllSearchResultItemsAreDisplayedInHighlightedMode()
 
       group = 'abc'
       equityAdmin.searchEngine.search(group)
       equityAdmin.groupManagementPage.assertAmountOfSearchResultsInTheList(2)
       equityAdmin.groupManagementPage.assertSearchResultListAccuracy(groupsIdInactiveTab)
       equityAdmin.groupManagementPage.assertOtherGroupListDisplayed()
-      equityAdmin.groupManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
+      equityAdmin.groupManagementPage.assertAllSearchResultItemsAreDisplayedInHighlightedMode()
 
       group = 'AbC'
       equityAdmin.searchEngine.search(group)
       equityAdmin.groupManagementPage.assertAmountOfSearchResultsInTheList(2)
       equityAdmin.groupManagementPage.assertSearchResultListAccuracy(groupsIdInactiveTab)
       equityAdmin.groupManagementPage.assertOtherGroupListDisplayed()
-      equityAdmin.groupManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
+      equityAdmin.groupManagementPage.assertAllSearchResultItemsAreDisplayedInHighlightedMode()
 
       group = 'randomName'
       equityAdmin.searchEngine.search(group)
@@ -310,7 +310,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userIds[0])
       equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userIds[1])
 
-      // Validates user 1 is linked to the group over User Management settings
+      // Validates user 1 is linked to the group over User Management settings - L4 page
       equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'user', false)
       equityAdmin.searchEngine.search(userName[0], 500)
       equityAdmin.userManagementPage.clickUserTable(userIds[0])
@@ -318,7 +318,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.userManagementPage.assertUserInfoContentInRightNavBar([groupName])
       equityAdmin.userManagementPage.clickOutsideToCloseL4RightBar()
 
-      // Validates user 2 is linked to the group over User Management settings
+      // Validates user 2 is linked to the group over User Management settings - L4 page
       equityAdmin.searchEngine.search(userName[1])
       equityAdmin.userManagementPage.clickUserTable(userIds[1])
       equityAdmin.userManagementPage.clickLinkToAccessUserInfoDetailsOnRightNavBar()
@@ -693,5 +693,3 @@ describe('Group Management tests over User Management settings', () => {
     })
   })
 })
-
-// ************************************************ TESTS AS CLIENTS ************************************************** //

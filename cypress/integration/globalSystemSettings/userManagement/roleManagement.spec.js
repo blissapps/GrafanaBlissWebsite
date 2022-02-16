@@ -1,10 +1,10 @@
 import EquityAdmin from '../../../support/pages/equityAdmin'
 import Utils from '../../../support/utils'
 
-describe('Role Management tests over User Management settings', () => {
-  const equityAdmin = new EquityAdmin()
-  const utils = new Utils()
+const equityAdmin = new EquityAdmin()
+const utils = new Utils()
 
+describe('Role Management tests over User Management settings', () => {
   context('Default User', () => {
     beforeEach(() => {
       equityAdmin.loginPage.login()
@@ -34,21 +34,21 @@ describe('Role Management tests over User Management settings', () => {
       equityAdmin.roleManagementPage.assertAmountOfSearchResultsInTheList(3)
       equityAdmin.roleManagementPage.assertSearchResultListAccuracy(rolesIdActiveTab)
       equityAdmin.roleManagementPage.assertOtherGroupListDisplayed()
-      equityAdmin.roleManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
+      equityAdmin.roleManagementPage.assertAllSearchResultItemsAreDisplayedInHighlightedMode()
 
       role = 'ROLE TO BE SEARCHED'
       equityAdmin.searchEngine.search(role)
       equityAdmin.roleManagementPage.assertAmountOfSearchResultsInTheList(3)
       equityAdmin.roleManagementPage.assertSearchResultListAccuracy(rolesIdActiveTab)
       equityAdmin.roleManagementPage.assertOtherGroupListDisplayed()
-      equityAdmin.roleManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
+      equityAdmin.roleManagementPage.assertAllSearchResultItemsAreDisplayedInHighlightedMode()
 
       role = 'role To Be searchEd'
       equityAdmin.searchEngine.search(role)
       equityAdmin.roleManagementPage.assertAmountOfSearchResultsInTheList(3)
       equityAdmin.roleManagementPage.assertSearchResultListAccuracy(rolesIdActiveTab)
       equityAdmin.roleManagementPage.assertOtherGroupListDisplayed()
-      equityAdmin.roleManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
+      equityAdmin.roleManagementPage.assertAllSearchResultItemsAreDisplayedInHighlightedMode()
 
       role = 'randomName'
       equityAdmin.searchEngine.search(role)
@@ -68,21 +68,21 @@ describe('Role Management tests over User Management settings', () => {
       equityAdmin.roleManagementPage.assertAmountOfSearchResultsInTheList(2)
       equityAdmin.roleManagementPage.assertSearchResultListAccuracy(rolesIdInactiveTab)
       equityAdmin.roleManagementPage.assertOtherGroupListDisplayed()
-      equityAdmin.roleManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
+      equityAdmin.roleManagementPage.assertAllSearchResultItemsAreDisplayedInHighlightedMode()
 
       role = 'zzz'
       equityAdmin.searchEngine.search(role)
       equityAdmin.roleManagementPage.assertAmountOfSearchResultsInTheList(2)
       equityAdmin.roleManagementPage.assertSearchResultListAccuracy(rolesIdInactiveTab)
       equityAdmin.roleManagementPage.assertOtherGroupListDisplayed()
-      equityAdmin.roleManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
+      equityAdmin.roleManagementPage.assertAllSearchResultItemsAreDisplayedInHighlightedMode()
 
       role = 'ZzZ'
       equityAdmin.searchEngine.search(role)
       equityAdmin.roleManagementPage.assertAmountOfSearchResultsInTheList(2)
       equityAdmin.roleManagementPage.assertSearchResultListAccuracy(rolesIdInactiveTab)
       equityAdmin.roleManagementPage.assertOtherGroupListDisplayed()
-      equityAdmin.roleManagementPage.assertAllSearchResultItensAreDisplayedInHighlightedMode()
+      equityAdmin.roleManagementPage.assertAllSearchResultItemsAreDisplayedInHighlightedMode()
 
       role = 'randomName'
       equityAdmin.searchEngine.search(role)

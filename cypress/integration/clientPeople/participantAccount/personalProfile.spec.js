@@ -1,8 +1,8 @@
 import EquityAdmin from '../../../support/pages/equityAdmin'
 
-describe('Personal profile tests for Participants', () => {
-  const equityAdmin = new EquityAdmin()
+const equityAdmin = new EquityAdmin()
 
+describe('Personal profile tests for Participants', () => {
   beforeEach(() => {
     equityAdmin.loginPage.login()
   })

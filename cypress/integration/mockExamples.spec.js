@@ -1,8 +1,8 @@
 import EquityAdmin from '../support/pages/equityAdmin'
 
-describe.skip('Mock examples tests', () => {
-  const equityAdmin = new EquityAdmin()
+const equityAdmin = new EquityAdmin()
 
+describe.skip('Mock examples tests', () => {
   beforeEach(() => {
     equityAdmin.loginPage.login()
   })

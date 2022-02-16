@@ -1,8 +1,8 @@
 import EquityAdmin from '../../support/pages/equityAdmin'
 
-describe('Preferences tests', () => {
-  const equityAdmin = new EquityAdmin()
+const equityAdmin = new EquityAdmin()
 
+describe('Preferences tests', () => {
   beforeEach(() => {
     equityAdmin.loginPage.login()
     equityAdmin.applicationLeftMenuBar.openProfileMenuBar()

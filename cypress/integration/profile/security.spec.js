@@ -1,8 +1,8 @@
 import EquityAdmin from '../../support/pages/equityAdmin'
 
-describe('Security tests', () => {
-  const equityAdmin = new EquityAdmin()
+const equityAdmin = new EquityAdmin()
 
+describe('Security tests', () => {
   beforeEach(() => {
     equityAdmin.loginPage.login()
     equityAdmin.applicationLeftMenuBar.openProfileMenuBar()
