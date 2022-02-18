@@ -58,10 +58,14 @@ describe('User Management tests over User Management settings', () => {
     equityAdmin.searchEngine.search(username, 500)
     equityAdmin.userManagementPage.clickUserTable(userId)
 
-    equityAdmin.userManagementPage.assertRightL4BarIsDisplayed()
-    equityAdmin.userManagementPage.assertUserDetailContentInRightNavBar(publicName, username, status, email)
-    equityAdmin.userManagementPage.clickLinkToAccessUserInfoDetailsOnRightNavBar()
-    equityAdmin.userManagementPage.assertUserInfoContentInRightNavBar(groups, firstName, lastName, publicName, jobTitle, qualifications, organization, phone, email, username)
+    equityAdmin.userDetailL4Page.assertRightL4BarIsDisplayed()
+    equityAdmin.userDetailL4Page.checkPageUrl()
+    equityAdmin.userDetailL4Page.assertUserDetailContent(publicName, username, status, email)
+    equityAdmin.userDetailL4Page.clickToAccessUserInfoDetails()
+    equityAdmin.userInfoL4Page.assertGroupsDisplayed(groups)
+    equityAdmin.userInfoL4Page.assertPersonalDataContent(firstName, lastName, publicName, jobTitle, qualifications, organization)
+    equityAdmin.userInfoL4Page.assertContactDataContent(phone, email)
+    equityAdmin.userInfoL4Page.assertAccountDetailsDataContent(username)
   })
 
   it('C7592117_Users_No_Users_Match_Search', () => {

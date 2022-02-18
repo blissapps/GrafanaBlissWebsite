@@ -131,7 +131,7 @@ class BasePage {
   }
 
   /**
-   * Assert the right nav bar (L4) is displayed
+   * Assert a right nav bar (L4) is displayed
    *
    * @param {boolean} displayed True to assert the L4 is displayed. False otherwise
    */

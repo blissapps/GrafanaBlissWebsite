@@ -16,6 +16,8 @@ import DapManagementPage from './equityAdmin/globalSettingsPages/userManagementP
 import GroupManagementPage from './equityAdmin/globalSettingsPages/userManagementPages/groupManagementPage'
 import RoleManagementPage from './equityAdmin/globalSettingsPages/userManagementPages/roleManagementPage'
 import UserManagementPage from './equityAdmin/globalSettingsPages/userManagementPages/userManagementPage'
+import UserDetailL4Page from './equityAdmin/globalSettingsPages/userManagementPages/userDetailL4Page'
+import UserInfoL4Page from './equityAdmin/globalSettingsPages/userManagementPages/userInfoL4Page'
 
 // Profile
 import PersonalInformationPage from './equityAdmin/profilePages/personalInformationPage'
@@ -63,6 +65,8 @@ class EquityAdmin {
     this.groupManagementPage = new GroupManagementPage()
     this.roleManagementPage = new RoleManagementPage()
     this.userManagementPage = new UserManagementPage()
+    this.userDetailL4Page = new UserDetailL4Page()
+    this.userInfoL4Page = new UserInfoL4Page()
 
     // Profile
     this.personalInformationPage = new PersonalInformationPage()

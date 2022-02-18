@@ -314,15 +314,41 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'user', false)
       equityAdmin.searchEngine.search(userName[0], 500)
       equityAdmin.userManagementPage.clickUserTable(userIds[0])
-      equityAdmin.userManagementPage.clickLinkToAccessUserInfoDetailsOnRightNavBar()
-      equityAdmin.userManagementPage.assertUserInfoContentInRightNavBar([groupName])
-      equityAdmin.userManagementPage.clickOutsideToCloseL4RightBar()
+      equityAdmin.userDetailL4Page.clickToAccessUserInfoDetails()
+      equityAdmin.userInfoL4Page.assertGroupsDisplayed([groupName])
+      equityAdmin.userInfoL4Page.clickOutsideToCloseL4RightBar()
 
       // Validates user 2 is linked to the group over User Management settings - L4 page
       equityAdmin.searchEngine.search(userName[1])
       equityAdmin.userManagementPage.clickUserTable(userIds[1])
-      equityAdmin.userManagementPage.clickLinkToAccessUserInfoDetailsOnRightNavBar()
-      equityAdmin.userManagementPage.assertUserInfoContentInRightNavBar([groupName])
+      equityAdmin.userDetailL4Page.clickToAccessUserInfoDetails()
+      equityAdmin.userInfoL4Page.assertGroupsDisplayed([groupName])
+    })
+
+    /**
+     * @missing_data Need to have a group with one user associated with it. This user should has the total max of 2 or 3 groups associated with it (So we don't need to click in showAll)
+     */
+    it.skip('C15256021_Delete a user from the group', () => {
+      const groupId = 1136
+      const groupName = ['Remove user']
+      const userName = 'dfonsecaNE'
+      const userId = 454293
+
+      // Remove user from group
+      equityAdmin.groupManagementPage.clickGroupById(groupId)
+      equityAdmin.groupManagementPage.removeUsersFromGroup([userId])
+      equityAdmin.groupManagementPage.saveEntityInformation()
+      equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved', true, true)
+
+      // Validates user is NOT linked to the group over User Management settings - L4 page
+      equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'user', false)
+      equityAdmin.searchEngine.search(userName)
+      equityAdmin.userManagementPage.clickUserTable(userId)
+      equityAdmin.userDetailL4Page.clickToAccessUserInfoDetails()
+
+      // Validates in the userInfoL4Page
+      equityAdmin.userInfoL4Page.checkPageUrl()
+      equityAdmin.userInfoL4Page.assertGroupsDisplayed(groupName, false)
     })
 
     /**

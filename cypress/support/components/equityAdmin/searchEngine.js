@@ -11,9 +11,9 @@ class SearchEngine extends BasePage {
    * Search bar
    *
    * @param {any} textToSearch Param to search in the search bar
-   * @param {number} delay Delay in milliseconds to wait. Sometimes, there are no XHR requests to intercept, so it is necessary to have a quick delay after using the search engine.
+   * @param {number} waitTime Delay in milliseconds to wait. Sometimes, there are no XHR requests to intercept, so it is necessary to have a quick delay after using the search engine.
    */
-  search(textToSearch, delay = 500) {
+  search(textToSearch, waitTime = 500) {
     cy.log('SEARCHING FOR ' + textToSearch)
     this.clearSearchBox()
 
@@ -21,14 +21,14 @@ class SearchEngine extends BasePage {
     cy.get('@inputBar').type(textToSearch)
     cy.get(selectors.searchClientButton).click()
 
-    cy.forcedWait(delay)
+    cy.forcedWait(waitTime)
   }
 
   /**
    * Clear the search bar content.
    */
   clearSearchBox() {
-    cy.get(selectors.inputBar).clear()
+    cy.get(selectors.inputBar).clear({ force: true })
     // cy.get(selectors.inputBar).type('{selectall}{backspace}{selectall}{backspace}')
   }
 
