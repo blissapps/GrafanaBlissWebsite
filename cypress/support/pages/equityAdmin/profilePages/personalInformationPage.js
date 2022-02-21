@@ -44,9 +44,4 @@ class PersonalInformationPage extends BasePage {
   }
 }
 
-/**
- * @needs_refactoring
- * create method to click in the save button when available
- */
-
 export default PersonalInformationPage

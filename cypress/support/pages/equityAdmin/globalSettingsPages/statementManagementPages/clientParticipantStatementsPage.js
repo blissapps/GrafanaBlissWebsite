@@ -228,12 +228,9 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
   /**
    * Assert the recall button is available for a given participant
    *
-   *
    * @param {number} participantId The participant id to check if the recall button is available for it
    * @param {boolean} displayed True to assert the recall button is displayed. False, otherwise.
    *
-   *
-   * @missing_ids
    */
   assertRecallButtonDisplayedForParticipant(participantId, displayed = true) {
     displayed
@@ -254,8 +251,6 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
    * @param {number} participantId The participant id to check if the approve button is available for it
    * @param {boolean} displayed True to assert the approve button is displayed. False, otherwise.
    *
-   *
-   * @missing_ids
    */
   assertApproveButtonDisplayedForParticipant(participantId, displayed = true) {
     displayed

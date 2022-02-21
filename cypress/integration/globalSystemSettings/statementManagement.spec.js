@@ -61,7 +61,7 @@ describe('Statement Management tests', () => {
   /**
    * ! @firefox_limited because Firefox does not save the downloaded file in the default cypress download folder:
    * * It works only in the pipeline with Linux machines. You will face an issue (running this test locally.) while this issue is not resolved by the Cypress team.
-   * * Issue open in https://github.com/cypress-io/cypress/issues/17896
+   * * Issue raised in https://github.com/cypress-io/cypress/issues/17896
    *
    * @missing_data Client with "Pending Validation", PUBLISHED, or PARTIALLY PUBLISHED statement
    */
@@ -112,9 +112,6 @@ describe('Statement Management tests', () => {
     equityAdmin.clientStatementsPage.assertAmountOfRecordsTable(3)
   })
 
-  /**
-   * ! @chrome_only https://globalshares.atlassian.net/browse/GDP-49661
-   */
   it('C7353834_Filter_To_Check_Empty_State', () => {
     const clientName = 'None'
     const yesterdayDate = utils.getDateInFutureOrPast(-1, 0, 0, 'YYYY/MM/DD').join()
@@ -329,7 +326,7 @@ describe('Statement Management tests', () => {
    * * It works only in the pipeline with Linux machines. You will face an issue (running this test locally.) while this issue is not resolved by the Cypress team.
    * * Issue open in https://github.com/cypress-io/cypress/issues/17896
    *
-   * * SKIPPED because this test will have a different behavior
+   * * SKIPPED because this test will have a different behavior in upcoming stories
    *
    */
   it.skip('C7395183_download_PDF_File_From_Participant', () => {

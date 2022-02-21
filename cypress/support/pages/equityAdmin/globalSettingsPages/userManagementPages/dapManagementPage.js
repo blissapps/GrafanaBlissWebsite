@@ -169,14 +169,11 @@ class DapManagementPage extends BaseManagementPage {
   }
 
   /**
-   * @missing_ids
-   * @needs_refactoring
-   *
    * Assert the value of a condition element
    *
    * @param {number} elementPosition The element position of the 'div.conditions input' locator
    * @param {string} conditionValue The value to assert in the elementPosition
-   * @param {boolean} displayed Send to false to assert the condition does not exists or if it was removed
+   * @param {boolean} displayed True is the default value to assert the condition does exist. Send false to assert the condition does not exists or if it was removed.
    *
    * @example
    * assertConditionValue(1, 'Client id') to assert the element 'div.conditions input' in position 1 is equal to  'Client id'
@@ -310,9 +307,6 @@ class DapManagementPage extends BaseManagementPage {
   }
 
   /**
-   * @missing_ids
-   * @needs_refactoring
-   *
    * Modifies conditions of a select dap
    * The method gets a array of selectors based on 'div.conditions input', so it is necessary to send the element position to be used in the eq() filter
    *
