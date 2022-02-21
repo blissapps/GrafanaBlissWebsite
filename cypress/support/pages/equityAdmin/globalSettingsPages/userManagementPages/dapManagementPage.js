@@ -1,4 +1,8 @@
 import BaseManagementPage from './baseManagementPage'
+import SelectSettingsL4Page from './selectSettingsL4Page'
+
+// Pages used
+const selectSettingsL4Page = new SelectSettingsL4Page()
 
 const properties = {
   pageURL: '/settings/dap-management'
@@ -283,7 +287,8 @@ class DapManagementPage extends BaseManagementPage {
    */
   addGroupsToDap(groupNames, groupIds) {
     cy.get(selectors.addGroupsBtn).scrollIntoView().click()
-    this.addEntitiesInTheRightNavBar('group', groupNames, groupIds)
+    selectSettingsL4Page.selectSettings('group', groupNames, groupIds)
+    selectSettingsL4Page.clickToConfirmTheSelections()
   }
 
   /**

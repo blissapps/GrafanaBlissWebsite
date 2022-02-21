@@ -7,17 +7,19 @@ import SettingsMenuNavBar from '../components/equityAdmin/settingsMenuNavBar'
 
 // ----------------------------------------------------------------Pages -----------------------------------------------------------//
 // Statement Management
-import ClientParticipantStatementsPage from './equityAdmin/globalSettingsPages/statementManagementPages/clientParticipantStatementsPage'
 import ClientStatementsPage from './equityAdmin/globalSettingsPages/statementManagementPages/clientStatementsPage'
+import ClientParticipantStatementsPage from './equityAdmin/globalSettingsPages/statementManagementPages/clientParticipantStatementsPage'
 import ParticipantRegulatoryLinkagePage from './equityAdmin/globalSettingsPages/statementManagementPages/participantRegulatoryLinkagePage'
+import ClientParticipantStatementDetailL4Page from './equityAdmin/globalSettingsPages/statementManagementPages/clientParticipantStatementDetailL4Page'
 
-// User Management
+// User Management - Settings
 import DapManagementPage from './equityAdmin/globalSettingsPages/userManagementPages/dapManagementPage'
 import GroupManagementPage from './equityAdmin/globalSettingsPages/userManagementPages/groupManagementPage'
 import RoleManagementPage from './equityAdmin/globalSettingsPages/userManagementPages/roleManagementPage'
 import UserManagementPage from './equityAdmin/globalSettingsPages/userManagementPages/userManagementPage'
 import UserDetailL4Page from './equityAdmin/globalSettingsPages/userManagementPages/userDetailL4Page'
 import UserInfoL4Page from './equityAdmin/globalSettingsPages/userManagementPages/userInfoL4Page'
+import SelectSettingsL4Page from './equityAdmin/globalSettingsPages/userManagementPages/selectSettingsL4Page'
 
 // Profile
 import PersonalInformationPage from './equityAdmin/profilePages/personalInformationPage'
@@ -26,6 +28,7 @@ import SecurityPage from './equityAdmin/profilePages/securityPage'
 
 // People Participants
 import ClientPeoplePage from './equityAdmin/clientPeoplePages/clientPeoplePage'
+import QuickEditParticipantDetailL4Page from './equityAdmin/clientPeoplePages/quickEditParticipantDetailL4Page'
 import PersonalProfileOverviewPage from './equityAdmin/clientPeoplePages/peopleParticipantPages/personalProfilePages/personalProfileOverviewPage'
 import PersonalProfileAddressAndContactPage from './equityAdmin/clientPeoplePages/peopleParticipantPages/personalProfilePages/personalProfileAddressAndContactPage'
 import CompanyProfileOverviewPage from './equityAdmin/clientPeoplePages/peopleParticipantPages/companyProfilePages/companyProfileOverviewPage'
@@ -56,24 +59,28 @@ class EquityAdmin {
 
     // --------------------------------------------------------------------------------Pages ----------------------------------------------------------------------//
     // Statement Management
-    this.clientParticipantStatementsPage = new ClientParticipantStatementsPage()
     this.clientStatementsPage = new ClientStatementsPage()
+    this.clientParticipantStatementsPage = new ClientParticipantStatementsPage()
     this.participantRegulatoryLinkagePage = new ParticipantRegulatoryLinkagePage()
+    this.clientParticipantStatementDetailL4Page = new ClientParticipantStatementDetailL4Page()
 
-    // User Management
+    // User Management - Settings
     this.dapManagementPage = new DapManagementPage()
     this.groupManagementPage = new GroupManagementPage()
     this.roleManagementPage = new RoleManagementPage()
     this.userManagementPage = new UserManagementPage()
     this.userDetailL4Page = new UserDetailL4Page()
     this.userInfoL4Page = new UserInfoL4Page()
+    this.selectSettingsL4Page = new SelectSettingsL4Page()
 
     // Profile
     this.personalInformationPage = new PersonalInformationPage()
     this.preferencesPage = new PreferencesPage()
     this.securityPage = new SecurityPage()
 
-    // People
+    // People - Client and Participants
+    this.clientPeoplePage = new ClientPeoplePage()
+    this.quickEditParticipantDetailL4Page = new QuickEditParticipantDetailL4Page()
     this.personalProfileOverviewPage = new PersonalProfileOverviewPage()
     this.personalProfileAddressAndContactPage = new PersonalProfileAddressAndContactPage()
     this.companyProfileOverviewPage = new CompanyProfileOverviewPage()
@@ -83,7 +90,6 @@ class EquityAdmin {
 
     // Others
     this.loginPage = new LoginPage()
-    this.clientPeoplePage = new ClientPeoplePage()
     this.homePage = new HomePage()
     this.unauthorizedPage = new UnauthorizedPage()
   }

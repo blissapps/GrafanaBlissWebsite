@@ -95,7 +95,7 @@ describe('Participants tests', () => {
 
     equityAdmin.homePage.selectClientById(clientId)
     equityAdmin.clientPeoplePage.clickParticipantById(participantId)
-    equityAdmin.clientPeoplePage.assertParticipantDetailContent(participantName, participantCountry, participantStatus)
+    equityAdmin.quickEditParticipantDetailL4Page.assertParticipantDetailContent(participantName, participantCountry, participantStatus)
   })
 
   it('C15166048_Not possible to navigate to participants page when there is no client selected', () => {

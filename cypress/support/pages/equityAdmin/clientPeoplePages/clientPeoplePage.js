@@ -20,16 +20,7 @@ const selectors = {
   editActionButton: '*[id*=cdk-overlay-] gs-action-panel-option:nth-child(1)'
 }
 
-const quickEditNavBarSelectors = {
-  editIconButton: '#quickEditEditPpt',
-  participantDetailTitle: '#quickEditHeader',
-  participantDetailName: '#quickEditPptName',
-  participantDetailCountry: '.participant-country',
-  participantDetailStatus: '.participant-status',
-  quickActionPanelIcon: '#quickEditActionPanel'
-}
-
-class EquityClientPeoplePage extends BasePage {
+class ClientPeoplePage extends BasePage {
   /**
    * Checks if the current page is the one in properties.pageURL
    */
@@ -159,20 +150,6 @@ class EquityClientPeoplePage extends BasePage {
   }
 
   /**
-   * Verify if the data displayed in Participant Detail container (right menu bar after clicking in a participant) is correct
-   *
-   * @param {string} name participant name
-   * @param {string} country participant country
-   * @param {string} status participant status
-   */
-  assertParticipantDetailContent(name, country, status) {
-    cy.get(quickEditNavBarSelectors.participantDetailTitle).should('be.visible')
-    cy.get(quickEditNavBarSelectors.participantDetailName).contains(name)
-    cy.get(quickEditNavBarSelectors.participantDetailCountry).contains(country)
-    cy.get(quickEditNavBarSelectors.participantDetailStatus).contains(status)
-  }
-
-  /**
    * Assert the name of the current client. It is located in the top left, right after the GS logo
    *
    * @param {string} clientName Client name to be verified
@@ -193,4 +170,4 @@ class EquityClientPeoplePage extends BasePage {
   // -------------------------------------------------------------------------- OTHERS ------------------------------------------------------------------------- //
 }
 
-export default EquityClientPeoplePage
+export default ClientPeoplePage

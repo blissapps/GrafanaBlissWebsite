@@ -656,7 +656,7 @@ describe('Statement Management tests', () => {
     // On Hold
     equityAdmin.clientParticipantStatementsPage.clickOnParticipant(participantOnHoldId)
     equityAdmin.clientParticipantStatementsPage.assertRightL4BarIsDisplayed()
-    equityAdmin.clientParticipantStatementsPage.assertParticipantStatementDetailsOnL4Bar(
+    equityAdmin.clientParticipantStatementDetailL4Page.assertParticipantStatementDetails(
       participantOnHoldName,
       participantOnHoldAsOfDate,
       participantOnHoldCurrentStatus,

@@ -1,4 +1,8 @@
 import BaseManagementPage from './baseManagementPage'
+import SelectSettingsL4Page from './selectSettingsL4Page'
+
+// Pages used
+const selectSettingsL4Page = new SelectSettingsL4Page()
 
 const properties = {
   pageURL: '/settings/group-management'
@@ -423,7 +427,8 @@ class GroupManagementPage extends BaseManagementPage {
    */
   selectRoleToGroup(roleName, roleId) {
     cy.get(selectors.selectRoleBtn).click()
-    this.addEntitiesInTheRightNavBar('role', [roleName], [roleId])
+    selectSettingsL4Page.selectSettings('role', [roleName], [roleId])
+    selectSettingsL4Page.clickToConfirmTheSelections()
   }
 
   /**
@@ -438,7 +443,8 @@ class GroupManagementPage extends BaseManagementPage {
    */
   addDapsToGroup(dapNames, dapIds) {
     cy.get(selectors.addDAPBtn).click()
-    this.addEntitiesInTheRightNavBar('dap', dapNames, dapIds)
+    selectSettingsL4Page.selectSettings('dap', dapNames, dapIds)
+    selectSettingsL4Page.clickToConfirmTheSelections()
   }
 
   /**
@@ -453,7 +459,8 @@ class GroupManagementPage extends BaseManagementPage {
    */
   addUsersToGroup(userNames, userIds) {
     cy.get(selectors.addUsersBtn).click()
-    this.addEntitiesInTheRightNavBar('user', userNames, userIds)
+    selectSettingsL4Page.selectSettings('user', userNames, userIds)
+    selectSettingsL4Page.clickToConfirmTheSelections()
   }
 
   /**
@@ -468,7 +475,8 @@ class GroupManagementPage extends BaseManagementPage {
    */
   addCompaniesToGroup(companyNames, companyIds) {
     cy.get(selectors.addCompaniesBtn).click()
-    this.addEntitiesInTheRightNavBar('client', companyNames, companyIds)
+    selectSettingsL4Page.selectSettings('client', companyNames, companyIds)
+    selectSettingsL4Page.clickToConfirmTheSelections()
   }
 
   /**
