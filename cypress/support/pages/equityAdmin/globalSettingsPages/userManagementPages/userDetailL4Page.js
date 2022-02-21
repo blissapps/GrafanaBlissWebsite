@@ -26,7 +26,7 @@ class UserDetailL4Page extends BaseManagementPage {
     this.checkUrlByRegex(properties.pageURL)
   }
 
-  // --------------------------------------- CLICKS --------------------------------------------- //
+  // -------------------------------------------------------------------------- CLICKS --------------------------------------------------------------------------------- //
 
   /**
    * Click in the '>' link button to access User Info details inside the right nav bar (L4)
@@ -35,7 +35,7 @@ class UserDetailL4Page extends BaseManagementPage {
     cy.get(selectors.userInfoButtonAccess).click()
   }
 
-  // --------------------------------------- ASSERTIONS  --------------------------------------------- //
+  // --------------------------------------------------------------------------- ASSERTIONS  ----------------------------------------------------------------------------- //
 
   /**
    * Verify if the data displayed in User Detail container is correct

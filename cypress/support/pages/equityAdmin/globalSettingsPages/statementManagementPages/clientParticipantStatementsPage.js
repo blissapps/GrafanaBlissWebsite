@@ -60,7 +60,7 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
     this.checkUrlByRegex(properties.pageURL)
   }
 
-  // ------------------------------------------------------------------------------------------------ CLICKS --------------------------------------------------------------------------------------- //
+  // -------------------------------------------------------------------------------------- CLICKS --------------------------------------------------------------------------------- //
 
   /**
    * Click in the summary button to download a csv file for a client
@@ -385,7 +385,7 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
     cy.get(selectors.clientStatusBadge).should('contain.text', statusName)
   }
 
-  // -------------------------------------------------------------------------------------------- OTHERS ------------------------------------------------------------------------------------------- //
+  // -------------------------------------------------------------------------------- OTHERS ----------------------------------------------------------------------------- //
 
   /**
    * Filter for a participant in the participants table
@@ -426,7 +426,7 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
     cy.forcedWait(800) // Necessary to avoid any errors regarding the table being reloaded in the UI.
   }
 
-  // -----------------------------------------------------------------------------------------  INTERCEPTIONS ------------------------------------------------------------------------------ //
+  // --------------------------------------------------------------------------------  INTERCEPTIONS ----------------------------------------------------------------------- //
 
   /**
    * This method waits until the table in reloaded after filtering something in filter statements.

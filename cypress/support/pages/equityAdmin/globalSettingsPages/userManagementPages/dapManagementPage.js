@@ -46,7 +46,7 @@ class DapManagementPage extends BaseManagementPage {
     this.checkUrl(properties.pageURL)
   }
 
-  // ----------------------------------------------- GETS --------------------------------------------- //
+  // -------------------------------------------------------------------------------------- GETS ------------------------------------------------------------------------------- //
 
   /**
    * Get a DAP by sending the DAP ID.
@@ -59,7 +59,7 @@ class DapManagementPage extends BaseManagementPage {
     return cy.get(selectors.dapId + dapId).scrollIntoView()
   }
 
-  // ----------------------------------------------- CLICKS --------------------------------------------- //
+  // -------------------------------------------------------------------------------------- CLICKS --------------------------------------------------------------------------- //
 
   /**
    * Click in a DAP by sending the DAP ID.
@@ -68,7 +68,7 @@ class DapManagementPage extends BaseManagementPage {
    */
   clickDapById(dapId) {
     this.getDapById(dapId).click()
-    this.scrollToTop()
+    this.scrollToEntityTop()
   }
 
   clickCreateNewDap() {
@@ -76,7 +76,7 @@ class DapManagementPage extends BaseManagementPage {
     cy.get('@createNewDapButton').click()
   }
 
-  // ----------------------------------------------- ASSERTS --------------------------------------------- //
+  // ----------------------------------------------------------------------------------- ASSERTIONS -------------------------------------------------------------------------- //
 
   /**
    * Assert the button (therefore the permission) to create a new DAP is displayed over the UI
@@ -269,7 +269,7 @@ class DapManagementPage extends BaseManagementPage {
     this.assertElementsInAlphabeticalOrder(selectors.dapsDisplayed)
   }
 
-  // ----------------------------------------------- OTHERS --------------------------------------------- //
+  // ---------------------------------------------------------------------------------- OTHERS -------------------------------------------------------------------------------- //
 
   /**
    * Add Groups to a selected DAP

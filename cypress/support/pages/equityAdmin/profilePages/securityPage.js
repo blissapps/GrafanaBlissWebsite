@@ -18,6 +18,8 @@ class SecurityPage extends BasePage {
     this.checkUrl(properties.pageURL)
   }
 
+  // --------------------------------------------------------------------------------  OTHERS ----------------------------------------------------------------------- //
+
   /**
    * Change the password in Profile Security page
    *

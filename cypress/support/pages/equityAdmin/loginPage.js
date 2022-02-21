@@ -51,7 +51,7 @@ class LoginPage extends BasePage {
     cy.get(selectors.loginButton).click()
   }
 
-  // --------------------------------------- ASSERTIONS  --------------------------------------------- //
+  // ----------------------------------------------------------------------------- ASSERTIONS  ----------------------------------------------------------------------------------- //
 
   /**
    * Assert the error message is displayed when a unsuccessful login is made for an valid email

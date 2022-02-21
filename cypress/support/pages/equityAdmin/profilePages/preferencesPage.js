@@ -19,6 +19,8 @@ class PreferencesPage extends BasePage {
     this.checkUrl(properties.pageURL)
   }
 
+  // --------------------------------------------------------------------------------  OTHERS ----------------------------------------------------------------------- //
+
   /**
    *
    * @param {string} language language name to change.

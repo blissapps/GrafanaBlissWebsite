@@ -29,7 +29,7 @@ class HomePage extends BasePage {
     this.checkUrl(Cypress.env('HOME_PAGE_URL'))
   }
 
-  // --------------------------------------- GETS --------------------------------------------- //
+  // ------------------------------------------------------------------------------ GETS ---------------------------------------------------------------------------------- //
 
   /**
    * Get client from the cards list
@@ -40,7 +40,7 @@ class HomePage extends BasePage {
     return cy.get(`${selectors.clientCard}${clientId}`)
   }
 
-  // --------------------------------- ASSERTIONS ----------------------------------- //
+  // ----------------------------------------------------------------------------- ASSERTIONS ---------------------------------------------------------------------------- //
 
   /**
    *
@@ -99,7 +99,14 @@ class HomePage extends BasePage {
     )
   }
 
-  // ------------------------------------- OTHERS----------------------------------- //
+  /**
+   * Check if the client list is correctly organized in the home page
+   */
+  assertCompaniesAreOrdered() {
+    this.assertElementsInAlphabeticalOrder(selectors.groupSections)
+  }
+
+  // ------------------------------------------------------------------------------------ OTHERS------------------------------------------------------------------------------ //
 
   /**
    * Search for a client by ID
@@ -163,13 +170,6 @@ class HomePage extends BasePage {
       default:
         throw new Error('The Group by option' + groupBy + ' is not valid, please fix it!')
     }
-  }
-
-  /**
-   * Check if the client list is correctly organized in the home page
-   */
-  assertCompaniesAreOrdered() {
-    this.assertElementsInAlphabeticalOrder(selectors.groupSections)
   }
 }
 

@@ -1,11 +1,11 @@
-// ---------------------- Components --------------------------//
+// ------------------------------------------------------------- Components -------------------------------------------------------//
 import ClientSwitchMenu from '../components/equityAdmin/clientSwitchMenu'
 import ApplicationLeftMenuBar from '../components/equityAdmin/applicationLeftMenuBar'
 import ProfileMenuNavBar from '../components/equityAdmin/profileMenuNavBar'
 import SearchEngine from '../components/equityAdmin/searchEngine'
 import SettingsMenuNavBar from '../components/equityAdmin/settingsMenuNavBar'
 
-// --------------------------Pages ----------------------------//
+// ----------------------------------------------------------------Pages -----------------------------------------------------------//
 // Statement Management
 import ClientParticipantStatementsPage from './equityAdmin/globalSettingsPages/statementManagementPages/clientParticipantStatementsPage'
 import ClientStatementsPage from './equityAdmin/globalSettingsPages/statementManagementPages/clientStatementsPage'
@@ -47,14 +47,14 @@ import UnauthorizedPage from './equityAdmin/unauthorizedPage'
  */
 class EquityAdmin {
   constructor() {
-    // ---------------------- Components --------------------------//
+    // -------------------------------------------------------------------------- Components --------------------------------------------------------------------//
     this.clientSwitchMenu = new ClientSwitchMenu()
     this.applicationLeftMenuBar = new ApplicationLeftMenuBar()
     this.profileMenuNavBar = new ProfileMenuNavBar()
     this.searchEngine = new SearchEngine()
     this.settingsMenuNavBar = new SettingsMenuNavBar()
 
-    // --------------------------Pages ----------------------------//
+    // --------------------------------------------------------------------------------Pages ----------------------------------------------------------------------//
     // Statement Management
     this.clientParticipantStatementsPage = new ClientParticipantStatementsPage()
     this.clientStatementsPage = new ClientStatementsPage()

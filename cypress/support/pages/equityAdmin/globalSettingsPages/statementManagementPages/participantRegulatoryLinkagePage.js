@@ -24,7 +24,7 @@ class ParticipantRegulatoryLinkagePage extends BaseStatementManagementPage {
     this.checkUrl(properties.pageURL)
   }
 
-  // --------------------------------------- ASSERTIONS AND OTHERS --------------------------------------------- //
+  // ------------------------------------------------------------------------ OTHERS ---------------------------------------------------------------------------------- //
 
   /**
    * Filter data from participant regulatory linkage
@@ -78,11 +78,10 @@ class ParticipantRegulatoryLinkagePage extends BaseStatementManagementPage {
         })
     }
 
-    // Angular is taking more time than expected to render elements. So, even using intercept, it is not sufficient and we need to add this explicity waiting.
-    cy.forcedWait(850)
+    cy.forcedWait(850) // Angular is taking more time than expected to render elements. So, even using intercept, it is not sufficient and we need to add this explicity waiting.
   }
 
-  // ---------------------------------------  INTERCEPTIONS --------------------------------------------- //
+  // ----------------------------------------------------------------------------  INTERCEPTIONS ------------------------------------------------------------------------------- //
 
   /**
    * This method will wait until a XHR request, that brings all statements after filtering, is reloaded

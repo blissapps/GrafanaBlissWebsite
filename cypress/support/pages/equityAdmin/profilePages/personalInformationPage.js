@@ -18,6 +18,8 @@ class PersonalInformationPage extends BasePage {
     this.checkUrl(properties.pageURL)
   }
 
+  // --------------------------------------------------------------------------------  OTHERS ----------------------------------------------------------------------- //
+
   /**
    * Edit personal info
    * @param {string} name Name to replace the current name
@@ -40,8 +42,11 @@ class PersonalInformationPage extends BasePage {
       cy.get(selectors.emailInput).type(email)
     }
   }
-
-  // put the save button in here when available
 }
+
+/**
+ * @needs_refactoring
+ * create method to click in the save button when available
+ */
 
 export default PersonalInformationPage

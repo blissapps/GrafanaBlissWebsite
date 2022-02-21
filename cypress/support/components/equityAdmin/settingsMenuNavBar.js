@@ -20,7 +20,7 @@ const globalSettingsMenuSelectors = {
 const applicationLeftMenuNavBar = new ApplicationLeftMenuBar()
 
 class SettingsMenuNavBar extends BasePage {
-  // --------------------------------------- CLICKS  --------------------------------------------- //
+  // -------------------------------------------------------------------------------------- CLICKS  ----------------------------------------------------------------------------- //
 
   /**
    * Click in the client switch button located in the bottom of the settings menu bar (It goes to the clientSwitchMenu.js component)
@@ -32,7 +32,7 @@ class SettingsMenuNavBar extends BasePage {
     cy.get(selectors.clientSwitchButton).click()
   }
 
-  // --------------------------------------- ASSERTIONS  --------------------------------------------- //
+  // ---------------------------------------------------------------------------------- ASSERTIONS  ------------------------------------------------------------------------- //
 
   /**
    * Check if the Settings Menu Nav Bar is open
@@ -83,7 +83,7 @@ class SettingsMenuNavBar extends BasePage {
       : cy.get(globalSettingsMenuSelectors.roleManagementSubMenuItem).should('not.exist')
   }
 
-  // --------------------------------------- OTHERS  --------------------------------------------- //
+  // -------------------------------------------------------------------------------------------- OTHERS  --------------------------------------------------------------------- //
 
   /**
    * Navigation menu

@@ -51,6 +51,69 @@ class CompanyProfileOverviewPage extends BasePeopleParticipantPage {
     this.checkUrl(properties.pageURL)
   }
 
+  // --------------------------------------------------------------------------- ASSERTIONS  ----------------------------------------------------------------------------- //
+  /**
+   * Assert if an error message is displayed for a field in the company page
+   *
+   * @param {string} inputFieldName Input field name to validate if there is an error message for it
+   * @param {string} errorMessage  Send the error message text in case you want to validate the content of the message. Send nothing to not validate the content
+   * @param {boolean} displayed True to validate if the error message is displayed, and false for otherwise
+   */
+  assertErrorMessageIsDisplayedInCompanyFields(inputFieldName, errorMessage = '', displayed = true) {
+    inputFieldName = inputFieldName.toLowerCase()
+
+    switch (inputFieldName) {
+      case 'department':
+        this.assertErrorMessageDisplayedInParticipantField(selectors.departmentField, errorMessage, displayed)
+        break
+
+      case 'section':
+        this.assertErrorMessageDisplayedInParticipantField(selectors.sectionField, errorMessage, displayed)
+        break
+
+      case 'branch':
+        this.assertErrorMessageDisplayedInParticipantField(selectors.branchField, errorMessage, displayed)
+        break
+
+      case 'business unit':
+        this.assertErrorMessageDisplayedInParticipantField(selectors.businessUnitField, errorMessage, displayed)
+        break
+
+      case 'company location':
+        this.assertErrorMessageDisplayedInParticipantField(selectors.companyLocationField, errorMessage, displayed)
+        break
+
+      case 'company code':
+        this.assertErrorMessageDisplayedInParticipantField(selectors.companyCodeField, errorMessage, displayed)
+        break
+
+      case 'subsidiary name':
+        this.assertErrorMessageDisplayedInParticipantField(selectors.subsidiaryNameField, errorMessage, displayed)
+        break
+
+      case 'subsidiary code':
+        this.assertErrorMessageDisplayedInParticipantField(selectors.subsidiaryCodeField, errorMessage, displayed)
+        break
+
+      case 'billing code':
+        this.assertErrorMessageDisplayedInParticipantField(selectors.billingCodeField, errorMessage, displayed)
+        break
+
+      case 'job title':
+        this.assertErrorMessageDisplayedInParticipantField(selectors.jobTitleField, errorMessage, displayed)
+        break
+
+      case 'broker officer code':
+        this.assertErrorMessageDisplayedInParticipantField(selectors.brokerOfficerCodeField, errorMessage, displayed)
+        break
+
+      default:
+        throw new Error('Option invalid for the input name: ' + inputFieldName + ' Please, try again!')
+    }
+  }
+
+  // --------------------------------------------------------------------------- OTHERS  ----------------------------------------------------------------------------- //
+
   /**
    * Fill out the company info of a participant in the Company Overview page
    *
@@ -231,66 +294,6 @@ class CompanyProfileOverviewPage extends BasePeopleParticipantPage {
     // OSA
     if (OSA) {
       cy.get(selectors.OSACheckbox).click()
-    }
-  }
-
-  /**
-   * Assert if an error message is displayed for a field in the company page
-   *
-   * @param {string} inputFieldName Input field name to validate if there is an error message for it
-   * @param {string} errorMessage  Send the error message text in case you want to validate the content of the message. Send nothing to not validate the content
-   * @param {boolean} displayed True to validate if the error message is displayed, and false for otherwise
-   */
-  assertErrorMessageIsDisplayedInCompanyFields(inputFieldName, errorMessage = '', displayed = true) {
-    inputFieldName = inputFieldName.toLowerCase()
-
-    switch (inputFieldName) {
-      case 'department':
-        this.assertErrorMessageDisplayedInParticipantField(selectors.departmentField, errorMessage, displayed)
-        break
-
-      case 'section':
-        this.assertErrorMessageDisplayedInParticipantField(selectors.sectionField, errorMessage, displayed)
-        break
-
-      case 'branch':
-        this.assertErrorMessageDisplayedInParticipantField(selectors.branchField, errorMessage, displayed)
-        break
-
-      case 'business unit':
-        this.assertErrorMessageDisplayedInParticipantField(selectors.businessUnitField, errorMessage, displayed)
-        break
-
-      case 'company location':
-        this.assertErrorMessageDisplayedInParticipantField(selectors.companyLocationField, errorMessage, displayed)
-        break
-
-      case 'company code':
-        this.assertErrorMessageDisplayedInParticipantField(selectors.companyCodeField, errorMessage, displayed)
-        break
-
-      case 'subsidiary name':
-        this.assertErrorMessageDisplayedInParticipantField(selectors.subsidiaryNameField, errorMessage, displayed)
-        break
-
-      case 'subsidiary code':
-        this.assertErrorMessageDisplayedInParticipantField(selectors.subsidiaryCodeField, errorMessage, displayed)
-        break
-
-      case 'billing code':
-        this.assertErrorMessageDisplayedInParticipantField(selectors.billingCodeField, errorMessage, displayed)
-        break
-
-      case 'job title':
-        this.assertErrorMessageDisplayedInParticipantField(selectors.jobTitleField, errorMessage, displayed)
-        break
-
-      case 'broker officer code':
-        this.assertErrorMessageDisplayedInParticipantField(selectors.brokerOfficerCodeField, errorMessage, displayed)
-        break
-
-      default:
-        throw new Error('Option invalid for the input name: ' + inputFieldName + ' Please, try again!')
     }
   }
 }

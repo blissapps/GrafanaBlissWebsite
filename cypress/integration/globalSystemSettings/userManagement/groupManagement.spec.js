@@ -580,7 +580,7 @@ describe('Group Management tests over User Management settings', () => {
       const userIds = [754546, 754556]
 
       equityAdmin.groupManagementPage.clickGroupById(groupId)
-      equityAdmin.groupManagementPage.scrollToTop() // strategy used just to move the scroll up
+      equityAdmin.groupManagementPage.scrollToEntityTop() // strategy used just to move the scroll up
 
       equityAdmin.groupManagementPage.removeUsersFromGroup(userIds)
       equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')

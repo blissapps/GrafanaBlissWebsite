@@ -13,7 +13,7 @@ describe.skip('Mock examples tests', () => {
     })
 
     it('Mocking participants', () => {
-      cy.intercept('GET', '/api/Clients**/Participants**count=true', { fixture: 'participantMockExample.json' }).as('PARTICIPANTS')
+      cy.intercept('GET', '/api/Clients**/Participants**count=true', { fixture: 'examples/participantMockExample.json' }).as('PARTICIPANTS')
 
       equityAdmin.homePage.selectClientById(144)
       cy.contains('Cypress Framework')
@@ -26,7 +26,7 @@ describe.skip('Mock examples tests', () => {
     })
 
     it('Mocking users', () => {
-      cy.intercept('GET', '/api/Users?tenantId=**count=true', { fixture: 'usersMockExample.json' }).as('USERS')
+      cy.intercept('GET', '/api/Users?tenantId=**count=true', { fixture: 'examples/usersMockExample.json' }).as('USERS')
 
       equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'user')
       equityAdmin.userManagementPage.checkPageUrl()

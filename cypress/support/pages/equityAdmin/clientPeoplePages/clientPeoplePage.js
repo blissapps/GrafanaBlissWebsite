@@ -37,7 +37,7 @@ class EquityClientPeoplePage extends BasePage {
     this.checkUrlByRegex(properties.pageURL)
   }
 
-  // --------------------------------------- GETS --------------------------------------------- //
+  // -------------------------------------------------------------------------- GETS ----------------------------------------------------------------------------- //
 
   /**
    * Get a participant by Id - Directly from the table list
@@ -50,7 +50,7 @@ class EquityClientPeoplePage extends BasePage {
     return cy.get(selectors.participant + participantId)
   }
 
-  // --------------------------------------- CLICKS --------------------------------------------- //
+  // ---------------------------------------------------------------------- CLICKS ----------------------------------------------------------------------------- //
 
   /**
    * Click in a Participant by Id - Directly from the table list
@@ -105,7 +105,7 @@ class EquityClientPeoplePage extends BasePage {
     }
   }
 
-  // -------------------------------- ASSERTIONS ------------------------------------- //
+  // ------------------------------------------------------------------------------ ASSERTIONS ------------------------------------------------------------------------ //
 
   /**
    * Assert the amount of records displayed in the People table
@@ -190,7 +190,7 @@ class EquityClientPeoplePage extends BasePage {
     displayed ? cy.get(selectors.noTrustsOrParticipantsCreatedMessage).should('be.visible') : cy.get(selectors.noTrustsOrParticipantsCreatedMessage).should('not.exist')
   }
 
-  // ------------------------------------- OTHERS ------------------------------------- //
+  // -------------------------------------------------------------------------- OTHERS ------------------------------------------------------------------------- //
 }
 
 export default EquityClientPeoplePage

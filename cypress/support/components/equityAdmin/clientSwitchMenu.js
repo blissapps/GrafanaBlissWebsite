@@ -13,7 +13,7 @@ const clientSwitchSelectors = {
 }
 
 class ClientSwitchMenu extends BasePage {
-  // --------------------------------------- CLICKS  --------------------------------------------- //
+  // ----------------------------------------------------------------------------------- CLICKS  ---------------------------------------------------------------------------- //
 
   /**
    * Click in View All Clients in the Switch Client area
@@ -42,7 +42,7 @@ class ClientSwitchMenu extends BasePage {
       .click({ force: true })
   }
 
-  // --------------------------------------- ASSERTIONS  --------------------------------------------- //
+  // ------------------------------------------------------------------------------------- ASSERTIONS  ---------------------------------------------------------------------------- //
 
   /**
    * Assert if a client is favorite in Client Switch
@@ -63,7 +63,7 @@ class ClientSwitchMenu extends BasePage {
     displayed ? cy.get(clientSwitchSelectors.noClientsFoundMsg).should('be.visible') : cy.get(clientSwitchSelectors.noClientsFoundMsg).should('not.exist')
   }
 
-  // --------------------------------------- OTHERS  --------------------------------------------- //
+  // ------------------------------------------------------------------------------------- OTHERS  --------------------------------------------------------------------------------- //
 
   /**
    * Search for a client in the Switch Client menu bar

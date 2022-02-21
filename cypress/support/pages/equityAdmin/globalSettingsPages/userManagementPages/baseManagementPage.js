@@ -44,7 +44,7 @@ const groupsNavBarSelectors = {
  *
  */
 class BaseManagementPage extends BasePage {
-  // ------------------------------------------------------- GETS ---------------------------------------------------------------------- //
+  // ------------------------------------------------------------------------------- GETS --------------------------------------------------------------------------------------- //
   /**
    * Get the entity (group role, or dap) header element of a selected entity
    *
@@ -72,7 +72,7 @@ class BaseManagementPage extends BasePage {
     }
   }
 
-  // ------------------------------------------------------- CLICKS ---------------------------------------------------------------------- //
+  // ------------------------------------------------------------------------------- CLICKS ---------------------------------------------------------------------------------------- //
 
   /**
    * Click in the Show All button of a given entity/section
@@ -188,7 +188,7 @@ class BaseManagementPage extends BasePage {
     }
   }
 
-  // --------------------------------------------------------- ASSERTIONS ------------------------------------------------------------------ //
+  // --------------------------------------------------------------------------------- ASSERTIONS ------------------------------------------------------------------------------------- //
 
   /**
    * Assert if the entity header/name is displayed. Also, asserts its content if the parameter headerText is sent
@@ -357,14 +357,14 @@ class BaseManagementPage extends BasePage {
     editable ? cy.get('@input').should('not.have.class', 'disabled**') : cy.get('@input').should('have.class', 'disabled**')
   }
 
-  // ----------------------------------------------------------------- OTHERS ------------------------------------------------------------- //
+  // ---------------------------------------------------------------------------------------- OTHERS --------------------------------------------------------------------------------- //
 
   /**
    * This method has the exactly implementation of the method getEntityHeader()
    * This is necessary is some cases, since settings pages have a problem while scrolling anything. So, this behavior is strict to settings like groups, roles, and daps
    *
    */
-  scrollToTop() {
+  scrollToEntityTop() {
     cy.get(selectors.entityNameInput).scrollIntoView()
   }
 

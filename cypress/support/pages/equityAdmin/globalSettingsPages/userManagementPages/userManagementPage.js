@@ -22,7 +22,7 @@ class UserManagementPage extends BaseManagementPage {
     this.checkUrl(properties.pageURL)
   }
 
-  // --------------------------------------- GETS --------------------------------------------- //
+  // ----------------------------------------------------------------------------------- GETS ----------------------------------------------------------------------------------- //
 
   /**
    * Get a user from the table of users
@@ -38,7 +38,7 @@ class UserManagementPage extends BaseManagementPage {
       .scrollIntoView()
   }
 
-  // --------------------------------------- CLICKS --------------------------------------------- //
+  // ---------------------------------------------------------------------------------------- CLICKS --------------------------------------------------------------------------- //
 
   /**
    * Select a user from the table of users
@@ -50,7 +50,7 @@ class UserManagementPage extends BaseManagementPage {
     this.getUserInTable(userId).click('left')
   }
 
-  // --------------------------------------- ASSERTIONS  --------------------------------------------- //
+  // ------------------------------------------------------------------------------------- ASSERTIONS  --------------------------------------------------------------------------- //
 
   /**
    * Assert if a given user is visible in the table of Users
@@ -82,7 +82,7 @@ class UserManagementPage extends BaseManagementPage {
     this.assertNumberOfRecordsDisplayed(selectors.numberOfSearchResultsInTable, results)
   }
 
-  // -----------------------------------------------------------------------------------------  INTERCEPTIONS ------------------------------------------------------------------------------ //
+  // --------------------------------------------------------------------------------------  INTERCEPTIONS ---------------------------------------------------------------------------- //
 
   /**
    * Intercept the usersLoading request located in the object apiInterceptions. You need to user the method waitForUsersToBeLoaded to wait for this interception

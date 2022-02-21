@@ -10,6 +10,7 @@ const selectors = {
  *
  */
 class BasePeopleParticipantPage extends BasePage {
+  // --------------------------------------------------------------------------- CLICKS  ----------------------------------------------------------------------------- //
   /**
    * Click in some item in the participant navigation menu
    *
@@ -49,6 +50,8 @@ class BasePeopleParticipantPage extends BasePage {
   clickToSaveChanges() {
     cy.get(selectors.saveChangesButton).scrollIntoView().click()
   }
+
+  // --------------------------------------------------------------------------- ASSERTIONS  ----------------------------------------------------------------------------- //
 
   /**
    * Assert if an error message is displayed for a field given an element locator

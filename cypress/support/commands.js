@@ -52,7 +52,7 @@ Cypress.Commands.add('loginSuccessfulXHRWaits', () => {
  *
  * @param {number} latencyTime Time of latency to simulate a slow connection
  *
- * Only works on Chrome
+ * @only_chrome  Only works on Chrome
  */
 Cypress.Commands.add('changeNetworkLatency', (latencyTime = -1) => {
   cy.log('************ Inserting LATENCY:' + latencyTime + 'ms **************')

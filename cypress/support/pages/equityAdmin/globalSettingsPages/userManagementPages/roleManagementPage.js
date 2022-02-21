@@ -36,7 +36,7 @@ class RoleManagementPage extends BaseManagementPage {
     this.checkUrl(properties.pageURL)
   }
 
-  // ----------------------------------------------- GETS --------------------------------------------- //
+  // -------------------------------------------------------------------------------------- GETS ---------------------------------------------------------------------------------------- //
 
   /**
    * Get a role by sending the role ID.
@@ -218,7 +218,7 @@ class RoleManagementPage extends BaseManagementPage {
     }
   }
 
-  // ----------------------------------------------- CLICKS --------------------------------------------- //
+  // --------------------------------------------------------------------------------------- CLICKS ----------------------------------------------------------------------------- //
 
   /**
    * Click in the new role button and change the current default role name
@@ -255,7 +255,7 @@ class RoleManagementPage extends BaseManagementPage {
     cy.get(selectors.roleId).last().scrollIntoView().click()
   }
 
-  // --------------------------------------- ASSERTIONS --------------------------------------------- //
+  // --------------------------------------------------------------------------------------- ASSERTIONS ---------------------------------------------------------------------------- //
 
   /**
    * Assert the message about no role selected is displayed
@@ -321,7 +321,7 @@ class RoleManagementPage extends BaseManagementPage {
     cy.get(selectors.columnHeaderDelete).should('be.visible')
   }
 
-  // ----------------------------------------------- PERMISSIONS --------------------------------------------- //
+  // ------------------------------------------------------------------------------------- PERMISSIONS -------------------------------------------------------------------------- //
 
   /**
    * Add or remove permissions of a selected role
@@ -506,7 +506,7 @@ class RoleManagementPage extends BaseManagementPage {
     displayed ? cy.get(selectors.newRoleBtn).should('be.visible') : cy.get(selectors.newRoleBtn).should('not.exist')
   }
 
-  // -------------------------------------------- OTHERS -------------------------------------------------//
+  // --------------------------------------------------------------------------------------- OTHERS ------------------------------------------------------------------------------------//
 
   /**
    * Activate the selected role
@@ -517,7 +517,7 @@ class RoleManagementPage extends BaseManagementPage {
     cy.forcedWait(300) // Necessary because the UI takes a very quick time to reload the data correctly
   }
 
-  // ---------------------------------------  INTERCEPTIONS --------------------------------------------- //
+  // ---------------------------------------------------------------------------------  INTERCEPTIONS -------------------------------------------------------------------------------- //
   /**
    * Waits until the page is loaded. This is a specific behavior of this page
    */

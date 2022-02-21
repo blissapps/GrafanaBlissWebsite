@@ -49,7 +49,7 @@ class GroupManagementPage extends BaseManagementPage {
     this.checkUrl(properties.pageURL)
   }
 
-  // --------------------------------------- GETS --------------------------------------------- //
+  // --------------------------------------------------------------------------------------- GETS ---------------------------------------------------------------------------- //
 
   /**
    * Get a group by sending the group ID.
@@ -89,7 +89,7 @@ class GroupManagementPage extends BaseManagementPage {
     }
   }
 
-  // --------------------------------------- CLICKS --------------------------------------------- //
+  // ----------------------------------------------------------------------------- CLICKS --------------------------------------------------------------------------------- //
 
   /**
    * Click in a group by sending the group ID.
@@ -100,10 +100,10 @@ class GroupManagementPage extends BaseManagementPage {
    */
   clickGroupById(groupId) {
     this.getGroupById(groupId).click()
-    this.scrollToTop()
+    this.scrollToEntityTop()
   }
 
-  // --------------------------------------- ASSERTIONS --------------------------------------------- //
+  // --------------------------------------------------------------------------- ASSERTIONS ------------------------------------------------------------------------------ //
   /**
    * Assert if the msg about no groups selected is displayed or not
    *
@@ -406,7 +406,7 @@ class GroupManagementPage extends BaseManagementPage {
     displayed ? cy.get(selectors.newGroupBtn).should('be.visible') : cy.get(selectors.newGroupBtn).should('not.exist')
   }
 
-  // ----------------------------------------------- OTHERS --------------------------------------------- //
+  // -------------------------------------------------------------------------------------- OTHERS ---------------------------------------------------------------------------- //
 
   /**
    * Activate the selected group

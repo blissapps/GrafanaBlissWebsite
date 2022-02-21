@@ -12,7 +12,7 @@ const selectors = {
 }
 
 class ProfileMenuNavBar extends BasePage {
-  // --------------------------------------- ASSERTIONS  --------------------------------------------- //
+  // ---------------------------------------------------------------------------- ASSERTIONS  ----------------------------------------------------------------------------- //
 
   /**
    * This method can be used to assert the Sign Out button is always visible across the menus in the profile nav bar
@@ -26,7 +26,7 @@ class ProfileMenuNavBar extends BasePage {
     }
   }
 
-  // --------------------------------------- OTHERS  --------------------------------------------- //
+  // ----------------------------------------------------------------------------------- OTHERS  ---------------------------------------------------------------------------- //
 
   /**
    * Logout command through the application UI

@@ -36,7 +36,7 @@ class BasePage {
     cy.url().should('match', url)
   }
 
-  // ------------------------------------------------------------------------------- GETS, SELECTS, AND CLICKS ------------------------------------------------------------------- //
+  // ------------------------------------------------------------------------------- GETS AND CLICKS ------------------------------------------------------------------- //
 
   /**
    * Get an element by passing a text
@@ -58,6 +58,22 @@ class BasePage {
    */
   clickElementByText(text) {
     this.getElementByText(text).click()
+  }
+
+  /**
+   * Click in the checkbox to select all elements of table when bulk actions is available
+   */
+  clickToSelectAllElementsInTable() {
+    this.assertBulkOptionsDisplayed()
+
+    cy.get(selectors.bulkActionsCheckbox).click()
+  }
+
+  /**
+   * Close the L4 right bar by clicking in the middle of the current page
+   */
+  clickOutsideToCloseL4RightBar() {
+    cy.get(selectors.entireAppPage).click('center')
   }
 
   // --------------------------------------------------------------------------------- ASSERTIONS ------------------------------------------------------------------------------------ //
@@ -284,7 +300,7 @@ class BasePage {
    * @param {string} url url to navigate. If you have a baseUrl defined in the cypress.json file, just send the endpoint instead of the entire URL.
    *
    * @example
-   * baseURL is https://ea-v3.myglobalshares.co.uk/, just send something like /client/431/people
+   * When baseURL defined as https://ea-v3.myglobalshares.co.uk/, just send something like /client/431/people and you go to https://ea-v3.myglobalshares.co.uk/client/431/people
    */
   navigateToUrl(url) {
     cy.visit(url, { failOnStatusCode: false })
@@ -295,28 +311,12 @@ class BasePage {
    *
    * @param {string} urlPathToAdd text to be added as a path in the end of the current url
    *
-   * @example: use this.addPathToUrlAndVisitIt('/new-user') to visit the url "yourCurrentUrl/new-user"
+   * @example: use addPathToUrlAndVisitIt('/new-user') to visit the url "yourCurrentUrl/new-user"
    */
   addPathToUrlAndVisitIt(urlPathToAdd) {
     cy.url().then((url) => {
       cy.visit(url + urlPathToAdd, { failOnStatusCode: false })
     })
-  }
-
-  /**
-   * Click in the checkbox to select all elements of table when bulk actions is available
-   */
-  clickToSelectAllElementsInTable() {
-    this.assertBulkOptionsDisplayed()
-
-    cy.get(selectors.bulkActionsCheckbox).click()
-  }
-
-  /**
-   * Close the L4 right bar by clicking in the middle of the current page
-   */
-  clickOutsideToCloseL4RightBar() {
-    cy.get(selectors.entireAppPage).click('center')
   }
 }
 

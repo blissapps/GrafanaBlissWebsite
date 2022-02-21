@@ -16,7 +16,7 @@ class UnauthorizedPage extends BasePage {
     this.checkUrl(properties.pageURL)
   }
 
-  // --------------------------------- ASSERTIONS ----------------------------------- //
+  // ----------------------------------------------------------------------------------- ASSERTIONS ---------------------------------------------------------------------------- //
 
   /**
    * Assert whether the message "Unfortunately, you are restricted to access this page." is displayed or not
