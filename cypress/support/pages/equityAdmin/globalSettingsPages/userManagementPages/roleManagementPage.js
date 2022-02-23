@@ -23,7 +23,8 @@ const selectors = {
 
 const apiInterceptions = {
   pageLoadedRequest: 'https://api.stonly.com/api/v2/widget/integration?*',
-  roleActivated: '/api/Roles/**/Activate'
+  roleActivated: '/api/Roles/**/Activate',
+  rolesLoading: '/api/Roles?**'
 }
 
 const utils = new Utils()
@@ -245,14 +246,6 @@ class RoleManagementPage extends BaseManagementPage {
     if (wait) {
       this.waitUntilPageIsLoaded() // wait to have all permissions loaded
     }
-  }
-
-  /**
-   * Click in the last role available in the list of roles
-   *
-   */
-  clickLastRole() {
-    cy.get(selectors.roleId).last().scrollIntoView().click()
   }
 
   // --------------------------------------------------------------------------------------- ASSERTIONS ---------------------------------------------------------------------------- //
@@ -518,6 +511,16 @@ class RoleManagementPage extends BaseManagementPage {
   }
 
   // ---------------------------------------------------------------------------------  INTERCEPTIONS -------------------------------------------------------------------------------- //
+
+  /**
+   * Intercept the rolesLoading request located in the object apiInterceptions and mock the data with a given fixture file.
+   *
+   * @param {string} fixtureFile name or path for the fixture file located inside the fixtures folder
+   */
+  interceptAndMockRolesLoadingRequest(fixtureFile) {
+    cy.intercept('GET', apiInterceptions.rolesLoading, { fixture: fixtureFile }).as('emptyUserList')
+  }
+
   /**
    * Waits until the page is loaded. This is a specific behavior of this page
    */

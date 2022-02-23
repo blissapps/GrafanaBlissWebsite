@@ -96,14 +96,6 @@ describe('Role Management tests over User Management settings', () => {
     })
 
     /**
-     * @missing_data Need to have at least 50 registered roles to scroll down
-     */
-    it.skip('C9281161_Role_CRUD_Permissions_Are_Visible', () => {
-      equityAdmin.roleManagementPage.clickLastRole()
-      equityAdmin.roleManagementPage.assertPermissionsHeadersAreDisplayed()
-    })
-
-    /**
      * @missing_data Need to have some roles in both active and inactive tabs
      */
     it.skip('C7499688_List Roles_Happy_Path_Active_And_Inactive_Roles', () => {
@@ -125,9 +117,12 @@ describe('Role Management tests over User Management settings', () => {
     })
 
     /**
-     * @missing_data Need to have some at least one role in active tab
+     * @mocks_used
      */
-    it.skip('C7499693_List_Roles_Navigation_Issues', () => {
+    it('C7499693_List_Roles_Navigation_Issues', () => {
+      // Create mocked roles to guarantee we will always have at least one role displayed
+      equityAdmin.roleManagementPage.interceptAndMockRolesLoadingRequest('rolesManagement_BasicRolesList.json')
+
       equityAdmin.roleManagementPage.reloadPage()
       equityAdmin.roleManagementPage.checkPageUrl()
       equityAdmin.roleManagementPage.assertActiveRolesAreDisplayed()
@@ -551,7 +546,7 @@ describe('Role Management tests over User Management settings', () => {
     })
   })
 
-  // ************************************************ TESTS AS CLIENTS ************************************************** //
+  // ************************************************ TESTS AS VIEW ONLY ************************************************** //
 
   context('View Only User 2', () => {
     beforeEach(() => {
@@ -577,7 +572,7 @@ describe('Role Management tests over User Management settings', () => {
 
     /**
      * @missing_data For test this scenario there should be no "Update Role" permission for the user.
-     * Also, two roles must be provided, one for each active and inactive states
+     * Also, one active role must be provided
      *
      */
     it.skip('C7499835_Activate/Deactivate_Role_No_Permission', () => {
@@ -631,6 +626,29 @@ describe('Role Management tests over User Management settings', () => {
       equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', '', false)
       equityAdmin.settingsMenuNavBar.assertBackButtonDisplayed() // Assert it just to make sure we are in the correct menu
       equityAdmin.settingsMenuNavBar.assertRoleSubMenuItemDisplayed(false)
+    })
+  })
+})
+
+/**
+ * @mocks_used
+ */
+describe('More Role Management tests - Empty state', () => {
+  beforeEach(() => {
+    equityAdmin.loginPage.login()
+    equityAdmin.roleManagementPage.interceptAndMockRolesLoadingRequest('rolesManagement_EmptyRoleList.json')
+    equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'role')
+    equityAdmin.roleManagementPage.checkPageUrl()
+  })
+
+  context('Mocked data tests', () => {
+    it('C7499690 - List Roles - Empty State (Active and Inactive Roles)', () => {
+      // Active tab
+      equityAdmin.roleManagementPage.assertNoRoleSelectedMessageIsDisplayed()
+
+      // Inactive tab
+      equityAdmin.roleManagementPage.clickTab('Inactive')
+      equityAdmin.roleManagementPage.assertNoRoleSelectedMessageIsDisplayed()
     })
   })
 })

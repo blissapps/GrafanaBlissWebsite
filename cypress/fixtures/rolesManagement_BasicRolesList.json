@@ -1,0 +1,65 @@
+{
+  "@odata.context": "https://api-business.myglobalshares.co.uk/api/$metadata#Roles",
+  "value": [
+    {
+      "id": 1,
+      "parentRoleId": null,
+      "baseRoleId": null,
+      "tenantId": 1,
+      "tenantName": "Admin Tenant",
+      "name": "Mocked Role 1 - Active",
+      "inUse": false,
+      "version": 1,
+      "recordStatus": "A",
+      "dateTimeCreated": "2022-02-23T00:35:57.16Z",
+      "userCreated": "951526",
+      "dateTimeModified": "2022-02-23T00:35:57.16Z",
+      "userModified": "951526"
+    },
+    {
+      "id": 2,
+      "parentRoleId": null,
+      "baseRoleId": null,
+      "tenantId": 1,
+      "tenantName": "Admin Tenant",
+      "name": "Mocked Role 2 - Active",
+      "inUse": false,
+      "version": 2,
+      "recordStatus": "A",
+      "dateTimeCreated": "2022-02-21T10:48:26.577Z",
+      "userCreated": "951526",
+      "dateTimeModified": "2022-02-23T13:54:00.767Z",
+      "userModified": "951526"
+    },
+    {
+      "id": 3,
+      "parentRoleId": null,
+      "baseRoleId": null,
+      "tenantId": 1,
+      "tenantName": "Admin Tenant",
+      "name": "Mocked Role 1 - Inactive",
+      "inUse": false,
+      "version": 1,
+      "recordStatus": "D",
+      "dateTimeCreated": "2022-02-23T00:35:57.16Z",
+      "userCreated": "951526",
+      "dateTimeModified": "2022-02-23T00:35:57.16Z",
+      "userModified": "951526"
+    },
+    {
+      "id": 4,
+      "parentRoleId": null,
+      "baseRoleId": null,
+      "tenantId": 1,
+      "tenantName": "Admin Tenant",
+      "name": "Mocked Role 2 - Inactive",
+      "inUse": false,
+      "version": 2,
+      "recordStatus": "D",
+      "dateTimeCreated": "2022-02-21T10:48:26.577Z",
+      "userCreated": "951526",
+      "dateTimeModified": "2022-02-23T13:54:00.767Z",
+      "userModified": "951526"
+    }
+  ]
+}

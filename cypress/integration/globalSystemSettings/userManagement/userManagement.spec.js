@@ -110,7 +110,10 @@ describe('User Management tests over User Management settings', () => {
   })
 })
 
-describe('More User Management tests', () => {
+/**
+ * @mocks_used
+ */
+describe('More User Management tests - Empty state', () => {
   beforeEach(() => {
     equityAdmin.loginPage.login()
     equityAdmin.userManagementPage.interceptAndMockUsersLoadingRequest('usersManagement_EmptyUserList.json')
