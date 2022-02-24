@@ -25,39 +25,49 @@ describe('Data Access Profiles tests over User Management settings', () => {
     })
 
     /**
-     * @missing_data Need to have an active DAP available. Need to have at least two groups available
+     * @missing_data Need to have an active DAP available. Need to have at least two groups available to be added. Also, it need to have 2 groups already associated
      */
-    it.skip('C7592112_DAP_Add_remove_And_Discard_A_Group_From_A_Data_Access_Profile', () => {
-      const dapId = 34
-      const dapName = 'Add, remove, and discard a Group'
-      const groupName = ['Add 1', 'Add 2']
-      const groupIds = [1124, 1090]
+    it.skip('C7592112 - List, add, remove and discard a Group from a Data Access Profile - Full path', () => {
+      const dapId = 7
+      const dapName = 'List, add, remove, and discard a Group'
+      const groupsAlreadyAddedIds = [1049, 1050]
+      const groupsToEditName = ['Add Group 1 to DAP', 'Add Group 2 to DAP']
+      const groupsToEditIds = [1046, 1045]
 
+      // View groups already associated
       equityAdmin.dapManagementPage.clickDapById(dapId)
-      equityAdmin.dapManagementPage.addGroupsToDap(groupName, groupIds)
+      equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupsAlreadyAddedIds[0])
+      equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupsAlreadyAddedIds[1])
+
+      // Add Groups
+      equityAdmin.dapManagementPage.clickDapById(dapId)
+      equityAdmin.dapManagementPage.addGroupsToDap(groupsToEditName, groupsToEditIds)
       equityAdmin.dapManagementPage.saveEntityInformation()
       equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved', true, true)
-      equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupIds[0])
-      equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupIds[1])
+      equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupsToEditIds[0])
+      equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupsToEditIds[1])
 
-      equityAdmin.dapManagementPage.removeGroupFromDap([groupIds[0]])
+      // Remove Group
+      equityAdmin.dapManagementPage.removeGroupFromDap([groupsToEditIds[0]])
       equityAdmin.dapManagementPage.saveEntityInformation()
       equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved', true, true)
-      equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupIds[0], false)
+      equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupsToEditIds[0], false)
 
-      equityAdmin.dapManagementPage.removeGroupFromDap([groupIds[1]])
-      equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupIds[1], false)
+      // Remove Groups and discard editions
+      equityAdmin.dapManagementPage.removeGroupFromDap([groupsToEditIds[1]])
+      equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupsToEditIds[1], false)
       equityAdmin.dapManagementPage.discardEntityInformation()
-      equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupIds[1])
+      equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupsToEditIds[1])
       equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed('Changes to data access profile were discard', true, true)
 
-      equityAdmin.dapManagementPage.addGroupsToDap([groupName[0]], [groupIds[0]])
+      // Add Groups and discard editions
+      equityAdmin.dapManagementPage.addGroupsToDap([groupsToEditName[0]], [groupsToEditIds[0]])
       equityAdmin.dapManagementPage.discardEntityInformation()
-      equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupIds[0], false)
+      equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupsToEditIds[0], false)
       equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed('Changes to data access profile were discard')
 
       //teardown
-      equityAdmin.dapManagementPage.removeGroupFromDap([groupIds[1]])
+      equityAdmin.dapManagementPage.removeGroupFromDap([groupsToEditIds[1]])
       equityAdmin.dapManagementPage.saveEntityInformation()
     })
 
@@ -92,7 +102,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
     /**
      * @missing_data Need to have a DAP with 3 groups associated
      */
-    it.skip('C9277649_DAP_View_Groups_Linked_To_DAP', () => {
+    it.skip('C15460659_DAP_View_Groups_Linked_To_DAP', () => {
       const dapId = 7
       const groupIdAssociated = [963, 964, 965]
 
@@ -132,7 +142,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
     /**
      * @missing_data Need to have a DAP and any 2 groups available to be added and discarded
      */
-    it.skip('C9277651_DAP_Discard_Daft_Linked_Groups', () => {
+    it.skip('C9277651_DAP_Discard_Draft_Linked_Groups', () => {
       const dapId = 13
       const groupName = ['Group to be added in DAP 1', 'Group to be added in DAP 2']
       const groupIdsToAssociate = [966, 967]
