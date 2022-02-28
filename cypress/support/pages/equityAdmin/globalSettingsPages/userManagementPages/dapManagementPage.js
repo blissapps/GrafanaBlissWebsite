@@ -14,15 +14,14 @@ const selectors = {
   inactiveDapList: 'gs-tab[data-test-id=inactiveTab] #dapList gs-list',
   dapsDisplayed: '#dapList gs-list a[data-test-id*="dap-',
   noDapsExistMessage: '#emptyList',
-  addGroupsBtn: '*[data-test-id=section-group] *[data-test-id=add-entity]',
-  addGroupsBtnDisabled: '*[data-test-id=section-group] *[data-test-id=add-entity][class*=disabled]',
+  addGroupsBtn: '*[data-test-id=section-group] gs-button[data-test-id=add-entity]',
   dapId: 'a[data-test-id=dap-',
   groupsCardId: '*[data-test-id=section-group] gs-card[data-test-id=entity-',
   removeIconButton: 'gs-button[data-test-id=remove-entity]',
   createDapBtn: 'gs-button[data-test-id="create-dap"]',
   dapDetailsContainer: 'hearth-dap-details',
   selectNotEditable: 'gs-select.disabled',
-  activateDapBtn: 'gs-button[data-test-id=activate-button]',
+  activateDapBtn: 'gs-button[data-test-id=activateBtn]',
   groupsRecordsCounter: '*[data-test-id=section-group] span.record-count',
   groupsAllCards: '*[data-test-id=section-group] gs-card'
 }
@@ -147,10 +146,11 @@ class DapManagementPage extends BaseManagementPage {
   }
 
   /**
-   * Assert the container with all conditions is displayed: I includes the a initial conditional, the select box and the input with value.
+   * Assert the container with all conditions is displayed: It includes a initial conditional, the select box and the input with value.
+   *
    * This is based on the US https://globalshares.atlassian.net/browse/PB-32
    */
-  assertConditionsContainerDisplayedWithExpectedValues() {
+  assertConditionsContainerDisplayedAsExpected() {
     // Container visible
     cy.get(conditionsSelectors.conditionsContainer).scrollIntoView().should('be.visible')
 
@@ -247,7 +247,7 @@ class DapManagementPage extends BaseManagementPage {
    *
    */
   assertAddGroupsButtonIsVisible(visible = true) {
-    visible ? cy.get(selectors.addGroupsBtn).should('be.visible') : cy.get(selectors.addGroupsBtnDisabled).should('be.visible')
+    visible ? cy.get(selectors.addGroupsBtn).should('be.visible') : cy.get(selectors.addGroupsBtn).should('not.exist')
   }
 
   /**
@@ -268,6 +268,15 @@ class DapManagementPage extends BaseManagementPage {
    */
   assertDapsInAlphabeticalOrder() {
     this.assertElementsInAlphabeticalOrder(selectors.dapsDisplayed)
+  }
+
+  /**
+   * Assert whether the button to activate a DAP (Activate profile button) is displayed or not
+   *
+   * @param {boolean} displayed True is the default value to validate the button to activate a DAP is displayed, false otherwise
+   */
+  assertActivateDapButtonDisplayed(displayed = true) {
+    displayed ? cy.get(selectors.activateDapBtn).should('be.visible') : cy.get(selectors.activateDapBtn).should('not.exist')
   }
 
   // ---------------------------------------------------------------------------------- OTHERS -------------------------------------------------------------------------------- //

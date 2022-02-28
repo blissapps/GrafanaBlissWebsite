@@ -270,7 +270,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
 
       equityAdmin.dapManagementPage.clickDapById(dapId)
       equityAdmin.dapManagementPage.assertEntityHeaderIsDisplayedAsExpected(dapName)
-      equityAdmin.dapManagementPage.assertConditionsContainerDisplayedWithExpectedValues()
+      equityAdmin.dapManagementPage.assertConditionsContainerDisplayedAsExpected()
       equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupIds[0])
     })
 
@@ -400,20 +400,16 @@ describe('Data Access Profiles tests over User Management settings', () => {
     })
 
     /**
-     * @missing_data Need to have an active DAP created in the active tab
-     *
-     * @Waiting also for https://globalshares.atlassian.net/wiki/spaces/~338817290/pages/3384774689/ids+missing+report+2 so the method clickToDeactivateEntity() will work
+     * @missing_data Need to have an active DAP created in the active tab with no groups associated with it
      *
      */
     it.skip('C7568176_DAP_Deactivate_And_Activate_DAP', () => {
-      const dapId = 20
+      const dapId = 13
       const dapName = 'Deactivate me'
 
       // Deactivate DAP
       equityAdmin.dapManagementPage.clickDapById(dapId)
-      //equityAdmin.dapManagementPage.clickToDeactivateEntity() // uncomment as soon as ids missing report 2 is finished
-      cy.get('gs-button[data-test-id=more-actions-button]').click() // temporarily placed until the ids missing report 2 is finished
-      cy.get('gs-action-panel-option[data-test-id=deactivate-button]').click() // temporarily placed until the ids missing report 2 is finished
+      equityAdmin.dapManagementPage.clickToDeactivateEntity()
 
       equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Deactivated', true, true)
       equityAdmin.dapManagementPage.assertInactiveDapsAreDisplayed()
@@ -572,31 +568,28 @@ describe('Data Access Profiles tests over User Management settings', () => {
     })
 
     /**
-     * @missing_data Need to have an active DAP created with a condition and with a group attached
-     *
-     * @Waiting also for https://globalshares.atlassian.net/wiki/spaces/~338817290/pages/3384774689/ids+missing+report+2 so the method clickToDeactivateEntity() will work
+     * @missing_data Need to have an active DAP created with a single condition(if > Business Unit > 1) and with a group attached
      *
      */
     it.skip('C7568169_DAP_Duplicate_DAP', () => {
-      const dapId = 64
+      const dapId = 9
       const dapName = 'Duplicate me'
       const newDapName = 'Duplicated DAP ' + utils.getRandomNumber()
-      const groupIdAssociated = 957
+      const groupIdAssociated = 1051
 
       // Duplicate DAP
       equityAdmin.dapManagementPage.clickDapById(dapId)
       equityAdmin.dapManagementPage.assertNumberOfGroupRecordsAssociatedWithDap(1)
       equityAdmin.dapManagementPage.assertNumberOfGroupCardsAssociatedWithDap(1)
-      // equityAdmin.dapManagementPage.clickToDuplicateEntity() // uncomment as soon as ids missing report 2 is finished
-      cy.get('gs-button[data-test-id=more-actions-button]').click() // temporarily placed until the ids missing report 2 is finished
-      cy.get('gs-action-panel-option[data-test-id=duplicate-button]').click() // temporarily placed until the ids missing report 2 is finished
+      equityAdmin.dapManagementPage.clickToDuplicateEntity()
 
+      // Duplicated DAP editions
       equityAdmin.dapManagementPage.assertEntityIsFocused()
-      equityAdmin.dapManagementPage.assertEntityHeaderIsDisplayedAsExpected('Copy of ' + dapName)
-
+      equityAdmin.dapManagementPage.assertEntityHeaderIsDisplayedAsExpected('Copy Of ' + dapName)
       equityAdmin.dapManagementPage.modifyEntityName(newDapName)
       equityAdmin.dapManagementPage.saveEntityInformation()
 
+      // Assert duplicated DAP editions
       equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed(newDapName + ' Saved', true, true)
       equityAdmin.dapManagementPage.assertEntityIsDisplayedInTheList(newDapName)
       equityAdmin.dapManagementPage.assertConditionValue(1, 'Business Unit')
@@ -672,7 +665,37 @@ describe('Data Access Profiles tests over User Management settings', () => {
 
       equityAdmin.dapManagementPage.clickDapById(dapId)
       equityAdmin.dapManagementPage.assertDapEditable(false)
-      cy.get('gs-button[data-test-id=more-actions-button]').should('not.exist') // temporarily placed until the ids missing report 2 is finished
+      equityAdmin.dapManagementPage.assertAddGroupsButtonIsVisible(false)
+    })
+
+    /**
+     * @missing_data Need to have an active DAP created, so we can try to duplicate it
+     *
+     */
+    it.skip('C7568170 - Data Access Profile - User does not have the AccessFilters -> Create Permission', () => {
+      const dapId = 7
+
+      equityAdmin.dapManagementPage.clickDapById(dapId)
+      equityAdmin.dapManagementPage.assertThreeDotButtonDisplayed(false)
+    })
+
+    /**
+     * @missing_data Need to have an active DAP created, so we can try to duplicate it
+     *
+     */
+    it.skip('C7568178 - Data Access Profile - User does not have the AccessFilters->Update Permission', () => {
+      const dapToDeactivateId = 7
+      const dapToActivateId = 11
+
+      // Deactivate DAP option
+      equityAdmin.dapManagementPage.clickDapById(dapToDeactivateId)
+      equityAdmin.dapManagementPage.assertDapEditable(false)
+      equityAdmin.dapManagementPage.assertThreeDotButtonDisplayed(false)
+
+      // Activate DAP option
+      equityAdmin.dapManagementPage.clickTab('Inactive')
+      equityAdmin.dapManagementPage.clickDapById(dapToActivateId)
+      equityAdmin.dapManagementPage.assertActivateDapButtonDisplayed(false)
     })
   })
 })

@@ -69,17 +69,6 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
   }
 
   /**
-   * Click to download a PDF file of a specific participant
-   *
-   * @param {number} participantId clientId number to be searched in the client statements table
-   *
-   */
-  clickDownloadPDFFromParticipantStatement(participantId) {
-    cy.get(selectors.clientParticipantStatementId + participantId + ' gs-svg-icon').as('participantRowSelected')
-    cy.get('@participantRowSelected').click()
-  }
-
-  /**
    * Click on a participant
    *
    * @param {number} participantId Id of the participant that is going to be clicked in the participants table

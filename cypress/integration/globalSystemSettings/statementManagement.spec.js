@@ -322,27 +322,6 @@ describe('Statement Management tests', () => {
   })
 
   /**
-   * ! @firefox_limited because Firefox does not save the downloaded file in the default cypress download folder.
-   * * It works only in the pipeline with Linux machines. You will face an issue (running this test locally.) while this issue is not resolved by the Cypress team.
-   * * Issue open in https://github.com/cypress-io/cypress/issues/17896
-   *
-   * * SKIPPED because this test will have a different behavior in upcoming stories
-   *
-   */
-  it.skip('C7395183_download_PDF_File_From_Participant', () => {
-    const clientName = 'Interxion'
-    const clientID = 76
-    const participantID = 32512
-    const participantName = 'Pacheco'
-
-    equityAdmin.clientStatementsPage.filterClientStatements(clientName)
-    equityAdmin.clientStatementsPage.clickClientTable(clientID)
-    equityAdmin.clientParticipantStatementsPage.filterParticipantStatements('', participantID)
-    equityAdmin.clientParticipantStatementsPage.clickDownloadPDFFromParticipantStatement(participantID)
-    equityAdmin.clientParticipantStatementsPage.assertFileWasDownloadedSuccessfully(participantName + '_Summary.pdf')
-  })
-
-  /**
    *
    * @missing_data Need to have at least one client for each possible state {Published, Partially Publish, Reconciled, Pending Validation, and Initiated}
    *
