@@ -138,4 +138,46 @@ Cypress.Commands.add('forcedWait', (time) => {
   cy.wait(time)
 })
 
+/**
+ * Get a token from authentication server - Hard coded for alpha14 in the moment
+ *
+ */
+Cypress.Commands.add('getBearerToken', () => {
+  cy.request({
+    url: Cypress.env('authApiAlpha14'),
+    method: 'POST',
+    body: {
+      grant_type: 'client_credentials',
+      client_id: Cypress.env('clientId'),
+      client_secret: Cypress.env('clientSecret'),
+      scope: Cypress.env('scope')
+    },
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      Accept: 'application/json'
+    }
+  }).then((response) => {
+    cy.log(JSON.stringify(response))
+
+    return cy.wrap(response.body.access_token)
+  })
+})
+
+/**
+ * Purge a client - Send it to the Initiated state
+ *
+ * @param {number} clientId Client id number to be sent to Initiated state
+ */
+Cypress.Commands.add('purgeClient', (clientId) => {
+  cy.getBearerToken().then((token) => {
+    cy.request({
+      method: 'POST',
+      url: 'http://10.132.3.203:8083/api/v1/TestingCommands/purge-client/' + clientId,
+      headers: {
+        Authorization: 'Bearer ' + token
+      }
+    })
+  })
+})
+
 export default executeCommand

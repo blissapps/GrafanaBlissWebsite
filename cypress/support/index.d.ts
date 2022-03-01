@@ -26,4 +26,12 @@ declare namespace Cypress {
   interface Chainable {
     forcedWait(time: Number): Chainable<Element>
   }
+
+  interface Chainable {
+    getBearerToken(): Chainable<Element>
+  }
+
+  interface Chainable {
+    purgeClient(clientId: Number): Chainable<Element>
+  }
 }
