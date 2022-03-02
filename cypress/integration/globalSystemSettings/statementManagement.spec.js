@@ -609,11 +609,44 @@ describe('Statement Management tests', () => {
   })
 
   /**
-   * @missing_data We need a client that has participants with all statuses, such as Initiated, Pending Validation, On Hold, Approved, Published, Recalled...
+   * @missing_data We need a client that has participants statements as Pending Validation
    *
-   * TODO: @missing_steps This one is made only for On Hold status. Need to do it for the others statuses as well when proper new data is provided
    */
-  it.skip('C7592123_Audit_Log_Initiated,_Pending_Validation,_On_Hold,_Approved,_Published,_Recalled,_and_Viewed_Statuses', () => {
+  it.skip('C15581309 - Audit Log -  Pending Validation', () => {
+    const clientPendingValidation = 'SJP Partners'
+    const clientPendingValidationId = 641
+
+    // Pending Validation data
+    const participantPendingValidationId = 222713
+    const participantPendingValidationName = 'Barrera'
+    const participantPendingValidationAsOfDate = '2020'
+    const participantPendingValidationCurrentStatus = 'Pending Validation'
+    const participantPendingValidationAuditTrailStatuses = [participantPendingValidationCurrentStatus, 'On Hold', 'Pending Validation', 'Initiated']
+    const participantPendingValidationAuditTrailUsers = ['UK_205_52d0ee01-555e-44ba-8ee6-3b38bfae3dc6', 'UK_205_52d0ee01-555e-44ba-8ee6-3b38bfae3dc6', 'system', 'system']
+    const participantPendingValidationAuditTrailTimestamps = ['21/02/2022 • 11:42:11', '21/02/2022 • 11:42:06', '08/02/2022 • 08:56:31', '08/02/2022 • 08:56:30']
+
+    equityAdmin.clientStatementsPage.filterClientStatements(clientPendingValidation)
+    equityAdmin.clientStatementsPage.clickClientTable(clientPendingValidationId)
+
+    // Pending Validation
+    equityAdmin.clientParticipantStatementsPage.clickOnParticipant(participantPendingValidationId)
+    equityAdmin.clientParticipantStatementsPage.assertRightL4BarIsDisplayed()
+    equityAdmin.clientParticipantStatementDetailL4Page.assertParticipantStatementDetails(
+      participantPendingValidationName,
+      participantPendingValidationAsOfDate,
+      participantPendingValidationCurrentStatus,
+      participantPendingValidationAuditTrailStatuses,
+      participantPendingValidationAuditTrailUsers,
+      participantPendingValidationAuditTrailTimestamps
+    )
+    equityAdmin.clientParticipantStatementsPage.clickOutsideToCloseL4RightBar()
+  })
+
+  /**
+   * @missing_data We need a client that has participants statements as On Hold
+   *
+   */
+  it.skip('C15581310_Audit Log - On Hold', () => {
     const clientPendingValidation = 'Keywords Studios plc'
     const clientPendingValidationId = 87
 

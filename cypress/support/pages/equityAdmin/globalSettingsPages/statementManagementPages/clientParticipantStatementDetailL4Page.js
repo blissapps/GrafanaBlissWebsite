@@ -12,8 +12,8 @@ const selectors = {
   statementAuditTrailContainer: 'gs-container-l4 ul.audit-trail',
   statementAuditTrailElementsHistory: 'gs-container-l4 ul.audit-trail li',
   statementAuditTrailStatusBadge: 'gs-container-l4 ul.audit-trail li gs-badge',
-  statementAuditTrailUser: 'gs-container-l4 ul.audit-trail li *.audit-entry-user',
-  statementAuditTrailTimestamp: 'gs-container-l4 ul.audit-trail li *.audit-entry-date'
+  statementAuditTrailUser: '//gs-container-l4//div[@class="audit-detail-title"]/following-sibling::p',
+  statementAuditTrailTimestamp: '//gs-container-l4//div[@class="audit-detail-title"]//p[last()]'
 }
 
 class ClientParticipantStatementDetailL4Page extends BaseStatementManagementPage {
@@ -68,13 +68,13 @@ class ClientParticipantStatementDetailL4Page extends BaseStatementManagementPage
 
     if (nameUserTrailList.length != 0) {
       for (let i = 0; i < nameUserTrailList.length; i++) {
-        cy.get(selectors.statementAuditTrailUser).eq(i).should('contain.text', nameUserTrailList[i])
+        cy.xpath(selectors.statementAuditTrailUser).eq(i).should('contain.text', nameUserTrailList[i])
       }
     }
 
     if (timestampTrailList.length != 0) {
       for (let i = 0; i < timestampTrailList.length; i++) {
-        cy.get(selectors.statementAuditTrailTimestamp).eq(i).should('contain.text', timestampTrailList[i])
+        cy.xpath(selectors.statementAuditTrailTimestamp).eq(i).should('contain.text', timestampTrailList[i])
       }
     }
   }
