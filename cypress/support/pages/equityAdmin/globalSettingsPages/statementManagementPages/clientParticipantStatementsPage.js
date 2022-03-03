@@ -73,7 +73,7 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
    *
    * @param {number} participantId Id of the participant that is going to be clicked in the participants table
    */
-  clickOnParticipant(participantId) {
+  clickOnParticipantById(participantId) {
     cy.get(selectors.clientParticipantStatementId + participantId)
       .scrollIntoView()
       .click({ force: true })
@@ -140,6 +140,15 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
   }
 
   // ------------------------------------------------------------------------------------------ ASSERTIONS -------------------------------------------------------------------------------- //
+  /**
+   * Assert the client status badge displayed in the top right beside the year
+   *
+   * @param {string} statusName The name of the status
+   *
+   */
+  assertClientStatus(statusName) {
+    cy.get(selectors.clientStatusBadge).should('contain.text', statusName)
+  }
 
   /**
    * Assert the table from participant statements shows all expected data in the columns, which are role number column, Participant, and Status
@@ -154,6 +163,9 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
    * This method will assert that the Participant Statements list is being displayed in order, which is by ID
    *
    * @param {array} idsList Ordered list of ids to validate
+   *
+   * @example
+   * assertParticipantStatementsTableInOrderById(1,2,3,4,5) to check if the 5 first elements have ids 1,2,3,4, and 5 in order
    */
   assertParticipantStatementsTableInOrderById(idsList) {
     for (let i = 0; i < idsList.length; i++) {
@@ -187,7 +199,7 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
   }
 
   /**
-   * Assert the summary button is correctly displayed
+   * Assert whether the summary button is  displayed or not
    *
    * @param {boolean} displayed True to assert the summary button is displayed. False, otherwise.
    *
@@ -197,7 +209,7 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
   }
 
   /**
-   * Assert the Reject button is displayed. Tip: so far it is only available for Pending Validation status
+   * Assert whether the Reject button is displayed or not.
    *
    * @param {boolean} displayed True to validate the Reject button is displayed. False otherwise.
    */
@@ -206,7 +218,7 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
   }
 
   /**
-   * Assert the REcall button is displayed. Tip: so far it is only available for Pending Validation status or Published
+   * Assert whether the Recall button is displayed or not.
    *
    * @param {boolean} displayed True to validate the Recall button is displayed. False otherwise.
    */
@@ -215,7 +227,7 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
   }
 
   /**
-   * Assert the recall button is available for a given participant
+   * Assert whether the recall button is available for a given participant or not
    *
    * @param {number} participantId The participant id to check if the recall button is available for it
    * @param {boolean} displayed True to assert the recall button is displayed. False, otherwise.
@@ -234,7 +246,7 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
   }
 
   /**
-   * Assert the approve button is available for a given participant
+   * Assert whether the approve button is available for a given participant or not
    *
    *
    * @param {number} participantId The participant id to check if the approve button is available for it
@@ -294,16 +306,6 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
     }
   }
 
-  /**
-   * Assert the client status badge displayed in the top right beside the year
-   *
-   * @param {string} statusName The name of the status
-   *
-   */
-  assertClientStatus(statusName) {
-    cy.get(selectors.clientStatusBadge).should('contain.text', statusName)
-  }
-
   // -------------------------------------------------------------------------------- OTHERS ----------------------------------------------------------------------------- //
 
   /**
@@ -349,7 +351,6 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
 
   /**
    * This method waits until the table in reloaded after filtering something in filter statements.
-   * It intercepts the call that is being made in the backend, avoiding unnecessary waits.
    */
   waitForTableToReloadAfterFiltering() {
     cy.intercept('GET', apiInterceptions.tableReloadedAfterFiltering).as('tableReloads')
@@ -357,7 +358,7 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
   }
 
   /**
-   * Waits for clients to be loaded in the table
+   * Waits for participants to be loaded in the table
    */
   waitForClientParticipantStatementsToBeLoaded() {
     cy.intercept('GET', apiInterceptions.clientParticipantStatementsLoaded).as('participantsLoaded')

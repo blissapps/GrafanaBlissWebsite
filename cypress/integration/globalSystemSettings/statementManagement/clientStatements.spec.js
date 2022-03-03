@@ -34,24 +34,24 @@ describe('Statement Management - Client Statements tests', () => {
     // Initial verification
     equityAdmin.clientStatementsPage.filterClientStatements(clientStatementName, dateFrom, dateTo)
     equityAdmin.clientStatementsPage.assertClientDisplayedOnClientStatementsTable(clientId)
-    equityAdmin.clientStatementsPage.assertAmountOfRecordsTable(1)
+    equityAdmin.clientStatementsPage.assertNumberOfRecordsDisplayedTable(1)
     equityAdmin.clientStatementsPage.clearAllFilters()
     equityAdmin.clientStatementsPage.assertClientStatementsTableInOrderById(idsClientList)
 
     // By Name
     equityAdmin.clientStatementsPage.filterClientStatements('TomTom')
     equityAdmin.clientStatementsPage.assertClientDisplayedOnClientStatementsTable(clientId)
-    equityAdmin.clientStatementsPage.assertAmountOfRecordsTable(1)
+    equityAdmin.clientStatementsPage.assertNumberOfRecordsDisplayedTable(1)
 
     // By Regulator
     equityAdmin.clientStatementsPage.filterClientStatements('', '', '', 'Form 1099')
     equityAdmin.clientStatementsPage.assertClientDisplayedOnClientStatementsTable(clientId)
-    equityAdmin.clientStatementsPage.assertAmountOfRecordsTable(1)
+    equityAdmin.clientStatementsPage.assertNumberOfRecordsDisplayedTable(1)
 
     // By Status
     equityAdmin.clientStatementsPage.filterClientStatements('', '', '', '', 'Published')
     equityAdmin.clientStatementsPage.assertClientDisplayedOnClientStatementsTable(clientId)
-    equityAdmin.clientStatementsPage.assertAmountOfRecordsTable(3)
+    equityAdmin.clientStatementsPage.assertNumberOfRecordsDisplayedTable(3)
   })
 
   it('C7353834_Filter_To_Check_Empty_State', () => {

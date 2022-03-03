@@ -15,16 +15,7 @@ class BaseStatementManagementPage extends BasePage {
   // ---------------------------------------------------------------------------------------- GETS ------------------------------------------------------------------------------------ //
 
   /**
-   * Get no data found message when displayed
-   *
-   * @returns no data message
-   */
-  getNoDataFoundMessage() {
-    return cy.get(selectors.noDataFoundMessage)
-  }
-
-  /**
-   * Get number of records displayed in the table
+   * Get the element that contains the number of records displayed in the table over statements pages
    *
    * @returns element containing the number of records displayed
    */
@@ -64,17 +55,17 @@ class BaseStatementManagementPage extends BasePage {
    * @param {boolean} displayed True to assert the "no data message" is  displayed. False, otherwise.
    */
   assertNoDataMessageFoundDisplayed(displayed = true) {
-    displayed ? this.getNoDataFoundMessage().should('be.visible') : this.getNoDataFoundMessage().should('not.exist')
+    displayed ? cy.get(selectors.noDataFoundMessage).should('be.visible') : cy.get(selectors.noDataFoundMessage).should('not.exist')
   }
 
   /**
-   * Checks the amount of records displayed in the table
+   * Checks the amount of records displayed in the table over statements pages
    *
    * @param {number} records amount of people you want to check in the records
    *
    * @example 'records = 1 for '1 record(s)' being displayed in the table
    */
-  assertAmountOfRecordsTable(records) {
+  assertNumberOfRecordsDisplayedTable(records) {
     cy.xpath(`//*[@id="gridCount"][normalize-space(text())="${records} record(s)"]`).scrollIntoView().should('be.visible')
   }
 }

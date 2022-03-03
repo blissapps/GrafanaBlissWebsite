@@ -118,66 +118,66 @@ describe('Statement Management - Participant Statements tests', () => {
     // By Participant Name
     equityAdmin.clientParticipantStatementsPage.filterParticipantStatements(participantName)
     equityAdmin.clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
-    equityAdmin.clientParticipantStatementsPage.assertAmountOfRecordsTable(4)
+    equityAdmin.clientParticipantStatementsPage.assertNumberOfRecordsDisplayedTable(4)
     equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
     // By Internal Id
     equityAdmin.clientParticipantStatementsPage.filterParticipantStatements('', participantID)
     equityAdmin.clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
-    equityAdmin.clientParticipantStatementsPage.assertAmountOfRecordsTable(1)
+    equityAdmin.clientParticipantStatementsPage.assertNumberOfRecordsDisplayedTable(1)
     equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
     // By External Id
     equityAdmin.clientParticipantStatementsPage.filterParticipantStatements('', -1, '', participantExternalId)
     equityAdmin.clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
-    equityAdmin.clientParticipantStatementsPage.assertAmountOfRecordsTable(1)
+    equityAdmin.clientParticipantStatementsPage.assertNumberOfRecordsDisplayedTable(1)
     equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
     // By Status
     equityAdmin.clientParticipantStatementsPage.filterParticipantStatements('', -1, participantStatus)
-    equityAdmin.clientParticipantStatementsPage.assertAmountOfRecordsTable(908)
+    equityAdmin.clientParticipantStatementsPage.assertNumberOfRecordsDisplayedTable(908)
     equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
     // By Name and Internal Id
     equityAdmin.clientParticipantStatementsPage.filterParticipantStatements(participantName, participantID)
     equityAdmin.clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
-    equityAdmin.clientParticipantStatementsPage.assertAmountOfRecordsTable(1)
+    equityAdmin.clientParticipantStatementsPage.assertNumberOfRecordsDisplayedTable(1)
     equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
     // By Name External Id
     equityAdmin.clientParticipantStatementsPage.filterParticipantStatements(participantName, -1, '', participantExternalId)
     equityAdmin.clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
-    equityAdmin.clientParticipantStatementsPage.assertAmountOfRecordsTable(1)
+    equityAdmin.clientParticipantStatementsPage.assertNumberOfRecordsDisplayedTable(1)
     equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
     // By Name and Status
     equityAdmin.clientParticipantStatementsPage.filterParticipantStatements(participantName, -1, participantStatus)
     equityAdmin.clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
-    equityAdmin.clientParticipantStatementsPage.assertAmountOfRecordsTable(1)
+    equityAdmin.clientParticipantStatementsPage.assertNumberOfRecordsDisplayedTable(1)
     equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
     // By Internal Id and External Id
     equityAdmin.clientParticipantStatementsPage.filterParticipantStatements('', participantID, '', participantExternalId)
     equityAdmin.clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
-    equityAdmin.clientParticipantStatementsPage.assertAmountOfRecordsTable(1)
+    equityAdmin.clientParticipantStatementsPage.assertNumberOfRecordsDisplayedTable(1)
     equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
     // By Internal Id and Status
     equityAdmin.clientParticipantStatementsPage.filterParticipantStatements('', participantID, participantStatus)
     equityAdmin.clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
-    equityAdmin.clientParticipantStatementsPage.assertAmountOfRecordsTable(1)
+    equityAdmin.clientParticipantStatementsPage.assertNumberOfRecordsDisplayedTable(1)
     equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
     // By External Id and Status
     equityAdmin.clientParticipantStatementsPage.filterParticipantStatements('', -1, participantStatus, participantExternalId)
     equityAdmin.clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
-    equityAdmin.clientParticipantStatementsPage.assertAmountOfRecordsTable(1)
+    equityAdmin.clientParticipantStatementsPage.assertNumberOfRecordsDisplayedTable(1)
     equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
     // By Name, Internal Id, Status, and External Id
     equityAdmin.clientParticipantStatementsPage.filterParticipantStatements(participantName, participantID, participantStatus, participantExternalId)
     equityAdmin.clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
-    equityAdmin.clientParticipantStatementsPage.assertAmountOfRecordsTable(1)
+    equityAdmin.clientParticipantStatementsPage.assertNumberOfRecordsDisplayedTable(1)
     equityAdmin.clientParticipantStatementsPage.clearAllFilters()
   })
 
@@ -427,7 +427,7 @@ describe('Statement Management - Participant Statements tests', () => {
     equityAdmin.clientStatementsPage.clickClientTable(clientStatementPendingValidationId)
 
     // Pending Validation
-    equityAdmin.clientParticipantStatementsPage.clickOnParticipant(participantPendingValidationId)
+    equityAdmin.clientParticipantStatementsPage.clickOnParticipantById(participantPendingValidationId)
     equityAdmin.clientParticipantStatementsPage.assertRightL4BarIsDisplayed()
     equityAdmin.clientParticipantStatementDetailL4Page.assertParticipantStatementDetails(
       participantPendingValidationName,
@@ -461,7 +461,7 @@ describe('Statement Management - Participant Statements tests', () => {
     equityAdmin.clientStatementsPage.clickClientTable(clientStatementPendingValidationId)
 
     // On Hold
-    equityAdmin.clientParticipantStatementsPage.clickOnParticipant(participantOnHoldId)
+    equityAdmin.clientParticipantStatementsPage.clickOnParticipantById(participantOnHoldId)
     equityAdmin.clientParticipantStatementsPage.assertRightL4BarIsDisplayed()
     equityAdmin.clientParticipantStatementDetailL4Page.assertParticipantStatementDetails(
       participantOnHoldName,

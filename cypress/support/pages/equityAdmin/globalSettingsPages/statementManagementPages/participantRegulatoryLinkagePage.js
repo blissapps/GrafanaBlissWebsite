@@ -31,20 +31,20 @@ class ParticipantRegulatoryLinkagePage extends BaseStatementManagementPage {
    *
    * @param {string} clientName client name to be filtered in the client input field
    * @param {string} participantName participant name to be filtered in the Participant Name input field
-   * @param {any} participantId participant id to be filtered in the Participant Id input field
+   * @param {any} participantId participant id to be filtered in the Participant Id input field.
    * @param {string} regulator regulator name to be filtered in the Regulator input field
    * @param {string} partner partner name to be filtered in the Partner input field
    *
-   * @example ('Acacia Pharma', '', '', 'FINRA', '') for Acacia Pharma client with regulator as FINRA
+   * @example
+   * ('Acacia Pharma', '', '', 'FINRA', '') for Acacia Pharma client with regulator as FINRA
    */
-  filterParticipantsStatements(clientName, participantName = '', participantId = -1, regulator = '', partner = '') {
-    if (clientName != '') {
-      cy.get(selectors.clientFilterStatementInput)
-        .type(clientName + '{enter}')
-        .then(() => {
-          this.waitForStatementsToReloadAfterFiltering()
-        })
-    }
+  filterParticipantsStatements(clientName, participantName = '', participantId = 0, regulator = '', partner = '') {
+    // At least the client is mandatory for filtering
+    cy.get(selectors.clientFilterStatementInput)
+      .type(clientName + '{enter}')
+      .then(() => {
+        this.waitForStatementsToReloadAfterFiltering()
+      })
 
     if (participantName != '') {
       cy.get(selectors.participantNameFilterStatementInput)
@@ -54,7 +54,7 @@ class ParticipantRegulatoryLinkagePage extends BaseStatementManagementPage {
         })
     }
 
-    if (participantId != -1) {
+    if (participantId != 0) {
       cy.get(selectors.participantIdFilterStatementInput)
         .type(participantId + '{enter}')
         .then(() => {
