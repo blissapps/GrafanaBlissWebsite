@@ -295,7 +295,7 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
   }
 
   /**
-   * Assert the client status badge displayed in the top
+   * Assert the client status badge displayed in the top right beside the year
    *
    * @param {string} statusName The name of the status
    *

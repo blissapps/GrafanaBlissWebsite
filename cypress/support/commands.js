@@ -166,6 +166,10 @@ Cypress.Commands.add('getBearerToken', () => {
 /**
  * Purge a client - Send it to the Initiated state
  *
+ * Alpha env:   http://10.132.3.203:8083
+ * Staging env: http://10.204.0.102:8083
+ * Mirror env:  http://10.204.0.102:8083
+ *
  * @param {number} clientId Client id number to be sent to Initiated state
  */
 Cypress.Commands.add('purgeClient', (clientId) => {

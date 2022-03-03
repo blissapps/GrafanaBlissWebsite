@@ -45,63 +45,55 @@ class ClientStatementsPage extends BaseStatementManagementPage {
   // -------------------------------------------------------------------------------------- GETS ------------------------------------------------------------------------- //
 
   /**
-   * Get client from the records table
-   *
-   * @param {number} clientId clientId number to be searched in the client statements table
-   *
-   * @returns client row element from table
-   */
-  getClientFromTable(clientId) {
-    return cy.get(selectors.clientStatementId + clientId)
-  }
-
-  /**
    * Get reconciled button for a specific client
    *
-   * @param clientId Id number of the statement with the reconcile button
+   * @param clientStatementId Id number of the client statement with the reconcile button
    *
    * @returns reconcile button for the client
    */
-  getReconcileButton(clientId) {
-    return cy.get(`#hover-actions-${clientId} gs-svg-icon`)
+  getReconcileButton(clientStatementId) {
+    return cy.get(`#clientStatement-${clientStatementId} gs-button`)
   }
 
   // ---------------------------------------------------------------------------------- CLICKS --------------------------------------------------------------------------- //
 
   /**
-   * Select a client from the table of clients
+   * Select a client statement from the table of Client Statements
    *
-   * @param {number} clientStatementId clientId number to be searched in the client statements table
+   * @param {number} clientStatementId Client Statement id number to be clicked in the table
    */
   clickClientTable(clientStatementId) {
-    this.getClientFromTable(clientStatementId).scrollIntoView().click()
+    cy.get(selectors.clientStatementId + clientStatementId)
+      .scrollIntoView()
+      .click()
   }
 
   /**
-   * Click in the button to reconcile a client
+   * Click in the button to reconcile a client statement
+   *
    * PS: This method does not reconcile the client, it only clicks in the reconcile button so you can verify its behavior. To reconcile go to the reconcileClient method
    *
-   * @param {number} clientId id number from the Client Statements table to reconcile
+   * @param {number} clientStatementId id number from the Client Statements table
    */
-  clickToReconcileClient(clientId) {
-    this.getReconcileButton(clientId).scrollIntoView().click()
+  clickToReconcileClient(clientStatementId) {
+    this.getReconcileButton(clientStatementId).scrollIntoView().click()
   }
 
   // --------------------------------------------------------------------------------- ASSERTIONS -------------------------------------------------------------------------------- //
 
   /**
-   * Assert the client is displayed in the table on statement/clients
+   * Assert the client is displayed in the table of Client Statements
    *
-   * @param {number} clientId The client id number
-   * @param {boolean} displayed True to assert the client is displayed. False, otherwise.
+   * @param {number} clientStatementId The client statement id number
+   * @param {boolean} displayed True to assert the client statement is displayed. False, otherwise.
    *
    */
-  assertClientDisplayedOnClientStatementsTable(clientId, displayed = true) {
-    displayed ? this.getClientFromTable(clientId).should('be.visible') : this.getClientFromTable(clientId).should('not.exist')
+  assertClientDisplayedOnClientStatementsTable(clientStatementId, displayed = true) {
+    displayed ? cy.get(selectors.clientStatementId + clientStatementId).should('be.visible') : cy.get(selectors.clientStatementId + clientStatementId).should('not.exist')
   }
 
   /**
-   * Assert the table from client statements shows all expected data in the columns, which are Ids, Clients, Regulators, Statuses and one to allocate the action items
+   * Assert the table from Client Statements shows all expected data in the columns, which are Ids, Clients, Regulators, Statuses and one to allocate the action items
    *
    */
   assertClientStatementsTableContainsExpectedColumns() {
@@ -113,24 +105,24 @@ class ClientStatementsPage extends BaseStatementManagementPage {
   }
 
   /**
-   * This method will assert that the Client Statement list is being displayed in order, which is by ID
+   * This method will assert that the Client Statement list is correctly ordered b IDs
    *
-   * @param {array} idsList Ordered list of ids to validate
+   * @param {array} clientStatementIdsList Ordered list of ids to validate
    */
-  assertClientStatementsTableInOrderById(idsList) {
-    for (let i = 0; i < idsList.length; i++) {
-      cy.get(selectors.clientsStatementIdsInTable).eq(i).should('contain.text', idsList[i])
+  assertClientStatementsTableInOrderById(clientStatementIdsList) {
+    for (let i = 0; i < clientStatementIdsList.length; i++) {
+      cy.get(selectors.clientsStatementIdsInTable).eq(i).should('contain.text', clientStatementIdsList[i])
     }
   }
 
   /**
    * Assert the state of the reconcile button.
    *
-   * @param {number} clientId Client id number to hover in this client to make sure the reconcile button is visible or not
+   * @param {number} clientStatementId Client id number to hover in this client to make sure the reconcile button is visible or not
    * @param {boolean} displayed True to assert the reconcile button is displayed. False, otherwise.
    */
-  assertReconcileButtonDisplayedForClient(clientId, displayed = true) {
-    displayed ? this.getReconcileButton(clientId).should('be.visible') : this.getReconcileButton(clientId).should('not.exist')
+  assertReconcileButtonDisplayedForClient(clientStatementId, displayed = true) {
+    displayed ? this.getReconcileButton(clientStatementId).should('be.visible') : this.getReconcileButton(clientStatementId).should('not.exist')
   }
 
   /**
@@ -165,9 +157,9 @@ class ClientStatementsPage extends BaseStatementManagementPage {
 
     // Once clicked in a security option, the Reconcile Button must also be enabled
     cy.get(reconcileStatementsSelectorsOnL4Bar.securityCheckBox).click()
-    cy.get(reconcileStatementsSelectorsOnL4Bar.reconcileButton).should('be.visible').should('have.class', 'default medium square primary disabled')
+    cy.get(reconcileStatementsSelectorsOnL4Bar.reconcileButton).should('be.visible').and('have.class', 'default medium square primary disabled')
     cy.get(reconcileStatementsSelectorsOnL4Bar.securityCard).first().click()
-    cy.get(reconcileStatementsSelectorsOnL4Bar.reconcileButton).should('be.visible').should('have.class', 'default medium square primary')
+    cy.get(reconcileStatementsSelectorsOnL4Bar.reconcileButton).should('be.visible').and('have.class', 'default medium square primary')
 
     // Cancel button must close the window
     cy.get(reconcileStatementsSelectorsOnL4Bar.cancelButton).click()
@@ -175,14 +167,14 @@ class ClientStatementsPage extends BaseStatementManagementPage {
   }
 
   /**
-   * Assert the client status in the clients table
+   * Assert the client status in the Client Statements table
    *
-   * @param {number} clientId Client id number to be asserted
+   * @param {number} clientStatementId Client statement id number to be asserted
    * @param {string} clientStatus Status to be verified in this client. Status can be: Pending Validation, On Hold ... Check HTML to make sure
    *
    */
-  assertClientStatus(clientId, clientStatus) {
-    cy.get(selectors.clientStatementId + clientId + ' gs-grid-cell gs-badge')
+  assertClientStatus(clientStatementId, clientStatus) {
+    cy.get(selectors.clientStatementId + clientStatementId + ' gs-grid-cell gs-badge')
       .scrollIntoView()
       .should('contain.text', clientStatus)
   }
@@ -198,7 +190,7 @@ class ClientStatementsPage extends BaseStatementManagementPage {
    * @param {string} regulator regulator to be filtered in the Regulator input field
    * @param {string} status status to be filtered in the Status field
    *
-   * @example ('TomTom', '20190301', '20210519') for TomTom client with date range from 2019-03-01 up to 2021-05-19
+   * @example ('TomTom', '20190301', '20210519') for TomTom client statement with date range from 2019-03-01 up to 2021-05-19
    */
   filterClientStatements(clientName = '', dateFrom = '', dateTo = '', regulator = '', status = '') {
     if (clientName != '') {
@@ -226,13 +218,13 @@ class ClientStatementsPage extends BaseStatementManagementPage {
   }
 
   /**
-   * Reconcile a client given its id and the security ids
+   * Reconcile a client given its client statement id and the security id(s)
    *
-   * @param {number} clientId Client id number to be reconciled
+   * @param {number} clientStatementId Client statement id number to be reconciled
    * @param {boolean} noSecurityConsidered True to select the checkbox to do not consider securities for IRS submission. False does not select the checkbox
    * @param {array} securityIds Client id number to be reconciled
    */
-  reconcileClient(clientId, noSecurityConsidered, securityIds = []) {
+  reconcileClient(clientStatementId, noSecurityConsidered, securityIds = []) {
     // Make sure the data is consistent
     if (noSecurityConsidered && securityIds.length > 0) {
       throw new Error('It does not make sense to send securityIds and mark the checkbox (noSecurityConsidered as True). Please, choose one option only')
@@ -240,7 +232,7 @@ class ClientStatementsPage extends BaseStatementManagementPage {
       throw new Error('In order to reconcile you need to choose to either send securityIds or to click in the checkbox by sending noSecurityConsidered as true')
     }
 
-    this.clickToReconcileClient(clientId)
+    this.clickToReconcileClient(clientStatementId)
 
     // Checkbox selection
     if (noSecurityConsidered) {
@@ -254,17 +246,18 @@ class ClientStatementsPage extends BaseStatementManagementPage {
       }
     }
 
+    // Reconcile
     cy.get(reconcileStatementsSelectorsOnL4Bar.reconcileButton).click()
   }
 
   // -------------------------------------------------------------------------------  INTERCEPTIONS ------------------------------------------------------------------------- //
 
   /**
-   * Waits for clients to be loaded in the table
+   * Waits for client statements to be loaded in the table
    */
   waitForClientStatementsToBeLoaded() {
-    cy.intercept('GET', apiInterceptions.clientStatementsLoaded).as('clientsLoaded')
-    cy.wait('@clientsLoaded', { timeout: 10000 })
+    cy.intercept('GET', apiInterceptions.clientStatementsLoaded).as('clientStatementsLoaded')
+    cy.wait('@clientStatementsLoaded', { timeout: 10000 })
   }
 }
 
