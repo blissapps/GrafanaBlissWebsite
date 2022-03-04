@@ -96,23 +96,26 @@ class ClientStatementsPage extends BaseStatementManagementPage {
    * Assert the table from Client Statements shows all expected data in the columns, which are Ids, Clients, Regulators, Statuses and one to allocate the action items
    *
    */
-  assertClientStatementsTableContainsExpectedColumns() {
+  assertClientStatementsTableContainsExpectedColumnsInOrder() {
+    const columnsToValidate = ['Id', 'Client', 'Regulator', 'Status']
+
+    // Assert visibility
     cy.get(tableColumnIds.tableIdColumn).should('be.visible')
     cy.get(tableColumnIds.tableClientColumn).should('be.visible')
     cy.get(tableColumnIds.tableRegulatorColumn).should('be.visible')
     cy.get(tableColumnIds.tableStatusColumn).should('be.visible')
     cy.get(tableColumnIds.tableUndefinedColumn).should('be.visible')
+
+    // Assert order
+    this.assertTableContainsExpectedColumnsInOrder(columnsToValidate)
   }
 
   /**
    * This method will assert that the Client Statement list is correctly ordered b IDs
    *
-   * @param {array} clientStatementIdsList Ordered list of ids to validate
    */
-  assertClientStatementsTableInOrderById(clientStatementIdsList) {
-    for (let i = 0; i < clientStatementIdsList.length; i++) {
-      cy.get(selectors.clientsStatementIdsInTable).eq(i).should('contain.text', clientStatementIdsList[i])
-    }
+  assertClientStatementsTableInOrderById() {
+    this.assertElementsInAlphabeticalOrNumericalOrder(selectors.clientsStatementIdsInTable)
   }
 
   /**

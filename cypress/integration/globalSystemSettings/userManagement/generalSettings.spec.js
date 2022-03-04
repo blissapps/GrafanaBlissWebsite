@@ -22,7 +22,8 @@ describe('User Management settings - User, Group, Role, and DAP', () => {
     })
 
     /**
-     * * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-1005
+     * @bug_raised
+     * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-1005
      */
     it.skip('C11649850_Assert_View_Only_Status_Badge_Displayed_Next_To_Settings_Titles', () => {
       // User

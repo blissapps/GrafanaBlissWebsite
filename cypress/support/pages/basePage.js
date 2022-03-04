@@ -179,12 +179,12 @@ class BasePage {
   }
 
   /**
-   * Assert if a list of elements is in alphabetical order.
+   * Assert if a list of elements is in alphabetical order, or in numerical order.
    * It works by sending n elements with the same locator, so this method can extract the text of all elements and assert they are being neatly displayed.
    *
    * @param {object} locator Object locator containing many elements
    */
-  assertElementsInAlphabeticalOrder(locator) {
+  assertElementsInAlphabeticalOrNumericalOrder(locator) {
     const listDisplayed = []
     let listOrdered = []
 

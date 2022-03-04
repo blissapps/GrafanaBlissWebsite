@@ -11,17 +11,16 @@ describe('Statement Management - Client Statements tests', () => {
     equityAdmin.clientStatementsPage.checkPageUrl()
   })
 
-  it.skip('C7394715_Happy_Path_To_View_Statements_Accordingly', () => {
-    const idsClientStatementsList = [77, 78, 79, 80, 81]
-    const columnsToValidate = ['Id', 'Client', 'Regulator', 'Status']
+  it.only('C7394715_Happy_Path_To_View_Statements_Accordingly', () => {
+    equityAdmin.clientStatementsPage.assertClientStatementsTableContainsExpectedColumnsInOrder()
+    equityAdmin.clientStatementsPage.assertClientStatementsTableInOrderById()
 
-    equityAdmin.clientStatementsPage.assertClientStatementsTableContainsExpectedColumns()
-    equityAdmin.clientStatementsPage.assertTableContainsExpectedColumnsInOrder(columnsToValidate)
-    equityAdmin.clientStatementsPage.assertClientStatementsTableInOrderById(idsClientStatementsList)
+    // Test scroll not possible because of the Angular page that does not scroll correctly with JS commands.
   })
 
   /**
-   * * SKIPPED DUE TO https://globalshares.atlassian.net/browse/PB-1040
+   * @bug_raised
+   * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-1040
    */
   it.skip('C7353833_Use_Filter_To_Search_For_Client_Statements', () => {
     // name and date
@@ -29,14 +28,13 @@ describe('Statement Management - Client Statements tests', () => {
     const dateFrom = '20190301'
     const dateTo = '20210519'
     const clientId = 77
-    const idsClientList = [77, 78, 79, 80, 81]
 
     // Initial verification
     equityAdmin.clientStatementsPage.filterClientStatements(clientStatementName, dateFrom, dateTo)
     equityAdmin.clientStatementsPage.assertClientDisplayedOnClientStatementsTable(clientId)
     equityAdmin.clientStatementsPage.assertNumberOfRecordsDisplayedTable(1)
     equityAdmin.clientStatementsPage.clearAllFilters()
-    equityAdmin.clientStatementsPage.assertClientStatementsTableInOrderById(idsClientList)
+    equityAdmin.clientStatementsPage.assertClientStatementsTableInOrderById()
 
     // By Name
     equityAdmin.clientStatementsPage.filterClientStatements('TomTom')
@@ -112,7 +110,8 @@ describe('Statement Management - Client Statements tests', () => {
    *
    * @missing_data Need to have one client Initiated to be able to Reconcile it
    *
-   * * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-912
+   * @bug_raised
+   * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-912
    *
    */
   it.skip('C9281170_Statements_L4_Window', () => {

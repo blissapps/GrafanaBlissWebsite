@@ -103,7 +103,7 @@ class HomePage extends BasePage {
    * Check if the client list is correctly organized in the home page
    */
   assertCompaniesAreOrdered() {
-    this.assertElementsInAlphabeticalOrder(selectors.groupSections)
+    this.assertElementsInAlphabeticalOrNumericalOrder(selectors.groupSections)
   }
 
   // ------------------------------------------------------------------------------------ OTHERS------------------------------------------------------------------------------ //

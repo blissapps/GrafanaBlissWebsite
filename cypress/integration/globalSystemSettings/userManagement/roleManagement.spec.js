@@ -472,7 +472,8 @@ describe('Role Management tests over User Management settings', () => {
     /**
      * @missing_data For this scenario we need to have a role called 'Activate and Inactivate' in the Active tab
      *
-     * * SKIPPING due to https://globalshares.atlassian.net/browse/PB-963
+     * @bug_raised
+     * SKIPPING due to https://globalshares.atlassian.net/browse/PB-963
      *
      * TODO: @missing_steps check if the role name is editable or not
      */
@@ -558,7 +559,8 @@ describe('Role Management tests over User Management settings', () => {
     /**
      * @missing_data For test this scenario there should be no "Create Role" permission for the user.
      *
-     * * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-979
+     * @bug_raised
+     * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-979
      *
      * TODO: @missing_steps What happens when the user tries do access this by the URL? Some error message?
      */
@@ -587,7 +589,9 @@ describe('Role Management tests over User Management settings', () => {
      * @missing_data Need to have a user with view only access to roles. Also, this user must have access to a group that contains this role linked, so the user can see the role
      *
      * TODO: @missing_steps
-     * * SKIPPING also due to https://globalshares.atlassian.net/browse/PB-963, https://globalshares.atlassian.net/browse/PB-975 and https://globalshares.atlassian.net/browse/PB-1001
+     *
+     * @bug_raised
+     * SKIPPING also due to https://globalshares.atlassian.net/browse/PB-963, https://globalshares.atlassian.net/browse/PB-975 and https://globalshares.atlassian.net/browse/PB-1001
      */
     it.skip('C7544053_Duplicate_Role_No_Permission', () => {
       const roleId = 1475
@@ -601,6 +605,7 @@ describe('Role Management tests over User Management settings', () => {
     /**
      * @missing_data Need to have a user with view only access to roles
      *
+     * @bug_raised
      * SKIPPING due to https://globalshares.atlassian.net/browse/PB-963
      */
     it.skip('C15166080_View Only Role name text field must not be editable', () => {

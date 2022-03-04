@@ -230,7 +230,8 @@ describe('Data Access Profiles tests over User Management settings', () => {
     })
 
     /**
-     * * SKIPPING DUE TO: https://globalshares.atlassian.net/browse/PB-920 and https://globalshares.atlassian.net/browse/PB-927
+     * @bug_raised
+     * SKIPPING DUE TO: https://globalshares.atlassian.net/browse/PB-920 and https://globalshares.atlassian.net/browse/PB-927
      */
     it.skip('C8981127_DAP_Save_Without_Name_And_Conditions', () => {
       const dapName = 'Created DAP ' + utils.getRandomNumber()
@@ -603,7 +604,8 @@ describe('Data Access Profiles tests over User Management settings', () => {
     /**
      * @missing_data Need to have a DAP with 1 role and with 13 Groups linked to a this DAP
      *
-     * * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-949
+     * @bug_raised
+     * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-949
      */
     it.skip('C9446198_Groups_Expand_And_Collapse_DAP_With_Many_Groups_added', () => {
       const dapId = 58

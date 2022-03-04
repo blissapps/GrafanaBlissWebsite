@@ -277,7 +277,7 @@ class RoleManagementPage extends BaseManagementPage {
    * Assert if the roles are being displayed in alphabetical order by default
    */
   assertRolesInAlphabeticalOrder() {
-    this.assertElementsInAlphabeticalOrder(selectors.rolesDisplayed)
+    this.assertElementsInAlphabeticalOrNumericalOrder(selectors.rolesDisplayed)
   }
 
   /**

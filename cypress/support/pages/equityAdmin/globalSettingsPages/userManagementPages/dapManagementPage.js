@@ -267,7 +267,7 @@ class DapManagementPage extends BaseManagementPage {
    * Assert if the Daps are being displayed in alphabetical order by default
    */
   assertDapsInAlphabeticalOrder() {
-    this.assertElementsInAlphabeticalOrder(selectors.dapsDisplayed)
+    this.assertElementsInAlphabeticalOrNumericalOrder(selectors.dapsDisplayed)
   }
 
   /**

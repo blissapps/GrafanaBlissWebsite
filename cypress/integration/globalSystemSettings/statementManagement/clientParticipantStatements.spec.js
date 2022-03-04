@@ -48,13 +48,13 @@ describe('Statement Management - Participant Statements tests', () => {
   })
 
   /**
-   * ! @firefox_limited because Firefox does not save the downloaded file in the default cypress download folder:
-   * * It works only in the pipeline with Linux machines. You will face an issue (running this test locally.) while this issue is not resolved by the Cypress team.
-   * * Issue raised in https://github.com/cypress-io/cypress/issues/17896
+   * @firefox_limited because Firefox does not save the downloaded file in the default cypress download folder:
+   * It works only in the pipeline with Linux machines. You will face an issue (running this test locally.) while this issue is not resolved by the Cypress team.
+   * Issue raised in https://github.com/cypress-io/cypress/issues/17896
    *
    * @missing_data Client with "Pending Validation", PUBLISHED, or PARTIALLY PUBLISHED statement
    */
-  it.skip('C7394242_Download_Summary_Report_Functionality', () => {
+  it.skip('C7394242_Download_Summary_Report_Functionality', { browser: '!firefox' }, () => {
     // Pending Validation
     const clientStatementName = 'Interxion'
     const clientStatementId = 76
@@ -555,18 +555,25 @@ describe('Statement Management - Participant Statements tests', () => {
    * @missing_data We need clients with all statuses available, such as Initiated, Pending Validation, On Hold, Approved, Published, Recalled...
    *
    * TODO: @missing_steps Waiting for https://globalshares.atlassian.net/browse/PB-954
+   *
    */
   it.skip('C7623839_Statements_Partially_Published_Or_Published_States_Can_Be_Recalled', () => {
-    const clientStatementPublishedName = 'Garrett Motion'
-    const clientStatementPublishedId = 95
-    const clientStatementPartiallyPublishedName = 'UDG Healthcare plc'
-    const clientStatementPartiallyPublishedId = 88
-    const clientStatementPendingValidationName = 'Keywords Studios plc'
-    const clientStatementPendingValidationId = 87
-    const clientStatementInitiatedName = 'Skanska'
-    const clientStatementInitiatedId = 119
-    const clientStatementReconcilingName = 'Shelf Drilling Ltd'
-    const clientStatementReconcilingId = 83
+    const clientStatementPublishedName = 'Tokyo Electron'
+    const clientStatementPublishedId = 1387
+    const participantsRecalledSample1 = [589008, 589119, 589124]
+
+    const clientStatementPartiallyPublishedName = 'GSK'
+    const clientStatementPartiallyPublishedId = 926
+    const participantsRecalledSample2 = [180932, 85568, 86582]
+
+    const clientStatementPendingValidationName = 'Amadeus'
+    const clientStatementPendingValidationId = 653
+
+    const clientStatementInitiatedName = 'Global Ports'
+    const clientStatementInitiatedId = 655
+
+    const clientStatementReconcilingName = 'Lenovo'
+    const clientStatementReconcilingId = 1702
 
     // Published
     equityAdmin.clientStatementsPage.filterClientStatements(clientStatementPublishedName)
@@ -576,7 +583,10 @@ describe('Statement Management - Participant Statements tests', () => {
     equityAdmin.clientParticipantStatementsPage.assertRecallButtonDisplayed()
     equityAdmin.clientParticipantStatementsPage.clickToRecallStatement()
     equityAdmin.clientParticipantStatementsPage.assertClientStatus('Initiated')
-    // *** Missing steps in here to validate what the recall does to the participants***
+    // Participants changed changed to recalled.
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantsRecalledSample1[0], 'Recalled')
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantsRecalledSample1[1], 'Recalled')
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantsRecalledSample1[2], 'Recalled')
     equityAdmin.clientParticipantStatementsPage.clickBackToManageStatements()
     equityAdmin.clientStatementsPage.clearAllFilters()
 
@@ -586,6 +596,12 @@ describe('Statement Management - Participant Statements tests', () => {
     equityAdmin.clientParticipantStatementsPage.checkPageUrl()
     equityAdmin.clientParticipantStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
     equityAdmin.clientParticipantStatementsPage.assertRecallButtonDisplayed()
+    equityAdmin.clientParticipantStatementsPage.clickToRecallStatement()
+    equityAdmin.clientParticipantStatementsPage.assertClientStatus('Initiated')
+    // Participants changed changed to recalled.
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantsRecalledSample2[0], 'Recalled')
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantsRecalledSample2[1], 'Recalled')
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantsRecalledSample2[2], 'Recalled')
     equityAdmin.clientParticipantStatementsPage.clickBackToManageStatements()
     equityAdmin.clientStatementsPage.clearAllFilters()
 
