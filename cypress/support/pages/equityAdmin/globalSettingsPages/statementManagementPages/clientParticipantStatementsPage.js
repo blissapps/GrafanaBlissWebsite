@@ -12,12 +12,15 @@ const selectors = {
   recallButton: '#recall',
   publishButton: '#publish',
   participantStatementIdsInTable: '*[id*=clientParticipantStatement-] gs-grid-extension-checkable-row-number-cell span',
-  actionRecallBtnForParticipant: '#gridActionRecall',
+  recallBtnOnTable: '#gridActionRecall',
   approveBtn: '#gridActionApprove',
   onHoldBtn: '#gridActionHold',
-  actionsButton: '.action gs-button',
   rerunBtn: '#gridActionRerun',
-  actionsRerunButton: 'gs-action-panel-option span',
+  actionsButton: '.action gs-button',
+  actionsRerunButton: '//gs-action-panel-option//span[contains(text(),"Rerun")]',
+  actionsRecallButton: '//gs-action-panel-option//span[contains(text(),"Recall")]',
+  actionsApproveButton: '//gs-action-panel-option//span[contains(text(),"Approve")]',
+  actionsViewPdfButton: '//gs-action-panel-option//span[contains(text(),"View PDF")]',
   clientStatusBadge: '*.title-header-info gs-badge',
   participantName: '#pptNameFilter input',
   participantId: '#pptIdFilter input',
@@ -102,9 +105,9 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
   }
 
   /**
-   * Click in the Recall button to recall a statement
+   * Click in the Recall button to recall a Client Statement
    */
-  clickToRecallStatement() {
+  clickToRecallClientStatement() {
     cy.get(selectors.recallButton).click()
     cy.get(selectorsOnL4Bar.actionButton).click()
   }
@@ -132,6 +135,10 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
         cy.get(selectors.approveBtn).click()
         break
 
+      case 'recall':
+        cy.get(selectors.recallBtnOnTable).click()
+        break
+
       default:
         throw new Error('Parameter actionToPerform is invalid')
     }
@@ -140,8 +147,20 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
     cy.get(selectorsOnL4Bar.actionButton).click()
   }
 
+  /**
+   * Click in the publish button to publish the client statement
+   */
   clickToPublish() {
     cy.get(selectors.publishButton).click()
+  }
+
+  /**
+   * Click in the action button of a specific Participant Statement
+   *
+   * @param {number} participantId Participant Id number to click in its action button
+   */
+  clickInTheActionsButtonOfParticipant(participantId) {
+    cy.get(selectors.clientParticipantStatementId + participantId + ' ' + selectors.actionsButton).click()
   }
 
   // ------------------------------------------------------------------------------------------ ASSERTIONS -------------------------------------------------------------------------------- //
@@ -225,11 +244,11 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
   }
 
   /**
-   * Assert whether the Recall button is displayed or not.
+   * Assert whether the Recall button is displayed or not for the Client statement.
    *
    * @param {boolean} displayed True to validate the Recall button is displayed. False otherwise.
    */
-  assertRecallButtonDisplayed(displayed = true) {
+  assertRecallButtonDisplayedForClientStatement(displayed = true) {
     displayed ? cy.get(selectors.recallButton).should('be.visible') : cy.get(selectors.recallButton).should('not.exist')
   }
 
@@ -240,14 +259,14 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
    * @param {boolean} displayed True to assert the recall button is displayed. False, otherwise.
    *
    */
-  assertRecallButtonDisplayedForParticipant(participantId, displayed = true) {
+  assertRecallButtonDisplayedForParticipantStatement(participantId, displayed = true) {
     displayed
       ? cy
-          .get(selectors.clientParticipantStatementId + participantId + ' ' + selectors.actionRecallBtnForParticipant)
+          .get(selectors.clientParticipantStatementId + participantId + ' ' + selectors.recallBtnOnTable)
           .eq(1)
           .should('be.visible')
       : cy
-          .get(selectors.clientParticipantStatementId + participantId + ' ' + selectors.actionRecallBtnForParticipant)
+          .get(selectors.clientParticipantStatementId + participantId + ' ' + selectors.recallBtnOnTable)
           .eq(1)
           .should('not.exist')
   }
@@ -287,6 +306,10 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
         displayed ? cy.get(selectors.onHoldBtn).should('be.visible') : cy.get(selectors.onHoldBtn).should('not.exist')
         break
 
+      case 'recall':
+        displayed ? cy.get(selectors.recallBtnOnTable).should('be.visible') : cy.get(selectors.recallBtnOnTable).should('not.exist')
+        break
+
       default:
         throw new Error('Parameter actionToPerform is invalid')
     }
@@ -297,15 +320,28 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
    *
    * @param {number} participantId Participant id to verify the actions available for it.
    * @param {string} buttonName Button name to be asserted
+   * @param {boolean} displayed True do assert the button is displayed in actions
    */
-  assertButtonIsDisplayedInParticipantActions(participantId, buttonName) {
+  assertActionButtonIsDisplayedInParticipantActions(participantId, buttonName, displayed = true) {
     buttonName = buttonName.toLowerCase()
 
-    cy.get(selectors.clientParticipantStatementId + participantId + ' ' + selectors.actionsButton).click()
+    this.clickInTheActionsButtonOfParticipant(participantId)
 
     switch (buttonName) {
       case 'rerun':
-        cy.get(selectors.actionsRerunButton).should('be.visible')
+        displayed ? cy.xpath(selectors.actionsRerunButton).should('be.visible') : cy.xpath(selectors.actionsRerunButton).should('not.exist')
+        break
+
+      case 'recall':
+        displayed ? cy.xpath(selectors.actionsRecallButton).should('be.visible') : cy.xpath(selectors.actionsRecallButton).should('not.exist')
+        break
+
+      case 'approve':
+        displayed ? cy.xpath(selectors.actionsApproveButton).should('be.visible') : cy.xpath(selectors.actionsApproveButton).should('not.exist')
+        break
+
+      case 'view pdf':
+        displayed ? cy.xpath(selectors.actionsViewPdfButton).should('be.visible') : cy.xpath(selectors.actionsViewPdfButton).should('not.exist')
         break
 
       default:
@@ -352,6 +388,16 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
 
     this.waitForTableToReloadAfterFiltering()
     cy.forcedWait(800) // Necessary to avoid any errors regarding the table being reloaded in the UI.
+  }
+
+  /**
+   * Approve a participant id that is On Hold
+   *
+   * @param {number} participantStatementId Id of the participant statement to be approved
+   */
+  approveParticipant(participantStatementId) {
+    this.clickInTheActionsButtonOfParticipant(participantStatementId)
+    cy.xpath(selectors.actionsApproveButton).click()
   }
 
   // --------------------------------------------------------------------------------  INTERCEPTIONS ----------------------------------------------------------------------- //

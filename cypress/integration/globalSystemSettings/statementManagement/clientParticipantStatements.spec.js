@@ -289,13 +289,13 @@ describe('Statement Management - Participant Statements tests', () => {
     // Participant with On Hold status
     equityAdmin.clientParticipantStatementsPage.filterParticipantStatements('', participantOnHoldId)
     equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantOnHoldId, 'On Hold')
-    equityAdmin.clientParticipantStatementsPage.assertRecallButtonDisplayedForParticipant(participantOnHoldId, false)
+    equityAdmin.clientParticipantStatementsPage.assertRecallButtonDisplayedForParticipantStatement(participantOnHoldId, false)
     equityAdmin.clientParticipantStatementsPage.clearAllFilters()
 
     //Participant with Pending Validation status
     equityAdmin.clientParticipantStatementsPage.filterParticipantStatements('', participantPendingValidationId)
     equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantPendingValidationId, 'Pending Validation')
-    equityAdmin.clientParticipantStatementsPage.assertRecallButtonDisplayedForParticipant(participantPendingValidationId, false)
+    equityAdmin.clientParticipantStatementsPage.assertRecallButtonDisplayedForParticipantStatement(participantPendingValidationId, false)
   })
 
   /**
@@ -367,7 +367,7 @@ describe('Statement Management - Participant Statements tests', () => {
 
     // Verify rerun button
     equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantPendingValidationId, 'On Hold')
-    equityAdmin.clientParticipantStatementsPage.assertButtonIsDisplayedInParticipantActions(participantPendingValidationId, 'rerun')
+    equityAdmin.clientParticipantStatementsPage.assertActionButtonIsDisplayedInParticipantActions(participantPendingValidationId, 'rerun')
     equityAdmin.clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantPendingValidationId)
     equityAdmin.clientParticipantStatementsPage.clickInTableHeaderToPerformActions('rerun', 1)
     equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantPendingValidationId, 'Pending Validation')
@@ -584,8 +584,8 @@ describe('Statement Management - Participant Statements tests', () => {
     equityAdmin.clientStatementsPage.clickClientTable(clientStatementPublishedId)
     equityAdmin.clientParticipantStatementsPage.checkPageUrl()
     equityAdmin.clientParticipantStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
-    equityAdmin.clientParticipantStatementsPage.assertRecallButtonDisplayed()
-    equityAdmin.clientParticipantStatementsPage.clickToRecallStatement()
+    equityAdmin.clientParticipantStatementsPage.assertRecallButtonDisplayedForClientStatement()
+    equityAdmin.clientParticipantStatementsPage.clickToRecallClientStatement()
     equityAdmin.clientParticipantStatementsPage.assertClientStatus('Initiated')
     // Participants changed changed to recalled.
     equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantsRecalledSample1[0], 'Recalled')
@@ -599,8 +599,8 @@ describe('Statement Management - Participant Statements tests', () => {
     equityAdmin.clientStatementsPage.clickClientTable(clientStatementPartiallyPublishedId)
     equityAdmin.clientParticipantStatementsPage.checkPageUrl()
     equityAdmin.clientParticipantStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
-    equityAdmin.clientParticipantStatementsPage.assertRecallButtonDisplayed()
-    equityAdmin.clientParticipantStatementsPage.clickToRecallStatement()
+    equityAdmin.clientParticipantStatementsPage.assertRecallButtonDisplayedForClientStatement()
+    equityAdmin.clientParticipantStatementsPage.clickToRecallClientStatement()
     equityAdmin.clientParticipantStatementsPage.assertClientStatus('Initiated')
     // Participants changed changed to recalled.
     equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantsRecalledSample2[0], 'Recalled')
@@ -613,7 +613,7 @@ describe('Statement Management - Participant Statements tests', () => {
     equityAdmin.clientStatementsPage.filterClientStatements(clientStatementPendingValidationName)
     equityAdmin.clientStatementsPage.clickClientTable(clientStatementPendingValidationId)
     equityAdmin.clientParticipantStatementsPage.checkPageUrl()
-    equityAdmin.clientParticipantStatementsPage.assertRecallButtonDisplayed(false)
+    equityAdmin.clientParticipantStatementsPage.assertRecallButtonDisplayedForClientStatement(false)
     equityAdmin.clientParticipantStatementsPage.clickBackToManageStatements()
     equityAdmin.clientStatementsPage.clearAllFilters()
 
@@ -622,7 +622,7 @@ describe('Statement Management - Participant Statements tests', () => {
     equityAdmin.clientStatementsPage.clickClientTable(clientStatementInitiatedId)
     equityAdmin.clientParticipantStatementsPage.checkPageUrl()
     equityAdmin.clientParticipantStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
-    equityAdmin.clientParticipantStatementsPage.assertRecallButtonDisplayed(false)
+    equityAdmin.clientParticipantStatementsPage.assertRecallButtonDisplayedForClientStatement(false)
     equityAdmin.clientParticipantStatementsPage.clickBackToManageStatements()
     equityAdmin.clientStatementsPage.clearAllFilters()
 
@@ -631,7 +631,7 @@ describe('Statement Management - Participant Statements tests', () => {
     equityAdmin.clientStatementsPage.clickClientTable(clientStatementReconcilingId)
     equityAdmin.clientParticipantStatementsPage.checkPageUrl()
     equityAdmin.clientParticipantStatementsPage.waitForClientParticipantStatementsToBeLoaded() // wait until the page is loaded to avoid a false positive
-    equityAdmin.clientParticipantStatementsPage.assertRecallButtonDisplayed(false)
+    equityAdmin.clientParticipantStatementsPage.assertRecallButtonDisplayedForClientStatement(false)
   })
 
   /**
@@ -733,5 +733,74 @@ describe('Statement Management - Participant Statements tests', () => {
     equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantsPendingValidationIds[0], participantStatusAfterSomeTime)
     equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantsPendingValidationIds[1], participantStatusAfterSomeTime)
     equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantsPendingValidationIds[2], participantStatusAfterSomeTime)
+  })
+
+  /**
+   * @missing_data Need to have a Client Statement PUBLISHED with participants with published and on hold status
+   */
+  it.skip('C9281166 - Statements - Recall button', () => {
+    const clientStatementPartiallyPublishedName = 'Sanne Group PLC'
+    const clientStatementPartiallyPublishedId = 1682
+    const participantStatementsPublished = [226791, 226792, 226797]
+    const participantStatementOnHold = 226748
+
+    equityAdmin.clientStatementsPage.filterClientStatements(clientStatementPartiallyPublishedName)
+    equityAdmin.clientStatementsPage.clickClientTable(clientStatementPartiallyPublishedId)
+
+    // Recall button is displayed only against the statements with Published status (inline)
+    equityAdmin.clientParticipantStatementsPage.assertActionButtonIsDisplayedInParticipantActions(participantStatementOnHold, 'recall', false)
+    equityAdmin.clientParticipantStatementsPage.assertActionButtonIsDisplayedInParticipantActions(participantStatementsPublished[0], 'recall')
+    equityAdmin.clientParticipantStatementsPage.assertActionButtonIsDisplayedInParticipantActions(participantStatementsPublished[1], 'recall')
+    equityAdmin.clientParticipantStatementsPage.assertActionButtonIsDisplayedInParticipantActions(participantStatementsPublished[2], 'recall')
+
+    // Ensure that the Recall button appeared only when Published statement was ticked (and it disappears when Published statement was untucked)
+    equityAdmin.clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantStatementOnHold)
+    equityAdmin.clientParticipantStatementsPage.assertActionButtonDisplayedInTableHeader('recall', false)
+    equityAdmin.clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantStatementsPublished[0])
+    equityAdmin.clientParticipantStatementsPage.assertActionButtonDisplayedInTableHeader('recall')
+    equityAdmin.clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantStatementsPublished[0])
+    equityAdmin.clientParticipantStatementsPage.assertActionButtonDisplayedInTableHeader('recall', false)
+    equityAdmin.clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantStatementOnHold)
+    equityAdmin.clientParticipantStatementsPage.assertActionButtonDisplayedInTableHeader('recall', false)
+
+    // Change the status of a statement to Published and make sure that the Recall button is now displayed against it
+    equityAdmin.clientParticipantStatementsPage.approveParticipant(participantStatementOnHold)
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantStatementOnHold, 'Approved')
+    equityAdmin.clientParticipantStatementsPage.waitSpecificTime(15000) // Wait until it is completely published
+    equityAdmin.clientParticipantStatementsPage.reloadPage()
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantStatementOnHold, 'Published')
+    equityAdmin.clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantStatementOnHold)
+    equityAdmin.clientParticipantStatementsPage.assertActionButtonDisplayedInTableHeader('recall')
+  })
+
+  /**
+   * @missing_data Need to have a Client Statement PUBLISHED with some participants in published status, so we can recall them
+   */
+  it.skip('C9281167 - Statements - Recall one or multiple statements', () => {
+    const clientStatementPartiallyPublishedName = 'Sanne Group PLC'
+    const clientStatementPartiallyPublishedId = 1682
+    const participantStatementsPublished = [226748, 226791, 226792, 226797]
+
+    equityAdmin.clientStatementsPage.filterClientStatements(clientStatementPartiallyPublishedName)
+    equityAdmin.clientStatementsPage.clickClientTable(clientStatementPartiallyPublishedId)
+
+    // Recall Recall 1 statement
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantStatementsPublished[0], 'Published')
+    equityAdmin.clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantStatementsPublished[0])
+    equityAdmin.clientParticipantStatementsPage.clickInTableHeaderToPerformActions('recall', 1)
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantStatementsPublished[0], 'Recalled')
+
+    // Recall multiple statements
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantStatementsPublished[1], 'Published')
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantStatementsPublished[2], 'Published')
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantStatementsPublished[3], 'Published')
+    equityAdmin.clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantStatementsPublished[0]) // Add that to validate only Published statements will change
+    equityAdmin.clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantStatementsPublished[1])
+    equityAdmin.clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantStatementsPublished[2])
+    equityAdmin.clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantStatementsPublished[3])
+    equityAdmin.clientParticipantStatementsPage.clickInTableHeaderToPerformActions('recall', 3)
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantStatementsPublished[1], 'Recalled')
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantStatementsPublished[2], 'Recalled')
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantStatementsPublished[3], 'Recalled')
   })
 })
