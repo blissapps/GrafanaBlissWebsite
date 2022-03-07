@@ -10,6 +10,7 @@ const selectors = {
   clientParticipantStatementId: '#clientParticipantStatement-',
   rejectButton: '#reject',
   recallButton: '#recall',
+  publishButton: '#publish',
   participantStatementIdsInTable: '*[id*=clientParticipantStatement-] gs-grid-extension-checkable-row-number-cell span',
   actionRecallBtnForParticipant: '#gridActionRecall',
   approveBtn: '#gridActionApprove',
@@ -139,6 +140,10 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
     cy.get(selectorsOnL4Bar.actionButton).click()
   }
 
+  clickToPublish() {
+    cy.get(selectors.publishButton).click()
+  }
+
   // ------------------------------------------------------------------------------------------ ASSERTIONS -------------------------------------------------------------------------------- //
   /**
    * Assert the client status badge displayed in the top right beside the year
@@ -153,10 +158,12 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
   /**
    * Assert the table from participant statements shows all expected data in the columns, which are role number column, Participant, and Status
    */
-  assertParticipantStatementsTableContainsExpectedColumns() {
+  assertParticipantStatementsTableContainsExpectedColumnsInOrder() {
     cy.get(tableColumnIds.tableNumberColumn).should('be.visible')
     cy.get(tableColumnIds.tableParticipantColumn).should('be.visible')
     cy.get(tableColumnIds.tableStatusColumn).should('be.visible')
+
+    this.assertTableContainsExpectedColumnsInOrder(['Participant', 'Status'])
   }
 
   /**
@@ -189,7 +196,7 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
    * Assert the participant status in the participants table
    *
    * @param {number} participantId Participant id number to be asserted
-   * @param {string} participantStatus Status to be verified into this participant. Status can be: Pending Validation, On Hold ... Check HTML to make sure
+   * @param {string} participantStatus Status to be verified into this participant. Status can be: Pending Validation, On Hold, Approved ... Check HTML to make sure
    *
    */
   assertParticipantStatus(participantId, participantStatus) {
@@ -363,6 +370,15 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
   waitForClientParticipantStatementsToBeLoaded() {
     cy.intercept('GET', apiInterceptions.clientParticipantStatementsLoaded).as('participantsLoaded')
     cy.wait('@participantsLoaded', { timeout: 10000 })
+  }
+
+  /**
+   * Intercept the clientParticipantStatementsLoaded request located in the object apiInterceptions and mock the data with a given fixture file.
+   *
+   * @param {string} fixtureFile name or path for the fixture file located inside the fixtures folder
+   */
+  interceptAndMockParticipantStatementsLoadingRequest(fixtureFile) {
+    cy.intercept('GET', apiInterceptions.clientParticipantStatementsLoaded, { fixture: fixtureFile }).as('emptyParticipantsList')
   }
 }
 

@@ -318,6 +318,18 @@ class BasePage {
       cy.visit(url + urlPathToAdd, { failOnStatusCode: false })
     })
   }
+
+  /**
+   * Wait for a certain number of time.
+   *
+   * PS: Do not use this method unless you really need it.
+   * It may be useful in some situations like statements, when we need to wait for some seconds until a statement changes its status
+   *
+   * @param {number} time Time in milliseconds to wait
+   */
+  waitSpecificTime(time) {
+    cy.forcedWait(time)
+  }
 }
 
 export default BasePage

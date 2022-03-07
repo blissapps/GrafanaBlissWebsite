@@ -54,19 +54,19 @@ describe('User Management settings - User, Group, Role, and DAP', () => {
       // Group
       equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'group')
       equityAdmin.groupManagementPage.checkPageUrl()
-      cy.forcedWait(1000) // Needs to wait to the UI to reload
+      equityAdmin.groupManagementPage.waitSpecificTime(1000) // Needs to wait to the UI to reload
       equityAdmin.groupManagementPage.assertCreateNewGroupButtonDisplayed(false)
 
       // Role
       equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'role', false)
       equityAdmin.roleManagementPage.checkPageUrl()
-      cy.forcedWait(1000) // Needs to wait to the UI to reload
+      equityAdmin.roleManagementPage.waitSpecificTime(1000) // Needs to wait to the UI to reload
       equityAdmin.roleManagementPage.assertCreateNewRoleButtonDisplayed(false)
 
       // DAP
       equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'dap', false)
       equityAdmin.dapManagementPage.checkPageUrl()
-      cy.forcedWait(1000) // Needs to wait to the UI to reload
+      equityAdmin.dapManagementPage.waitSpecificTime(1000) // Needs to wait to the UI to reload
       equityAdmin.dapManagementPage.assertCreateNewDapButtonDisplayed(false)
     })
 

@@ -88,21 +88,21 @@ describe('User Management tests over User Management settings', () => {
 
     // eoindeasyNE
     equityAdmin.userManagementPage.getUserInTable(usersIdListToCheckLoading[0])
-    cy.forcedWait(500) // The UI takes a time to load, so this wait is really necessary
+    equityAdmin.userManagementPage.waitSpecificTime(500) // The UI takes a time to load, so this wait is really necessary
 
     // jachas@globalshares.com
     equityAdmin.userManagementPage.getUserInTable(usersIdListToCheckLoading[1])
-    cy.forcedWait(500) // The UI takes a time to load, so this wait is really necessary
+    equityAdmin.userManagementPage.waitSpecificTime(500) // The UI takes a time to load, so this wait is really necessary
     equityAdmin.userManagementPage.waitForUsersLoadingRequest()
 
     // mpurcellNE
     equityAdmin.userManagementPage.getUserInTable(usersIdListToCheckLoading[2])
-    cy.forcedWait(500) // The UI takes a time to load, so this wait is really necessary
+    equityAdmin.userManagementPage.waitSpecificTime(500) // The UI takes a time to load, so this wait is really necessary
     equityAdmin.userManagementPage.waitForUsersLoadingRequest()
 
     // Piotr Litwinski
     equityAdmin.userManagementPage.getUserInTable(usersIdListToCheckLoading[3])
-    cy.forcedWait(500) // The UI takes a time to load, so this wait is really necessary
+    equityAdmin.userManagementPage.waitSpecificTime(500) // The UI takes a time to load, so this wait is really necessary
 
     // ZoeLewis_NE - Last User in the table
     equityAdmin.userManagementPage.getUserInTable(usersIdListToCheckLoading[4])

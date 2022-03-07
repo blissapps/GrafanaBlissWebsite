@@ -75,29 +75,29 @@ describe('Statement Management - Participant Statements tests', () => {
   it.skip('C7394265_View_Statements', () => {
     const clientStatementName = 'Keywords Studios plc'
     const clientStatementId = 87
-    const columnsToValidate = ['Participant', 'Status']
     const idsParticipantsList = [1, 2]
 
     equityAdmin.clientStatementsPage.filterClientStatements(clientStatementName)
     equityAdmin.clientStatementsPage.clickClientTable(clientStatementId)
     equityAdmin.clientParticipantStatementsPage.checkPageUrl()
-    equityAdmin.clientParticipantStatementsPage.assertTableContainsExpectedColumnsInOrder(columnsToValidate)
-    equityAdmin.clientParticipantStatementsPage.assertParticipantStatementsTableContainsExpectedColumns()
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatementsTableContainsExpectedColumnsInOrder()
     equityAdmin.clientParticipantStatementsPage.assertParticipantStatementsTableInOrderById(idsParticipantsList)
   })
 
   /**
-   * @missing_data Need to have a proper client without any participants
+   * @missing_data Need to have a client statement
+   * @mocks_used
    */
   it.skip('C7395182_Select_Client_Without_Participants_To_Check_Empty_State', () => {
-    const clientStatementName = 'Global Ports'
-    const clientStatementId = 655
+    const clientStatementName = 'Repsol'
+    const clientStatementId = 638
+
+    // Intercept the request to force a empty list in Participant Statements
+    equityAdmin.clientParticipantStatementsPage.interceptAndMockParticipantStatementsLoadingRequest('participantStatements_EmptyList.json')
 
     equityAdmin.clientStatementsPage.filterClientStatements(clientStatementName)
     equityAdmin.clientStatementsPage.clickClientTable(clientStatementId)
     equityAdmin.clientParticipantStatementsPage.assertNoDataMessageFoundDisplayed()
-    equityAdmin.clientParticipantStatementsPage.clickBackToManageStatements()
-    equityAdmin.clientStatementsPage.checkPageUrl()
   })
 
   /**
@@ -179,6 +179,10 @@ describe('Statement Management - Participant Statements tests', () => {
     equityAdmin.clientParticipantStatementsPage.assertParticipantStatementDisplayed(participantID)
     equityAdmin.clientParticipantStatementsPage.assertNumberOfRecordsDisplayedTable(1)
     equityAdmin.clientParticipantStatementsPage.clearAllFilters()
+
+    // Check empty state
+    equityAdmin.clientParticipantStatementsPage.filterParticipantStatements('SomeRandomWordToBringTheNoDataMessageDisplayed')
+    equityAdmin.clientParticipantStatementsPage.assertNoDataMessageFoundDisplayed()
   })
 
   /**
@@ -692,5 +696,42 @@ describe('Statement Management - Participant Statements tests', () => {
     equityAdmin.clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantsPendingValidationIds[0])
     equityAdmin.clientParticipantStatementsPage.clickOnTheCheckboxToSelectParticipant(participantsPendingValidationIds[1])
     equityAdmin.clientParticipantStatementsPage.clickInTableHeaderToPerformActions('Approve', participantsPendingValidationIds.length)
+  })
+
+  /**
+   * @missing_data A client statement with Pending Validation status and with some Participants Statements inside it.
+   */
+  it.skip('C7623840_Statements - Publish action', () => {
+    const clientStatementPendingValidationName = 'Irish Life'
+    const clientStatementPendingValidationId = 1248
+    const clientStatus = 'Pending Validation'
+    const clientNewStatus = 'Publishing'
+    const participantsPendingValidationIds = [131918, 126400, 128153]
+    const participantStatusBeforePublishing = 'Pending Validation'
+    const participantStatusAfterPublishing = 'Approved'
+    const participantStatusAfterSomeTime = 'Published'
+
+    equityAdmin.clientStatementsPage.filterClientStatements(clientStatementPendingValidationName)
+    equityAdmin.clientStatementsPage.clickClientTable(clientStatementPendingValidationId)
+
+    // Before publishing
+    equityAdmin.clientParticipantStatementsPage.assertClientStatus(clientStatus)
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantsPendingValidationIds[0], participantStatusBeforePublishing)
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantsPendingValidationIds[1], participantStatusBeforePublishing)
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantsPendingValidationIds[2], participantStatusBeforePublishing)
+
+    // Right after publishing
+    equityAdmin.clientParticipantStatementsPage.clickToPublish()
+    equityAdmin.clientParticipantStatementsPage.assertClientStatus(clientNewStatus)
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantsPendingValidationIds[0], participantStatusAfterPublishing)
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantsPendingValidationIds[1], participantStatusAfterPublishing)
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantsPendingValidationIds[2], participantStatusAfterPublishing)
+
+    // After some time
+    equityAdmin.clientParticipantStatementsPage.waitSpecificTime(15000) // Wait until it is completely published
+    equityAdmin.clientParticipantStatementsPage.reloadPage()
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantsPendingValidationIds[0], participantStatusAfterSomeTime)
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantsPendingValidationIds[1], participantStatusAfterSomeTime)
+    equityAdmin.clientParticipantStatementsPage.assertParticipantStatus(participantsPendingValidationIds[2], participantStatusAfterSomeTime)
   })
 })
