@@ -98,7 +98,7 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
   }
 
   /**
-   * Click in the Reject button to reject a statement
+   * Click in the Reject button to reject the entire client statement
    */
   clickToRejectStatement() {
     cy.get(selectors.rejectButton).click()
@@ -260,15 +260,9 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
    *
    */
   assertRecallButtonDisplayedForParticipantStatement(participantId, displayed = true) {
-    displayed
-      ? cy
-          .get(selectors.clientParticipantStatementId + participantId + ' ' + selectors.recallBtnOnTable)
-          .eq(1)
-          .should('be.visible')
-      : cy
-          .get(selectors.clientParticipantStatementId + participantId + ' ' + selectors.recallBtnOnTable)
-          .eq(1)
-          .should('not.exist')
+    this.clickInTheActionsButtonOfParticipant(participantId)
+
+    displayed ? cy.xpath(selectors.actionsRecallButton).should('be.visible') : cy.xpath(selectors.actionsRecallButton).should('not.exist')
   }
 
   /**
@@ -292,7 +286,19 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
   }
 
   /**
-   * Assert if the a specific button is displayed in the table header after selecting one or more participants
+   * Assert if the button "Actions" is displayed for a specific participant statement
+   *
+   * @param {number} participantId Participant Id number
+   * @param {boolean} displayed True to assert the button is displayed. False, otherwise.
+   */
+  assertActionButtonDisplayedForParticipant(participantId, displayed) {
+    displayed
+      ? cy.get(selectors.clientParticipantStatementId + participantId + ' ' + selectors.actionsButton).should('be.visible')
+      : cy.get(selectors.clientParticipantStatementId + participantId + ' ' + selectors.actionsButton).should('not.exist')
+  }
+
+  /**
+   * Assert if a specific button for a statement action is displayed in the table header after selecting one or more participants
    *
    * @param {string} actionButtonName Action name. It can be approve, on hold, rerun
    * @param {boolean} displayed True to assert the button is displayed. False, otherwise.
@@ -391,13 +397,26 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
   }
 
   /**
-   * Approve a participant id that is On Hold
+   * Approve a single participant id that is On Hold
    *
    * @param {number} participantStatementId Id of the participant statement to be approved
    */
-  approveParticipant(participantStatementId) {
+  approveSingleParticipantById(participantStatementId) {
     this.clickInTheActionsButtonOfParticipant(participantStatementId)
     cy.xpath(selectors.actionsApproveButton).click()
+  }
+
+  /**
+   * Recall a single participant by its id
+   *
+   * @param {number} participantStatementId Id of the participant statement to be recalled
+   */
+  recallSingleParticipantById(participantStatementId) {
+    this.clickInTheActionsButtonOfParticipant(participantStatementId)
+    cy.xpath(selectors.actionsRecallButton).click()
+    this.clickInTableHeaderToPerformActions('recall', 1)
+    cy.get(selectorsOnL4Bar.numberOfStatements).should('have.text', 1)
+    cy.get(selectorsOnL4Bar.actionButton).click()
   }
 
   // --------------------------------------------------------------------------------  INTERCEPTIONS ----------------------------------------------------------------------- //

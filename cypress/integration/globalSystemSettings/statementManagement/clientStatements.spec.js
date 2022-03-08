@@ -11,7 +11,7 @@ describe('Statement Management - Client Statements tests', () => {
     equityAdmin.clientStatementsPage.checkPageUrl()
   })
 
-  it.only('C7394715_Happy_Path_To_View_Statements_Accordingly', () => {
+  it('C7394715_Happy_Path_To_View_Statements_Accordingly', () => {
     equityAdmin.clientStatementsPage.assertClientStatementsTableContainsExpectedColumnsInOrder()
     equityAdmin.clientStatementsPage.assertClientStatementsTableInOrderById()
 
@@ -110,9 +110,6 @@ describe('Statement Management - Client Statements tests', () => {
    *
    * @missing_data Need to have one client Initiated to be able to Reconcile it
    *
-   * @bug_raised
-   * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-912
-   *
    */
   it.skip('C9281170_Statements_L4_Window', () => {
     const clientStatementInitiatedName = 'Santen Pharmaceutical'
@@ -122,6 +119,32 @@ describe('Statement Management - Client Statements tests', () => {
     equityAdmin.clientStatementsPage.filterClientStatements(clientStatementInitiatedName)
     equityAdmin.clientStatementsPage.clickToReconcileClient(clientStatementInitiatedId)
     equityAdmin.clientStatementsPage.assertReconcileStatementRightWindowDisplaysElementsAsExpected(securityIds)
+  })
+
+  /**
+   *
+   * @missing_data Need to have 2 clients Initiated to be able to Reconcile it
+   *
+   */
+  it.skip('C9281171 - Statement - Reconciling a statement', () => {
+    const clientStatementInitiatedName = 'EQT AB'
+    const clientStatementInitiatedId = 1244
+    const clientStatementInitiatedName2 = 'GSK'
+    const clientStatementInitiatedId2 = 1252
+    const securityIdsClient2 = [250]
+
+    // Client 1 - No security
+    equityAdmin.clientStatementsPage.filterClientStatements(clientStatementInitiatedName)
+    equityAdmin.clientStatementsPage.reconcileClient(clientStatementInitiatedId, true)
+    equityAdmin.clientStatementsPage.assertClientStatus(clientStatementInitiatedId, 'Reconciling')
+    equityAdmin.clientStatementsPage.assertReconcileButtonDisplayedForClient(clientStatementInitiatedId, false)
+    equityAdmin.clientStatementsPage.clearAllFilters()
+
+    // Client 2 - Security selected
+    equityAdmin.clientStatementsPage.filterClientStatements(clientStatementInitiatedName2)
+    equityAdmin.clientStatementsPage.reconcileClient(clientStatementInitiatedId2, false, securityIdsClient2)
+    equityAdmin.clientStatementsPage.assertClientStatus(clientStatementInitiatedId2, 'Reconciling')
+    equityAdmin.clientStatementsPage.assertReconcileButtonDisplayedForClient(clientStatementInitiatedId2, false)
   })
 
   /**
