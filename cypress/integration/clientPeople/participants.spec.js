@@ -8,18 +8,18 @@ describe('Participants tests', () => {
   })
 
   /**
-   * TODO: @missing_steps Search for numbers is missing to cover PB-829
-   *
    * @missing_data The number of records needs to be known, so we can assert the search results
    */
-  it.skip('C11069829_SearchEngine_Search_For_ID_Name_Email', () => {
+  it.skip('C11069829_SearchEngine_Search_For_ID_Name_Email_And_Numbers', () => {
+    const clientId = 144
     const participantId = 112967
     const participantName = 'Bryan'
     const participantLastName = 'Branch'
     const participantEmail = 'SuppliedEmailAddress_'
     const participantResidency = 'LUX'
+    const numberToSearch = 113067
 
-    equityAdmin.homePage.selectClientById(144)
+    equityAdmin.homePage.selectClientById(clientId)
     equityAdmin.clientPeoplePage.checkPageUrl() // needed to use the search engine in the correct page
 
     // Id
@@ -30,7 +30,7 @@ describe('Participants tests', () => {
 
     // Email
     equityAdmin.searchEngine.search(participantEmail)
-    equityAdmin.clientPeoplePage.assertAmountOfPeopleTable(232)
+    equityAdmin.clientPeoplePage.assertAmountOfPeopleTable(233)
     equityAdmin.clientPeoplePage.assertDataDisplayedOnGsGridTableIsHighlighted(participantEmail)
 
     // Name
@@ -45,7 +45,11 @@ describe('Participants tests', () => {
     equityAdmin.clientPeoplePage.assertParticipantDisplayed(participantId)
     equityAdmin.clientPeoplePage.assertDataDisplayedOnGsGridTableIsHighlighted(participantName + ' ' + participantLastName)
 
-    // Test with numbers - missing
+    // Test with numbers
+    equityAdmin.searchEngine.search(numberToSearch)
+    equityAdmin.clientPeoplePage.assertAmountOfPeopleTable(1)
+    equityAdmin.clientPeoplePage.assertParticipantDisplayed(participantId)
+    equityAdmin.clientPeoplePage.assertDataDisplayedOnGsGridTableIsHighlighted(participantName + ' ' + participantLastName)
 
     equityAdmin.clientPeoplePage.assertParticipantDataDisplayedOnTheParticipantsList([participantId, participantName, participantEmail, participantResidency])
   })
@@ -55,7 +59,7 @@ describe('Participants tests', () => {
    */
   it.skip('C11069830_SearchEngine_Search_Without_Returned_Values', () => {
     const clientId = 144
-    const participantId = 113026
+    const participantId = 113026 // Abel Lewis
 
     equityAdmin.homePage.selectClientById(clientId)
     equityAdmin.clientPeoplePage.checkPageUrl() // needed to use the search engine in the correct page
