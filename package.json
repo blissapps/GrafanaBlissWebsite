@@ -42,7 +42,7 @@
     "cypress"
   ],
   "devDependencies": {
-    "cypress": "9.5.1",
+    "cypress": "9.5.2",
     "cypress-plugin-snapshots": "1.4.4",
     "cypress-xpath": "1.6.2",
     "cypress-iframe": "1.0.1",
