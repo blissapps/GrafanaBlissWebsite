@@ -1,10 +1,10 @@
-import BasePage from '../../../basePage'
+import BasePeopleParticipantPage from './basePeopleParticipantPage'
 
 const properties = {
   pageURL: '/sale-and-dividend'
 }
 
-class SaleAndDividendPage extends BasePage {
+class SaleAndDividendPage extends BasePeopleParticipantPage {
   /**
    * Checks if the current page is the one in properties.pageURL
    */

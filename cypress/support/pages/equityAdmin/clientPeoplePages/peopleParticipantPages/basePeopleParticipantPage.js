@@ -1,12 +1,13 @@
 import BasePage from '../../../basePage'
 
 const selectors = {
-  companyNavigationMenuButton: 'hearth-participant-record-navigation a:nth-child(3)'
+  companyNavigationMenuButton: 'hearth-participant-record-navigation a:nth-child(3)',
+  saveChangesButton: 'gs-button#saveChanges'
 }
 
 /**
  *
- * This class is a common page for all common methods and/or locators over all the pages inside peoplePages folder
+ * This class is a common page for all common methods and/or locators over all the pages inside peopleParticipantPages folder
  *
  */
 class BasePeopleParticipantPage extends BasePage {
@@ -49,6 +50,36 @@ class BasePeopleParticipantPage extends BasePage {
    */
   clickToSaveChanges() {
     cy.get(selectors.saveChangesButton).scrollIntoView().click()
+  }
+
+  /**
+   * Click in a tab by passing the first tab name
+   *
+   * @param {string} firstTabName Tabs can be either "overview", "address", "bank", or payroll
+   */
+  clickTab(firstTabName) {
+    firstTabName = firstTabName.toLowerCase()
+
+    switch (firstTabName) {
+      case 'overview':
+        cy.get(selectors.overviewTab).click()
+        break
+
+      case 'address':
+        cy.get(selectors.addressAndContactTab).click()
+        break
+
+      case 'bank':
+        cy.get(selectors.bankAccountsTab).click()
+        break
+
+      case 'payroll':
+        cy.get(selectors.payrollInformationTab).click()
+        break
+
+      default:
+        throw new Error('Option invalid. Tabs can be either "overview", "address", "bank", or payroll')
+    }
   }
 
   // --------------------------------------------------------------------------- ASSERTIONS  ----------------------------------------------------------------------------- //

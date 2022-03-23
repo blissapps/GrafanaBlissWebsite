@@ -13,7 +13,7 @@ const selectors = {
 }
 
 /**
- * This class is built to implement the page of the USER DETAIL page that is displayed as a container/"popup" in the right side of the page when the user click in an user to get details
+ * This class represents the L4 right page responsible to add some setting in a Group or DAP
  */
 class SelectSettingsL4Page extends BaseManagementPage {
   /**

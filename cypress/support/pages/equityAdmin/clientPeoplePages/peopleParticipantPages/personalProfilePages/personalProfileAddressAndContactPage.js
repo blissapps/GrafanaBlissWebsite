@@ -1,4 +1,4 @@
-import BasePersonalProfilePage from './basePersonalProfilePage'
+import BasePeopleParticipantPage from '../basePeopleParticipantPage'
 
 const properties = {
   pageURL: '/personal-profile/address-and-contact'
@@ -8,7 +8,7 @@ const addressOfResidenceSelectors = {
   stateInputField: ' #homeAddressField #stateField input'
 }
 
-class PersonalProfileAddressAndContactPage extends BasePersonalProfilePage {
+class PersonalProfileAddressAndContactPage extends BasePeopleParticipantPage {
   /**
    * Checks if the current page is the one in properties.pageURL
    */

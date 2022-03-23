@@ -1,10 +1,10 @@
 import BasePeopleParticipantPage from '../basePeopleParticipantPage'
 
 const properties = {
-  pageURL: '/primary-settings'
+  pageURL: 'company-profile/payroll-information'
 }
 
-class PrimarySettingsSalesPage extends BasePeopleParticipantPage {
+class CompanyProfilePayrollInformationPage extends BasePeopleParticipantPage {
   /**
    * Checks if the current page is the one in properties.pageURL
    */
@@ -13,4 +13,4 @@ class PrimarySettingsSalesPage extends BasePeopleParticipantPage {
   }
 }
 
-export default PrimarySettingsSalesPage
+export default CompanyProfilePayrollInformationPage
