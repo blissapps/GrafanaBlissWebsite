@@ -570,7 +570,7 @@ describe('Role Management tests over User Management settings', () => {
       equityAdmin.roleManagementPage.clickTab('Active')
       equityAdmin.roleManagementPage.getNewRoleButton().should('not.exist')
 
-      equityAdmin.roleManagementPage.addPathToUrlAndVisitIt('/0')
+      equityAdmin.roleManagementPage.navigateToUrl('/0')
       // Assert in here some error message that will appears
     })
 
@@ -649,7 +649,7 @@ describe('More Role Management tests - Empty state', () => {
   })
 
   context('Mocked data tests', () => {
-    it('C7499690 - List Roles - Empty State (Active and Inactive Roles)', () => {
+    it('C7499690_List Roles - Empty State (Active and Inactive Roles)', () => {
       // Active tab
       equityAdmin.roleManagementPage.assertNoRoleSelectedMessageIsDisplayed()
 

@@ -144,13 +144,13 @@ Cypress.Commands.add('forcedWait', (time) => {
  */
 Cypress.Commands.add('getBearerToken', () => {
   cy.request({
-    url: Cypress.env('authApiAlpha14'),
+    url: Cypress.env('AUTH_API_ALPHA_14'),
     method: 'POST',
     body: {
       grant_type: 'client_credentials',
-      client_id: Cypress.env('clientId'),
-      client_secret: Cypress.env('clientSecret'),
-      scope: Cypress.env('scope')
+      client_id: Cypress.env('CLIENT_ID'),
+      client_secret: Cypress.env('CLIENT_SECRET'),
+      scope: Cypress.env('SCOPE')
     },
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',

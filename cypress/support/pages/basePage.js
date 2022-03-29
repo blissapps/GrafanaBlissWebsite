@@ -308,10 +308,11 @@ class BasePage {
 
   /**
    * Get the current URL and add a text (urlPathToAdd) in the end of the current path. Then, visit this new url.
+   * This method can be handy in situations where you want to perform an action by an url. Look in the example to more details
    *
    * @param {string} urlPathToAdd text to be added as a path in the end of the current url
    *
-   * @example: use addPathToUrlAndVisitIt('/new-user') to visit the url "yourCurrentUrl/new-user"
+   * @example: use addPathToUrlAndVisitIt(';action=duplicate') to visit the url "yourCurrentUrl;action=duplicate"
    */
   addPathToUrlAndVisitIt(urlPathToAdd) {
     cy.url().then((url) => {

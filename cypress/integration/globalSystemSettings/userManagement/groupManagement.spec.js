@@ -698,7 +698,7 @@ describe('Group Management tests over User Management settings', () => {
      */
     it.skip('C7493035_Groups_User_Does_Not_Have_Group_Permission_To_Create_Group', () => {
       equityAdmin.groupManagementPage.assertCreateNewGroupButtonDisplayed(false)
-      equityAdmin.groupManagementPage.addPathToUrlAndVisitIt('/0')
+      equityAdmin.groupManagementPage.navigateToUrl('/0')
       // Need to wait for PB-979 to know what are going to be the next steps
     })
   })
