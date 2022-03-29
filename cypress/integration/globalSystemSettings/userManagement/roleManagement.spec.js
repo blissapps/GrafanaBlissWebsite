@@ -123,12 +123,14 @@ describe('Role Management tests over User Management settings', () => {
       // Create mocked roles to guarantee we will always have at least one role displayed
       equityAdmin.roleManagementPage.interceptAndMockRolesLoadingRequest('rolesManagement_BasicRolesList.json')
 
+      equityAdmin.roleManagementPage.checkPageUrl()
       equityAdmin.roleManagementPage.reloadPage()
       equityAdmin.roleManagementPage.checkPageUrl()
       equityAdmin.roleManagementPage.assertActiveRolesAreDisplayed()
 
       equityAdmin.applicationLeftMenuBar.clickLogoToGoToHomePage()
-      equityAdmin.roleManagementPage.goBackOrForwardInBrowser('back')
+      equityAdmin.homePage.checkPageUrl()
+      equityAdmin.homePage.goBackOrForwardInBrowser('back')
       equityAdmin.roleManagementPage.checkPageUrl()
       equityAdmin.roleManagementPage.assertActiveRolesAreDisplayed()
 
