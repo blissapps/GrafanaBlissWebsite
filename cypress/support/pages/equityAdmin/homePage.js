@@ -1,6 +1,10 @@
 import BasePage from '../basePage'
 import SearchEngine from '../../components/equityAdmin/searchEngine'
 
+const properties = {
+  pageURL: /.*\/home$/
+}
+
 const searchEngine = new SearchEngine()
 
 const selectors = {
@@ -26,7 +30,7 @@ class HomePage extends BasePage {
    * Checks if the current page is the home page
    */
   checkPageUrl() {
-    this.checkUrl(Cypress.env('HOME_PAGE_URL'))
+    this.checkUrlByRegex(properties.pageURL)
   }
 
   // ------------------------------------------------------------------------------ GETS ---------------------------------------------------------------------------------- //

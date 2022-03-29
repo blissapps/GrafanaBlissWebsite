@@ -15,7 +15,6 @@ class ApplicationLeftMenuBar extends BasePage {
    */
   clickLogoToGoToHomePage() {
     cy.get(selectors.logo).click()
-    this.checkUrl(Cypress.env('HOME_PAGE_URL'))
   }
 
   /**
