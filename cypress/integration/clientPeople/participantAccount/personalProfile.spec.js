@@ -22,7 +22,7 @@ describe('Personal profile tests for Participants', () => {
     equityAdmin.applicationLeftMenuBar.clickLogoToGoToHomePage()
 
     // Test
-    equityAdmin.homePage.selectClientById(clientId)
+    equityAdmin.homePage.clickClientById(clientId)
     equityAdmin.clientPeoplePage.clickToEditParticipant(participantId, false)
     equityAdmin.personalProfileOverviewPage.clickTab('address')
     equityAdmin.personalProfileAddressAndContactPage.fillOutAddressOfResidenceSection('', '', '', '', '', 'randomTextToGenerateError')

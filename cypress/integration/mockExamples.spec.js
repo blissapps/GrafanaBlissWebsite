@@ -15,7 +15,7 @@ describe.skip('Mock examples tests', () => {
     it('Mocking participants', () => {
       cy.intercept('GET', '/api/Clients**/Participants**count=true', { fixture: 'examples/participantMockExample.json' }).as('PARTICIPANTS')
 
-      equityAdmin.homePage.selectClientById(144)
+      equityAdmin.homePage.clickClientById(144)
       cy.contains('Cypress Framework')
     })
   })

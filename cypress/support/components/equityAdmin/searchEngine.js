@@ -2,7 +2,7 @@ import BasePage from '../../pages/basePage'
 
 const selectors = {
   inputBar: 'gs-global-search .input-bar input',
-  searchClientButton: '.search-action',
+  searchButton: '.search-action',
   clearXButton: 'gs-global-search div.clear-action gs-svg-icon'
 }
 
@@ -19,7 +19,7 @@ class SearchEngine extends BasePage {
 
     cy.get(selectors.inputBar).as('inputBar')
     cy.get('@inputBar').type(textToSearch)
-    cy.get(selectors.searchClientButton).click()
+    cy.get(selectors.searchButton).click()
 
     cy.forcedWait(waitTime)
   }

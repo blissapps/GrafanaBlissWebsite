@@ -1,6 +1,6 @@
 {
   "projectId": "6d27ms",
-  "baseUrl": "https://ea-v3.myglobalshares.co.uk/",
+  "baseUrl": "https://ea-v3-at-10.gscloud.dev/",
 
   "chromeWebSecurity": false,
   "trashAssetsBeforeRuns": true,

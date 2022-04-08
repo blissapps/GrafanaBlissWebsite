@@ -160,7 +160,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
     /**
      * @missing_data Need to have a DAP and any 2 groups available with 2 existing groups linked
      *
-     * ! @chrome_only Network commands are only manageable for chrome based browsers
+     * @chrome_only Network commands are only manageable for chrome based browsers
      */
     it.skip('C9277652_DAP_Error_Linked_Groups_To_DAPs_Cannot_Connect_API_Timeout', { browser: '!firefox' }, () => {
       const dapId = 14

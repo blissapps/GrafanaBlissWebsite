@@ -22,7 +22,9 @@ const selectors = {
   clientCardStatus: '#statusBadge',
   homePageHeader: '#homepageHeader',
   separatorFavorites: '#cardGroupSectionFavorites',
-  groupSections: '*[id*=cardGroupSection]'
+  groupSections: '*[id*=cardGroupSection]',
+  clientCards: 'hearth-client-group-card gs-card',
+  cardsByGroupSection: '#cardGroupSection'
 }
 
 class HomePage extends BasePage {
@@ -33,22 +35,36 @@ class HomePage extends BasePage {
     this.checkUrlByRegex(properties.pageURL)
   }
 
-  // ------------------------------------------------------------------------------ GETS ---------------------------------------------------------------------------------- //
+  // ------------------------------------------------------------------------------ CLICKS ---------------------------------------------------------------------------------- //
 
   /**
-   * Get client from the cards list
+   * Click in a specific client by its id
    *
    * @param {number} clientId Client name to search
    */
-  getClientCard(clientId) {
-    return cy.get(`${selectors.clientCard}${clientId}`)
+  clickClientById(clientId) {
+    cy.get(selectors.clientCard + clientId)
+      .scrollIntoView()
+      .click()
+  }
+
+  /**
+   * Click in a client after using the search engine first
+   *
+   * @param {string} clientName Client name to search
+   */
+  clickClientFromTheListBySearchForName(clientName) {
+    searchEngine.search(clientName)
+    searchEngine.clearSearchBox()
+    cy.contains(clientName) // avoid element detached from the DOM
+    cy.xpath(`//gs-card//h4[normalize-space(text()) = '${clientName}']`).click()
   }
 
   // ----------------------------------------------------------------------------- ASSERTIONS ---------------------------------------------------------------------------- //
 
   /**
    *
-   * @param {boolean} displayed True is the default value to assert the Companies header is displayed. Send false otherwise
+   * @param {boolean} displayed True is the default value to assert the "Companies" text header is displayed. Send false otherwise
    */
   assertCompaniesHeaderIsDisplayed(displayed = true) {
     displayed ? cy.get(selectors.homePageHeader).should('be.visible') : cy.get(selectors.homePageHeader).should('not.exist')
@@ -80,27 +96,36 @@ class HomePage extends BasePage {
    * @param {string} regulated Client information about if it is regulated. Accepted parameters: 'Regulated' and 'Not Regulated'
    * @param {string} status Client status. Accepted parameters includes: 'Active', 'NOT SET', 'Terminated', 'Implementation'
    *
-   * @example validateClientCardSummaryInformation('144', 'GBR', 'Regulated', 'Active')
+   * @example assertClientCardSummaryInformation('144', 'GBR', 'Regulated', 'Active')
    */
-  assertClientCardSummaryInformation(clientId, clientName, location = 'GBR', regulated = 'Regulated', status = 'Active') {
-    return (
-      cy
-        .get(selectors.clientCard + clientId + ' ' + selectors.clientCardHeader + clientId)
-        .scrollIntoView()
-        .contains(clientName) &&
-      cy
-        .get(selectors.clientCard + clientId + ' ' + selectors.clientCardCountryBadge + clientId)
-        .scrollIntoView()
-        .contains(location) &&
-      cy
-        .get(selectors.clientCard + clientId + ' ' + selectors.clientCardRegulatedStatus + clientId)
-        .scrollIntoView()
-        .contains(regulated) &&
-      cy
-        .get(selectors.clientCard + clientId + ' ' + selectors.clientCardStatus + clientId)
-        .scrollIntoView()
-        .contains(status)
-    )
+  assertClientCardSummaryInformation(clientId, clientName = '', location = '', regulated = '', status = '') {
+    clientName != ''
+      ? cy
+          .get(selectors.clientCard + clientId + ' ' + selectors.clientCardHeader + clientId)
+          .scrollIntoView()
+          .contains(clientName)
+      : null
+
+    location != ''
+      ? cy
+          .get(selectors.clientCard + clientId + ' ' + selectors.clientCardCountryBadge + clientId)
+          .scrollIntoView()
+          .contains(location)
+      : null
+
+    regulated != ''
+      ? cy
+          .get(selectors.clientCard + clientId + ' ' + selectors.clientCardRegulatedStatus + clientId)
+          .scrollIntoView()
+          .contains(regulated)
+      : null
+
+    status != ''
+      ? cy
+          .get(selectors.clientCard + clientId + ' ' + selectors.clientCardStatus + clientId)
+          .scrollIntoView()
+          .contains(status)
+      : null
   }
 
   /**
@@ -110,28 +135,39 @@ class HomePage extends BasePage {
     this.assertElementsInAlphabeticalOrNumericalOrder(selectors.groupSections)
   }
 
+  /**
+   * Assert the number of clients displayed. It is the number displayed in the top of the page as 'X CLIENTS(S)'
+   *
+   * @param {number} number Number of clients to assert
+   */
+  assertNumberOfClientsDisplayedOnThePageHeader(number) {
+    //this.assertNormalizedTextInElement(selectors.homePageClientsCounter, number + ' Client(s)')
+    cy.xpath(`//*[@id='homepageCount' and normalize-space(text()) = '${number} Client(s)']`).should('be.visible')
+  }
+
+  /**
+   * Assert the number of client cards displayed. This method counts the number of cards
+   *
+   * @param {number} numberOfCountedCards Number of clients to assert
+   */
+  assertNumberOfClientCardsCounted(numberOfCountedCards) {
+    cy.get(selectors.clientCards).should('have.length', numberOfCountedCards)
+  }
+
+  /**
+   * Assert the number of groups displayed in each section
+   *
+   * @param {string} groupName
+   * @param {number} numberOfClientsCounted
+   *
+   * @example assertNumberOfClientsByGroup('All Companies', 6) -> Assert there are 6 clients being counted in the All Companies section
+   *
+   */
+  assertNumberOfClientsByGroupSection(groupName, numberOfClientsCounted) {
+    cy.get(selectors.cardsByGroupSection + groupName.replace(/\s/g, '') + ' + .section-count').contains(numberOfClientsCounted + ' Client(s)')
+  }
+
   // ------------------------------------------------------------------------------------ OTHERS------------------------------------------------------------------------------ //
-
-  /**
-   * Search for a client by ID
-   *
-   * @param {number} clientId Client name to search
-   */
-  selectClientById(clientId) {
-    this.getClientCard(clientId).scrollIntoView().click()
-  }
-
-  /**
-   * Click in a client after using the search engine first
-   *
-   * @param {string} clientName Client name to search
-   */
-  selectClientFromTheListBySearch(clientName) {
-    searchEngine.search(clientName)
-    searchEngine.clearSearchBox()
-    cy.contains(clientName) // avoid element detached from the DOM
-    cy.xpath(`//gs-card//h4[normalize-space(text()) = '${clientName}']`).click()
-  }
 
   /**
    * Favorite/Unfavorite a client from the home client list

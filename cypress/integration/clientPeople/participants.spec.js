@@ -19,7 +19,7 @@ describe('Participants tests', () => {
     const participantResidency = 'LUX'
     const numberToSearch = 113067
 
-    equityAdmin.homePage.selectClientById(clientId)
+    equityAdmin.homePage.clickClientById(clientId)
     equityAdmin.clientPeoplePage.checkPageUrl() // needed to use the search engine in the correct page
 
     // Id
@@ -61,7 +61,7 @@ describe('Participants tests', () => {
     const clientId = 144
     const participantId = 113026 // Abel Lewis
 
-    equityAdmin.homePage.selectClientById(clientId)
+    equityAdmin.homePage.clickClientById(clientId)
     equityAdmin.clientPeoplePage.checkPageUrl() // needed to use the search engine in the correct page
 
     equityAdmin.searchEngine.search('thereIsNoOneLikeThisTEST')
@@ -79,7 +79,7 @@ describe('Participants tests', () => {
   it.skip('C1234567_Client_Without_Participants_And_Trusts', () => {
     const clientId = 420
 
-    equityAdmin.homePage.selectClientById(clientId)
+    equityAdmin.homePage.clickClientById(clientId)
     equityAdmin.clientPeoplePage.assertNoParticipantsOrTrustsAvailableDisplayed()
     equityAdmin.clientPeoplePage.clickTab('trusts')
     equityAdmin.clientPeoplePage.assertNoParticipantsOrTrustsAvailableDisplayed()
@@ -98,7 +98,7 @@ describe('Participants tests', () => {
     const participantCountry = 'New Zealand'
     const participantStatus = 'ACTIVE'
 
-    equityAdmin.homePage.selectClientById(clientId)
+    equityAdmin.homePage.clickClientById(clientId)
     equityAdmin.clientPeoplePage.clickParticipantById(participantId)
     equityAdmin.quickEditParticipantDetailL4Page.assertParticipantDetailContent(participantName, participantCountry, participantStatus)
   })

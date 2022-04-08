@@ -22,7 +22,7 @@ describe('Personal profile tests for Participants', () => {
     const baseErrorMessage150chars = ' must have no more than 150 characters'
     const baseErrorMessage10chars = ' must have no more than 10 characters'
 
-    equityAdmin.homePage.selectClientById(clientId)
+    equityAdmin.homePage.clickClientById(clientId)
     equityAdmin.clientPeoplePage.clickToEditParticipant(participantId, false)
     equityAdmin.personalProfileOverviewPage.clickOnTheParticipantNavigationMenu('company')
     equityAdmin.companyProfileOverviewPage.checkPageUrl()
