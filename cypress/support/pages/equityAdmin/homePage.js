@@ -21,10 +21,10 @@ const selectors = {
   clientCardRegulatedStatus: '#regBadge',
   clientCardStatus: '#statusBadge',
   homePageHeader: '#homepageHeader',
-  separatorFavorites: '#cardGroupSectionFavorites',
   groupSections: '*[id*=cardGroupSection]',
   clientCards: 'hearth-client-group-card gs-card',
-  cardsByGroupSection: '#cardGroupSection'
+  cardsByGroupSection: '#cardGroupSection',
+  noDataFoundMessage: '#clientsEmpty'
 }
 
 class HomePage extends BasePage {
@@ -71,14 +71,12 @@ class HomePage extends BasePage {
   }
 
   /**
-   * Assert if the client is favorite
+   * Assert if the client is favorite by checking the star icon and the Favorites section
    *
    * @param {number} clientId Client id to be checked
    * @param {boolean} favorite True fo assert the client is favorite, false otherwise
    */
   assertClientIsFavorite(clientId, favorite = true) {
-    favorite ? cy.get(selectors.separatorFavorites).should('exist') : true
-
     if (favorite) {
       cy.get(`${selectors.clientCard}${clientId}.favoriteVisible`).should('be.visible')
     } else {
@@ -165,6 +163,51 @@ class HomePage extends BasePage {
    */
   assertNumberOfClientsByGroupSection(groupName, numberOfClientsCounted) {
     cy.get(selectors.cardsByGroupSection + groupName.replace(/\s/g, '') + ' + .section-count').contains(numberOfClientsCounted + ' Client(s)')
+  }
+
+  /**
+   * Assert if a section of clients is displayed
+   *
+   * @param {string} sectionName The name of the section to be evaluated if it is displayed
+   * @param {boolean} displayed True is the default value to validate if the section is displayed. Send false to validate the opposite case
+   *
+   * @example
+   * Send 'Favorites' as sectionName to assert the section of Favorites is displayed
+   * Send 'All Companies' as sectionName to assert the section of All Companies is displayed
+   */
+  assertSectionIsDisplayed(sectionName, displayed = true) {
+    displayed
+      ? cy
+          .get(selectors.cardsByGroupSection + sectionName.replace(/\s/g, ''))
+          .scrollIntoView()
+          .should('be.visible')
+      : cy.get(selectors.cardsByGroupSection + sectionName.replace(/\s/g, '')).should('not.exist')
+  }
+
+  /**
+   * Assert the tooltip shows the expected text in the country badge for a specific client
+   *
+   * @firefox_limited Only works for chrome based browsers
+   *
+   * @param {number} clientId Client id number
+   * @param {string} text Text to be validated within the tollTip
+   */
+  assertClientCountryBadgeTollTipDisplaysCorrectText(clientId, text) {
+    cy.get(selectors.clientCardCountryBadge + clientId)
+      .scrollIntoView()
+      .realHover() // Only works for chrome based browsers
+      .then(() => {
+        this.assertTollTipDisplayedWithText(text)
+      })
+  }
+
+  /**
+   * Assert the message 'No data found' when the list of clients is empty or when it does not return clients while searching in the search bar
+   *
+   * @param {boolean} displayed True to assert the message 'No data found' is displayed
+   */
+  assertNoDataFoundDisplayed(displayed = true) {
+    displayed ? cy.get(selectors.noDataFoundMessage).should('be.visible') : cy.get(selectors.noDataFoundMessage).should('not.exist')
   }
 
   // ------------------------------------------------------------------------------------ OTHERS------------------------------------------------------------------------------ //

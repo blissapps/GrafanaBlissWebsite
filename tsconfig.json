@@ -17,6 +17,6 @@
     "skipLibCheck": true,
     "lib": ["ESNext.String", "es7"]
   },
-  "include": ["./cypress"],
+  "include": ["./cypress", "cypress-real-events"],
   "exclude": ["node_modules"]
 }

@@ -12,7 +12,8 @@ const selectors = {
   notificationError: '#notificationError',
   bulkActionsCheckbox: 'gs-grid-row gs-checkbox',
   gsProgressBar: 'hearth-root gs-progress-indicator',
-  entireAppPage: '#sisenseApp'
+  entireAppPage: '#sisenseApp',
+  gsTollTip: 'gs-tooltip'
 }
 
 class BasePage {
@@ -251,6 +252,15 @@ class BasePage {
    */
   assertBulkOptionsDisplayed(displayed = true) {
     displayed ? cy.get(selectors.bulkActionsCheckbox).should('exist') : cy.get(selectors.bulkActionsCheckbox).should('not.exist')
+  }
+
+  /**
+   *
+   * @param {string} text The text to be validated in the tooltip
+   * @param {boolean} displayed True to validate the tooltip with the text id displayed, false otherwise
+   */
+  assertTollTipDisplayedWithText(text, displayed = true) {
+    displayed ? cy.get(selectors.gsTollTip).should('have.text', text) : cy.get(selectors.gsTollTip).should('not.exist')
   }
 
   // -----------------------------------------------------------------------------------  OTHERS ---------------------------------------------------------------------------- //

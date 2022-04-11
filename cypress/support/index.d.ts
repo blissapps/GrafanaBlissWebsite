@@ -34,4 +34,8 @@ declare namespace Cypress {
   interface Chainable {
     purgeClient(clientId: Number): Chainable<Element>
   }
+
+  interface Chainable {
+    realHover(): Chainable<Element>
+  }
 }
