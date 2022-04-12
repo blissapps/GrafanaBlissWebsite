@@ -12,7 +12,7 @@ const selectors = {
   noGroupSelectedMsg: '#noGroupSelectedContainer div.content',
   activeGroupsList: 'gs-tab[data-test-id=activeTab] #groupList gs-list',
   inactiveGroupsList: 'gs-tab[data-test-id=inactiveTab] #groupList gs-list',
-  noGroupsExistMessage: '#emptyList',
+  noGroupsExistMessage: '#emptyContainer',
   groupId: '#group_',
   activateGroupBtn: 'gs-button[data-test-id=activateBtn]',
   groupNameInput: 'gs-input-inline[data-test-id=name-input]',

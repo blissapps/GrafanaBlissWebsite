@@ -170,37 +170,6 @@ describe('Group Management tests over User Management settings', () => {
     })
 
     /**
-     * @missing_data Need to have some groups in both active and inactive tabs
-     */
-    it.skip('C7499684_Groups_Happy_Path_List_Active_And_Inactive_Groups', () => {
-      equityAdmin.groupManagementPage.assertActiveGroupsAreDisplayed()
-      equityAdmin.groupManagementPage.clickTab('Inactive')
-      equityAdmin.groupManagementPage.assertInactiveGroupsAreDisplayed()
-    })
-
-    /**
-     * @missing_data Need to have a group created in the active tab
-     */
-    it.skip('C7499679_Groups_Deactivate_And_Activate_A_Group', () => {
-      const groupId = 1122
-      const groupName = 'Active and Inactive'
-
-      // Inactivating a group
-      equityAdmin.groupManagementPage.clickGroupById(groupId)
-      equityAdmin.groupManagementPage.clickToDeactivateEntity()
-      equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Deactivated')
-      equityAdmin.groupManagementPage.assertInactiveGroupsAreDisplayed()
-      equityAdmin.groupManagementPage.assertEntityIsDisplayedInTheList(groupName)
-
-      // Activating a group
-      equityAdmin.groupManagementPage.clickTab('Inactive')
-      equityAdmin.groupManagementPage.activateGroup()
-      equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Activated')
-      equityAdmin.groupManagementPage.assertActiveGroupsAreDisplayed()
-      equityAdmin.groupManagementPage.assertEntityIsDisplayedInTheList(groupName)
-    })
-
-    /**
      * @missing_data Need to have at least one active group called 'Duplicate this group'
      */
     it.skip('C7493036_Groups_Duplicate_A_Group', () => {

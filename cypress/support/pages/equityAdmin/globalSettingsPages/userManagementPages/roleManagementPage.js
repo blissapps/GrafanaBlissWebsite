@@ -329,6 +329,7 @@ class RoleManagementPage extends BaseManagementPage {
    */
   addOrRemovePermissions(permissionName, permissionsType, insertPermission = true) {
     // Manipulate permissionName and permissionsType, so we do not need to be worried about capitalization nor blank spaces
+    // @ts-ignore
     permissionName = permissionName.replaceAll(' ', '').toLowerCase()
     permissionsType = permissionsType.map((permission) => permission.replaceAll(' ', '').toLowerCase())
 
@@ -391,6 +392,7 @@ class RoleManagementPage extends BaseManagementPage {
    */
   addOrRemoveAllPermissions(permissionsType) {
     // Manipulate permissionName and permissionsType, so we do not need to be worried about capitalization nor blank spaces
+    // @ts-ignore
     permissionsType = permissionsType.replaceAll(' ', '').toLowerCase()
 
     cy.log('Permissions: ' + permissionsType)
@@ -429,6 +431,7 @@ class RoleManagementPage extends BaseManagementPage {
    */
   assertPermissionState(permissionName, permissionsType, activeState) {
     // Manipulate permissionName and permissionsType, so we do not need to be worried about capitalization nor blank spaces
+    // @ts-ignore
     permissionName = permissionName.replaceAll(' ', '').toLowerCase()
     permissionsType = permissionsType.map((permission) => permission.replaceAll(' ', '').toLowerCase())
 
@@ -518,7 +521,7 @@ class RoleManagementPage extends BaseManagementPage {
    * @param {string} fixtureFile name or path for the fixture file located inside the fixtures folder
    */
   interceptAndMockRolesLoadingRequest(fixtureFile) {
-    cy.intercept('GET', apiInterceptions.rolesLoading, { fixture: fixtureFile }).as('emptyUserList')
+    cy.intercept('GET', apiInterceptions.rolesLoading, { fixture: fixtureFile }).as('emptyRoleList')
   }
 
   /**
