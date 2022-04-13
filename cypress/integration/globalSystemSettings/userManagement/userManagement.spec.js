@@ -11,27 +11,6 @@ describe('User Management tests over User Management settings', () => {
 
   // ************************************************ TESTS AS ADMIN TENANT ************************************************** //
 
-  /**
-   * @missing_data We need to make sure about the current total of clients that has the same userEmail
-   */
-  it.skip('C7592116_Users_Search_For_Username_/_Email_And_Check_Highlighted_Data', () => {
-    const username = 'amulcahyNE'
-    const userEmail = 'test@globalshares.com'
-    const userStatus = 'Active'
-
-    cy.log('EMAIL')
-    equityAdmin.searchEngine.search(userEmail)
-    equityAdmin.userManagementPage.assertAmountOfSearchResults(11)
-    equityAdmin.userManagementPage.assertDataDisplayedOnGsGridTableIsHighlighted(userEmail)
-
-    cy.log('USERNAME')
-    equityAdmin.searchEngine.search(username)
-    equityAdmin.userManagementPage.assertAmountOfSearchResults(1)
-    equityAdmin.userManagementPage.assertDataDisplayedOnGsGridTableIsHighlighted(username)
-
-    equityAdmin.userManagementPage.assertDataDisplayedOnGsGridTable([username, userEmail, userStatus])
-  })
-
   it('C7353826_List_User_Happy_Path_Contains_Expected_Columns_On_Users_Table', () => {
     const columnsToValidate = ['username', 'email', 'status']
 

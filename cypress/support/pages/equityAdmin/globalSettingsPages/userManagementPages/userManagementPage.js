@@ -71,17 +71,6 @@ class UserManagementPage extends BaseManagementPage {
     displayed ? cy.get(selectors.noUserExistsMessage).should('be.visible') : cy.get(selectors.noUserExistsMessage).should('not.exist')
   }
 
-  /**
-   * Checks the amount of results displayed in the Users table after using the search engine
-   *
-   * @param {number} results amount of people you want to check after a search
-   *
-   * @example 'results = 2 for '2 SEARCH RESULT(S)' being displayed in the table
-   */
-  assertAmountOfSearchResults(results) {
-    this.assertNumberOfRecordsDisplayed(selectors.numberOfSearchResultsInTable, results)
-  }
-
   // --------------------------------------------------------------------------------------  INTERCEPTIONS ---------------------------------------------------------------------------- //
 
   /**

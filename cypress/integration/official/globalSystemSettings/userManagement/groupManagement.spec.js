@@ -1,11 +1,11 @@
-import EquityAdmin from '../../../support/pages/equityAdmin'
+import EquityAdmin from '../../../../support/pages/equityAdmin'
 
 const equityAdmin = new EquityAdmin()
 
-describe('Group Management tests over User Management settings', () => {
+describe('Group Management tests over User Management settings - Admin tenant user', () => {
   beforeEach(() => {
     equityAdmin.loginPage.login()
-    equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'group')
+    equityAdmin.homePage.navigateToUrl('/tenant/1/settings/group-management')
     equityAdmin.groupManagementPage.checkPageUrl()
   })
 

@@ -13,7 +13,8 @@ const selectors = {
   bulkActionsCheckbox: 'gs-grid-row gs-checkbox',
   gsProgressBar: 'hearth-root gs-progress-indicator',
   entireAppPage: '#sisenseApp',
-  gsTollTip: 'gs-tooltip'
+  gsTollTip: 'gs-tooltip',
+  rowsInTable: 'gs-grid-row-list gs-grid-row'
 }
 
 class BasePage {
@@ -106,7 +107,7 @@ class BasePage {
   /**
    * Assert the number of records displayed. It is shown in the top like this: 'X record(s)' or 'X SEARCH RESULT(S)'
    *
-   * @param {object} locator Object locator where this method will extract the text from this locator
+   * @param {string} locator String that contains the locator where this method will extract the text from
    * @param {number} numberOfRecords amount of people you want to check in the records
    *
    */
@@ -261,6 +262,19 @@ class BasePage {
    */
   assertTollTipDisplayedWithText(text, displayed = true) {
     displayed ? cy.get(selectors.gsTollTip).should('have.text', text) : cy.get(selectors.gsTollTip).should('not.exist')
+  }
+
+  /**
+   * Assert the number of rows in a table (The header is not counted as a row)
+   *
+   * @param {number} expectedNumberOfRows Expected number of rows in the table WITHOUT COUNTING THE TABLE HEADER
+   */
+  assertNumberOfRowsInTable(expectedNumberOfRows) {
+    if (expectedNumberOfRows > 0) {
+      cy.get(selectors.rowsInTable).should('have.length', expectedNumberOfRows + 1)
+    } else {
+      throw new Error('The number ' + expectedNumberOfRows + ' is invalid, please pick a value greaten than 0 to make sense')
+    }
   }
 
   // -----------------------------------------------------------------------------------  OTHERS ---------------------------------------------------------------------------- //

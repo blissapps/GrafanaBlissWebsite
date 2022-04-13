@@ -1,7 +1,7 @@
 import BasePage from '../../../basePage'
 
 const selectors = {
-  numberOfSearchResultsInTable: '#recordCount',
+  numberOfSearchResultsInTable: '#recordCount span',
   searchResultList: 'gs-list[data-test-id=searchListing-found]',
   searchResultItem: '#searchResultItem_',
   searchResultAllItemsHighlighted: '*[id*="searchResultItem_"] gs-highlighted-text mark:not(:empty)',
@@ -346,6 +346,17 @@ class BaseManagementPage extends BasePage {
     this.getEntityHeader().as('input')
 
     editable ? cy.get('@input').should('not.have.class', 'disabled**') : cy.get('@input').should('have.class', 'disabled**')
+  }
+
+  /**
+   * Checks the amount of records displayed in the table over statements pages
+   *
+   * @param {number} records amount of people you want to check in the records
+   *
+   * @example 'records = 1 for '1 record(s)' being displayed in the table
+   */
+  assertNumberOfRecordsDisplayedInTable(records) {
+    cy.xpath(`//*[@id="recordCount"][normalize-space(text())="${records} record(s)"]`).scrollIntoView().should('be.visible')
   }
 
   // ---------------------------------------------------------------------------------------- OTHERS --------------------------------------------------------------------------------- //
