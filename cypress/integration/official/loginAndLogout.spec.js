@@ -1,14 +1,13 @@
 import EquityAdmin from '../../support/pages/equityAdmin'
-// @ts-ignore
-import dataTest from '../fixtures/data.json'
 
 const equityAdmin = new EquityAdmin()
-const dataTestLanguage = Cypress.env('LANGUAGE') // Used just as an example if we want to apply l10n in other spec files
 
 describe('Login and Logout tests', { tags: ['@smoke'] }, () => {
   it('C16515484_Unsuccessful Login with wrong password', () => {
     equityAdmin.loginPage.loginWithoutSession(Cypress.env('DEFAULT_USER_AUTH'), 'Test@1234')
-    equityAdmin.loginPage.assertUnsuccessfulLoginErrorMessageDisplayed(dataTest[dataTestLanguage].errorMessages.loginInvalidEmailOrPassword)
+    equityAdmin.loginPage.assertUnsuccessfulLoginErrorMessageDisplayed(
+      'You have an invalid username or password or your account is locked. Please try again or contact your service team to assist you.'
+    )
   })
 
   it('C16515485_Successful Login', () => {
@@ -18,7 +17,9 @@ describe('Login and Logout tests', { tags: ['@smoke'] }, () => {
 
   it('C16515486_Unsuccessful Login with wrong username', () => {
     equityAdmin.loginPage.loginWithoutSession('test@test.com', Cypress.env('DEFAULT_PASSWORD_AUTH'))
-    equityAdmin.loginPage.assertUnsuccessfulLoginErrorMessageDisplayed(dataTest[dataTestLanguage].errorMessages.loginInvalidEmailOrPassword)
+    equityAdmin.loginPage.assertUnsuccessfulLoginErrorMessageDisplayed(
+      'You have an invalid username or password or your account is locked. Please try again or contact your service team to assist you.'
+    )
   })
 
   it('C16515487_Logout from the application', () => {
