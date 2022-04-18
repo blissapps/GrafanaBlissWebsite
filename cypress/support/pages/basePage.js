@@ -277,6 +277,15 @@ class BasePage {
     }
   }
 
+  /**
+   * Assert if a text id displayed in a gs-badge element
+   *
+   * @param {string} text Text to be found inside the gs-badge
+   */
+  assertGSBadgeContainsText(text) {
+    cy.get('gs-badge').contains(text)
+  }
+
   // -----------------------------------------------------------------------------------  OTHERS ---------------------------------------------------------------------------- //
 
   /**

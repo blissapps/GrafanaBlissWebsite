@@ -502,13 +502,14 @@ class GroupManagementPage extends BaseManagementPage {
    * @param {array} userIds Array of ids of users that are going to be added into this group.
    * @param {array} companyNames Array of names of companies that are going to be added into this group.
    * @param {array} companyIds Array of ids of companies  that are going to be added into this group.
+   * @param {boolean} saveChanges In case you send false, the new group information will be filled out but it will not be saved
    *
    * @example
    * All names and ids need to be placed in order for all parameters that it is applied.
    * For example: dapNames=['dap1', 'dap2'] needs to match the exactly order in dapIds=[1, 2]
    *
    */
-  createGroup(groupName, roleName = '', roleId = 0, dapNames = [], dapIds = [], userNames = [], userIds = [], companyNames = [], companyIds = []) {
+  createGroup(groupName, roleName = '', roleId = 0, dapNames = [], dapIds = [], userNames = [], userIds = [], companyNames = [], companyIds = [], saveChanges = true) {
     // ********* Validating if the data is consistent *********** //
     // DAPs
     if (dapNames.length == dapIds.length) {
@@ -552,7 +553,7 @@ class GroupManagementPage extends BaseManagementPage {
       this.addCompaniesToGroup(companyNames, companyIds)
     }
 
-    this.saveEntityInformation()
+    saveChanges ? this.saveEntityInformation() : null
   }
 
   /**

@@ -56,7 +56,7 @@ class BaseManagementPage extends BasePage {
     if (displayed) {
       return cy.xpath(`//gs-list//div[normalize-space(text()) = '${entityName}']`)
     } else {
-      return cy.get(selectors.entityNameInList).filter(`:contains('${entityName}')`).should('not.exist')
+      return cy.xpath(`//gs-list//div[normalize-space(text()) = '${entityName}']`).should('not.exist')
     }
   }
 

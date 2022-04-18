@@ -1,8 +1,6 @@
 import EquityAdmin from '../../../support/pages/equityAdmin'
-import Utils from '../../../support/utils'
 
 const equityAdmin = new EquityAdmin()
-const utils = new Utils()
 
 describe('Group Management tests over User Management settings', () => {
   context('Default User', () => {
@@ -170,25 +168,6 @@ describe('Group Management tests over User Management settings', () => {
     })
 
     /**
-     * @missing_data Need to have at least one active group called 'Duplicate this group'
-     */
-    it.skip('C7493036_Groups_Duplicate_A_Group', () => {
-      const groupId = 1097
-      const groupName = 'Duplicate this group'
-      const newNameForDuplicatedGroup = 'Duplicated Group ' + utils.getRandomNumber()
-
-      equityAdmin.groupManagementPage.clickGroupById(groupId)
-      equityAdmin.groupManagementPage.clickToDuplicateEntity()
-      equityAdmin.groupManagementPage.assertEntityHeaderIsDisplayedAsExpected('Copy Of ' + groupName)
-      equityAdmin.groupManagementPage.modifyEntityName(newNameForDuplicatedGroup)
-      equityAdmin.groupManagementPage.saveEntityInformation()
-
-      equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(newNameForDuplicatedGroup + ' Saved')
-      equityAdmin.groupManagementPage.assertInactiveGroupsAreDisplayed()
-      equityAdmin.groupManagementPage.assertEntityIsDisplayedInTheList(newNameForDuplicatedGroup)
-    })
-
-    /**
      * @missing_data Need to have a group with NO role associated. Also, it needs to have at least on role created in the environment.
      */
     it.skip('C7419661_Groups_Add_A_Role_To_A_Group', () => {
@@ -200,22 +179,6 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.clickGroupById(groupId)
       equityAdmin.groupManagementPage.selectRoleToGroup(roleName, roleId)
       equityAdmin.groupManagementPage.saveEntityInformation()
-      equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
-
-      equityAdmin.groupManagementPage.assertRoleAssociatedWithGroup(roleId)
-    })
-
-    /**
-     * @missing_data Need to have a group with an associated role created. Also, it needs to have at least two roles created in the environment.
-     */
-    it.skip('C7419662_Groups_Change_The_Role_Associated_With_A_Group', () => {
-      const groupId = 1230
-      const groupName = 'Change this role'
-      const roleName = 'View Only'
-      const roleId = 1397
-
-      equityAdmin.groupManagementPage.clickGroupById(groupId)
-      equityAdmin.groupManagementPage.selectRoleToGroup(roleName, roleId)
       equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
 
       equityAdmin.groupManagementPage.assertRoleAssociatedWithGroup(roleId)

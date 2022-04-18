@@ -22,17 +22,20 @@ describe('Group Management tests over User Management settings - Different users
   it('C16587446_List All Active Groups - Empty state', () => {
     equityAdmin.loginPage.login('jachas@globalshares.com')
     equityAdmin.homePage.navigateToUrl('/tenant/546/settings/group-management') //cargill1
+
     equityAdmin.groupManagementPage.assertNoGroupExistMessageIsDisplayed()
   })
 
   it('C16587447_List All Inactive Groups - Empty state', () => {
     equityAdmin.loginPage.login('jachas@globalshares.com')
     equityAdmin.homePage.navigateToUrl('/tenant/548/settings/group-management') // cargill3
+
     equityAdmin.groupManagementPage.assertNoGroupExistMessageIsDisplayed()
   })
 
   it('C16587448_List All Groups - No access to Group Management area', () => {
     equityAdmin.loginPage.login('DPikurs@globalshares.com')
+
     equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user')
     equityAdmin.settingsMenuNavBar.assertGroupSubMenuItemDisplayed(false)
 
@@ -52,6 +55,22 @@ describe('Group Management tests over User Management settings - Different users
     equityAdmin.groupManagementPage.assertCreateNewGroupButtonDisplayed(false)
     equityAdmin.groupManagementPage.addPathToUrlAndVisitIt('/0')
     // Need to wait for PB-979 to know what are going to be the next steps
+  })
+
+  it('C16661659_Not able to duplicate group', () => {
+    equityAdmin.loginPage.login('tlaw@globalshares.com')
+    equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'group')
+    equityAdmin.groupManagementPage.checkPageUrl()
+    equityAdmin.groupManagementPage.assertGroupPageHeaderIsDisplayed()
+
+    equityAdmin.groupManagementPage.clickGroupById(946)
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('roles', 1)
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 1)
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('users', 1)
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('companies', 2)
+
+    equityAdmin.groupManagementPage.clickThreeDotOptionButton()
+    equityAdmin.groupManagementPage.assertDuplicateEntityButtonDisplayed(false)
   })
 })
 
@@ -128,5 +147,96 @@ describe('Group Management tests over User Management settings - Admin tenant us
 
     equityAdmin.groupManagementPage.createGroup('')
     equityAdmin.groupManagementPage.assertNotificationErrorDisplayed('Name should not be empty.')
+  })
+
+  it('C16661657_Duplicate a Group', () => {
+    const groupId = 434
+    const groupName = 'cash_gen_006'
+    const newNameForDuplicatedGroup = 'Duplicated Group ' + utils.getRandomNumber()
+
+    equityAdmin.homePage.navigateToUrl('/tenant/154/settings/group-management') // cashgen006
+
+    equityAdmin.groupManagementPage.clickGroupById(groupId)
+    equityAdmin.groupManagementPage.clickToDuplicateEntity()
+    equityAdmin.groupManagementPage.assertEntityHeaderIsDisplayedAsExpected('Copy Of ' + groupName)
+    equityAdmin.groupManagementPage.assertGSBadgeContainsText('INACTIVE')
+    equityAdmin.groupManagementPage.modifyEntityName(newNameForDuplicatedGroup)
+    equityAdmin.groupManagementPage.saveEntityInformation()
+
+    equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(newNameForDuplicatedGroup + ' Saved')
+    equityAdmin.groupManagementPage.assertInactiveGroupsAreDisplayed()
+    equityAdmin.groupManagementPage.assertEntityIsDisplayedInTheList(newNameForDuplicatedGroup)
+  })
+
+  it('C16661658_Duplicate a Group - Empty name', () => {
+    const groupId = 434
+    const groupName = 'cash_gen_006'
+
+    equityAdmin.homePage.navigateToUrl('/tenant/154/settings/group-management') // cashgen006
+
+    equityAdmin.groupManagementPage.clickGroupById(groupId)
+    equityAdmin.groupManagementPage.clickToDuplicateEntity()
+    equityAdmin.groupManagementPage.assertEntityHeaderIsDisplayedAsExpected('Copy Of ' + groupName)
+    equityAdmin.groupManagementPage.assertGSBadgeContainsText('INACTIVE')
+    equityAdmin.groupManagementPage.modifyEntityName('')
+    equityAdmin.groupManagementPage.saveEntityInformation()
+
+    equityAdmin.groupManagementPage.assertNotificationErrorDisplayed('Name should not be empty.')
+  })
+
+  it('C16661664_Add a Role to a Group', () => {
+    const groupName = 'Created Group ' + utils.getRandomNumber()
+    const roleName = 'cash_gen_013 Participants'
+    const roleId = 738
+
+    equityAdmin.homePage.navigateToUrl('/tenant/175/settings/group-management') // cashgen013
+
+    equityAdmin.groupManagementPage.createGroup(groupName, roleName, roleId)
+    equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
+    equityAdmin.groupManagementPage.assertEntityIsDisplayedInTheList(groupName)
+    equityAdmin.groupManagementPage.clickEntityByName(groupName)
+    equityAdmin.groupManagementPage.assertRoleAssociatedWithGroup(roleId)
+  })
+
+  it('C16661665_Dismiss adding a Role to a group', () => {
+    const groupName = 'Dismissed role name - C16661665'
+    const roleName = 'cash_gen_014 Participants'
+    const roleId = 740
+
+    equityAdmin.homePage.navigateToUrl('/tenant/177/settings/group-management') // cashgen014
+
+    equityAdmin.groupManagementPage.createGroup(groupName, roleName, roleId, [], [], [], [], [], [], false)
+    equityAdmin.groupManagementPage.assertRoleAssociatedWithGroup(roleId)
+    equityAdmin.groupManagementPage.discardEntityInformation()
+    equityAdmin.groupManagementPage.assertEntityIsDisplayedInTheList(groupName, false)
+  })
+
+  it('C16661666_Do Not Save the Role Added to a group', () => {
+    const groupId = 459
+    const roleName = 'cash_gen_015 Participants'
+    const roleId = 742
+
+    equityAdmin.homePage.navigateToUrl('/tenant/179/settings/group-management') // cashgen015
+
+    equityAdmin.groupManagementPage.clickGroupById(groupId)
+    equityAdmin.groupManagementPage.selectRoleToGroup(roleName, roleId)
+    equityAdmin.groupManagementPage.assertRoleAssociatedWithGroup(roleId)
+    equityAdmin.groupManagementPage.discardEntityInformation()
+    equityAdmin.groupManagementPage.assertRoleAssociatedWithGroup(roleId, false)
+  })
+
+  it('C16661667_Add a User to a Group', () => {
+    const groupId = 459
+    const groupName = 'cash_gen_015'
+    const userId = [678]
+    const userName = ['cashgen015']
+
+    equityAdmin.homePage.navigateToUrl('/tenant/179/settings/group-management') // cashgen015
+
+    equityAdmin.groupManagementPage.clickGroupById(groupId)
+    equityAdmin.groupManagementPage.addUsersToGroup(userName, userId)
+    equityAdmin.groupManagementPage.saveEntityInformation()
+    equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
+    equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userId[0])
   })
 })
