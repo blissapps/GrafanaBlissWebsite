@@ -188,32 +188,6 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertEntityIsDisplayedInTheList(newNameForDuplicatedGroup)
     })
 
-    it('C12925306_Groups_Create_A_New_Group_Without_Entities_Associated', () => {
-      const groupName = 'Created Group ' + utils.getRandomNumber()
-      equityAdmin.groupManagementPage.createGroup(groupName)
-      equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
-      equityAdmin.groupManagementPage.assertEntityIsDisplayedInTheList(groupName)
-    })
-
-    /**
-     * @missing_data Need to have at least one group and roles, daps, users, and companies to associate
-     */
-    it.skip('C7493034_Groups_Create_A_New_Group', () => {
-      const groupName = 'Created Group ' + utils.getRandomNumber()
-      const roleName = 'View Only'
-      const roleId = 1397
-      const dapNames = ['Test', 'View']
-      const dapIds = [60, 12]
-      const userNames = ['carolyn', 'igor']
-      const userIds = [754546, 754556]
-      const companyName = ['7Digital', '9F Group']
-      const companyIds = [144, 337]
-
-      equityAdmin.groupManagementPage.createGroup(groupName, roleName, roleId, dapNames, dapIds, userNames, userIds, companyName, companyIds)
-      equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
-      equityAdmin.groupManagementPage.assertEntityIsDisplayedInTheList(groupName)
-    })
-
     /**
      * @missing_data Need to have a group with NO role associated. Also, it needs to have at least on role created in the environment.
      */
@@ -657,18 +631,6 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertDeactivateEntityButtonDisplayed(true)
       equityAdmin.groupManagementPage.assertCreateNewGroupButtonDisplayed(false)
       equityAdmin.groupManagementPage.assertDuplicateEntityButtonDisplayed(false)
-    })
-
-    /**
-     * @missing_data Need to have a group linked with a user that has all Group permissions but Create
-     *
-     * @bug_raised
-     * SkIPPING due to https://globalshares.atlassian.net/browse/PB-979
-     */
-    it.skip('C7493035_Groups_User_Does_Not_Have_Group_Permission_To_Create_Group', () => {
-      equityAdmin.groupManagementPage.assertCreateNewGroupButtonDisplayed(false)
-      equityAdmin.groupManagementPage.navigateToUrl('/0')
-      // Need to wait for PB-979 to know what are going to be the next steps
     })
   })
 

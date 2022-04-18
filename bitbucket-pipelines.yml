@@ -62,19 +62,6 @@ pipelines:
           - cypress/videos/**
           - cypress/test-results/**
           - cypress/downloads/**
-    - step:
-        name: Cypress - Firefox browser
-        caches:
-          - npm
-          - cypress
-          - node
-        script:
-          - yarn cy:run:firefox
-        artifacts:
-          - cypress/screenshots/**
-          - cypress/videos/**
-          - cypress/test-results/**
-          - cypress/downloads/**
 
   branches:
     cypressDashboard:
@@ -97,10 +84,3 @@ pipelines:
               <<: *cypressChrome
           - step:
               <<: *cypressChrome
-      - parallel:
-          - step:
-              <<: *cypressFirefox
-          - step:
-              <<: *cypressFirefox
-          - step:
-              <<: *cypressFirefox

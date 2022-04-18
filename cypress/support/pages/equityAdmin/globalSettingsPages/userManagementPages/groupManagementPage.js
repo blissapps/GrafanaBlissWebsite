@@ -22,7 +22,8 @@ const selectors = {
   addUsersBtn: '*[data-test-id=section-user] *[data-test-id=add-entity]',
   addCompaniesBtn: '*[data-test-id=section-client] *[data-test-id=add-entity]',
   changeRoleBtn: '*[data-test-id=section-role] a',
-  removeIconButton: 'gs-button[data-test-id=remove-entity]'
+  removeIconButton: 'gs-button[data-test-id=remove-entity]',
+  groupPageHeader: '#groupMgmtHeader'
 }
 
 // These selectors are the ones from the cards
@@ -108,6 +109,16 @@ class GroupManagementPage extends BaseManagementPage {
   }
 
   // --------------------------------------------------------------------------- ASSERTIONS ------------------------------------------------------------------------------ //
+
+  /**
+   * Assert the page header 'Groups' is displayed. It may be useful to guarantee the Groups page is the correct one being displayed.
+   *
+   * @param {boolean} displayed True is the default value to assert the header is displayed. Send false to validate the otherwise
+   */
+  assertGroupPageHeaderIsDisplayed(displayed = true) {
+    displayed ? cy.get(selectors.groupPageHeader).should('be.visible').and('have.text', 'Groups') : cy.get(selectors.groupPageHeader).should('not.exist')
+  }
+
   /**
    * Assert if the msg about no groups selected is displayed or not
    *

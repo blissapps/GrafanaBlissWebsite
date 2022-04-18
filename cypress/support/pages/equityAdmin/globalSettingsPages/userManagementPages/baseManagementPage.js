@@ -20,7 +20,6 @@ const selectors = {
   hideUsersBtn: '*[data-test-id=section-user] gs-button[data-test-id=hide]',
   hideCompaniesBtn: '*[data-test-id=section-client] gs-button[data-test-id=hide]',
   hideGroupsBtn: '*[data-test-id=section-group] gs-button[data-test-id=hide]',
-  entityNameInList: 'gs-list a',
   threeDotBtn: 'gs-button[data-test-id=detailsActionPanelBtn]',
   threeDotDuplicateBtn: 'gs-action-panel-option[data-test-id=action-duplicate]',
   threeDotDeactivateBtn: 'gs-action-panel-option[data-test-id=action-deactivate]',
@@ -55,9 +54,7 @@ class BaseManagementPage extends BasePage {
    */
   getEntityByName(entityName, displayed = true) {
     if (displayed) {
-      cy.get(selectors.entityNameInList).as('entity')
-
-      return cy.get('@entity').filter(`:contains('${entityName}')`)
+      return cy.xpath(`//gs-list//div[normalize-space(text()) = '${entityName}']`)
     } else {
       return cy.get(selectors.entityNameInList).filter(`:contains('${entityName}')`).should('not.exist')
     }
@@ -379,7 +376,10 @@ class BaseManagementPage extends BasePage {
     this.getEntityHeader().as('input')
 
     cy.get('@input').clear()
-    cy.get('@input').type(entityName).blur() // remove focus from element
+
+    if (entityName != '') {
+      cy.get('@input').type(entityName).blur() // remove focus from element
+    }
   }
 
   /**
