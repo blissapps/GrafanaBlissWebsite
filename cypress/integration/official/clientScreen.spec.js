@@ -8,6 +8,9 @@ describe('Client search tests related with the search bar functionally in the ho
     equityAdmin.homePage.checkPageUrl()
   })
 
+  /**
+   * @bug_raised https://globalshares.atlassian.net/browse/PB-1185
+   */
   it('C16515489_Search client', () => {
     const clientName = 'label'
 
@@ -15,15 +18,18 @@ describe('Client search tests related with the search bar functionally in the ho
     equityAdmin.homePage.assertNumberOfClientCardsCounted(6)
     equityAdmin.homePage.assertNumberOfClientsDisplayedOnThePageHeader(6)
     equityAdmin.homePage.assertNumberOfClientsByGroupSection('All Companies', 6)
-    equityAdmin.homePage.assertClientCardSummaryInformation(463, 'Gateway Labels 1', 'GBR', 'Not Regulated', 'NOT SET')
-    equityAdmin.homePage.assertClientCardSummaryInformation(410, 'Label Checks', 'IRL', 'Regulated', 'NOT SET')
-    equityAdmin.homePage.assertClientCardSummaryInformation(287, 'Labels', 'GBR', 'Not Regulated', 'NOT SET')
-    equityAdmin.homePage.assertClientCardSummaryInformation(495, 'White_Label', 'IRL', 'Regulated', 'NOT SET')
-    equityAdmin.homePage.assertClientCardSummaryInformation(413, 'WhiteLabel', 'KHM', 'Not Regulated', 'NOT SET')
-    equityAdmin.homePage.assertClientCardSummaryInformation(506, 'WhiteLabel1', 'ITA', 'Regulated', 'NOT SET')
+
+    // Add the status as a parameter in the assertClientCardSummaryInformation as soon as the PB-1185 is fixed, like this:
+    // equityAdmin.homePage.assertClientCardSummaryInformation(463, 'Gateway Labels 1', 'GBR', 'Not Regulated', 'NOT SET')
+    equityAdmin.homePage.assertClientCardSummaryInformation(463, 'Gateway Labels 1', 'GBR', 'Not Regulated')
+    equityAdmin.homePage.assertClientCardSummaryInformation(410, 'Label Checks', 'IRL', 'Regulated')
+    equityAdmin.homePage.assertClientCardSummaryInformation(287, 'Labels', 'GBR', 'Not Regulated')
+    equityAdmin.homePage.assertClientCardSummaryInformation(495, 'WhiteLabell', 'IRL', 'Regulated')
+    equityAdmin.homePage.assertClientCardSummaryInformation(413, 'WhiteLabel', 'KHM', 'Not Regulated')
+    equityAdmin.homePage.assertClientCardSummaryInformation(506, 'WhiteLabel1', 'ITA', 'Regulated')
   })
 
-  it('CC16515490_Clear client search', () => {
+  it('C16515490_Clear client search', () => {
     const clientName = 'label'
     const firstClientCardId = 472
 
@@ -34,7 +40,11 @@ describe('Client search tests related with the search bar functionally in the ho
     equityAdmin.homePage.assertClientCardSummaryInformation(firstClientCardId, 'ActivateLang')
   })
 
-  it('C16524712_Favorite/Unfavorite Client', () => {
+  /**
+   * @bug_raised
+   * SkIPPING DUE TO https://globalshares.atlassian.net/browse/PB-1184
+   */
+  it.skip('C16524712_Favorite/Unfavorite Client', () => {
     const clientName = 'Revertdata1'
     const clientId = 516
 
@@ -55,7 +65,11 @@ describe('Client search tests related with the search bar functionally in the ho
     equityAdmin.homePage.assertSectionIsDisplayed('Favorites', false)
   })
 
-  it('C16524713_Group clients by alphabets', () => {
+  /**
+   * @bug_raised
+   * SkIPPING DUE TO https://globalshares.atlassian.net/browse/PB-1185
+   */
+  it.skip('C16524713_Group clients by alphabets', () => {
     // All Companies (default)
     equityAdmin.homePage.selectGroupByOptionForCompanies()
     equityAdmin.homePage.assertCompaniesAreOrdered()

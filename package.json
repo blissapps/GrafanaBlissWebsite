@@ -1,6 +1,6 @@
 {
   "name": "gs-cypress-automation-framework",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "Cypress framework for the new Equity Admin Portal",
   "repository": {
     "type": "git",
