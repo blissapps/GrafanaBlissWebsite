@@ -72,6 +72,45 @@ describe('Group Management tests over User Management settings - Different users
     equityAdmin.groupManagementPage.clickThreeDotOptionButton()
     equityAdmin.groupManagementPage.assertDuplicateEntityButtonDisplayed(false)
   })
+
+  it('C16767340_Not able to Deactivate a group', () => {
+    const groupId = 941 // Cannot Update & Delete Group
+
+    equityAdmin.loginPage.login('jachas@globalshares.com')
+    equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'group')
+    equityAdmin.groupManagementPage.checkPageUrl()
+
+    equityAdmin.groupManagementPage.clickGroupById(groupId)
+    equityAdmin.groupManagementPage.assertThreeDotButtonDisplayed()
+    equityAdmin.groupManagementPage.clickThreeDotOptionButton()
+    equityAdmin.groupManagementPage.assertDuplicateEntityButtonDisplayed(true)
+    equityAdmin.groupManagementPage.assertCreateNewGroupButtonDisplayed(true)
+    equityAdmin.groupManagementPage.assertDeactivateEntityButtonDisplayed(false)
+  })
+
+  it('C16767341_User is not able to add or change role', () => {
+    const groupId = 941 // Cannot Update & Delete Group
+
+    equityAdmin.loginPage.login('jachas@globalshares.com')
+    equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'group')
+    equityAdmin.groupManagementPage.checkPageUrl()
+
+    equityAdmin.groupManagementPage.clickGroupById(groupId)
+    equityAdmin.groupManagementPage.assertEntityHeaderIsDisplayedAsExpected()
+    equityAdmin.groupManagementPage.assertChangeRoleButtonDisplayed(false)
+  })
+
+  it('C16767327_Unable to Add User to the Group', () => {
+    const groupId = 941 // Cannot Update & Delete Group
+
+    equityAdmin.loginPage.login('jachas@globalshares.com')
+    equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'group')
+    equityAdmin.groupManagementPage.checkPageUrl()
+
+    equityAdmin.groupManagementPage.clickGroupById(groupId)
+    equityAdmin.groupManagementPage.assertEntityHeaderIsDisplayedAsExpected()
+    equityAdmin.groupManagementPage.assertAddUsersButtonDisplayed(false)
+  })
 })
 
 describe('Group Management tests over User Management settings - Admin tenant user direct setting navigation (navigateToUrl)', () => {
@@ -238,5 +277,123 @@ describe('Group Management tests over User Management settings - Admin tenant us
     equityAdmin.groupManagementPage.saveEntityInformation()
     equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
     equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userId[0])
+  })
+
+  it('C16767329_Add a Single Company to a Group', () => {
+    const groupId = 516
+    const groupName = 'cash_gen_021'
+    const companyNames = ['cashgen020']
+    const companyIds = [339]
+
+    equityAdmin.homePage.navigateToUrl('/tenant/236/settings/group-management') // cashgen021
+
+    equityAdmin.groupManagementPage.clickGroupById(groupId)
+    equityAdmin.groupManagementPage.addCompaniesToGroup(companyNames, companyIds)
+    equityAdmin.groupManagementPage.saveEntityInformation()
+    equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
+
+    equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[0])
+  })
+
+  it('C16767330_Dismiss Adding a Company to a Group', () => {
+    const groupId = 531
+    const companyNames = ['cashgen020']
+    const companyIds = [339]
+
+    equityAdmin.homePage.navigateToUrl('/tenant/251/settings/group-management') // cashgen022
+
+    equityAdmin.groupManagementPage.clickGroupById(groupId)
+    equityAdmin.groupManagementPage.addCompaniesToGroup(companyNames, companyIds)
+    equityAdmin.groupManagementPage.discardEntityInformation()
+
+    equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[0], false)
+  })
+
+  it('C16767331_Adding more than one company to a group', () => {
+    const groupId = 534
+    const groupName = 'cash_gen_023'
+    const companyNames = ['cashgen001', 'cashgen002', 'cashgen003', 'cashgen004', 'cashgen005', 'cashgen006', 'cashgen007', 'cashgen008', 'cashgen009']
+    const companyIds = [179, 181, 202, 255, 258, 259, 264, 265, 267]
+
+    equityAdmin.homePage.navigateToUrl('/tenant/254/settings/group-management') // cashgen023
+
+    equityAdmin.groupManagementPage.clickGroupById(groupId)
+    equityAdmin.groupManagementPage.addCompaniesToGroup(companyNames, companyIds)
+    equityAdmin.groupManagementPage.saveEntityInformation()
+    equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
+
+    equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[0], true, true)
+    equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[1])
+    equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[2])
+    equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[3])
+    equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[4])
+    equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[5])
+    equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[6])
+    equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[7])
+    equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[8])
+  })
+
+  it('C16767332_Do Not Save Adding Company to a group', () => {
+    const groupId = 540
+    const companyNames = ['cashgen020', 'cashgen021', 'cashgen022', 'cashgen023', 'cashgen025']
+    const companyIds = [339, 341, 356, 359, 366]
+
+    equityAdmin.homePage.navigateToUrl('/tenant/260/settings/group-management') // cashgen024
+
+    equityAdmin.groupManagementPage.clickGroupById(groupId)
+    equityAdmin.groupManagementPage.addCompaniesToGroup(companyNames, companyIds)
+    equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[0])
+    equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[1])
+    equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[2])
+    equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[3])
+    equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[4])
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('companies', companyIds.length + 1)
+
+    equityAdmin.groupManagementPage.discardEntityInformation()
+
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('companies', 1)
+    equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[0], false)
+    equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[1], false)
+    equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[2], false)
+    equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[3], false)
+    equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[4], false)
+  })
+
+  it('C16767326_Dismiss Adding a User to a Group', () => {
+    const groupId = 514
+    const userName = ['cashgen020']
+    const userIds = [825]
+
+    equityAdmin.homePage.navigateToUrl('/tenant/234/settings/group-management') // cashgen020
+
+    equityAdmin.groupManagementPage.clickGroupById(groupId)
+    equityAdmin.groupManagementPage.addUsersToGroup(userName, userIds)
+    equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userIds[0])
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('users', userIds.length)
+
+    equityAdmin.groupManagementPage.discardEntityInformation()
+
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('users', 0)
+    equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userIds[0], false)
+  })
+
+  it('C16767328_Adding more than one user to a group', () => {
+    const groupId = 541
+    const groupName = 'cash_gen_025'
+    const userName = ['cashgen025_1', 'cashgen025_2', 'cashgen025_3', 'cashgen025_4']
+    const userIds = [954, 956, 958, 960]
+
+    equityAdmin.homePage.navigateToUrl('/tenant/261/settings/group-management') // cashgen025
+
+    equityAdmin.groupManagementPage.clickGroupById(groupId)
+    equityAdmin.groupManagementPage.addUsersToGroup(userName, userIds)
+    equityAdmin.groupManagementPage.saveEntityInformation()
+
+    equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('users', userIds.length)
+    equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userIds[0], true)
+    equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userIds[1], true)
+    equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userIds[2], true)
+    equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userIds[3], true)
   })
 })

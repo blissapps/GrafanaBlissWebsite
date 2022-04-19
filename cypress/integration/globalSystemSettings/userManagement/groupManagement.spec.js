@@ -258,22 +258,6 @@ describe('Group Management tests over User Management settings', () => {
     })
 
     /**
-     * @missing_data Need to have a group. Also, it needs to have at least one user created in the environment.
-     */
-    it.skip('C7419660_Groups_Discard_Without_Saving_The_User', () => {
-      const groupId = 1256
-      const userName = ['carolyn_giles', 'amulcahyNE']
-      const userIds = [754546, 454292]
-
-      equityAdmin.groupManagementPage.clickGroupById(groupId)
-      equityAdmin.groupManagementPage.addUsersToGroup(userName, userIds)
-      equityAdmin.groupManagementPage.discardEntityInformation()
-
-      equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userIds[0], false)
-      equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userIds[1], false)
-    })
-
-    /**
      * @missing_data Need to have a group. Also, it needs to have at least one client created in the environment.
      */
     it.skip('C7462559_Groups_Add_A_Client_To_A_Group', () => {
@@ -290,22 +274,6 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[0])
       equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[1])
       equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[2])
-    })
-
-    /**
-     * @missing_data Need to have a group. Also, it needs to have at least one client created in the environment.
-     */
-    it.skip('C7462561_Groups_Discard_Without_Saving_The_Company', () => {
-      const groupId = 1220
-      const companyNames = ['7Digital', '9F Group', 'Allianz']
-      const companyIds = [144, 337, 55]
-
-      equityAdmin.groupManagementPage.clickGroupById(groupId)
-      equityAdmin.groupManagementPage.addCompaniesToGroup(companyNames, companyIds)
-      equityAdmin.groupManagementPage.discardEntityInformation()
-
-      equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(companyIds[0], false)
-      equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(companyIds[1], false)
     })
 
     /**
@@ -566,20 +534,6 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertRemoveUserOptionIsDisplayed(userId, false)
       equityAdmin.groupManagementPage.assertRemoveCompanyOptionIsDisplayed(companiesIds[0], false)
       equityAdmin.groupManagementPage.assertRemoveCompanyOptionIsDisplayed(companiesIds[1], false)
-    })
-
-    /**
-     * @missing_data Need to have a group linked with a user that has all Group permissions but Delete
-     */
-    it.skip('C7499680_Groups_User_Does_Not_Have_Group_Permission_To_Deactivate_Group', () => {
-      const groupId = 1017
-
-      equityAdmin.groupManagementPage.clickGroupById(groupId)
-      equityAdmin.groupManagementPage.assertThreeDotButtonDisplayed()
-      equityAdmin.groupManagementPage.clickThreeDotOptionButton()
-      equityAdmin.groupManagementPage.assertDuplicateEntityButtonDisplayed(true)
-      equityAdmin.groupManagementPage.assertCreateNewGroupButtonDisplayed(true)
-      equityAdmin.groupManagementPage.assertDeactivateEntityButtonDisplayed(false)
     })
 
     /**
