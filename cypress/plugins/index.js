@@ -47,6 +47,7 @@ module.exports = (on, config) => {
 
   on('after:run', async () => {
     console.log('override after:run')
+    await exec('cp -r cypress/test-results/.jsons cypress/test-results/jsonResults')
     await afterRunHook()
     await exec('yarn jrm ./cypress/test-results/JUnitReport.xml ./cypress/test-results/junit/*.xml')
   })
