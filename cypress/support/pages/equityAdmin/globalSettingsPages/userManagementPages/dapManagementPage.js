@@ -14,7 +14,7 @@ const selectors = {
   inactiveDapList: 'gs-tab[data-test-id=inactiveTab] #dapList gs-list',
   dapsDisplayed: '#dapList gs-list a[data-test-id*="dap-',
   noDapsExistMessage: '#emptyList',
-  addGroupsBtn: '*[data-test-id=section-group] gs-button[data-test-id=add-entity]',
+  addGroupsBtn: '*[data-test-id=section-group] *[data-test-id=add-entity]',
   dapId: 'a[data-test-id=dap-',
   groupsCardId: '*[data-test-id=section-group] gs-card[data-test-id=entity-',
   removeIconButton: 'gs-button[data-test-id=remove-entity]',

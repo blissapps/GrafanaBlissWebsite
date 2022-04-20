@@ -114,32 +114,6 @@ describe('Data Access Profiles tests over User Management settings', () => {
     })
 
     /**
-     * @missing_data Need to have a DAP and 2 groups available to be added. These groups should only be used in this test
-     */
-    it.skip('C9277650_DAP_Link_Groups_To_DAP', () => {
-      const dapId = 11
-      const dapName = 'Add groups'
-      const groupName = ['Group to be added in DAP 1', 'Group to be added in DAP 2']
-      const groupIdsToAssociate = [966, 967]
-
-      equityAdmin.dapManagementPage.clickDapById(dapId)
-      equityAdmin.dapManagementPage.addGroupsToDap(groupName, groupIdsToAssociate)
-      equityAdmin.dapManagementPage.saveEntityInformation()
-
-      equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved')
-      equityAdmin.dapManagementPage.assertNumberOfGroupRecordsAssociatedWithDap(2)
-      equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupIdsToAssociate[0])
-      equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupIdsToAssociate[1])
-
-      // So go to groups and see if the association is made
-      equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'group', false)
-      equityAdmin.groupManagementPage.clickGroupById(groupIdsToAssociate[0])
-      equityAdmin.groupManagementPage.assertDapAssociatedWithGroup(dapId)
-      equityAdmin.groupManagementPage.clickGroupById(groupIdsToAssociate[1])
-      equityAdmin.groupManagementPage.assertDapAssociatedWithGroup(dapId)
-    })
-
-    /**
      * @missing_data Need to have a DAP and any 2 groups available to be added and discarded
      */
     it.skip('C9277651_DAP_Discard_Draft_Linked_Groups', () => {
@@ -175,90 +149,6 @@ describe('Data Access Profiles tests over User Management settings', () => {
       equityAdmin.dapManagementPage.saveEntityInformation()
       equityAdmin.dapManagementPage.assertNotificationErrorDisplayed()
       cy.network({ offline: false }) && cy.assertNetworkOnline({ online: true })
-    })
-
-    it('C8981124_DAP_Create_DAP_With_No_Nested_Conditions', () => {
-      const dapName = 'Create new DAP no nested ' + utils.getRandomNumber()
-
-      equityAdmin.dapManagementPage.clickCreateNewDap()
-      equityAdmin.dapManagementPage.modifyEntityName(dapName)
-      equityAdmin.dapManagementPage.modifyCondition([], [1, 'Client id'], [2, '11'])
-      equityAdmin.dapManagementPage.saveEntityInformation()
-
-      equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved')
-      equityAdmin.dapManagementPage.assertEntityIsDisplayedInTheList(dapName)
-
-      equityAdmin.dapManagementPage.reloadPage()
-      equityAdmin.dapManagementPage.clickEntityByName(dapName)
-      equityAdmin.dapManagementPage.assertConditionValue(1, 'Client id')
-      equityAdmin.dapManagementPage.assertConditionValue(2, '11')
-    })
-
-    it('C8981125_DAP_Create_DAP_With_Nested_Conditions', () => {
-      const dapName = 'Create new DAP NESTED ' + utils.getRandomNumber()
-
-      equityAdmin.dapManagementPage.clickCreateNewDap()
-      equityAdmin.dapManagementPage.modifyEntityName(dapName)
-      equityAdmin.dapManagementPage.modifyCondition([], [1, 'Client id'], [2, '11'])
-      equityAdmin.dapManagementPage.addCondition(1, 2)
-      equityAdmin.dapManagementPage.modifyCondition([3, 'or'], [4, 'Client id'], [5, '11'])
-      equityAdmin.dapManagementPage.saveEntityInformation()
-
-      equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved')
-      equityAdmin.dapManagementPage.assertEntityIsDisplayedInTheList(dapName)
-
-      equityAdmin.dapManagementPage.reloadPage()
-      equityAdmin.dapManagementPage.clickEntityByName(dapName)
-      equityAdmin.dapManagementPage.assertConditionValue(1, 'Client id')
-      equityAdmin.dapManagementPage.assertConditionValue(2, '11')
-      equityAdmin.dapManagementPage.assertConditionValue(3, 'or')
-      equityAdmin.dapManagementPage.assertConditionValue(4, 'Client id')
-      equityAdmin.dapManagementPage.assertConditionValue(5, '11')
-    })
-
-    it('C8981126_DAP_Discard_Unsaved_DAP', () => {
-      const dapName = 'Create and Discard DAP ' + utils.getRandomNumber()
-
-      equityAdmin.dapManagementPage.clickCreateNewDap()
-      equityAdmin.dapManagementPage.modifyEntityName(dapName)
-      equityAdmin.dapManagementPage.modifyCondition([], [1, 'Client id'], [2, '11'])
-      equityAdmin.dapManagementPage.discardEntityInformation()
-
-      equityAdmin.dapManagementPage.assertDapDetailsContainerDisplayed(false)
-      equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed('New data access profile was discarded')
-      equityAdmin.dapManagementPage.assertEntityIsDisplayedInTheList(dapName, false)
-    })
-
-    /**
-     * @bug_raised
-     * SKIPPING DUE TO: https://globalshares.atlassian.net/browse/PB-920 and https://globalshares.atlassian.net/browse/PB-927
-     */
-    it.skip('C8981127_DAP_Save_Without_Name_And_Conditions', () => {
-      const dapName = 'Created DAP ' + utils.getRandomNumber()
-
-      // Without filling a name
-      equityAdmin.dapManagementPage.clickCreateNewDap()
-      equityAdmin.dapManagementPage.saveEntityInformation()
-      equityAdmin.dapManagementPage.assertNotificationErrorDisplayed('Name/Condition cannot be empty')
-
-      // Without filling conditions
-      equityAdmin.dapManagementPage.modifyEntityName(dapName)
-      equityAdmin.dapManagementPage.saveEntityInformation()
-      equityAdmin.dapManagementPage.assertNotificationErrorDisplayed('Name/Condition cannot be empty')
-
-      // Without filling conditions and with a name with size > 50 chars
-      equityAdmin.dapManagementPage.modifyEntityName(dapName + dapName + dapName)
-      equityAdmin.dapManagementPage.saveEntityInformation()
-      equityAdmin.dapManagementPage.assertNotificationErrorDisplayed('Name length must be 50 characters or fewer')
-
-      // Save now with everything all right
-      equityAdmin.dapManagementPage.modifyEntityName(dapName)
-      equityAdmin.dapManagementPage.modifyCondition([], [1, 'Client id'], [2, '11'])
-      equityAdmin.dapManagementPage.saveEntityInformation()
-      equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved')
-      equityAdmin.dapManagementPage.assertEntityIsDisplayedInTheList(dapName)
-      equityAdmin.dapManagementPage.assertNotificationErrorDisplayed('Name/Condition cannot be empty', false)
-      equityAdmin.dapManagementPage.assertNotificationErrorDisplayed('Name length must be 50 characters or fewer', false)
     })
 
     /**
