@@ -1,6 +1,7 @@
 {
   "projectId": "6d27ms",
   "baseUrl": "https://ea-v3-at-10.gscloud.dev/",
+  "integrationFolder": "cypress/integration/official",
 
   "chromeWebSecurity": false,
   "trashAssetsBeforeRuns": true,

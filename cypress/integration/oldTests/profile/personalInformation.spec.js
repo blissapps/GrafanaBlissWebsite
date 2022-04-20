@@ -1,4 +1,4 @@
-import EquityAdmin from '../../support/pages/equityAdmin'
+import EquityAdmin from '../../../support/pages/equityAdmin'
 
 const equityAdmin = new EquityAdmin()
 

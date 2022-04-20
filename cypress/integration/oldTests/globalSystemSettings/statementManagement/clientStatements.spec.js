@@ -1,5 +1,5 @@
-import EquityAdmin from '../../../support/pages/equityAdmin'
-import Utils from '../../../support/utils'
+import EquityAdmin from '../../../../support/pages/equityAdmin'
+import Utils from '../../../../support/utils'
 
 const equityAdmin = new EquityAdmin()
 const utils = new Utils()
