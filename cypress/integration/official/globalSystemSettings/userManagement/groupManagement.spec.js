@@ -16,6 +16,43 @@ describe('Group Management tests over User Management settings - Admin tenant us
     equityAdmin.groupManagementPage.clickTab('Inactive')
     equityAdmin.groupManagementPage.assertInactiveGroupsAreDisplayed()
   })
+
+  it('C16801711_Expand DAPs, Users, and Companies of a group', () => {
+    const groupId = 955
+
+    equityAdmin.groupManagementPage.clickGroupById(groupId)
+    equityAdmin.groupManagementPage.assertActiveGroupsAreDisplayed()
+
+    // Assert number of records
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('roles', 1)
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 10)
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('users', 10)
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('companies', 10)
+
+    // Assert number of cards BEFORE clicking in 'Show All'
+    equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('roles', 1)
+    equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('daps', 8)
+    equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('users', 8)
+    equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('companies', 8)
+
+    // Assert number of cards AFTER clicking in 'Show All'
+    equityAdmin.groupManagementPage.clickShowAll('daps')
+    equityAdmin.groupManagementPage.clickShowAll('users')
+    equityAdmin.groupManagementPage.clickShowAll('companies')
+    equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('roles', 1)
+    equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('daps', 10)
+    equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('users', 10)
+    equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('companies', 10)
+
+    // Assert number of cards AFTER clicking in 'Hide'
+    equityAdmin.groupManagementPage.clickHide('daps')
+    equityAdmin.groupManagementPage.clickHide('users')
+    equityAdmin.groupManagementPage.clickHide('companies')
+    equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('roles', 1)
+    equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('daps', 8)
+    equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('users', 8)
+    equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('companies', 8)
+  })
 })
 
 describe('Group Management tests over User Management settings - Different users for login', () => {
@@ -58,12 +95,14 @@ describe('Group Management tests over User Management settings - Different users
   })
 
   it('C16661659_Not able to duplicate group', () => {
+    const groupId = 946
+
     equityAdmin.loginPage.login('tlaw@globalshares.com')
     equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'group')
     equityAdmin.groupManagementPage.checkPageUrl()
     equityAdmin.groupManagementPage.assertGroupPageHeaderIsDisplayed()
 
-    equityAdmin.groupManagementPage.clickGroupById(946)
+    equityAdmin.groupManagementPage.clickGroupById(groupId)
     equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('roles', 1)
     equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 1)
     equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('users', 1)
@@ -395,5 +434,81 @@ describe('Group Management tests over User Management settings - Admin tenant us
     equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userIds[1], true)
     equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userIds[2], true)
     equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userIds[3], true)
+  })
+
+  it('C16767333_Show Content of a Group', () => {
+    const groupId = 951
+
+    equityAdmin.homePage.navigateToUrl('/tenant/263/settings/group-management') // cashgen026
+
+    equityAdmin.groupManagementPage.clickGroupById(groupId)
+    equityAdmin.groupManagementPage.assertActiveGroupsAreDisplayed()
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('roles', 1)
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 10)
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('users', 7)
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('companies', 10)
+  })
+  it('C16805474_Search Groups behavior', () => {
+    const groupsSearchedIds = [549, 270]
+
+    equityAdmin.homePage.navigateToUrl('/tenant/269/settings/group-management') // cashgen027
+
+    cy.log('Basic searching behavior')
+
+    equityAdmin.searchEngine.search('cash')
+    equityAdmin.groupManagementPage.assertAmountOfSearchResultsInTheList(2)
+    equityAdmin.groupManagementPage.assertSearchResultListAccuracy(groupsSearchedIds)
+    equityAdmin.groupManagementPage.assertOtherGroupListDisplayed()
+    equityAdmin.groupManagementPage.assertAllSearchResultItemsAreDisplayedInHighlightedMode()
+
+    equityAdmin.searchEngine.clearSearchBoxByXIcon()
+    equityAdmin.groupManagementPage.clickGroupById(groupsSearchedIds[0])
+    equityAdmin.groupManagementPage.assertEntityHeaderIsDisplayedAsExpected()
+    equityAdmin.searchEngine.search('cash')
+
+    // Roles validations
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('roles', 1)
+    equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('roles', 1)
+    equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('roles', 1)
+
+    // DAPS validations
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 3)
+    equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('daps', 2)
+    equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('daps', 2)
+
+    // Users validations
+    equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('users', 4)
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('users', 4)
+    equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('users', 4)
+
+    // Companies validations
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('companies', 6)
+    equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('companies', 6)
+    equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('companies', 6)
+
+    cy.log('No Groups found behavior')
+    equityAdmin.searchEngine.search('lunes')
+    equityAdmin.groupManagementPage.assertNoResultFoundIsVisible()
+
+    cy.log('No Roles, DAPs, Users and Companies match the search term')
+    // Roles validations
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('roles', 1)
+    equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('roles', 'No')
+    equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('roles', 0)
+
+    // DAPS validations
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 3)
+    equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('daps', 'No')
+    equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('daps', 0)
+
+    // Users validations
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('users', 4)
+    equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('users', 'No')
+    equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('users', 0)
+
+    // Companies validations
+    equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('companies', 6)
+    equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('companies', 'No')
+    equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('companies', 0)
   })
 })

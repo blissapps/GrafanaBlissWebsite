@@ -1,7 +1,7 @@
 import BasePage from '../../../basePage'
 
 const selectors = {
-  numberOfSearchResultsInTable: '#recordCount span',
+  numberOfSearchResultsInTable: '#recordCount',
   searchResultList: 'gs-list[data-test-id=searchListing-found]',
   searchResultItem: '#searchResultItem_',
   searchResultAllItemsHighlighted: '*[id*="searchResultItem_"] gs-highlighted-text mark:not(:empty)',
