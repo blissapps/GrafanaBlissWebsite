@@ -282,7 +282,7 @@ class BasePage {
    *
    * @param {string} text Text to be found inside the gs-badge
    */
-  assertGSBadgeContainsText(text) {
+  assertBadgeContainsText(text) {
     cy.get('gs-badge').contains(text)
   }
 

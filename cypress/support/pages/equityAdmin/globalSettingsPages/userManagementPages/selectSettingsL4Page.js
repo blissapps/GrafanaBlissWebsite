@@ -9,7 +9,8 @@ const selectors = {
   searchInput: 'gs-container-l4 input',
   entityCardId: 'gs-container-l4 gs-card[data-test-id=entity-',
   confirmBtn: 'gs-container-l4 gs-button[data-test-id=confirm-button]',
-  dismissBtn: 'gs-container-l4 gs-button[data-test-id=dismiss-button]'
+  dismissBtn: 'gs-container-l4 gs-button[data-test-id=dismiss-button]',
+  noEntityFound: 'gs-empty-container#noAvailableEntitiesFound'
 }
 
 /**
@@ -23,7 +24,34 @@ class SelectSettingsL4Page extends BaseManagementPage {
     this.checkUrlByRegex(properties.pageURL)
   }
 
+  // -------------------------------------------------------------------------- ASSERTIONS ----------------------------------------------------------------------------- //
+
+  /**
+   * Assert the message 'No $entity available to add were found'
+   *
+   * @param {string} text Text to be validated in case you want to validate the content of the 'not found' message
+   * @param {boolean} displayed True is the default value to validate the message id displayed. Send false to validate the otherwise
+   */
+  assertNoEntityToAddWereFoundIsDisplayed(text = '', displayed = true) {
+    if (displayed) {
+      cy.get(selectors.noEntityFound).should('be.visible')
+      text != '' ? cy.get(selectors.noEntityFound).should('contain', text) : null
+    } else {
+      cy.get(selectors.noEntityFound).should('not.exist')
+    }
+  }
+
   // -------------------------------------------------------------------------- OTHERS --------------------------------------------------------------------------------- //
+
+  /**
+   * Search for a specific text in the search input and nothing else. You may be looking for the method selectSettings that does the searching and adding in a single method
+   *
+   * @param {string} textToSearch Text to be searched in the search input
+   */
+  searchEntity(textToSearch) {
+    cy.get(selectors.searchInput).clear()
+    cy.get(selectors.searchInput).type(textToSearch)
+  }
 
   /**
    * Add entities in the nav right bar After clicking the "+ Add entity" button.

@@ -10,6 +10,8 @@ const selectors = {
   noResultsFound: '#emptyRecordCount',
   noRecordsFoundEmptyState: 'gs-empty-container[data-test-id="list-empty-container"] .content > div',
   entityNameInput: 'gs-input-inline[data-test-id=name-input]',
+  entityNameInputEditable: 'gs-input-inline[data-test-id=name-input][contenteditable]',
+  entityNameInputNotEditable: 'gs-input-inline[data-test-id=name-input][class*="disabled"]',
   saveBtn: 'gs-button[data-test-id=save-button]',
   discardBtn: 'gs-button[data-test-id=discard-button]',
   showAllDapsBtn: '*[data-test-id=section-dap] gs-button[data-test-id=show-all]',
@@ -337,12 +339,10 @@ class BaseManagementPage extends BasePage {
   /**
    * Assert if the name of the entity in the header is editable or not over the UI
    *
-   * @param {boolean} editable True to assert the entity name is editable, false otherwise
+   * @param {boolean} editable True is the default value to assert the entity name is editable, false otherwise
    */
-  assertEntityNameEditable(editable) {
-    this.getEntityHeader().as('input')
-
-    editable ? cy.get('@input').should('not.have.class', 'disabled**') : cy.get('@input').should('have.class', 'disabled**')
+  assertEntityNameEditable(editable = true) {
+    editable ? cy.get(selectors.entityNameInputEditable).should('be.visible') : cy.get(selectors.entityNameInputNotEditable).should('be.visible')
   }
 
   /**

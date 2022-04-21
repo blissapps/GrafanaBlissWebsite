@@ -114,24 +114,6 @@ describe('Data Access Profiles tests over User Management settings', () => {
     })
 
     /**
-     * @missing_data Need to have a DAP and any 2 groups available to be added and discarded
-     */
-    it.skip('C9277651_DAP_Discard_Draft_Linked_Groups', () => {
-      const dapId = 13
-      const groupName = ['Group to be added in DAP 1', 'Group to be added in DAP 2']
-      const groupIdsToAssociate = [966, 967]
-
-      equityAdmin.dapManagementPage.clickDapById(dapId)
-      equityAdmin.dapManagementPage.addGroupsToDap(groupName, groupIdsToAssociate)
-      equityAdmin.dapManagementPage.discardEntityInformation()
-
-      equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed('Changes to data access profile were discard')
-      equityAdmin.dapManagementPage.assertNumberOfGroupRecordsAssociatedWithDap(0)
-      equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupIdsToAssociate[0], false)
-      equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupIdsToAssociate[1], false)
-    })
-
-    /**
      * @missing_data Need to have a DAP and any 2 groups available with 2 existing groups linked
      *
      * @chrome_only Network commands are only manageable for chrome based browsers
@@ -291,32 +273,6 @@ describe('Data Access Profiles tests over User Management settings', () => {
     })
 
     /**
-     * @missing_data Need to have an active DAP created in the active tab with no groups associated with it
-     *
-     */
-    it.skip('C7568176_DAP_Deactivate_And_Activate_DAP', () => {
-      const dapId = 13
-      const dapName = 'Deactivate me'
-
-      // Deactivate DAP
-      equityAdmin.dapManagementPage.clickDapById(dapId)
-      equityAdmin.dapManagementPage.clickToDeactivateEntity()
-
-      equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Deactivated', true, true)
-      equityAdmin.dapManagementPage.assertInactiveDapsAreDisplayed()
-      equityAdmin.dapManagementPage.assertEntityIsDisplayedInTheList(dapName)
-      equityAdmin.dapManagementPage.assertDapEditable(false)
-
-      // Activate DAP
-      equityAdmin.dapManagementPage.activateDap()
-
-      equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Activated')
-      equityAdmin.dapManagementPage.assertActiveDapsAreDisplayed()
-      equityAdmin.dapManagementPage.assertEntityIsDisplayedInTheList(dapName)
-      equityAdmin.dapManagementPage.assertDapEditable()
-    })
-
-    /**
      * @missing_data Need to have some 3 daps called 'dap to search Nº' in each active and inactive tabs. Also need to have another dap called 'other group dap' in both active and inactive tab.
      *               All daps must have just one 'Business Unit' conditions added
      */
@@ -459,39 +415,6 @@ describe('Data Access Profiles tests over User Management settings', () => {
     })
 
     /**
-     * @missing_data Need to have an active DAP created with a single condition(if > Business Unit > 1) and with a group attached
-     *
-     */
-    it.skip('C7568169_DAP_Duplicate_DAP', () => {
-      const dapId = 9
-      const dapName = 'Duplicate me'
-      const newDapName = 'Duplicated DAP ' + utils.getRandomNumber()
-      const groupIdAssociated = 1051
-
-      // Duplicate DAP
-      equityAdmin.dapManagementPage.clickDapById(dapId)
-      equityAdmin.dapManagementPage.assertNumberOfGroupRecordsAssociatedWithDap(1)
-      equityAdmin.dapManagementPage.assertNumberOfGroupCardsAssociatedWithDap(1)
-      equityAdmin.dapManagementPage.clickToDuplicateEntity()
-
-      // Duplicated DAP editions
-      equityAdmin.dapManagementPage.assertEntityIsFocused()
-      equityAdmin.dapManagementPage.assertEntityHeaderIsDisplayedAsExpected('Copy Of ' + dapName)
-      equityAdmin.dapManagementPage.modifyEntityName(newDapName)
-      equityAdmin.dapManagementPage.saveEntityInformation()
-
-      // Assert duplicated DAP editions
-      equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed(newDapName + ' Saved', true, true)
-      equityAdmin.dapManagementPage.assertEntityIsDisplayedInTheList(newDapName)
-      equityAdmin.dapManagementPage.assertConditionValue(1, 'Business Unit')
-      equityAdmin.dapManagementPage.assertConditionValue(2, '1')
-      equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupIdAssociated, false)
-      equityAdmin.dapManagementPage.assertNumberOfGroupRecordsAssociatedWithDap(0)
-      equityAdmin.dapManagementPage.assertNumberOfGroupCardsAssociatedWithDap(0)
-      equityAdmin.dapManagementPage.assertEntityIsFocused(false)
-    })
-
-    /**
      * @missing_data Need to have a DAP with 1 role and with 13 Groups linked to a this DAP
      *
      * @bug_raised
@@ -556,7 +479,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
       const dapId = 7
 
       equityAdmin.dapManagementPage.clickDapById(dapId)
-      equityAdmin.dapManagementPage.assertDapEditable(false)
+      equityAdmin.dapManagementPage.assertDapIsEditable(false)
       equityAdmin.dapManagementPage.assertAddGroupsButtonIsVisible(false)
     })
 
@@ -581,7 +504,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
 
       // Deactivate DAP option
       equityAdmin.dapManagementPage.clickDapById(dapToDeactivateId)
-      equityAdmin.dapManagementPage.assertDapEditable(false)
+      equityAdmin.dapManagementPage.assertDapIsEditable(false)
       equityAdmin.dapManagementPage.assertThreeDotButtonDisplayed(false)
 
       // Activate DAP option

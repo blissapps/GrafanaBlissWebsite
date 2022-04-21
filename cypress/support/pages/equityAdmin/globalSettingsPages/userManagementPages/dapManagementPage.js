@@ -15,7 +15,7 @@ const selectors = {
   dapsDisplayed: '#dapList gs-list a[data-test-id*="dap-',
   noDapsExistMessage: '#emptyList',
   addGroupsBtn: '*[data-test-id=section-group] *[data-test-id=add-entity]',
-  dapId: 'a[data-test-id=dap-',
+  dapId: '*[data-test-id=dap-',
   groupsCardId: '*[data-test-id=section-group] gs-card[data-test-id=entity-',
   removeIconButton: 'gs-button[data-test-id=remove-entity]',
   createDapBtn: 'gs-button[data-test-id="create-dap"]',
@@ -77,6 +77,13 @@ class DapManagementPage extends BaseManagementPage {
   clickCreateNewDap() {
     cy.get(selectors.createDapBtn).as('createNewDapButton')
     cy.get('@createNewDapButton').click()
+  }
+
+  /**
+   * Click in the Add groups button and nothing else. You may be looking for the addGroupsToDap method that does everything in a single method
+   */
+  clickAddGroupsToDap() {
+    cy.get(selectors.addGroupsBtn).scrollIntoView().click()
   }
 
   // ----------------------------------------------------------------------------------- ASSERTIONS -------------------------------------------------------------------------- //
@@ -207,7 +214,7 @@ class DapManagementPage extends BaseManagementPage {
    *
    * @param {boolean} editable True to assert the Dap is editable, false otherwise
    */
-  assertDapEditable(editable = true) {
+  assertDapIsEditable(editable = true) {
     editable ? cy.get(selectors.selectNotEditable).should('not.exist') : cy.get(selectors.selectNotEditable).should('exist')
   }
 
@@ -292,7 +299,7 @@ class DapManagementPage extends BaseManagementPage {
    * For example: dapNames=['dap1', 'dap2'] needs to match the exactly order in dapIds=[1, 2]
    */
   addGroupsToDap(groupNames, groupIds) {
-    cy.get(selectors.addGroupsBtn).scrollIntoView().click()
+    this.clickAddGroupsToDap()
     selectSettingsL4Page.selectSettings('group', groupNames, groupIds)
     selectSettingsL4Page.clickToConfirmTheSelections()
   }

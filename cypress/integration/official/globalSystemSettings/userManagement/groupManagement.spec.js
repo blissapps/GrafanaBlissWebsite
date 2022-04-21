@@ -238,7 +238,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.clickGroupById(groupId)
       equityAdmin.groupManagementPage.clickToDuplicateEntity()
       equityAdmin.groupManagementPage.assertEntityHeaderIsDisplayedAsExpected('Copy Of ' + groupName)
-      equityAdmin.groupManagementPage.assertGSBadgeContainsText('INACTIVE')
+      equityAdmin.groupManagementPage.assertBadgeContainsText('INACTIVE')
       equityAdmin.groupManagementPage.modifyEntityName(newNameForDuplicatedGroup)
       equityAdmin.groupManagementPage.saveEntityInformation()
 
@@ -256,7 +256,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.clickGroupById(groupId)
       equityAdmin.groupManagementPage.clickToDuplicateEntity()
       equityAdmin.groupManagementPage.assertEntityHeaderIsDisplayedAsExpected('Copy Of ' + groupName)
-      equityAdmin.groupManagementPage.assertGSBadgeContainsText('INACTIVE')
+      equityAdmin.groupManagementPage.assertBadgeContainsText('INACTIVE')
       equityAdmin.groupManagementPage.modifyEntityName('')
       equityAdmin.groupManagementPage.saveEntityInformation()
 
