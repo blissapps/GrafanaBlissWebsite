@@ -9,7 +9,7 @@
   "testFiles": "**/*.spec.js",
   "ignoreTestFiles": ["**/__snapshots__/*", "**/__image_snapshots__/*"],
 
-  "experimentalSessionSupport": true,
+  "experimentalSessionAndOrigin": true,
 
   "video": true,
   "videoCompression": false,
