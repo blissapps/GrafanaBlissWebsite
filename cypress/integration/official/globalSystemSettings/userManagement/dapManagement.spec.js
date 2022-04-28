@@ -166,19 +166,22 @@ describe('Data Access Profiles tests over User Management settings', () => {
       // ACTIVE TAB
       let dap = 'pixel'
       equityAdmin.searchEngine.search(dap)
-      equityAdmin.dapManagementPage.assertAmountOfSearchResultsInTheList(1)
+      equityAdmin.dapManagementPage.assertAmountOfSearchResultsInTheList(3)
+      equityAdmin.dapManagementPage.assertAndCountNumberOfSearchResults(3)
       equityAdmin.dapManagementPage.assertSearchResultListAccuracy(dapIds)
       equityAdmin.dapManagementPage.assertAllSearchResultItemsAreDisplayedInHighlightedMode()
 
       dap = 'PiXeL'
       equityAdmin.searchEngine.search(dap)
-      equityAdmin.dapManagementPage.assertAmountOfSearchResultsInTheList(1)
+      equityAdmin.dapManagementPage.assertAmountOfSearchResultsInTheList(3)
+      equityAdmin.dapManagementPage.assertAndCountNumberOfSearchResults(3)
       equityAdmin.dapManagementPage.assertSearchResultListAccuracy(dapIds)
       equityAdmin.dapManagementPage.assertAllSearchResultItemsAreDisplayedInHighlightedMode()
 
       dap = 'PIXEL'
       equityAdmin.searchEngine.search(dap)
-      equityAdmin.dapManagementPage.assertAmountOfSearchResultsInTheList(1)
+      equityAdmin.dapManagementPage.assertAmountOfSearchResultsInTheList(3)
+      equityAdmin.dapManagementPage.assertAndCountNumberOfSearchResults(3)
       equityAdmin.dapManagementPage.assertSearchResultListAccuracy(dapIds)
       equityAdmin.dapManagementPage.assertAllSearchResultItemsAreDisplayedInHighlightedMode()
 
@@ -315,9 +318,9 @@ describe('Data Access Profiles tests over User Management settings', () => {
     })
 
     it('C17041143_DAP- Remove a group from Data Access Profile', () => {
-      const dapId = 31
-      const dapName = 'QA3'
-      const groupIdsAssociated = [950, 955]
+      const dapId = 35
+      const dapName = 'Remove group DAP'
+      const groupIdsAssociated = [957, 958]
 
       // Remove Group
       equityAdmin.dapManagementPage.clickDapById(dapId)

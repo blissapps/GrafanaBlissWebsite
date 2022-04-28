@@ -26,7 +26,7 @@ describe('Group Management tests over User Management settings', () => {
 
       // Assert number of records
       equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('roles', 1)
-      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 10)
+      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 11)
       equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('users', 10)
       equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('companies', 10)
 
@@ -41,7 +41,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.clickShowAll('users')
       equityAdmin.groupManagementPage.clickShowAll('companies')
       equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('roles', 1)
-      equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('daps', 10)
+      equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('daps', 11)
       equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('users', 10)
       equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('companies', 10)
 

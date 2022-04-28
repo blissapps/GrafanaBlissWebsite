@@ -351,7 +351,7 @@ class BaseManagementPage extends BasePage {
    * @param {boolean} editable True is the default value to assert the entity name is editable, false otherwise
    */
   assertEntityNameEditable(editable = true) {
-    editable ? cy.get(selectors.entityNameInputEditable).should('be.visible') : cy.get(selectors.entityNameInputNotEditable).should('be.visible')
+    editable ? cy.get(selectors.entityNameInputEditable).scrollIntoView().should('be.visible') : cy.get(selectors.entityNameInputNotEditable).scrollIntoView().should('be.visible')
   }
 
   /**
