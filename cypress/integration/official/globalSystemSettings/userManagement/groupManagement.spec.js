@@ -104,13 +104,9 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertGroupPageHeaderIsDisplayed()
 
       equityAdmin.groupManagementPage.clickGroupById(groupId)
-      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('roles', 1)
-      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 1)
-      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('users', 1)
-      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('companies', 2)
-
       equityAdmin.groupManagementPage.clickThreeDotOptionButton()
       equityAdmin.groupManagementPage.assertDuplicateEntityButtonDisplayed(false)
+      equityAdmin.groupManagementPage.assertCreateNewGroupButtonDisplayed(false)
     })
 
     it('C16767340_Not able to Deactivate a group', () => {
@@ -138,6 +134,9 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.clickGroupById(groupId)
       equityAdmin.groupManagementPage.assertEntityHeaderIsDisplayedAsExpected()
       equityAdmin.groupManagementPage.assertChangeRoleButtonDisplayed(false)
+      equityAdmin.groupManagementPage.assertAddDapsButtonDisplayed(false)
+      equityAdmin.groupManagementPage.assertAddUsersButtonDisplayed(false)
+      equityAdmin.groupManagementPage.assertAddCompaniesButtonDisplayed(false)
     })
 
     it('C16767327_Unable to Add User to the Group', () => {

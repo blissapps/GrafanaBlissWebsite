@@ -10,152 +10,6 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.checkPageUrl()
     })
 
-    // ************************************************ TESTS AS ADMIN TENANT ************************************************** //
-
-    /**
-     * Verify if the settings send the user back to the home screen when the user closes the settings menu
-     *
-     */
-    it('C7412690_Group_Check_The_System_Behavior_When_Closing_The_Settings_Nav_Bar', () => {
-      equityAdmin.settingsMenuNavBar.closeGlobalSettingsNavBar()
-      equityAdmin.groupManagementPage.checkPageUrl()
-    })
-
-    /**
-     * @missing_data Need to have one group with 1 role, 2 daps, 3 users and 2 companies added. Name the group, role, and daps with something that includes the searchTerm "To be searched"
-     * Attention the searchTerm "To be searched" needs to have at least one letter in uppercase mode, so we can catch the bug raised in PB-962
-     *
-     * @bug_raised
-     * SkIPPING due to https://globalshares.atlassian.net/browse/PB-962
-     */
-    it.skip('C9277663_Groups_Happy_Path_For_Searching_Behavior_In_Groups_Roles_Daps_Clients_And_Users_Over_The_Groups_Page', () => {
-      const groupId = 1066
-      const roleId = 1468
-      const dapsId = [10, 12]
-      const searchTerm = 'To be searched'
-      const user = 'amulcahyNE'
-      const userId = [454292]
-      const client = '7Digital'
-      const clientId = [144]
-
-      equityAdmin.groupManagementPage.clickGroupById(groupId)
-      equityAdmin.searchEngine.search(searchTerm)
-      equityAdmin.groupManagementPage.assertSearchResultListAccuracy([groupId])
-      equityAdmin.groupManagementPage.assertOtherGroupListDisplayed()
-      equityAdmin.searchEngine.search(searchTerm)
-
-      // Roles and DAPs to be found in the search
-      cy.log('------ Find Roles and DAPs ------')
-      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('roles', 1)
-      equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('roles', 1)
-      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 2)
-      equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('daps', 2)
-      equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('users', 'No')
-      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('users', 3)
-      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('companies', 2)
-      equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('companies', 'No')
-      equityAdmin.groupManagementPage.assertCardsDisplayedInHighlightedMode([roleId], 'role')
-      equityAdmin.groupManagementPage.assertCardsDisplayedInHighlightedMode(dapsId, 'daps')
-
-      // Users to be found in the search
-      cy.log('------ Find Users ------')
-      equityAdmin.searchEngine.search(user)
-      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('roles', 1)
-      equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('roles', 'No')
-      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 2)
-      equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('daps', 'No')
-      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('users', 3)
-      equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('users', 1)
-      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('companies', 2)
-      equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('companies', 'No')
-      equityAdmin.groupManagementPage.assertCardsDisplayedInHighlightedMode(userId, 'daps')
-
-      // Clients to be found in the search
-      cy.log('------ Find Clients ------')
-      equityAdmin.searchEngine.search(client)
-      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('roles', 1)
-      equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('roles', 'No')
-      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 2)
-      equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('daps', 'No')
-      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('users', 3)
-      equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('users', 'No')
-      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('companies', 2)
-      equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('companies', 1)
-      equityAdmin.groupManagementPage.assertCardsDisplayedInHighlightedMode(clientId, 'daps')
-
-      // Search for text without returning any result
-      cy.log('------ No matching text ------')
-      equityAdmin.searchEngine.search('textDoesNotReturnNothingAtAll')
-      equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('roles', 'No')
-      equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('daps', 'No')
-      equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('users', 'No')
-      equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('companies', 'No')
-    })
-
-    /**
-     * @missing_data Need to have a group with NO role associated. Also, it needs to have at least on role created in the environment.
-     */
-    it.skip('C7419661_Groups_Add_A_Role_To_A_Group', () => {
-      const groupId = 1059
-      const groupName = 'Add Role'
-      const roleName = 'View Only'
-      const roleId = 1655
-
-      equityAdmin.groupManagementPage.clickGroupById(groupId)
-      equityAdmin.groupManagementPage.selectRoleToGroup(roleName, roleId)
-      equityAdmin.groupManagementPage.saveEntityInformation()
-      equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
-
-      equityAdmin.groupManagementPage.assertRoleAssociatedWithGroup(roleId)
-    })
-
-    /**
-     * @missing_data Need to have a group. Also, it needs to have at least on role created in the environment.
-     */
-    it.skip('C7419664_Groups_Discard_Without_Saving_The_Role', () => {
-      const groupId = 1317
-      const roleName = 'View Only'
-      const roleId = 1397
-
-      equityAdmin.groupManagementPage.clickGroupById(groupId)
-      equityAdmin.groupManagementPage.selectRoleToGroup(roleName, roleId)
-      equityAdmin.groupManagementPage.discardEntityInformation()
-
-      equityAdmin.groupManagementPage.assertRoleAssociatedWithGroup(1397, false)
-    })
-
-    /**
-     * @missing_data Need to have a group. Also, it needs to have 2 users created in the environment.
-     */
-    it.skip('C7419658_Groups_Add_Users_To_A_Group', () => {
-      const groupId = 1095
-      const groupName = 'Add Users Group'
-      const userName = ['dfonsecaNE', 'amulcahyNE']
-      const userIds = [454293, 454292]
-
-      equityAdmin.groupManagementPage.clickGroupById(groupId)
-      equityAdmin.groupManagementPage.addUsersToGroup(userName, userIds)
-      equityAdmin.groupManagementPage.saveEntityInformation()
-      equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
-
-      equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userIds[0])
-      equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userIds[1])
-
-      // Validates user 1 is linked to the group over User Management settings - L4 page
-      equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'user', false)
-      equityAdmin.searchEngine.search(userName[0], 500)
-      equityAdmin.userManagementPage.clickUserTable(userIds[0])
-      equityAdmin.userDetailL4Page.clickToAccessUserInfoDetails()
-      equityAdmin.userInfoL4Page.assertGroupsDisplayed([groupName])
-      equityAdmin.userInfoL4Page.clickOutsideToCloseL4RightBar()
-
-      // Validates user 2 is linked to the group over User Management settings - L4 page
-      equityAdmin.searchEngine.search(userName[1])
-      equityAdmin.userManagementPage.clickUserTable(userIds[1])
-      equityAdmin.userDetailL4Page.clickToAccessUserInfoDetails()
-      equityAdmin.userInfoL4Page.assertGroupsDisplayed([groupName])
-    })
-
     /**
      * @missing_data Need to have a group with one user associated with it. This user should has the total max of 2 or 3 groups associated with it (So we don't need to click in showAll)
      */
@@ -180,25 +34,6 @@ describe('Group Management tests over User Management settings', () => {
       // Validates in the userInfoL4Page
       equityAdmin.userInfoL4Page.checkPageUrl()
       equityAdmin.userInfoL4Page.assertGroupsDisplayed(groupName, false)
-    })
-
-    /**
-     * @missing_data Need to have a group. Also, it needs to have at least one client created in the environment.
-     */
-    it.skip('C7462559_Groups_Add_A_Client_To_A_Group', () => {
-      const groupId = 1084
-      const groupName = 'Add Clients'
-      const companyNames = ['7Digital', '9F Group', 'Allianz']
-      const companyIds = [144, 337, 55]
-
-      equityAdmin.groupManagementPage.clickGroupById(groupId)
-      equityAdmin.groupManagementPage.addCompaniesToGroup(companyNames, companyIds)
-      equityAdmin.groupManagementPage.saveEntityInformation()
-      equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
-
-      equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[0])
-      equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[1])
-      equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[2])
     })
 
     /**
@@ -265,33 +100,6 @@ describe('Group Management tests over User Management settings', () => {
       // companies
       equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('companies', 2)
       equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('companies', 18)
-    })
-
-    /**
-     * @missing_data Need to have a group with 1 role at least 8 DAPs, 8 Users, and 8 Clients linked to a this group
-     */
-    it.skip('C7462615_Groups_Expand_DAPs_Users_And_Clients', () => {
-      const groupId = 964
-
-      equityAdmin.groupManagementPage.clickGroupById(groupId)
-
-      // daps
-      equityAdmin.groupManagementPage.clickShowAll('daps')
-      equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('daps', 13)
-      equityAdmin.groupManagementPage.clickHide('daps')
-      equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('daps', 8)
-
-      // users
-      equityAdmin.groupManagementPage.clickShowAll('users')
-      equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('users', 11)
-      equityAdmin.groupManagementPage.clickHide('users')
-      equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('users', 8)
-
-      // clients
-      equityAdmin.groupManagementPage.clickShowAll('companies')
-      equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('companies', 15)
-      equityAdmin.groupManagementPage.clickHide('companies')
-      equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('companies', 8)
     })
 
     /**
@@ -403,43 +211,13 @@ describe('Group Management tests over User Management settings', () => {
 
       equityAdmin.groupManagementPage.assertRoleAssociatedWithGroup(1854, false)
     })
-
-    /**
-     * @missing_data No active and inactive groups exist
-     */
-    it.skip('C7499685_Groups_Empty_State_Active_and_Inactive_Groups', () => {
-      // Active Tab
-      equityAdmin.groupManagementPage.clickTab('Active')
-      equityAdmin.groupManagementPage.assertActiveGroupsAreDisplayed(false)
-      equityAdmin.groupManagementPage.assertNoGroupExistMessageIsDisplayed()
-
-      // Inactive Tab
-      equityAdmin.groupManagementPage.clickTab('Inactive')
-      equityAdmin.groupManagementPage.assertInactiveGroupsAreDisplayed(false)
-      equityAdmin.groupManagementPage.assertNoGroupExistMessageIsDisplayed()
-    })
   })
-
-  // ************************************************ TESTS AS VIEW ONLY USER ************************************************** //
 
   context('View Only User', () => {
     beforeEach(() => {
       equityAdmin.loginPage.login(Cypress.env('VIEW_ONLY_USER_2_AUTH'))
       equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'group')
       equityAdmin.groupManagementPage.checkPageUrl()
-    })
-
-    /**
-     * @missing_data Need to have a group with 1 Role with a "view only" access and a user with "view only" access as well.
-     */
-    it.skip('C7422807_Groups_User_Does_Not_Have_Group_Update_Permission_To_Add_DAPs_Users_Role_And_Clients', () => {
-      const groupId = 1017
-
-      equityAdmin.groupManagementPage.clickGroupById(groupId)
-      equityAdmin.groupManagementPage.assertChangeRoleButtonDisplayed(false)
-      equityAdmin.groupManagementPage.assertAddDapsButtonDisplayed(false)
-      equityAdmin.groupManagementPage.assertAddUsersButtonDisplayed(false)
-      equityAdmin.groupManagementPage.assertAddCompaniesButtonDisplayed(false)
     })
 
     /**
@@ -460,20 +238,6 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertRemoveCompanyOptionIsDisplayed(companiesIds[0], false)
       equityAdmin.groupManagementPage.assertRemoveCompanyOptionIsDisplayed(companiesIds[1], false)
     })
-
-    /**
-     * @missing_data Need to have a group linked with a user that has all Group permissions but Create
-     */
-    it.skip('C7493037_Groups_User_Does_Not_Have_Group_Permission_To_Duplicate_Group', () => {
-      const groupId = 1017
-
-      equityAdmin.groupManagementPage.clickGroupById(groupId)
-      equityAdmin.groupManagementPage.assertThreeDotButtonDisplayed()
-      equityAdmin.groupManagementPage.clickThreeDotOptionButton()
-      equityAdmin.groupManagementPage.assertDeactivateEntityButtonDisplayed(true)
-      equityAdmin.groupManagementPage.assertCreateNewGroupButtonDisplayed(false)
-      equityAdmin.groupManagementPage.assertDuplicateEntityButtonDisplayed(false)
-    })
   })
 
   context('View Only User 2 - Shorter login mode', () => {
@@ -490,6 +254,8 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', '', false)
       equityAdmin.settingsMenuNavBar.assertBackButtonDisplayed() // Assert it just to make sure we are in the correct menu
       equityAdmin.settingsMenuNavBar.assertGroupSubMenuItemDisplayed(false)
+
+      // missing url access
     })
   })
 })
