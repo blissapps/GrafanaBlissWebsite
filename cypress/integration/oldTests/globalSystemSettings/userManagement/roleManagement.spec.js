@@ -20,82 +20,6 @@ describe('Role Management tests over User Management settings', () => {
     })
 
     /**
-     *
-     * @missing_data Besides the roles we need to search, we need to have some roles in both active and inactive tabs to be displayed in the OTHER GROUP after a search
-     */
-    it.skip('C7544081_Search_Engine_Search_For_Role_With_Different_Combinations_In_Active_And_Inactive_Tabs', () => {
-      const rolesIdActiveTab = [1632, 1633, 1634]
-      const rolesIdInactiveTab = [1635, 1636]
-
-      equityAdmin.roleManagementPage.assertNoRoleSelectedMessageIsDisplayed()
-
-      let role = 'role to be searched'
-      equityAdmin.searchEngine.search(role)
-      equityAdmin.roleManagementPage.assertAmountOfSearchResultsInTheList(3)
-      equityAdmin.roleManagementPage.assertSearchResultListAccuracy(rolesIdActiveTab)
-      equityAdmin.roleManagementPage.assertOtherGroupListDisplayed()
-      equityAdmin.roleManagementPage.assertAllSearchResultItemsAreDisplayedInHighlightedMode()
-
-      role = 'ROLE TO BE SEARCHED'
-      equityAdmin.searchEngine.search(role)
-      equityAdmin.roleManagementPage.assertAmountOfSearchResultsInTheList(3)
-      equityAdmin.roleManagementPage.assertSearchResultListAccuracy(rolesIdActiveTab)
-      equityAdmin.roleManagementPage.assertOtherGroupListDisplayed()
-      equityAdmin.roleManagementPage.assertAllSearchResultItemsAreDisplayedInHighlightedMode()
-
-      role = 'role To Be searchEd'
-      equityAdmin.searchEngine.search(role)
-      equityAdmin.roleManagementPage.assertAmountOfSearchResultsInTheList(3)
-      equityAdmin.roleManagementPage.assertSearchResultListAccuracy(rolesIdActiveTab)
-      equityAdmin.roleManagementPage.assertOtherGroupListDisplayed()
-      equityAdmin.roleManagementPage.assertAllSearchResultItemsAreDisplayedInHighlightedMode()
-
-      role = 'randomName'
-      equityAdmin.searchEngine.search(role)
-      equityAdmin.roleManagementPage.assertNoResultFoundIsVisible()
-      equityAdmin.roleManagementPage.assertOtherGroupListDisplayed()
-
-      role = 'SELECT * FROM groups'
-      equityAdmin.searchEngine.search(role)
-      equityAdmin.roleManagementPage.assertNoResultFoundIsVisible()
-      equityAdmin.roleManagementPage.assertOtherGroupListDisplayed()
-
-      // Now on Inactive TAB
-      equityAdmin.roleManagementPage.clickTab('Inactive')
-
-      role = 'ZZZ'
-      equityAdmin.searchEngine.search(role)
-      equityAdmin.roleManagementPage.assertAmountOfSearchResultsInTheList(2)
-      equityAdmin.roleManagementPage.assertSearchResultListAccuracy(rolesIdInactiveTab)
-      equityAdmin.roleManagementPage.assertOtherGroupListDisplayed()
-      equityAdmin.roleManagementPage.assertAllSearchResultItemsAreDisplayedInHighlightedMode()
-
-      role = 'zzz'
-      equityAdmin.searchEngine.search(role)
-      equityAdmin.roleManagementPage.assertAmountOfSearchResultsInTheList(2)
-      equityAdmin.roleManagementPage.assertSearchResultListAccuracy(rolesIdInactiveTab)
-      equityAdmin.roleManagementPage.assertOtherGroupListDisplayed()
-      equityAdmin.roleManagementPage.assertAllSearchResultItemsAreDisplayedInHighlightedMode()
-
-      role = 'ZzZ'
-      equityAdmin.searchEngine.search(role)
-      equityAdmin.roleManagementPage.assertAmountOfSearchResultsInTheList(2)
-      equityAdmin.roleManagementPage.assertSearchResultListAccuracy(rolesIdInactiveTab)
-      equityAdmin.roleManagementPage.assertOtherGroupListDisplayed()
-      equityAdmin.roleManagementPage.assertAllSearchResultItemsAreDisplayedInHighlightedMode()
-
-      role = 'randomName'
-      equityAdmin.searchEngine.search(role)
-      equityAdmin.roleManagementPage.assertNoResultFoundIsVisible()
-      equityAdmin.roleManagementPage.assertOtherGroupListDisplayed()
-
-      role = 'SELECT * FROM roles'
-      equityAdmin.searchEngine.search(role)
-      equityAdmin.roleManagementPage.assertNoResultFoundIsVisible()
-      equityAdmin.roleManagementPage.assertOtherGroupListDisplayed()
-    })
-
-    /**
      * @missing_data Need to have some roles in both active and inactive tabs
      */
     it.skip('C7499688_List Roles_Happy_Path_Active_And_Inactive_Roles', () => {
@@ -633,29 +557,6 @@ describe('Role Management tests over User Management settings', () => {
       equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', '', false)
       equityAdmin.settingsMenuNavBar.assertBackButtonDisplayed() // Assert it just to make sure we are in the correct menu
       equityAdmin.settingsMenuNavBar.assertRoleSubMenuItemDisplayed(false)
-    })
-  })
-})
-
-/**
- * @mocks_used
- */
-describe('More Role Management tests - Empty state', () => {
-  beforeEach(() => {
-    equityAdmin.loginPage.login()
-    equityAdmin.roleManagementPage.interceptAndMockRolesLoadingRequest('rolesManagement_EmptyRoleList.json')
-    equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'role')
-    equityAdmin.roleManagementPage.checkPageUrl()
-  })
-
-  context('Mocked data tests', () => {
-    it('C7499690_List Roles - Empty State (Active and Inactive Roles)', () => {
-      // Active tab
-      equityAdmin.roleManagementPage.assertNoRoleSelectedMessageIsDisplayed()
-
-      // Inactive tab
-      equityAdmin.roleManagementPage.clickTab('Inactive')
-      equityAdmin.roleManagementPage.assertNoRoleSelectedMessageIsDisplayed()
     })
   })
 })

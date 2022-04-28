@@ -9,14 +9,6 @@ describe('User Management tests over User Management settings', () => {
     equityAdmin.userManagementPage.checkPageUrl()
   })
 
-  // ************************************************ TESTS AS ADMIN TENANT ************************************************** //
-
-  it('C7353826_List_User_Happy_Path_Contains_Expected_Columns_On_Users_Table', () => {
-    const columnsToValidate = ['username', 'email', 'status']
-
-    equityAdmin.userManagementPage.assertTableContainsExpectedColumnsInOrder(columnsToValidate)
-  })
-
   /**
    * @missing_data Need to have a user with proper groups and data registered
    */
@@ -56,37 +48,6 @@ describe('User Management tests over User Management settings', () => {
     equityAdmin.searchEngine.search('SELECT * FROM users')
     equityAdmin.userManagementPage.assertNoUserExistsMessageIsDisplayed()
   })
-
-  /**
-   * @missing_data Need to have the exactly same users registered in order to validate this load behavior
-   */
-  it.skip('C7353827_List User - Lazy Load Test', () => {
-    const usersIdListToCheckLoading = [454295, 941741, 454300, 941765, 836495]
-
-    equityAdmin.userManagementPage.interceptUsersLoadingRequest()
-
-    // eoindeasyNE
-    equityAdmin.userManagementPage.getUserInTable(usersIdListToCheckLoading[0])
-    equityAdmin.userManagementPage.waitSpecificTime(500) // The UI takes a time to load, so this wait is really necessary
-
-    // jachas@globalshares.com
-    equityAdmin.userManagementPage.getUserInTable(usersIdListToCheckLoading[1])
-    equityAdmin.userManagementPage.waitSpecificTime(500) // The UI takes a time to load, so this wait is really necessary
-    equityAdmin.userManagementPage.waitForUsersLoadingRequest()
-
-    // mpurcellNE
-    equityAdmin.userManagementPage.getUserInTable(usersIdListToCheckLoading[2])
-    equityAdmin.userManagementPage.waitSpecificTime(500) // The UI takes a time to load, so this wait is really necessary
-    equityAdmin.userManagementPage.waitForUsersLoadingRequest()
-
-    // Piotr Litwinski
-    equityAdmin.userManagementPage.getUserInTable(usersIdListToCheckLoading[3])
-    equityAdmin.userManagementPage.waitSpecificTime(500) // The UI takes a time to load, so this wait is really necessary
-
-    // ZoeLewis_NE - Last User in the table
-    equityAdmin.userManagementPage.getUserInTable(usersIdListToCheckLoading[4])
-    equityAdmin.userManagementPage.assertUserIsVisibleOnTable(usersIdListToCheckLoading[4])
-  })
 })
 
 /**
@@ -101,7 +62,7 @@ describe('More User Management tests - Empty state', () => {
   })
 
   context('Mocked data tests', () => {
-    it('C7353828_List User - Empty State)', () => {
+    it('C7353828_List User - Empty State', () => {
       equityAdmin.userManagementPage.assertNoUserExistsMessageIsDisplayed()
     })
   })

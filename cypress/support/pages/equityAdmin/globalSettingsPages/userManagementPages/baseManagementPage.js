@@ -201,7 +201,7 @@ class BaseManagementPage extends BasePage {
    *
    * @param {number} results amount of results you want to check after a search
    *
-   * @example Send 'results = 2' to validate the '2 SEARCH RESULT(S)' is being displayed in the Search Results list
+   * @example Send results as 2 to validate the '2 SEARCH RESULT(S)' is being displayed in the Search Results list
    */
   assertAmountOfSearchResultsInTheList(results) {
     this.assertNumberOfRecordsDisplayed(selectors.numberOfSearchResultsInTable, results)
@@ -229,6 +229,15 @@ class BaseManagementPage extends BasePage {
     for (let i = 0; i < entityId.length; i++) {
       cy.get(selectors.searchResultList + ' ' + selectors.searchResultItem + entityId[i]).should('be.visible')
     }
+  }
+
+  /**
+   * Count the number of search results displayed after a search right bellow the X SEARCH RESULT(S) text, and assert it.
+   *
+   * @param {number} number Number of search results displayed to be counted
+   */
+  assertAndCountNumberOfSearchResults(number) {
+    cy.get('*[id*=searchResultItem_]').should('have.length', number)
   }
 
   /**

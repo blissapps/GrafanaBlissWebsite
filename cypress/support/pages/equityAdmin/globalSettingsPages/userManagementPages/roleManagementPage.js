@@ -18,7 +18,8 @@ const selectors = {
   columnHeaderView: 'thead th[name=column_view]',
   columnHeaderUpdate: 'thead th[name=column_update]',
   columnHeaderCreate: 'thead th[name=column_create]',
-  columnHeaderDelete: 'thead th[name=column_delete]'
+  columnHeaderDelete: 'thead th[name=column_delete]',
+  searchResultForPermissions: '//div[@class="permission-header"]//div'
 }
 
 const apiInterceptions = {
@@ -500,6 +501,31 @@ class RoleManagementPage extends BaseManagementPage {
    */
   assertCreateNewRoleButtonDisplayed(displayed = true) {
     displayed ? cy.get(selectors.newRoleBtn).should('be.visible') : cy.get(selectors.newRoleBtn).should('not.exist')
+  }
+
+  /**
+   *
+   * @param {Number} number Number to be asserted in the Permissions Search Results after searching for a permission
+   *
+   * @example
+   * Send number equals 1 to assert the text 1 SEARCH RESULT(S) alongside the Permissions header
+   */
+  assertNumberOfSearchResultsForPermissions(number) {
+    cy.xpath(selectors.searchResultForPermissions + `[normalize-space(text()) = '${number} Search Result(s)']`).should('be.visible')
+  }
+
+  /**
+   * Assert a permission is highlighted. It happens after a search for a permissions.
+   *
+   * @param {string} permissionName Permission name to validate. It is case sensitive
+   * @param {number} numberOfPermissions 1 is the default value to validate only one permission is highlighted. Send a different number to validate many elements highlighted.
+   *
+   * @example
+   * permissionName as 'email' to validate the permission email is highlighted.
+   * permissionName as 'participants' and numberOfPermissions as 16 to validate the permission participants is highlighted in 16 elements.
+   */
+  assertPermissionHighlighted(permissionName, numberOfPermissions = 1) {
+    cy.xpath(`//th[@name="permission_name"]//gs-highlighted-text//mark[normalize-space(text()) = '${permissionName}']`).should('be.visible').and('have.length', numberOfPermissions)
   }
 
   // --------------------------------------------------------------------------------------- OTHERS ------------------------------------------------------------------------------------//
