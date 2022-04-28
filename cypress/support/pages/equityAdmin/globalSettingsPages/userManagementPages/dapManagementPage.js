@@ -372,7 +372,7 @@ class DapManagementPage extends BaseManagementPage {
           .eq(value[0] - 1)
           .scrollIntoView()
           .clear()
-          .type(value[1])
+          .type(value[1] + '{enter}')
       } else {
         cy.get(conditionsSelectors.generalElement)
           .eq(value[0] - 1)

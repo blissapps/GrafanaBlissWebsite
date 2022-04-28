@@ -299,6 +299,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
       // Duplicated DAP editions
       equityAdmin.dapManagementPage.assertEntityIsFocused()
       equityAdmin.dapManagementPage.assertEntityHeaderIsDisplayedAsExpected('Copy Of ' + dapName)
+      equityAdmin.dapManagementPage.assertConditionsContainerDisplayedAsExpected()
       equityAdmin.dapManagementPage.modifyEntityName(newDapName)
       equityAdmin.dapManagementPage.saveEntityInformation()
 
@@ -311,6 +312,96 @@ describe('Data Access Profiles tests over User Management settings', () => {
       equityAdmin.dapManagementPage.assertNumberOfGroupRecordsAssociatedWithDap(0)
       equityAdmin.dapManagementPage.assertNumberOfGroupCardsAssociatedWithDap(0)
       equityAdmin.dapManagementPage.assertEntityIsFocused(false)
+    })
+
+    it('C17041143_DAP- Remove a group from Data Access Profile', () => {
+      const dapId = 31
+      const dapName = 'QA3'
+      const groupIdsAssociated = [950, 955]
+
+      // Remove Group
+      equityAdmin.dapManagementPage.clickDapById(dapId)
+      equityAdmin.dapManagementPage.removeGroupFromDap(groupIdsAssociated)
+      equityAdmin.dapManagementPage.saveEntityInformation()
+      equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved')
+      equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupIdsAssociated[0], false)
+      equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupIdsAssociated[1], false)
+    })
+
+    it('C17041144_DAP - Created DAP with nested conditions with business unit and client id', () => {
+      const dapName = 'DAP NESTED - Business and client ' + utils.getRandomNumber()
+
+      equityAdmin.dapManagementPage.clickCreateNewDap()
+      equityAdmin.dapManagementPage.modifyEntityName(dapName)
+      equityAdmin.dapManagementPage.modifyCondition([], [1, 'Business Unit'], [2, '112'])
+      equityAdmin.dapManagementPage.addCondition(1, 2)
+      equityAdmin.dapManagementPage.modifyCondition([], [4, 'Client id'], [5, '123'])
+      equityAdmin.dapManagementPage.saveEntityInformation()
+
+      equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved')
+      equityAdmin.dapManagementPage.assertEntityIsDisplayedInTheList(dapName)
+      equityAdmin.dapManagementPage.assertConditionValue(1, 'Business Unit')
+      equityAdmin.dapManagementPage.assertConditionValue(2, '112')
+      equityAdmin.dapManagementPage.assertConditionValue(3, 'and')
+      equityAdmin.dapManagementPage.assertConditionValue(4, 'Client id')
+      equityAdmin.dapManagementPage.assertConditionValue(5, '123')
+    })
+
+    it('C17041145_DAP - Create DAP with nested conditions with "is international mobile" and participant id', () => {
+      const dapName = 'DAP NESTED - inter and participant ' + utils.getRandomNumber()
+
+      equityAdmin.dapManagementPage.clickCreateNewDap()
+      equityAdmin.dapManagementPage.modifyEntityName(dapName)
+      equityAdmin.dapManagementPage.modifyCondition([], [1, 'Is international mobile?'], [2, 'Yes'], false)
+      equityAdmin.dapManagementPage.addCondition(1, 2)
+      equityAdmin.dapManagementPage.modifyCondition([3, 'or'], [4, 'Participant id'], [5, '110'])
+      equityAdmin.dapManagementPage.saveEntityInformation()
+
+      equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved')
+      equityAdmin.dapManagementPage.assertEntityIsDisplayedInTheList(dapName)
+      equityAdmin.dapManagementPage.assertConditionValue(1, 'Is international mobile?')
+      equityAdmin.dapManagementPage.assertConditionValue(2, 'Yes')
+      equityAdmin.dapManagementPage.assertConditionValue(3, 'or')
+      equityAdmin.dapManagementPage.assertConditionValue(4, 'Participant id')
+      equityAdmin.dapManagementPage.assertConditionValue(5, '110')
+    })
+
+    it('C17041146_DAP - Create DAP with nested conditions with payroll id and residency', () => {
+      const dapName = 'DAP NESTED - payroll and residency ' + utils.getRandomNumber()
+
+      equityAdmin.dapManagementPage.clickCreateNewDap()
+      equityAdmin.dapManagementPage.modifyEntityName(dapName)
+      equityAdmin.dapManagementPage.modifyCondition([], [1, 'Payroll id'], [2, '100'])
+      equityAdmin.dapManagementPage.addCondition(1, 2)
+      equityAdmin.dapManagementPage.modifyCondition([3, 'and'], [4, 'Residency'], [5, 'China'])
+      equityAdmin.dapManagementPage.saveEntityInformation()
+
+      equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved')
+      equityAdmin.dapManagementPage.assertEntityIsDisplayedInTheList(dapName)
+      equityAdmin.dapManagementPage.assertConditionValue(1, 'Payroll id')
+      equityAdmin.dapManagementPage.assertConditionValue(2, '100')
+      equityAdmin.dapManagementPage.assertConditionValue(3, 'and')
+      equityAdmin.dapManagementPage.assertConditionValue(4, 'Residency')
+      equityAdmin.dapManagementPage.assertConditionValue(5, 'China')
+    })
+
+    it('C17041147_DAP- Create DAP with nested condition with business id and tax status', () => {
+      const dapName = 'DAP NESTED - business and tax ' + utils.getRandomNumber()
+
+      equityAdmin.dapManagementPage.clickCreateNewDap()
+      equityAdmin.dapManagementPage.modifyEntityName(dapName)
+      equityAdmin.dapManagementPage.modifyCondition([], [1, 'Business'], [2, '123'])
+      equityAdmin.dapManagementPage.addCondition(1, 2)
+      equityAdmin.dapManagementPage.modifyCondition([3, 'or'], [4, 'Tax'], [5, 'MIFID W8- Non-US Tax Resident'], false)
+      equityAdmin.dapManagementPage.saveEntityInformation()
+
+      equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved')
+      equityAdmin.dapManagementPage.assertEntityIsDisplayedInTheList(dapName)
+      equityAdmin.dapManagementPage.assertConditionValue(1, 'Business')
+      equityAdmin.dapManagementPage.assertConditionValue(2, '123')
+      equityAdmin.dapManagementPage.assertConditionValue(3, 'or')
+      equityAdmin.dapManagementPage.assertConditionValue(4, 'Tax')
+      equityAdmin.dapManagementPage.assertConditionValue(5, 'MIFID W8- Non-US Tax Resident')
     })
   })
 })
