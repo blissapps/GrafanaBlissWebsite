@@ -17,25 +17,32 @@ const executeCommand = (command) => {
 }
 
 /**
- * Waits for XHR requests that may generate elements detached from the DOM after a successful login or in a refresh in the home page for the Equity Admin
- *
- * Even though we are using intercepts and waiting for them, these interception are being called more than 1 single time,
- * which are not sufficient because the front-end call some XHR calls twice (I don't know why).
- * To see this behavior, open Chrome dev tools and check this behavior right after the login (XHR examples are 'Self' and 'Permissions').
- *
+ * Intercepts XHR requests that may generate elements detached from the DOM after a successful login or in a refresh in the home page for the Equity Admin
  */
-Cypress.Commands.add('loginSuccessfulXHRWaits', () => {
+Cypress.Commands.add('interceptHomeSystemInitializedAPICalls', () => {
   // Avoid elements detached from the DOM when loading at the home page right after the login
   cy.intercept('GET', '/api/Clients?$orderby=name**count=true').as('waitsClientsToBeLoaded')
   cy.intercept('GET', '/api/Users/Self/Tenants/**/Permissions').as('waitsPermissionsToBeReceived')
+})
 
+/**
+ * Waits for XHR requests that may generate elements detached from the DOM after a successful login or in a refresh in the home page for the Equity Admin
+ *
+ * Even though we are using intercepts and waiting for them, these interceptions are being called more than 1 single time.
+ * So, only using waits for interceptions are not sufficient because the front-end call some XHR calls twice (I don't know why and a ticket was raised PB-828).
+ * To see this behavior, open Chrome dev tools under the Network tab and check this behavior right after the login.
+ *
+ */
+Cypress.Commands.add('waitForHomeSystemInitializedApiCalls', () => {
   cy.wait('@waitsClientsToBeLoaded', { timeout: 10000 })
   cy.wait('@waitsPermissionsToBeReceived', { timeout: 20000 })
 
+  // Also guarantee the expected cookies are being saved
   cy.waitUntil(() => cy.getCookie('SERVERID').then((cookie) => Boolean(cookie && cookie.value)))
   cy.waitUntil(() => cy.getCookie('idsrv').then((cookie) => Boolean(cookie && cookie.value)))
   cy.waitUntil(() => cy.getCookie('idsrv.session').then((cookie) => Boolean(cookie && cookie.value)))
 
+  // Intercept without waiting just to give some time in the loading
   cy.intercept({ method: 'POST', url: 'https://rs.fullstory.com/rec/page' }, { success: true })
 
   cy.forcedWait(1000) // the menu is no stable yet due to some API duplicated calls. A ticket was open https://globalshares.atlassian.net/browse/PB-828

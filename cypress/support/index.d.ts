@@ -8,7 +8,11 @@
 // Ignore any warning error in namespace in case it happens (It is expected to happen due to the TS compiler we are using in this project)
 declare namespace Cypress {
   interface Chainable {
-    loginSuccessfulXHRWaits(): Chainable<Element>
+    interceptHomeSystemInitializedAPICalls(): Chainable<Element>
+  }
+
+  interface Chainable {
+    waitForHomeSystemInitializedApiCalls(): Chainable<Element>
   }
 
   interface Chainable {

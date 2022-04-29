@@ -23,8 +23,9 @@ describe('Login and Logout tests', { tags: ['@smoke'] }, () => {
   })
 
   it('C16515487_Logout from the application', () => {
+    cy.interceptHomeSystemInitializedAPICalls()
     equityAdmin.loginPage.loginWithoutSession()
-    cy.loginSuccessfulXHRWaits()
+    cy.waitForHomeSystemInitializedApiCalls()
     equityAdmin.homePage.checkUrl('/home')
     equityAdmin.profileMenuNavBar.logout()
 
@@ -32,8 +33,9 @@ describe('Login and Logout tests', { tags: ['@smoke'] }, () => {
   })
 
   it('C16515488_Login and Logout functionalities are persistent', () => {
+    cy.interceptHomeSystemInitializedAPICalls()
     equityAdmin.loginPage.loginWithoutSession()
-    cy.loginSuccessfulXHRWaits()
+    cy.waitForHomeSystemInitializedApiCalls()
     equityAdmin.homePage.checkUrl('/home')
     equityAdmin.profileMenuNavBar.logout()
 

@@ -15,9 +15,10 @@ class LoginPage extends BasePage {
    * @param {string} password password to login. The default variable is set in the cypress.json file
    */
   login(email = Cypress.env('DEFAULT_USER_AUTH'), password = Cypress.env('DEFAULT_PASSWORD_AUTH')) {
+    cy.interceptHomeSystemInitializedAPICalls()
     this.loginWithSession(email, password)
     cy.visit('/') && cy.reload()
-    cy.loginSuccessfulXHRWaits()
+    cy.waitForHomeSystemInitializedApiCalls()
   }
 
   /**

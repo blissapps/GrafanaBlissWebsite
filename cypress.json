@@ -37,7 +37,7 @@
     "cypressMochawesomeReporterReporterOptions": {
       "reportDir": "cypress/test-results",
       "charts": true,
-      "reportPageTitle": "Equity Admin V3 - Test results",
+      "reportPageTitle": "Equity Admin V2 - Test results",
       "embeddedScreenshots": true,
       "inlineAssets": true
     },
