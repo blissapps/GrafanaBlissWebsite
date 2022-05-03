@@ -118,67 +118,6 @@ describe('Group Management tests over User Management settings', () => {
     })
 
     /**
-     * @missing_data Need to have a group with 1 DAP registered
-     */
-    it.skip('C7493030_Groups_DAP_Is_Removed_From_The_Group', () => {
-      const groupId = 1222
-      const groupName = 'Remove dap'
-      const dapIds = [60]
-
-      equityAdmin.groupManagementPage.clickGroupById(groupId)
-
-      equityAdmin.groupManagementPage.removeDapsFromGroup(dapIds)
-      equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
-      equityAdmin.groupManagementPage.assertDapAssociatedWithGroup(dapIds[0], false)
-    })
-
-    /**
-     * @missing_data Need to have a group. Also, it needs to have 3 daps created in the environment.
-     */
-    it.skip('C7412692_Groups_Add_A_Data_Access_Profile_To_A_Group', () => {
-      const groupId = 1022
-      const groupName = 'ADD daps'
-      const dapNames = ['DAP 1', 'DAP 2', 'DAP 3']
-      const dapIds = [41, 42, 43]
-
-      equityAdmin.groupManagementPage.clickGroupById(groupId)
-      equityAdmin.groupManagementPage.addDapsToGroup(dapNames, dapIds)
-      equityAdmin.groupManagementPage.saveEntityInformation()
-      equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
-
-      equityAdmin.groupManagementPage.assertDapAssociatedWithGroup(dapIds[0])
-      equityAdmin.groupManagementPage.assertDapAssociatedWithGroup(dapIds[1])
-      equityAdmin.groupManagementPage.assertDapAssociatedWithGroup(dapIds[2])
-
-      equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'dap', false)
-      equityAdmin.dapManagementPage.checkPageUrl()
-
-      equityAdmin.dapManagementPage.clickDapById(dapIds[0])
-      equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupId)
-      equityAdmin.dapManagementPage.clickDapById(dapIds[1])
-      equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupId)
-      equityAdmin.dapManagementPage.clickDapById(dapIds[2])
-      equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupId)
-    })
-
-    /**
-     * @missing_data Need to have a group. Also, it needs to have at least one DAP created in the environment.
-     */
-    it.skip('C7412694_Groups_Discard_Without_Saving_DAPs', () => {
-      const groupId = 1281
-      const dapNames = ['Test', 'Test', 'Test3']
-      const dapIds = [60, 77, 78]
-
-      equityAdmin.groupManagementPage.clickGroupById(groupId)
-      equityAdmin.groupManagementPage.addDapsToGroup(dapNames, dapIds)
-      equityAdmin.groupManagementPage.discardEntityInformation()
-
-      equityAdmin.groupManagementPage.assertDapAssociatedWithGroup(dapIds[0], false)
-      equityAdmin.groupManagementPage.assertDapAssociatedWithGroup(dapIds[1], false)
-      equityAdmin.groupManagementPage.assertDapAssociatedWithGroup(dapIds[2], false)
-    })
-
-    /**
      * @missing_data Need to have a group with 1 User registered
      */
     it.skip('C7493032_Groups_User_Is_Removed_From_The_Group', () => {

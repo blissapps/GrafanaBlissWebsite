@@ -105,6 +105,35 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
       equityAdmin.groupManagementPage.assertRoleAssociatedWithGroup(roleId, false)
     })
+
+    it('C17223611_Remove a Single and Multiple DAPs from a Group', () => {
+      const groupId = 956
+      const groupName = 'Delete Components Test'
+      const dapIdSingle = [6]
+      const dapIdsMultiple = [7, 8, 9]
+
+      equityAdmin.groupManagementPage.clickGroupById(groupId)
+      equityAdmin.groupManagementPage.assertDapAssociatedWithGroup(dapIdSingle[0])
+      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 4)
+
+      // Single removal
+      equityAdmin.groupManagementPage.removeDapsFromGroup([dapIdSingle[0]])
+      equityAdmin.groupManagementPage.saveEntityInformation()
+
+      equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
+      equityAdmin.groupManagementPage.assertDapAssociatedWithGroup(dapIdSingle[0], false)
+      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 3)
+
+      // Multiple removal
+      equityAdmin.groupManagementPage.removeDapsFromGroup(dapIdsMultiple)
+      equityAdmin.groupManagementPage.saveEntityInformation()
+
+      equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
+      equityAdmin.groupManagementPage.assertDapAssociatedWithGroup(dapIdsMultiple[1], false)
+      equityAdmin.groupManagementPage.assertDapAssociatedWithGroup(dapIdsMultiple[2], false)
+      equityAdmin.groupManagementPage.assertDapAssociatedWithGroup(dapIdsMultiple[3], false)
+      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 0)
+    })
   })
 
   context('Different users for login', () => {
@@ -228,6 +257,20 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertEntityHeaderIsDisplayedAsExpected()
       equityAdmin.groupManagementPage.assertRoleAssociatedWithGroup(roleId)
       equityAdmin.groupManagementPage.assertRemoveRoleOptionIsDisplayed(roleId, false)
+    })
+
+    it('C17181562_Unable to Remove DAPs from a Group', () => {
+      const groupId = 941 // Cannot Update & Delete Group
+      const dapId = 3 // Test 1
+
+      equityAdmin.loginPage.login('jachas@globalshares.com')
+      equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'group')
+      equityAdmin.groupManagementPage.checkPageUrl()
+
+      equityAdmin.groupManagementPage.clickGroupById(groupId)
+      equityAdmin.groupManagementPage.assertEntityHeaderIsDisplayedAsExpected()
+      equityAdmin.groupManagementPage.assertDapAssociatedWithGroup(dapId)
+      equityAdmin.groupManagementPage.assertRemoveDapOptionIsDisplayed(dapId, false)
     })
   })
 
@@ -653,6 +696,85 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIdsToRemove[0])
       equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIdsToRemove[1])
       equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIdsToRemove[2])
+    })
+
+    it('C17181563_Add a Single DAP to a Group', () => {
+      const groupId = 959
+      const groupName = 'cash_gen_034'
+      const dapName = ['DAP02_cashgen034']
+      const dapId = [37]
+
+      equityAdmin.homePage.navigateToUrl('/tenant/353/settings/group-management') // cashgen034
+
+      equityAdmin.groupManagementPage.clickGroupById(groupId)
+      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 0)
+
+      equityAdmin.groupManagementPage.addDapsToGroup(dapName, dapId)
+      equityAdmin.groupManagementPage.saveEntityInformation()
+      equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
+
+      equityAdmin.groupManagementPage.assertDapAssociatedWithGroup(dapId[0])
+      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 1)
+    })
+
+    it('C17181564_Add Multiple DAPs to a Group', () => {
+      const groupId = 960
+      const groupName = 'cash_gen_036'
+      const dapNames = ['DAP01', 'DAP02', 'DAP03', 'DAP04']
+      const dapIds = [39, 40, 41, 42]
+
+      equityAdmin.homePage.navigateToUrl('/tenant/362/settings/group-management') // cashgen036
+
+      equityAdmin.groupManagementPage.clickGroupById(groupId)
+      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 0)
+
+      equityAdmin.groupManagementPage.addDapsToGroup(dapNames, dapIds)
+      equityAdmin.groupManagementPage.saveEntityInformation()
+      equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
+
+      equityAdmin.groupManagementPage.assertDapAssociatedWithGroup(dapIds[0])
+      equityAdmin.groupManagementPage.assertDapAssociatedWithGroup(dapIds[1])
+      equityAdmin.groupManagementPage.assertDapAssociatedWithGroup(dapIds[2])
+      equityAdmin.groupManagementPage.assertDapAssociatedWithGroup(dapIds[3])
+      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 4)
+    })
+
+    it('C17181565_Dismiss Adding DAP to a Group', () => {
+      const groupId = 962
+      const dapNames = ['DAP01', 'DAP02']
+      const dapIds = [39, 40]
+
+      equityAdmin.homePage.navigateToUrl('/tenant/362/settings/group-management') // cashgen036
+
+      equityAdmin.groupManagementPage.clickGroupById(groupId)
+      equityAdmin.groupManagementPage.clickAddDapsToGroup()
+      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 0)
+
+      equityAdmin.selectSettingsL4Page.selectSettings('dap', dapNames, dapIds)
+      equityAdmin.selectSettingsL4Page.clickToDismissTheSelections()
+
+      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 0)
+    })
+
+    it('C17181566_Discard Adding DAP to a Group - Not Save', () => {
+      const groupId = 962
+      const dapNames = ['DAP01', 'DAP02']
+      const dapIds = [39, 40]
+
+      equityAdmin.homePage.navigateToUrl('/tenant/362/settings/group-management') // cashgen036
+
+      equityAdmin.groupManagementPage.clickGroupById(groupId)
+      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 0)
+
+      equityAdmin.groupManagementPage.addDapsToGroup(dapNames, dapIds)
+      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 2)
+      equityAdmin.groupManagementPage.assertDapAssociatedWithGroup(dapIds[0])
+      equityAdmin.groupManagementPage.assertDapAssociatedWithGroup(dapIds[1])
+
+      equityAdmin.groupManagementPage.discardEntityInformation()
+
+      equityAdmin.groupManagementPage.assertDapAssociatedWithGroup(dapIds[0], false)
+      equityAdmin.groupManagementPage.assertDapAssociatedWithGroup(dapIds[1], false)
     })
   })
 })

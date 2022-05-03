@@ -108,6 +108,13 @@ class GroupManagementPage extends BaseManagementPage {
     this.scrollToEntityTop()
   }
 
+  /**
+   * Click in the Add groups button and nothing else. You may be looking for the addGroupsToDap method that does everything in a single method
+   */
+  clickAddDapsToGroup() {
+    cy.get(selectors.addDAPBtn).scrollIntoView().click()
+  }
+
   // --------------------------------------------------------------------------- ASSERTIONS ------------------------------------------------------------------------------ //
 
   /**
@@ -453,7 +460,7 @@ class GroupManagementPage extends BaseManagementPage {
    * For example: dapNames=['dap1', 'dap2'] needs to match the exactly order in dapIds=[1, 2]
    */
   addDapsToGroup(dapNames, dapIds) {
-    cy.get(selectors.addDAPBtn).click()
+    this.clickAddDapsToGroup()
     selectSettingsL4Page.selectSettings('dap', dapNames, dapIds)
     selectSettingsL4Page.clickToConfirmTheSelections()
   }
