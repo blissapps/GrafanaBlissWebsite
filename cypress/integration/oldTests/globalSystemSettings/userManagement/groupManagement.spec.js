@@ -195,22 +195,6 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userIds[0], false)
       equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userIds[1], false)
     })
-
-    /**
-     * @missing_data Need to have a group with 1 Role registered
-     */
-    it.skip('C8161539_Groups_Role_Is_Removed_From_The_Group', () => {
-      const groupId = 1424
-      const groupName = 'Remove role'
-      const roleId = 1854
-
-      equityAdmin.groupManagementPage.clickGroupById(groupId)
-
-      equityAdmin.groupManagementPage.removeRoleFromGroup(roleId)
-      equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
-
-      equityAdmin.groupManagementPage.assertRoleAssociatedWithGroup(1854, false)
-    })
   })
 
   context('View Only User', () => {

@@ -187,7 +187,7 @@ class HomePage extends BasePage {
   /**
    * Assert the tooltip shows the expected text in the country badge for a specific client
    *
-   * @firefox_limited Only works for chrome based browsers
+   * @chrome_only Only works for chrome based browsers
    *
    * @param {number} clientId Client id number
    * @param {string} text Text to be validated within the tollTip
@@ -197,7 +197,7 @@ class HomePage extends BasePage {
       .scrollIntoView()
       .realHover() // Only works for chrome based browsers
       .then(() => {
-        this.assertTollTipDisplayedWithText(text)
+        this.assertToolTipDisplayedWithText(text)
       })
   }
 

@@ -370,7 +370,7 @@ class GroupManagementPage extends BaseManagementPage {
   }
 
   /**
-   * Assert if the option to remove a dap is available by checking if the remove role button is displayed or not
+   * Assert if the option to remove a dap is available by checking if the remove dap button is displayed or not
    *
    * @param {number} dapId DAP id number to verify if the remove button appears on it
    * @param {boolean} displayed True if you want to assert the button is displayed, false otherwise
@@ -382,7 +382,7 @@ class GroupManagementPage extends BaseManagementPage {
   }
 
   /**
-   * Assert if the option to remove a user is available by checking if the remove role button is displayed or not
+   * Assert if the option to remove a user is available by checking if the remove user button is displayed or not
    *
    * @param {number} userId User id number to verify if the remove button appears on it
    * @param {boolean} displayed True if you want to assert the button is displayed, false otherwise
@@ -394,9 +394,9 @@ class GroupManagementPage extends BaseManagementPage {
   }
 
   /**
-   * Assert if the option to remove a company is available by checking if the remove role button is displayed or not
+   * Assert if the option to remove a company is available by checking if the remove company button is displayed or not
    *
-   * @param {number} companyId User id number to verify if the remove button appears on it
+   * @param {number} companyId Company id number to verify if the remove button appears on it
    * @param {boolean} displayed True if you want to assert the button is displayed, false otherwise
    */
   assertRemoveCompanyOptionIsDisplayed(companyId, displayed = true) {

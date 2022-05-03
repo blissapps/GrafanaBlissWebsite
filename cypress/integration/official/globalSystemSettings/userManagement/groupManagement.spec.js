@@ -54,6 +54,57 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('users', 8)
       equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('companies', 8)
     })
+
+    /**
+     * @chrome_only Hover events only works on Chrome based browsers
+     */
+    it('C17223608_Remove entity tooltip', { browser: '!firefox' }, () => {
+      const groupId = 961
+      const roleId = 1505
+      const dapId = 44
+      const userId = 5189
+      const companyId = 579
+
+      equityAdmin.groupManagementPage.assertActiveGroupsAreDisplayed()
+      equityAdmin.groupManagementPage.clickGroupById(groupId)
+
+      // Role
+      equityAdmin.groupManagementPage.hoverMouseOverRemoveIcon(roleId)
+      equityAdmin.groupManagementPage.assertToolTipDisplayedWithText('Remove Role')
+
+      // DAP
+      equityAdmin.groupManagementPage.hoverMouseOverRemoveIcon(dapId)
+      equityAdmin.groupManagementPage.assertToolTipDisplayedWithText('Remove Data Access Profile')
+
+      // User
+      equityAdmin.groupManagementPage.hoverMouseOverRemoveIcon(userId)
+      equityAdmin.groupManagementPage.assertToolTipDisplayedWithText('Remove User')
+
+      // Company
+      equityAdmin.groupManagementPage.hoverMouseOverRemoveIcon(companyId)
+      equityAdmin.groupManagementPage.assertToolTipDisplayedWithText('Remove Client')
+
+      // Group
+      equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'dap', false)
+      equityAdmin.dapManagementPage.clickDapById(dapId)
+      equityAdmin.groupManagementPage.hoverMouseOverRemoveIcon(groupId)
+      equityAdmin.groupManagementPage.assertToolTipDisplayedWithText('Remove group')
+    })
+
+    it('C17181558_Remove a Role from a Group', () => {
+      const groupId = 956
+      const groupName = 'Delete Components Test'
+      const roleId = 1493
+
+      equityAdmin.groupManagementPage.assertActiveGroupsAreDisplayed()
+      equityAdmin.groupManagementPage.clickGroupById(groupId)
+
+      equityAdmin.groupManagementPage.removeRoleFromGroup(roleId)
+      equityAdmin.groupManagementPage.saveEntityInformation()
+
+      equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
+      equityAdmin.groupManagementPage.assertRoleAssociatedWithGroup(roleId, false)
+    })
   })
 
   context('Different users for login', () => {
@@ -149,6 +200,34 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.clickGroupById(groupId)
       equityAdmin.groupManagementPage.assertEntityHeaderIsDisplayedAsExpected()
       equityAdmin.groupManagementPage.assertAddUsersButtonDisplayed(false)
+    })
+
+    it('C17181557_Unable to Remove a Company', () => {
+      const groupId = 941 // Cannot Update & Delete Group
+      const companyId = 123 // Cash Management Payment
+
+      equityAdmin.loginPage.login('jachas@globalshares.com')
+      equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'group')
+      equityAdmin.groupManagementPage.checkPageUrl()
+
+      equityAdmin.groupManagementPage.clickGroupById(groupId)
+      equityAdmin.groupManagementPage.assertEntityHeaderIsDisplayedAsExpected()
+      equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyId, true, true)
+      equityAdmin.groupManagementPage.assertRemoveCompanyOptionIsDisplayed(companyId, false)
+    })
+
+    it('C17181559_Unable to Remove a Role of a Group', () => {
+      const groupId = 941 // Cannot Update & Delete Group
+      const roleId = 1496 // Cannot Update & Delete Group
+
+      equityAdmin.loginPage.login('jachas@globalshares.com')
+      equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'group')
+      equityAdmin.groupManagementPage.checkPageUrl()
+
+      equityAdmin.groupManagementPage.clickGroupById(groupId)
+      equityAdmin.groupManagementPage.assertEntityHeaderIsDisplayedAsExpected()
+      equityAdmin.groupManagementPage.assertRoleAssociatedWithGroup(roleId)
+      equityAdmin.groupManagementPage.assertRemoveRoleOptionIsDisplayed(roleId, false)
     })
   })
 
@@ -510,6 +589,70 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('companies', 6)
       equityAdmin.groupManagementPage.assertNumberOfSearchResultsInASection('companies', 'No')
       equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('companies', 0)
+    })
+
+    it('C17181554_Remove a Single Company from a Group', () => {
+      const groupId = 551
+      const groupName = 'cash_gen_029'
+      const companyIds = [580]
+
+      equityAdmin.homePage.navigateToUrl('/tenant/271/settings/group-management') // cashgen029
+
+      equityAdmin.groupManagementPage.clickGroupById(groupId)
+
+      equityAdmin.groupManagementPage.removeCompaniesFromGroup(companyIds, true)
+      equityAdmin.groupManagementPage.saveEntityInformation()
+      equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
+
+      equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[0], false)
+    })
+
+    it('C17181555_Remove Multiple Companies from a Group', () => {
+      const groupId = 560
+      const groupName = 'cash_gen_031'
+      const companyIdsToRemove = [281, 286, 349, 579, 580]
+      const companyIdsRemained = [385]
+
+      equityAdmin.homePage.navigateToUrl('/tenant/280/settings/group-management') // cashgen031
+
+      equityAdmin.groupManagementPage.clickGroupById(groupId)
+
+      equityAdmin.groupManagementPage.removeCompaniesFromGroup(companyIdsToRemove)
+      equityAdmin.groupManagementPage.saveEntityInformation()
+      equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
+
+      equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIdsRemained[0])
+      equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIdsToRemove[0], false)
+      equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIdsToRemove[1], false)
+      equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIdsToRemove[2], false)
+      equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIdsToRemove[3], false)
+      equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIdsToRemove[4], false)
+    })
+
+    it('C17181556_Discard Removing Companies from a Group', () => {
+      const groupId = 948
+      const groupName = 'cash_gen_032_viewers'
+      const companyIdsToRemove = [579, 580, 581]
+
+      equityAdmin.homePage.navigateToUrl('/tenant/347/settings/group-management') // cashgen031
+
+      equityAdmin.groupManagementPage.clickGroupById(groupId)
+
+      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('companies', 15)
+      equityAdmin.groupManagementPage.removeCompaniesFromGroup(companyIdsToRemove, true)
+      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('companies', 12)
+
+      equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIdsToRemove[0], false)
+      equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIdsToRemove[1], false)
+      equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIdsToRemove[2], false)
+
+      equityAdmin.groupManagementPage.discardEntityInformation()
+      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('companies', 15)
+      equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved', false)
+
+      equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIdsToRemove[0])
+      equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIdsToRemove[1])
+      equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIdsToRemove[2])
     })
   })
 })

@@ -256,11 +256,12 @@ class BasePage {
   }
 
   /**
+   * Assert a tooltip is visible or not with a given text
    *
    * @param {string} text The text to be validated in the tooltip
    * @param {boolean} displayed True to validate the tooltip with the text id displayed, false otherwise
    */
-  assertTollTipDisplayedWithText(text, displayed = true) {
+  assertToolTipDisplayedWithText(text, displayed = true) {
     displayed ? cy.get(selectors.gsTollTip).should('have.text', text) : cy.get(selectors.gsTollTip).should('not.exist')
   }
 

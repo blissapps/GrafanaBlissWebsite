@@ -27,7 +27,8 @@ const selectors = {
   threeDotDeactivateBtn: 'gs-action-panel-option[data-test-id=action-deactivate]',
   activeTab: '.tabs-bar #Active',
   inactiveTab: '.tabs-bar #Inactive',
-  viewOnlyStatusBadge: 'div .status gs-badge'
+  viewOnlyStatusBadge: 'div .status gs-badge',
+  removeEntityButton: 'gs-button[data-test-id=remove-entity]'
 }
 
 /**
@@ -403,6 +404,18 @@ class BaseManagementPage extends BasePage {
    */
   discardEntityInformation() {
     cy.get(selectors.discardBtn).scrollIntoView().click()
+  }
+
+  /**
+   * Hover the mouse pointer over the remove button of an entity card by sending its entity id
+   *
+   * @chrome_only This method only works on chrome based browsers
+   *
+   * @param {number} entityId Entity id number to hover over its card
+   *
+   */
+  hoverMouseOverRemoveIcon(entityId) {
+    cy.get(`gs-card[data-test-id="entity-${entityId}"] ` + selectors.removeEntityButton).realHover()
   }
 }
 
