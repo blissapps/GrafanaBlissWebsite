@@ -3,7 +3,7 @@ import EquityAdmin from '../../../../support/pages/equityAdmin'
 const equityAdmin = new EquityAdmin()
 
 describe('User Management tests over User Management settings', () => {
-  context('Admin tenant user', () => {
+  context('Admin tenant user over direct navigation (navigateToUrl)', () => {
     beforeEach(() => {
       equityAdmin.loginPage.login()
       equityAdmin.homePage.navigateToUrl('/tenant/1/settings/user-management')

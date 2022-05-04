@@ -23,7 +23,6 @@ const selectors = {
 }
 
 const apiInterceptions = {
-  pageLoadedRequest: 'https://api.stonly.com/api/v2/widget/integration?*',
   roleActivated: '/api/Roles/**/Activate',
   rolesLoading: '/api/Roles?**'
 }
@@ -62,7 +61,7 @@ class RoleManagementPage extends BaseManagementPage {
    * Get all types of permissions [view, update ...] associated with a permission
    *
    * @param {string} permissionName name of the permission
-   * @returns array of type of permissions associated with the permissionName given
+   * @returns array of type of permissions associated with the given permissionName
    */
   getPermissionsByName(permissionName) {
     // Choose permission name
@@ -223,7 +222,7 @@ class RoleManagementPage extends BaseManagementPage {
   // --------------------------------------------------------------------------------------- CLICKS ----------------------------------------------------------------------------- //
 
   /**
-   * Click in the new role button and change the current default role name
+   * Click in the "new role" button and change the current default role name
    *
    * @param {string} roleName Name given to replace the default 'New Role' name that comes by default
    */
@@ -239,14 +238,9 @@ class RoleManagementPage extends BaseManagementPage {
    * Click in a role by sending the role ID.
    *
    * @param {number} roleId Role id number.
-   * @param {boolean} wait Sometimes the roles take a time to be loaded. If it does not happen, send false and the request/response will not be awaited
    */
-  clickRoleById(roleId, wait = true) {
+  clickRoleById(roleId) {
     this.getRoleById(roleId).scrollIntoView().click()
-
-    if (wait) {
-      this.waitUntilPageIsLoaded() // wait to have all permissions loaded
-    }
   }
 
   // --------------------------------------------------------------------------------------- ASSERTIONS ---------------------------------------------------------------------------- //
@@ -293,7 +287,7 @@ class RoleManagementPage extends BaseManagementPage {
   /**
    * Assert if a selected role is editable or not
    *
-   * @param {boolean} editable True to assert the role is editable, false otherwise
+   * @param {boolean} editable True is the default value to assert the role is editable, false otherwise
    *
    */
   assertRoleIsEditable(editable = true) {
@@ -548,14 +542,6 @@ class RoleManagementPage extends BaseManagementPage {
    */
   interceptAndMockRolesLoadingRequest(fixtureFile) {
     cy.intercept('GET', apiInterceptions.rolesLoading, { fixture: fixtureFile }).as('emptyRoleList')
-  }
-
-  /**
-   * Waits until the page is loaded. This is a specific behavior of this page
-   */
-  waitUntilPageIsLoaded() {
-    cy.intercept('GET', apiInterceptions.pageLoadedRequest).as('pageLoaded')
-    cy.wait('@pageLoaded', { requestTimeout: 10000 })
   }
 
   /**

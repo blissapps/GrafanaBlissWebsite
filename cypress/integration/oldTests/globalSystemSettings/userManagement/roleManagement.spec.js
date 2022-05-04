@@ -64,54 +64,6 @@ describe('Role Management tests over User Management settings', () => {
       equityAdmin.roleManagementPage.assertActiveRolesAreDisplayed()
     })
 
-    it('C7499700_Create_A_New_Role_Happy_Path', () => {
-      const roleName = 'Create new role ' + utils.getRandomNumber()
-
-      equityAdmin.roleManagementPage.clickToCreateRoleWithNewName(roleName)
-      equityAdmin.roleManagementPage.addOrRemovePermissions('accessfilters', ['view', 'update', 'create', 'delete'])
-      equityAdmin.roleManagementPage.addOrRemovePermissions('api', ['view'])
-      equityAdmin.roleManagementPage.addOrRemovePermissions('settings', ['update'])
-      equityAdmin.roleManagementPage.addOrRemovePermissions('settings', ['delete'])
-      equityAdmin.roleManagementPage.addOrRemovePermissions('groups', ['view', 'update', 'create', 'delete'])
-
-      equityAdmin.roleManagementPage.saveEntityInformation()
-
-      equityAdmin.roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully')
-      equityAdmin.roleManagementPage.assertActiveRolesAreDisplayed()
-      equityAdmin.roleManagementPage.assertEntityIsDisplayedInTheList(roleName)
-    })
-
-    it('C7499701_Create_A_New_Role_Discard_Role', () => {
-      const roleName = 'Create and Discard' + utils.getRandomNumber()
-
-      equityAdmin.roleManagementPage.clickToCreateRoleWithNewName(roleName)
-      equityAdmin.roleManagementPage.addOrRemovePermissions('accessfilters', ['view', 'update', 'create', 'delete'])
-      equityAdmin.roleManagementPage.addOrRemovePermissions('api', ['view'])
-      equityAdmin.roleManagementPage.addOrRemovePermissions('groups', ['view', 'update', 'create', 'delete'])
-
-      equityAdmin.roleManagementPage.discardEntityInformation()
-      equityAdmin.roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully', false)
-      equityAdmin.roleManagementPage.assertEntityIsDisplayedInTheList(roleName, false)
-    })
-
-    it('C7499702_Create_A_New_Role_Mandatory_Fields_Are_Not_Populated', () => {
-      const roleName = 'Filling Mandatory Fields ' + utils.getRandomNumber()
-
-      equityAdmin.roleManagementPage.clickToCreateRoleWithNewName('{backspace}') // just to save the role with empty name
-      equityAdmin.roleManagementPage.saveEntityInformation()
-
-      equityAdmin.roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully', false)
-      equityAdmin.roleManagementPage.assertNotificationErrorDisplayed('Name should not be empty.')
-      equityAdmin.roleManagementPage.assertEntityIsDisplayedInTheList(roleName, false)
-
-      equityAdmin.roleManagementPage.modifyEntityName(roleName)
-      equityAdmin.roleManagementPage.saveEntityInformation()
-
-      equityAdmin.roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully')
-      equityAdmin.roleManagementPage.assertNotificationErrorDisplayed('Name should not be empty.', false)
-      equityAdmin.roleManagementPage.assertEntityIsDisplayedInTheList(roleName)
-    })
-
     it('C7499704_Create_A_New_Role_Name_Character_Limit_When_Creating', () => {
       let roleName = utils.generateRandomString(51)
 
@@ -157,27 +109,6 @@ describe('Role Management tests over User Management settings', () => {
       equityAdmin.roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully')
       equityAdmin.roleManagementPage.assertNotificationErrorDisplayed('Name length must be 50 characters or fewer.', false)
       equityAdmin.roleManagementPage.assertEntityIsDisplayedInTheList(newRoleName)
-    })
-
-    /**
-     * @missing_data For this scenario we need to have a role called 'Existing Role' (No permissions needed)
-     *
-     */
-    it.skip('C7499706_Create_A_New_Role_Same_Role_Names', () => {
-      const roleName = 'Existing Role'
-      const roleId = 1498
-
-      equityAdmin.roleManagementPage.clickToCreateRoleWithNewName(roleName)
-      equityAdmin.roleManagementPage.saveEntityInformation()
-      equityAdmin.roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully', false)
-      equityAdmin.roleManagementPage.assertNotificationErrorDisplayed('Name value is not valid.')
-      equityAdmin.roleManagementPage.discardEntityInformation()
-
-      equityAdmin.roleManagementPage.clickRoleById(roleId, false)
-      equityAdmin.roleManagementPage.modifyEntityName(roleName)
-      equityAdmin.roleManagementPage.saveEntityInformation()
-      equityAdmin.roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully', false)
-      equityAdmin.roleManagementPage.assertNotificationErrorDisplayed('', false)
     })
 
     /**
@@ -393,53 +324,6 @@ describe('Role Management tests over User Management settings', () => {
       equityAdmin.roleManagementPage.assertPermissionState('transactionwindows', ['create'], true)
       equityAdmin.roleManagementPage.assertPermissionState('users', ['create'], true)
       equityAdmin.roleManagementPage.assertPermissionState('vestingschedules', ['create'], true)
-    })
-
-    /**
-     * @missing_data For this scenario we need to have a role called 'Activate and Inactivate' in the Active tab
-     *
-     * @bug_raised
-     * SKIPPING due to https://globalshares.atlassian.net/browse/PB-963
-     *
-     * TODO: @missing_steps check if the role name is editable or not
-     */
-    it.skip('C7499833_Deactivate_And_Activate_Role', () => {
-      const roleId = 1645
-      const roleName = 'Activate and Inactivate'
-
-      // Inactivate role
-      cy.log('Inactivate role')
-      equityAdmin.roleManagementPage.clickRoleById(roleId)
-      equityAdmin.roleManagementPage.clickToDeactivateEntity()
-      equityAdmin.roleManagementPage.assertToastNotificationMessageIsDisplayed('Role deactivated', true, true)
-      equityAdmin.roleManagementPage.assertInactiveRolesAreDisplayed()
-      equityAdmin.roleManagementPage.assertEntityIsDisplayedInTheList(roleName)
-      equityAdmin.roleManagementPage.assertRoleIsEditable(false)
-
-      // Activate role
-      cy.log('Activate role')
-      equityAdmin.roleManagementPage.clickRoleById(roleId, false)
-      equityAdmin.roleManagementPage.activateRole()
-      equityAdmin.roleManagementPage.assertToastNotificationMessageIsDisplayed('Role activated')
-      equityAdmin.roleManagementPage.assertActiveRolesAreDisplayed()
-      equityAdmin.roleManagementPage.assertEntityIsDisplayedInTheList(roleName)
-      equityAdmin.roleManagementPage.clickRoleById(roleId, false)
-      equityAdmin.roleManagementPage.assertRoleIsEditable()
-    })
-
-    /**
-     * @missing_data Need to have a role called "Duplicate me" or something like that
-     */
-    it.skip('C7544052_Roles_Duplicate_A_Role', () => {
-      const roleId = 1493
-      const roleName = 'Duplicate me'
-
-      equityAdmin.roleManagementPage.clickRoleById(roleId)
-      equityAdmin.roleManagementPage.clickToDuplicateEntity()
-      equityAdmin.roleManagementPage.assertEntityHeaderIsDisplayedAsExpected('Copy Of ' + roleName)
-      equityAdmin.roleManagementPage.assertEntityIsFocused()
-      equityAdmin.roleManagementPage.saveEntityInformation()
-      equityAdmin.roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully')
     })
 
     /**
