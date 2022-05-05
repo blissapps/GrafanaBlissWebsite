@@ -14,11 +14,6 @@ describe('Role Management tests over User Management settings', () => {
 
     // ************************************************ TESTS AS ADMIN TENANT ************************************************** //
 
-    it('C7544080_Role_Check_Behavior_When_Closing_The_Settings', () => {
-      equityAdmin.settingsMenuNavBar.closeGlobalSettingsNavBar()
-      equityAdmin.roleManagementPage.checkPageUrl()
-    })
-
     /**
      * @missing_data Need to have some roles in both active and inactive tabs
      */
@@ -185,6 +180,7 @@ describe('Role Management tests over User Management settings', () => {
       equityAdmin.roleManagementPage.addOrRemoveAllPermissions('create')
       equityAdmin.roleManagementPage.addOrRemoveAllPermissions('delete')
       equityAdmin.roleManagementPage.saveEntityInformation()
+      equityAdmin.roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully', true)
     })
 
     /**
@@ -253,6 +249,7 @@ describe('Role Management tests over User Management settings', () => {
       equityAdmin.roleManagementPage.addOrRemovePermissions('categories', ['view'], true)
       equityAdmin.roleManagementPage.addOrRemovePermissions('users', ['create'], true)
       equityAdmin.roleManagementPage.saveEntityInformation()
+      equityAdmin.roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully', true)
     })
 
     /**
@@ -383,19 +380,6 @@ describe('Role Management tests over User Management settings', () => {
     })
 
     /**
-     * @missing_data For test this scenario there should be no "Update Role" permission for the user.
-     * Also, one active role must be provided
-     *
-     */
-    it.skip('C7499835_Activate/Deactivate_Role_No_Permission', () => {
-      const roleIdActive = 1574
-
-      equityAdmin.roleManagementPage.clickRoleById(roleIdActive)
-      equityAdmin.roleManagementPage.assertThreeDotButtonDisplayed(false)
-      equityAdmin.roleManagementPage.assertRoleIsEditable(false)
-    })
-
-    /**
      * @missing_data Need to have a user with view only access to roles. Also, this user must have access to a group that contains this role linked, so the user can see the role
      *
      * TODO: @missing_steps
@@ -410,19 +394,6 @@ describe('Role Management tests over User Management settings', () => {
       equityAdmin.roleManagementPage.assertThreeDotButtonDisplayed(false)
       equityAdmin.roleManagementPage.addPathToUrlAndVisitIt(';action=duplicate')
       // missing step to validate the user was not redirect to any ;action=duplicate panel and so the panel to duplicate the role is not displayed (waiting for PB-975)
-    })
-
-    /**
-     * @missing_data Need to have a user with view only access to roles
-     *
-     * @bug_raised
-     * SKIPPING due to https://globalshares.atlassian.net/browse/PB-963
-     */
-    it.skip('C15166080_View Only Role name text field must not be editable', () => {
-      const roleId = 1475
-
-      equityAdmin.roleManagementPage.clickRoleById(roleId)
-      equityAdmin.roleManagementPage.assertEntityNameEditable(false)
     })
   })
 

@@ -51,8 +51,8 @@ describe('Role Management tests over User Management settings', () => {
 
       let role = 'role'
       equityAdmin.searchEngine.search(role)
-      equityAdmin.roleManagementPage.assertAmountOfSearchResultsInTheList(2)
-      equityAdmin.roleManagementPage.assertAndCountNumberOfSearchResults(2)
+      equityAdmin.roleManagementPage.assertAmountOfSearchResultsInTheList(3)
+      equityAdmin.roleManagementPage.assertAndCountNumberOfSearchResults(3)
       equityAdmin.roleManagementPage.assertSearchResultListAccuracy(rolesIdActiveTab)
       equityAdmin.roleManagementPage.assertOtherGroupListDisplayed()
       equityAdmin.roleManagementPage.assertAllSearchResultItemsAreDisplayedInHighlightedMode()
