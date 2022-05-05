@@ -11,7 +11,7 @@ describe('Client search tests related with the search bar functionally in the ho
   /**
    * @bug_raised https://globalshares.atlassian.net/browse/PB-1185
    */
-  it('C16515489_Search client', () => {
+  it('C16515489 Search client', () => {
     const clientName = 'label'
 
     equityAdmin.searchEngine.search(clientName)
@@ -29,7 +29,7 @@ describe('Client search tests related with the search bar functionally in the ho
     equityAdmin.homePage.assertClientCardSummaryInformation(506, 'WhiteLabel1', 'ITA', 'Regulated')
   })
 
-  it('C16515490_Clear client search', () => {
+  it('C16515490 Clear client search', () => {
     const clientName = 'label'
     const firstClientCardId = 472
 
@@ -44,7 +44,7 @@ describe('Client search tests related with the search bar functionally in the ho
    * @bug_raised
    * SkIPPING DUE TO https://globalshares.atlassian.net/browse/PB-1184
    */
-  it.skip('C16524712_Favorite/Unfavorite Client', () => {
+  it.skip('C16524712 Favorite/Unfavorite Client', () => {
     const clientName = 'Revertdata1'
     const clientId = 516
 
@@ -69,7 +69,7 @@ describe('Client search tests related with the search bar functionally in the ho
    * @bug_raised
    * SkIPPING DUE TO https://globalshares.atlassian.net/browse/PB-1185
    */
-  it.skip('C16524713_Group clients by alphabets', () => {
+  it.skip('C16524713 Group clients by alphabets', () => {
     // All Companies (default)
     equityAdmin.homePage.selectGroupByOptionForCompanies()
     equityAdmin.homePage.assertCompaniesAreOrdered()
@@ -94,11 +94,11 @@ describe('Client search tests related with the search bar functionally in the ho
   /**
    * @only_chrome Hover commands are strict to chrome, so since we are using RealHover commands, this test needs to be skipped in other browsers rather than Chrome based ones
    */
-  it('C16587404_Check country badge hover behavior', { browser: '!firefox' }, () => {
+  it('C16587404 Check country badge hover behavior', { browser: '!firefox' }, () => {
     equityAdmin.homePage.assertClientCountryBadgeTollTipDisplaysCorrectText(256, 'Australia')
   })
 
-  it('C16524716_Search a non existing client', () => {
+  it('C16524716 Search a non existing client', () => {
     equityAdmin.searchEngine.search('Test123')
     equityAdmin.homePage.assertNoDataFoundDisplayed()
   })

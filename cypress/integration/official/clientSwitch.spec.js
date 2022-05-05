@@ -10,14 +10,14 @@ describe('Client tests over the client switch functionality', () => {
     equityAdmin.settingsMenuNavBar.clickClientSwitchButton()
   })
 
-  it('C16515491_View all clients using client switch functionality', () => {
+  it('C16515491 View all clients using client switch functionality', () => {
     equityAdmin.clientSwitchMenu.assertClientListDisplayed()
     equityAdmin.clientSwitchMenu.clickViewAllClients()
     equityAdmin.homePage.checkPageUrl()
     equityAdmin.homePage.assertCompaniesHeaderIsDisplayed()
   })
 
-  it('C16515492_Search clients using client switch', () => {
+  it('C16515492 Search clients using client switch', () => {
     const clientName = 'Activation'
     const clientId = 151
 
@@ -36,7 +36,7 @@ describe('Client tests over the client switch functionality', () => {
     equityAdmin.clientPeoplePage.assertClientNameInTheHeader(clientName)
   })
 
-  it('C16515493_Favorite / Unfavorite a client in the client switch menu', () => {
+  it('C16515493 Favorite / Unfavorite a client in the client switch menu', () => {
     const clientIds = [151, 162]
     const clientNames = ['Activation', 'Ambev']
 

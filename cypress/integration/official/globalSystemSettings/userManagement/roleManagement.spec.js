@@ -12,7 +12,7 @@ describe('Role Management tests over User Management settings', () => {
       equityAdmin.roleManagementPage.checkPageUrl()
     })
 
-    it('C17067395_Not selected role in active and inactive', () => {
+    it('C17067395 Not selected role in active and inactive', () => {
       // Active tab
       equityAdmin.roleManagementPage.assertActiveRolesAreDisplayed()
       equityAdmin.roleManagementPage.assertNoRoleSelectedMessageIsDisplayed()
@@ -23,7 +23,7 @@ describe('Role Management tests over User Management settings', () => {
       equityAdmin.roleManagementPage.assertNoRoleSelectedMessageIsDisplayed()
     })
 
-    it('C17067411_Successful and Unsuccessful search (Active Tab)', () => {
+    it('C17067411 Successful and Unsuccessful search (Active Tab)', () => {
       const rolesIdActiveTab = [1490, 1495]
 
       equityAdmin.roleManagementPage.assertNoRoleSelectedMessageIsDisplayed()
@@ -42,7 +42,7 @@ describe('Role Management tests over User Management settings', () => {
       equityAdmin.roleManagementPage.assertOtherGroupListDisplayed()
     })
 
-    it('C17067413_Successful and Unsuccessful search (Inactive Tab)', () => {
+    it('C17067413 Successful and Unsuccessful search (Inactive Tab)', () => {
       const rolesIdActiveTab = [1500, 1501]
 
       equityAdmin.roleManagementPage.assertNoRoleSelectedMessageIsDisplayed()
@@ -63,7 +63,7 @@ describe('Role Management tests over User Management settings', () => {
       equityAdmin.roleManagementPage.assertOtherGroupListDisplayed()
     })
 
-    it('C17067414_Search permissions in active and inactive tab', () => {
+    it('C17067414 Search permissions in active and inactive tab', () => {
       const roleId = 1494
       const roleInactive = 1500
 
@@ -102,7 +102,7 @@ describe('Role Management tests over User Management settings', () => {
       equityAdmin.roleManagementPage.assertPermissionHighlighted('Participant', 16)
     })
 
-    it('C17253538_Creating a new Role- Happy path', () => {
+    it('C17253538 Creating a new Role- Happy path', () => {
       const roleName = 'Create new role ' + utils.getRandomNumber()
 
       equityAdmin.roleManagementPage.clickToCreateRoleWithNewName(roleName)
@@ -118,7 +118,7 @@ describe('Role Management tests over User Management settings', () => {
       equityAdmin.roleManagementPage.assertEntityIsDisplayedInTheList(roleName)
     })
 
-    it('C17253539_Discard creating a new Role', () => {
+    it('C17253539 Discard creating a new Role', () => {
       const roleName = 'Create and Discard' + utils.getRandomNumber()
 
       equityAdmin.roleManagementPage.clickToCreateRoleWithNewName(roleName)
@@ -133,7 +133,7 @@ describe('Role Management tests over User Management settings', () => {
       equityAdmin.roleManagementPage.assertEntityIsDisplayedInTheList(roleName, false)
     })
 
-    it('C7499702_Create_A_New_Role_Mandatory_Fields_Are_Not_Populated', () => {
+    it('C17253540 Create a new Role without mandatory fields', () => {
       const roleName = 'Filling Mandatory Fields ' + utils.getRandomNumber()
 
       equityAdmin.roleManagementPage.clickToCreateRoleWithNewName('{backspace}') // just to save the role with empty name
@@ -145,7 +145,7 @@ describe('Role Management tests over User Management settings', () => {
       equityAdmin.roleManagementPage.assertEntityIsDisplayedInTheList(roleName, false)
     })
 
-    it('C17253541_Create a Role with the same name', () => {
+    it('C17253541 Create a Role with the same name', () => {
       const roleName = 'View Only'
 
       equityAdmin.roleManagementPage.clickToCreateRoleWithNewName(roleName)
@@ -157,7 +157,7 @@ describe('Role Management tests over User Management settings', () => {
       equityAdmin.roleManagementPage.assertEntityIsDisplayedInTheList(roleName)
     })
 
-    it('C17253542_Activate a Role', () => {
+    it('C17253542 Activate a Role', () => {
       const roleId = 1503
       const roleName = 'QA 3'
 
@@ -172,7 +172,7 @@ describe('Role Management tests over User Management settings', () => {
       equityAdmin.roleManagementPage.assertRoleIsEditable()
     })
 
-    it('C17253543_Deactivate a Role', () => {
+    it('C17253543 Deactivate a Role', () => {
       const roleId = 1504
       const roleName = 'QA 4'
 
@@ -185,7 +185,7 @@ describe('Role Management tests over User Management settings', () => {
       equityAdmin.roleManagementPage.assertRoleIsEditable(false)
     })
 
-    it('C17253544_Duplicate a Role - Happy Path', () => {
+    it('C17253544 Duplicate a Role - Happy Path', () => {
       const roleId = 1506
       const roleName = 'QA 5'
       const duplicatedRoleName = 'Duplicated role ' + utils.getRandomNumber()
@@ -201,7 +201,7 @@ describe('Role Management tests over User Management settings', () => {
       equityAdmin.roleManagementPage.assertEntityIsDisplayedInTheList(duplicatedRoleName)
     })
 
-    it('C17253545_Discard duplicate a role', () => {
+    it('C17253545 Discard duplicate a role', () => {
       const roleId = 1506
       const duplicatedRoleName = 'Duplicated role ' + utils.getRandomNumber()
 
@@ -212,7 +212,7 @@ describe('Role Management tests over User Management settings', () => {
       equityAdmin.roleManagementPage.assertEntityIsDisplayedInTheList(duplicatedRoleName, false)
     })
 
-    it('C17261309_Duplicate an inactive role', () => {
+    it('C17261309 Duplicate an inactive role', () => {
       const roleId = 1507
       const roleName = 'QA 8'
       const duplicatedRoleName = 'Copy Of ' + roleName + ' ' + utils.getRandomNumber()
@@ -252,7 +252,7 @@ describe('Role Management tests over User Management settings', () => {
   })
 
   context('Tenant 1 settings over direct navigation (navigateToUrl) with different logins', () => {
-    it('C17261305_Enabled view permission for view only user', () => {
+    it('C17261305 Enabled view permission for view only user', () => {
       const roleId = 1490
 
       equityAdmin.loginPage.login('ViewOnlyUser@globalshares.com')
@@ -263,7 +263,7 @@ describe('Role Management tests over User Management settings', () => {
       equityAdmin.roleManagementPage.assertRoleIsEditable(false)
     })
 
-    it('C17261306_Enabled create permission for a user', () => {
+    it('C17261306 Enabled create permission for a user', () => {
       const roleId = 1510
 
       equityAdmin.loginPage.login('ivasiljev@globalshares.com')
@@ -275,7 +275,7 @@ describe('Role Management tests over User Management settings', () => {
       equityAdmin.roleManagementPage.assertCreateNewRoleButtonDisplayed()
     })
 
-    it('C17261307_Enabled Update permission for a user', () => {
+    it('C17261307 Enabled Update permission for a user', () => {
       const roleId = 1513
 
       equityAdmin.loginPage.login('gbmeireles@globalshares.com')
@@ -291,7 +291,7 @@ describe('Role Management tests over User Management settings', () => {
       equityAdmin.roleManagementPage.assertNotificationErrorDisplayed('Unfortunately, you are restricted to perform that operation')
     })
 
-    it('C17261308_Enabled delete permission for a user', () => {
+    it('C17261308 Enabled delete permission for a user', () => {
       const roleId = 1514
 
       equityAdmin.loginPage.login('cgiles@globalshares.com')

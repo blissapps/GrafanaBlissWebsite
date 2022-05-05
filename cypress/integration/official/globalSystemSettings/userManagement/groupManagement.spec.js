@@ -12,13 +12,13 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.checkPageUrl()
     })
 
-    it('C16587445_List All Active and Inactive Groups', () => {
+    it('C16587445 List All Active and Inactive Groups', () => {
       equityAdmin.groupManagementPage.assertActiveGroupsAreDisplayed()
       equityAdmin.groupManagementPage.clickTab('Inactive')
       equityAdmin.groupManagementPage.assertInactiveGroupsAreDisplayed()
     })
 
-    it('C16801711_Expand DAPs, Users, and Companies of a group', () => {
+    it('C16801711 Expand DAPs, Users, and Companies of a group', () => {
       const groupId = 955
 
       equityAdmin.groupManagementPage.clickGroupById(groupId)
@@ -58,7 +58,7 @@ describe('Group Management tests over User Management settings', () => {
     /**
      * @chrome_only Hover events only works on Chrome based browsers
      */
-    it('C17223608_Remove entity tooltip', { browser: '!firefox' }, () => {
+    it('C17223608 Remove entity tooltip', { browser: '!firefox' }, () => {
       const groupId = 961
       const roleId = 1505
       const dapId = 44
@@ -91,7 +91,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertToolTipDisplayedWithText('Remove group')
     })
 
-    it('C17181558_Remove a Role from a Group', () => {
+    it('C17181558 Remove a Role from a Group', () => {
       const groupId = 956
       const groupName = 'Delete Components Test'
       const roleId = 1493
@@ -106,7 +106,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertRoleAssociatedWithGroup(roleId, false)
     })
 
-    it('C17223611_Remove a Single and Multiple DAPs from a Group', () => {
+    it('C17223611 Remove a Single and Multiple DAPs from a Group', () => {
       const groupId = 956
       const groupName = 'Delete Components Test'
       const dapIdSingle = [6]
@@ -137,21 +137,21 @@ describe('Group Management tests over User Management settings', () => {
   })
 
   context('Different users for login', () => {
-    it('C16587446_List All Active Groups - Empty state', () => {
+    it('C16587446 List All Active Groups - Empty state', () => {
       equityAdmin.loginPage.login('jachas@globalshares.com')
       equityAdmin.homePage.navigateToUrl('/tenant/546/settings/group-management') //cargill1
 
       equityAdmin.groupManagementPage.assertNoGroupExistMessageIsDisplayed()
     })
 
-    it('C16587447_List All Inactive Groups - Empty state', () => {
+    it('C16587447 List All Inactive Groups - Empty state', () => {
       equityAdmin.loginPage.login('jachas@globalshares.com')
       equityAdmin.homePage.navigateToUrl('/tenant/548/settings/group-management') // cargill3
 
       equityAdmin.groupManagementPage.assertNoGroupExistMessageIsDisplayed()
     })
 
-    it('C16587448_List All Groups - No access to Group Management area', () => {
+    it('C16587448 List All Groups - No access to Group Management area', () => {
       equityAdmin.loginPage.login('DPikurs@globalshares.com')
 
       equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user')
@@ -165,7 +165,7 @@ describe('Group Management tests over User Management settings', () => {
     /**
      * @bug_raised https://globalshares.atlassian.net/browse/PB-979
      */
-    it('C16661662_Create a New Group - User does not have Create permission', () => {
+    it('C16661662 Create a New Group - User does not have Create permission', () => {
       equityAdmin.loginPage.login('tlaw@globalshares.com')
       equityAdmin.homePage.navigateToUrl('/tenant/260/settings/group-management') // cashgen024
 
@@ -175,7 +175,7 @@ describe('Group Management tests over User Management settings', () => {
       // Need to wait for PB-979 to know what are going to be the next steps
     })
 
-    it('C16661659_Not able to duplicate group', () => {
+    it('C16661659 Not able to duplicate group', () => {
       const groupId = 946
 
       equityAdmin.loginPage.login('tlaw@globalshares.com')
@@ -189,7 +189,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertCreateNewGroupButtonDisplayed(false)
     })
 
-    it('C16767340_Not able to Deactivate a group', () => {
+    it('C16767340 Not able to Deactivate a group', () => {
       const groupId = 941 // Cannot Update & Delete Group
 
       equityAdmin.loginPage.login('jachas@globalshares.com')
@@ -204,7 +204,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertDeactivateEntityButtonDisplayed(false)
     })
 
-    it('C16767341_User is not able to add or change role', () => {
+    it('C16767341 User is not able to add or change role', () => {
       const groupId = 941 // Cannot Update & Delete Group
 
       equityAdmin.loginPage.login('jachas@globalshares.com')
@@ -219,7 +219,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertAddCompaniesButtonDisplayed(false)
     })
 
-    it('C16767327_Unable to Add User to the Group', () => {
+    it('C16767327 Unable to Add User to the Group', () => {
       const groupId = 941 // Cannot Update & Delete Group
 
       equityAdmin.loginPage.login('jachas@globalshares.com')
@@ -231,7 +231,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertAddUsersButtonDisplayed(false)
     })
 
-    it('C17181557_Unable to Remove a Company', () => {
+    it('C17181557 Unable to Remove a Company', () => {
       const groupId = 941 // Cannot Update & Delete Group
       const companyId = 123 // Cash Management Payment
 
@@ -245,7 +245,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertRemoveCompanyOptionIsDisplayed(companyId, false)
     })
 
-    it('C17181559_Unable to Remove a Role of a Group', () => {
+    it('C17181559 Unable to Remove a Role of a Group', () => {
       const groupId = 941 // Cannot Update & Delete Group
       const roleId = 1496 // Cannot Update & Delete Group
 
@@ -259,7 +259,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertRemoveRoleOptionIsDisplayed(roleId, false)
     })
 
-    it('C17181562_Unable to Remove DAPs from a Group', () => {
+    it('C17181562 Unable to Remove DAPs from a Group', () => {
       const groupId = 941 // Cannot Update & Delete Group
       const dapId = 3 // Test 1
 
@@ -279,7 +279,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.loginPage.login()
     })
 
-    it('C16587449_Activate a Group', () => {
+    it('C16587449 Activate a Group', () => {
       const groupId = 939
       const groupName = 'Contractors'
 
@@ -294,7 +294,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertEntityIsDisplayedInTheList(groupName)
     })
 
-    it('C16587450_Deactivate a Group', () => {
+    it('C16587450 Deactivate a Group', () => {
       const groupId = 354
       const groupName = 'cash_gen_001'
 
@@ -308,7 +308,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertEntityIsDisplayedInTheList(groupName)
     })
 
-    it('C16661660_Create a New Group', () => {
+    it('C16661660 Create a New Group', () => {
       const groupName = 'Created Group ' + utils.getRandomNumber()
       const roleName = 'cash_gen_008'
       const roleId = 444
@@ -326,7 +326,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertEntityIsDisplayedInTheList(groupName)
     })
 
-    it('C16661661_Create a New Group without entities associated', () => {
+    it('C16661661 Create a New Group without entities associated', () => {
       const groupName = 'Created Group ' + utils.getRandomNumber()
 
       equityAdmin.homePage.navigateToUrl('/tenant/162/settings/group-management') // cashgen009
@@ -342,14 +342,14 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('companies', 0)
     })
 
-    it('C16661663_Create a New Group - Empty name', () => {
+    it('C16661663 Create a New Group - Empty name', () => {
       equityAdmin.homePage.navigateToUrl('/tenant/168/settings/group-management') // cashgen011
 
       equityAdmin.groupManagementPage.createGroup('')
       equityAdmin.groupManagementPage.assertNotificationErrorDisplayed('Name should not be empty.')
     })
 
-    it('C16661657_Duplicate a Group', () => {
+    it('C16661657 Duplicate a Group', () => {
       const groupId = 434
       const groupName = 'cash_gen_006'
       const newNameForDuplicatedGroup = 'Duplicated Group ' + utils.getRandomNumber()
@@ -368,7 +368,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertEntityIsDisplayedInTheList(newNameForDuplicatedGroup)
     })
 
-    it('C16661658_Duplicate a Group - Empty name', () => {
+    it('C16661658 Duplicate a Group - Empty name', () => {
       const groupId = 434
       const groupName = 'cash_gen_006'
 
@@ -384,7 +384,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertNotificationErrorDisplayed('Name should not be empty.')
     })
 
-    it('C16661664_Add a Role to a Group', () => {
+    it('C16661664 Add a Role to a Group', () => {
       const groupName = 'Created Group ' + utils.getRandomNumber()
       const roleName = 'cash_gen_013 Participants'
       const roleId = 738
@@ -398,7 +398,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertRoleAssociatedWithGroup(roleId)
     })
 
-    it('C16661665_Dismiss adding a Role to a group', () => {
+    it('C16661665 Dismiss adding a Role to a group', () => {
       const groupName = 'Dismissed role name - C16661665'
       const roleName = 'cash_gen_014 Participants'
       const roleId = 740
@@ -411,7 +411,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertEntityIsDisplayedInTheList(groupName, false)
     })
 
-    it('C16661666_Do Not Save the Role Added to a group', () => {
+    it('C16661666 Do Not Save the Role Added to a group', () => {
       const groupId = 459
       const roleName = 'cash_gen_015 Participants'
       const roleId = 742
@@ -425,7 +425,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertRoleAssociatedWithGroup(roleId, false)
     })
 
-    it('C16661667_Add a User to a Group', () => {
+    it('C16661667 Add a User to a Group', () => {
       const groupId = 459
       const groupName = 'cash_gen_015'
       const userId = [678]
@@ -440,7 +440,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userId[0])
     })
 
-    it('C16767329_Add a Single Company to a Group', () => {
+    it('C16767329 Add a Single Company to a Group', () => {
       const groupId = 516
       const groupName = 'cash_gen_021'
       const companyNames = ['cashgen020']
@@ -456,7 +456,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[0])
     })
 
-    it('C16767330_Dismiss Adding a Company to a Group', () => {
+    it('C16767330 Dismiss Adding a Company to a Group', () => {
       const groupId = 531
       const companyNames = ['cashgen020']
       const companyIds = [339]
@@ -470,7 +470,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[0], false)
     })
 
-    it('C16767331_Adding more than one company to a group', () => {
+    it('C16767331 Adding more than one company to a group', () => {
       const groupId = 534
       const groupName = 'cash_gen_023'
       const companyNames = ['cashgen001', 'cashgen002', 'cashgen003', 'cashgen004', 'cashgen005', 'cashgen006', 'cashgen007', 'cashgen008', 'cashgen009']
@@ -494,7 +494,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[8])
     })
 
-    it('C16767332_Do Not Save Adding Company to a group', () => {
+    it('C16767332 Do Not Save Adding Company to a group', () => {
       const groupId = 540
       const companyNames = ['cashgen020', 'cashgen021', 'cashgen022', 'cashgen023', 'cashgen025']
       const companyIds = [339, 341, 356, 359, 366]
@@ -520,7 +520,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[4], false)
     })
 
-    it('C16767326_Dismiss Adding a User to a Group', () => {
+    it('C16767326 Dismiss Adding a User to a Group', () => {
       const groupId = 514
       const userName = ['cashgen020']
       const userIds = [825]
@@ -538,7 +538,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userIds[0], false)
     })
 
-    it('C16767328_Adding more than one user to a group', () => {
+    it('C16767328 Adding more than one user to a group', () => {
       const groupId = 541
       const groupName = 'cash_gen_025'
       const userName = ['cashgen025_1', 'cashgen025_2', 'cashgen025_3', 'cashgen025_4']
@@ -558,7 +558,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userIds[3])
     })
 
-    it('C16767333_Show Content of a Group', () => {
+    it('C16767333 Show Content of a Group', () => {
       const groupId = 951
 
       equityAdmin.homePage.navigateToUrl('/tenant/263/settings/group-management') // cashgen026
@@ -570,7 +570,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('users', 7)
       equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('companies', 10)
     })
-    it('C16805474_Search Groups behavior', () => {
+    it('C16805474 Search Groups behavior', () => {
       const groupsSearchedIds = [549, 270]
 
       equityAdmin.homePage.navigateToUrl('/tenant/269/settings/group-management') // cashgen027
@@ -634,7 +634,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('companies', 0)
     })
 
-    it('C17181554_Remove a Single Company from a Group', () => {
+    it('C17181554 Remove a Single Company from a Group', () => {
       const groupId = 551
       const groupName = 'cash_gen_029'
       const companyIds = [580]
@@ -650,7 +650,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIds[0], false)
     })
 
-    it('C17181555_Remove Multiple Companies from a Group', () => {
+    it('C17181555 Remove Multiple Companies from a Group', () => {
       const groupId = 560
       const groupName = 'cash_gen_031'
       const companyIdsToRemove = [281, 286, 349, 579, 580]
@@ -672,7 +672,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIdsToRemove[4], false)
     })
 
-    it('C17181556_Discard Removing Companies from a Group', () => {
+    it('C17181556 Discard Removing Companies from a Group', () => {
       const groupId = 948
       const groupName = 'cash_gen_032_viewers'
       const companyIdsToRemove = [579, 580, 581]
@@ -698,7 +698,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertCompanyAssociatedWithGroup(companyIdsToRemove[2])
     })
 
-    it('C17181563_Add a Single DAP to a Group', () => {
+    it('C17181563 Add a Single DAP to a Group', () => {
       const groupId = 959
       const groupName = 'cash_gen_034'
       const dapName = ['DAP02_cashgen034']
@@ -717,7 +717,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 1)
     })
 
-    it('C17181564_Add Multiple DAPs to a Group', () => {
+    it('C17181564 Add Multiple DAPs to a Group', () => {
       const groupId = 960
       const groupName = 'cash_gen_036'
       const dapNames = ['DAP01', 'DAP02', 'DAP03', 'DAP04']
@@ -739,7 +739,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 4)
     })
 
-    it('C17181565_Dismiss Adding DAP to a Group', () => {
+    it('C17181565 Dismiss Adding DAP to a Group', () => {
       const groupId = 962
       const dapNames = ['DAP01', 'DAP02']
       const dapIds = [39, 40]
@@ -756,7 +756,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 0)
     })
 
-    it('C17181566_Discard Adding DAP to a Group - Not Save', () => {
+    it('C17181566 Discard Adding DAP to a Group - Not Save', () => {
       const groupId = 962
       const dapNames = ['DAP01', 'DAP02']
       const dapIds = [39, 40]

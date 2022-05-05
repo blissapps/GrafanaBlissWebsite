@@ -12,7 +12,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
       equityAdmin.dapManagementPage.checkPageUrl()
     })
 
-    it('C16746114_Create a new DAP', () => {
+    it('C16746114 Create a new DAP', () => {
       const dapName = 'Create new DAP no nested ' + utils.getRandomNumber()
 
       equityAdmin.dapManagementPage.clickCreateNewDap()
@@ -24,7 +24,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
       equityAdmin.dapManagementPage.assertEntityIsDisplayedInTheList(dapName)
     })
 
-    it('C16746115_DAP_Create a new DAP with nested conditions', () => {
+    it('C16746115 DAP Create a new DAP with nested conditions', () => {
       const dapName = 'Create new DAP NESTED ' + utils.getRandomNumber()
 
       equityAdmin.dapManagementPage.clickCreateNewDap()
@@ -42,7 +42,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
      * @bug_raised
      * SKIPPING DUE TO: https://globalshares.atlassian.net/browse/PB-920 and https://globalshares.atlassian.net/browse/PB-927
      */
-    it.skip('C16746116_Create a new DAP without conditions', () => {
+    it.skip('C16746116 Create a new DAP without conditions', () => {
       const dapName = 'Created DAP ' + utils.getRandomNumber()
 
       // Without filling a name
@@ -70,7 +70,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
       equityAdmin.dapManagementPage.assertNotificationErrorDisplayed('Name length must be 50 characters or fewer', false)
     })
 
-    it('C16746117_Create a new DAP and discard the changes', () => {
+    it('C16746117 Create a new DAP and discard the changes', () => {
       const dapName = 'Create and Discard DAP ' + utils.getRandomNumber()
 
       equityAdmin.dapManagementPage.clickCreateNewDap()
@@ -83,7 +83,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
       equityAdmin.dapManagementPage.assertEntityIsDisplayedInTheList(dapName, false)
     })
 
-    it('C16746118_Create a new DAP while assigning a group', () => {
+    it('C16746118 Create a new DAP while assigning a group', () => {
       const dapName = 'Create DAP with GROUPS ' + utils.getRandomNumber()
       const groupName = ['Test1']
       const groupIdsToAssociate = [950]
@@ -99,7 +99,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
       equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupIdsToAssociate[0])
     })
 
-    it('C16767633_DAP- Discard linked groups', () => {
+    it('C16767633 DAP- Discard linked groups', () => {
       const dapName = 'Create DAP with GROUPS ' + utils.getRandomNumber()
       const groupNames = ['Test1']
       const groupIdsToAssociate = [950]
@@ -116,7 +116,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
       equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupIdsToAssociate[0], false)
     })
 
-    it('C16767634_DAP - Group search not found', () => {
+    it('C16767634 DAP - Group search not found', () => {
       const dapName = 'Create DAP with GROUPS ' + utils.getRandomNumber()
 
       equityAdmin.dapManagementPage.clickCreateNewDap()
@@ -128,7 +128,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
       equityAdmin.selectSettingsL4Page.assertNoEntityToAddWereFoundIsDisplayed('No groups available to add were found')
     })
 
-    it('C16767635_DAP- Deactivate a Data Access Profile', () => {
+    it('C16767635 DAP- Deactivate a Data Access Profile', () => {
       const dapId = 29
       const dapName = 'Deactivate me'
 
@@ -142,7 +142,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
       equityAdmin.dapManagementPage.assertBadgeContainsText('INACTIVE')
     })
 
-    it('C16767636_DAP- Activate a Data Access Profile', () => {
+    it('C16767636 DAP- Activate a Data Access Profile', () => {
       const dapId = 30
       const dapName = 'Activate me'
 
@@ -157,7 +157,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
       equityAdmin.dapManagementPage.assertEntityNameEditable()
     })
 
-    it('C16767637_DAP -Search a Data access profile', () => {
+    it('C16767637 DAP -Search a Data access profile', () => {
       const dapIds = [28]
       const dapConditionActiveTab = 'Client Id'
 
@@ -200,7 +200,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
       equityAdmin.dapManagementPage.assertAmountOfSearchedConditionResults(1)
     })
 
-    it('C16767639_DAP - Search inactive Data Access Profile', () => {
+    it('C16767639 DAP - Search inactive Data Access Profile', () => {
       const dapInactiveIds = [19]
       const dapConditionInactiveTab = 'Business Unit'
 
@@ -240,7 +240,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
       equityAdmin.dapManagementPage.assertAmountOfSearchedConditionResults(1)
     })
 
-    it('C16767638_DAP - Search not found for active DAP', () => {
+    it('C16767638 DAP - Search not found for active DAP', () => {
       let dap = '1$1$'
       equityAdmin.searchEngine.search(dap)
       equityAdmin.dapManagementPage.assertNoResultFoundIsVisible()
@@ -262,7 +262,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
       equityAdmin.dapManagementPage.assertNoResultFoundIsVisible()
     })
 
-    it('C16767640_DAP - Search not found for inactive DAP', () => {
+    it('C16767640 DAP - Search not found for inactive DAP', () => {
       equityAdmin.dapManagementPage.clickTab('Inactive')
       equityAdmin.dapManagementPage.assertInactiveDapsAreDisplayed()
 
@@ -287,7 +287,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
       equityAdmin.dapManagementPage.assertNoResultFoundIsVisible()
     })
 
-    it('C16767641_DAP- Duplicate a Data Access Profile', () => {
+    it('C16767641 DAP- Duplicate a Data Access Profile', () => {
       const dapId = 22
       const dapName = 'QA 2'
       const newDapName = 'Duplicated from QA 2 ' + utils.getRandomNumber()
@@ -317,7 +317,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
       equityAdmin.dapManagementPage.assertEntityIsFocused(false)
     })
 
-    it('C17041143_DAP- Remove a group from Data Access Profile', () => {
+    it('C17041143 DAP- Remove a group from Data Access Profile', () => {
       const dapId = 35
       const dapName = 'Remove group DAP'
       const groupIdsAssociated = [957, 958]
@@ -331,7 +331,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
       equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupIdsAssociated[1], false)
     })
 
-    it('C17041144_DAP - Created DAP with nested conditions with business unit and client id', () => {
+    it('C17041144 DAP - Created DAP with nested conditions with business unit and client id', () => {
       const dapName = 'DAP NESTED - Business and client ' + utils.getRandomNumber()
 
       equityAdmin.dapManagementPage.clickCreateNewDap()
@@ -350,7 +350,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
       equityAdmin.dapManagementPage.assertConditionValue(5, '123')
     })
 
-    it('C17041145_DAP - Create DAP with nested conditions with "is international mobile" and participant id', () => {
+    it('C17041145 DAP - Create DAP with nested conditions with "is international mobile" and participant id', () => {
       const dapName = 'DAP NESTED - inter and participant ' + utils.getRandomNumber()
 
       equityAdmin.dapManagementPage.clickCreateNewDap()
@@ -369,7 +369,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
       equityAdmin.dapManagementPage.assertConditionValue(5, '110')
     })
 
-    it('C17041146_DAP - Create DAP with nested conditions with payroll id and residency', () => {
+    it('C17041146 DAP - Create DAP with nested conditions with payroll id and residency', () => {
       const dapName = 'DAP NESTED - payroll and residency ' + utils.getRandomNumber()
 
       equityAdmin.dapManagementPage.clickCreateNewDap()
@@ -388,7 +388,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
       equityAdmin.dapManagementPage.assertConditionValue(5, 'China')
     })
 
-    it('C17041147_DAP- Create DAP with nested condition with business id and tax status', () => {
+    it('C17041147 DAP- Create DAP with nested condition with business id and tax status', () => {
       const dapName = 'DAP NESTED - business and tax ' + utils.getRandomNumber()
 
       equityAdmin.dapManagementPage.clickCreateNewDap()

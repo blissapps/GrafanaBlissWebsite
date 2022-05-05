@@ -13,7 +13,7 @@ describe('User Management tests over User Management settings', () => {
     /**
      * @bug_raised  https://globalshares.atlassian.net/browse/PB-1158
      */
-    it('C7353826_List_User_Happy_Path_Contains_Expected_Columns_On_Users_Table', () => {
+    it('C16636881 Search user by username, email, no records and test search behaviorse', () => {
       const username = 'RSaxena@globalshares.com'
       const userEmail = 'APSilva@globalshares.com'
       const userEmail2 = 'test1@test.com'
