@@ -5,7 +5,7 @@ const equityAdmin = new EquityAdmin()
 const utils = new Utils()
 
 describe('Group Management tests over User Management settings', () => {
-  context('Admin tenant user over direct navigation (navigateToUrl)', () => {
+  context('Tenant 1 settings over direct navigation (navigateToUrl)', () => {
     beforeEach(() => {
       equityAdmin.loginPage.login()
       equityAdmin.homePage.navigateToUrl('/tenant/1/settings/group-management')
@@ -274,7 +274,7 @@ describe('Group Management tests over User Management settings', () => {
     })
   })
 
-  context('Admin tenant user direct setting navigation (navigateToUrl)', () => {
+  context('Admin user over direct setting navigation (navigateToUrl)', () => {
     beforeEach(() => {
       equityAdmin.loginPage.login()
     })

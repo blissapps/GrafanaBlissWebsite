@@ -5,7 +5,7 @@ const equityAdmin = new EquityAdmin()
 const utils = new Utils()
 
 describe('Role Management tests over User Management settings', () => {
-  context('Admin tenant user over direct navigation (navigateToUrl)', () => {
+  context('Tenant 1 settings over direct navigation (navigateToUrl)', () => {
     beforeEach(() => {
       equityAdmin.loginPage.login()
       equityAdmin.homePage.navigateToUrl('/tenant/1/settings/role-management')
@@ -210,6 +210,97 @@ describe('Role Management tests over User Management settings', () => {
       equityAdmin.roleManagementPage.discardEntityInformation()
 
       equityAdmin.roleManagementPage.assertEntityIsDisplayedInTheList(duplicatedRoleName, false)
+    })
+
+    it('C17261309_Duplicate an inactive role', () => {
+      const roleId = 1507
+      const roleName = 'QA 8'
+      const duplicatedRoleName = 'Copy Of ' + roleName + ' ' + utils.getRandomNumber()
+
+      equityAdmin.roleManagementPage.clickTab('Inactive')
+      equityAdmin.roleManagementPage.clickRoleById(roleId)
+
+      // Duplication
+      equityAdmin.roleManagementPage.clickToDuplicateEntity()
+      equityAdmin.roleManagementPage.assertEntityHeaderIsDisplayedAsExpected('Copy Of ' + roleName)
+
+      equityAdmin.roleManagementPage.saveEntityInformation()
+
+      equityAdmin.roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully')
+      equityAdmin.roleManagementPage.assertActiveRolesAreDisplayed()
+      equityAdmin.roleManagementPage.assertEntityIsDisplayedInTheList('Copy Of ' + roleName)
+      equityAdmin.roleManagementPage.modifyEntityName(duplicatedRoleName)
+      equityAdmin.roleManagementPage.saveEntityInformation()
+      equityAdmin.roleManagementPage.assertEntityIsDisplayedInTheList(duplicatedRoleName)
+
+      // Permissions check
+      equityAdmin.roleManagementPage.assertPermissionState('categories', ['view', 'update', 'create'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('categories', ['delete'], false)
+
+      equityAdmin.roleManagementPage.assertPermissionState('clients', ['view'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('clients', ['update', 'create'], false)
+
+      equityAdmin.roleManagementPage.assertPermissionState('roles', ['delete'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('roles', ['view', 'update', 'create'], false)
+
+      equityAdmin.roleManagementPage.assertPermissionState('settings', ['delete'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('settings', ['view', 'update', 'create'], false)
+
+      equityAdmin.roleManagementPage.assertPermissionState('tenants', ['view', 'update'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('tenants', ['delete'], false)
+    })
+  })
+
+  context('Tenant 1 settings over direct navigation (navigateToUrl) with different logins', () => {
+    it('C17261305_Enabled view permission for view only user', () => {
+      const roleId = 1490
+
+      equityAdmin.loginPage.login('ViewOnlyUser@globalshares.com')
+      equityAdmin.homePage.navigateToUrl('/tenant/1/settings/role-management')
+      equityAdmin.roleManagementPage.checkPageUrl()
+
+      equityAdmin.roleManagementPage.clickRoleById(roleId)
+      equityAdmin.roleManagementPage.assertRoleIsEditable(false)
+    })
+
+    it('C17261306_Enabled create permission for a user', () => {
+      const roleId = 1510
+
+      equityAdmin.loginPage.login('ivasiljev@globalshares.com')
+      equityAdmin.homePage.navigateToUrl('/tenant/1/settings/role-management')
+      equityAdmin.roleManagementPage.checkPageUrl()
+
+      equityAdmin.roleManagementPage.clickRoleById(roleId)
+      equityAdmin.roleManagementPage.assertRoleIsEditable(false)
+      equityAdmin.roleManagementPage.assertCreateNewRoleButtonDisplayed()
+    })
+
+    it('C17261307_Enabled Update permission for a user', () => {
+      const roleId = 1513
+
+      equityAdmin.loginPage.login('gbmeireles@globalshares.com')
+      equityAdmin.homePage.navigateToUrl('/tenant/1/settings/role-management')
+      equityAdmin.roleManagementPage.checkPageUrl()
+
+      equityAdmin.roleManagementPage.clickRoleById(roleId)
+      equityAdmin.roleManagementPage.addOrRemoveAllPermissions('view')
+      equityAdmin.roleManagementPage.addOrRemoveAllPermissions('update')
+      equityAdmin.roleManagementPage.addOrRemoveAllPermissions('create')
+      equityAdmin.roleManagementPage.addOrRemoveAllPermissions('delete')
+      equityAdmin.roleManagementPage.saveEntityInformation()
+      equityAdmin.roleManagementPage.assertNotificationErrorDisplayed('Unfortunately, you are restricted to perform that operation')
+    })
+
+    it('C17261308_Enabled delete permission for a user', () => {
+      const roleId = 1514
+
+      equityAdmin.loginPage.login('cgiles@globalshares.com')
+      equityAdmin.homePage.navigateToUrl('/tenant/1/settings/role-management')
+      equityAdmin.roleManagementPage.checkPageUrl()
+
+      equityAdmin.roleManagementPage.clickRoleById(roleId)
+      equityAdmin.roleManagementPage.clickToDeactivateEntity()
+      equityAdmin.roleManagementPage.assertNotificationErrorDisplayed('Unfortunately, you are restricted to perform that operation')
     })
   })
 })

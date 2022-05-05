@@ -5,7 +5,7 @@ const equityAdmin = new EquityAdmin()
 const utils = new Utils()
 
 describe('Data Access Profiles tests over User Management settings', () => {
-  context('Admin tenant user over menu settings', () => {
+  context('Tenant 1 settings over menu settings', () => {
     beforeEach(() => {
       equityAdmin.loginPage.login()
       equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'dap')
