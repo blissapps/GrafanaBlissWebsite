@@ -134,6 +134,102 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertDapAssociatedWithGroup(dapIdsMultiple[3], false)
       equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 0)
     })
+
+    it('C17316996 Add a User to a Group and Verify the User Info', () => {
+      const groupId = 968
+      const groupName = ['Group_Remove']
+      const userName = ['csouto']
+      const userId = [5186]
+
+      // Remove user from group
+      equityAdmin.groupManagementPage.clickGroupById(groupId)
+
+      equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userId[0], false)
+      equityAdmin.groupManagementPage.addUsersToGroup(userName, userId)
+      equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userId[0])
+
+      equityAdmin.groupManagementPage.saveEntityInformation()
+      equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
+
+      // Validates user is linked to the group over User Management settings - L4 page
+      equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'user', false)
+      equityAdmin.searchEngine.search(userName[0])
+      equityAdmin.userManagementPage.clickUserTable(userId[0])
+      equityAdmin.userDetailL4Page.clickToAccessUserInfoDetails()
+
+      // Validates in the userInfoL4Page
+      equityAdmin.userInfoL4Page.checkPageUrl()
+      equityAdmin.userInfoL4Page.assertGroupsDisplayed(groupName)
+    })
+
+    it('C17316992 Remove a Single User from a Group', () => {
+      const groupId = 966
+      const groupName = ['Remove_User']
+      const userId = [5161] // cgiles@globalshares.com
+
+      // Remove user from group
+      equityAdmin.groupManagementPage.clickGroupById(groupId)
+      equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userId[0], true, true)
+
+      equityAdmin.groupManagementPage.removeUsersFromGroup(userId)
+      equityAdmin.groupManagementPage.saveEntityInformation()
+      equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userId[0], false)
+      equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
+    })
+
+    it('C17316993 Remove Multiple Users from a Group', () => {
+      const groupId = 967
+      const groupName = ['Remove_Multiple_Users']
+      const userId = [5187, 5198, 5171]
+
+      // Remove user from group
+      equityAdmin.groupManagementPage.clickGroupById(groupId)
+      equityAdmin.groupManagementPage.clickShowAll('users')
+      equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('users', 12)
+      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('users', 12)
+      equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userId[0])
+      equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userId[1])
+      equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userId[2])
+
+      equityAdmin.groupManagementPage.removeUsersFromGroup(userId)
+      equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userId[0], false)
+      equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userId[1], false)
+      equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userId[2], false)
+
+      equityAdmin.groupManagementPage.saveEntityInformation()
+      equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
+      equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('users', 9)
+      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('users', 9)
+
+      equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userId[0], false)
+      equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userId[0], false)
+      equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userId[1], false)
+      equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userId[2], false)
+    })
+
+    it('C17316995 Remove a User from a Group and Verify the User Info', () => {
+      const groupId = 968
+      const groupName = ['Group_Remove']
+      const userName = ['bleduc@globalshares.com']
+      const userId = [5178]
+
+      // Remove user from group
+      equityAdmin.groupManagementPage.clickGroupById(groupId)
+      equityAdmin.groupManagementPage.removeUsersFromGroup(userId)
+      equityAdmin.groupManagementPage.saveEntityInformation()
+      equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userId[0], false)
+      equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved', true, true)
+
+      // Validates user is NOT linked to the group over User Management settings - L4 page
+      equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'user', false)
+      equityAdmin.searchEngine.search(userName[0])
+      equityAdmin.userManagementPage.clickUserTable(userId[0])
+      equityAdmin.userDetailL4Page.clickToAccessUserInfoDetails()
+
+      // Validates in the userInfoL4Page
+      equityAdmin.userInfoL4Page.checkPageUrl()
+      equityAdmin.userInfoL4Page.assertGroupsDisplayed(groupName, false)
+    })
   })
 
   context('Different users for login', () => {
@@ -153,12 +249,13 @@ describe('Group Management tests over User Management settings', () => {
 
     it('C16587448 List All Groups - No access to Group Management area', () => {
       equityAdmin.loginPage.login('DPikurs@globalshares.com')
-
       equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user')
+
       equityAdmin.settingsMenuNavBar.assertGroupSubMenuItemDisplayed(false)
 
       equityAdmin.settingsMenuNavBar.navigateToUrl('/tenant/1/settings/group-management')
       equityAdmin.unauthorizedPage.checkPageUrl()
+
       equityAdmin.unauthorizedPage.assertYouAreRestrictedToAccessMessageIsDisplayed()
     })
 
@@ -179,7 +276,7 @@ describe('Group Management tests over User Management settings', () => {
       const groupId = 946
 
       equityAdmin.loginPage.login('tlaw@globalshares.com')
-      equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'group')
+      equityAdmin.homePage.navigateToUrl('/tenant/1/settings/group-management')
       equityAdmin.groupManagementPage.checkPageUrl()
       equityAdmin.groupManagementPage.assertGroupPageHeaderIsDisplayed()
 
@@ -193,7 +290,7 @@ describe('Group Management tests over User Management settings', () => {
       const groupId = 941 // Cannot Update & Delete Group
 
       equityAdmin.loginPage.login('jachas@globalshares.com')
-      equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'group')
+      equityAdmin.homePage.navigateToUrl('/tenant/1/settings/group-management')
       equityAdmin.groupManagementPage.checkPageUrl()
 
       equityAdmin.groupManagementPage.clickGroupById(groupId)
@@ -208,7 +305,7 @@ describe('Group Management tests over User Management settings', () => {
       const groupId = 941 // Cannot Update & Delete Group
 
       equityAdmin.loginPage.login('jachas@globalshares.com')
-      equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'group')
+      equityAdmin.homePage.navigateToUrl('/tenant/1/settings/group-management')
       equityAdmin.groupManagementPage.checkPageUrl()
 
       equityAdmin.groupManagementPage.clickGroupById(groupId)
@@ -223,7 +320,7 @@ describe('Group Management tests over User Management settings', () => {
       const groupId = 941 // Cannot Update & Delete Group
 
       equityAdmin.loginPage.login('jachas@globalshares.com')
-      equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'group')
+      equityAdmin.homePage.navigateToUrl('/tenant/1/settings/group-management')
       equityAdmin.groupManagementPage.checkPageUrl()
 
       equityAdmin.groupManagementPage.clickGroupById(groupId)
@@ -236,7 +333,7 @@ describe('Group Management tests over User Management settings', () => {
       const companyId = 123 // Cash Management Payment
 
       equityAdmin.loginPage.login('jachas@globalshares.com')
-      equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'group')
+      equityAdmin.homePage.navigateToUrl('/tenant/1/settings/group-management')
       equityAdmin.groupManagementPage.checkPageUrl()
 
       equityAdmin.groupManagementPage.clickGroupById(groupId)
@@ -250,7 +347,7 @@ describe('Group Management tests over User Management settings', () => {
       const roleId = 1496 // Cannot Update & Delete Group
 
       equityAdmin.loginPage.login('jachas@globalshares.com')
-      equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'group')
+      equityAdmin.homePage.navigateToUrl('/tenant/1/settings/group-management')
       equityAdmin.groupManagementPage.checkPageUrl()
 
       equityAdmin.groupManagementPage.clickGroupById(groupId)
@@ -264,13 +361,27 @@ describe('Group Management tests over User Management settings', () => {
       const dapId = 3 // Test 1
 
       equityAdmin.loginPage.login('jachas@globalshares.com')
-      equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'group')
+      equityAdmin.homePage.navigateToUrl('/tenant/1/settings/group-management')
       equityAdmin.groupManagementPage.checkPageUrl()
 
       equityAdmin.groupManagementPage.clickGroupById(groupId)
       equityAdmin.groupManagementPage.assertEntityHeaderIsDisplayedAsExpected()
       equityAdmin.groupManagementPage.assertDapAssociatedWithGroup(dapId)
       equityAdmin.groupManagementPage.assertRemoveDapOptionIsDisplayed(dapId, false)
+    })
+
+    it('C17316994 Unable to Remove Users from a Group', () => {
+      const groupId = 941 // Cannot Update & Delete Group
+      const userId = 5166 // jachas@globalshares.com
+
+      equityAdmin.loginPage.login('jachas@globalshares.com')
+      equityAdmin.homePage.navigateToUrl('/tenant/1/settings/group-management')
+      equityAdmin.groupManagementPage.checkPageUrl()
+
+      equityAdmin.groupManagementPage.clickGroupById(groupId)
+      equityAdmin.groupManagementPage.assertEntityHeaderIsDisplayedAsExpected()
+      equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userId)
+      equityAdmin.groupManagementPage.assertRemoveUserOptionIsDisplayed(userId, false)
     })
   })
 

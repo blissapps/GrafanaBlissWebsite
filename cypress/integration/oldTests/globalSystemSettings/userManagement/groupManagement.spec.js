@@ -11,32 +11,6 @@ describe('Group Management tests over User Management settings', () => {
     })
 
     /**
-     * @missing_data Need to have a group with one user associated with it. This user should has the total max of 2 or 3 groups associated with it (So we don't need to click in showAll)
-     */
-    it.skip('C15256021_Delete a user from the group', () => {
-      const groupId = 1136
-      const groupName = ['Remove user']
-      const userName = 'dfonsecaNE'
-      const userId = 454293
-
-      // Remove user from group
-      equityAdmin.groupManagementPage.clickGroupById(groupId)
-      equityAdmin.groupManagementPage.removeUsersFromGroup([userId])
-      equityAdmin.groupManagementPage.saveEntityInformation()
-      equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved', true, true)
-
-      // Validates user is NOT linked to the group over User Management settings - L4 page
-      equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'user', false)
-      equityAdmin.searchEngine.search(userName)
-      equityAdmin.userManagementPage.clickUserTable(userId)
-      equityAdmin.userDetailL4Page.clickToAccessUserInfoDetails()
-
-      // Validates in the userInfoL4Page
-      equityAdmin.userInfoL4Page.checkPageUrl()
-      equityAdmin.userInfoL4Page.assertGroupsDisplayed(groupName, false)
-    })
-
-    /**
      * @missing_data Need to have a group with 1 role at least 8 DAPs, 8 Users, and 8 Clients linked to a this group
      */
     it.skip('C7462614_Groups_Show_High_Level_Content_Of_A_Group', () => {
@@ -115,24 +89,6 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.removeCompaniesFromGroup(companyIds)
       equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
       equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(companyIds[0], false)
-    })
-
-    /**
-     * @missing_data Need to have a group with 1 User registered
-     */
-    it.skip('C7493032_Groups_User_Is_Removed_From_The_Group', () => {
-      const groupId = 1282
-      const groupName = 'Remove user'
-      const userIds = [754546, 754556]
-
-      equityAdmin.groupManagementPage.clickGroupById(groupId)
-      equityAdmin.groupManagementPage.scrollToEntityTop() // strategy used just to move the scroll up
-
-      equityAdmin.groupManagementPage.removeUsersFromGroup(userIds)
-      equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
-
-      equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userIds[0], false)
-      equityAdmin.groupManagementPage.assertUserAssociatedWithGroup(userIds[1], false)
     })
   })
 
