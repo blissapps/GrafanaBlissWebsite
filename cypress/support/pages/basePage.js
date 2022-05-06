@@ -93,7 +93,7 @@ class BasePage {
    * Assert that a table shows all expected data supposed to be in the columns. The order is taken in consideration.
    * In case the first column is a checkbox, it will be ignored, so just send the other columns in order
    *
-   * @param {array} columnsToValidate column names to validate, example: columnsToValidate = [Id, Client, Regulator, Status]
+   * @param {string[]} columnsToValidate column names to validate, example: columnsToValidate = [Id, Client, Regulator, Status]
    *
    */
   assertTableContainsExpectedColumnsInOrder(columnsToValidate) {
@@ -120,7 +120,7 @@ class BasePage {
    * Check the data in a row listed in a table of type gs-grid
    * It is possible to validate multiple rows, just sent the data one after the other (check last example)
    *
-   * @param {array} data Array with the data needed to be validated. The correct order is the ORDER displayed in the UI,
+   * @param {string[]} data Array with the data needed to be validated. The correct order is the ORDER displayed in the UI,
    * example [username, email, and status].
    *
    * @example: send ['amulcahyNE', 'test@globalshares.com', 'Active'] to validate the data from user amulcahyNE is

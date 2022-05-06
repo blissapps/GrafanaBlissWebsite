@@ -131,7 +131,7 @@ class ClientStatementsPage extends BaseStatementManagementPage {
   /**
    * Assert the L4 window for RECONCILIATE STATEMENTS is visible and all components are placed as expected. It was made according to PB-612
    *
-   * @param {array} securityIds Security ids to be validated
+   * @param {number[]} securityIds Security ids to be validated
    */
   assertReconcileStatementRightWindowDisplaysElementsAsExpected(securityIds) {
     // L4 Window must be open
@@ -225,7 +225,7 @@ class ClientStatementsPage extends BaseStatementManagementPage {
    *
    * @param {number} clientStatementId Client statement id number to be reconciled
    * @param {boolean} noSecurityConsidered True to select the checkbox to do not consider securities for IRS submission. False does not select the checkbox
-   * @param {array} securityIds Client id number to be reconciled
+   * @param {number[]} securityIds Client id number to be reconciled
    */
   reconcileClient(clientStatementId, noSecurityConsidered, securityIds = []) {
     // Make sure the data is consistent

@@ -32,9 +32,9 @@ class ClientParticipantStatementDetailL4Page extends BaseStatementManagementPage
    * @param {string} participantName Name of the participant
    * @param {string} participantAsOfDate Participant as of date
    * @param {string} participantCurrentStatus Participant current status displayed in the Badge. Attention: It is not in uppercase, so take a look in the HTML
-   * @param {array} statusNameTrailList List of status to be verified in order decrescent
-   * @param {array} nameUserTrailList List of names to be verified in order decrescent
-   * @param {array} timestampTrailList List of timestamps to be verified in order decrescent
+   * @param {string[]} statusNameTrailList List of status to be verified in order decrescent
+   * @param {string[]} nameUserTrailList List of names to be verified in order decrescent
+   * @param {string[]} timestampTrailList List of timestamps to be verified in order decrescent
    *
    * @examples
    * assertParticipantStatementDetails('', '', '', [' Initiated', 'Initiated'], ['system', 'system'], ['07/09/2021 • 10:24:42', '11/05/2021 • 05:13:30'])

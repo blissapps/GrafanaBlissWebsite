@@ -58,8 +58,8 @@ class SelectSettingsL4Page extends BaseManagementPage {
    * This is valid for adding groups, daps, users, clients and roles
    *
    * @param {string} entityType Type of the entity that is going to be added. It can be = group, role, dap, user, client
-   * @param {array} entityNames Array containing the names of the entities that are going to be added into this entity.
-   * @param {array} entityIds Array containing the ids of the entities that are going to be added into this entity.
+   * @param {string[]} entityNames Array containing the names of the entities that are going to be added into this entity.
+   * @param {number[]} entityIds Array containing the ids of the entities that are going to be added into this entity.
    *
    * @example
    * All entityNames and entityIds need to be placed in order.

@@ -188,7 +188,7 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
   /**
    * This method will assert that the Participant Statements list is being displayed in order, which is by ID
    *
-   * @param {array} idsList Ordered list of ids to validate
+   * @param {number[]} idsList Ordered list of ids to validate
    *
    * @example
    * assertParticipantStatementsTableInOrderById(1,2,3,4,5) to check if the 5 first elements have ids 1,2,3,4, and 5 in order

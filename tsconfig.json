@@ -15,7 +15,7 @@
     "strictNullChecks": true,
     "sourceMap": false,
     "skipLibCheck": true,
-    "lib": ["ESNext.String", "es7"]
+    "lib": ["ESNext.String", "es7", "es2021"]
   },
   "include": ["./cypress", "cypress-real-events"],
   "exclude": ["node_modules"]

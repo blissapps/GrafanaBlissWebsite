@@ -27,7 +27,7 @@ class Utils {
   /**
    * Verify if a array contains duplicated elements
    *
-   * @param {array} array array to be verified
+   * @param {array} array Array to be verified
    *
    * @returns True if there is a duplicated element, false otherwise
    */

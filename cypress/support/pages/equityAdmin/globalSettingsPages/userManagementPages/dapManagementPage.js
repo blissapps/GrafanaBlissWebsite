@@ -291,8 +291,8 @@ class DapManagementPage extends BaseManagementPage {
   /**
    * Add Groups to a selected DAP
    *
-   * @param {array} groupNames Array of name of groups that are going to be added into this dap.
-   * @param {array} groupIds Array of id of groups that are going to be added into this dap.
+   * @param {string[]} groupNames Array of name of groups that are going to be added into this dap.
+   * @param {number[]} groupIds Array of id of groups that are going to be added into this dap.
    *
    * @example
    * All dapNames and dapIds need to be placed in order.
@@ -307,7 +307,7 @@ class DapManagementPage extends BaseManagementPage {
   /**
    * Remove Groups from a selected dap
    *
-   * @param {array} groupsIds Array of ids of groups that are going to be removed of the selected DAP.
+   * @param {number[]} groupsIds Array of ids of groups that are going to be removed of the selected DAP.
    * @param {boolean} showAll True to click in the showAll buttons for the case where we have lots of groups associated
    */
   removeGroupFromDap(groupsIds, showAll = false) {

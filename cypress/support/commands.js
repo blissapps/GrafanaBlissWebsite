@@ -123,13 +123,10 @@ Cypress.Commands.add('network', (options) => {
  * cy.network({ online: false }) => Assert the browser is NOT connected
  */
 Cypress.Commands.add('assertNetworkOnline', (options) => {
-  return (
-    cy
-      // @ts-ignore
-      .wrap(window)
-      .its('navigator.onLine')
-      .should('be.' + options.online)
-  )
+  return cy
+    .wrap(window)
+    .its('navigator.onLine')
+    .should('be.' + options.online)
 })
 
 /**

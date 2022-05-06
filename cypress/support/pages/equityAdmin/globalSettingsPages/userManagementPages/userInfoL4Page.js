@@ -47,7 +47,7 @@ class UserInfoL4Page extends BaseManagementPage {
   /**
    * Assert if groups are displayed or not in the Groups section
    *
-   * @param {array} groupNames Group name(s) to be validated in the cards
+   * @param {string[]} groupNames Group name(s) to be validated in the cards
    * @param {boolean} displayed True is the default value to validate the group(s) are displayed. False to validate the group(s) are not visible
    * @param {boolean} showAll True to click in the show all button to display all the groups in case there are lots of groups registered
    */

@@ -452,8 +452,8 @@ class GroupManagementPage extends BaseManagementPage {
   /**
    * Add Daps to a selected group
    *
-   * @param {array} dapNames Array of name of data access profiles that are going to be added into this group.
-   * @param {array} dapIds Array of id of data access profiles that are going to be added into this group.
+   * @param {string[]} dapNames Array of name of data access profiles that are going to be added into this group.
+   * @param {number[]} dapIds Array of id of data access profiles that are going to be added into this group.
    *
    * @example
    * All dapNames and dapIds need to be placed in order.
@@ -468,8 +468,8 @@ class GroupManagementPage extends BaseManagementPage {
   /**
    * Add Users to a selected group
    *
-   * @param {array} userNames Array of names of users that are going to be added into this group.
-   * @param {array} userIds Array of ids of users that are going to be added into this group.
+   * @param {string[]} userNames Array of names of users that are going to be added into this group.
+   * @param {number[]} userIds Array of ids of users that are going to be added into this group.
    *
    * @example
    * All userNames and userIds need to be placed in order.
@@ -484,8 +484,8 @@ class GroupManagementPage extends BaseManagementPage {
   /**
    * Add Companies to a selected group
    *
-   * @param {array} companyNames Array of names of companies that are going to be added into this group.
-   * @param {array} companyIds Array of ids of companies  that are going to be added into this group.
+   * @param {string[]} companyNames Array of names of companies that are going to be added into this group.
+   * @param {number[]} companyIds Array of ids of companies  that are going to be added into this group.
    *
    * @example
    * All companyNames and companyIds need to be placed in order.
@@ -503,12 +503,12 @@ class GroupManagementPage extends BaseManagementPage {
    * @param {string} groupName Name of the group that is going to be created.
    * @param {string} roleName Role name that is going to be added into this group.
    * @param {number} roleId Role id number that is going to be added into this group.
-   * @param {array} dapNames Array of name of data access profiles that are going to be added into this group.
-   * @param {array} dapIds Array of if of data access profiles that are going to be added into this group.
-   * @param {array} userNames Array of names of users that are going to be added into this group.
-   * @param {array} userIds Array of ids of users that are going to be added into this group.
-   * @param {array} companyNames Array of names of companies that are going to be added into this group.
-   * @param {array} companyIds Array of ids of companies  that are going to be added into this group.
+   * @param {string[]} dapNames Array of name of data access profiles that are going to be added into this group.
+   * @param {number[]} dapIds Array of if of data access profiles that are going to be added into this group.
+   * @param {string[]} userNames Array of names of users that are going to be added into this group.
+   * @param {number[]} userIds Array of ids of users that are going to be added into this group.
+   * @param {string[]} companyNames Array of names of companies that are going to be added into this group.
+   * @param {number[]} companyIds Array of ids of companies  that are going to be added into this group.
    * @param {boolean} saveChanges In case you send false, the new group information will be filled out but it will not be saved
    *
    * @example
@@ -577,7 +577,7 @@ class GroupManagementPage extends BaseManagementPage {
   /**
    * Remove DAPs from a selected group
    *
-   * @param {array} dapIds Array of ids of daps that are going to be removed of the selected group.
+   * @param {number[]} dapIds Array of ids of daps that are going to be removed of the selected group.
    * @param {boolean} showAll True to click in the showAll buttons for the case where we have lots of daps associated
    */
   removeDapsFromGroup(dapIds, showAll = false) {
@@ -595,7 +595,7 @@ class GroupManagementPage extends BaseManagementPage {
   /**
    * Remove Users from a selected group
    *
-   * @param {array} userIds Array of ids of users that are going to be removed of the selected group.
+   * @param {number[]} userIds Array of ids of users that are going to be removed of the selected group.
    * @param {boolean} showAll True to click in the showAll buttons for the case where we have lots of users associated
    */
   removeUsersFromGroup(userIds, showAll = false) {
@@ -613,7 +613,7 @@ class GroupManagementPage extends BaseManagementPage {
   /**
    * Remove Companies from a selected group
    *
-   * @param {array} companyIds Array of ids of companies that are going to be removed of the selected group.
+   * @param {number[]} companyIds Array of ids of companies that are going to be removed of the selected group.
    * @param {boolean} showAll True to click in the showAll buttons for the case where we have lots of clients associated
    */
   removeCompaniesFromGroup(companyIds, showAll = false) {

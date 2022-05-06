@@ -315,7 +315,7 @@ class RoleManagementPage extends BaseManagementPage {
    * Add or remove permissions of a selected role
    *
    * @param {string} permissionName Permission name of a role
-   * @param {array} permissionsType Array containing the permissions, for this permission are allowed ['view', 'update', 'create', 'delete']
+   * @param {string[]} permissionsType Array containing the permissions, for this permission are allowed ['view', 'update', 'create', 'delete']
    * @param {boolean} insertPermission True to insert permission, false to remove
    *
    * @example:
@@ -324,7 +324,6 @@ class RoleManagementPage extends BaseManagementPage {
    */
   addOrRemovePermissions(permissionName, permissionsType, insertPermission = true) {
     // Manipulate permissionName and permissionsType, so we do not need to be worried about capitalization nor blank spaces
-    // @ts-ignore
     permissionName = permissionName.replaceAll(' ', '').toLowerCase()
     permissionsType = permissionsType.map((permission) => permission.replaceAll(' ', '').toLowerCase())
 
@@ -387,7 +386,6 @@ class RoleManagementPage extends BaseManagementPage {
    */
   addOrRemoveAllPermissions(permissionsType) {
     // Manipulate permissionName and permissionsType, so we do not need to be worried about capitalization nor blank spaces
-    // @ts-ignore
     permissionsType = permissionsType.replaceAll(' ', '').toLowerCase()
 
     cy.log('Permissions: ' + permissionsType)
@@ -417,7 +415,7 @@ class RoleManagementPage extends BaseManagementPage {
    * Assert a given permission is active or not of a selected role
    *
    * @param {string} permissionName Permission name of a role
-   * @param {array} permissionsType Array containing the permissions, for this permission are allowed ['view', 'update', 'create', 'delete']
+   * @param {string[]} permissionsType Array containing the permissions, for this permission are allowed ['view', 'update', 'create', 'delete']
    * @param {boolean} activeState True to assert the permission is selected, false otherwise
    *
    * @example:
@@ -426,7 +424,6 @@ class RoleManagementPage extends BaseManagementPage {
    */
   assertPermissionState(permissionName, permissionsType, activeState) {
     // Manipulate permissionName and permissionsType, so we do not need to be worried about capitalization nor blank spaces
-    // @ts-ignore
     permissionName = permissionName.replaceAll(' ', '').toLowerCase()
     permissionsType = permissionsType.map((permission) => permission.replaceAll(' ', '').toLowerCase())
 

@@ -220,7 +220,7 @@ class BaseManagementPage extends BasePage {
   /**
    * Assert the Search Results list is displayed with the given ids.
    *
-   * @param {array} entityId Array containing the ids of groups, roles, or daps that are supposed to be displayed in the search result list.
+   * @param {number[]} entityId Array containing the ids of groups, roles, or daps that are supposed to be displayed in the search result list.
    *
    * @example Send entityId=[1] to assert if the group with id 1 was correctly found in the results list, after using the search engine.
    */
@@ -287,7 +287,7 @@ class BaseManagementPage extends BasePage {
   /**
    * Assert a card is being highlighted displayed. It usually happens after searching for it in the search bar
    *
-   * @param {array} entitiesIds Entities ids to be verified. This is how this method locates the cards
+   * @param {number[]} entitiesIds Entities ids to be verified. This is how this method locates the cards
    * @param {string} entityType If this card is a role, dap, user, group, or company
    * @param {boolean} showAll False is the default value to NOT click in the 'show all button'. Sent True to click in the 'show all' button in case there are many entities
    */
