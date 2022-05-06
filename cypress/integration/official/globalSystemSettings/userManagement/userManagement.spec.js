@@ -47,5 +47,37 @@ describe('User Management tests over User Management settings', () => {
       equityAdmin.searchEngine.clearSearchBoxByXIcon()
       equityAdmin.userManagementPage.assertNumberOfRecordsDisplayedInTable(79)
     })
+
+    it('C17344546 Search user with SQL query', () => {
+      equityAdmin.searchEngine.search('SELECT * FROM users')
+      equityAdmin.userManagementPage.assertNoUserExistsMessageIsDisplayed()
+    })
+
+    it('C17344548 User Management details and info L4', () => {
+      const username = 'RSaxena@globalshares.com'
+      const userId = 5183
+      const publicName = 'Rishabh Saxena'
+      const status = 'active'
+      const email = 'RSaxena@globalshares.com'
+      const groups = ['Global Admin Group']
+      const firstName = 'Rishabh'
+      const lastName = 'Saxena'
+      const jobTitle = 'Writer'
+      const qualifications = 'Reading'
+      const organization = 'Global Shares'
+      const phone = '000000000'
+
+      equityAdmin.searchEngine.search(username, 500)
+      equityAdmin.userManagementPage.clickUserTable(userId)
+
+      equityAdmin.userDetailL4Page.assertRightL4BarIsDisplayed()
+      equityAdmin.userDetailL4Page.checkPageUrl()
+      equityAdmin.userDetailL4Page.assertUserDetailContent(publicName, username, status, email)
+      equityAdmin.userDetailL4Page.clickToAccessUserInfoDetails()
+      equityAdmin.userInfoL4Page.assertGroupsDisplayed(groups)
+      equityAdmin.userInfoL4Page.assertPersonalDataContent(firstName, lastName, publicName, jobTitle, qualifications, organization)
+      equityAdmin.userInfoL4Page.assertContactDataContent(phone, email)
+      equityAdmin.userInfoL4Page.assertAccountDetailsDataContent(username)
+    })
   })
 })
