@@ -525,6 +525,7 @@ class RoleManagementPage extends BaseManagementPage {
    * Activate the selected role
    */
   activateRole() {
+    this.interceptRoleActivationRequest()
     cy.get(selectors.activateRoleBtn).click()
     this.waitRoleIsActivated()
     cy.forcedWait(300) // Necessary because the UI takes a very quick time to reload the data correctly
@@ -542,10 +543,16 @@ class RoleManagementPage extends BaseManagementPage {
   }
 
   /**
-   * Waits until the page is loaded. This is a specific behavior of this page
+   * Intercept the call responsible for role activation
+   */
+  interceptRoleActivationRequest() {
+    cy.intercept('PATCH', apiInterceptions.roleActivated).as('roleActivated')
+  }
+
+  /**
+   * Waits until the role is activated, so we don't need to explicity wait for a specific time
    */
   waitRoleIsActivated() {
-    cy.intercept('PATCH', apiInterceptions.roleActivated).as('roleActivated')
     cy.wait('@roleActivated', { requestTimeout: 10000 })
   }
 }
