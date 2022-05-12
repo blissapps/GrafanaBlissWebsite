@@ -62,20 +62,6 @@ describe('Data Access Profiles tests over User Management settings', () => {
     })
 
     /**
-     * @missing_data Need to have a simple DAP created
-     */
-    it.skip('C7564744_DAP_Rename_DAP', () => {
-      const dapId = 20
-      const newDapName = 'DAP was renamed'
-
-      equityAdmin.dapManagementPage.clickDapById(dapId)
-      equityAdmin.dapManagementPage.modifyEntityName(newDapName)
-      equityAdmin.dapManagementPage.assertEntityHeaderIsDisplayedAsExpected(newDapName)
-      equityAdmin.dapManagementPage.saveEntityInformation()
-      equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed(newDapName + ' Saved')
-    })
-
-    /**
      * @missing_data Need to have a simple DAP created with a single condition
      */
     it.skip('C7564745_DAP_Change_An_Existing_Condition', () => {
@@ -90,39 +76,6 @@ describe('Data Access Profiles tests over User Management settings', () => {
       equityAdmin.dapManagementPage.reloadPage()
       equityAdmin.dapManagementPage.assertConditionValue(1, 'Client id')
       equityAdmin.dapManagementPage.assertConditionValue(2, '11')
-    })
-
-    /**
-     * @missing_data Need to have a simple DAP created with two conditions created
-     */
-    it.skip('C7564748_DAP_Remove_Condition', () => {
-      const dapId = 5
-      const dapName = 'Remove condition'
-
-      equityAdmin.dapManagementPage.clickDapById(dapId)
-
-      equityAdmin.dapManagementPage.removeCondition(2)
-      equityAdmin.dapManagementPage.saveEntityInformation()
-      equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved')
-
-      equityAdmin.dapManagementPage.reloadPage()
-      equityAdmin.dapManagementPage.clickDapById(dapId)
-      equityAdmin.dapManagementPage.assertConditionValue(4, 'Client id', false)
-      equityAdmin.dapManagementPage.assertConditionValue(5, '11', false)
-    })
-
-    /**
-     * @missing_data Need to have a simple DAP created with only one condition created
-     */
-    it.skip('C7564749_DAP_Discard_Changes_Condition', () => {
-      const dapId = 6
-
-      equityAdmin.dapManagementPage.clickDapById(dapId)
-
-      equityAdmin.dapManagementPage.addCondition(1, 2)
-      equityAdmin.dapManagementPage.modifyCondition([], [4, 'Client id'], [5, '11'])
-      equityAdmin.dapManagementPage.discardEntityInformation()
-      equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed('Changes to data access profile were discard')
     })
 
     /**

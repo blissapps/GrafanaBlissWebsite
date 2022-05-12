@@ -406,5 +406,67 @@ describe('Data Access Profiles tests over User Management settings', () => {
       equityAdmin.dapManagementPage.assertConditionValue(4, 'Tax')
       equityAdmin.dapManagementPage.assertConditionValue(5, 'MIFID W8- Non-US Tax Resident')
     })
+
+    it('C17555354 DAP - Remove a condition from an existing DAP', () => {
+      const dapId = 51
+      const dapName = 'GS 1'
+      const dapIdToSearch = 49
+
+      equityAdmin.dapManagementPage.clickDapById(dapId)
+      equityAdmin.dapManagementPage.assertConditionValue(4, 'Residency')
+      equityAdmin.dapManagementPage.assertConditionValue(5, 'Angola')
+
+      equityAdmin.dapManagementPage.removeCondition(2)
+      equityAdmin.dapManagementPage.saveEntityInformation()
+      equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved')
+
+      equityAdmin.dapManagementPage.clickDapById(dapIdToSearch)
+      equityAdmin.dapManagementPage.clickDapById(dapId)
+      equityAdmin.dapManagementPage.assertConditionValue(4, 'Residency', false)
+      equityAdmin.dapManagementPage.assertConditionValue(5, 'Angola', false)
+    })
+
+    it('C17555355 DAP - Discard DAP after removing a condition', () => {
+      const dapId = 52
+      const dapIdToSearch = 49
+
+      equityAdmin.dapManagementPage.clickDapById(dapId)
+      equityAdmin.dapManagementPage.assertConditionValue(4, 'Tax status')
+      equityAdmin.dapManagementPage.assertConditionValue(5, 'MIFID W8- Non-US Tax Resident')
+
+      equityAdmin.dapManagementPage.removeCondition(2)
+      equityAdmin.dapManagementPage.discardEntityInformation()
+      equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed('Changes to data access profile were discard')
+
+      equityAdmin.dapManagementPage.clickDapById(dapIdToSearch)
+      equityAdmin.dapManagementPage.clickDapById(dapId)
+      equityAdmin.dapManagementPage.assertConditionValue(4, 'Tax status')
+      equityAdmin.dapManagementPage.assertConditionValue(5, 'MIFID W8- Non-US Tax Resident')
+    })
+
+    it('C17555356 DAP - Rename a saved DAP', () => {
+      const dapId = 53
+      const dapName = 'GS 4'
+      const newDapName = 'GS 5'
+
+      equityAdmin.dapManagementPage.clickDapById(dapId)
+      equityAdmin.dapManagementPage.assertEntityHeaderIsDisplayedAsExpected(dapName)
+
+      equityAdmin.dapManagementPage.modifyEntityName(newDapName)
+      equityAdmin.dapManagementPage.assertEntityHeaderIsDisplayedAsExpected(newDapName)
+      equityAdmin.dapManagementPage.saveEntityInformation()
+
+      equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed(newDapName + ' Saved')
+
+      equityAdmin.searchEngine.search(dapName)
+      equityAdmin.dapManagementPage.assertNoResultFoundIsVisible()
+
+      equityAdmin.searchEngine.search(newDapName)
+      equityAdmin.dapManagementPage.assertSearchResultListAccuracy([dapId])
+      equityAdmin.searchEngine.clearSearchBoxByXIcon()
+
+      equityAdmin.dapManagementPage.clickDapById(dapId)
+      equityAdmin.dapManagementPage.assertEntityHeaderIsDisplayedAsExpected(newDapName)
+    })
   })
 })
