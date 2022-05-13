@@ -468,5 +468,38 @@ describe('Data Access Profiles tests over User Management settings', () => {
       equityAdmin.dapManagementPage.clickDapById(dapId)
       equityAdmin.dapManagementPage.assertEntityHeaderIsDisplayedAsExpected(newDapName)
     })
+
+    it('C17675265 DAP - Change an existing value in the condition', () => {
+      const dapId = 54
+      const dapName = 'Home 1'
+
+      equityAdmin.dapManagementPage.clickDapById(dapId)
+      equityAdmin.dapManagementPage.assertConditionValue(4, 'Participant')
+      equityAdmin.dapManagementPage.assertConditionValue(5, '12231')
+
+      equityAdmin.dapManagementPage.modifyCondition([], [], [5, '1122'])
+      equityAdmin.dapManagementPage.saveEntityInformation()
+
+      equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved')
+      equityAdmin.dapManagementPage.assertConditionValue(4, 'Participant')
+      equityAdmin.dapManagementPage.assertConditionValue(5, '1122')
+    })
+
+    it('C17675266 DAP - change the existing condition and value', () => {
+      const dapId = 55
+      const dapName = 'Home 2'
+
+      equityAdmin.dapManagementPage.clickDapById(dapId)
+      equityAdmin.dapManagementPage.assertConditionValue(4, 'Residency')
+      equityAdmin.dapManagementPage.assertConditionValue(5, 'Belgium')
+
+      equityAdmin.dapManagementPage.modifyCondition([], [], [4, 'Is international mobile?'], false)
+      equityAdmin.dapManagementPage.modifyCondition([], [], [5, 'Yes'], false)
+      equityAdmin.dapManagementPage.saveEntityInformation()
+
+      equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved')
+      equityAdmin.dapManagementPage.assertConditionValue(4, 'Is international mobile?')
+      equityAdmin.dapManagementPage.assertConditionValue(5, 'Yes')
+    })
   })
 })

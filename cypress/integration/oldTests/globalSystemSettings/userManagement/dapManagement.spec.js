@@ -62,23 +62,6 @@ describe('Data Access Profiles tests over User Management settings', () => {
     })
 
     /**
-     * @missing_data Need to have a simple DAP created with a single condition
-     */
-    it.skip('C7564745_DAP_Change_An_Existing_Condition', () => {
-      const dapId = 30
-      const dapName = 'Change condition'
-
-      equityAdmin.dapManagementPage.clickDapById(dapId)
-      equityAdmin.dapManagementPage.modifyCondition([], [1, 'Client id'], [2, '11'])
-      equityAdmin.dapManagementPage.saveEntityInformation()
-
-      equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed(dapName + ' Saved')
-      equityAdmin.dapManagementPage.reloadPage()
-      equityAdmin.dapManagementPage.assertConditionValue(1, 'Client id')
-      equityAdmin.dapManagementPage.assertConditionValue(2, '11')
-    })
-
-    /**
      * @missing_data Need to have a DAP with 1 role and with 13 Groups linked to a this DAP
      *
      * @bug_raised
