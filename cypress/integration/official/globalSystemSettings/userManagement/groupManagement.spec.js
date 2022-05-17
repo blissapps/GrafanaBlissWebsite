@@ -26,7 +26,7 @@ describe('Group Management tests over User Management settings', () => {
 
       // Assert number of records
       equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('roles', 1)
-      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 11)
+      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 12)
       equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('users', 10)
       equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('companies', 10)
 
@@ -41,7 +41,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.clickShowAll('users')
       equityAdmin.groupManagementPage.clickShowAll('companies')
       equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('roles', 1)
-      equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('daps', 11)
+      equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('daps', 12)
       equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('users', 10)
       equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('companies', 10)
 
@@ -114,7 +114,7 @@ describe('Group Management tests over User Management settings', () => {
 
       equityAdmin.groupManagementPage.clickGroupById(groupId)
       equityAdmin.groupManagementPage.assertDapAssociatedWithGroup(dapIdSingle[0])
-      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 4)
+      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 5)
 
       // Single removal
       equityAdmin.groupManagementPage.removeDapsFromGroup([dapIdSingle[0]])
@@ -122,7 +122,7 @@ describe('Group Management tests over User Management settings', () => {
 
       equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
       equityAdmin.groupManagementPage.assertDapAssociatedWithGroup(dapIdSingle[0], false)
-      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 3)
+      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 4)
 
       // Multiple removal
       equityAdmin.groupManagementPage.removeDapsFromGroup(dapIdsMultiple)
@@ -132,7 +132,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertDapAssociatedWithGroup(dapIdsMultiple[1], false)
       equityAdmin.groupManagementPage.assertDapAssociatedWithGroup(dapIdsMultiple[2], false)
       equityAdmin.groupManagementPage.assertDapAssociatedWithGroup(dapIdsMultiple[3], false)
-      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 0)
+      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 1)
     })
 
     it('C17316996 Add a User to a Group and Verify the User Info', () => {
