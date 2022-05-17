@@ -385,7 +385,7 @@ describe('Group Management tests over User Management settings', () => {
     })
   })
 
-  context('Admin user over direct setting navigation (navigateToUrl)', () => {
+  context('Admin user over direct setting navigation (navigateToUrl) - CLIENT tenant perspective', () => {
     beforeEach(() => {
       equityAdmin.loginPage.login()
     })

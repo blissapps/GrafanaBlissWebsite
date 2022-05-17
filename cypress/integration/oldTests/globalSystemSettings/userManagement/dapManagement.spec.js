@@ -40,42 +40,6 @@ describe('Data Access Profiles tests over User Management settings', () => {
       equityAdmin.dapManagementPage.assertNoDapsExistMessageIsDisplayed()
     })
 
-    /**
-     * @missing_data Need to have a DAP and any 2 groups available with 2 existing groups linked
-     *
-     * @chrome_only Network commands are only manageable for chrome based browsers
-     */
-    it.skip('C9277652_DAP_Error_Linked_Groups_To_DAPs_Cannot_Connect_API_Timeout', { browser: '!firefox' }, () => {
-      const dapId = 34
-      const groupName = ['Test1', 'Test Content']
-      const groupIdsToAssociate = [950, 955]
-
-      equityAdmin.dapManagementPage.clickDapById(dapId)
-      equityAdmin.dapManagementPage.addGroupsToDap(groupName, groupIdsToAssociate)
-
-      // Offline
-      cy.network({ offline: true })
-      cy.assertNetworkOnline({ online: false })
-
-      equityAdmin.dapManagementPage.saveEntityInformation()
-      equityAdmin.dapManagementPage.assertNotificationErrorDisplayed()
-    })
-
-    /**
-     * @missing_data Need to have a DAP with 1 role and with 13 Groups linked to a this DAP
-     *
-     * @bug_raised
-     * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-949
-     */
-    it.skip('C9446198_Groups_Expand_And_Collapse_DAP_With_Many_Groups_added', () => {
-      const dapId = 58
-
-      equityAdmin.dapManagementPage.clickDapById(dapId)
-      equityAdmin.dapManagementPage.assertNumberOfGroupCardsDisplayedInASection(13, true)
-      equityAdmin.dapManagementPage.clickHide('groups')
-      equityAdmin.dapManagementPage.assertNumberOfGroupCardsDisplayedInASection(8)
-    })
-
     // ************************************************ TESTS AS CLIENTS ************************************************** //
   })
 

@@ -501,5 +501,77 @@ describe('Data Access Profiles tests over User Management settings', () => {
       equityAdmin.dapManagementPage.assertConditionValue(4, 'Is international mobile?')
       equityAdmin.dapManagementPage.assertConditionValue(5, 'Yes')
     })
+
+    it('C17774314 DAP - Discard changing DAP conditions', () => {
+      const dapId = 56
+
+      equityAdmin.dapManagementPage.clickDapById(dapId)
+      equityAdmin.dapManagementPage.assertConditionValue(7, 'Tax status')
+      equityAdmin.dapManagementPage.assertConditionValue(8, 'MIFID W8- Non-US Tax Resident')
+
+      equityAdmin.dapManagementPage.removeCondition(3)
+      equityAdmin.dapManagementPage.assertConditionValue(7, 'Tax status', false)
+      equityAdmin.dapManagementPage.assertConditionValue(8, 'MIFID W8- Non-US Tax Resident', false)
+
+      equityAdmin.dapManagementPage.discardEntityInformation()
+
+      equityAdmin.dapManagementPage.assertToastNotificationMessageIsDisplayed('Changes to data access profile were discard')
+      equityAdmin.dapManagementPage.assertConditionValue(7, 'Tax status')
+      equityAdmin.dapManagementPage.assertConditionValue(8, 'MIFID W8- Non-US Tax Resident')
+
+      equityAdmin.dapManagementPage.reloadPage()
+      equityAdmin.dapManagementPage.assertConditionValue(7, 'Tax status')
+      equityAdmin.dapManagementPage.assertConditionValue(8, 'MIFID W8- Non-US Tax Resident')
+    })
+
+    it('C9446198_Groups_Expand_And_Collapse_DAP_With_Many_Groups_added', () => {
+      const dapId = 57
+
+      equityAdmin.dapManagementPage.clickDapById(dapId)
+      equityAdmin.dapManagementPage.assertNumberOfGroupRecordsAssociatedWithDap(10)
+      equityAdmin.dapManagementPage.assertNumberOfGroupCardsDisplayedInASection(8)
+
+      equityAdmin.dapManagementPage.clickShowAll('groups')
+      equityAdmin.dapManagementPage.assertNumberOfGroupCardsDisplayedInASection(10)
+
+      equityAdmin.dapManagementPage.clickHide('groups')
+      equityAdmin.dapManagementPage.assertNumberOfGroupCardsDisplayedInASection(8)
+    })
+
+    /**
+     * @electron_only Network commands (specific turn back on the internet) are only manageable in Electron: https://github.com/cypress-io/cypress/issues/235
+     */
+    it('C17774316 DAP - Error message saving DAP when API is down', { browser: 'electron' }, () => {
+      const dapId = 58
+      const groupName = ['GB Test', 'CG Test']
+      const groupIdsToAssociate = [969, 970]
+
+      equityAdmin.dapManagementPage.clickDapById(dapId)
+      equityAdmin.dapManagementPage.addGroupsToDap(groupName, groupIdsToAssociate)
+
+      // Go offline
+      cy.network({ offline: true })
+      cy.assertNetworkOnline({ online: false })
+
+      equityAdmin.dapManagementPage.saveEntityInformation()
+      equityAdmin.dapManagementPage.assertNotificationErrorDisplayed()
+
+      // Tear down to go back online, so it does not affect other tests in the spec file
+      cy.network({ offline: false })
+      cy.assertNetworkOnline({ online: true })
+    })
+  })
+
+  context('Admin user over direct setting navigation (navigateToUrl) - CLIENT tenant perspective', () => {
+    beforeEach(() => {
+      equityAdmin.loginPage.login()
+    })
+
+    it('C17774317 DAP - Empty state for a DAP', () => {
+      equityAdmin.homePage.navigateToUrl('/tenant/552/settings/dap-management') // cashgen064
+
+      equityAdmin.dapManagementPage.assertNoDapsExistMessageIsDisplayed()
+      equityAdmin.dapManagementPage.assertCreateNewDapButtonDisplayed()
+    })
   })
 })

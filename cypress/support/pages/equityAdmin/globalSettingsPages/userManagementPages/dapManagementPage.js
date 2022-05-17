@@ -23,7 +23,8 @@ const selectors = {
   selectNotEditable: 'gs-select.disabled',
   activateDapBtn: 'gs-button[data-test-id=activateBtn]',
   groupsRecordsCounter: '*[data-test-id=section-group] span.record-count',
-  groupsAllCards: '*[data-test-id=section-group] gs-card'
+  groupsAllCards: '*[data-test-id=section-group] gs-card',
+  noDapExistsMessage: '#emptyDapMsg'
 }
 
 const conditionsSelectors = {
