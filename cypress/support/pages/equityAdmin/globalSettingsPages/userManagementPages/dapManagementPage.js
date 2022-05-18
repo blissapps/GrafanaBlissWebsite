@@ -14,8 +14,7 @@ const selectors = {
   inactiveDapList: 'gs-tab[data-test-id=inactiveTab] #dapList gs-list',
   dapsDisplayed: '#dapList gs-list a[data-test-id*="dap-',
   noDapsExistMessage: '#emptyList',
-  addGroupsBtn: '*[data-test-id=section-group] *[data-test-id=add-entity]',
-  addGroupsBtnDisabled: '*[data-test-id=section-group] *[data-test-id="add-entity"][class*=disabled]',
+  addGroupsBtn: '*[data-test-id=section-group] *[data-test-id="add-entity"]:not([class*=disabled])',
   dapId: '*[data-test-id=dap-',
   groupsCardId: '*[data-test-id=section-group] gs-card[data-test-id=entity-',
   removeIconButton: 'gs-button[data-test-id=remove-entity]',
@@ -256,7 +255,7 @@ class DapManagementPage extends BaseManagementPage {
    *
    */
   assertAddGroupsButtonIsVisible(visible = true) {
-    visible ? cy.get(selectors.addGroupsBtn).should('be.visible') : cy.get(selectors.addGroupsBtnDisabled).should('be.visible')
+    visible ? cy.get(selectors.addGroupsBtn).should('be.visible') : cy.get(selectors.addGroupsBtn).should('not.exist')
   }
 
   /**

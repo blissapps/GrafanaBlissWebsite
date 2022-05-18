@@ -48,29 +48,6 @@ describe('User Management settings - User, Group, Role, and DAP', () => {
     })
 
     /**
-     * @missing_data need a user for that
-     */
-    it.skip('C12324915_Create_New_Group/role/dap_Button_Should_Not_Be_Available_In_The_Ui_For_A_User_With_Only_View_Permissions', () => {
-      // Group
-      equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'group')
-      equityAdmin.groupManagementPage.checkPageUrl()
-      equityAdmin.groupManagementPage.waitSpecificTime(1000) // Needs to wait to the UI to reload
-      equityAdmin.groupManagementPage.assertCreateNewGroupButtonDisplayed(false)
-
-      // Role
-      equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'role', false)
-      equityAdmin.roleManagementPage.checkPageUrl()
-      equityAdmin.roleManagementPage.waitSpecificTime(1000) // Needs to wait to the UI to reload
-      equityAdmin.roleManagementPage.assertCreateNewRoleButtonDisplayed(false)
-
-      // DAP
-      equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'dap', false)
-      equityAdmin.dapManagementPage.checkPageUrl()
-      equityAdmin.dapManagementPage.waitSpecificTime(1000) // Needs to wait to the UI to reload
-      equityAdmin.dapManagementPage.assertCreateNewDapButtonDisplayed(false)
-    })
-
-    /**
      * @missing_data Need to have one user associated with a group without permissions to see any User Management settings (including users, groups, roles, and DAPs (access filters))
      */
     it.skip('C7544061_User_Does_Not_Have_View_Permissions_For_Users,_Groups,_Roles,_And_Access_Filters', () => {

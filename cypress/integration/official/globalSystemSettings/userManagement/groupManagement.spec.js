@@ -248,7 +248,7 @@ describe('Group Management tests over User Management settings', () => {
 
       // users
       equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('users', 8)
-      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('users', 10)
+      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('users', 9)
 
       // companies
       equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('companies', 8)
@@ -267,7 +267,7 @@ describe('Group Management tests over User Management settings', () => {
 
       // users
       equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('users', 4)
-      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('users', 10)
+      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('users', 9)
 
       // companies
       equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('companies', 4)
@@ -286,7 +286,7 @@ describe('Group Management tests over User Management settings', () => {
 
       // users
       equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('users', 2)
-      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('users', 10)
+      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('users', 9)
 
       // companies
       equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('companies', 2)

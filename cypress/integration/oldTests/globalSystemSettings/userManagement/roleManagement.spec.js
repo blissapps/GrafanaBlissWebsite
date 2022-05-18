@@ -17,7 +17,7 @@ describe('Role Management tests over User Management settings', () => {
     /**
      * @missing_data Need to have some roles in both active and inactive tabs
      */
-    it.skip('C7499688_List Roles_Happy_Path_Active_And_Inactive_Roles', () => {
+    it.skip('C7499688_List_Roles_Happy_Path_Active_And_Inactive_Roles', () => {
       equityAdmin.roleManagementPage.assertActiveRolesAreDisplayed()
       equityAdmin.roleManagementPage.assertRolesInAlphabeticalOrder()
 
@@ -253,77 +253,6 @@ describe('Role Management tests over User Management settings', () => {
     })
 
     /**
-     * @missing_data For this scenario we need to have a role called 'Discard changes' with some permissions selected
-     *               The permissions are: access filters [all], api [view], groups [view and delete], settings [delete] and CREATE in all permissions
-     */
-    it.skip('C7499832_View/Update_Role_Permissions_Discard_Unsaved_Changes', () => {
-      const roleId = 1403
-
-      equityAdmin.roleManagementPage.clickRoleById(roleId)
-
-      equityAdmin.roleManagementPage.addOrRemovePermissions('accessfilters', ['update'], false)
-      equityAdmin.roleManagementPage.addOrRemovePermissions('api', ['view'], false)
-      equityAdmin.roleManagementPage.addOrRemovePermissions('groups', ['delete'], false)
-      equityAdmin.roleManagementPage.addOrRemovePermissions('settings', ['delete'], false)
-      equityAdmin.roleManagementPage.addOrRemovePermissions('bi', ['view'], true)
-      equityAdmin.roleManagementPage.addOrRemovePermissions('categories', ['update', 'delete'], true)
-      equityAdmin.roleManagementPage.addOrRemoveAllPermissions('create')
-      equityAdmin.roleManagementPage.discardEntityInformation()
-      equityAdmin.roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully', false)
-
-      equityAdmin.roleManagementPage.reloadPage()
-      equityAdmin.roleManagementPage.clickRoleById(roleId)
-
-      // Assert permissions not changed
-      equityAdmin.roleManagementPage.assertPermissionState('accessfilters', ['view', 'update', 'delete'], true)
-      equityAdmin.roleManagementPage.assertPermissionState('api', ['view'], true)
-      equityAdmin.roleManagementPage.assertPermissionState('groups', ['view', 'delete'], true)
-      equityAdmin.roleManagementPage.assertPermissionState('settings', ['delete'], true)
-      equityAdmin.roleManagementPage.assertPermissionState('bi', ['view'], false)
-      equityAdmin.roleManagementPage.assertPermissionState('categories', ['update', 'delete'], false)
-
-      // Assert CREATE permissions type removed from all permissions
-      equityAdmin.roleManagementPage.assertPermissionState('accessfilters', ['create'], true)
-      equityAdmin.roleManagementPage.assertPermissionState('categories', ['create'], true)
-      equityAdmin.roleManagementPage.assertPermissionState('clients', ['create'], true)
-      equityAdmin.roleManagementPage.assertPermissionState('clients_modules', ['create'], true)
-      equityAdmin.roleManagementPage.assertPermissionState('companysecurity', ['create'], true)
-      equityAdmin.roleManagementPage.assertPermissionState('contents', ['create'], true)
-      equityAdmin.roleManagementPage.assertPermissionState('contributions', ['create'], true)
-      equityAdmin.roleManagementPage.assertPermissionState('emails', ['create'], true)
-      equityAdmin.roleManagementPage.assertPermissionState('grants', ['create'], true)
-      equityAdmin.roleManagementPage.assertPermissionState('groups', ['create'], true)
-      equityAdmin.roleManagementPage.assertPermissionState('participants', ['create'], true)
-      equityAdmin.roleManagementPage.assertPermissionState('participants_account', ['create'], true)
-      equityAdmin.roleManagementPage.assertPermissionState('participants_bankaccounts', ['create'], true)
-      equityAdmin.roleManagementPage.assertPermissionState('participants_compliance', ['create'], true)
-      equityAdmin.roleManagementPage.assertPermissionState('participants_dividends', ['create'], true)
-      equityAdmin.roleManagementPage.assertPermissionState('participants_financialreporting', ['create'], true)
-      equityAdmin.roleManagementPage.assertPermissionState('participants_gateway', ['create'], true)
-      equityAdmin.roleManagementPage.assertPermissionState('participants_linkage', ['create'], true)
-      equityAdmin.roleManagementPage.assertPermissionState('participants_partners', ['create'], true)
-      equityAdmin.roleManagementPage.assertPermissionState('participants_restrictions', ['create'], true)
-      equityAdmin.roleManagementPage.assertPermissionState('participants_sharemanagement', ['create'], true)
-      equityAdmin.roleManagementPage.assertPermissionState('participants_sharetransactions', ['create'], true)
-      equityAdmin.roleManagementPage.assertPermissionState('participants_tax', ['create'], true)
-      equityAdmin.roleManagementPage.assertPermissionState('participants_trading', ['create'], true)
-      equityAdmin.roleManagementPage.assertPermissionState('partner_account', ['create'], true)
-      equityAdmin.roleManagementPage.assertPermissionState('partner_custodyaccountmovement', ['create'], true)
-      equityAdmin.roleManagementPage.assertPermissionState('payrollschedules', ['create'], true)
-      equityAdmin.roleManagementPage.assertPermissionState('plans', ['create'], true)
-      equityAdmin.roleManagementPage.assertPermissionState('purchaseplans', ['create'], true)
-      equityAdmin.roleManagementPage.assertPermissionState('roles', ['create'], true)
-      equityAdmin.roleManagementPage.assertPermissionState('settings', ['create'], true)
-      equityAdmin.roleManagementPage.assertPermissionState('shareissuances', ['create'], true)
-      equityAdmin.roleManagementPage.assertPermissionState('tags', ['create'], true)
-      equityAdmin.roleManagementPage.assertPermissionState('terminationrequests', ['create'], true)
-      equityAdmin.roleManagementPage.assertPermissionState('transactions', ['create'], true)
-      equityAdmin.roleManagementPage.assertPermissionState('transactionwindows', ['create'], true)
-      equityAdmin.roleManagementPage.assertPermissionState('users', ['create'], true)
-      equityAdmin.roleManagementPage.assertPermissionState('vestingschedules', ['create'], true)
-    })
-
-    /**
      * @missing_data Need to have a role with 50 characters in the name
      */
     it.skip('C7544054_Duplicate_Role_Maximum_Characters_In_Name_Field', () => {
@@ -339,18 +268,6 @@ describe('Role Management tests over User Management settings', () => {
       equityAdmin.roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully')
       equityAdmin.roleManagementPage.assertNotificationErrorDisplayed('Name length must be 50 characters or fewer.', false)
       equityAdmin.roleManagementPage.assertEntityIsDisplayedInTheList(newRoleNameLessThan50Characters)
-    })
-
-    /**
-     * @missing_data Need to have a role registered
-     *
-     */
-    it.skip('C9281161_CRUD_Permissions_Are_Visible_While_Scrolling_Down', () => {
-      const roleId = 1468
-
-      equityAdmin.roleManagementPage.clickRoleById(roleId)
-      equityAdmin.roleManagementPage.addOrRemovePermissions('vestingschedules', ['delete']) //strategy to easily scroll until the bottom
-      equityAdmin.roleManagementPage.assertCRUDColumnsDisplayed()
     })
   })
 
@@ -394,24 +311,6 @@ describe('Role Management tests over User Management settings', () => {
       equityAdmin.roleManagementPage.assertThreeDotButtonDisplayed(false)
       equityAdmin.roleManagementPage.addPathToUrlAndVisitIt(';action=duplicate')
       // missing step to validate the user was not redirect to any ;action=duplicate panel and so the panel to duplicate the role is not displayed (waiting for PB-975)
-    })
-  })
-
-  context('View Only User 2 - Shorter login mode', () => {
-    beforeEach(() => {
-      equityAdmin.loginPage.login(Cypress.env('VIEW_ONLY_USER_2_AUTH'))
-    })
-
-    /**
-     * @missing_data Need to have a user with view permissions for all the settings but Role
-     */
-    it.skip('C9281160_User_Does_Not_Have_View_Permissions_For_Groups_Only', () => {
-      equityAdmin.applicationLeftMenuBar.openSettingsMenuBar()
-      equityAdmin.settingsMenuNavBar.assertGlobalSettingsMenuOpen()
-      equityAdmin.settingsMenuNavBar.assertUserManagementMenuDisplayed()
-      equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', '', false)
-      equityAdmin.settingsMenuNavBar.assertBackButtonDisplayed() // Assert it just to make sure we are in the correct menu
-      equityAdmin.settingsMenuNavBar.assertRoleSubMenuItemDisplayed(false)
     })
   })
 })
