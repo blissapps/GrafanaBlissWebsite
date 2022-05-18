@@ -230,6 +230,68 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.userInfoL4Page.checkPageUrl()
       equityAdmin.userInfoL4Page.assertGroupsDisplayed(groupName, false)
     })
+
+    it('C17833366 List Groups - Show high level content of a group', () => {
+      const groupId = 974
+      const roleId = 1517
+
+      equityAdmin.groupManagementPage.clickGroupById(groupId)
+      equityAdmin.groupManagementPage.assertRoleAssociatedWithGroup(roleId)
+
+      // roles
+      equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('roles', 1)
+      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('roles', 1)
+
+      // daps
+      equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('daps', 8)
+      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 10)
+
+      // users
+      equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('users', 8)
+      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('users', 10)
+
+      // companies
+      equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('companies', 8)
+      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('companies', 10)
+
+      // CHANGE RESOLUTION
+      equityAdmin.groupManagementPage.changeBrowserResolution(1500, 1080)
+
+      // roles
+      equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('roles', 1)
+      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('roles', 1)
+
+      // daps
+      equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('daps', 4)
+      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 10)
+
+      // users
+      equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('users', 4)
+      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('users', 10)
+
+      // companies
+      equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('companies', 4)
+      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('companies', 10)
+
+      // CHANGE RESOLUTION
+      equityAdmin.groupManagementPage.changeBrowserResolution(1200, 960)
+
+      // roles
+      equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('roles', 1)
+      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('roles', 1)
+
+      // daps
+      equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('daps', 2)
+      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('daps', 10)
+
+      // users
+      equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('users', 2)
+      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('users', 10)
+
+      // companies
+      equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('companies', 2)
+      equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('companies', 10)
+    })
   })
 
   context('Different users for login', () => {

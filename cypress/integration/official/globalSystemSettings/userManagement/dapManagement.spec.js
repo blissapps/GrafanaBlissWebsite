@@ -574,4 +574,79 @@ describe('Data Access Profiles tests over User Management settings', () => {
       equityAdmin.dapManagementPage.assertCreateNewDapButtonDisplayed()
     })
   })
+
+  context('Different logins', () => {
+    it('C17833367 DAP - User does not have permission to link a group to the DAP', () => {
+      const dapId = 60
+      const groupId = 973
+
+      equityAdmin.loginPage.login('ViewOnlyUser@globalshares.com')
+      equityAdmin.homePage.navigateToUrl('/tenant/1/settings/dap-management')
+
+      equityAdmin.dapManagementPage.assertActiveDapsAreDisplayed()
+
+      equityAdmin.dapManagementPage.clickDapById(dapId)
+      equityAdmin.dapManagementPage.assertGroupAssociatedWithDap(groupId)
+      equityAdmin.dapManagementPage.assertAddGroupsButtonIsVisible(false)
+    })
+
+    it('C17833368 DAP - User does not have create permission to add new DAP', () => {
+      equityAdmin.loginPage.login('tlaw@globalshares.com')
+      equityAdmin.homePage.navigateToUrl('/tenant/1/settings/dap-management')
+
+      equityAdmin.dapManagementPage.assertActiveDapsAreDisplayed()
+      equityAdmin.dapManagementPage.assertCreateNewDapButtonDisplayed(false)
+      equityAdmin.dapManagementPage.clickTab('Inactive')
+      equityAdmin.dapManagementPage.assertInactiveDapsAreDisplayed()
+      equityAdmin.dapManagementPage.assertCreateNewDapButtonDisplayed(false)
+    })
+
+    it('C17833369 DAP - User does not have create permission to duplicate DAP', () => {
+      const dapId = 60
+
+      equityAdmin.loginPage.login('tlaw@globalshares.com')
+      equityAdmin.homePage.navigateToUrl('/tenant/1/settings/dap-management')
+
+      equityAdmin.dapManagementPage.clickDapById(dapId)
+
+      equityAdmin.dapManagementPage.clickThreeDotOptionButton()
+      equityAdmin.dapManagementPage.assertDuplicateEntityButtonDisplayed(false)
+    })
+
+    it('C17833370 DAP - User does not have update permission to modify the Access Filters', () => {
+      const dapId = 60
+
+      equityAdmin.loginPage.login('jachas@globalshares.com')
+      equityAdmin.homePage.navigateToUrl('/tenant/1/settings/dap-management')
+      equityAdmin.dapManagementPage.clickDapById(dapId)
+      equityAdmin.dapManagementPage.assertActiveDapsAreDisplayed()
+
+      equityAdmin.dapManagementPage.assertDapIsEditable(false)
+      equityAdmin.dapManagementPage.assertAddGroupsButtonIsVisible(false)
+    })
+
+    it('C17854681 DAP - User does not have update permission to Activate a DAP', () => {
+      const dapToDeactivateId = 60
+      const dapToActivateId = 61
+
+      equityAdmin.loginPage.login('jachas@globalshares.com')
+      equityAdmin.homePage.navigateToUrl('/tenant/1/settings/dap-management')
+      equityAdmin.dapManagementPage.clickDapById(dapToDeactivateId)
+      equityAdmin.dapManagementPage.assertActiveDapsAreDisplayed()
+
+      // Deactivate DAP option
+      equityAdmin.dapManagementPage.clickDapById(dapToDeactivateId)
+      equityAdmin.dapManagementPage.assertDapIsEditable(false)
+      equityAdmin.dapManagementPage.clickThreeDotOptionButton()
+      equityAdmin.dapManagementPage.assertDeactivateEntityButtonDisplayed(false)
+      equityAdmin.dapManagementPage.assertAddGroupsButtonIsVisible(false)
+
+      // Activate DAP option
+      equityAdmin.dapManagementPage.clickTab('Inactive')
+      equityAdmin.dapManagementPage.clickDapById(dapToActivateId)
+      equityAdmin.dapManagementPage.assertDapIsEditable(false)
+      equityAdmin.dapManagementPage.assertActivateDapButtonDisplayed(false)
+      equityAdmin.dapManagementPage.assertAddGroupsButtonIsVisible(false)
+    })
+  })
 })

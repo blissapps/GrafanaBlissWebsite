@@ -51,17 +51,6 @@ describe('Data Access Profiles tests over User Management settings', () => {
     })
 
     /**
-     * @missing_data Need to have a user with more than 1 client assigned (to make sure the landing page is the home page) and 1 DAP with the proper given access to this user
-     *
-     */
-    it.skip('C9277653_DAP_User_Does_Not_Have_Permission_Needed_To_Link_A_Group_To_The_DAP', () => {
-      const dapId = 7
-
-      equityAdmin.dapManagementPage.clickDapById(dapId)
-      equityAdmin.dapManagementPage.assertAddGroupsButtonIsVisible(false)
-    })
-
-    /**
      * @missing_data Need to have a user with only View permissions to see DAPS. Also, need to have 1 DAP available to use in the active tab, and another 1 in the inactive tab
      *
      */
@@ -91,27 +80,6 @@ describe('Data Access Profiles tests over User Management settings', () => {
 
       equityAdmin.dapManagementPage.clickDapById(dapId)
       equityAdmin.dapManagementPage.assertThreeDotButtonDisplayed(false)
-    })
-
-    /**
-     * @missing_data Need to have an active DAP created, so we can try to duplicate it
-     *
-     */
-    it.skip('C7568178 - Data Access Profile - User does not have the AccessFilters->Update Permission', () => {
-      const dapToDeactivateId = 7
-      const dapToActivateId = 11
-
-      // Deactivate DAP option
-      equityAdmin.dapManagementPage.clickDapById(dapToDeactivateId)
-      equityAdmin.dapManagementPage.assertDapIsEditable(false)
-      equityAdmin.dapManagementPage.assertThreeDotButtonDisplayed(false)
-      equityAdmin.dapManagementPage.assertAddGroupsButtonIsVisible(false)
-
-      // Activate DAP option
-      equityAdmin.dapManagementPage.clickTab('Inactive')
-      equityAdmin.dapManagementPage.clickDapById(dapToActivateId)
-      equityAdmin.dapManagementPage.assertActivateDapButtonDisplayed(false)
-      equityAdmin.dapManagementPage.assertAddGroupsButtonIsVisible(false)
     })
   })
 })
