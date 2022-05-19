@@ -4,7 +4,8 @@ import ApplicationLeftMenuBar from './applicationLeftMenuBar'
 const selectors = {
   clientSwitchButton: '#clientSwitchClick',
   settingsMenuOpen: 'hearth-settings-navigation-bar[class*=open]',
-  closeNavBarIcon: '#collapse'
+  closeNavBarIcon: '#collapse',
+  clientNameHeader: 'h2 > span'
 }
 
 const globalSettingsMenuSelectors = {
@@ -81,6 +82,15 @@ class SettingsMenuNavBar extends BasePage {
     displayed
       ? cy.get(globalSettingsMenuSelectors.roleManagementSubMenuItem).should('be.visible')
       : cy.get(globalSettingsMenuSelectors.roleManagementSubMenuItem).should('not.exist')
+  }
+
+  /**
+   * Assert the name of the current client. It is located in the top left, right after the GS logo
+   *
+   * @param {string} clientName Client name to be verified
+   */
+  assertClientNameInTheHeader(clientName) {
+    cy.get(selectors.clientNameHeader).should('contain.text', clientName)
   }
 
   // -------------------------------------------------------------------------------------------- OTHERS  --------------------------------------------------------------------- //

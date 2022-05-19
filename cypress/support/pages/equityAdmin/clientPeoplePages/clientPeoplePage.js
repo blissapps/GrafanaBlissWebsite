@@ -11,7 +11,6 @@ const selectors = {
   noTrustsOrParticipantsCreatedMessage: 'gs-empty-container .content > div',
   customizeColumnsIcon: '#pptOpenColumn',
   numberOfRecordsInTable: '#peopleRecordCount',
-  clientNameHeader: 'gs-container-l2 #navBarHeader > span',
   participant: '#participant-',
   participantsTab: '.tabs-bar #Participants',
   trustsTab: '.tabs-bar #Trusts',
@@ -147,15 +146,6 @@ class ClientPeoplePage extends BasePage {
     cy.xpath(`//div[@class='data']//gs-grid-cell[${columnToVerify}]//span[@class='subtitled-cell-title']`).each(($el) => {
       cy.wrap($el).should('contain.text', value)
     })
-  }
-
-  /**
-   * Assert the name of the current client. It is located in the top left, right after the GS logo
-   *
-   * @param {string} clientName Client name to be verified
-   */
-  assertClientNameInTheHeader(clientName) {
-    cy.get(selectors.clientNameHeader).should('have.text', clientName)
   }
 
   /**

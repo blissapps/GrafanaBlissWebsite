@@ -170,7 +170,7 @@ class DapManagementPage extends BaseManagementPage {
     cy.get(conditionsSelectors.generalSelect).first().click()
 
     for (let i = 0; i < optionsAvailable.length; i++) {
-      cy.get(conditionsSelectors.generalSelectOptions).eq(i).should('have.text', optionsAvailable[i])
+      cy.get(conditionsSelectors.generalSelectOptions).eq(i).should('contain', optionsAvailable[i])
     }
 
     cy.get(conditionsSelectors.inputs).first().should('be.visible')

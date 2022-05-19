@@ -20,6 +20,7 @@ describe('Client tests over the client switch functionality', () => {
   it('C16515492 Search clients using client switch', () => {
     const clientName = 'Activation'
     const clientId = 151
+    const participantId = [90230]
 
     // Search for a client that doesn't exists
     equityAdmin.applicationLeftMenuBar.openSettingsMenuBar()
@@ -33,7 +34,9 @@ describe('Client tests over the client switch functionality', () => {
     equityAdmin.clientSwitchMenu.clickInClientInSwitchClientMenu(clientId)
     equityAdmin.clientSwitchMenu.closeSwitchClientMenuBar()
     equityAdmin.clientPeoplePage.checkPageUrl()
-    equityAdmin.clientPeoplePage.assertClientNameInTheHeader(clientName)
+    equityAdmin.clientPeoplePage.assertParticipantDataDisplayedOnTheParticipantsList(participantId) // Just to make sure the page is completely loaded
+    equityAdmin.applicationLeftMenuBar.openSettingsMenuBar()
+    equityAdmin.settingsMenuNavBar.assertClientNameInTheHeader(clientName)
   })
 
   it('C16515493 Favorite / Unfavorite a client in the client switch menu', () => {
