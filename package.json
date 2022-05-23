@@ -20,7 +20,7 @@
     "cy:run:chrome": "cypress run --browser chrome --spec 'cypress/integration/**/*.spec.js'",
     "cy:run:firefox": "cypress run --browser firefox --spec 'cypress/integration/**/*.spec.js'",
     "cy:run:edge": "cypress run --browser edge",
-    "cy:run:dashboard": "cypress run --record --key a0b2d38f-1ea0-4639-8bb7-c74bdb76591e --tag 'staging,dashboard'",
+    "cy:run:dashboard": "cypress run --record --key a0b2d38f-1ea0-4639-8bb7-c74bdb76591e --tag 'EA-v2'",
     "cy:run:tag:chrome": "cypress run --env grepTags=@smoke --browser chrome",
     "cy:run:tag:firefox": "cypress run --env grepTags=@smoke --browser firefox",
     "cy:list:spec:by:names": "find-cypress-specs --names",
