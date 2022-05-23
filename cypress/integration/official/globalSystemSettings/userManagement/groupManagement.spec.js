@@ -292,6 +292,18 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertNumberOfCardsDisplayedInASection('companies', 2)
       equityAdmin.groupManagementPage.assertNumberOfRecordsInASection('companies', 10)
     })
+
+    it('C18116628 Create a New Group - Name length limit > 250 characters', () => {
+      const groupName250Chars = utils.generateRandomString(250)
+
+      equityAdmin.groupManagementPage.createGroup(utils.generateRandomString(251))
+      equityAdmin.groupManagementPage.saveEntityInformation()
+      equityAdmin.groupManagementPage.assertNotificationErrorDisplayed('Name length must be 250 characters or fewer.')
+
+      equityAdmin.groupManagementPage.modifyEntityName(groupName250Chars)
+      equityAdmin.groupManagementPage.saveEntityInformation()
+      equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName250Chars + ' Saved')
+    })
   })
 
   context('Different users for login', () => {

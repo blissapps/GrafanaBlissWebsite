@@ -8,7 +8,7 @@
 // Ignore any warning error in namespace in case it happens (It is expected to happen due to the TS compiler we are using in this project)
 declare namespace Cypress {
   interface Chainable {
-    interceptHomeSystemInitializedAPICalls(): Chainable<Element>
+    interceptHomeSystemInitializedAPICalls(interceptPermissions = false, fixtureFileNameContainingPermissions = ''): Chainable<Element>
   }
 
   interface Chainable {

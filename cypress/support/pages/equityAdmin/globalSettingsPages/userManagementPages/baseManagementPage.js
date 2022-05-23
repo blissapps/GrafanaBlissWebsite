@@ -385,7 +385,7 @@ class BaseManagementPage extends BasePage {
   modifyEntityName(entityName) {
     this.getEntityHeader().as('input')
 
-    cy.get('@input').clear()
+    cy.get('@input').clear({ force: true })
 
     if (entityName != '') {
       cy.get('@input').type(entityName).blur() // remove focus from element

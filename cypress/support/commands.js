@@ -18,11 +18,17 @@ const executeCommand = (command) => {
 
 /**
  * Intercepts XHR requests that may generate elements detached from the DOM after a successful login or in a refresh in the home page for the Equity Admin
+ *
+ * @param interceptPermissions False is the default value to NOT mock the permissions. Send true to mock the permissions
+ * @param fixtureFileContainingPermissions Name for the permission file located in the fixture folder
  */
-Cypress.Commands.add('interceptHomeSystemInitializedAPICalls', () => {
+Cypress.Commands.add('interceptHomeSystemInitializedAPICalls', (interceptPermissions = false, fixtureFileNameContainingPermissions = '') => {
   // Avoid elements detached from the DOM when loading at the home page right after the login
   cy.intercept('GET', '/api/Clients?$orderby=name**count=true').as('waitsClientsToBeLoaded')
-  cy.intercept('GET', '/api/Users/Self/Tenants/**/Permissions').as('waitsPermissionsToBeReceived')
+
+  interceptPermissions
+    ? cy.intercept('GET', '/api/Users/Self/Tenants/**/Permissions', { fixture: fixtureFileNameContainingPermissions }).as('emptyPermissionsList')
+    : cy.intercept('GET', '/api/Users/Self/Tenants/**/Permissions').as('waitsPermissionsToBeReceived')
 })
 
 /**

@@ -8,7 +8,7 @@ describe('User Management settings - User, Group, Role, and DAP', () => {
       equityAdmin.loginPage.login()
     })
 
-    it('C7405960_User_Check_Behavior_When_Closing_The_Settings', () => {
+    it('C18116624 Check the system behavior when closing the settings nav bar', () => {
       equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'user')
       equityAdmin.userManagementPage.checkPageUrl()
       equityAdmin.settingsMenuNavBar.closeGlobalSettingsNavBar()
@@ -18,18 +18,18 @@ describe('User Management settings - User, Group, Role, and DAP', () => {
 
   context('View Only User', () => {
     beforeEach(() => {
-      equityAdmin.loginPage.login(Cypress.env('VIEW_ONLY_USER_2_AUTH'))
+      equityAdmin.loginPage.login('viewonlyuser@globalshares.com')
     })
 
     /**
      * @bug_raised
      * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-1005
      */
-    it.skip('C11649850_Assert_View_Only_Status_Badge_Displayed_Next_To_Settings_Titles', () => {
+    it('C18116625 Assert View Only Status Badge Displayed Next To Settings Titles', () => {
       // User
       equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'user')
       equityAdmin.userManagementPage.checkPageUrl()
-      // userManagementPage.assertViewOnlyBadgeDisplayed()
+      // userManagementPage.assertViewOnlyBadgeDisplayed() // Uncomment this line as soon as the PB-1005 is fixed
 
       // Group
       equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'group', false)
@@ -46,13 +46,18 @@ describe('User Management settings - User, Group, Role, and DAP', () => {
       equityAdmin.dapManagementPage.checkPageUrl()
       equityAdmin.dapManagementPage.assertViewOnlyBadgeDisplayed()
     })
+  })
 
+  context('Using mocks', () => {
     /**
-     * @missing_data Need to have one user associated with a group without permissions to see any User Management settings (including users, groups, roles, and DAPs (access filters))
+     * @mocks_used
      */
-    it.skip('C7544061_User_Does_Not_Have_View_Permissions_For_Users,_Groups,_Roles,_And_Access_Filters', () => {
+    it('C18116626 User does not have View Permissions for Users, Groups, Roles, and Access Filters', () => {
+      equityAdmin.loginPage.loginWithMockedPermissions('noPermissionsForSettings.json')
+
       equityAdmin.applicationLeftMenuBar.openSettingsMenuBar()
       equityAdmin.settingsMenuNavBar.assertGlobalSettingsMenuOpen()
+      equityAdmin.settingsMenuNavBar.assertClientNameInTheHeader('Global Settings')
       equityAdmin.settingsMenuNavBar.assertUserManagementMenuDisplayed(false)
 
       // User Management tentative access

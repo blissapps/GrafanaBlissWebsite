@@ -1,4 +1,7 @@
 import BasePage from '../basePage'
+import HomePage from '../equityAdmin/homePage'
+
+const homePage = new HomePage()
 
 const selectors = {
   usernameInput: '#username-field',
@@ -50,6 +53,20 @@ class LoginPage extends BasePage {
     cy.get(selectors.passwordInput).type(password, { log: false })
     cy.forcedWait(500) // avoid element detached from the DOM. See https://github.com/cypress-io/cypress/issues/7306. A ticket was open https://globalshares.atlassian.net/browse/PB-828
     cy.get(selectors.loginButton).click()
+  }
+
+  /**
+   * Login command through the application UI With SESSION STORAGE and with MOCKED permissions
+   *
+   * @param {string} permissionsFixtureFile Name for the permission file located in the fixture folder
+   * @param {string} email email to login. The default variable is set in the cypress.json file
+   * @param {string} password password to login. The default variable is set in the cypress.json file
+   */
+  loginWithMockedPermissions(permissionsFixtureFile, email = Cypress.env('DEFAULT_USER_AUTH'), password = Cypress.env('DEFAULT_PASSWORD_AUTH')) {
+    cy.interceptHomeSystemInitializedAPICalls(true, permissionsFixtureFile)
+    this.login(email, password)
+    homePage.assertCompaniesHeaderIsDisplayed() // Just to make sure we are in the landing page and the Companies are already loaded
+    cy.forcedWait(2000) // Wait for the settings menu to reload without any issues
   }
 
   // ----------------------------------------------------------------------------- ASSERTIONS  ----------------------------------------------------------------------------------- //
