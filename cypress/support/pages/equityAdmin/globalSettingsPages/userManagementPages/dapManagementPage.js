@@ -12,7 +12,7 @@ const selectors = {
   noDapSelectedMsg: 'gs-empty-container[data-test-id=no-dap-selected-message] div.content',
   activeDapList: 'gs-tab[data-test-id=activeTab] #dapList gs-list',
   inactiveDapList: 'gs-tab[data-test-id=inactiveTab] #dapList gs-list',
-  dapsDisplayed: '#dapList gs-list a[data-test-id*="dap-',
+  dapsDisplayed: '#dapList gs-list *[data-test-id*="dap-',
   noDapsExistMessage: '#emptyList',
   addGroupsBtn: '*[data-test-id=section-group] *[data-test-id="add-entity"]:not([class*=disabled])',
   dapId: '*[data-test-id=dap-',

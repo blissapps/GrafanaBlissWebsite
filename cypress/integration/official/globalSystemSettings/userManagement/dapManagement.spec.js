@@ -560,6 +560,17 @@ describe('Data Access Profiles tests over User Management settings', () => {
       cy.network({ offline: false })
       cy.assertNetworkOnline({ online: true })
     })
+
+    it('C18105890 DAP - Happy Path - Alphabetically List Active and Inactive data access profile(s)', () => {
+      // Active tab
+      equityAdmin.dapManagementPage.assertActiveDapsAreDisplayed()
+      equityAdmin.dapManagementPage.assertDapsInAlphabeticalOrder()
+
+      // Inactive tab
+      equityAdmin.dapManagementPage.clickTab('Inactive')
+      equityAdmin.dapManagementPage.assertInactiveDapsAreDisplayed()
+      equityAdmin.dapManagementPage.assertDapsInAlphabeticalOrder()
+    })
   })
 
   context('Admin user over direct setting navigation (navigateToUrl) - CLIENT tenant perspective', () => {
@@ -647,6 +658,17 @@ describe('Data Access Profiles tests over User Management settings', () => {
       equityAdmin.dapManagementPage.assertDapIsEditable(false)
       equityAdmin.dapManagementPage.assertActivateDapButtonDisplayed(false)
       equityAdmin.dapManagementPage.assertAddGroupsButtonIsVisible(false)
+    })
+
+    it('C18105891 - Data Access Profile - User has only the view permission', () => {
+      const dapId = 50
+
+      equityAdmin.loginPage.login('viewonlyuser@globalshares.com')
+      equityAdmin.homePage.navigateToUrl('/tenant/1/settings/dap-management')
+
+      equityAdmin.dapManagementPage.clickDapById(dapId)
+      equityAdmin.dapManagementPage.assertEntityHeaderIsDisplayedAsExpected() // make sure the dap is loaded
+      equityAdmin.dapManagementPage.assertThreeDotButtonDisplayed(false)
     })
   })
 })

@@ -79,5 +79,23 @@ describe('User Management tests over User Management settings', () => {
       equityAdmin.userInfoL4Page.assertContactDataContent(phone, email)
       equityAdmin.userInfoL4Page.assertAccountDetailsDataContent(username)
     })
+
+    it('C18105892 List User - Happy path - Contains Expected Columns on users table', () => {
+      equityAdmin.userManagementPage.assertTableContainsExpectedColumnsInOrder(['username', 'email', 'status'])
+    })
+  })
+
+  /**
+   * @mocks_used
+   */
+  context('Mocked data tests', () => {
+    it('C7353828_List User - Empty State', () => {
+      equityAdmin.loginPage.login()
+      equityAdmin.userManagementPage.interceptAndMockUsersLoadingRequest('usersManagement_EmptyUserList.json')
+      equityAdmin.homePage.navigateToUrl('/tenant/1/settings/user-management')
+      equityAdmin.userManagementPage.checkPageUrl()
+
+      equityAdmin.userManagementPage.assertNoUserExistsMessageIsDisplayed()
+    })
   })
 })
