@@ -334,7 +334,7 @@ describe('Group Management tests over User Management settings', () => {
     })
 
     /**
-     * @bug_raised https://globalshares.atlassian.net/browse/PB-979
+     * @bug_raised https://globalshares.atlassian.net/browse/PB-1212
      */
     it('C16661662 Create a New Group - User does not have Create permission', () => {
       equityAdmin.loginPage.login('tlaw@globalshares.com')
@@ -343,7 +343,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertGroupPageHeaderIsDisplayed()
       equityAdmin.groupManagementPage.assertCreateNewGroupButtonDisplayed(false)
       equityAdmin.groupManagementPage.addPathToUrlAndVisitIt('/0')
-      // Need to wait for PB-979 to know what are going to be the next steps
+      // Need to wait for PB-1212 to know what are going to be the next steps
     })
 
     it('C16661659 Not able to duplicate group', () => {

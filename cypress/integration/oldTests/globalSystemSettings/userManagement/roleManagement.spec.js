@@ -14,51 +14,6 @@ describe('Role Management tests over User Management settings', () => {
 
     // ************************************************ TESTS AS ADMIN TENANT ************************************************** //
 
-    /**
-     * @missing_data Need to have some roles in both active and inactive tabs
-     */
-    it.skip('C7499688_List_Roles_Happy_Path_Active_And_Inactive_Roles', () => {
-      equityAdmin.roleManagementPage.assertActiveRolesAreDisplayed()
-      equityAdmin.roleManagementPage.assertRolesInAlphabeticalOrder()
-
-      equityAdmin.roleManagementPage.clickTab('Inactive')
-      equityAdmin.roleManagementPage.assertInactiveRolesAreDisplayed()
-      equityAdmin.roleManagementPage.assertRolesInAlphabeticalOrder()
-    })
-
-    /**
-     * @missing_data For test this scenario there should be no Active nor Inactive roles.
-     */
-    it.skip('C7499690_Empty_State_Active_And_Inactive_Roles)', () => {
-      equityAdmin.roleManagementPage.assertEmptyStateMessageIsVisible()
-      equityAdmin.roleManagementPage.clickTab('Inactive')
-      equityAdmin.roleManagementPage.assertEmptyStateMessageIsVisible()
-    })
-
-    /**
-     * @mocks_used
-     */
-    it('C7499693_List_Roles_Navigation_Issues', () => {
-      // Create mocked roles to guarantee we will always have at least one role displayed
-      equityAdmin.roleManagementPage.interceptAndMockRolesLoadingRequest('rolesManagement_BasicRolesList.json')
-
-      equityAdmin.roleManagementPage.checkPageUrl()
-      equityAdmin.roleManagementPage.reloadPage()
-      equityAdmin.roleManagementPage.checkPageUrl()
-      equityAdmin.roleManagementPage.assertActiveRolesAreDisplayed()
-
-      equityAdmin.applicationLeftMenuBar.clickLogoToGoToHomePage()
-      equityAdmin.homePage.checkPageUrl()
-      equityAdmin.homePage.goBackOrForwardInBrowser('back')
-      equityAdmin.roleManagementPage.checkPageUrl()
-      equityAdmin.roleManagementPage.assertActiveRolesAreDisplayed()
-
-      equityAdmin.applicationLeftMenuBar.clickLogoToGoToHomePage()
-      equityAdmin.homePage.navigateToUrl('/tenant/1/settings/role-management')
-      equityAdmin.roleManagementPage.checkPageUrl()
-      equityAdmin.roleManagementPage.assertActiveRolesAreDisplayed()
-    })
-
     it('C7499704_Create_A_New_Role_Name_Character_Limit_When_Creating', () => {
       let roleName = utils.generateRandomString(51)
 
@@ -251,24 +206,6 @@ describe('Role Management tests over User Management settings', () => {
       equityAdmin.roleManagementPage.saveEntityInformation()
       equityAdmin.roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully', true)
     })
-
-    /**
-     * @missing_data Need to have a role with 50 characters in the name
-     */
-    it.skip('C7544054_Duplicate_Role_Maximum_Characters_In_Name_Field', () => {
-      const roleId = 1495
-      const newRoleNameLessThan50Characters = 'Role ' + utils.getRandomNumber()
-
-      equityAdmin.roleManagementPage.clickRoleById(roleId)
-      equityAdmin.roleManagementPage.clickToDuplicateEntity()
-      equityAdmin.roleManagementPage.saveEntityInformation()
-      equityAdmin.roleManagementPage.assertNotificationErrorDisplayed('Name length must be 50 characters or fewer.')
-      equityAdmin.roleManagementPage.modifyEntityName(newRoleNameLessThan50Characters)
-      equityAdmin.roleManagementPage.saveEntityInformation()
-      equityAdmin.roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully')
-      equityAdmin.roleManagementPage.assertNotificationErrorDisplayed('Name length must be 50 characters or fewer.', false)
-      equityAdmin.roleManagementPage.assertEntityIsDisplayedInTheList(newRoleNameLessThan50Characters)
-    })
   })
 
   // ************************************************ TESTS AS VIEW ONLY ************************************************** //
@@ -278,22 +215,6 @@ describe('Role Management tests over User Management settings', () => {
       equityAdmin.loginPage.login(Cypress.env('VIEW_ONLY_USER_2_AUTH'))
       equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'role')
       equityAdmin.roleManagementPage.checkPageUrl()
-    })
-
-    /**
-     * @missing_data For test this scenario there should be no "Create Role" permission for the user.
-     *
-     * @bug_raised
-     * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-979
-     *
-     * TODO: @missing_steps What happens when the user tries do access this by the URL? Some error message?
-     */
-    it.skip('C7499703_User_Does_Not_Have_Permissions_To_Create_New_Role', () => {
-      equityAdmin.roleManagementPage.clickTab('Active')
-      equityAdmin.roleManagementPage.getNewRoleButton().should('not.exist')
-
-      equityAdmin.roleManagementPage.navigateToUrl('/0')
-      // Assert in here some error message that will appears
     })
 
     /**

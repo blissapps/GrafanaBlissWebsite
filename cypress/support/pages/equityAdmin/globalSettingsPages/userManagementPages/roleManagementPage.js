@@ -9,7 +9,7 @@ const selectors = {
   noRoleSelectedMsg: '#noRoleSelectedContainer div.content',
   activeRolesList: 'gs-tab[data-test-id=activeTab] #roleList gs-list',
   inactiveRolesList: 'gs-tab[data-test-id=inactiveTab] #roleList gs-list',
-  rolesDisplayed: '#roleList gs-list a[id*="role_',
+  rolesDisplayed: '#roleList gs-list *[id*="role_',
   newRoleBtn: 'gs-button[data-test-id=create-role]',
   roleId: '*[id*=role_',
   activateRoleBtn: 'gs-button[data-test-id=activateBtn]',

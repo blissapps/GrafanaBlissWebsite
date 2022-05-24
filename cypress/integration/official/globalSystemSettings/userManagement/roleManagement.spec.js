@@ -249,6 +249,49 @@ describe('Role Management tests over User Management settings', () => {
       equityAdmin.roleManagementPage.assertPermissionState('tenants', ['view', 'update'], true)
       equityAdmin.roleManagementPage.assertPermissionState('tenants', ['delete'], false)
     })
+
+    it('C18154749 List Roles - Happy Path (Active and Inactive Roles)', () => {
+      equityAdmin.roleManagementPage.assertActiveRolesAreDisplayed()
+      equityAdmin.roleManagementPage.assertRolesInAlphabeticalOrder()
+
+      equityAdmin.roleManagementPage.clickTab('Inactive')
+      equityAdmin.roleManagementPage.assertInactiveRolesAreDisplayed()
+      equityAdmin.roleManagementPage.assertRolesInAlphabeticalOrder()
+    })
+
+    it('C18154751 List Roles - Navigation issues', () => {
+      equityAdmin.roleManagementPage.checkPageUrl()
+      equityAdmin.roleManagementPage.reloadPage()
+      equityAdmin.roleManagementPage.checkPageUrl()
+      equityAdmin.roleManagementPage.assertActiveRolesAreDisplayed()
+
+      equityAdmin.applicationLeftMenuBar.clickLogoToGoToHomePage()
+      equityAdmin.homePage.checkPageUrl()
+      equityAdmin.homePage.goBackOrForwardInBrowser('back')
+      equityAdmin.roleManagementPage.checkPageUrl()
+      equityAdmin.roleManagementPage.assertActiveRolesAreDisplayed()
+
+      equityAdmin.applicationLeftMenuBar.clickLogoToGoToHomePage()
+      equityAdmin.homePage.navigateToUrl('/tenant/1/settings/role-management')
+      equityAdmin.roleManagementPage.checkPageUrl()
+      equityAdmin.roleManagementPage.assertActiveRolesAreDisplayed()
+    })
+
+    it('C18154752 Duplicate a Role - Maximum characters in name field', () => {
+      const roleId = 1518
+      const newRoleNameLessThan50Characters = 'Role ' + utils.getRandomNumber()
+
+      equityAdmin.roleManagementPage.clickRoleById(roleId)
+      equityAdmin.roleManagementPage.clickToDuplicateEntity()
+      equityAdmin.roleManagementPage.saveEntityInformation()
+      equityAdmin.roleManagementPage.assertNotificationErrorDisplayed('Name length must be 50 characters or fewer.')
+      equityAdmin.roleManagementPage.assertEntityHeaderIsDisplayedAsExpected('Copy Of role with the exactly 50max characters in the name')
+      equityAdmin.roleManagementPage.modifyEntityName(newRoleNameLessThan50Characters)
+      equityAdmin.roleManagementPage.saveEntityInformation()
+      equityAdmin.roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully')
+      equityAdmin.roleManagementPage.assertNotificationErrorDisplayed('Name length must be 50 characters or fewer.', false)
+      equityAdmin.roleManagementPage.assertEntityIsDisplayedInTheList(newRoleNameLessThan50Characters)
+    })
   })
 
   context('Tenant 1 settings over direct navigation (navigateToUrl) with different logins', () => {
@@ -301,6 +344,40 @@ describe('Role Management tests over User Management settings', () => {
       equityAdmin.roleManagementPage.clickRoleById(roleId)
       equityAdmin.roleManagementPage.clickToDeactivateEntity()
       equityAdmin.roleManagementPage.assertNotificationErrorDisplayed('Unfortunately, you are restricted to perform that operation')
+    })
+
+    it('C18154753 Creating a new Role without permission', () => {
+      equityAdmin.loginPage.login('ViewOnlyUser@globalshares.com')
+      equityAdmin.homePage.navigateToUrl('/tenant/1/settings/role-management')
+      equityAdmin.roleManagementPage.checkPageUrl()
+
+      equityAdmin.roleManagementPage.assertActiveRolesAreDisplayed()
+      equityAdmin.roleManagementPage.assertCreateNewRoleButtonDisplayed(false)
+      equityAdmin.roleManagementPage.clickTab('Inactive')
+      equityAdmin.roleManagementPage.assertCreateNewRoleButtonDisplayed(false)
+
+      equityAdmin.roleManagementPage.addPathToUrlAndVisitIt('/0')
+      equityAdmin.roleManagementPage.assertRoleIsEditable(false)
+    })
+  })
+
+  /**
+   * @mocks_used
+   */
+  context('Mocked data tests', () => {
+    beforeEach(() => {
+      equityAdmin.loginPage.login()
+      equityAdmin.homePage.navigateToUrl('/tenant/1/settings/role-management')
+      equityAdmin.roleManagementPage.checkPageUrl()
+    })
+
+    it('C18154750 List Roles - Empty State (Active and Inactive Roles))', () => {
+      equityAdmin.roleManagementPage.interceptAndMockRolesLoadingRequest('rolesManagement_EmptyRoleList.json')
+
+      equityAdmin.homePage.navigateToUrl('/tenant/1/settings/role-management')
+      equityAdmin.roleManagementPage.assertEmptyStateMessageIsVisible()
+      equityAdmin.roleManagementPage.clickTab('Inactive')
+      equityAdmin.roleManagementPage.assertEmptyStateMessageIsVisible()
     })
   })
 })
