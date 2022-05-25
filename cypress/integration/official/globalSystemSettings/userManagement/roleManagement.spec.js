@@ -284,13 +284,226 @@ describe('Role Management tests over User Management settings', () => {
       equityAdmin.roleManagementPage.clickRoleById(roleId)
       equityAdmin.roleManagementPage.clickToDuplicateEntity()
       equityAdmin.roleManagementPage.saveEntityInformation()
+
       equityAdmin.roleManagementPage.assertNotificationErrorDisplayed('Name length must be 50 characters or fewer.')
       equityAdmin.roleManagementPage.assertEntityHeaderIsDisplayedAsExpected('Copy Of role with the exactly 50max characters in the name')
+
       equityAdmin.roleManagementPage.modifyEntityName(newRoleNameLessThan50Characters)
       equityAdmin.roleManagementPage.saveEntityInformation()
+
       equityAdmin.roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully')
       equityAdmin.roleManagementPage.assertNotificationErrorDisplayed('Name length must be 50 characters or fewer.', false)
       equityAdmin.roleManagementPage.assertEntityIsDisplayedInTheList(newRoleNameLessThan50Characters)
+    })
+
+    it('C18176175 Create a new Role - Role Name character limit', () => {
+      let roleName = utils.generateRandomString(51)
+
+      // 51 chars
+      equityAdmin.roleManagementPage.clickToCreateRoleWithNewName(roleName)
+      equityAdmin.roleManagementPage.saveEntityInformation()
+
+      equityAdmin.roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully', false)
+      equityAdmin.roleManagementPage.assertNotificationErrorDisplayed('Name length must be 50 characters or fewer.')
+      equityAdmin.roleManagementPage.assertEntityIsDisplayedInTheList(roleName, false)
+
+      // 50 chars
+      roleName = utils.generateRandomString(50)
+      equityAdmin.roleManagementPage.modifyEntityName(roleName)
+      equityAdmin.roleManagementPage.saveEntityInformation()
+
+      equityAdmin.roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully')
+      equityAdmin.roleManagementPage.assertNotificationErrorDisplayed('Name length must be 50 characters or fewer.', false)
+      equityAdmin.roleManagementPage.assertEntityIsDisplayedInTheList(roleName)
+    })
+
+    it('C18176176 View/Update Role Permissions - Add permission to Role', () => {
+      const roleId = 1519
+
+      equityAdmin.roleManagementPage.clickRoleById(roleId)
+      equityAdmin.roleManagementPage.waitSpecificTime(1000) // This is really necessary, otherwise the UI will be flaky
+
+      // Give some random permissions
+      equityAdmin.roleManagementPage.addOrRemovePermissions('api', ['view'])
+      equityAdmin.roleManagementPage.addOrRemovePermissions('groups', ['view', 'update'])
+
+      // Delete permission given for all types
+      equityAdmin.roleManagementPage.addOrRemoveAllPermissions('delete')
+
+      // Save and assert it was saved
+      equityAdmin.roleManagementPage.saveEntityInformation()
+      equityAdmin.roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully')
+
+      // Reload
+      equityAdmin.roleManagementPage.reloadPage()
+      equityAdmin.roleManagementPage.clickRoleById(roleId)
+
+      // Assert random permissions given
+      equityAdmin.roleManagementPage.assertPermissionState('api', ['view'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('groups', ['view', 'update'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('groups', ['create'], false)
+
+      // Assert Delete permissions type given to all permissions
+      equityAdmin.roleManagementPage.assertPermissionState('accessfilters', ['delete'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('categories', ['delete'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('companysecurity', ['delete'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('contents', ['delete'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('contributions', ['delete'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('emails', ['delete'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('grants', ['delete'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('groups', ['delete'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('participants', ['delete'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('participants_bankaccounts', ['delete'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('participants_compliance', ['delete'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('participants_dividends', ['delete'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('participants_financialreporting', ['delete'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('participants_gateway', ['delete'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('participants_linkage', ['delete'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('participants_partners', ['delete'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('participants_restrictions', ['delete'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('participants_sharemanagement', ['delete'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('participants_sharetransactions', ['delete'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('participants_tax', ['delete'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('participants_trading', ['delete'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('payrollschedules', ['delete'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('plans', ['delete'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('purchaseplans', ['delete'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('roles', ['delete'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('settings', ['delete'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('shareissuances', ['delete'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('tags', ['delete'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('tenants', ['delete'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('transactions', ['delete'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('transactionwindows', ['delete'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('users', ['delete'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('vestingschedules', ['delete'], true)
+
+      //teardown - Remove all permissions at once
+      cy.log('--- TEARDOWN ---')
+      equityAdmin.roleManagementPage.addOrRemoveAllPermissions('view')
+      equityAdmin.roleManagementPage.addOrRemoveAllPermissions('view')
+      equityAdmin.roleManagementPage.addOrRemoveAllPermissions('update')
+      equityAdmin.roleManagementPage.addOrRemoveAllPermissions('update')
+      equityAdmin.roleManagementPage.addOrRemoveAllPermissions('create')
+      equityAdmin.roleManagementPage.addOrRemoveAllPermissions('create')
+      equityAdmin.roleManagementPage.addOrRemoveAllPermissions('delete')
+      equityAdmin.roleManagementPage.saveEntityInformation()
+      equityAdmin.roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully')
+    })
+
+    it('C18176177 View/Update Role Permissions - Remove permission from Role', () => {
+      const roleId = 1520
+
+      equityAdmin.roleManagementPage.clickRoleById(roleId)
+
+      // Remove some permiossions
+      equityAdmin.roleManagementPage.addOrRemovePermissions('categories', ['update'], false)
+      equityAdmin.roleManagementPage.addOrRemovePermissions('participants', ['update', 'create', 'delete'], false)
+
+      // Remove all permissions for view
+      equityAdmin.roleManagementPage.addOrRemoveAllPermissions('view')
+
+      equityAdmin.roleManagementPage.saveEntityInformation()
+      equityAdmin.roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully')
+
+      equityAdmin.roleManagementPage.reloadPage()
+      equityAdmin.roleManagementPage.clickRoleById(roleId)
+
+      // Assert permissions removed
+      equityAdmin.roleManagementPage.assertPermissionState('categories', ['update'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('participants', ['update', 'create', 'delete'], false)
+
+      // Assert Delete permissions type removed from all permissions
+      equityAdmin.roleManagementPage.assertPermissionState('accessfilters', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('api', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('bi', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('categories', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('clients', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('clients_modules', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('companysecurity', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('contents', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('contributions', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('emails', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('exchanges', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('grants', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('groups', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('mobile', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('participants', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('participants_bankaccounts', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('participants_compliance', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('participants_dividends', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('participants_events', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('participants_financialreporting', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('participants_gateway', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('participants_linkage', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('participants_onbehalf', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('participants_partners', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('participants_restrictions', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('participants_sharemanagement', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('participants_sharetransactions', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('participants_tax', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('participants_trading', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('partners', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('payrollschedules', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('plans', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('purchaseplans', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('roles', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('settings', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('shareissuances', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('sms', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('tags', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('tenants', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('terminationrequests', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('terminationtypes', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('transactions', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('transactionwindows', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('users', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('vestingschedules', ['view'], false)
+
+      //teardown - Add permissions removed
+      cy.log('--- TEARDOWN ---')
+      equityAdmin.roleManagementPage.addOrRemoveAllPermissions('view')
+      equityAdmin.roleManagementPage.addOrRemovePermissions('categories', ['update'], true)
+      equityAdmin.roleManagementPage.addOrRemovePermissions('participants', ['update', 'create', 'delete'], true)
+      equityAdmin.roleManagementPage.saveEntityInformation()
+      equityAdmin.roleManagementPage.assertToastNotificationMessageIsDisplayed('Role updated successfully')
+    })
+
+    it('C18176178 View/Update Role Permissions - Discard unsaved changes', () => {
+      const roleId = 1521
+
+      equityAdmin.roleManagementPage.clickRoleById(roleId)
+      equityAdmin.roleManagementPage.waitSpecificTime(1000) // This is really necessary, otherwise the UI will be flaky
+
+      // Give some random permissions
+      equityAdmin.roleManagementPage.addOrRemovePermissions('bi', ['view'], false)
+      equityAdmin.roleManagementPage.addOrRemovePermissions('exchanges', ['view'])
+      equityAdmin.roleManagementPage.addOrRemovePermissions('exchanges', ['update'], false)
+      equityAdmin.roleManagementPage.addOrRemovePermissions('participants', ['update'], false)
+      equityAdmin.roleManagementPage.addOrRemovePermissions('roles', ['delete'])
+
+      // Delete permission given for all types
+      equityAdmin.roleManagementPage.addOrRemoveAllPermissions('create')
+
+      // Assert random permissions state BEFORE discarding
+      equityAdmin.roleManagementPage.assertPermissionState('bi', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('exchanges', ['view'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('exchanges', ['update', 'create'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('participants', ['update', 'create'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('roles', ['delete'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('roles', ['create'], false)
+
+      // Discarding Modifications
+      equityAdmin.roleManagementPage.discardEntityInformation()
+
+      // Assert random permissions AFTER discarding
+      equityAdmin.roleManagementPage.assertPermissionState('bi', ['view'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('exchanges', ['view'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('exchanges', ['update', 'create'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('participants', ['update', 'create'], true)
+      equityAdmin.roleManagementPage.assertPermissionState('participants', ['view', 'delete'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('roles', ['delete'], false)
+      equityAdmin.roleManagementPage.assertPermissionState('roles', ['view', 'update', 'create'], true)
     })
   })
 
@@ -358,6 +571,24 @@ describe('Role Management tests over User Management settings', () => {
 
       equityAdmin.roleManagementPage.addPathToUrlAndVisitIt('/0')
       equityAdmin.roleManagementPage.assertRoleIsEditable(false)
+    })
+
+    it('C18176179 Duplicate a Role - No permission', () => {
+      const roleId = 1490
+      const roleName = 'View Only'
+
+      equityAdmin.loginPage.login('ViewOnlyUser@globalshares.com')
+      equityAdmin.homePage.navigateToUrl('/tenant/1/settings/role-management')
+      equityAdmin.roleManagementPage.checkPageUrl()
+
+      equityAdmin.roleManagementPage.clickRoleById(roleId)
+      equityAdmin.roleManagementPage.assertEntityHeaderIsDisplayedAsExpected(roleName)
+      equityAdmin.roleManagementPage.assertThreeDotButtonDisplayed(false)
+      equityAdmin.roleManagementPage.addPathToUrlAndVisitIt(';action=duplicate')
+      equityAdmin.roleManagementPage.assertEntityHeaderIsDisplayedAsExpected('Copy Of ' + roleName)
+      equityAdmin.roleManagementPage.assertRoleIsEditable(false)
+      equityAdmin.roleManagementPage.assertEntityNameEditable(false)
+      equityAdmin.roleManagementPage.assertSaveEntityButtonDisplayed(false)
     })
   })
 

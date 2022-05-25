@@ -100,6 +100,9 @@ class RoleManagementPage extends BaseManagementPage {
       case 'emails':
         return cy.get('tr[name=permission_emails]')
 
+      case 'exchanges':
+        return cy.get('tr[name=permission_exchanges]')
+
       case 'grants':
         return cy.get('tr[name=permission_grants]')
 
@@ -374,6 +377,8 @@ class RoleManagementPage extends BaseManagementPage {
           throw new Error(permissionsType + ' is not valid. Please, provide a valid permission type for this one!')
       }
     }
+
+    cy.forcedWait(300) //Just to avoid problems when the UI is reloaded
   }
 
   /**

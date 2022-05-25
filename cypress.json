@@ -5,7 +5,7 @@
 
   "chromeWebSecurity": false,
   "trashAssetsBeforeRuns": true,
-  "numTestsKeptInMemory": 15,
+  "numTestsKeptInMemory": 10,
   "testFiles": "**/*.spec.js",
   "ignoreTestFiles": ["**/__snapshots__/*", "**/__image_snapshots__/*"],
 

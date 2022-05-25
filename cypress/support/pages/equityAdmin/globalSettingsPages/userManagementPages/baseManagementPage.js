@@ -366,6 +366,15 @@ class BaseManagementPage extends BasePage {
     cy.xpath(`//*[@id="recordCount"][normalize-space(text())="${records} record(s)"]`).scrollIntoView().should('be.visible')
   }
 
+  /**
+   * Assert the Save button to save all updates made in the selected entity is displayed or not. The entity can be groups, roles, or daps
+   *
+   * @param {boolean} displayed True is the default value to validate the save button is displayed. False otherwise.
+   */
+  assertSaveEntityButtonDisplayed(displayed = true) {
+    displayed ? cy.get(selectors.saveBtn).scrollIntoView().should('be.visible') : cy.get(selectors.saveBtn).should('not.exist')
+  }
+
   // ---------------------------------------------------------------------------------------- OTHERS --------------------------------------------------------------------------------- //
 
   /**
