@@ -12,7 +12,7 @@ describe('Preferences tests', () => {
   /**
    * Test if the menu link sends to the correct page and it gets back to the home screen if closed
    */
-  it('C1234567_Check_URL_Access_Over_The_Menu', () => {
+  it('C1234567 Check URL Access Over The Menu', () => {
     equityAdmin.preferencesPage.checkPageUrl()
     equityAdmin.profileMenuNavBar.closeProfileMenuNavBar()
     equityAdmin.preferencesPage.checkPageUrl()
@@ -22,7 +22,7 @@ describe('Preferences tests', () => {
    * Change language to PORTUGUESE and verify some random texts around the system
    *
    */
-  it('C1234567_Change_Language_Successfully_To_Portuguese', () => {
+  it('C1234567 Change Language Successfully To Portuguese', () => {
     equityAdmin.preferencesPage.changeLanguage('portuguese')
     equityAdmin.applicationLeftMenuBar.clickLogoToGoToHomePage()
 

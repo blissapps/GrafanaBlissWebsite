@@ -13,13 +13,13 @@ describe('User Management tests over User Management settings', () => {
     /**
      * @bug_raised  https://globalshares.atlassian.net/browse/PB-1158
      */
-    it('C16636881 Search user by username, email, no records and test search behaviorse', () => {
+    it('C16636881 Search user by username, email, no records and test search behaviors', () => {
       const username = 'RSaxena@globalshares.com'
       const userEmail = 'APSilva@globalshares.com'
       const userEmail2 = 'test1@test.com'
 
       // Uncomment this line as soon as the the bug is fixed
-      // equityAdmin.userManagementPage.assertNumberOfRecordsDisplayedInTable(79)
+      // equityAdmin.userManagementPage.assertNumberOfRecordsDisplayedInTable(Cypress.env('TOTAL_NUMBER_OF_USERS_AT10_ENV'))
 
       cy.log('USERNAME')
       equityAdmin.searchEngine.search(username)
@@ -45,7 +45,7 @@ describe('User Management tests over User Management settings', () => {
 
       cy.log('Clear button behavior over this page')
       equityAdmin.searchEngine.clearSearchBoxByXIcon()
-      equityAdmin.userManagementPage.assertNumberOfRecordsDisplayedInTable(79)
+      equityAdmin.userManagementPage.assertNumberOfRecordsDisplayedInTable(Cypress.env('TOTAL_NUMBER_OF_USERS_AT10_ENV'))
     })
 
     it('C17344546 Search user with SQL query', () => {
