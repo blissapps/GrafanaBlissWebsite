@@ -10,15 +10,6 @@ describe('Preferences tests', () => {
   })
 
   /**
-   * Test if the menu link sends to the correct page and it gets back to the home screen if closed
-   */
-  it('C1234567 Check URL Access Over The Menu', () => {
-    equityAdmin.preferencesPage.checkPageUrl()
-    equityAdmin.profileMenuNavBar.closeProfileMenuNavBar()
-    equityAdmin.preferencesPage.checkPageUrl()
-  })
-
-  /**
    * Change language to PORTUGUESE and verify some random texts around the system
    *
    */

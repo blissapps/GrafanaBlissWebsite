@@ -10,14 +10,12 @@ describe('Security tests', () => {
   })
 
   /**
-   * Change password Successfully
+   * Test if the menu link sends to the correct page and it gets back to the home screen if closed
    */
-  it('C1234567 Change Password Successfully', () => {
+  it('C18295658 Check URL Access Over The Menu', () => {
     equityAdmin.securityPage.checkPageUrl()
-    equityAdmin.securityPage.changePassword('test', 'test')
+    equityAdmin.securityPage.assertHeaderIsDisplayedCorrectly(true, 'Security')
+    equityAdmin.profileMenuNavBar.closeProfileMenuNavBar()
+    equityAdmin.securityPage.checkPageUrl()
   })
-
-  /**
-   * Change password Unsuccessfully
-   */
 })

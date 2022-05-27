@@ -4,7 +4,8 @@ const selectors = {
   englishCard: '#langCarden-US',
   portugueseCard: '#langCardpt',
   chineseCard: '#langCardzh-chs',
-  japaneseCard: '#langCardja'
+  japaneseCard: '#langCardja',
+  preferencesHeader: '#preferencesHeader'
 }
 
 const properties = {
@@ -17,6 +18,23 @@ class PreferencesPage extends BasePage {
    */
   checkPageUrl() {
     this.checkUrl(properties.pageURL)
+  }
+
+  // -----------------------------------------------------------------------------  ASSERTIONS ---------------------------------------------------------------------- //
+
+  /**
+   * Assert if the Preferences header is displayed correctly
+   *
+   * @param {boolean} displayed True is the default value to validate with the header is displayed. False to validate the otherwise
+   * @param {string} textToValidate Send a text to validate the text displayed in the header
+   */
+  assertHeaderIsDisplayedCorrectly(displayed = true, textToValidate = '') {
+    if (displayed) {
+      cy.get(selectors.preferencesHeader).should('be.visible')
+      textToValidate != '' ? cy.get(selectors.preferencesHeader).should('have.text', textToValidate) : null
+    } else {
+      cy.get(selectors.preferencesHeader).should('not.exist')
+    }
   }
 
   // --------------------------------------------------------------------------------  OTHERS ----------------------------------------------------------------------- //

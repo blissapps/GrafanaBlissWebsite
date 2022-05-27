@@ -3,27 +3,24 @@ import EquityAdmin from '../../../support/pages/equityAdmin'
 const equityAdmin = new EquityAdmin()
 
 describe('Personal Information tests', () => {
-  beforeEach(() => {
-    equityAdmin.loginPage.login()
-    equityAdmin.applicationLeftMenuBar.openProfileMenuBar()
-    equityAdmin.profileMenuNavBar.openProfilePersonalInformationPage()
-  })
+  it.only('C1234567 Edit Personal Information', () => {
+    const userEmailForLogin = 'userForEditProfilePurposes@globalshares.com'
+    const userName = 'User Edit Profile'
+    const userContact = '+353 000000000'
+    const userEmail = 'userEditProfile@globalshares.com'
+    const newUserName = 'The name was changed'
+    const newUserContact = '+1 555555555'
+    const newUserEmail = 'emailChanged@globalshares.com'
 
-  /**
-   * Test if the menu link sends to the correct page and it gets back to the home screen if closed
-   */
-  it('C1234567 Check URL Access Over The Menu', () => {
-    equityAdmin.personalInformationPage.checkPageUrl()
-    equityAdmin.profileMenuNavBar.closeProfileMenuNavBar()
-    equityAdmin.personalInformationPage.checkPageUrl()
-  })
-
-  /**
-   * Edit personal information by sending name, contact number, and email
-   */
-  it('C1234567 Edit Personal Information', () => {
-    // Login with another user to not mix things up
-    equityAdmin.personalInformationPage.editPersonalInfo('Test name', '+1 555555555', 'editedEmail@gmail.com')
+    equityAdmin.loginPage.login(userEmailForLogin)
+    equityAdmin.homePage.navigateToUrl('/profile/personal-information')
+    equityAdmin.personalInformationPage.assertPersonalInfoDisplayed(userName, userContact, userEmail)
+    equityAdmin.personalInformationPage.editPersonalInfo(newUserName, newUserContact, newUserEmail)
     equityAdmin.personalInformationPage.reloadPage()
+    equityAdmin.personalInformationPage.assertPersonalInfoDisplayed(newUserName, newUserContact, newUserEmail)
+    equityAdmin.profileMenuNavBar.logout()
+    equityAdmin.loginPage.login(userEmailForLogin)
+    equityAdmin.homePage.navigateToUrl('/profile/personal-information')
+    equityAdmin.personalInformationPage.assertPersonalInfoDisplayed(newUserName, newUserContact, newUserEmail)
   })
 })

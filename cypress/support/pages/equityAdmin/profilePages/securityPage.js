@@ -3,7 +3,8 @@ import BasePage from '../../basePage'
 const selectors = {
   currentPasswordInput: '#currentPassword input',
   newPasswordInput: '#newPassword input',
-  confirmChangeButton: '#confirmChange'
+  confirmChangeButton: '#confirmChange',
+  securityHeader: '#securityHeader'
 }
 
 const properties = {
@@ -16,6 +17,23 @@ class SecurityPage extends BasePage {
    */
   checkPageUrl() {
     this.checkUrl(properties.pageURL)
+  }
+
+  // -----------------------------------------------------------------------------  ASSERTIONS ---------------------------------------------------------------------- //
+
+  /**
+   * Assert if the Security header is displayed correctly
+   *
+   * @param {boolean} displayed True is the default value to validate with the header is displayed. False to validate the otherwise
+   * @param {string} textToValidate Send a text to validate the text displayed in the header
+   */
+  assertHeaderIsDisplayedCorrectly(displayed = true, textToValidate = '') {
+    if (displayed) {
+      cy.get(selectors.securityHeader).should('be.visible')
+      textToValidate != '' ? cy.get(selectors.securityHeader).should('have.text', textToValidate) : null
+    } else {
+      cy.get(selectors.securityHeader).should('not.exist')
+    }
   }
 
   // --------------------------------------------------------------------------------  OTHERS ----------------------------------------------------------------------- //
