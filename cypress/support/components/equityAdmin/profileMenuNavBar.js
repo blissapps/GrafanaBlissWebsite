@@ -29,18 +29,9 @@ class ProfileMenuNavBar extends BasePage {
   // ----------------------------------------------------------------------------------- OTHERS  ---------------------------------------------------------------------------- //
 
   /**
-   * Logout command through the application UI
+   * Logout command through the application UI by clicking in the 'Sing Out' button
    */
-  logout() {
-    cy.get(selectors.profileLargeAvatar).then(($avatar) => {
-      if ($avatar.is(':visible')) {
-        cy.log('Menu is already open, moving on...')
-      } else {
-        cy.get('#profile-item').as('avatarBtn')
-        cy.get('@avatarBtn').click()
-        cy.forcedWait(500) // avoid element detached from the DOM. See https://github.com/cypress-io/cypress/issues/7306
-      }
-    })
+  clickToSignOut() {
     cy.get('#logoutButton').click()
   }
 

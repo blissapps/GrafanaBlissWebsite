@@ -27,7 +27,8 @@ describe('Login and Logout tests', { tags: ['@smoke'] }, () => {
     equityAdmin.loginPage.loginWithoutSession()
     cy.waitForHomeSystemInitializedApiCalls()
     equityAdmin.homePage.checkUrl('/home')
-    equityAdmin.profileMenuNavBar.logout()
+    equityAdmin.applicationLeftMenuBar.openProfileMenuBar()
+    equityAdmin.profileMenuNavBar.clickToSignOut()
 
     equityAdmin.loginPage.checkUrl('/Account/Log')
   })
@@ -37,7 +38,8 @@ describe('Login and Logout tests', { tags: ['@smoke'] }, () => {
     equityAdmin.loginPage.loginWithoutSession()
     cy.waitForHomeSystemInitializedApiCalls()
     equityAdmin.homePage.checkUrl('/home')
-    equityAdmin.profileMenuNavBar.logout()
+    equityAdmin.applicationLeftMenuBar.openProfileMenuBar()
+    equityAdmin.profileMenuNavBar.clickToSignOut()
 
     equityAdmin.loginPage.checkUrl('/Account/Log')
     equityAdmin.loginPage.goBackOrForwardInBrowser('back')
