@@ -20,7 +20,7 @@ class LoginPage extends BasePage {
   login(email = Cypress.env('DEFAULT_USER_AUTH'), password = Cypress.env('DEFAULT_PASSWORD_AUTH')) {
     cy.interceptHomeSystemInitializedAPICalls()
     this.loginWithSession(email, password)
-    cy.visit('/') && cy.reload()
+    cy.visit('/')
     cy.waitForHomeSystemInitializedApiCalls()
   }
 
