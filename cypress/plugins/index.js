@@ -21,10 +21,14 @@ const exec = require('child_process').execSync
  * @type {Cypress.PluginConfig}
  */
 module.exports = (on, config) => {
+  console.log('Initializing module settings')
+  console.log('============================')
+
   require('cypress-grep/src/plugin')(config)
 
   on('before:browser:launch', (launchOptions, browser = {}) => {
     if (browser.family === 'chromium') {
+      console.log('+++ Modifying chromium settings +++')
       launchOptions.args.push(
         '--ignore-certificate-errors',
         '--disable-gpu',
@@ -34,7 +38,6 @@ module.exports = (on, config) => {
         '--proxy-server="direct://"',
         '--proxy-bypass-list=*'
       )
-      // launchOptions.args.push("--ignore-certificate-errors", "--disable-gpu", "--window-size=1920,1080", "--start-maximized", "--no-sandbox")
 
       return launchOptions
     }
