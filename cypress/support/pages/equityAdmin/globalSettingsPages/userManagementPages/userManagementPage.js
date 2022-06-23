@@ -32,10 +32,9 @@ class UserManagementPage extends BaseManagementPage {
    * @example send userId = 454292 to select this user from the table
    */
   getUserInTable(userId) {
-    return cy
-      .get(selectors.user + userId + ' gs-grid-cell')
-      .first()
-      .scrollIntoView()
+    cy.get(selectors.user + userId + ' gs-grid-cell').as('userInTable') //doing this to avoid the element detached, we can refactor it when Cypress solve this issue
+
+    return cy.get('@userInTable').first().scrollIntoView()
   }
 
   // ---------------------------------------------------------------------------------------- CLICKS --------------------------------------------------------------------------- //
@@ -47,7 +46,8 @@ class UserManagementPage extends BaseManagementPage {
    *
    */
   clickUserTable(userId) {
-    this.getUserInTable(userId).click('left')
+    this.getUserInTable(userId).as('clickUserTable') //doing this to avoid the element detached, we can refactor it when Cypress solve this issue
+    cy.get('@clickUserTable').click('left')
   }
 
   // ------------------------------------------------------------------------------------- ASSERTIONS  --------------------------------------------------------------------------- //
