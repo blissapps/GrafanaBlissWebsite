@@ -70,6 +70,7 @@
     "junit-report-merger": "3.0.5",
     "cypress-mochawesome-reporter": "3.0.1",
     "cypress-recurse": "1.19.0",
-    "cypress-real-events": "1.7.0"
+    "cypress-real-events": "1.7.0",
+    "husky": "8.0.1"
   }
 }
