@@ -1414,10 +1414,10 @@ cypress-iframe@1.0.1:
   resolved "https://registry.yarnpkg.com/cypress-iframe/-/cypress-iframe-1.0.1.tgz#2a286cfd47a240aa9af0ad9f339f4c6f942089f8"
   integrity sha512-Ne+xkZmWMhfq3x6wbfzK/SzsVTCrJru3R3cLXsoSAZyfUtJDamXyaIieHXeea3pQDXF4wE2w4iUuvCYHhoD31g==
 
-cypress-mochawesome-reporter@3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/cypress-mochawesome-reporter/-/cypress-mochawesome-reporter-3.1.0.tgz#3f3f111a5d05d851cbd8434c72cecc0c5ecf5347"
-  integrity sha512-hwk5WSIiIqJTp0yEtXpqt0pP5SZMw/yDe/X4X2X5PhcYS4Dw0DfDvHlPwF4Z/tnPf4/QCJ4Q/0+MGmwCd0iBZA==
+cypress-mochawesome-reporter@3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/cypress-mochawesome-reporter/-/cypress-mochawesome-reporter-3.2.0.tgz#4e335b674973bd0d5bbfa3e8ff1229b98df0bba3"
+  integrity sha512-2cTKgjQmmCdNvMTca1ieCcfF8fFih7Ums/iJxqXpN9RCIE/4wIGzwjmEDDNgRm+SyGOUac6EdfAVe48S82Bw0Q==
   dependencies:
     fs-extra "^10.0.1"
     mochawesome "^7.1.3"
