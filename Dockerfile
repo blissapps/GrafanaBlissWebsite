@@ -1,6 +1,5 @@
 # Pull image
-FROM cypress/browsers:node16.5.0-chrome94-ff93
-FROM cypress/browsers:node14.10.1-edge88
+FROM node16.14.2-slim-chrome100-ff99-edge
 
 # Creating a directory inside container
 RUN mkdir /testApp

@@ -287,6 +287,10 @@ describe('Data Access Profiles tests over User Management settings', () => {
       equityAdmin.dapManagementPage.assertNoResultFoundIsVisible()
     })
 
+    /**
+     * @bug_raised
+     * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-1291
+     */
     it('C16767641 DAP- Duplicate a Data Access Profile', () => {
       const dapId = 22
       const dapName = 'QA 2'
@@ -300,7 +304,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
       equityAdmin.dapManagementPage.clickToDuplicateEntity()
 
       // Duplicated DAP editions
-      equityAdmin.dapManagementPage.assertEntityIsFocused()
+      // equityAdmin.dapManagementPage.assertEntityIsFocused() // Uncomment this line as soon as the PB-1291 is fixed
       equityAdmin.dapManagementPage.assertEntityHeaderIsDisplayedAsExpected('Copy Of ' + dapName)
       equityAdmin.dapManagementPage.assertConditionsContainerDisplayedAsExpected()
       equityAdmin.dapManagementPage.modifyEntityName(newDapName)

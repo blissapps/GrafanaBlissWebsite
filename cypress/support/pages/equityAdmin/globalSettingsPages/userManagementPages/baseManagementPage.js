@@ -9,9 +9,8 @@ const selectors = {
   otherItem: '#otherItem_',
   noResultsFound: '#emptyRecordCount',
   noRecordsFoundEmptyState: 'gs-empty-container[data-test-id="list-empty-container"] .content > div',
-  entityNameInput: 'gs-input-inline[data-test-id=name-input]',
-  entityNameInputEditable: 'gs-input-inline[data-test-id=name-input][contenteditable]',
-  entityNameInputNotEditable: 'gs-input-inline[data-test-id=name-input][class*="disabled"]',
+  entityNameInput: 'gs-input-inline[data-test-id=name-input] input',
+  entityNameInputNotEditable: 'gs-input-inline[data-test-id=name-input] input[disabled]',
   saveBtn: 'gs-button[data-test-id=save-button]',
   discardBtn: 'gs-button[data-test-id=discard-button]',
   showAllDapsBtn: '*[data-test-id=section-dap] gs-button[data-test-id=show-all]',
@@ -193,7 +192,7 @@ class BaseManagementPage extends BasePage {
     cy.get('@header').should('be.visible')
 
     if (headerText != '') {
-      cy.get('@header').should('contain.text', headerText)
+      cy.get('@header').should('have.value', headerText)
     }
   }
 
@@ -352,7 +351,7 @@ class BaseManagementPage extends BasePage {
    * @param {boolean} editable True is the default value to assert the entity name is editable, false otherwise
    */
   assertEntityNameEditable(editable = true) {
-    editable ? cy.get(selectors.entityNameInputEditable).scrollIntoView().should('be.visible') : cy.get(selectors.entityNameInputNotEditable).scrollIntoView().should('be.visible')
+    editable ? cy.get(selectors.entityNameInput).scrollIntoView().should('be.visible') : cy.get(selectors.entityNameInputNotEditable).scrollIntoView().should('be.visible')
   }
 
   /**
@@ -394,7 +393,7 @@ class BaseManagementPage extends BasePage {
   modifyEntityName(entityName) {
     this.getEntityHeader().as('input')
 
-    cy.get('@input').clear({ force: true })
+    cy.get('@input').type('{selectall}{backspace}{selectall}{backspace}') // clear({ force: true }) not working
 
     if (entityName != '') {
       cy.get('@input').type(entityName).blur() // remove focus from element

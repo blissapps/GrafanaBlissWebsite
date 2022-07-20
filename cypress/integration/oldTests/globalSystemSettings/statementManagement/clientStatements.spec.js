@@ -18,11 +18,7 @@ describe('Statement Management - Client Statements tests', () => {
     // Test scroll not possible because of the Angular page that does not scroll correctly with JS commands.
   })
 
-  /**
-   * @bug_raised
-   * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-1040
-   */
-  it.skip('C7353833_Use_Filter_To_Search_For_Client_Statements', () => {
+  it('C7353833_Use_Filter_To_Search_For_Client_Statements', () => {
     // name and date
     const clientStatementName = 'TomTom'
     const dateFrom = '20190301'

@@ -29,7 +29,7 @@ describe('User Management settings - User, Group, Role, and DAP', () => {
       // User
       equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'user')
       equityAdmin.userManagementPage.checkPageUrl()
-      // userManagementPage.assertViewOnlyBadgeDisplayed() // Uncomment this line as soon as the PB-1005 is fixed
+      // equityAdmin.userManagementPage.assertViewOnlyBadgeDisplayed() // Uncomment this line as soon as the PB-1005 is fixed
 
       // Group
       equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'group', false)
