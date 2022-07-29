@@ -42,6 +42,38 @@ describe('Role Management tests over User Management settings', () => {
       equityAdmin.roleManagementPage.assertOtherGroupListDisplayed()
     })
 
+    it('C20975190 Roles - Happy Path for searching multiple string in low and up cases', () => {
+      const roleIdToBeSearched = [1522]
+      const roleNamesToSearch = ['Role to be SeaRchED', 'role to be searched', 'ROLE TO BE SEARCHED', 'Role TO Be SearChED', 'role to be searcheD', 'Role to be searched']
+
+      equityAdmin.roleManagementPage.assertNoRoleSelectedMessageIsDisplayed()
+
+      // 1 - Without cleaning the field after each search
+      roleNamesToSearch.forEach((roleName) => {
+        equityAdmin.searchEngine.search(roleName)
+        equityAdmin.roleManagementPage.assertAmountOfSearchResultsInTheList(1)
+        equityAdmin.roleManagementPage.assertAndCountNumberOfSearchResults(1)
+        equityAdmin.roleManagementPage.assertSearchResultListAccuracy(roleIdToBeSearched)
+        equityAdmin.roleManagementPage.assertOtherGroupListDisplayed()
+        equityAdmin.roleManagementPage.assertAllSearchResultItemsAreDisplayedInHighlightedMode()
+      })
+
+      equityAdmin.searchEngine.clearSearchBoxByXIcon()
+      equityAdmin.roleManagementPage.assertCreateNewRoleButtonDisplayed() // Make sure the search is clean
+
+      // 2 - Cleaning the field after each search
+      roleNamesToSearch.forEach((roleName) => {
+        equityAdmin.searchEngine.search(roleName)
+        equityAdmin.roleManagementPage.assertAmountOfSearchResultsInTheList(1)
+        equityAdmin.roleManagementPage.assertAndCountNumberOfSearchResults(1)
+        equityAdmin.roleManagementPage.assertSearchResultListAccuracy(roleIdToBeSearched)
+        equityAdmin.roleManagementPage.assertOtherGroupListDisplayed()
+        equityAdmin.roleManagementPage.assertAllSearchResultItemsAreDisplayedInHighlightedMode()
+        equityAdmin.searchEngine.clearSearchBoxByXIcon()
+        equityAdmin.roleManagementPage.assertCreateNewRoleButtonDisplayed() // Make sure the search is clean
+      })
+    })
+
     it('C17067413 Successful and Unsuccessful search (Inactive Tab)', () => {
       const rolesIdActiveTab = [1500, 1501]
 
