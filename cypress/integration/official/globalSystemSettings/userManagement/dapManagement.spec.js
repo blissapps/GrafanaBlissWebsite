@@ -8,6 +8,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
   context('Tenant 1 settings over menu settings', () => {
     beforeEach(() => {
       equityAdmin.loginPage.login()
+      equityAdmin.applicationLeftMenuBar.openSettingsMenuBar()
       equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'dap')
       equityAdmin.dapManagementPage.checkPageUrl()
     })

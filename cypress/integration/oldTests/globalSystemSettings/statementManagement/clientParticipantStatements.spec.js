@@ -5,7 +5,8 @@ const equityAdmin = new EquityAdmin()
 describe('Statement Management - Participant Statements tests', () => {
   beforeEach(() => {
     equityAdmin.loginPage.login()
-    equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('statement')
+    equityAdmin.applicationLeftMenuBar.openSettingsMenuBar()
+    equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('statement', '')
     equityAdmin.clientStatementsPage.checkPageUrl()
   })
 

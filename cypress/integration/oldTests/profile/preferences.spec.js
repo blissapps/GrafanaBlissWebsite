@@ -22,7 +22,8 @@ describe('Preferences tests', () => {
     equityAdmin.applicationLeftMenuBar.getElementByText('Gestão de Declaração').should('be.visible')
     equityAdmin.settingsMenuNavBar.closeGlobalSettingsNavBar()
 
-    equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user')
+    equityAdmin.applicationLeftMenuBar.openSettingsMenuBar()
+    equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', '')
     equityAdmin.applicationLeftMenuBar.getElementByText('Gestão de Utilizadores').should('be.visible')
     equityAdmin.applicationLeftMenuBar.getElementByText('Gestão de Grupos').should('be.visible')
     equityAdmin.applicationLeftMenuBar.getElementByText('Gestão de Funções').should('be.visible')

@@ -28,6 +28,7 @@ describe.skip('Mock examples tests', () => {
     it('Mocking users', () => {
       cy.intercept('GET', '/api/Users?tenantId=**count=true', { fixture: 'examples/usersMockExample.json' }).as('USERS')
 
+      equityAdmin.applicationLeftMenuBar.openSettingsMenuBar()
       equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'user')
       equityAdmin.userManagementPage.checkPageUrl()
       cy.contains('Mocked User for testing - 1')

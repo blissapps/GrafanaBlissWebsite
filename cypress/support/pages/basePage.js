@@ -204,8 +204,30 @@ class BasePage {
         listOrdered = listOrdered.sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' })) //Not consider case sensitive, so this is a personalized sort
         cy.log('List Displayed: ' + listDisplayed.slice().toString())
         cy.log('List Ordered: ' + listOrdered.toString())
-        expect(JSON.stringify(listOrdered) === JSON.stringify(listDisplayed), 'List is not ordered').to.be.true
+        expect(JSON.stringify(listOrdered) === JSON.stringify(listDisplayed), 'Asserting if list is ordered').to.be.true
         cy.log('List is alphabetically ordered')
+      })
+  }
+
+  /**
+   * Assert the elements in a locator are not duplicated. For example, you can send the locator contains ids and the method will verify if the ids are unique
+   *
+   * @param {object} locator Object locator containing many elements
+   */
+  assertNoDuplicatesOnList(locator) {
+    const listToBeVerified = []
+
+    cy.get(locator)
+      .each(($el, index) => {
+        cy.wrap($el)
+          .invoke('text')
+          .then((text) => {
+            listToBeVerified.push(text)
+            cy.log('Element added in the list: ' + listToBeVerified[index])
+          })
+      })
+      .then(() => {
+        expect(new Set(listToBeVerified).size !== listToBeVerified.length, 'Asserting duplicated values in an array').to.be.false
       })
   }
 

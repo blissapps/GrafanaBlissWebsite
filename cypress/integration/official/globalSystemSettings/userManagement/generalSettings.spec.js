@@ -9,6 +9,7 @@ describe('User Management settings - User, Group, Role, and DAP', () => {
     })
 
     it('C18116624 Check the system behavior when closing the settings nav bar', () => {
+      equityAdmin.applicationLeftMenuBar.openSettingsMenuBar()
       equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'user')
       equityAdmin.userManagementPage.checkPageUrl()
       equityAdmin.settingsMenuNavBar.closeGlobalSettingsNavBar()
@@ -27,22 +28,23 @@ describe('User Management settings - User, Group, Role, and DAP', () => {
      */
     it('C18116625 Assert View Only Status Badge Displayed Next To Settings Titles', () => {
       // User
+      equityAdmin.applicationLeftMenuBar.openSettingsMenuBar()
       equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'user')
       equityAdmin.userManagementPage.checkPageUrl()
       // equityAdmin.userManagementPage.assertViewOnlyBadgeDisplayed() // Uncomment this line as soon as the PB-1005 is fixed
 
       // Group
-      equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'group', false)
+      equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'group')
       equityAdmin.groupManagementPage.checkPageUrl()
       equityAdmin.groupManagementPage.assertViewOnlyBadgeDisplayed()
 
       // Role
-      equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'role', false)
+      equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'role')
       equityAdmin.roleManagementPage.checkPageUrl()
       equityAdmin.roleManagementPage.assertViewOnlyBadgeDisplayed()
 
       // DAP
-      equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'dap', false)
+      equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'dap')
       equityAdmin.dapManagementPage.checkPageUrl()
       equityAdmin.dapManagementPage.assertViewOnlyBadgeDisplayed()
     })

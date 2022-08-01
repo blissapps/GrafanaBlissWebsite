@@ -1,5 +1,4 @@
 import BasePage from '../../pages/basePage'
-import ApplicationLeftMenuBar from './applicationLeftMenuBar'
 
 const selectors = {
   clientSwitchButton: '#clientSwitchClick',
@@ -11,14 +10,16 @@ const selectors = {
 const globalSettingsMenuSelectors = {
   userManagementMenuItem: '#userManagementItem',
   statementManagementMenuItem: '#statementManagementItem',
+  regulatoryManagementItem: '#regulatoryManagementItem',
   userManagementSubMenuItem: '#userManagementChild',
   groupManagementSubMenuItem: '#groupManagementChild',
   roleManagementSubMenuItem: '#roleManagementChild',
   dapSubMenuItem: '#dapManagementChild',
+  frameworkManagementSubMenuItem: 'a[href="/regulatory/frameworks"]',
+  frameworkByClientSubMenuItem: 'a[href="/regulatory/clients"]',
+  regulatoryFrameworkSetupSubMenuItem: 'a[href="/regulatory/framework-setup"]',
   backButton: '#navBarReturn'
 }
-
-const applicationLeftMenuNavBar = new ApplicationLeftMenuBar()
 
 class SettingsMenuNavBar extends BasePage {
   // -------------------------------------------------------------------------------------- CLICKS  ----------------------------------------------------------------------------- //
@@ -98,52 +99,80 @@ class SettingsMenuNavBar extends BasePage {
   /**
    * Navigation menu
    *
-   * @param {string} item Main menu item, available options are: user, statement
-   * @param {string} subItem Submenu item if available. If not, passes nothing like the examples provided
-   * @param {boolean} openLeftBar True is the default value to open the left bar. Send False in case it is already open
+   * @param {string} item Main menu item, available options are: user, statement, or regulatory. You cam send "" in case the menu is already open.
+   * @param {string} subItem Submenu item to be selected.
    *
    * @example: accessGlobalSettingsMenu("user", "dap")
-   * @example: accessGlobalSettingsMenu("statement")
+   * @example: accessGlobalSettingsMenu("regulatory", "framework management")
    *
    */
-  accessGlobalSettingsMenu(item, subItem = '', openLeftBar = true) {
+  accessGlobalSettingsMenu(item, subItem) {
     item = item.toLowerCase()
     subItem = subItem.toLowerCase()
 
-    openLeftBar ? applicationLeftMenuNavBar.openSettingsMenuBar() : true
+    if (item != '') {
+      switch (item) {
+        case 'user':
+          cy.get(globalSettingsMenuSelectors.userManagementMenuItem).as('btnMenu')
+          break
 
-    // Menus
-    if (item === 'user') {
-      cy.get(globalSettingsMenuSelectors.userManagementMenuItem).as('btnMenu')
+        case 'statement':
+          cy.get(globalSettingsMenuSelectors.statementManagementMenuItem).as('btnMenu')
+          break
+
+        case 'regulatory':
+          cy.get(globalSettingsMenuSelectors.regulatoryManagementItem).as('btnMenu')
+          break
+
+        default:
+          throw new Error('Option for menu is invalid. Menus can be "user", "statement", "regulatory", or "" in case the menu is already open')
+      }
+
       cy.get('@btnMenu').click()
-    } else if (item === 'statement') {
-      cy.get(globalSettingsMenuSelectors.statementManagementMenuItem).as('btnMenu')
-      cy.get('@btnMenu').click()
+    } else {
+      cy.log('Main menu already selected, moving on...')
     }
 
-    // Submenu inside a menu
+    // Submenus
     if (subItem != '') {
       switch (subItem) {
+        // User Management cases
         case 'user':
           cy.get(globalSettingsMenuSelectors.userManagementSubMenuItem).as('btnSubMenu')
-          cy.get('@btnSubMenu').click()
           break
 
         case 'group':
           cy.get(globalSettingsMenuSelectors.groupManagementSubMenuItem).as('btnSubMenu')
-          cy.get('@btnSubMenu').click()
           break
 
         case 'role':
           cy.get(globalSettingsMenuSelectors.roleManagementSubMenuItem).as('btnSubMenu')
-          cy.get('@btnSubMenu').click()
           break
 
         case 'dap':
           cy.get(globalSettingsMenuSelectors.dapSubMenuItem).as('btnSubMenu')
-          cy.get('@btnSubMenu').click()
           break
+
+        // Regulatory Setup cases
+        case 'framework management':
+          cy.get(globalSettingsMenuSelectors.frameworkManagementSubMenuItem).as('btnSubMenu')
+          break
+
+        case 'framework by client':
+          cy.get(globalSettingsMenuSelectors.frameworkByClientSubMenuItem).as('btnSubMenu')
+          break
+
+        case 'regulatory framework setup':
+          cy.get(globalSettingsMenuSelectors.regulatoryFrameworkSetupSubMenuItem).as('btnSubMenu')
+          break
+
+        default:
+          throw new Error('Option invalid for this subMenu.')
       }
+
+      cy.get('@btnSubMenu').click()
+    } else {
+      cy.log('A submenu item was not given, moving on...')
     }
   }
 

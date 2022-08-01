@@ -7,7 +7,8 @@ const utils = new Utils()
 describe('Statement Management - Client Statements tests', () => {
   beforeEach(() => {
     equityAdmin.loginPage.login()
-    equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('statement')
+    equityAdmin.applicationLeftMenuBar.openSettingsMenuBar()
+    equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('statement', '')
     equityAdmin.clientStatementsPage.checkPageUrl()
   })
 

@@ -5,7 +5,8 @@ const equityAdmin = new EquityAdmin()
 describe('Statement Management - Participant Regulatory Linkage tests', () => {
   beforeEach(() => {
     equityAdmin.loginPage.login()
-    equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('statement')
+    equityAdmin.applicationLeftMenuBar.openSettingsMenuBar()
+    equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('statement', '')
     equityAdmin.clientStatementsPage.clickTab('participant regulatory linkage')
     equityAdmin.participantRegulatoryLinkagePage.checkPageUrl()
   })

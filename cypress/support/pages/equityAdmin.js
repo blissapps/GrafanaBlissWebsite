@@ -26,7 +26,7 @@ import PersonalInformationPage from './equityAdmin/profilePages/personalInformat
 import PreferencesPage from './equityAdmin/profilePages/preferencesPage'
 import SecurityPage from './equityAdmin/profilePages/securityPage'
 
-// People Participants
+// People - Client and Participants
 import ClientPeoplePage from './equityAdmin/clientPeoplePages/clientPeoplePage'
 import QuickEditParticipantDetailL4Page from './equityAdmin/clientPeoplePages/quickEditParticipantDetailL4Page'
 import PersonalProfileOverviewPage from './equityAdmin/clientPeoplePages/peopleParticipantPages/personalProfilePages/personalProfileOverviewPage'
@@ -35,6 +35,14 @@ import CompanyProfileOverviewPage from './equityAdmin/clientPeoplePages/peoplePa
 import PrimarySettingsSalesPage from './equityAdmin/clientPeoplePages/peopleParticipantPages/primarySettingsPages/primarySettingsSalesPage'
 import SaleAndDividendPage from './equityAdmin/clientPeoplePages/peopleParticipantPages/saleAndDividendPage'
 import TaxAndCommissionPage from './equityAdmin/clientPeoplePages/peopleParticipantPages/taxAndCommissionPage'
+
+// Regulatory Setup
+import FrameworkManagementPage from './equityAdmin/globalSettingsPages/regulatorySetupPages/frameworkManagementPages/frameworkManagementPage'
+import FrameworkByClientNotLinkedPage from './equityAdmin/globalSettingsPages/regulatorySetupPages/frameworkByClientPages/frameworkByClientNotLinkedPage'
+import FrameworkByClientLinkedPage from './equityAdmin/globalSettingsPages/regulatorySetupPages/frameworkByClientPages/frameworkByClientLinkedPage'
+import BrokerDealersPage from './equityAdmin/globalSettingsPages/regulatorySetupPages/regulatoryFrameworkSetupPages/brokerDealersPage'
+import RegulatoryAuthoritiesPage from './equityAdmin/globalSettingsPages/regulatorySetupPages/regulatoryFrameworkSetupPages/regulatoryAuthoritiesPage'
+import CorporateFilingProgramsPage from './equityAdmin/globalSettingsPages/regulatorySetupPages/regulatoryFrameworkSetupPages/corporateFilingProgramsPage'
 
 // Others
 import LoginPage from './equityAdmin/loginPage'
@@ -87,6 +95,14 @@ class EquityAdmin {
     this.primarySettingsSalesPage = new PrimarySettingsSalesPage()
     this.saleAndDividendPage = new SaleAndDividendPage()
     this.taxAndCommissionPage = new TaxAndCommissionPage()
+
+    // Regulatory Setup
+    this.frameworkManagementPage = new FrameworkManagementPage()
+    this.frameworkByClientNotLinkedPage = new FrameworkByClientNotLinkedPage()
+    this.frameworkByClientLinkedPage = new FrameworkByClientLinkedPage()
+    this.brokerDealersPage = new BrokerDealersPage()
+    this.regulatoryAuthoritiesPage = new RegulatoryAuthoritiesPage()
+    this.corporateFilingProgramsPage = new CorporateFilingProgramsPage()
 
     // Others
     this.loginPage = new LoginPage()

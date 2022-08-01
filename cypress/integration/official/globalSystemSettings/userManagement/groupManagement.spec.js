@@ -85,7 +85,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertToolTipDisplayedWithText('Remove Client')
 
       // Group
-      equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'dap', false)
+      equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'dap')
       equityAdmin.dapManagementPage.clickDapById(dapId)
       equityAdmin.groupManagementPage.hoverMouseOverRemoveIcon(groupId)
       equityAdmin.groupManagementPage.assertToolTipDisplayedWithText('Remove group')
@@ -152,7 +152,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved')
 
       // Validates user is linked to the group over User Management settings - L4 page
-      equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'user', false)
+      equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'user')
       equityAdmin.searchEngine.search(userName[0])
       equityAdmin.userManagementPage.clickUserTable(userId[0])
       equityAdmin.userDetailL4Page.clickToAccessUserInfoDetails()
@@ -221,7 +221,7 @@ describe('Group Management tests over User Management settings', () => {
       equityAdmin.groupManagementPage.assertToastNotificationMessageIsDisplayed(groupName + ' Saved', true, true)
 
       // Validates user is NOT linked to the group over User Management settings - L4 page
-      equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'user', false)
+      equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'user')
       equityAdmin.searchEngine.search(userName[0])
       equityAdmin.userManagementPage.clickUserTable(userId[0])
       equityAdmin.userDetailL4Page.clickToAccessUserInfoDetails()
@@ -323,7 +323,8 @@ describe('Group Management tests over User Management settings', () => {
 
     it('C16587448 List All Groups - No access to Group Management area', () => {
       equityAdmin.loginPage.login('DPikurs@globalshares.com')
-      equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user')
+      equityAdmin.applicationLeftMenuBar.openSettingsMenuBar()
+      equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', '')
 
       equityAdmin.settingsMenuNavBar.assertGroupSubMenuItemDisplayed(false)
 
