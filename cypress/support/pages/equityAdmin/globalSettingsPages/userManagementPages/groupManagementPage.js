@@ -519,19 +519,19 @@ class GroupManagementPage extends BaseManagementPage {
   createGroup(groupName, roleName = '', roleId = 0, dapNames = [], dapIds = [], userNames = [], userIds = [], companyNames = [], companyIds = [], saveChanges = true) {
     // ********* Validating if the data is consistent *********** //
     // DAPs
-    if (dapNames.length == dapIds.length) {
+    if (dapNames.length === dapIds.length) {
       cy.log('Daps are valid, moving on...')
     } else {
       throw new Error('Dap names and Dap ids need to have the same length')
     }
     // Users
-    if (userNames.length == userIds.length) {
+    if (userNames.length === userIds.length) {
       cy.log('Users are valid, moving on...')
     } else {
       throw new Error('User names and User ids need to have the same length')
     }
     // Companies
-    if (companyNames.length == companyIds.length) {
+    if (companyNames.length === companyIds.length) {
       cy.log('Companies are valid, moving on...')
     } else {
       throw new Error('Company names and Company ids need to have the same length')
