@@ -231,7 +231,7 @@ class ClientStatementsPage extends BaseStatementManagementPage {
     // Make sure the data is consistent
     if (noSecurityConsidered && securityIds.length > 0) {
       throw new Error('It does not make sense to send securityIds and mark the checkbox (noSecurityConsidered as True). Please, choose one option only')
-    } else if (!noSecurityConsidered && securityIds.length == 0) {
+    } else if (!noSecurityConsidered && securityIds.length === 0) {
       throw new Error('In order to reconcile you need to choose to either send securityIds or to click in the checkbox by sending noSecurityConsidered as true')
     }
 

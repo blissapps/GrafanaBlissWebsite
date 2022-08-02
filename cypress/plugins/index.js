@@ -56,7 +56,7 @@ module.exports = (on, config) => {
     const regMasterEnvironmentsToAvoid = ['alpha-23', 'alpha23', '23']
 
     // This routine avoids accidents, so the tests will never be allowed to run in the environments placed in the regMasterEnvironmentsToAvoid variable
-    if (details.config.env.TARGET_ENV == '' || details.config.env.TARGET_ENV == null || details.config.env.TARGET_ENV == undefined) {
+    if (details.config.env.TARGET_ENV === '' || details.config.env.TARGET_ENV === null || details.config.env.TARGET_ENV === undefined) {
       throw new Error('\x1b[31m !!! ************** The TARGET_ENV variable MUST BE PROVIDED in the cypress.env.json file **************************** !!! \x1b[39m')
     } else if (regMasterEnvironmentsToAvoid.includes(details.config.env.TARGET_ENV)) {
       throw new Error(

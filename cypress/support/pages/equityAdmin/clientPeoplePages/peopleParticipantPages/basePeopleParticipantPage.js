@@ -97,7 +97,7 @@ class BasePeopleParticipantPage extends BasePage {
       return cy.get(elementLocator + ' div.message').should('not.exist')
     }
 
-    if (textToBeValidated == '') {
+    if (textToBeValidated === '') {
       cy.get(elementLocator + ' div.message')
         .scrollIntoView()
         .should('be.visible')

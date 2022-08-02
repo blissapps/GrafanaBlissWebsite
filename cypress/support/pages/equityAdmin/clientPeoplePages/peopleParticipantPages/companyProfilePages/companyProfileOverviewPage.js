@@ -146,9 +146,9 @@ class CompanyProfileOverviewPage extends BasePeopleParticipantPage {
     if (relationshipToCompany != '') {
       relationshipToCompany = relationshipToCompany.toLowerCase()
       cy.get(selectors.relationshipToCompanyField).click()
-      if (relationshipToCompany == 'employee') {
+      if (relationshipToCompany === 'employee') {
         cy.get(selectors.optionEmployee).click()
-      } else if (relationshipToCompany == 'non employee') {
+      } else if (relationshipToCompany === 'non employee') {
         cy.get(selectors.optionNonEmployee).click()
       } else {
         throw new Error('Company relationship option not valid. Please, choose a valid option. It can be employee, or non employee')
