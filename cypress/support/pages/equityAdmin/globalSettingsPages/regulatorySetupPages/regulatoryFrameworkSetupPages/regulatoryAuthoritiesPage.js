@@ -21,6 +21,8 @@ class RegulatoryAuthoritiesPage extends BaseRegulatoryFrameworkSetupPage {
     this.checkUrl(properties.pageURL)
   }
 
+  // ----------------------------------------------------------------- ASSERTIONS -------------------------------------------------------------------- //
+
   /**
    * Assert if the expect columns are displayed, which are code, name, country, and regularly program
    */

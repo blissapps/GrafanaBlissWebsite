@@ -38,6 +38,8 @@ import TaxAndCommissionPage from './equityAdmin/clientPeoplePages/peopleParticip
 
 // Regulatory Setup
 import FrameworkManagementPage from './equityAdmin/globalSettingsPages/regulatorySetupPages/frameworkManagementPages/frameworkManagementPage'
+import NewFrameworkPage from './equityAdmin/globalSettingsPages/regulatorySetupPages/frameworkManagementPages/newFrameworkPage'
+import EditFrameworkPage from './equityAdmin/globalSettingsPages/regulatorySetupPages/frameworkManagementPages/editFrameworkPage'
 import FrameworkByClientNotLinkedPage from './equityAdmin/globalSettingsPages/regulatorySetupPages/frameworkByClientPages/frameworkByClientNotLinkedPage'
 import FrameworkByClientLinkedPage from './equityAdmin/globalSettingsPages/regulatorySetupPages/frameworkByClientPages/frameworkByClientLinkedPage'
 import BrokerDealersPage from './equityAdmin/globalSettingsPages/regulatorySetupPages/regulatoryFrameworkSetupPages/brokerDealersPage'
@@ -98,6 +100,8 @@ class EquityAdmin {
 
     // Regulatory Setup
     this.frameworkManagementPage = new FrameworkManagementPage()
+    this.newFrameworkPage = new NewFrameworkPage()
+    this.editFrameworkPage = new EditFrameworkPage()
     this.frameworkByClientNotLinkedPage = new FrameworkByClientNotLinkedPage()
     this.frameworkByClientLinkedPage = new FrameworkByClientLinkedPage()
     this.brokerDealersPage = new BrokerDealersPage()

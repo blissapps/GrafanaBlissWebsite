@@ -20,6 +20,8 @@ class BrokerDealersPage extends BaseRegulatoryFrameworkSetupPage {
     this.checkUrl(properties.pageURL)
   }
 
+  // ----------------------------------------------------------------- ASSERTIONS -------------------------------------------------------------------- //
+
   /**
    * Assert if the expect columns are displayed, which are name, id, and regulatory authority
    */

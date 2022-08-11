@@ -6,6 +6,8 @@ const selectors = {
 }
 
 class BaseFrameworkByClientLinkedPage extends BasePage {
+  // ----------------------------------------------------------------- CLICKS -------------------------------------------------------------------- //
+
   /**
    * Click in the Not Linked tab
    */
@@ -19,6 +21,8 @@ class BaseFrameworkByClientLinkedPage extends BasePage {
   clickLinkedTab() {
     cy.get(selectors.linkedTab).click()
   }
+
+  // ----------------------------------------------------------------- ASSERTIONS -------------------------------------------------------------------- //
 
   /**
    * Assert the number of Not Linked frameworks by checking the tab counter

@@ -7,6 +7,8 @@ const selectors = {
 }
 
 class BaseRegulatoryFrameworkSetupPage extends BasePage {
+  // ----------------------------------------------------------------- CLICKS -------------------------------------------------------------------- //
+
   /**
    * Click in the Broker-Dealers tab
    */
