@@ -355,7 +355,7 @@ class BaseManagementPage extends BasePage {
   }
 
   /**
-   * Checks the amount of records displayed in the table over statements pages
+   * Checks the amount of records displayed in the table over the settings pages (users, roles, groups, or daps)
    *
    * @param {number} records amount of people you want to check in the records
    *

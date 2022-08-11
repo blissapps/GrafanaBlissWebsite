@@ -1,7 +1,7 @@
 import BaseStatementManagementPage from './baseStatementsManagementPage'
 
 const properties = {
-  pageURL: '/statement/clients'
+  pageURL: '/statement/1099/clients'
 }
 
 const selectors = {
