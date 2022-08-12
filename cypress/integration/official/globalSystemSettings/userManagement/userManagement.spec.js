@@ -53,6 +53,9 @@ describe('User Management tests over User Management settings', () => {
       equityAdmin.userManagementPage.assertNoUserExistsMessageIsDisplayed()
     })
 
+    /**
+     * @bug_raised  https://globalshares.atlassian.net/browse/PB-1315 https://globalshares.atlassian.net/browse/PB-1316
+     */
     it('C17344548 User Management details and info L4', () => {
       const username = 'RSaxena@globalshares.com'
       const userId = 5183
