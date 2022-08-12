@@ -1,10 +1,10 @@
-import BaseFrameworkManagementPage from './baseFrameworkManagementPage'
+import BaseNewOrEditFrameworkPage from './baseNewOrEditFrameworkPage'
 
 const properties = {
   pageURL: '/regulatory/frameworks/edit/'
 }
 
-class EditFrameworkPage extends BaseFrameworkManagementPage {
+class EditFrameworkPage extends BaseNewOrEditFrameworkPage {
   /**
    * Checks if the current page is the one in properties.pageURL
    */
