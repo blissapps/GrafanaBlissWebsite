@@ -7,7 +7,8 @@ const properties = {
 const selectors = {
   numberOfSearchResultsInTable: '#recordCount span',
   user: '#user-',
-  noUserExistsMessage: '#noUsersMsg'
+  noUserExistsMessage: '#noUsersMsg',
+  pageHeader: '#userMgmtHeader'
 }
 
 const apiInterceptions = {
@@ -69,6 +70,24 @@ class UserManagementPage extends BaseManagementPage {
    */
   assertNoUserExistsMessageIsDisplayed(displayed = true) {
     displayed ? cy.get(selectors.noUserExistsMessage).should('be.visible') : cy.get(selectors.noUserExistsMessage).should('not.exist')
+  }
+
+  /**
+   * Validate the header for Users is displayed in the page
+   *
+   * @param {string} headerText Send a text if you want to validate the text in the header. Send '' to skip the text validation.
+   * @param {boolean} displayed True is the default value to assert the user header is displayed. Send false to otherwise.
+   */
+  assertUsersPageHeaderDisplayed(headerText = '', displayed = true) {
+    if (displayed) {
+      cy.get(selectors.pageHeader).should('be.visible')
+
+      if (headerText !== '') {
+        cy.get(selectors.pageHeader).should('have.text', headerText)
+      }
+    } else {
+      cy.get(selectors.pageHeader).should('not.exist')
+    }
   }
 
   // --------------------------------------------------------------------------------------  INTERCEPTIONS ---------------------------------------------------------------------------- //

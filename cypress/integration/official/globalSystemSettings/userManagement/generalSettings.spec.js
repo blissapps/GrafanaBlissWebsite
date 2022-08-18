@@ -22,31 +22,31 @@ describe('User Management settings - User, Group, Role, and DAP', () => {
       equityAdmin.loginPage.login('viewonlyuser@globalshares.com')
     })
 
-    /**
-     * @bug_raised
-     * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-1005
-     */
     it('C18116625 Assert View Only Status Badge Displayed Next To Settings Titles', () => {
       // User
       equityAdmin.applicationLeftMenuBar.openSettingsMenuBar()
       equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('user', 'user')
       equityAdmin.userManagementPage.checkPageUrl()
-      // equityAdmin.userManagementPage.assertViewOnlyBadgeDisplayed() // Uncomment this line as soon as the PB-1005 is fixed
+      equityAdmin.userManagementPage.assertUsersPageHeaderDisplayed('Users')
+      equityAdmin.userManagementPage.assertViewOnlyBadgeDisplayed('View Only')
 
       // Group
       equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'group')
       equityAdmin.groupManagementPage.checkPageUrl()
-      equityAdmin.groupManagementPage.assertViewOnlyBadgeDisplayed()
+      equityAdmin.groupManagementPage.assertGroupPageHeaderIsDisplayed('Groups')
+      equityAdmin.groupManagementPage.assertViewOnlyBadgeDisplayed('View Only')
 
       // Role
       equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'role')
       equityAdmin.roleManagementPage.checkPageUrl()
-      equityAdmin.roleManagementPage.assertViewOnlyBadgeDisplayed()
+      equityAdmin.roleManagementPage.assertRolePageHeaderIsDisplayed('Roles')
+      equityAdmin.roleManagementPage.assertViewOnlyBadgeDisplayed('View Only')
 
       // DAP
       equityAdmin.settingsMenuNavBar.accessGlobalSettingsMenu('', 'dap')
       equityAdmin.dapManagementPage.checkPageUrl()
-      equityAdmin.dapManagementPage.assertViewOnlyBadgeDisplayed()
+      equityAdmin.dapManagementPage.assertDapPageHeaderIsDisplayed('Profiles')
+      equityAdmin.dapManagementPage.assertViewOnlyBadgeDisplayed('View Only')
     })
   })
 

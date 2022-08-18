@@ -13,7 +13,7 @@ describe('User Management tests over User Management settings', () => {
     /**
      * @bug_raised  https://globalshares.atlassian.net/browse/PB-1315 https://globalshares.atlassian.net/browse/PB-1316
      */
-    it('C16636881 Search user by username, email, no records and test search behaviors', () => {
+    it.skip('C16636881 Search user by username, email, no records and test search behaviors', () => {
       const username = 'RSaxena@globalshares.com'
       const userEmail = 'APSilva@globalshares.com'
       const userEmail2 = 'test1@test.com'
@@ -56,7 +56,7 @@ describe('User Management tests over User Management settings', () => {
     /**
      * @bug_raised  https://globalshares.atlassian.net/browse/PB-1315 https://globalshares.atlassian.net/browse/PB-1316
      */
-    it('C17344548 User Management details and info L4', () => {
+    it.skip('C17344548 User Management details and info L4', () => {
       const username = 'RSaxena@globalshares.com'
       const userId = 5183
       const publicName = 'Rishabh Saxena'

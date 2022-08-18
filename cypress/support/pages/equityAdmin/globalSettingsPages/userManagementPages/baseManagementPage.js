@@ -26,7 +26,7 @@ const selectors = {
   threeDotDeactivateBtn: 'gs-action-panel-option[data-test-id=action-deactivate]',
   activeTab: '.tabs-bar #Active',
   inactiveTab: '.tabs-bar #Inactive',
-  viewOnlyStatusBadge: 'div .status gs-badge',
+  viewOnlyStatusBadge: 'div.status gs-badge#viewOnlyStatus',
   removeEntityButton: 'gs-button[data-test-id=remove-entity]'
 }
 
@@ -339,10 +339,19 @@ class BaseManagementPage extends BasePage {
   /**
    * Assert a badge with View Only is displayed next the entity header/title
    *
+   * @param {string} textOnBadge Send a text to validate the content text of the view only badge
    * @param {boolean} displayed True is the default value to assert the VIEW ONLY badge is displayed. False otherwise
    */
-  assertViewOnlyBadgeDisplayed(displayed = true) {
-    displayed ? cy.get(selectors.viewOnlyStatusBadge).should('be.visible') : cy.get(selectors.viewOnlyStatusBadge).should('not.exist')
+  assertViewOnlyBadgeDisplayed(textOnBadge = '', displayed = true) {
+    if (displayed) {
+      cy.get(selectors.viewOnlyStatusBadge).should('be.visible')
+
+      if (textOnBadge !== '') {
+        cy.get(selectors.viewOnlyStatusBadge).should('contain.text', textOnBadge)
+      }
+    } else {
+      cy.get(selectors.viewOnlyStatusBadge).should('not.exist')
+    }
   }
 
   /**

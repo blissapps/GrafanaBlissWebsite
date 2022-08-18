@@ -138,7 +138,7 @@ describe('Group Management tests over User Management settings', () => {
     /**
      * @bug_raised  https://globalshares.atlassian.net/browse/PB-1315 https://globalshares.atlassian.net/browse/PB-1316
      */
-    it('C17316996 Add a User to a Group and Verify the User Info', () => {
+    it.skip('C17316996 Add a User to a Group and Verify the User Info', () => {
       const groupId = 968
       const groupName = ['Group_Remove']
       const userName = ['csouto']

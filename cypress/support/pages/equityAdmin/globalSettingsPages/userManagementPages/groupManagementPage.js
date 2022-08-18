@@ -120,10 +120,19 @@ class GroupManagementPage extends BaseManagementPage {
   /**
    * Assert the page header 'Groups' is displayed. It may be useful to guarantee the Groups page is the correct one being displayed.
    *
+   * @param {string} headerText Send a text if you want to validate the text in the header. Send '' to skip the text validation.
    * @param {boolean} displayed True is the default value to assert the header is displayed. Send false to validate the otherwise
    */
-  assertGroupPageHeaderIsDisplayed(displayed = true) {
-    displayed ? cy.get(selectors.groupPageHeader).should('be.visible').and('have.text', 'Groups') : cy.get(selectors.groupPageHeader).should('not.exist')
+  assertGroupPageHeaderIsDisplayed(headerText = '', displayed = true) {
+    if (displayed) {
+      cy.get(selectors.groupPageHeader).should('be.visible')
+
+      if (headerText !== '') {
+        cy.get(selectors.groupPageHeader).should('have.text', headerText)
+      }
+    } else {
+      cy.get(selectors.groupPageHeader).should('not.exist')
+    }
   }
 
   /**

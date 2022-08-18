@@ -11,12 +11,7 @@ describe('Statement Management - Participant Regulatory Linkage tests', () => {
     equityAdmin.participantRegulatoryLinkagePage.checkPageUrl()
   })
 
-  /**
-   * @bug_raised
-   * SkIPPING DUE TO https://globalshares.atlassian.net/browse/PB-1008
-   *
-   */
-  it.skip('C7394266_Filter_Behavior_of_Participant_Regulatory_Linkage', () => {
+  it('C7394266_Filter_Behavior_of_Participant_Regulatory_Linkage', () => {
     const clientName = 'Acacia Pharma'
     const participantName = 'Serrano'
     const participantFirstName = 'Paisley'

@@ -24,7 +24,8 @@ const selectors = {
   activateDapBtn: 'gs-button[data-test-id=activateBtn]',
   groupsRecordsCounter: '*[data-test-id=section-group] span.record-count',
   groupsAllCards: '*[data-test-id=section-group] gs-card',
-  noDapExistsMessage: '#emptyDapMsg'
+  noDapExistsMessage: '#emptyDapMsg',
+  dapPageHeader: '#dapMgmtTitle'
 }
 
 const conditionsSelectors = {
@@ -285,6 +286,24 @@ class DapManagementPage extends BaseManagementPage {
    */
   assertActivateDapButtonDisplayed(displayed = true) {
     displayed ? cy.get(selectors.activateDapBtn).should('be.visible') : cy.get(selectors.activateDapBtn).should('not.exist')
+  }
+
+  /**
+   * Assert the page header 'Profiles' is displayed.
+   *
+   * @param {string} headerText Send a text if you want to validate the text in the header. Send '' to skip the text validation.
+   * @param {boolean} displayed True is the default value to assert the header is displayed. Send false to validate the otherwise
+   */
+  assertDapPageHeaderIsDisplayed(headerText = '', displayed = true) {
+    if (displayed) {
+      cy.get(selectors.dapPageHeader).should('be.visible')
+
+      if (headerText !== '') {
+        cy.get(selectors.dapPageHeader).should('have.text', headerText)
+      }
+    } else {
+      cy.get(selectors.dapPageHeader).should('not.exist')
+    }
   }
 
   // ---------------------------------------------------------------------------------- OTHERS -------------------------------------------------------------------------------- //

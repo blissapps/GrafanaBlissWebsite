@@ -19,7 +19,8 @@ const selectors = {
   columnHeaderUpdate: 'thead th[name=column_update]',
   columnHeaderCreate: 'thead th[name=column_create]',
   columnHeaderDelete: 'thead th[name=column_delete]',
-  searchResultForPermissions: '//div[@class="permission-header"]//div'
+  searchResultForPermissions: '//div[@class="permission-header"]//div',
+  rolePageHeader: '#roleMgmtHeader'
 }
 
 const apiInterceptions = {
@@ -310,6 +311,24 @@ class RoleManagementPage extends BaseManagementPage {
     cy.get(selectors.columnHeaderUpdate).should('be.visible')
     cy.get(selectors.columnHeaderCreate).should('be.visible')
     cy.get(selectors.columnHeaderDelete).should('be.visible')
+  }
+
+  /**
+   * Assert the page header 'Roles' is displayed.
+   *
+   * @param {string} headerText Send a text if you want to validate the text in the header. Send '' to skip the text validation.
+   * @param {boolean} displayed True is the default value to assert the header is displayed. Send false to validate the otherwise
+   */
+  assertRolePageHeaderIsDisplayed(headerText = '', displayed = true) {
+    if (displayed) {
+      cy.get(selectors.rolePageHeader).should('be.visible')
+
+      if (headerText !== '') {
+        cy.get(selectors.rolePageHeader).should('have.text', headerText)
+      }
+    } else {
+      cy.get(selectors.rolePageHeader).should('not.exist')
+    }
   }
 
   // ------------------------------------------------------------------------------------- PERMISSIONS -------------------------------------------------------------------------- //

@@ -217,10 +217,6 @@ describe('Role Management tests over User Management settings', () => {
       equityAdmin.roleManagementPage.assertRoleIsEditable(false)
     })
 
-    /**
-     * @bug_raised
-     * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-1291
-     */
     it('C17253544 Duplicate a Role - Happy Path', () => {
       const roleId = 1506
       const roleName = 'QA 5'
@@ -229,7 +225,7 @@ describe('Role Management tests over User Management settings', () => {
       equityAdmin.roleManagementPage.clickRoleById(roleId)
       equityAdmin.roleManagementPage.clickToDuplicateEntity()
       equityAdmin.roleManagementPage.assertEntityHeaderIsDisplayedAsExpected('Copy Of ' + roleName)
-      // equityAdmin.roleManagementPage.assertEntityIsFocused() // Uncomment this line as soon as the PB-1291 is fixed
+      equityAdmin.roleManagementPage.assertEntityIsFocused()
 
       equityAdmin.roleManagementPage.modifyEntityName(duplicatedRoleName)
       equityAdmin.roleManagementPage.saveEntityInformation()
