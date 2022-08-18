@@ -553,7 +553,7 @@ class GroupManagementPage extends BaseManagementPage {
     this.assertEntityHeaderIsDisplayedAsExpected('New Group')
     this.modifyEntityName(groupName)
 
-    if (roleName != '' && roleId != 0) {
+    if (roleName !== '' && roleId !== 0) {
       this.selectRoleToGroup(roleName, roleId)
     }
 

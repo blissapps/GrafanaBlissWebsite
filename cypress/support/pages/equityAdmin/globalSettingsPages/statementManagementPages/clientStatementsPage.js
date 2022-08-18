@@ -196,24 +196,24 @@ class ClientStatementsPage extends BaseStatementManagementPage {
    * @example ('TomTom', '20190301', '20210519') for TomTom client statement with date range from 2019-03-01 up to 2021-05-19
    */
   filterClientStatements(clientName = '', dateFrom = '', dateTo = '', regulator = '', status = '') {
-    if (clientName != '') {
+    if (clientName !== '') {
       cy.get(selectors.clientFilterStatementInput).as('clientFilterInput')
       cy.get('@clientFilterInput').type(clientName)
       cy.get('@clientFilterInput').type('{enter}')
     }
 
-    if (dateFrom != '' && dateTo != '') {
+    if (dateFrom !== '' && dateTo !== '') {
       cy.get(selectors.dateFilterStatementInput).first().type(dateFrom)
       cy.get(selectors.dateFilterStatementInput).last().type(dateTo)
     }
 
-    if (regulator != '') {
+    if (regulator !== '') {
       cy.get(selectors.regulatorFilterStatementInput).as('regulatorFilterInput')
       cy.get('@regulatorFilterInput').type(regulator)
       cy.get('@regulatorFilterInput').type('{enter}')
     }
 
-    if (status != '') {
+    if (status !== '') {
       cy.get(selectors.statusFilterStatementInput).as('statusFilterStatementInput')
       cy.get('@statusFilterStatementInput').type(status)
       cy.get('@statusFilterStatementInput').type('{enter}')

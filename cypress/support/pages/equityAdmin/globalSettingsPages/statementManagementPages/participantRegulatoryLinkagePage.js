@@ -46,7 +46,7 @@ class ParticipantRegulatoryLinkagePage extends BaseStatementManagementPage {
         this.waitForStatementsToReloadAfterFiltering()
       })
 
-    if (participantName != '') {
+    if (participantName !== '') {
       cy.get(selectors.participantNameFilterStatementInput)
         .type(participantName + '{enter}')
         .then(() => {
@@ -54,7 +54,7 @@ class ParticipantRegulatoryLinkagePage extends BaseStatementManagementPage {
         })
     }
 
-    if (participantId != 0) {
+    if (participantId !== 0) {
       cy.get(selectors.participantIdFilterStatementInput)
         .type(participantId + '{enter}')
         .then(() => {
@@ -62,7 +62,7 @@ class ParticipantRegulatoryLinkagePage extends BaseStatementManagementPage {
         })
     }
 
-    if (regulator != '') {
+    if (regulator !== '') {
       cy.get(selectors.regulatorFilterStatementInput)
         .type(regulator + '{enter}')
         .then(() => {
@@ -70,7 +70,7 @@ class ParticipantRegulatoryLinkagePage extends BaseStatementManagementPage {
         })
     }
 
-    if (partner != '') {
+    if (partner !== '') {
       cy.get(selectors.partnerFilterStatementInput)
         .type(partner + '{enter}')
         .then(() => {

@@ -28,31 +28,31 @@ class PersonalProfileAddressAndContactPage extends BasePeopleParticipantPage {
    * @param {string} country Country field to be filled. Send '' for don't fill nothing in this field
    */
   fillOutAddressOfResidenceSection(address = '', addressLine2 = '', addressLine3 = '', postCode = '', city = '', state = '', country = '') {
-    if (address != '') {
+    if (address !== '') {
       cy.log('To be implemented')
     }
 
-    if (addressLine2 != '') {
+    if (addressLine2 !== '') {
       cy.log('To be implemented')
     }
 
-    if (addressLine3 != '') {
+    if (addressLine3 !== '') {
       cy.log('To be implemented')
     }
 
-    if (postCode != '') {
+    if (postCode !== '') {
       cy.log('To be implemented')
     }
 
-    if (city != '') {
+    if (city !== '') {
       cy.log('To be implemented')
     }
 
-    if (state != '') {
+    if (state !== '') {
       cy.get(addressOfResidenceSelectors.stateInputField).type(state)
     }
 
-    if (country != '') {
+    if (country !== '') {
       cy.log('To be implemented')
     }
   }

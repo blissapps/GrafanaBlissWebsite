@@ -48,31 +48,31 @@ class ClientParticipantStatementDetailL4Page extends BaseStatementManagementPage
     nameUserTrailList = [],
     timestampTrailList = []
   ) {
-    if (participantName != '') {
+    if (participantName !== '') {
       cy.get(selectors.nameOfParticipantHeader).should('contain.text', participantName)
     }
 
-    if (participantAsOfDate != '') {
+    if (participantAsOfDate !== '') {
       cy.get(selectors.asOfDate).should('contain.text', participantAsOfDate)
     }
 
-    if (participantCurrentStatus != '') {
+    if (participantCurrentStatus !== '') {
       cy.get(selectors.currentStatus).should('contain.text', participantCurrentStatus)
     }
 
-    if (statusNameTrailList.length != 0) {
+    if (statusNameTrailList.length !== 0) {
       for (let i = 0; i < statusNameTrailList.length; i++) {
         cy.get(selectors.statementAuditTrailStatusBadge).eq(i).should('contain.text', statusNameTrailList[i])
       }
     }
 
-    if (nameUserTrailList.length != 0) {
+    if (nameUserTrailList.length !== 0) {
       for (let i = 0; i < nameUserTrailList.length; i++) {
         cy.xpath(selectors.statementAuditTrailUser).eq(i).should('contain.text', nameUserTrailList[i])
       }
     }
 
-    if (timestampTrailList.length != 0) {
+    if (timestampTrailList.length !== 0) {
       for (let i = 0; i < timestampTrailList.length; i++) {
         cy.xpath(selectors.statementAuditTrailTimestamp).eq(i).should('contain.text', timestampTrailList[i])
       }

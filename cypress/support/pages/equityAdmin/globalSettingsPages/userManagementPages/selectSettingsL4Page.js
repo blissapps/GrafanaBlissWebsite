@@ -35,7 +35,7 @@ class SelectSettingsL4Page extends BaseManagementPage {
   assertNoEntityToAddWereFoundIsDisplayed(text = '', displayed = true) {
     if (displayed) {
       cy.get(selectors.noEntityFound).should('be.visible')
-      text != '' ? cy.get(selectors.noEntityFound).should('contain', text) : null
+      text !== '' ? cy.get(selectors.noEntityFound).should('contain', text) : null
     } else {
       cy.get(selectors.noEntityFound).should('not.exist')
     }

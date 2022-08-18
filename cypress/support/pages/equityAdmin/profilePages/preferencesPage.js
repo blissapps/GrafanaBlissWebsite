@@ -31,7 +31,7 @@ class PreferencesPage extends BasePage {
   assertHeaderIsDisplayedCorrectly(displayed = true, textToValidate = '') {
     if (displayed) {
       cy.get(selectors.preferencesHeader).should('be.visible')
-      textToValidate != '' ? cy.get(selectors.preferencesHeader).should('have.text', textToValidate) : null
+      textToValidate !== '' ? cy.get(selectors.preferencesHeader).should('have.text', textToValidate) : null
     } else {
       cy.get(selectors.preferencesHeader).should('not.exist')
     }

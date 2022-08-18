@@ -110,7 +110,7 @@ class SettingsMenuNavBar extends BasePage {
     item = item.toLowerCase()
     subItem = subItem.toLowerCase()
 
-    if (item != '') {
+    if (item !== '') {
       switch (item) {
         case 'user':
           cy.get(globalSettingsMenuSelectors.userManagementMenuItem).as('btnMenu')
@@ -134,7 +134,7 @@ class SettingsMenuNavBar extends BasePage {
     }
 
     // Submenus
-    if (subItem != '') {
+    if (subItem !== '') {
       switch (subItem) {
         // User Management cases
         case 'user':

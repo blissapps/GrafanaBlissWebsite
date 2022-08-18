@@ -240,7 +240,7 @@ class BasePage {
   assertNotificationErrorDisplayed(textDisplayed = '', displayed = true) {
     displayed ? cy.get(selectors.notificationError).should('be.visible') : cy.get(selectors.notificationError).should('not.exist')
 
-    if (textDisplayed != '' && displayed) {
+    if (textDisplayed !== '' && displayed) {
       cy.get(selectors.notificationError).contains(textDisplayed)
       // cy.get(selectors.notificationError).invoke('text').then((text) => { expect(text.trim()).equal(textDisplayed) })
     }

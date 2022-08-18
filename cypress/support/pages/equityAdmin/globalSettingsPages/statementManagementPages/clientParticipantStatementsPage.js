@@ -376,19 +376,19 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
 
     cy.log('FILTERING PARTICIPANT')
 
-    if (participantName != '') {
+    if (participantName !== '') {
       cy.get(selectors.participantName).type(participantName + '{enter}', { delay: delay })
     }
 
-    if (participantId != -1) {
+    if (participantId !== -1) {
       cy.get(selectors.participantId).type(participantId + '{enter}', { delay: delay })
     }
 
-    if (status != '') {
+    if (status !== '') {
       cy.get(selectors.participantStatus).type(status + '{enter}', { delay: delay })
     }
 
-    if (participantExternalId != '') {
+    if (participantExternalId !== '') {
       cy.get(selectors.participantExternalId).type(participantExternalId + '{enter}', { delay: delay })
     }
 

@@ -30,7 +30,7 @@ class SecurityPage extends BasePage {
   assertHeaderIsDisplayedCorrectly(displayed = true, textToValidate = '') {
     if (displayed) {
       cy.get(selectors.securityHeader).should('be.visible')
-      textToValidate != '' ? cy.get(selectors.securityHeader).should('have.text', textToValidate) : null
+      textToValidate !== '' ? cy.get(selectors.securityHeader).should('have.text', textToValidate) : null
     } else {
       cy.get(selectors.securityHeader).should('not.exist')
     }
@@ -45,12 +45,12 @@ class SecurityPage extends BasePage {
    * @param {string} newPassword New password
    */
   changePassword(currentPassword = '', newPassword = '') {
-    if (currentPassword != '') {
+    if (currentPassword !== '') {
       cy.get(selectors.currentPasswordInput).clear()
       cy.get(selectors.currentPasswordInput).type(currentPassword)
     }
 
-    if (newPassword != '') {
+    if (newPassword !== '') {
       cy.get(selectors.newPasswordInput).clear()
       cy.get(selectors.newPasswordInput).type(newPassword)
     }

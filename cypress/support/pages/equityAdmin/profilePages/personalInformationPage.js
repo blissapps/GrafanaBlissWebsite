@@ -30,7 +30,7 @@ class PersonalInformationPage extends BasePage {
   assertHeaderIsDisplayedCorrectly(displayed = true, textToValidate = '') {
     if (displayed) {
       cy.get(selectors.personalInfoHeader).should('be.visible')
-      textToValidate != '' ? cy.get(selectors.personalInfoHeader).should('have.text', textToValidate) : null
+      textToValidate !== '' ? cy.get(selectors.personalInfoHeader).should('have.text', textToValidate) : null
     } else {
       cy.get(selectors.personalInfoHeader).should('not.exist')
     }
@@ -48,9 +48,9 @@ class PersonalInformationPage extends BasePage {
     cy.get(selectors.contactInput).should('be.visible')
     cy.get(selectors.emailInput).should('be.visible')
 
-    name != '' ? cy.get(selectors.nameInput).should('have.value', name) : null
-    contact != '' ? cy.get(selectors.contactInput).should('have.value', contact) : null
-    email != '' ? cy.get(selectors.emailInput).should('have.value', email) : null
+    name !== '' ? cy.get(selectors.nameInput).should('have.value', name) : null
+    contact !== '' ? cy.get(selectors.contactInput).should('have.value', contact) : null
+    email !== '' ? cy.get(selectors.emailInput).should('have.value', email) : null
   }
 
   // --------------------------------------------------------------------------------  OTHERS ----------------------------------------------------------------------- //
@@ -62,15 +62,15 @@ class PersonalInformationPage extends BasePage {
    * @param {string} email Email address to replace the current email address
    */
   editPersonalInfo(name = '', contact = '', email = '') {
-    if (name != '') {
+    if (name !== '') {
       cy.get(selectors.nameInput).clear().type(name)
     }
 
-    if (contact != '') {
+    if (contact !== '') {
       cy.get(selectors.contactInput).clear().type(contact)
     }
 
-    if (email != '') {
+    if (email !== '') {
       cy.get(selectors.emailInput).clear().type(email)
     }
   }

@@ -27,7 +27,7 @@ class UnauthorizedPage extends BasePage {
   assertYouAreRestrictedToAccessMessageIsDisplayed(message = '', displayed = true) {
     if (displayed) {
       cy.get(selectors.restrictedPageAccess).should('be.visible')
-      message != '' ? cy.get(selectors.restrictedPageAccess).should('contain.text', message) : null
+      message !== '' ? cy.get(selectors.restrictedPageAccess).should('contain.text', message) : null
     } else {
       cy.get(selectors.restrictedPageAccess).should('not.be.visible')
     }

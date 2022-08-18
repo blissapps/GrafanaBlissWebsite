@@ -191,7 +191,7 @@ class BaseManagementPage extends BasePage {
 
     cy.get('@header').should('be.visible')
 
-    if (headerText != '') {
+    if (headerText !== '') {
       cy.get('@header').should('have.value', headerText)
     }
   }
@@ -404,7 +404,7 @@ class BaseManagementPage extends BasePage {
 
     cy.get('@input').type('{selectall}{backspace}{selectall}{backspace}') // clear({ force: true }) not working
 
-    if (entityName != '') {
+    if (entityName !== '') {
       cy.get('@input').type(entityName).blur() // remove focus from element
     }
   }

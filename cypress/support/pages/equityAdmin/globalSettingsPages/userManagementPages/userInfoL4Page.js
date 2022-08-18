@@ -71,27 +71,27 @@ class UserInfoL4Page extends BaseManagementPage {
    * @param {string} organization User organization under Personal section
    */
   assertPersonalDataContent(firstName = '', lastName = '', publicName = '', jobTitle = '', qualifications = '', organization = '') {
-    if (firstName != '') {
+    if (firstName !== '') {
       cy.get(selectors.personalFirstName).should('have.value', firstName)
     }
 
-    if (lastName != '') {
+    if (lastName !== '') {
       cy.get(selectors.personalLastName).should('have.value', lastName)
     }
 
-    if (publicName != '') {
+    if (publicName !== '') {
       cy.get(selectors.personalPublicName).should('have.value', publicName)
     }
 
-    if (jobTitle != '') {
+    if (jobTitle !== '') {
       cy.get(selectors.personalJobTitle).should('have.value', jobTitle)
     }
 
-    if (qualifications != '') {
+    if (qualifications !== '') {
       cy.get(selectors.personalQualifications).should('have.value', qualifications)
     }
 
-    if (organization != '') {
+    if (organization !== '') {
       cy.get(selectors.personalOrganization).should('have.value', organization)
     }
   }
@@ -103,11 +103,11 @@ class UserInfoL4Page extends BaseManagementPage {
    * @param {string} email User email under Contact section
    */
   assertContactDataContent(phone = '', email = '') {
-    if (phone != '') {
+    if (phone !== '') {
       cy.get(selectors.contactPhone).should('have.value', phone)
     }
 
-    if (email != '') {
+    if (email !== '') {
       cy.get(selectors.contactPreferredEmail).should('have.value', email)
     }
   }
@@ -118,7 +118,7 @@ class UserInfoL4Page extends BaseManagementPage {
    * @param {string} username User username under Account Details section
    */
   assertAccountDetailsDataContent(username) {
-    if (username != '') {
+    if (username !== '') {
       cy.get(selectors.AccountDetailsUsername).should('have.value', username)
     }
   }

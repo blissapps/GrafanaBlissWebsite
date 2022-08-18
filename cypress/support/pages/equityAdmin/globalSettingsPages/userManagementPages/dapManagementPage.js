@@ -361,7 +361,7 @@ class DapManagementPage extends BaseManagementPage {
    */
   modifyCondition(conditionType = [], condition = [], value = [], valueIsInput = true) {
     //Modify condition (and, or)
-    if (conditionType.length != 0) {
+    if (conditionType.length !== 0) {
       cy.log('Selecting ' + conditionType[1])
       cy.get(conditionsSelectors.generalElement)
         .eq(conditionType[0] - 1)
@@ -373,7 +373,7 @@ class DapManagementPage extends BaseManagementPage {
     }
 
     // Modify with 'Business Unit', 'Client id', 'Is international mobile?', 'Participant id', 'Payroll id', 'Residency', or 'Tax status'
-    if (condition.length != 0) {
+    if (condition.length !== 0) {
       cy.log('Selecting ' + condition[1])
       cy.get(conditionsSelectors.generalElement)
         .eq(condition[0] - 1)
@@ -385,7 +385,7 @@ class DapManagementPage extends BaseManagementPage {
     }
 
     // Type value of a condition. It can be an input or select, so it depends of the valueIsInput parameter
-    if (value.length != 0) {
+    if (value.length !== 0) {
       cy.log('Selecting ' + value[1])
       if (valueIsInput) {
         cy.get(conditionsSelectors.generalElement)

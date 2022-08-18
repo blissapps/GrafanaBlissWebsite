@@ -143,7 +143,7 @@ class CompanyProfileOverviewPage extends BasePeopleParticipantPage {
     billingCode = ''
   ) {
     // Relationship to Company
-    if (relationshipToCompany != '') {
+    if (relationshipToCompany !== '') {
       relationshipToCompany = relationshipToCompany.toLowerCase()
       cy.get(selectors.relationshipToCompanyField).click()
       if (relationshipToCompany === 'employee') {
@@ -156,52 +156,52 @@ class CompanyProfileOverviewPage extends BasePeopleParticipantPage {
     }
 
     // Hire Date
-    if (hireDate != '') {
+    if (hireDate !== '') {
       cy.get(selectors.hireDateInputField).clear().type(hireDate)
     }
 
     // Department
-    if (department != '') {
+    if (department !== '') {
       cy.get(selectors.departmentInputField).clear().type(department)
     }
 
     // Section
-    if (section != '') {
+    if (section !== '') {
       cy.get(selectors.sectionInputField).clear().type(section)
     }
 
     // Branch
-    if (branch != '') {
+    if (branch !== '') {
       cy.get(selectors.branchInputField).clear().type(branch)
     }
 
     // Business Unit
-    if (businessUnit != '') {
+    if (businessUnit !== '') {
       cy.get(selectors.businessUnitInputField).clear().type(businessUnit)
     }
 
     // Company Location
-    if (companyLocation != '') {
+    if (companyLocation !== '') {
       cy.get(selectors.companyLocationInputField).clear().type(companyLocation)
     }
 
     // Company Code
-    if (companyCode != '') {
+    if (companyCode !== '') {
       cy.get(selectors.companyCodeInputField).clear().type(companyCode)
     }
 
     // Subsidiary Name
-    if (subsidiaryName != '') {
+    if (subsidiaryName !== '') {
       cy.get(selectors.subsidiaryNameInputField).clear().type(subsidiaryName)
     }
 
     // Subsidiary Code
-    if (subsidiaryCode != '') {
+    if (subsidiaryCode !== '') {
       cy.get(selectors.subsidiaryCodeInputField).clear().type(subsidiaryCode)
     }
 
     // Billing Code
-    if (billingCode != '') {
+    if (billingCode !== '') {
       cy.get(selectors.billingCodeInputField).clear().type(billingCode)
     }
   }
@@ -237,12 +237,12 @@ class CompanyProfileOverviewPage extends BasePeopleParticipantPage {
     OSA = false
   ) {
     // Job Title
-    if (jobTitle != '') {
+    if (jobTitle !== '') {
       cy.get(selectors.jobTitleInputField).clear().type(jobTitle)
     }
 
     // Broker Officer Code
-    if (brokerOfficerCode != '') {
+    if (brokerOfficerCode !== '') {
       cy.get(selectors.brokerOfficerCodeInputField).clear().type(brokerOfficerCode)
     }
 

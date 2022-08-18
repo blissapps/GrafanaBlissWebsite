@@ -59,8 +59,8 @@ class BaseNewOrEditRuleL4Page extends BasePage {
       cy.get(selectors.titleHeader).should('be.visible')
       cy.get(selectors.subtitleHeader).should('be.visible')
 
-      title != '' ? cy.get(selectors.titleHeader).should('contain.text', title) : null
-      subtitle != '' ? cy.get(selectors.subtitleHeader).should('contain.text', subtitle) : null
+      title !== '' ? cy.get(selectors.titleHeader).should('contain.text', title) : null
+      subtitle !== '' ? cy.get(selectors.subtitleHeader).should('contain.text', subtitle) : null
     }
   }
 

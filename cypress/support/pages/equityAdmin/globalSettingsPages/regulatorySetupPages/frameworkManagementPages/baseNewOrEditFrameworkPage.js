@@ -28,7 +28,7 @@ class BaseNewOrEditFrameworkPage extends BasePage {
   assertErrorMessageForNameInputFieldIsDisplayed(textToValidate = '', displayed = true) {
     displayed ? cy.get(selectors.frameworkInputNameInlineNotificationError).should('be.visible') : cy.get(selectors.frameworkInputNameInlineNotificationError).should('not.exist')
 
-    textToValidate != '' ? cy.get(selectors.frameworkInputNameInlineNotificationError).should('contain.text', textToValidate) : null
+    textToValidate !== '' ? cy.get(selectors.frameworkInputNameInlineNotificationError).should('contain.text', textToValidate) : null
   }
 
   /**
@@ -40,7 +40,7 @@ class BaseNewOrEditFrameworkPage extends BasePage {
   assertErrorMessageForCodeInputFieldIsDisplayed(textToValidate = '', displayed = true) {
     displayed ? cy.get(selectors.frameworkInputCodeInlineNotificationError).should('be.visible') : cy.get(selectors.frameworkInputCodeInlineNotificationError).should('not.exist')
 
-    textToValidate != '' ? cy.get(selectors.frameworkInputCodeInlineNotificationError).should('contain.text', textToValidate) : null
+    textToValidate !== '' ? cy.get(selectors.frameworkInputCodeInlineNotificationError).should('contain.text', textToValidate) : null
   }
 
   /**
@@ -94,7 +94,7 @@ class BaseNewOrEditFrameworkPage extends BasePage {
     cy.get(selectors.frameworkInputName).as('frameworkInputName')
     cy.get('@frameworkInputName').should('be.visible').clear()
 
-    frameworkName != '' ? cy.get('@frameworkInputName').should('be.visible').type(frameworkName) : null
+    frameworkName !== '' ? cy.get('@frameworkInputName').should('be.visible').type(frameworkName) : null
     cy.forcedWait(300) // Necessary because sometimes the UI gets stuck if you use this method together with changeFrameworkCode
   }
 
@@ -107,7 +107,7 @@ class BaseNewOrEditFrameworkPage extends BasePage {
     cy.get(selectors.frameworkInputCode).as('frameworkInputCode')
     cy.get('@frameworkInputCode').should('be.visible').clear()
 
-    frameworkCode != '' ? cy.get('@frameworkInputCode').should('be.visible').type(frameworkCode) : null
+    frameworkCode !== '' ? cy.get('@frameworkInputCode').should('be.visible').type(frameworkCode) : null
     cy.forcedWait(300) // Necessary because sometimes the UI gets stuck if you use this method together with changeFrameworkName
   }
 

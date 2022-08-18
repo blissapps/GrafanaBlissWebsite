@@ -97,28 +97,28 @@ class HomePage extends BasePage {
    * @example assertClientCardSummaryInformation('144', 'GBR', 'Regulated', 'Active')
    */
   assertClientCardSummaryInformation(clientId, clientName = '', location = '', regulated = '', status = '') {
-    clientName != ''
+    clientName !== ''
       ? cy
           .get(selectors.clientCard + clientId + ' ' + selectors.clientCardHeader + clientId)
           .scrollIntoView()
           .contains(clientName)
       : null
 
-    location != ''
+    location !== ''
       ? cy
           .get(selectors.clientCard + clientId + ' ' + selectors.clientCardCountryBadge + clientId)
           .scrollIntoView()
           .contains(location)
       : null
 
-    regulated != ''
+    regulated !== ''
       ? cy
           .get(selectors.clientCard + clientId + ' ' + selectors.clientCardRegulatedStatus + clientId)
           .scrollIntoView()
           .contains(regulated)
       : null
 
-    status != ''
+    status !== ''
       ? cy
           .get(selectors.clientCard + clientId + ' ' + selectors.clientCardStatus + clientId)
           .scrollIntoView()
