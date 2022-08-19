@@ -17,6 +17,15 @@ const selectors = {
  * Class created with common elements for both creating and editing a rule in the Framework Management area
  */
 class BaseNewOrEditFrameworkPage extends BasePage {
+  // ----------------------------------------------------------------- CLICKS -------------------------------------------------------------------- //
+
+  /**
+   * Clicks in the button to Create/Save the framework while creating or editing one
+   */
+  clickToCreateOrSaveButton() {
+    cy.get(selectors.createOrSaveButton).scrollIntoView().click()
+  }
+
   // ----------------------------------------------------------------- ASSERTIONS -------------------------------------------------------------------- //
 
   /**
