@@ -12,7 +12,9 @@ const selectors = {
   threeDotActionButtonColumnHeader: '#Column',
   newFrameworkButton: '#newFrameworkBtn',
   frameworksElementsByCodes: '*[id*="regulatoryFrameworkList-"] gs-grid-cell:first-child',
-  frameworksElementsByNames: '*[id*="regulatoryFrameworkList-"] gs-grid-cell:nth-child(2)'
+  frameworksElementsByNames: '*[id*="regulatoryFrameworkList-"] gs-grid-cell:nth-child(2)',
+  regulatoryFrameworkRows: '#regulatoryFrameworkList-',
+  editButton: 'gs-action-panel-option span'
 }
 
 class FrameworkManagementPage extends BasePage {
@@ -30,6 +32,16 @@ class FrameworkManagementPage extends BasePage {
    */
   clickNewFramework() {
     cy.get(selectors.newFrameworkButton).click()
+  }
+
+  /**
+   * Click in the edit button of a given Framework
+   *
+   * @param {number} regulatoryFrameworkId The regulatory framework id to be edited
+   */
+  clickToEditFramework(regulatoryFrameworkId) {
+    cy.get(selectors.regulatoryFrameworkRows + regulatoryFrameworkId + ' gs-grid-cell:last-child svg').click({ force: true })
+    cy.get(selectors.editButton).click()
   }
 
   // ----------------------------------------------------------------- ASSERTIONS -------------------------------------------------------------------- //

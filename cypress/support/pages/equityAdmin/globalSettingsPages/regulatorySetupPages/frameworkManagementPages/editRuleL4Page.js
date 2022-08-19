@@ -1,10 +1,10 @@
 import BaseNewOrEditRuleL4Page from './baseNewOrEditRuleL4Page'
 
 const properties = {
-  pageURL: '/rule/new?ruleType='
+  pageURL: '/rule/edit?ruleType='
 }
 
-class NewRuleL4Page extends BaseNewOrEditRuleL4Page {
+class EditRuleL4Page extends BaseNewOrEditRuleL4Page {
   /**
    * Checks if the current page is the one in properties.pageURL
    *
@@ -23,4 +23,4 @@ class NewRuleL4Page extends BaseNewOrEditRuleL4Page {
   }
 }
 
-export default NewRuleL4Page
+export default EditRuleL4Page

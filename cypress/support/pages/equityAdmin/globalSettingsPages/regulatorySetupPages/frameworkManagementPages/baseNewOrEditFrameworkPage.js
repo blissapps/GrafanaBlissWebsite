@@ -1,6 +1,7 @@
 import BasePage from '../../../../basePage'
 
 const selectors = {
+  addRuleButton: '#noRulesBtn',
   frameworkInputName: '#name input',
   frameworkInputNameInlineNotificationError: '#name div[class*="message"]',
   frameworkInputCode: '#code input',
@@ -10,7 +11,17 @@ const selectors = {
   frameworkVisibilityResellerOption: '#option1',
   frameworkVisibilityClientOption: '#option2',
   createOrSaveButton: '#save-button',
-  dismissButton: '#discard-button'
+  dismissButton: '#discard-button',
+  publicTabButton: 'gs-tabs [id*="Public Security Rules"]',
+  privateTabButton: 'gs-tabs [id*="Private Security Rules"]',
+  otcTabButton: 'gs-tabs [id*="OTC Security Rules"]',
+  orderColumn: '#orderColumn',
+  referenceColumn: '#descriptionColumn',
+  taxResidenceColumn: '#taxResidenceColumn',
+  securityListingColumn: '#securityCountriesColumn',
+  brokerDealerColumn: '#regulatoryPartnerColumn',
+  reorderColumnHeader: '#reorderColumn',
+  threeDotActionButtonColumnHeader: '#Column'
 }
 
 /**
@@ -20,10 +31,46 @@ class BaseNewOrEditFrameworkPage extends BasePage {
   // ----------------------------------------------------------------- CLICKS -------------------------------------------------------------------- //
 
   /**
+   * Click in the Add Rule button
+   */
+  clickAddRuleButton() {
+    cy.get(selectors.addRuleButton).click()
+  }
+
+  /**
    * Clicks in the button to Create/Save the framework while creating or editing one
    */
   clickToCreateOrSaveButton() {
     cy.get(selectors.createOrSaveButton).scrollIntoView().click()
+  }
+
+  /**
+   * Navigates over the tabs by clicking on it.
+   *
+   * @param {string} tab Tab name to be clicked. Choose among 'public', 'private', or 'otc'
+   *
+   * @example
+   * clickTab('private') => Goes to the private tab
+   */
+  clickRegulatoryFrameworkTab(tab) {
+    tab = tab.toLowerCase()
+
+    switch (tab) {
+      case 'public':
+        cy.get(selectors.publicTabButton).click()
+        break
+
+      case 'private':
+        cy.get(selectors.privateTabButton).click()
+        break
+
+      case 'otc':
+        cy.get(selectors.otcTabButton).click()
+        break
+
+      default:
+        throw new Error('Tab name is invalid, please choose a valid one!')
+    }
   }
 
   // ----------------------------------------------------------------- ASSERTIONS -------------------------------------------------------------------- //
@@ -90,6 +137,21 @@ class BaseNewOrEditFrameworkPage extends BasePage {
     displayed
       ? cy.xpath(`//*//*[contains(@id, "regulatoryFrameworkRuleList")]//gs-grid-cell[2]//span[normalize-space(text())="${referenceName}"]`).should('be.visible')
       : cy.xpath(`//*//*[contains(@id, "regulatoryFrameworkRuleList")]//gs-grid-cell[2]//span[normalize-space(text())="${referenceName}"]`).should('not.exist')
+  }
+
+  /**
+   * Assert the expect columns are displayed
+   * Expect columns:
+   * ORDER, REFERENCE, TAX RESIDENCIES, SECURITY LISTING LOCATION, BROKER DEALER, a column to change the  order, and the empty colum for the 3 dot button are displayed
+   */
+  assertExpectedFrameworkColumnsAreDisplayedOverTheTable() {
+    cy.get(selectors.orderColumn).should('be.visible')
+    cy.get(selectors.referenceColumn).should('be.visible')
+    cy.get(selectors.taxResidenceColumn).should('be.visible')
+    cy.get(selectors.securityListingColumn).should('be.visible')
+    cy.get(selectors.brokerDealerColumn).should('be.visible')
+    cy.get(selectors.orderColumn).should('be.visible')
+    cy.get(selectors.threeDotActionButtonColumnHeader).should('be.visible')
   }
 
   // ----------------------------------------------------------------- OTHERS -------------------------------------------------------------------- //

@@ -1,7 +1,7 @@
 import BaseNewOrEditFrameworkPage from './baseNewOrEditFrameworkPage'
 
 const properties = {
-  pageURL: '/regulatory/frameworks/edit/'
+  pageURL: '/regulatory/regulatory-framework/edit/'
 }
 
 class EditFrameworkPage extends BaseNewOrEditFrameworkPage {

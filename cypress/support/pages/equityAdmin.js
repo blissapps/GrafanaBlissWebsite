@@ -40,6 +40,7 @@ import TaxAndCommissionPage from './equityAdmin/clientPeoplePages/peopleParticip
 import FrameworkManagementPage from './equityAdmin/globalSettingsPages/regulatorySetupPages/frameworkManagementPages/frameworkManagementPage'
 import NewFrameworkPage from './equityAdmin/globalSettingsPages/regulatorySetupPages/frameworkManagementPages/newFrameworkPage'
 import NewRuleL4Page from './equityAdmin/globalSettingsPages/regulatorySetupPages/frameworkManagementPages/newRuleL4Page'
+import EditRuleL4Page from './equityAdmin/globalSettingsPages/regulatorySetupPages/frameworkManagementPages/editRuleL4Page'
 import EditFrameworkPage from './equityAdmin/globalSettingsPages/regulatorySetupPages/frameworkManagementPages/editFrameworkPage'
 import FrameworkByClientNotLinkedPage from './equityAdmin/globalSettingsPages/regulatorySetupPages/frameworkByClientPages/frameworkByClientNotLinkedPage'
 import FrameworkByClientLinkedPage from './equityAdmin/globalSettingsPages/regulatorySetupPages/frameworkByClientPages/frameworkByClientLinkedPage'
@@ -103,6 +104,7 @@ class EquityAdmin {
     this.frameworkManagementPage = new FrameworkManagementPage()
     this.newFrameworkPage = new NewFrameworkPage()
     this.newRuleL4Page = new NewRuleL4Page()
+    this.editRuleL4Page = new EditRuleL4Page()
     this.editFrameworkPage = new EditFrameworkPage()
     this.frameworkByClientNotLinkedPage = new FrameworkByClientNotLinkedPage()
     this.frameworkByClientLinkedPage = new FrameworkByClientLinkedPage()

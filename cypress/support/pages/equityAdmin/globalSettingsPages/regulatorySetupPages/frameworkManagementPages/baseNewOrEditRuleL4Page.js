@@ -41,8 +41,6 @@ class BaseNewOrEditRuleL4Page extends BasePage {
     }
   }
 
-  // ----------------------------------------------------------------- OTHERS -------------------------------------------------------------------- //
-
   /**
    * Assert the header title and subtitle from the L4 panel
    *
@@ -63,6 +61,17 @@ class BaseNewOrEditRuleL4Page extends BasePage {
       subtitle !== '' ? cy.get(selectors.subtitleHeader).should('contain.text', subtitle) : null
     }
   }
+
+  assertCreateOrSaveButtonIsEnabled(enabled = true) {
+    if (enabled) {
+      cy.get(selectors.saveButton).should('be.visible')
+      cy.get(selectors.saveButton + '.disabled').should('not.exist')
+    } else {
+      cy.get(selectors.saveButton + '.disabled').should('be.visible')
+    }
+  }
+
+  // ----------------------------------------------------------------- OTHERS -------------------------------------------------------------------- //
 
   /**
    * Type the rule reference in the Rule Reference field
