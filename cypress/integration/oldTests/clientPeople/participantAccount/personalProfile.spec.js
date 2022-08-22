@@ -8,8 +8,7 @@ describe('Personal profile tests for Participants', () => {
   })
 
   /**
-   * @bug_raised
-   * SkIPPING DUE TO https://globalshares.atlassian.net/browse/PB-1030
+   * @bug_raised SkIPPING DUE TO https://globalshares.atlassian.net/browse/PB-1030
    */
   it.skip('C12466237_Translate_Error_Messages_From_API', () => {
     const clientId = 144

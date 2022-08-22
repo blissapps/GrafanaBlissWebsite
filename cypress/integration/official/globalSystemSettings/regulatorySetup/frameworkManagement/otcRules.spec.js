@@ -13,9 +13,14 @@ describe('OTC Rules', () => {
   context('Error Scenarios ', () => {
     /**
      * @missing_data Waiting for proper data
+     * @bug_raised SkIPPING DUE TO https://globalshares.atlassian.net/browse/PB-1338
      */
-    it('C21721828 Create new OTC rule - all fields in blank', () => {
-      const regulatoryFrameworkId = 1
+    it.skip('C21823507 Create new OTC rule - check mandatory fields', () => {
+      const regulatoryFrameworkId = 6
+      const ruleReference = 'OT001'
+      const taxResidenciesList = ['EU']
+      const securityListingLocation = ['US']
+      const brokerDealerName = 'Wells Fargo'
 
       equityAdmin.frameworkManagementPage.clickToEditFramework(regulatoryFrameworkId)
       equityAdmin.editFrameworkPage.checkPageUrl()
@@ -24,6 +29,36 @@ describe('OTC Rules', () => {
       equityAdmin.editFrameworkPage.clickAddRuleButton()
 
       equityAdmin.newRuleL4Page.checkPageUrl('otc')
+
+      cy.log('All fields in blank')
+      equityAdmin.newRuleL4Page.assertCreateOrSaveButtonIsEnabled(false)
+
+      cy.log('Rule Reference field in blank')
+      equityAdmin.newRuleL4Page.selectTaxResidences(taxResidenciesList, false)
+      equityAdmin.newRuleL4Page.selectSecurityListingLocation(securityListingLocation, false)
+      equityAdmin.newRuleL4Page.selectBrokerDealer(brokerDealerName)
+      equityAdmin.newRuleL4Page.assertCreateOrSaveButtonIsEnabled(false)
+      equityAdmin.newRuleL4Page.clickToClearAllTaxResidencies() // Cleaning fields
+      equityAdmin.newRuleL4Page.clickToClearAllSecurityListingLocations() // Cleaning up fields
+
+      cy.log('Not select Tax Residencies')
+      equityAdmin.newRuleL4Page.modifyRuleReference(ruleReference)
+      equityAdmin.newRuleL4Page.selectSecurityListingLocation(securityListingLocation, false)
+      equityAdmin.newRuleL4Page.selectBrokerDealer(brokerDealerName)
+      equityAdmin.newRuleL4Page.assertCreateOrSaveButtonIsEnabled(false)
+      equityAdmin.newRuleL4Page.clickToClearAllSecurityListingLocations() // Cleaning up fields
+
+      cy.log('Not select Security Listing Location')
+      equityAdmin.newRuleL4Page.modifyRuleReference(ruleReference)
+      equityAdmin.newRuleL4Page.selectTaxResidences(taxResidenciesList, false)
+      equityAdmin.newRuleL4Page.selectBrokerDealer(brokerDealerName)
+      equityAdmin.newRuleL4Page.assertCreateOrSaveButtonIsEnabled(false)
+      equityAdmin.newRuleL4Page.clickToClearAllTaxResidencies() // Cleaning up fields
+
+      cy.log('Not select Broker-Dealer')
+      equityAdmin.newRuleL4Page.modifyRuleReference(ruleReference)
+      equityAdmin.newRuleL4Page.selectTaxResidences(taxResidenciesList, false)
+      equityAdmin.newRuleL4Page.selectSecurityListingLocation(securityListingLocation, false)
       equityAdmin.newRuleL4Page.assertCreateOrSaveButtonIsEnabled(false)
     })
   })

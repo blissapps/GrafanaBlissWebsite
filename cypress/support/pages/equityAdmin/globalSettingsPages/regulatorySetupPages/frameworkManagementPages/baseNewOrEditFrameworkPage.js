@@ -40,7 +40,7 @@ class BaseNewOrEditFrameworkPage extends BasePage {
   /**
    * Clicks in the button to Create/Save the framework while creating or editing one
    */
-  clickToCreateOrSaveButton() {
+  clickToCreateOrSaveFrameworkButton() {
     cy.get(selectors.createOrSaveButton).scrollIntoView().click()
   }
 

@@ -9,7 +9,9 @@ const selectors = {
   selectAllSecurityListingLocationCountriesCheckBox: '#selectAllSecurityCountries',
   securityListingLocationInputOptions: '#securityCountries input',
   brokerDealerInputOptions: '#regulatoryPartners input',
-  saveButton: '#saveBtn'
+  saveButton: '#saveBtn',
+  taxResidenciesClearAllButton: '#taxResidencies gs-button[title*= "Clear All"]',
+  securityListingLocationClearAllButton: '#securityCountries gs-button[title*= "Clear All"]'
 }
 
 /**
@@ -23,6 +25,20 @@ class BaseNewOrEditRuleL4Page extends BasePage {
    */
   clickToSaveTheRule() {
     cy.get(selectors.saveButton).click()
+  }
+
+  /**
+   * Click in the Clear All Button for the Tax Residencies field
+   */
+  clickToClearAllTaxResidencies() {
+    cy.get(selectors.taxResidenciesClearAllButton).click()
+  }
+
+  /**
+   * Click in the Clear All Button for the Security Listing Location field
+   */
+  clickToClearAllSecurityListingLocations() {
+    cy.get(selectors.securityListingLocationClearAllButton).click()
   }
 
   // ----------------------------------------------------------------- ASSERTIONS -------------------------------------------------------------------- //
@@ -78,8 +94,8 @@ class BaseNewOrEditRuleL4Page extends BasePage {
    *
    * @param {string} reference the Reference to fill the Rule Reference field
    */
-  typeRuleReference(reference) {
-    cy.get(selectors.ruleReferenceInput).type(reference)
+  modifyRuleReference(reference) {
+    cy.get(selectors.ruleReferenceInput).clear().type(reference)
   }
 
   /**

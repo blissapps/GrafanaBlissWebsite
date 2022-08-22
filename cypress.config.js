@@ -4,7 +4,7 @@ module.exports = defineConfig({
   projectId: '6d27ms',
   chromeWebSecurity: false,
   trashAssetsBeforeRuns: true,
-  numTestsKeptInMemory: 10,
+  numTestsKeptInMemory: 5,
   video: true,
   videoCompression: false,
   videoUploadOnPasses: true,

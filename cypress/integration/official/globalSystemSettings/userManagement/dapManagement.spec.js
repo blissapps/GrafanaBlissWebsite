@@ -40,8 +40,7 @@ describe('Data Access Profiles tests over User Management settings', () => {
     })
 
     /**
-     * @bug_raised
-     * SKIPPING DUE TO: https://globalshares.atlassian.net/browse/PB-920 and https://globalshares.atlassian.net/browse/PB-927
+     * @bug_raised SKIPPING DUE TO: https://globalshares.atlassian.net/browse/PB-920 and https://globalshares.atlassian.net/browse/PB-927
      */
     it.skip('C16746116 Create a new DAP without conditions', () => {
       const dapName = 'Created DAP ' + utils.getRandomNumber()

@@ -343,8 +343,7 @@ describe('Statement Management - Participant Statements tests', () => {
   /**
    * @missing_data Need to have one client with at least one participant statements in published status and others in other statuses
    *
-   * @bug_raised
-   * SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-1133
+   * @bug_raised SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-1133
    */
   it.skip('C9324998 - Try to recall Multiple Participant Statements, some published some not', () => {
     const clientStatementName = 'Keywords Studios plc'

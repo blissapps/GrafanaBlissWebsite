@@ -41,8 +41,7 @@ describe('Client search tests related with the search bar functionally in the ho
   })
 
   /**
-   * @bug_raised
-   * SkIPPING DUE TO https://globalshares.atlassian.net/browse/PB-1184
+   * @bug_raised SkIPPING DUE TO https://globalshares.atlassian.net/browse/PB-1184
    */
   it.skip('C16524712 Favorite/Unfavorite Client', () => {
     const clientName = 'Revertdata1'

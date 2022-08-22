@@ -88,8 +88,7 @@ describe('Participants tests', () => {
   /**
    * Verify PARTICIPANT DETAIL container data when picking a participant from the Participants table
    *
-   * @bug_raised
-   * SkIPPING DUE TO https://globalshares.atlassian.net/browse/PB-1023
+   * @bug_raised SkIPPING DUE TO https://globalshares.atlassian.net/browse/PB-1023
    */
   it.skip('C12177200_Verify_Participant_Detail_Data_On_L4_Container', () => {
     const clientId = 144
