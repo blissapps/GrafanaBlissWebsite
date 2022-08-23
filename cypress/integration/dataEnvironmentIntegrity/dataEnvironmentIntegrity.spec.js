@@ -6,10 +6,10 @@ const equityAdmin = new EquityAdmin()
  * The tests bellow are created to check data integrity.
  * This spec files is supposed to run before all specs files.
  *
- * @bug_raised  https://globalshares.atlassian.net/browse/PB-1315 https://globalshares.atlassian.net/browse/PB-1316
+ * @bug_raised SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-1315 https://globalshares.atlassian.net/browse/PB-1316
  *
  */
-describe('[AT-10 Environment only] - These tests bellow are related to data integrity', () => {
+describe.skip('[AT-10 Environment only] - These tests bellow are related to data integrity', () => {
   it('Check the amount of many parts of the system, so we make sure the data is as we expect', () => {
     // Check login
     equityAdmin.loginPage.login()
