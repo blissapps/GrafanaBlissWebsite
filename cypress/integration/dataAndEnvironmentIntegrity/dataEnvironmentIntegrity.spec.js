@@ -4,7 +4,7 @@ const equityAdmin = new EquityAdmin()
 
 /**
  * The tests bellow are created to check data integrity.
- * This spec files is supposed to run before all specs files.
+ * This spec files is supposed to run right after the warmup spec in the pipeline.
  *
  * @bug_raised SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-1315 https://globalshares.atlassian.net/browse/PB-1316
  *

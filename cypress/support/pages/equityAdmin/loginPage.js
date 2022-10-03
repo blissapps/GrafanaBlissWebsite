@@ -12,6 +12,13 @@ const selectors = {
 
 class LoginPage extends BasePage {
   /**
+   * Check if the current page is the home URL
+   */
+  checkLoginPageUrl() {
+    this.checkUrl('/Account/Login')
+  }
+
+  /**
    * Login command through the application UI with session storage and XHR interceptions
    *
    * @param {string} email email to login. The default variable is set in the cypress.json file
@@ -45,7 +52,7 @@ class LoginPage extends BasePage {
       cy.get(selectors.loginButton).click()
     }
     if (cacheSession) {
-      cy.session([email, password], login)
+      cy.session([email, password], login), { cacheAcrossSpecs: true }
     } else {
       login()
     }
@@ -74,6 +81,16 @@ class LoginPage extends BasePage {
    */
   assertUnsuccessfulLoginErrorMessageDisplayed(errorMessage) {
     cy.get(selectors.errorMessageNotification).should('be.visible').contains(errorMessage)
+  }
+
+  /**
+   * Assert the main login elements (username field, password field, and Sign In button) are visible.
+   * This method is very useful for a warmup test
+   */
+  assertLoginElementsAreVisible() {
+    cy.get(selectors.usernameInput).should('be.visible')
+    cy.get(selectors.passwordInput).should('be.visible')
+    cy.get(selectors.loginButton).should('be.visible')
   }
 }
 

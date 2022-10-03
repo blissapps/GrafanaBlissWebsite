@@ -34,13 +34,12 @@ module.exports = defineConfig({
     }
   },
   e2e: {
-    // We've imported your old cypress plugins here.
-    // You may want to clean this up later by importing these.
+    // We've imported your old cypress plugins here. You may want to clean this up later by importing these.
     setupNodeEvents(on, config) {
       return require('./cypress/plugins/index.js')(on, config)
     },
     baseUrl: 'https://ea-v3-at-10.gscloud.dev/',
-    specPattern: 'cypress/integration/official/**/*.spec.js',
+    specPattern: 'cypress/integration/admin/**/*.spec.js',
     excludeSpecPattern: ['**/__snapshots__/*', '**/__image_snapshots__/*'],
     experimentalSessionAndOrigin: true,
     slowTestThreshold: 30000
