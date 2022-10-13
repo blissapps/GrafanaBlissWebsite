@@ -23,6 +23,7 @@ class LoginPage extends BasePage {
    *
    * @param {string} email email to login. The default variable is set in the cypress.json file
    * @param {string} password password to login. The default variable is set in the cypress.json file
+   * @param {Boolean} cacheSession Send true to cache the session using cy.session. Send false to login without caching the session
    */
   login(email = Cypress.env('DEFAULT_USER_AUTH'), password = Cypress.env('DEFAULT_PASSWORD_AUTH'), cacheSession = true) {
     cy.interceptHomeSystemInitializedAPICalls()
@@ -42,6 +43,7 @@ class LoginPage extends BasePage {
    *
    * @param {string} email email to login. The default variable is set in the cypress.json file
    * @param {string} password password to login. The default variable is set in the cypress.json file
+   * @param {Boolean} cacheSession Send true to cache the session using cy.session. Send false to login without caching the session
    */
   loginWithSession(email = Cypress.env('DEFAULT_USER_AUTH'), password = Cypress.env('DEFAULT_PASSWORD_AUTH'), cacheSession = true) {
     const login = () => {
@@ -51,6 +53,7 @@ class LoginPage extends BasePage {
       cy.forcedWait(500) // avoid element detached from the DOM. See https://github.com/cypress-io/cypress/issues/7306. A ticket was open https://globalshares.atlassian.net/browse/PB-828
       cy.get(selectors.loginButton).click()
     }
+
     if (cacheSession) {
       cy.session([email, password], login), { cacheAcrossSpecs: true }
     } else {
