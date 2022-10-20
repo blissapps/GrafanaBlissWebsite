@@ -11,7 +11,7 @@ describe('Warm up tests for Equity Admin + Equity Gateway', () => {
     cy.screenshot('Screenshot - Login page - Before visiting page')
     cy.visit('/')
     cy.screenshot('Screenshot - Login page - Before visiting page - Environment online')
-    equityAdmin.loginPage.checkLoginPageUrl()
+    equityAdmin.loginPage.checkPageUrl()
     equityAdmin.loginPage.assertLoginElementsAreVisible()
   })
 })

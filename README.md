@@ -12,6 +12,10 @@
 - [Cypress website](https://www.cypress.io/).
 - The API documentation is available [here](https://docs.cypress.io/api/api/table-of-contents.html).
 
+---
+
+<br>
+
 ## Dependencies
 
 You will need to install the Node.js to execute the project.
@@ -60,6 +64,10 @@ Once you run yarn, you will see something like this:
 > success Saved lockfile.
 > ```
 
+---
+
+<br>
+
 ## How to Run the tests with Cypress Interface
 
 Cypress give us the ability to run tests with a test runner interface that allow us to debug and develop tests much more quickly
@@ -69,11 +77,11 @@ To do this, just run the following command:
 > yarn cy:open
 > ```
 
-With the last command above, Cypress interface will be open and you can select the browser and the exactly file that you want to run. In addition, you are able to select to run all files directly clicking on "Run All Specs" Button.
+With this command, Cypress interface will be opened and you can select the browser and the exact file that you want to run. In addition, you are able to select to run all files directly clicking on "Run All Specs" Button.
 
 ## How to Run the tests with Cypress using CLI
 
-We can create many personalized ways to run cypress. To do this, we need to create commands in the package.json file located in the root of this repo. So far, we have some commands to facilitate or day to day work, which are:
+We can create many personalized ways to run cypress. To do this, we need to create commands in the package.json file located in the root of this repo. So far, we have some commands to facilitate our day to day work, which are:
 
 > ```bash
 > # Starting the tests via CLI with the Chrome browser by default:
@@ -92,7 +100,11 @@ We can create many personalized ways to run cypress. To do this, we need to crea
 > cy:run:edge
 > ```
 
-Remember that all theses commands above can be totally adapted, modified, or even created according with the project current necessities
+Remember that all those commands above can be totally adapted, modified, or even created according to the project current necessities
+
+---
+
+<br>
 
 ## Compilers and linters
 
@@ -111,6 +123,10 @@ yarn lint:fix
 ```
 
 Please refer to this link to more information regarding compilers and linters details in this project: https://globalshares.atlassian.net/wiki/spaces/GCE/pages/2826076557/Compilers
+
+---
+
+<br>
 
 ## Cypress with Docker
 

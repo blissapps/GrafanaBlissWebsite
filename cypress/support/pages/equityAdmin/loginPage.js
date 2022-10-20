@@ -14,7 +14,7 @@ class LoginPage extends BasePage {
   /**
    * Check if the current page is the home URL
    */
-  checkLoginPageUrl() {
+  checkPageUrl() {
     this.checkUrl('/Account/Login')
   }
 

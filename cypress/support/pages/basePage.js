@@ -41,28 +41,6 @@ class BasePage {
   // ------------------------------------------------------------------------------- GETS AND CLICKS ------------------------------------------------------------------- //
 
   /**
-   * Get an element by passing a text
-   *
-   * @param {string} text text to get the element
-   *
-   * @returns the element if found
-   */
-  getElementByText(text) {
-    // return cy.xpath(`//*[normalize-space(text()) = '${text}']`)
-    return cy.contains(text)
-  }
-
-  /**
-   * Click in a element by passing the element text
-   *
-   * @param {string} text element text to be clicked
-
-   */
-  clickElementByText(text) {
-    this.getElementByText(text).click()
-  }
-
-  /**
    * Click in the checkbox to select all elements of table when bulk actions is available
    */
   clickToSelectAllElementsInTable() {

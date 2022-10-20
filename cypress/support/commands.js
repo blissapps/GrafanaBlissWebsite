@@ -124,6 +124,8 @@ Cypress.Commands.add('network', (options) => {
  *
  * Only works on Chrome
  *
+ * @param {Object} options Object to assert the network status
+ *
  * @example:
  * cy.network({ online: true }) => Assert the browser is connected
  * cy.network({ online: false }) => Assert the browser is NOT connected
