@@ -4,15 +4,17 @@ import HomePage from '../equityAdmin/homePage'
 const homePage = new HomePage()
 
 const selectors = {
-  usernameInput: '#username-field',
-  passwordInput: '#password-field',
-  loginButton: '#login',
-  errorMessageNotification: '.notification > .danger'
+  usernameInput: 'input#Username',
+  passwordInput: '#Password',
+  loginButton: '#button[type="Submit"]',
+  errorMessageNotification: '.notification > .danger',
+  optCodeField: '#Code',
+  validateOtpButton: 'button[value="send"]'
 }
 
 class LoginPage extends BasePage {
   /**
-   * Check if the current page is the home URL
+   * Check if the url is the one expected for this page
    */
   checkPageUrl() {
     this.checkUrl('/Account/Login')
@@ -21,44 +23,99 @@ class LoginPage extends BasePage {
   /**
    * Login command through the application UI with session storage and XHR interceptions
    *
-   * @param {string} email email to login. The default variable is set in the cypress.json file
-   * @param {string} password password to login. The default variable is set in the cypress.json file
-   * @param {Boolean} cacheSession Send true to cache the session using cy.session. Send false to login without caching the session
+   * @param {String} email email to login. The default variable is set in the cypress.json file
+   * @param {String} password password to login. The default variable is set in the cypress.json file
    */
-  login(email = Cypress.env('DEFAULT_USER_AUTH'), password = Cypress.env('DEFAULT_PASSWORD_AUTH'), cacheSession = true) {
-    cy.interceptHomeSystemInitializedAPICalls()
-
-    if (cacheSession) {
-      this.loginWithSession(email, password, cacheSession)
-      cy.visit('/')
-      cy.waitForHomeSystemInitializedApiCalls() // Make sure the necessary permissions are given before anything
-      cy.url().should('contain', '/home') // Make sure the home page is the one loaded after the login
-    } else {
-      this.loginWithSession(email, password, cacheSession)
-    }
+  login(email = Cypress.env('DEFAULT_USER_AUTH'), password = Cypress.env('DEFAULT_PASSWORD_AUTH')) {
+    this.loginWithSession(email, password)
   }
 
   /**
-   * Login command through the application UI with SESSION STORAGE
+   * Login command through the application UI WITH session storage
    *
    * @param {string} email email to login. The default variable is set in the cypress.json file
    * @param {string} password password to login. The default variable is set in the cypress.json file
-   * @param {Boolean} cacheSession Send true to cache the session using cy.session. Send false to login without caching the session
    */
-  loginWithSession(email = Cypress.env('DEFAULT_USER_AUTH'), password = Cypress.env('DEFAULT_PASSWORD_AUTH'), cacheSession = true) {
-    const login = () => {
-      cy.visit('/')
-      cy.get(selectors.usernameInput).type(email)
-      cy.get(selectors.passwordInput).type(password, { log: false })
-      cy.forcedWait(500) // avoid element detached from the DOM. See https://github.com/cypress-io/cypress/issues/7306. A ticket was open https://globalshares.atlassian.net/browse/PB-828
-      cy.get(selectors.loginButton).click()
-    }
+  loginWithSession(email = Cypress.env('DEFAULT_USER_AUTH'), password = Cypress.env('DEFAULT_PASSWORD_AUTH')) {
+    cy.session(
+      [email, password],
+      () => {
+        this.loginWithoutSession(email, password)
+      },
+      {
+        validate() {
+          cy.request(Cypress.config('baseUrl') + 'home')
+            .its('status')
+            .should('eq', 200)
+        }
+      }
+    )
 
-    if (cacheSession) {
-      cy.session([email, password], login), { cacheAcrossSpecs: true }
-    } else {
-      login()
-    }
+    cy.visit('/')
+
+    /**
+     * Final verification - The code below creates a new session in case the "Session Timeout" message is displayed
+     * Warning!!! This method works in a recursion, so be careful while touching it since you can end up in an infinite loop!
+     */
+    cy.get('body').then(($body) => {
+      if ($body.find('#messageView').length > 0) {
+        cy.get('#messageView').then(($header) => {
+          if ($header.is(':visible')) {
+            cy.log('Session timeout message, moving to login to create a new session')
+            Cypress.session.clearAllSavedSessions()
+            cy.get('a[href="/Authentication/Logout"]').click()
+            this.loginWithSession(email, password)
+          }
+        })
+      } else {
+        //you get here if the session is already created
+        assert.isOk('Everything is OK', 'Session already created, moving on...')
+      }
+    })
+  }
+
+  /**
+   * Login command through the application UI WITHOUT session storage
+   *
+   * @param {String} email email to login. The default variable is set in the cypress.json file
+   * @param {String} password password to login. The default variable is set in the cypress.json file
+   */
+  loginWithoutSession(email = Cypress.env('EQUITY_ADMIN_DEFAULT_USER_AUTH'), password = Cypress.env('EQUITY_ADMIN_DEFAULT_PASSWORD_AUTH')) {
+    cy.visit('/')
+
+    // Warning!!! This method works in a recursion, so be careful while touching it since you can end up in an infinite loop!
+    cy.get('body').then(($body) => {
+      if ($body.find('#messageView').length > 0) {
+        cy.get('#messageView').then(($header) => {
+          if ($header.is(':visible')) {
+            cy.log('Session timeout message, moving to the login page to log in again')
+            cy.get('a[href="/Authentication/Logout"]').click()
+            this.loginWithoutSession(email, password)
+          }
+        })
+      } else {
+        //you get here if the session is already created
+        assert.isOk('Everything is OK', 'Session already created, moving on...')
+      }
+    })
+
+    // Continues the normal login
+    cy.get(selectors.inputNameField).type(email)
+    cy.get(selectors.loginButton).click()
+
+    cy.get(selectors.inputPasswordField).type(password, { log: false })
+    cy.get(selectors.loginButton).click()
+
+    cy.url().then(($url) => {
+      if ($url.includes('/Mfa/Authenticate')) {
+        cy.task('generateOTP', Cypress.env('OTP_SECRET_KEY')).then((token) => {
+          // @ts-ignore
+          cy.get(selectors.optCodeField).type(token)
+        })
+
+        cy.get(selectors.validateOtpButton).click()
+      }
+    })
   }
 
   /**
@@ -70,7 +127,9 @@ class LoginPage extends BasePage {
    */
   loginWithMockedPermissions(permissionsFixtureFile, email = Cypress.env('DEFAULT_USER_AUTH'), password = Cypress.env('DEFAULT_PASSWORD_AUTH')) {
     cy.interceptHomeSystemInitializedAPICalls(true, permissionsFixtureFile)
+
     this.login(email, password)
+
     homePage.assertCompaniesHeaderIsDisplayed() // Just to make sure we are in the landing page and the Companies are already loaded
     cy.forcedWait(2000) // Wait for the settings menu to reload without any issues - This is necessary until the https://github.com/cypress-io/cypress/issues/7306 is fixed
   }

@@ -21,10 +21,8 @@ const exec = require('child_process').execSync
  * @type {Cypress.PluginConfig}
  */
 module.exports = (on, config) => {
-  console.log('Initializing module settings')
+  console.log('\x1b[32mInitializing module settings \n \x1b[39m')
   console.log('============================')
-
-  require('cypress-grep/src/plugin')(config)
 
   on('before:browser:launch', (launchOptions, browser = {}) => {
     if (browser.family === 'chromium') {
@@ -84,7 +82,13 @@ module.exports = (on, config) => {
     await exec('yarn jrm ./cypress/test-results/JUnitReport.xml ./cypress/test-results/junit/*.xml')
   })
 
+  on('task', {
+    generateOTP: require('cypress-otp')
+  })
+
   initPlugin(on, config)
+
+  console.log('\x1b[32m \nModules were successfully loaded\x1b[39m')
 
   return config
 }

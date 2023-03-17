@@ -4,6 +4,22 @@
 
 class Utils {
   /**
+   * Get the current date
+   *
+   * @param {String} format date format, example: MM/DD/YYYY, YYYY/MM/DD
+   */
+  getCurrentDate(format) {
+    const dayjs = require('dayjs')
+
+    // eslint-disable-next-line prefer-destructuring
+    const date_formatted = dayjs().format(format).split('+')[0]
+
+    cy.log('Date formatted: ' + date_formatted)
+
+    return date_formatted
+  }
+
+  /**
    * Get a data in a list with the format {month, day, year}.
    * You can use the parameters to get a future date or a past date.
    * If you do not want to shift date, just send 0,0,0 in the parameters and you will get current day
@@ -22,6 +38,35 @@ class Utils {
     const date_formatted = date.format(format)
 
     return date_formatted.split('/')
+  }
+
+  /**
+   * Get the current date formatted
+   *
+   * @param {string} format
+   *
+   * @returns Data formatted
+   */
+  getCurrentFormattedDateAndTime(format, days = 0, months = 0, years = 0, hours = 0, minutes = 0, seconds = 0) {
+    const dayjs = require('dayjs')
+
+    const now = dayjs()
+    const date = now.add(days, 'day').add(months, 'month').add(years, 'year').add(hours, 'hour').add(minutes, 'minute').add(seconds, 'second')
+
+    cy.log('Date and time formatted: ' + date.format(format))
+
+    return date.format(format)
+  }
+
+  /**
+   * Get the last day of the current month
+   *
+   * @returns the last day of the current month
+   */
+  getLastDayOfCurrentMonth() {
+    const dayjs = require('dayjs')
+
+    return dayjs().endOf('month').format('D')
   }
 
   /**

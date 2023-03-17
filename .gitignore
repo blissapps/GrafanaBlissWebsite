@@ -9,6 +9,7 @@ downloads
 
 # Vs code or other IDE generated config files:
 .vs
+.vscode
 
 # Yarn files
 yarn-error.log
@@ -23,3 +24,7 @@ yarn-error.log*
 
 # MAC files - misc
 **/.DS_Store
+
+# Files downloaded/converted dynamically during testing
+cypress/downloads/*
+cypress/convertedFiles/*

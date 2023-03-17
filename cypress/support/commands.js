@@ -9,7 +9,6 @@
 // References for global autocomplete
 /// <reference types="cypress" />
 
-import 'cypress-iframe'
 import 'cypress-wait-until'
 
 const executeCommand = (command) => {
@@ -147,8 +146,7 @@ Cypress.Commands.add('forcedWait', (time) => {
 })
 
 /**
- * Get a token from authentication server - Hard coded for alpha14 in the moment
- *
+ * Get a token from authentication server - Hard coded for alpha14 in the moment as it is only a example
  */
 Cypress.Commands.add('getBearerToken', () => {
   cy.request({

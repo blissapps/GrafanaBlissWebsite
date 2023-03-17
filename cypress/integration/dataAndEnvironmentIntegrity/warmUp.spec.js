@@ -10,7 +10,7 @@ describe('Warm up tests for Equity Admin + Equity Gateway', () => {
   it('Assert EA env is online', () => {
     cy.screenshot('Screenshot - Login page - Before visiting page')
     cy.visit('/')
-    cy.screenshot('Screenshot - Login page - Before visiting page - Environment online')
+    cy.screenshot('Screenshot - Login page - After visiting page - Environment online')
     equityAdmin.loginPage.checkPageUrl()
     equityAdmin.loginPage.assertLoginElementsAreVisible()
   })

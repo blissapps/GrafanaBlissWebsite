@@ -64,7 +64,7 @@
     "dot-notation": "error",
     "func-names": "error",
     "guard-for-in": "error",
-    "linebreak-style": "error",
+    "linebreak-style": 0,
     "max-params": ["error", 12],
     "newline-before-return": "error",
     "no-empty-function": "warn",

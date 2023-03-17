@@ -13,7 +13,7 @@
 // Import all commands before running
 import './commands.js'
 
-// Reporter artifact
+// Other imports
 import 'cypress-mochawesome-reporter/register'
 
 // Hooks
@@ -24,12 +24,10 @@ beforeEach(() => {
 // Import commands.js using ES2015 syntax:
 import './commands'
 import 'cypress-plugin-snapshots/commands'
-
-// Plugins
-require('cypress-xpath')
-require('@cypress/skip-test/support')
-require('cypress-grep')()
 import 'cypress-real-events/support'
+
+// Alternatively you can use CommonJS syntax: require('./commands')
+require('cypress-xpath')
 
 // Returning false here prevents Cypress from failing the test
 // eslint-disable-next-line no-unused-vars

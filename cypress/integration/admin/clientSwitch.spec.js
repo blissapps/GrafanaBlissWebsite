@@ -55,7 +55,6 @@ describe('Client tests over the client switch functionality', () => {
 
     equityAdmin.clientSwitchMenu.closeSwitchClientMenuBar()
     equityAdmin.homePage.reloadPage()
-    cy.waitForHomeSystemInitializedApiCalls()
 
     equityAdmin.homePage.assertClientIsFavorite(clientIds[0])
     equityAdmin.homePage.assertClientIsFavorite(clientIds[1])
@@ -74,7 +73,6 @@ describe('Client tests over the client switch functionality', () => {
     equityAdmin.clientSwitchMenu.closeSwitchClientMenuBar()
 
     equityAdmin.homePage.reloadPage()
-    cy.waitForHomeSystemInitializedApiCalls()
 
     equityAdmin.homePage.assertClientIsFavorite(clientIds[0], false)
     equityAdmin.homePage.assertClientIsFavorite(clientIds[1], false)
