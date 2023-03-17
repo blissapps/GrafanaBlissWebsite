@@ -4,10 +4,10 @@ import HomePage from '../equityAdmin/homePage'
 const homePage = new HomePage()
 
 const selectors = {
-  usernameInput: 'input#Username',
-  passwordInput: '#Password',
-  loginButton: '#button[type="Submit"]',
-  errorMessageNotification: '.notification > .danger',
+  inputNameField: '#Username',
+  inputPasswordField: '#Password',
+  loginButton: 'button[type="Submit"]',
+  errorMessageNotification: '.validation-summary-errors li',
   optCodeField: '#Code',
   validateOtpButton: 'button[value="send"]'
 }
@@ -101,8 +101,6 @@ class LoginPage extends BasePage {
 
     // Continues the normal login
     cy.get(selectors.inputNameField).type(email)
-    cy.get(selectors.loginButton).click()
-
     cy.get(selectors.inputPasswordField).type(password, { log: false })
     cy.get(selectors.loginButton).click()
 
@@ -150,8 +148,8 @@ class LoginPage extends BasePage {
    * This method is very useful for a warmup test
    */
   assertLoginElementsAreVisible() {
-    cy.get(selectors.usernameInput).should('be.visible')
-    cy.get(selectors.passwordInput).should('be.visible')
+    cy.get(selectors.inputNameField).should('be.visible')
+    cy.get(selectors.inputPasswordField).should('be.visible')
     cy.get(selectors.loginButton).should('be.visible')
   }
 }
