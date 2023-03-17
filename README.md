@@ -123,22 +123,3 @@ yarn lint:fix
 ```
 
 Please refer to this link to more information regarding compilers and linters details in this project: https://globalshares.atlassian.net/wiki/spaces/GCE/pages/2826076557/Compilers
-
----
-
-<br>
-
-## Cypress with Docker
-
-When we execute tests using our local resources, the tests take advantage of the host machine like browsers, memory and etc.
-
-Using Docker you'll be able to customize your "machine configurations" without having any extra infrastructure. It's so simple to create Containers on the fly and add your tests into a Continuous Integration Environment.
-
-For this case, the tests are running inside the container via dockerfile so, you can follow the next steps to see how to run tests with Docker.
-
-### How to Run the tests with Docker
-
-> ```bash
-> # Into your cli:
-> docker build -t cypress .
-> ```
