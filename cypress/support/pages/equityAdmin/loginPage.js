@@ -9,7 +9,8 @@ const selectors = {
   loginButton: 'button[type="Submit"]',
   errorMessageNotification: '.validation-summary-errors li',
   optCodeField: '#Code',
-  validateOtpButton: 'button[value="send"]'
+  validateOtpButton: 'button[value="send"]',
+  showPasswordIcon: 'svg[data-password-visibility-icon="show"]'
 }
 
 class LoginPage extends BasePage {
@@ -26,7 +27,7 @@ class LoginPage extends BasePage {
    * @param {String} email email to login. The default variable is set in the cypress.json file
    * @param {String} password password to login. The default variable is set in the cypress.json file
    */
-  login(email = Cypress.env('DEFAULT_USER_AUTH'), password = Cypress.env('DEFAULT_PASSWORD_AUTH')) {
+  login(email = Cypress.env('EQUITY_ADMIN_DEFAULT_USER_AUTH'), password = Cypress.env('EQUITY_ADMIN_DEFAULT_PASSWORD_AUTH')) {
     this.loginWithSession(email, password)
     cy.interceptHomeSystemInitializedAPICalls()
     cy.waitForHomeSystemInitializedApiCalls()
@@ -38,7 +39,7 @@ class LoginPage extends BasePage {
    * @param {string} email email to login. The default variable is set in the cypress.json file
    * @param {string} password password to login. The default variable is set in the cypress.json file
    */
-  loginWithSession(email = Cypress.env('DEFAULT_USER_AUTH'), password = Cypress.env('DEFAULT_PASSWORD_AUTH')) {
+  loginWithSession(email = Cypress.env('EQUITY_ADMIN_DEFAULT_USER_AUTH'), password = Cypress.env('EQUITY_ADMIN_DEFAULT_PASSWORD_AUTH')) {
     cy.session(
       [email, password],
       () => {
@@ -68,6 +69,10 @@ class LoginPage extends BasePage {
             this.loginWithSession(email, password)
           }
         })
+      } else if ($body.find(selectors.inputNameField).length > 0) {
+        cy.log('Redirected to the login page - Creating a new session')
+        Cypress.session.clearAllSavedSessions()
+        this.loginWithSession(email, password)
       } else {
         //you get here if the session is already created
         assert.isOk('Everything is OK', 'Session already created, moving on...')
@@ -102,7 +107,8 @@ class LoginPage extends BasePage {
 
     // Continues the normal login
     cy.get(selectors.inputNameField).type(email)
-    cy.get(selectors.inputPasswordField).type(password, { log: false })
+    cy.get(selectors.inputPasswordField).type(password)
+    cy.get(selectors.showPasswordIcon).click({ force: true })
     cy.get(selectors.loginButton).click()
 
     cy.url().then(($url) => {
@@ -115,6 +121,8 @@ class LoginPage extends BasePage {
         cy.get(selectors.validateOtpButton).click()
       }
     })
+
+    homePage.checkPageUrl() // Make sure the login was correctly performed with the given credentials!
   }
 
   /**
@@ -124,7 +132,7 @@ class LoginPage extends BasePage {
    * @param {string} email email to login. The default variable is set in the cypress.json file
    * @param {string} password password to login. The default variable is set in the cypress.json file
    */
-  loginWithMockedPermissions(permissionsFixtureFile, email = Cypress.env('DEFAULT_USER_AUTH'), password = Cypress.env('DEFAULT_PASSWORD_AUTH')) {
+  loginWithMockedPermissions(permissionsFixtureFile, email = Cypress.env('EQUITY_ADMIN_DEFAULT_USER_AUTH'), password = Cypress.env('EQUITY_ADMIN_DEFAULT_PASSWORD_AUTH')) {
     cy.interceptHomeSystemInitializedAPICalls(true, permissionsFixtureFile)
 
     this.login(email, password)

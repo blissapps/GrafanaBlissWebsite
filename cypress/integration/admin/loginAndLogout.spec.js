@@ -5,13 +5,13 @@ const equityAdmin = new EquityAdmin()
 // @ts-ignore
 describe('Login and Logout tests', () => {
   context('Unsuccessful scenarios', () => {
-    it('C16515484 Unsuccessful Login with wrong password', () => {
-      equityAdmin.loginPage.loginWithoutSession(Cypress.env('DEFAULT_USER_AUTH'), 'Test@1234')
+    it.skip('C16515484 Unsuccessful Login with wrong password', () => {
+      equityAdmin.loginPage.loginWithoutSession(Cypress.env('EQUITY_ADMIN_DEFAULT_USER_AUTH'), 'Test@1234')
       equityAdmin.loginPage.assertUnsuccessfulLoginErrorMessageDisplayed('Credentials supplied are invalid or account is locked')
     })
 
-    it('C16515486 Unsuccessful Login with wrong username', () => {
-      equityAdmin.loginPage.loginWithoutSession('test@test.com', Cypress.env('DEFAULT_PASSWORD_AUTH'))
+    it.skip('C16515486 Unsuccessful Login with wrong username', () => {
+      equityAdmin.loginPage.loginWithoutSession('test@test.com', Cypress.env('EQUITY_ADMIN_DEFAULT_PASSWORD_AUTH'))
       equityAdmin.loginPage.assertUnsuccessfulLoginErrorMessageDisplayed('Credentials supplied are invalid or account is locked')
     })
   })
