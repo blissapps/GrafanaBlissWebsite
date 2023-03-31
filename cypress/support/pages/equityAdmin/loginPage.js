@@ -28,6 +28,8 @@ class LoginPage extends BasePage {
    */
   login(email = Cypress.env('DEFAULT_USER_AUTH'), password = Cypress.env('DEFAULT_PASSWORD_AUTH')) {
     this.loginWithSession(email, password)
+    cy.interceptHomeSystemInitializedAPICalls()
+    cy.waitForHomeSystemInitializedApiCalls()
   }
 
   /**
@@ -44,9 +46,8 @@ class LoginPage extends BasePage {
       },
       {
         validate() {
-          cy.request(Cypress.config('baseUrl') + 'home')
-            .its('status')
-            .should('eq', 200)
+          // @ts-ignore
+          cy.request(Cypress.config('baseUrl')).its('status').should('eq', 200)
         }
       }
     )

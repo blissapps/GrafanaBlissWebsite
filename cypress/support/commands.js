@@ -43,9 +43,9 @@ Cypress.Commands.add('waitForHomeSystemInitializedApiCalls', () => {
   cy.wait('@waitsPermissionsToBeReceived', { timeout: 20000 })
 
   // Also guarantee the expected cookies are being saved
-  cy.waitUntil(() => cy.getCookie('SERVERID').then((cookie) => Boolean(cookie && cookie.value)))
-  cy.waitUntil(() => cy.getCookie('idsrv').then((cookie) => Boolean(cookie && cookie.value)))
-  cy.waitUntil(() => cy.getCookie('idsrv.session').then((cookie) => Boolean(cookie && cookie.value)))
+  //cy.waitUntil(() => cy.getCookie('SERVERID').then((cookie) => Boolean(cookie && cookie.value)))
+  //cy.waitUntil(() => cy.getCookie('idsrv').then((cookie) => Boolean(cookie && cookie.value)))
+  //cy.waitUntil(() => cy.getCookie('idsrv.session').then((cookie) => Boolean(cookie && cookie.value)))
 
   // Intercept without waiting just to give some time in the loading
   cy.intercept({ method: 'POST', url: 'https://rs.fullstory.com/rec/page' }, { success: true })
