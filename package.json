@@ -44,7 +44,7 @@
   "devDependencies": {
     "@babel/core": "7.21.3",
     "@babel/eslint-parser": "7.21.3",
-    "cypress": "12.9.0",
+    "cypress": "12.10.0",
     "cypress-grep": "3.0.4",
     "cypress-mochawesome-reporter": "3.3.0",
     "cypress-multi-reporters": "1.6.3",
