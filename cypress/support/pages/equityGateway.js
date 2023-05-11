@@ -1,9 +1,14 @@
+// @ts-ignore
 //TODO
 // ------------------------------------------------------------- Components -------------------------------------------------------//
+
 //TODO
 // ----------------------------------------------------------------Pages -----------------------------------------------------------//
-//Others
+
+
+// Others
 import LoginPage from './equityGateway/loginPage'
+import Helpdesk from './equityGateway/helpdesk.js'
 /**
  * This is the main class the encapsulates all pages regarding the Equity Gateway portal (Except base pages since they are not meant to be directly called).
  *
@@ -17,6 +22,7 @@ class EquityGateway {
         // -------------------------------------------------------------------------- Components --------------------------------------------------------------------//
         //TODO
         // --------------------------------------------------------------------------------Pages ----------------------------------------------------------------------//
+        this.Helpdesk = new Helpdesk()
         this.LoginPage = new LoginPage()
     }
 }

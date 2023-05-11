@@ -13,7 +13,7 @@ class LoginPage extends BasePage {
    * Check if the url is the one expected for this page
    */
   checkPageUrl() {
-    this.checkUrl('https://eg-v4-alpha-25.gsapps.dev/welcome')
+    this.checkUrl(Cypress.env('EQUITY_GATEWAY_BASE_URL'))
   }
 
   /**
