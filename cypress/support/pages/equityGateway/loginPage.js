@@ -1,8 +1,8 @@
 import BasePage from '../basePage'
 
 const selectors = {
-  inputNameField: '#Username',
-  inputPasswordField: '#Password',
+  inputNameField: 'input[placeholder="Username"]',
+  inputPasswordField: 'input[placeholder="Password"]',
   loginButton: 'input[value="Login"],button[type="Submit"]',
   optCodeField: '#Code',
   validateOtpButton: 'button[value="send"]'
@@ -13,7 +13,7 @@ class LoginPage extends BasePage {
    * Check if the url is the one expected for this page
    */
   checkPageUrl() {
-    this.checkUrl('Authentication/LogOn')
+    this.checkUrl('https://eg-v4-alpha-25.gsapps.dev/welcome')
   }
 
   /**
