@@ -14,7 +14,7 @@ cypressChrome: &cypressChrome
     - node
     - cypress
   script:
-    - yarn cy:run:dashboard --browser chrome --parallel --group Chrome --ci-build-id $BITBUCKET_BUILD_NUMBER
+    - yarn cy:run:portfolio --browser chrome --parallel --group Chrome --ci-build-id $BITBUCKET_BUILD_NUMBER
   artifacts:
     - cypress/screenshots/**
     - cypress/videos/**
@@ -28,7 +28,7 @@ cypressFirefox: &cypressFirefox
     - node
     - cypress
   script:
-    - yarn cy:run:dashboard --browser firefox --parallel --group Firefox --ci-build-id $BITBUCKET_BUILD_NUMBER
+    - yarn cy:run:portfolio --browser firefox --parallel --group Firefox --ci-build-id $BITBUCKET_BUILD_NUMBER
   artifacts:
     - cypress/screenshots/**
     - cypress/videos/**

@@ -5,6 +5,9 @@
 //TODO
 // ----------------------------------------------------------------Pages -----------------------------------------------------------//
 
+//Dashboard
+import Dashboard from './equityGateway/dashboard/dashboard'
+import Portfolio from './equityGateway/dashboard/portfolio'
 
 // Others
 import LoginPage from './equityGateway/loginPage'
@@ -22,6 +25,8 @@ class EquityGateway {
         // -------------------------------------------------------------------------- Components --------------------------------------------------------------------//
         //TODO
         // --------------------------------------------------------------------------------Pages ----------------------------------------------------------------------//
+        this.Dashboard = new Dashboard()
+        this.Portfolio = new Portfolio()
         this.Helpdesk = new Helpdesk()
         this.LoginPage = new LoginPage()
     }
