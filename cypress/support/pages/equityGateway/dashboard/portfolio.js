@@ -11,7 +11,7 @@ class portfolio extends BasePage {
         cy.get(`#option${type}`).click()
     }
 
-    portfolio(label1, label2){
+    content(label1, label2){
         cy.contains(selectors.portfolio, label1).contains(selectors.portfolio, label2)
     }
 }
