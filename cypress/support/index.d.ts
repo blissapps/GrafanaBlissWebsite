@@ -38,6 +38,10 @@ declare namespace Cypress {
     purgeClient(clientId: Number): Chainable<Element>
   }
 
+  interface Chainable<Subject = any> {
+    loginWithUI(username: string, password: string): Chainable<Subject>;
+  }
+
   interface Chainable {
     realHover(): Chainable<Element>
   }
