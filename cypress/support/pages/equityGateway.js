@@ -8,9 +8,12 @@
 //Dashboard
 import Dashboard from './equityGateway/dashboard/dashboard'
 import Portfolio from './equityGateway/dashboard/portfolio'
+import SharesHeader from './equityGateway/dashboard/sharesHeader';
 
 // Others
+import Sidebar from './equityGateway/sidebar/sidebar';
 import LoginPage from './equityGateway/loginPage'
+import Topbar from './equityGateway/topbar/topbar';
 import Helpdesk from './equityGateway/helpdesk.js'
 /**
  * This is the main class the encapsulates all pages regarding the Equity Gateway portal (Except base pages since they are not meant to be directly called).
@@ -25,10 +28,13 @@ class EquityGateway {
         // -------------------------------------------------------------------------- Components --------------------------------------------------------------------//
         //TODO
         // --------------------------------------------------------------------------------Pages ----------------------------------------------------------------------//
+        this.SharesHeader = new SharesHeader()
         this.Dashboard = new Dashboard()
+        this.Sidebar = new Sidebar()
         this.Portfolio = new Portfolio()
         this.Helpdesk = new Helpdesk()
         this.LoginPage = new LoginPage()
+        this.Topbar = new Topbar()
     }
 }
 

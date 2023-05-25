@@ -73,10 +73,10 @@ class UserManagementPage extends BaseManagementPage {
   }
 
   /**
-   * Validate the header for Users is displayed in the page
+   * Validate the sharesHeader for Users is displayed in the page
    *
-   * @param {string} headerText Send a text if you want to validate the text in the header. Send '' to skip the text validation.
-   * @param {boolean} displayed True is the default value to assert the user header is displayed. Send false to otherwise.
+   * @param {string} headerText Send a text if you want to validate the text in the sharesHeader. Send '' to skip the text validation.
+   * @param {boolean} displayed True is the default value to assert the user sharesHeader is displayed. Send false to otherwise.
    */
   assertUsersPageHeaderDisplayed(headerText = '', displayed = true) {
     if (displayed) {

@@ -289,10 +289,10 @@ class DapManagementPage extends BaseManagementPage {
   }
 
   /**
-   * Assert the page header 'Profiles' is displayed.
+   * Assert the page sharesHeader 'Profiles' is displayed.
    *
-   * @param {string} headerText Send a text if you want to validate the text in the header. Send '' to skip the text validation.
-   * @param {boolean} displayed True is the default value to assert the header is displayed. Send false to validate the otherwise
+   * @param {string} headerText Send a text if you want to validate the text in the sharesHeader. Send '' to skip the text validation.
+   * @param {boolean} displayed True is the default value to assert the sharesHeader is displayed. Send false to validate the otherwise
    */
   assertDapPageHeaderIsDisplayed(headerText = '', displayed = true) {
     if (displayed) {

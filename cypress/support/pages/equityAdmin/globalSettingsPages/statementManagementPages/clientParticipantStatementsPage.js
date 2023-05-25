@@ -21,7 +21,7 @@ const selectors = {
   actionsRecallButton: '//gs-action-panel-option//span[contains(text(),"Recall")]',
   actionsApproveButton: '//gs-action-panel-option//span[contains(text(),"Approve")]',
   actionsViewPdfButton: '//gs-action-panel-option//span[contains(text(),"View PDF")]',
-  clientStatusBadge: '*.title-header-info gs-badge',
+  clientStatusBadge: '*.title-sharesHeader-info gs-badge',
   participantName: '#pptNameFilter input',
   participantId: '#pptIdFilter input',
   participantStatus: '#statusSelect input',
@@ -113,7 +113,7 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
   }
 
   /**
-   * Click in the buttons located in the header of the participants table right after selecting them on the checkboxes
+   * Click in the buttons located in the sharesHeader of the participants table right after selecting them on the checkboxes
    *
    * @param {string} actionToPerform Chose the action to perform. It can be Rerun, Approve, or On Hold.
    * @param {number} numberOfParticipantsAffected Number of participants that are going be affected
@@ -298,7 +298,7 @@ class ClientParticipantStatementsPage extends BaseStatementManagementPage {
   }
 
   /**
-   * Assert if a specific button for a statement action is displayed in the table header after selecting one or more participants
+   * Assert if a specific button for a statement action is displayed in the table sharesHeader after selecting one or more participants
    *
    * @param {string} actionButtonName Action name. It can be approve, on hold, rerun
    * @param {boolean} displayed True to assert the button is displayed. False, otherwise.

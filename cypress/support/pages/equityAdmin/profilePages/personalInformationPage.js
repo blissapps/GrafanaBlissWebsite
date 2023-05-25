@@ -22,10 +22,10 @@ class PersonalInformationPage extends BasePage {
   // -----------------------------------------------------------------------------  ASSERTIONS ---------------------------------------------------------------------- //
 
   /**
-   * Assert if the personal information header is displayed correctly
+   * Assert if the personal information sharesHeader is displayed correctly
    *
-   * @param {boolean} displayed True is the default value to validate with the header is displayed. False to validate the otherwise
-   * @param {string} textToValidate Send a text to validate the text displayed in the header
+   * @param {boolean} displayed True is the default value to validate with the sharesHeader is displayed. False to validate the otherwise
+   * @param {string} textToValidate Send a text to validate the text displayed in the sharesHeader
    */
   assertHeaderIsDisplayedCorrectly(displayed = true, textToValidate = '') {
     if (displayed) {
