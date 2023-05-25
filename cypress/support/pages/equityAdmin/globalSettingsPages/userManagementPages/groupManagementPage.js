@@ -118,10 +118,10 @@ class GroupManagementPage extends BaseManagementPage {
   // --------------------------------------------------------------------------- ASSERTIONS ------------------------------------------------------------------------------ //
 
   /**
-   * Assert the page header 'Groups' is displayed. It may be useful to guarantee the Groups page is the correct one being displayed.
+   * Assert the page sharesHeader 'Groups' is displayed. It may be useful to guarantee the Groups page is the correct one being displayed.
    *
-   * @param {string} headerText Send a text if you want to validate the text in the header. Send '' to skip the text validation.
-   * @param {boolean} displayed True is the default value to assert the header is displayed. Send false to validate the otherwise
+   * @param {string} headerText Send a text if you want to validate the text in the sharesHeader. Send '' to skip the text validation.
+   * @param {boolean} displayed True is the default value to assert the sharesHeader is displayed. Send false to validate the otherwise
    */
   assertGroupPageHeaderIsDisplayed(headerText = '', displayed = true) {
     if (displayed) {

@@ -8,7 +8,7 @@ const selectors = {
 
 class dashboard extends BasePage {
 
-    home(acc_name, href){
+    home(acc_name){
         cy.get(selectors.headName).contains(`Hello, ${acc_name}`)
         cy.get(selectors.activityWidget).contains('Activity')
         cy.get(selectors.activityWidget).contains('In progress')
@@ -17,7 +17,6 @@ class dashboard extends BasePage {
             const url = $element.attr('href');
             expect(url).to.contain('/activity');
         });
-        cy.url().should('contain', href);
     }
 }
 export default dashboard

@@ -36,9 +36,9 @@ class UserInfoL4Page extends BaseManagementPage {
   // --------------------------------------------------------------------------- ASSERTIONS -------------------------------------------------------------------------- //
 
   /**
-   * Assert the User Info header title is displayed correctly
+   * Assert the User Info sharesHeader title is displayed correctly
    *
-   * @param {string} text text to be validated in the top of the header title. "User Info" is the default value for that
+   * @param {string} text text to be validated in the top of the sharesHeader title. "User Info" is the default value for that
    */
   assertHeaderTitleCorrectlyDisplayed(text = 'User Info') {
     cy.get(selectors.headerTitle).should('be.visible').and('contain.text', text)

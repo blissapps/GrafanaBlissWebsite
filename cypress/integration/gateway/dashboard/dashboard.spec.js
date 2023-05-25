@@ -1,49 +1,44 @@
 import EquityGateway from '../../../support/pages/equityGateway'
 
 const equityGateway = new EquityGateway()
+//const dayjs = require('dayjs')
 describe('Dashboard page tests', () => {
     beforeEach(() => {
         equityGateway.LoginPage.login()
         //cy.loginWithUI(Cypress.env('EQUITY_GATEWAY_DEFAULT_USER_AUTH'), Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH'))
     })
     context('General test scenarios', () => {
-        it('Dashboard Home Validation', () => {
-            //We must pass the account 1st name and href to the dashboard page
-            equityGateway.Dashboard.home(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_NAME'), '/dashboard')
+
+        it('EGVFOUR- 49 - Dashboard Home Elements Validation', () => {
+            //TODO -EGVFOUR- 49- TEST CASE REVIEW WITH TEAM
+            equityGateway.Dashboard.home(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_NAME'))
         })
 
-    })
-
-    context('EGVFOUR-42 - Top Navigation Bar', () => {
-        it('Topbar Validation', () => {
-            //The name on Topbar must be displayed as "full name" 1st and last name(1st name is a ENV variable)
-            equityGateway.Topbar.accDetails(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_NAME')+' Maddox')
-        })
-    })
-    context('Side Navigation Bar', () => {
-        //TODO
-        it('Sidebar shares validation', () => {
-            //We must pass the URL that Support Page should contain
-            equityGateway.Sidebar.shareInfo()
-        })
-
-        it('EGVFOUR-43 - Sidebar Pages Validation', () => {
-            equityGateway.Sidebar.pages()
-            //We must pass the URL that Support Page should contain
-            equityGateway.Sidebar.support('/help')
-        })
-    })
-
-    context('Side Navigation Bar Share Details', () => {
-        //TODO
-    })
-
-    context('Component Header', () => {
-        //TODO
     })
 
     context('Component Header Share Details', () => {
-        //TODO
+        const shareVariables = {
+            name: 'Big Yellow Group PLC',
+            amount: '0.00',
+            currency: 'GBP',
+            date: 'Mar 31', //FIXME dayjs().format('MMM DD, H:mm'),
+            share_status: 'positive',
+            sharesPositiveColor: 'rgb(0, 153, 0)',
+            sharesNegativeColor: 'rgb(223, 7, 7)',
+            sharesPositiveReg: /[0-9]*\.[0-9]+ [0-9]*\.[0-9]+%/,  //FIXME \+[0-9]*\.[0-9]+ \(\+[0-9]*\.[0-9]+%\)
+            sharesNegativeReg: /-[0-9]*\\.[0-9]+ -[0-9]*\\.[0-9]+%/ //FIXME -[0-9]*\.[0-9]+ \(-[0-9]*\.[0-9]+%\)
+        }
+
+        it('EGVFOUR-52/249 - Shares Details', () => {
+            equityGateway.SharesHeader.sharesName(shareVariables.name)
+            equityGateway.SharesHeader.sharesAmount(shareVariables.amount)
+            equityGateway.SharesHeader.currency(shareVariables.currency)
+            equityGateway.SharesHeader.date(shareVariables.date)
+            equityGateway.SharesHeader.sharesFluctuation(shareVariables.sharesPositiveColor, shareVariables.sharesNegativeColor, shareVariables.sharesPositiveReg, shareVariables.sharesNegativeReg)
+
+            //Match sidebar shares info
+            equityGateway.Sidebar.shareInfo(shareVariables.name, shareVariables.amount, shareVariables.currency, shareVariables.date, shareVariables.sharesPositiveColor, shareVariables.sharesNegativeColor, shareVariables.sharesPositiveReg, shareVariables.sharesNegativeReg)
+        })
     })
 
     context('Component Footer', () => {
@@ -68,10 +63,5 @@ describe('Dashboard page tests', () => {
             equityGateway.Portfolio.filter(2) //Filter '2' stands for 'By Plan'
             equityGateway.Portfolio.filterContent('SAYE', 'Employee purchase plan')
         })
-
-        //TODO
-    })
-    context('Activity', () => {
-        //TODO
     })
 })

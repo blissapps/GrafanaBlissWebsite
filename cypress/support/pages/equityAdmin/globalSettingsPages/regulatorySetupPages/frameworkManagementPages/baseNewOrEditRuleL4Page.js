@@ -58,7 +58,7 @@ class BaseNewOrEditRuleL4Page extends BasePage {
   }
 
   /**
-   * Assert the header title and subtitle from the L4 panel
+   * Assert the sharesHeader title and subtitle from the L4 panel
    *
    * @param {string} title Send a text in here to assert the title displayed on the top L4 panel in bold. The default '' will skip the text content verification.
    * @param {string} subtitle Send a text in here to assert the subtitle displayed on the top L4 panel bellow the title. The default '' will skip the text content verification.
