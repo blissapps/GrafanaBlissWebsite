@@ -16,5 +16,8 @@ class Activity extends BasePage {
     breadcrumbNavi(){
         cy.get(selectors.breadcrumb).contains('Dashboard').click()
     }
+    newtest(){
+        //TODO
+    }
 }
 export default Activity
