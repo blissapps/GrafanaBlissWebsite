@@ -1,24 +1,20 @@
 import BasePage from '../../basePage'
 
 const selectors = {
-    filterSelector: 'gs-select[aria-label="graph type"]',
-    portfolio: '.eg-portfolio',
-    portfolioBasis: '.eg-portfolio > .flex-column'
+    viewActivity: '.eg-activity-widget',
+    breadcrumb: '.mb-7 > .flex'
 }
 
 class Activity extends BasePage {
-    filter(type){
-        cy.get(selectors.filterSelector).click()
-        cy.get(`#option${type}`).click()
+    gotoHome(){
+        cy.get(selectors.viewActivity).contains('View all activity').should(($element) => {
+            const url = $element.attr('href')
+            expect(url).to.contain('/activity')
+        });
+        cy.get(selectors.viewActivity).contains('View all activity').click()
     }
-
-    filterContent(label1, label2){
-        cy.contains(selectors.portfolio, label1).contains(selectors.portfolio, label2)
-    }
-
-    portfolioBasis(label1){
-        cy.contains(selectors.portfolioBasis, 'Estimated gross value')
-        cy.get('p.text-color-cool80.mb-5').contains(`${label1} Units`);
+    breadcrumbNavi(){
+        cy.get(selectors.breadcrumb).contains('Dashboard').click()
     }
 }
 export default Activity

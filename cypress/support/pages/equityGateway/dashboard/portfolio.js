@@ -18,7 +18,7 @@ class Portfolio extends BasePage {
 
     portfolioBasis(label1){
         cy.contains(selectors.portfolioBasis, 'Estimated gross value')
-        cy.get('p.text-color-cool80.mb-5').contains(`${label1} Units`);
+        cy.get('p.text-color-cool80.mb-5').contains(`${label1} Units`)
     }
 }
 export default Portfolio

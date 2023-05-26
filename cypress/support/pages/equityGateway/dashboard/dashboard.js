@@ -14,23 +14,23 @@ class Dashboard extends BasePage {
         cy.get(selectors.activityWidget).contains('In progress')
         cy.get(selectors.activityWidget).contains('Upcoming')
         cy.get(selectors.activityUrl).should(($element) => {
-            const url = $element.attr('href');
-            expect(url).to.contain('/activity');
+            const url = $element.attr('href')
+            expect(url).to.contain('/activity')
         });
     }
 
     footer(){
         cy.get(selectors.footer).contains('Terms and Conditions').should(($element) => {
-            const url = $element.attr('href');
-            expect(url).to.contain('/terms-and-conditions');
+            const url = $element.attr('href')
+            expect(url).to.contain('/terms-and-conditions')
         });
         cy.get(selectors.footer).contains('Privacy Policy').should(($element) => {
-            const url = $element.attr('href');
-            expect(url).to.contain('/privacy-policy');
+            const url = $element.attr('href')
+            expect(url).to.contain('/privacy-policy')
         });
         cy.get(selectors.footer).contains('Help').should(($element) => {
-            const url = $element.attr('href');
-            expect(url).to.contain('/help');
+            const url = $element.attr('href')
+            expect(url).to.contain('/help')
         });
     }
 }
