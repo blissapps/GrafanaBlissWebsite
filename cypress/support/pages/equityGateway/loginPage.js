@@ -14,15 +14,8 @@ class LoginPage extends BasePage {
   checkPageUrl() {
     this.checkUrl(Cypress.env('EQUITY_GATEWAY_BASE_URL'))
   }
-
-  /**
-   * Login command through the application UI
-   *
-   * @param {String} email email to login. The default variable is set in the cypress.json file
-   * @param {String} password password to login. The default variable is set in the cypress.json file
-   */
-  login(email = Cypress.env('EQUITY_GATEWAY_DEFAULT_USER_AUTH'), password = Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH')) {
-    this.loginWithSession(email, password)
+  login() {
+    this.loginWithSession(Cypress.env('EQUITY_GATEWAY_DEFAULT_USER_AUTH'), Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH'))
     /**
      * >>> GATEWAY LOGIN STILL PROVISIONAL <<<
     cy.interceptHomeSystemInitializedAPICalls()

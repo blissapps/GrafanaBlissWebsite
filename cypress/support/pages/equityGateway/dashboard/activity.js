@@ -6,7 +6,7 @@ const selectors = {
 }
 
 class Activity extends BasePage {
-    gotoHome(){
+    gotoActivity(){
         cy.get(selectors.viewActivity).contains('View all activity').should(($element) => {
             const url = $element.attr('href')
             expect(url).to.contain('/activity')

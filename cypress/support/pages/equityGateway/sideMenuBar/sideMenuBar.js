@@ -7,7 +7,7 @@ const selectors = {
     support: '.eg-sidebar > .flex-column > .flex'
 }
 
-class Sidebar extends BasePage {
+class SideMenuBar extends BasePage {
     mainPages(position, name){
         cy.get(selectors.pages+'('+position+')').contains(name)
     }
@@ -42,4 +42,4 @@ class Sidebar extends BasePage {
 
     }
 }
-export default Sidebar
+export default SideMenuBar

@@ -5,7 +5,7 @@ const selectors = {
     accMenuDetails: 'div.eg-header__dropdown'
 }
 
-class Topbar extends BasePage {
+class TopBar extends BasePage {
     accDetails(acc_name){
         cy.get(selectors.accDetails).contains(acc_name).click()
     }
@@ -18,4 +18,4 @@ class Topbar extends BasePage {
     }
 
 }
-export default Topbar
+export default TopBar
