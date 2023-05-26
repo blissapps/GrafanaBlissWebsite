@@ -8,18 +8,24 @@
 //Dashboard
 import Dashboard from './equityGateway/dashboard/dashboard'
 import Portfolio from './equityGateway/dashboard/portfolio'
-import SharesHeader from './equityGateway/dashboard/sharesHeader';
-import Activity from './equityGateway/dashboard/activity';
+import SharesHeader from './equityGateway/dashboard/sharesHeader'
+import Activity from './equityGateway/dashboard/activity'
 
 //Help Form
-import HelpForm from './equityGateway/helpForm/helpForm';
+import HelpForm from './equityGateway/helpForm/helpForm'
+
+//Side Menu
+import SideMenuBar from './equityGateway/sideMenuBar/sideMenuBar'
+
+//Top Bar
+import TopBar from './equityGateway/topBar/topBar'
+
+//Application Pages Navigation
+import PageNavi from './equityGateway/pageNavi/pageNavi'
 
 // Others
-import Sidebar from './equityGateway/sidebar/sidebar';
 import LoginPage from './equityGateway/loginPage'
-import Topbar from './equityGateway/topbar/topbar';
-import Helpdesk from './equityGateway/helpdesk.js'
-import PageNavi from './equityGateway/pageNavi/pageNavi';
+
 /**
  * This is the main class the encapsulates all pages regarding the Equity Gateway portal (Except base pages since they are not meant to be directly called).
  *
@@ -43,12 +49,17 @@ class EquityGateway {
         //Help Form
         this.HelpForm = new HelpForm()
 
-        //Others
-        this.Sidebar = new Sidebar()
-        this.Helpdesk = new Helpdesk()
-        this.LoginPage = new LoginPage()
-        this.Topbar = new Topbar()
+        //Side Menu
+        this.SideMenuBar = new SideMenuBar()
+
+        //TopBar
+        this.TopBar = new TopBar()
+
+        //Application Pages Navigation
         this.PageNavi = new PageNavi()
+
+        //Others
+        this.LoginPage = new LoginPage()
     }
 }
 

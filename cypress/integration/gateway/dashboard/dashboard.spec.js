@@ -9,12 +9,18 @@ describe('Dashboard page tests', () => {
     })
 
     context('General Dashboard Validations', () => {
-        it('EGVFOUR- 49 - Dashboard Home Elements Validation', () => {
+        /** Related to User Stories
+         * EGVFOUR-49
+         */
+        it('C30092770 - Dashboard Home Elements Validation', () => {
             equityGateway.Dashboard.home(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_NAME'))
         })
     })
 
     context('Component Header Share Details', () => {
+        /** Related to User Stories
+         * EGVFOUR-52, EGVFOUR-249
+         */
         const shareVariables = {
             name: 'Big Yellow Group PLC',
             amount: '0.00',
@@ -27,7 +33,7 @@ describe('Dashboard page tests', () => {
             sharesNegativeReg: /-[0-9]*\\.[0-9]+ -[0-9]*\\.[0-9]+%/ //FIXME -[0-9]*\.[0-9]+ \(-[0-9]*\.[0-9]+%\)
         }
 
-        it('EGVFOUR-52/249 - Shares Details', () => {
+        it('C30092773/.89/.90/.91 - Shares Details', () => {
             equityGateway.SharesHeader.sharesName(shareVariables.name)
             equityGateway.SharesHeader.sharesAmount(shareVariables.amount)
             equityGateway.SharesHeader.currency(shareVariables.currency)
@@ -35,32 +41,38 @@ describe('Dashboard page tests', () => {
             equityGateway.SharesHeader.sharesFluctuation(shareVariables.sharesPositiveColor, shareVariables.sharesNegativeColor, shareVariables.sharesPositiveReg, shareVariables.sharesNegativeReg)
 
             //Match sidebar shares info
-            equityGateway.Sidebar.shareInfo(shareVariables.name, shareVariables.amount, shareVariables.currency, shareVariables.date, shareVariables.sharesPositiveColor, shareVariables.sharesNegativeColor, shareVariables.sharesPositiveReg, shareVariables.sharesNegativeReg)
+            equityGateway.SideMenuBar.shareInfo(shareVariables.name, shareVariables.amount, shareVariables.currency, shareVariables.date, shareVariables.sharesPositiveColor, shareVariables.sharesNegativeColor, shareVariables.sharesPositiveReg, shareVariables.sharesNegativeReg)
         })
     })
 
     context('Component Footer', () => {
-        it('EGVFOUR-50 - Footer Elements validation', () => {
+        /** Related to User Stories
+         * EGVFOUR-50
+         */
+        it('C30092771 - Footer Elements validation', () => {
             equityGateway.Dashboard.footer()
         })
     })
 
     context('Portfolio Breakdown', () => {
+        /** Related to User Stories
+         * EGVFOUR-53, EGVFOUR-54, EGVFOUR-55
+         */
         it('Portfolio - General view', () => {
             equityGateway.Portfolio.portfolioBasis( '1117') //label1 must be the amount of Units allocated to the Test Account
         })
 
-        it('EGVFOUR-53 - Portfolio - Filter by Status', () => {
+        it('C30092774 - Filter by Status', () => {
             equityGateway.Portfolio.filter(0) //Filter '0' stands for 'By Status'
             equityGateway.Portfolio.filterContent('Available', 'Unavailable')
         })
 
-        it('EGVFOUR-54 - Portfolio - Filter by Type', () => {
+        it('C30092775 - Filter by Type', () => {
             equityGateway.Portfolio.filter(1) //Filter '1' stands for 'By Type'
             equityGateway.Portfolio.filterContent('Options', 'Shares')
         })
 
-        it('EGVFOUR-55 - Portfolio - Filter by Plan', () => {
+        it('C30092776 - Filter by Plan', () => {
             equityGateway.Portfolio.filter(2) //Filter '2' stands for 'By Plan'
             equityGateway.Portfolio.filterContent('SAYE', 'Employee purchase plan')
         })
