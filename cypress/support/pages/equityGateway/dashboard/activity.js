@@ -19,8 +19,5 @@ class Activity extends BasePage {
     newtest(){
         //TODO
     }
-    newtest2(){
-        //TODO
-    }
 }
 export default Activity
