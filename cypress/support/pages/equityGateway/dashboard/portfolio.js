@@ -6,7 +6,7 @@ const selectors = {
     portfolioBasis: '.eg-portfolio > .flex-column'
 }
 
-class portfolio extends BasePage {
+class Portfolio extends BasePage {
     filter(type){
         cy.get(selectors.filterSelector).click()
         cy.get(`#option${type}`).click()
@@ -18,7 +18,7 @@ class portfolio extends BasePage {
 
     portfolioBasis(label1){
         cy.contains(selectors.portfolioBasis, 'Estimated gross value')
-        cy.get('p.text-color-cool80.mb-5').contains(`${label1} Units`);
+        cy.get('p.text-color-cool80.mb-5').contains(`${label1} Units`)
     }
 }
-export default portfolio
+export default Portfolio
