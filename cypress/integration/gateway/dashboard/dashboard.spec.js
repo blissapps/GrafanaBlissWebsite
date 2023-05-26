@@ -7,13 +7,11 @@ describe('Dashboard page tests', () => {
         equityGateway.LoginPage.login()
         //cy.loginWithUI(Cypress.env('EQUITY_GATEWAY_DEFAULT_USER_AUTH'), Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH'))
     })
-    context('General test scenarios', () => {
 
+    context('General Dashboard Validations', () => {
         it('EGVFOUR- 49 - Dashboard Home Elements Validation', () => {
-            //TODO -EGVFOUR- 49- TEST CASE REVIEW WITH TEAM
             equityGateway.Dashboard.home(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_NAME'))
         })
-
     })
 
     context('Component Header Share Details', () => {
@@ -42,8 +40,11 @@ describe('Dashboard page tests', () => {
     })
 
     context('Component Footer', () => {
-        //TODO
+        it('EGVFOUR-50 - Footer Elements validation', () => {
+            equityGateway.Dashboard.footer()
+        })
     })
+
     context('Portfolio Breakdown', () => {
         it('Portfolio - General view', () => {
             equityGateway.Portfolio.portfolioBasis( '1117') //label1 must be the amount of Units allocated to the Test Account
