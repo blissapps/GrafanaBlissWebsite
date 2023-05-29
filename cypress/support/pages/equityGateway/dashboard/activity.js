@@ -22,7 +22,7 @@ class Activity extends BasePage {
         cy.get(selectors.breadcrumb).contains('Dashboard').click()
     }
     pageValidation(page_title, sector1_title, sector2_title1, sector2_title2){
-        cy.get(selectors.goToActivityBtn).contains(page_title)
+        cy.get(selectors.pageTitle).contains(page_title)
         cy.get(selectors.progressSectorTileHeader).contains(sector1_title)
         cy.get(selectors.tabsBarHeader).within(() => {
             cy.contains(sector2_title1)
