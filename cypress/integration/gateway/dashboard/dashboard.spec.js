@@ -21,7 +21,7 @@ describe('Dashboard page tests', () => {
         /** Related to User Stories
          * EGVFOUR-52, EGVFOUR-249
          */
-        const shareVariables = {
+        const shareLabels = {
             name: 'Big Yellow Group PLC',
             amount: '0.00',
             currency: 'GBP',
@@ -29,19 +29,19 @@ describe('Dashboard page tests', () => {
             share_status: 'positive',
             sharesPositiveColor: 'rgb(0, 153, 0)',
             sharesNegativeColor: 'rgb(223, 7, 7)',
-            sharesPositiveReg: /[0-9]*\.[0-9]+ [0-9]*\.[0-9]+%/,  //FIXME \+[0-9]*\.[0-9]+ \(\+[0-9]*\.[0-9]+%\)
-            sharesNegativeReg: /-[0-9]*\\.[0-9]+ -[0-9]*\\.[0-9]+%/ //FIXME -[0-9]*\.[0-9]+ \(-[0-9]*\.[0-9]+%\)
+            sharesPositiveRgx: /[0-9]*\.[0-9]+ [0-9]*\.[0-9]+%/,  //FIXME \+[0-9]*\.[0-9]+ \(\+[0-9]*\.[0-9]+%\)
+            sharesNegativeRgx: /-[0-9]*\\.[0-9]+ -[0-9]*\\.[0-9]+%/ //FIXME -[0-9]*\.[0-9]+ \(-[0-9]*\.[0-9]+%\)
         }
 
-        it('C30092773/.89/.90/.91 - Shares Details', () => {
-            equityGateway.SharesHeader.sharesName(shareVariables.name)
-            equityGateway.SharesHeader.sharesAmount(shareVariables.amount)
-            equityGateway.SharesHeader.currency(shareVariables.currency)
-            equityGateway.SharesHeader.date(shareVariables.date)
-            equityGateway.SharesHeader.sharesFluctuation(shareVariables.sharesPositiveColor, shareVariables.sharesNegativeColor, shareVariables.sharesPositiveReg, shareVariables.sharesNegativeReg)
+        it('C30092773/.789/.790/.791 - Shares Details', () => {
+            equityGateway.SharesHeader.sharesName(shareLabels.name)
+            equityGateway.SharesHeader.sharesAmount(shareLabels.amount)
+            equityGateway.SharesHeader.currency(shareLabels.currency)
+            equityGateway.SharesHeader.date(shareLabels.date)
+            equityGateway.SharesHeader.sharesFluctuation(shareLabels.sharesPositiveColor, shareLabels.sharesNegativeColor, shareLabels.sharesPositiveRgx, shareLabels.sharesNegativeRgx)
 
             //Match sidebar shares info
-            equityGateway.SideMenuBar.shareInfo(shareVariables.name, shareVariables.amount, shareVariables.currency, shareVariables.date, shareVariables.sharesPositiveColor, shareVariables.sharesNegativeColor, shareVariables.sharesPositiveReg, shareVariables.sharesNegativeReg)
+            equityGateway.SideMenuBar.shareInfo(shareLabels.name, shareLabels.amount, shareLabels.currency, shareLabels.date, shareLabels.sharesPositiveColor, shareLabels.sharesNegativeColor, shareLabels.sharesPositiveRgx, shareLabels.sharesNegativeRgx)
         })
     })
 
@@ -49,8 +49,11 @@ describe('Dashboard page tests', () => {
         /** Related to User Stories
          * EGVFOUR-50
          */
-        it('C30092771 - Footer Elements validation', () => {
-            equityGateway.Dashboard.footer()
+        it('Footer Elements Validation', () => {
+            //As new elements may be included on footer this method validates the num of labels passed
+            const expectedFooterItems = ['Terms and Conditions', 'Privacy Policy', 'Help'];
+
+            equityGateway.Dashboard.footer(expectedFooterItems)
         })
     })
 
@@ -59,7 +62,7 @@ describe('Dashboard page tests', () => {
          * EGVFOUR-53, EGVFOUR-54, EGVFOUR-55
          */
         it('Portfolio - General view', () => {
-            equityGateway.Portfolio.portfolioBasis( '1117') //label1 must be the amount of Units allocated to the Test Account
+            equityGateway.Portfolio.portfolioBasis( '1117') //label1 must be the amount of Units allocated to the Test ACC
         })
 
         it('C30092774 - Filter by Status', () => {
