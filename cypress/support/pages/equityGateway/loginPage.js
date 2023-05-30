@@ -16,6 +16,7 @@ class LoginPage extends BasePage {
   }
   login() {
     this.loginWithSession(Cypress.env('EQUITY_GATEWAY_DEFAULT_USER_AUTH'), Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH'))
+    cy.url().should('contain', '/dashboard')
     /**
      * >>> GATEWAY LOGIN STILL PROVISIONAL <<<
     cy.interceptHomeSystemInitializedAPICalls()

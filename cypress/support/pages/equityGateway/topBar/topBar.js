@@ -1,8 +1,8 @@
 import BasePage from '../../basePage'
 
 const selectors = {
-    accDetails: 'gs-button.icon.medium.square.flat',
-    accMenuDetails: 'div.eg-header__dropdown'
+    accDetails: '.w-3 > .medium',
+    accMenuDetails: '.eg-header__dropdown'
 }
 
 class TopBar extends BasePage {
@@ -10,11 +10,11 @@ class TopBar extends BasePage {
         cy.get(selectors.accDetails).contains(acc_name).click()
     }
 
-    accMenu(){
-        cy.get(selectors.accMenuDetails).should('be.visible').contains('Personal Information')
-        cy.get(selectors.accMenuDetails).should('be.visible').contains('Bank Account')
-        cy.get(selectors.accMenuDetails).should('be.visible').contains('Tax Documents')
-        cy.get(selectors.accMenuDetails).should('be.visible').contains('Logout')
+    accMenu(label1, label2, label3, label4){
+        cy.get(selectors.accMenuDetails).should('be.visible').contains(label1)
+        cy.get(selectors.accMenuDetails).should('be.visible').contains(label2)
+        cy.get(selectors.accMenuDetails).should('be.visible').contains(label3)
+        cy.get(selectors.accMenuDetails).should('be.visible').contains(label4)
     }
 
 }
