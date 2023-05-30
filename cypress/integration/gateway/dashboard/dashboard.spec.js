@@ -29,8 +29,8 @@ describe('Dashboard page tests', () => {
             share_status: 'positive',
             sharesPositiveColor: 'rgb(0, 153, 0)',
             sharesNegativeColor: 'rgb(223, 7, 7)',
-            sharesPositiveRgx: /[0-9]*\.[0-9]+ [0-9]*\.[0-9]+%/,  //FIXME \+[0-9]*\.[0-9]+ \(\+[0-9]*\.[0-9]+%\)
-            sharesNegativeRgx: /-[0-9]*\\.[0-9]+ -[0-9]*\\.[0-9]+%/ //FIXME -[0-9]*\.[0-9]+ \(-[0-9]*\.[0-9]+%\)
+            sharesPositiveRgx: /\+[0-9]*\.[0-9]+ \(\+[0-9]*\.[0-9]+%\)/,
+            sharesNegativeRgx: /-[0-9]*\.[0-9]+ \(-[0-9]*\.[0-9]+%\)/
         }
 
         it('C30092773/.789/.790/.791 - Shares Details', () => {
