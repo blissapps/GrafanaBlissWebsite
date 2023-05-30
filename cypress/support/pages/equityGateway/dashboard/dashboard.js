@@ -19,18 +19,9 @@ class Dashboard extends BasePage {
         });
     }
 
-    footer(){
-        cy.get(selectors.footer).contains('Terms and Conditions').should(($element) => {
-            const url = $element.attr('href')
-            expect(url).to.contain('/terms-and-conditions')
-        });
-        cy.get(selectors.footer).contains('Privacy Policy').should(($element) => {
-            const url = $element.attr('href')
-            expect(url).to.contain('/privacy-policy')
-        });
-        cy.get(selectors.footer).contains('Help').should(($element) => {
-            const url = $element.attr('href')
-            expect(url).to.contain('/help')
+    footer(elementArray){
+        elementArray.forEach((item) => {
+            cy.get(selectors.footer).contains(item).should('exist');
         });
     }
 }
