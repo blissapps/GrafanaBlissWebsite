@@ -8,10 +8,11 @@ describe('Help form page tests', () => {
     })
 
     context('General Forms Validations', () => {
-        //FIXME EGVFOUR-XXX is the test reference on TestRail
-        it('EGVFOUR-XXX - I AM A DESCRIPTION', () => {
-            //TODO PAULO - EX: CALL helpForm.js
-            //equityGateway.HelpForm.
+        /** Related to User Stories
+         * EGVFOUR-39, EGVFOUR-40
+         */
+        it('C30092756 - Helpdesk Screen Layout', () => {
+            equityGateway.HelpForm.help()
         })
 
         it('EGVFOUR-XXX - I AM A DESCRIPTION', () => {
