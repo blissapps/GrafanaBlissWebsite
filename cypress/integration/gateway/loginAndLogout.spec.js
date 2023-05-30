@@ -1,5 +1,6 @@
 import EquityGateway from '../../support/pages/equityGateway'
 
+// @ts-ignore
 const equityGateway = new EquityGateway()
 
 describe('Login and Logout tests', () => {
