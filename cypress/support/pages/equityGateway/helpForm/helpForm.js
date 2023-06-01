@@ -1,4 +1,5 @@
 import BasePage from '../../basePage'
+import SideMenuBar from '../sideMenuBar/sideMenuBar'
 
 // @ts-ignore
 const selectors = {
@@ -39,7 +40,8 @@ class HelpForm extends BasePage {
    */
   navigateToHelpDesk(auth = true) {
     if (auth) {
-      cy.get(selectors.dashboardHelp).click()
+      const sideMenuBar = new SideMenuBar()
+      sideMenuBar.support('/help')
     } else if (!auth) {
       cy.visit(`${Cypress.env('EQUITY_GATEWAY_BASE_URL')}\\help`, { failOnStatusCode: false })
     }

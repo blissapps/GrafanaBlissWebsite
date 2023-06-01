@@ -1,5 +1,4 @@
 import EquityGateway from '../../../support/pages/equityGateway'
-import HelpForm from '../../../support/pages/equityGateway/helpForm/helpForm'
 
 const equityGateway = new EquityGateway()
 describe('Help form page tests - Not Authenticated', () => {
