@@ -62,7 +62,7 @@ class HelpForm extends BasePage {
     this.validateElementAndText(selectors.contactHeader, 'Contact us')
     this.validateElementAndText(
       selectors.contactText,
-      " Need help? We're here for you. Our service desk team are here to answer all your questions" + ' - from navigating your portfolio to transferring your shares. '
+      ' Need help? We\'re here for you. Our service desk team are here to answer all your questions - from navigating your portfolio to transferring your shares. '
     )
     this.validateElementAndText(selectors.phoneHeader, 'Reach us by phone')
     this.validateElementAndText(selectors.phoneSubTitleTop, 'Monday to Friday')
