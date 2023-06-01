@@ -13,10 +13,6 @@ describe('Dashboard page tests', () => {
          * EGVFOUR-49
          */
         it('C30092770 - Dashboard Home Elements Validation', () => {
-        /** Related to User Stories
-         * EGVFOUR-49
-         */
-        it('C30092770 - Dashboard Home Elements Validation', () => {
             equityGateway.Dashboard.home(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_NAME'))
         })
     })
@@ -65,26 +61,20 @@ describe('Dashboard page tests', () => {
         /** Related to User Stories
          * EGVFOUR-53, EGVFOUR-54, EGVFOUR-55
          */
-        /** Related to User Stories
-         * EGVFOUR-53, EGVFOUR-54, EGVFOUR-55
-         */
         it('Portfolio - General view', () => {
             equityGateway.Portfolio.portfolioBasis( '1117') //label1 must be the amount of Units allocated to the Test ACC
         })
 
-        it('C30092774 - Filter by Status', () => {
         it('C30092774 - Filter by Status', () => {
             equityGateway.Portfolio.filter(0) //Filter '0' stands for 'By Status'
             equityGateway.Portfolio.filterContent('Available', 'Unavailable')
         })
 
         it('C30092775 - Filter by Type', () => {
-        it('C30092775 - Filter by Type', () => {
             equityGateway.Portfolio.filter(1) //Filter '1' stands for 'By Type'
             equityGateway.Portfolio.filterContent('Options', 'Shares')
         })
 
-        it('C30092776 - Filter by Plan', () => {
         it('C30092776 - Filter by Plan', () => {
             equityGateway.Portfolio.filter(2) //Filter '2' stands for 'By Plan'
             equityGateway.Portfolio.filterContent('SAYE', 'Employee purchase plan')
