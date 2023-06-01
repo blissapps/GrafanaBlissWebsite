@@ -45,8 +45,7 @@ class HelpForm extends BasePage {
     }
   }
 
-  // Validates Helpdesk form elements visibility
-  /**
+  /** Validates Helpdesk form elements visibility
    * @param {boolean} auth (Adapts the behavior corresponding to the user authentication status)
    */
   validateFormElements(auth = true) {
@@ -62,7 +61,7 @@ class HelpForm extends BasePage {
     this.validateElementAndText(selectors.contactHeader, 'Contact us')
     this.validateElementAndText(
       selectors.contactText,
-      ' Need help? We\'re here for you. Our service desk team are here to answer all your questions - from navigating your portfolio to transferring your shares. '
+      " Need help? We're here for you. Our service desk team are here to answer all your questions - from navigating your portfolio to transferring your shares. "
     )
     this.validateElementAndText(selectors.phoneHeader, 'Reach us by phone')
     this.validateElementAndText(selectors.phoneSubTitleTop, 'Monday to Friday')
@@ -79,7 +78,7 @@ class HelpForm extends BasePage {
     this.validateElementAndClass('submitButton', 'disabled')
   }
 
-  /** Generetes a string with a*charsToGenerate
+  /** Generates a string with (a * [times] charsToGenerate)
    *  (eg generateChars(3) will return aaa)
    * @param {number} charsToGenerate
    */
@@ -92,6 +91,12 @@ class HelpForm extends BasePage {
     return chars
   }
 
+  /** Validates the character related error for input fields
+   * (eg. input with char limit of 40 it will validate if when an input of 41+ is passed an error is generated or visible )
+   * @param {string} elementIdentifier input element to validate identifier
+   * @param {number} charsLimit the characters limit for the input
+   * @param {string} errorMessage the error message that should be visible if an error occurs
+   */
   validateInputFieldCharsError(elementIdentifier, charsLimit, errorMessage) {
     cy.get(selectors[`${elementIdentifier}Input`])
       .invoke('val', this.generateChars(charsLimit - 1))
@@ -106,6 +111,13 @@ class HelpForm extends BasePage {
     this.validateElementAndText(selectors[`${elementIdentifier}Error`], errorMessage)
   }
 
+  /** Validates the errors that could occur when interacting with the inputs
+   * (eg. empty (required) input would lead to an Field is required error)
+   * @param {string} elementIdentifier input element to validate identifier
+   * @param {string} input input text to be passed
+   * @param {string} errorMessage the error message that should be visible if an error occurs
+   * @param {boolean} isRequiredField is the input element a required field ?
+   */
   validateInputCustomError(elementIdentifier, input, errorMessage, isRequiredField = true) {
     if (isRequiredField) {
       cy.get(selectors[`${elementIdentifier}Input`]).type(input)
@@ -121,18 +133,40 @@ class HelpForm extends BasePage {
     cy.get(selectors[`${elementIdentifier}Input`]).clear()
   }
 
+  /** Fills the input element with the desired input
+   * (eg. fillInputElement(nameBox, 'First Name') will fill the element mapped with the identifier nameBox with <First Name>)
+   * @param {string} elementIdentifier input element to validate identifier
+   * @param {string} input input text to be passed
+   */
   fillInputElement(elementIdentifier, input) {
     cy.get(selectors[`${elementIdentifier}Input`]).type(input)
   }
 
+  /** Validates if the element mapped to elementIdentifier is available in the DOM
+   * with the desired attribute and attribute value
+   * @param {string} elementIdentifier element to validate identifier
+   * @param {string} attribute attribute that the element should have
+   * @param {string} attributeValue value of the element attribute
+   */
   validateElementAndAttribute(elementIdentifier, attribute, attributeValue) {
     cy.get(elementIdentifier).should('have.attr', attribute, attributeValue)
   }
 
+  /** Validates if the element mapped to elementIdentifier is available in the DOM
+   *  with the desired tex
+   * @param {string} elementIdentifier element to validate identifier
+   * @param {string} elementText text that should be within the validated element
+   */
   validateElementAndText(elementIdentifier, elementText) {
     cy.get(elementIdentifier).should('have.text', elementText)
   }
 
+  /** Validates if the element mapped to elementIdentifier is available in the DOM
+   * with the desired class or the negation of it
+   * @param {string} elementIdentifier element to validate identifier
+   * @param {string} elementClass class that the element should have or not
+   * @param {boolean} negation if we should be looking for a positive or negative match
+   */
   validateElementAndClass(elementIdentifier, elementClass, negation = false) {
     if (negation) {
       cy.get(selectors[elementIdentifier]).should('not.have.class', elementClass)
