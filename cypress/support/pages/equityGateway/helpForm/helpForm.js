@@ -2,36 +2,36 @@ import BasePage from '../../basePage'
 import SideMenuBar from '../sideMenuBar/sideMenuBar'
 
 // @ts-ignore
+//TODO [Fix the selectors with navigation and div dependencies]
 const selectors = {
-  dashboardHelp: 'div .flex.mb-6 > a',
   clientLogo: 'eg-company-logo > img',
   contactHeader: 'h1',
   contactText: '.eg-contact__text',
-  phoneHeader: 'div .flex-column > h2',
-  phoneSubTitleTop: 'div .col-12.lg\\:col-6.flex.p-5 > :nth-child(2)',
-  phoneSubTitleBot: 'div .flex-column .p-5 > p.pb-5',
+  phoneHeader: '.flex-column > .text-h5', //FIXME (needs to be fixed nav dependent)
+  phoneSubTitleTop: '.grid > .flex-column > :nth-child(2)', //FIXME (needs to be fixed nav dependent)
+  phoneSubTitleBot: '.font-semibold.pb-5',
   phoneBodyTop: '.overline',
-  phoneBodyBot: 'div .mr-5 :nth-child(2)',
-  emailTitle: 'div .grid :nth-child(1) > h2',
+  phoneBodyBot: 'div .mr-5 :nth-child(2)', //FIXME (needs to be fixed div and nav dependent)
+  emailTitle: 'div .grid :nth-child(1) > h2', //FIXME (needs to be fixed div and nav dependent)
   emailSubject: 'gs-input-field[title="Subject"]',
-  emailSubjectCharCount: 'gs-input-field[title="Subject"] + label',
+  emailSubjectCharCount: 'gs-input-field[title="Subject"] + label', //FIXME (needs to be fixed nav dependent)
   emailSubjectInput: 'gs-input-field[title="Subject"] > div > input',
-  emailSubjectError: 'gs-input-field[title="Subject"] > div.message',
+  emailSubjectError: 'gs-input-field[title="Subject"] > div.message', //FIXME (needs to be fixed div and nav dependent)
   emailMessage: 'gs-input-area[placeholder="Enter detailed description"]',
-  emailMessageCharCount: '.eg-contact__area > .absolute',
-  emailMessageInput: 'gs-input-area[placeholder="Enter detailed description"] > textarea',
-  emailMessageError: 'gs-input-area[placeholder="Enter detailed description"] > div.message',
+  emailMessageCharCount: '.eg-contact__area > .absolute', //FIXME (needs to be fixed nav dependent)
+  emailMessageInput: 'gs-input-area[placeholder="Enter detailed description"] > textarea', //FIXME (needs to be fixed nav dependent)
+  emailMessageError: 'gs-input-area[placeholder="Enter detailed description"] > div.message', //FIXME (needs to be fixed div and nav dependent)
   emailFirstLastName: 'gs-input-field[title="First and last name"]',
-  emailFirstLastNameInput: 'gs-input-field[title="First and last name"] > div > input',
-  emailFirstLastNameError: 'gs-input-field[title="First and last name"] > div.message',
+  emailFirstLastNameInput: 'gs-input-field[title="First and last name"] > div > input', //FIXME (needs to be fixed div and nav dependent)
+  emailFirstLastNameError: 'gs-input-field[title="First and last name"] > div.message', //FIXME (needs to be fixed div and nav dependent)
   emailRequester: 'gs-input-field[title="Email"]',
-  emailRequesterInput: 'gs-input-field[title="Email"] > div > input',
-  emailRequesterError: 'gs-input-field[title="Email"] > div.message',
+  emailRequesterInput: 'gs-input-field[title="Email"] > div > input', //FIXME (needs to be fixed div and nav dependent)
+  emailRequesterError: 'gs-input-field[title="Email"] > div.message', //FIXME (needs to be fixed div and nav dependent)
   submitButton: 'gs-button',
-  footerTermsAndConditions: 'footer > div > a.mr-3',
-  footerPrivacyPolicy: 'footer > div.mb-7 > :last-child',
-  footerGSCopy: 'footer > div > p',
-  footerGSLogo: 'footer > div > img'
+  footerTermsAndConditions: 'footer > div > a.mr-3', //FIXME (needs to be fixed nav dependent)
+  footerPrivacyPolicy: 'footer > div.mb-7 > :last-child', //FIXME (needs to be fixed nav dependent)
+  footerGSCopy: 'footer > div > p', //FIXME (needs to be fixed nav dependent)
+  footerGSLogo: 'footer > div > img' //FIXME (needs to be fixed nav dependent)
 }
 
 class HelpForm extends BasePage {
@@ -87,7 +87,9 @@ class HelpForm extends BasePage {
   generateChars(charsToGenerate) {
     let chars = ''
     for (let i = 0; i < charsToGenerate; i++) {
-      chars = chars + 'a'
+      const randomCharCode = Math.floor(Math.random() * 26) + 97 // Random ASCII code between 97 ('a') and 122 ('z')
+      const randomChar = String.fromCharCode(randomCharCode) // Convert ASCII code to character
+      chars += randomChar
     }
 
     return chars
