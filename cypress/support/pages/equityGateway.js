@@ -14,6 +14,12 @@ import Activity from './equityGateway/dashboard/activity'
 //Help Form
 import HelpForm from './equityGateway/helpForm/helpForm'
 
+//My Account
+import AccBasePage from './equityGateway/myAccount/accBasePage'
+import AccPreferences from './equityGateway/myAccount/accPreferences';
+import AccProfile from './equityGateway/myAccount/accProfile'
+import AccTax from './equityGateway/myAccount/accTax'
+
 //Side Menu
 import SideMenuBar from './equityGateway/sideMenuBar/sideMenuBar'
 
@@ -48,6 +54,12 @@ class EquityGateway {
 
         //Help Form
         this.HelpForm = new HelpForm()
+
+        //My Account
+        this.AccBasePage = new AccBasePage()
+        this.AccPreferences = new AccPreferences()
+        this.AccProfile = new AccProfile()
+        this.AccTax = new AccTax()
 
         //Side Menu
         this.SideMenuBar = new SideMenuBar()
