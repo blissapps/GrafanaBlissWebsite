@@ -15,7 +15,7 @@ const selectors = {
   emailTitle: 'div .grid :nth-child(1) > h2', //FIXME (needs to be fixed div and nav dependent)
   emailSubject: 'gs-input-field[title="Subject"]',
   emailSubjectCharCount: 'gs-input-field[title="Subject"] + label', //FIXME (needs to be fixed nav dependent)
-  emailSubjectInput: 'gs-input-field[title="Subject"] > div > input',
+  emailSubjectInput: 'gs-input-field[title="Subject"] > div > input', //FIXME (needs to be fixed div and nav dependent)
   emailSubjectError: 'gs-input-field[title="Subject"] > div.message', //FIXME (needs to be fixed div and nav dependent)
   emailMessage: 'gs-input-area[placeholder="Enter detailed description"]',
   emailMessageCharCount: '.eg-contact__area > .absolute', //FIXME (needs to be fixed nav dependent)
@@ -31,7 +31,8 @@ const selectors = {
   footerTermsAndConditions: 'footer > div > a.mr-3', //FIXME (needs to be fixed nav dependent)
   footerPrivacyPolicy: 'footer > div.mb-7 > :last-child', //FIXME (needs to be fixed nav dependent)
   footerGSCopy: 'footer > div > p', //FIXME (needs to be fixed nav dependent)
-  footerGSLogo: 'footer > div > img' //FIXME (needs to be fixed nav dependent)
+  footerGSLogo: 'footer > div > img', //FIXME (needs to be fixed nav dependent)
+  welcomePageHelp: 'a.ng-star-inserted'
 }
 
 class HelpForm extends BasePage {
@@ -43,7 +44,8 @@ class HelpForm extends BasePage {
       const sideMenuBar = new SideMenuBar()
       sideMenuBar.support('/help')
     } else if (!auth) {
-      cy.visit(`${Cypress.env('EQUITY_GATEWAY_BASE_URL')}\\help`, { failOnStatusCode: false })
+      cy.visit(`${Cypress.env('EQUITY_GATEWAY_BASE_URL')}`, { failOnStatusCode: false })
+      cy.get(selectors.welcomePageHelp).click()
     }
   }
 
