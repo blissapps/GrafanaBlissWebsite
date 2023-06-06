@@ -8,17 +8,17 @@ const selectors = {
   contactHeader: 'h1',
   contactText: '.eg-contact__text',
   phoneHeader: '.flex-column > .text-h5', //FIXME (needs to be fixed nav dependent)
-  phoneSubTitleTop: '.grid > .flex-column > :nth-child(2)', //FIXME (needs to be fixed nav dependent)
-  phoneSubTitleBot: '.font-semibold.pb-5',
+  phoneSubTitleTop: '.eg-contact__container > .flex-column > .mb-2', //FIXME (needs to be fixed nav dependent)
+  phoneSubTitleBot: '.flex-column > .font-semibold.mb-5',
   phoneBodyTop: '.overline',
-  phoneBodyBot: 'div .mr-5 :nth-child(2)', //FIXME (needs to be fixed div and nav dependent)
-  emailTitle: 'div .grid :nth-child(1) > h2', //FIXME (needs to be fixed div and nav dependent)
+  phoneBodyBot: '.eg-contact__numbers > div > :nth-child(2)', //FIXME (needs to be fixed div and nav dependent)
+  emailTitle: '.mb-9 > .text-h5', //FIXME (needs to be fixed div and nav dependent)
   emailSubject: 'gs-input-field[title="Subject"]',
   emailSubjectCharCount: 'gs-input-field[title="Subject"] + label', //FIXME (needs to be fixed nav dependent)
   emailSubjectInput: 'gs-input-field[title="Subject"] > div > input', //FIXME (needs to be fixed div and nav dependent)
   emailSubjectError: 'gs-input-field[title="Subject"] > div.message', //FIXME (needs to be fixed div and nav dependent)
   emailMessage: 'gs-input-area[placeholder="Enter detailed description"]',
-  emailMessageCharCount: '.eg-contact__area > .absolute', //FIXME (needs to be fixed nav dependent)
+  emailMessageCharCount: '.h-3rem > .absolute', //FIXME (needs to be fixed nav dependent)
   emailMessageInput: 'gs-input-area[placeholder="Enter detailed description"] > textarea', //FIXME (needs to be fixed nav dependent)
   emailMessageError: 'gs-input-area[placeholder="Enter detailed description"] > div.message', //FIXME (needs to be fixed div and nav dependent)
   emailFirstLastName: 'gs-input-field[title="First and last name"]',
@@ -29,7 +29,7 @@ const selectors = {
   emailRequesterError: 'gs-input-field[title="Email"] > div.message', //FIXME (needs to be fixed div and nav dependent)
   submitButton: 'gs-button',
   footerTermsAndConditions: 'footer > div > a.mr-3', //FIXME (needs to be fixed nav dependent)
-  footerPrivacyPolicy: 'footer > div.mb-7 > :last-child', //FIXME (needs to be fixed nav dependent)
+  footerPrivacyPolicy: 'footer > div.eg-footer__right > :last-child', //FIXME (needs to be fixed nav dependent)
   footerGSCopy: 'footer > div > p', //FIXME (needs to be fixed nav dependent)
   footerGSLogo: 'footer > div > img', //FIXME (needs to be fixed nav dependent)
   welcomePageHelp: 'a.ng-star-inserted'
@@ -60,7 +60,7 @@ class HelpForm extends BasePage {
       this.validateElementAndAttribute(selectors.emailRequester, 'placeholder', 'Enter email address')
       this.validateElementAndAttribute(selectors.emailFirstLastName, 'placeholder', 'Enter first and last name')
     }
-    this.validateElementAndAttribute(selectors.clientLogo, 'src', 'assets/images/AJUObp_UKBAA.svg')
+    this.validateElementAndAttribute(selectors.clientLogo, 'src', 'assets/images/companyLogoMed.svg')
     this.validateElementAndAttribute(selectors.clientLogo, 'alt', 'Skanska logo')
     this.validateElementAndText(selectors.contactHeader, 'Contact us')
     this.validateElementAndText(
@@ -108,11 +108,11 @@ class HelpForm extends BasePage {
       .invoke('val', this.generateChars(charsLimit - 1))
       .type('a')
 
-    this.validateElementAndText(selectors[`${elementIdentifier}CharCount`], `${charsLimit}/${charsLimit}`)
+    this.validateElementAndText(selectors[`${elementIdentifier}CharCount`], ` ${charsLimit}/${charsLimit} `)
 
     cy.get(selectors[`${elementIdentifier}Input`]).clear().invoke('val', this.generateChars(charsLimit)).type('a')
 
-    this.validateElementAndText(selectors[`${elementIdentifier}CharCount`], `${charsLimit + 1}/${charsLimit}`)
+    this.validateElementAndText(selectors[`${elementIdentifier}CharCount`], ` ${charsLimit + 1}/${charsLimit} `)
     this.validateElementAndClass(elementIdentifier, 'error')
     this.validateElementAndText(selectors[`${elementIdentifier}Error`], errorMessage)
   }
