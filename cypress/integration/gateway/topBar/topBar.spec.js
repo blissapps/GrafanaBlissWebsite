@@ -17,16 +17,29 @@ describe('TopBar tests', () => {
             equityGateway.TopBar.accDetails(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_NAME')+' Maddox')
         })
 
-        it('C30092786 - TopBar ACC Menu Validation', () => {
+        it('C30092768 - TopBar ACC Menu and Hrefs Validation', () => {
+            /** Validate Menu Items and respective Hrefs
+             *  topbarAccMenuLabels & topbarAccMenuHRefs must contain the same length
+             */
             const topbarAccMenuLabels = [
                 'Personal Information',
                 'Bank Account',
-                'Tax Documents',
-                'Logout'
+                'Tax Documents'
             ]
-            equityGateway.TopBar.accDetails(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_NAME')+' Maddox')
+            const topbarAccMenuHRefs = [
+                '/my-account/profile/personal-information',
+                '/my-account/account-preferences/bank-account',
+                '/my-account/tax/tax-documents'
+            ]
             //Check Menu and URLS
-            equityGateway.TopBar.accMenuValidation(topbarAccMenuLabels)
+            equityGateway.TopBar.accMenuHrefValidations(topbarAccMenuLabels, topbarAccMenuHRefs)
+        })
+
+        it('C30092768 - TopBar Acc Logout', () => {
+            //The name on TopBar must be displayed as "full name" 1st and last name(1st name is a ENV variable)
+            equityGateway.TopBar.accMenuLogout()
+            cy.url().should('contain', '/welcome')
         })
     })
 })
+

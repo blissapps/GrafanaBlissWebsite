@@ -4,13 +4,13 @@ const equityGateway = new EquityGateway()
 describe('My Account TAX Section', () => {
     beforeEach(() => {
         equityGateway.LoginPage.login() //Workaround for now
-        equityGateway.TopBar.accMenuClick('', '')
-        equityGateway.AccBasePage.gotoPage('Tax documents', '/tax-documents')
+        equityGateway.TopBar.accMenuClick(null, 'Tax Documents')
     })
 
     context('General Validations', () => {
         it('C30092728 - Page General Validations', () => {
             equityGateway.AccTax.header('Tax documents')
+            equityGateway.AccBasePage.sideMenuGotoPage('Tax documents', '/my-account/tax/tax-documents')
             cy.fixture('gateway/myAccount/taxInfo').then((jsonObject) => {
                 const stringArray = Object.values(jsonObject);
                 equityGateway.AccTax.infoSector(stringArray);
