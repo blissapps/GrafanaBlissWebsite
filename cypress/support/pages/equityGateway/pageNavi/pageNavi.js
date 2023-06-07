@@ -58,7 +58,7 @@ class PageNavi extends BasePage {
    */
   navigateToActivity(){
     // User logs in
-    cy.visit('https://eg-v4-alpha-25.gsapps.dev/sale-wizard/activity', { failOnStatusCode: false })
+    cy.visit('https://eg-v4-alpha-25.gsapps.dev/activity', { failOnStatusCode: false })
     cy.url().should('contain', '/activity')
   }
 }
