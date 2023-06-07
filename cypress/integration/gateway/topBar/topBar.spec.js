@@ -11,28 +11,22 @@ describe('TopBar tests', () => {
     context('Top Navigation Bar', () => {
         /** Related to User Stories
          * EGVFOUR-42, EGVFOUR-109
-        */
-            const topbarAccMenuLabels = {
-                    personalInfo: 'Personal Information',
-                    bank: 'Bank Account',
-                    tax: 'Tax Documents',
-                    logout: 'Logout'
-                }
+         */
+        it('C30092768 - TopBar Acc name Validation', () => {
+            //The name on TopBar must be displayed as "full name" 1st and last name(1st name is a ENV variable)
+            equityGateway.TopBar.accDetails(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_NAME')+' Maddox')
+        })
 
-            it('C30092768 - TopBar Acc name Validation', () => {
-                //The name on TopBar must be displayed as "full name" 1st and last name(1st name is a ENV variable)
-                equityGateway.TopBar.accDetails(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_NAME')+' Maddox')
-            })
-
-            it('C30092786 - TopBar ACC Menu Validation', () => {
-                equityGateway.TopBar.accDetails(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_NAME')+' Maddox')
-                //Check Menu and URLS
-                equityGateway.TopBar.accMenu(
-                    topbarAccMenuLabels.personalInfo,
-                    topbarAccMenuLabels.bank,
-                    topbarAccMenuLabels.tax,
-                    topbarAccMenuLabels.logout
-            )
+        it('C30092786 - TopBar ACC Menu Validation', () => {
+            const topbarAccMenuLabels = [
+                'Personal Information',
+                'Bank Account',
+                'Tax Documents',
+                'Logout'
+            ]
+            equityGateway.TopBar.accDetails(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_NAME')+' Maddox')
+            //Check Menu and URLS
+            equityGateway.TopBar.accMenuValidation(topbarAccMenuLabels)
         })
     })
 })

@@ -4,11 +4,7 @@ const equityGateway = new EquityGateway()
 describe('My Account TAX Section', () => {
     beforeEach(() => {
         equityGateway.LoginPage.login() //Workaround for now
-        //FIXME PROVISORY
-        cy.window().then((win) => {
-            // @ts-ignore
-            win.location.href = 'https://eg-v4-alpha-25.gsapps.dev/my-account/profile/personal-information';
-        });
+        equityGateway.TopBar.accMenuClick('', '')
         equityGateway.AccBasePage.gotoPage('Tax documents', '/tax-documents')
     })
 
