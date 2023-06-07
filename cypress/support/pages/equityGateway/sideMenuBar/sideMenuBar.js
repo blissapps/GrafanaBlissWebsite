@@ -36,7 +36,7 @@ class SideMenuBar extends BasePage {
     cy.get(selectors.support).should(($element) => {
       expect($element).to.have.attr('href', '/help')
     })
-    cy.get(selectors.support).scrollIntoView().click()
+    cy.get(selectors.support).scrollIntoView().click({ force: true })
     cy.url().should('contain', href)
   }
 }
