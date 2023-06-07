@@ -13,9 +13,11 @@ class accBasePage extends BasePage {
         cy.get(selectors.sideLmenu).contains(item).should('exist');
         })
     }
-    gotoPage(pageName, href){
+    sideMenuGotoPage(pageName, href){
         cy.get(selectors.sideLbar).contains(pageName).click({ force: true })
-        cy.url().should('include', href)
+        cy.get(selectors.sideLbar).contains(pageName)
+            .should('exist')
+            .should('have.attr', 'href', href);
     }
 }
 export default accBasePage

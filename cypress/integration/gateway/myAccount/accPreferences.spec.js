@@ -16,7 +16,7 @@ describe('My Account Preferences Section', () => {
          *  EGVFOUR-81
          */
         beforeEach(() => {
-            equityGateway.AccBasePage.gotoPage('Bank account', '/bank-account')
+            equityGateway.AccBasePage.sideMenuGotoPage('Bank account', '/my-account/account-preferences/bank-account')
         })
 
         it('Page General Validations', () => {
@@ -40,7 +40,7 @@ describe('My Account Preferences Section', () => {
          *  EGVFOUR-82
          */
         beforeEach(() => {
-            equityGateway.AccBasePage.gotoPage('Payments', '/payments')
+            equityGateway.AccBasePage.sideMenuGotoPage('Payments', '/my-account/account-preferences/payments')
         })
 
         it('Page General Validations', () => {
@@ -58,7 +58,7 @@ describe('My Account Preferences Section', () => {
                 'These are the methods in which you prefer to receive sale payments.',
                 'Preferred delivery methods'
             ]
-            /** Waiting for new Developments, for now its build to pass:
+            /** Waiting for new Developments, for now it checks:
              * Section 1 or 2: 1=Distributions methods 2=Bank account
              * Elements: Array of anything that you want to verify inside that section,excluding "Preferred delivery methods"
              * Delivery: Refers to "Preferred delivery methods inside", for now its just 1 (not necessarily need to pass)
@@ -74,7 +74,7 @@ describe('My Account Preferences Section', () => {
                 '0192 (Personal account)',
                 'Alison Smith'
             ]
-            /** Waiting for new Developments, for now its build to pass:
+            /** Waiting for new Developments, for now it checks:
              * Section 1 or 2: 1=Distributions methods 2=Bank account
              * Elements: Array of anything that you want to verify inside that section,excluding "Preferred delivery methods"
              * Delivery: Refers to "Preferred delivery methods inside", for now its just 1 (not necessarily need to pass)
@@ -89,7 +89,7 @@ describe('My Account Preferences Section', () => {
                 'These are the methods in which you prefer to receive sale payments.',
                 'Preferred delivery methods'
             ]
-            /** Waiting for new Developments, for now its build to pass:
+            /** Waiting for new Developments, for now it checks:
              * Section 1 or 2: 1=Distributions methods 2=Bank account
              * Elements: Array of anything that you want to verify inside that section,excluding "Preferred delivery methods"
              * Delivery: Refers to "Preferred delivery methods inside", for now its just 1 (not necessarily need to pass)
@@ -105,7 +105,7 @@ describe('My Account Preferences Section', () => {
                 '0192 (Personal account)',
                 'Alison Smith'
             ]
-            /** Waiting for new Developments, for now its build to pass:
+            /** Waiting for new Developments, for now it checks:
              * Section 1 or 2: 1=Distributions methods 2=Bank account
              * Elements: Array of anything that you want to verify inside that section,excluding "Preferred delivery methods"
              * Delivery: Refers to "Preferred delivery methods inside", for now its just 1 (not necessarily need to pass)
@@ -125,7 +125,7 @@ describe('My Account Preferences Section', () => {
                 'EN - English',
                 'English'
             ]
-            equityGateway.AccBasePage.gotoPage('Language', '/language')
+            equityGateway.AccBasePage.sideMenuGotoPage('Language', '/my-account/account-preferences/language')
             equityGateway.AccPreferences.languageSection(elements)
         })
     })

@@ -1,8 +1,11 @@
 import BasePage from '../../basePage'
 import HelpForm from '../helpForm/helpForm'
 import SideMenuBar from '../sideMenuBar/sideMenuBar'
+import HelpForm from '../helpForm/helpForm'
+import SideMenuBar from '../sideMenuBar/sideMenuBar'
 
 // @ts-ignore
+//TODO [Fix the selectors with navigation and div dependencies]
 //TODO [Fix the selectors with navigation and div dependencies]
 const selectors = {
   welcomePageHelp: 'a.ng-star-inserted',
@@ -62,5 +65,6 @@ class PageNavi extends BasePage {
     cy.url().should('contain', '/activity')
   }
 }
+
 
 export default PageNavi

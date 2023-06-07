@@ -8,8 +8,8 @@ const selectors = {
 }
 
 class Dashboard extends BasePage {
-    home(acc_name){
-        cy.get(selectors.headName).contains(`Hello, ${acc_name}`)
+    home(acc1stName){
+        cy.get(selectors.headName).contains(`Hello, ${acc1stName}`)
         cy.get(selectors.activityWidget).contains('Activity')
         cy.get(selectors.activityWidget).contains('In progress')
         cy.get(selectors.activityWidget).contains('Upcoming')
