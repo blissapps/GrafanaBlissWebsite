@@ -49,6 +49,7 @@ class PageNavi extends BasePage {
    * @param {string} salesWizardStep (the desired Sales Wizard Step to navigate to)
    */
   navigateToSalesWizard(salesWizardStep = '') {
+    cy.log(`SALES WIZARD PAGE TO NAVIGATE: ${salesWizardStep}`)
     cy.visit(`https://eg-v4-alpha-25.gsapps.dev/sale-wizard/${salesWizardStep}`, { failOnStatusCode: false })
     cy.url().should('contain', '/sale-wizard/overview')
   }
@@ -61,3 +62,5 @@ class PageNavi extends BasePage {
     cy.url().should('contain', '/activity')
   }
 }
+
+export default PageNavi
