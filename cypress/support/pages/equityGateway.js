@@ -31,6 +31,7 @@ import PageNavi from './equityGateway/pageNavi/pageNavi'
 
 // Others
 import LoginPage from './equityGateway/loginPage'
+import LogoutPage from './equityGateway/logoutPage';
 
 /**
  * This is the main class the encapsulates all pages regarding the Equity Gateway portal (Except base pages since they are not meant to be directly called).
@@ -72,6 +73,7 @@ class EquityGateway {
 
         //Others
         this.LoginPage = new LoginPage()
+        this.LogoutPage = new LogoutPage()
     }
 }
 

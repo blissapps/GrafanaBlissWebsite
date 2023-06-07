@@ -13,7 +13,15 @@ describe('My Account Page', () => {
 
     context('General Page Validations', () => {
         it('Side Menu Validation', () => {
-            const menuItems = ['Personal Information', 'Bank account', 'Payments', 'Password & Security', 'Language', 'Tax documents', 'Help', 'Log Out']
+            const menuItems = [
+                'Personal Information',
+                'Bank account',
+                'Payments',
+                'Password & Security',
+                'Language',
+                'Tax documents',
+                'Help',
+                'Log Out']
             equityGateway.AccBasePage.sideMenu(menuItems)
         })
     })

@@ -3,6 +3,8 @@ import BasePage from '../basePage'
 const selectors = {
   inputNameField: 'input[placeholder="Username"]',
   inputPasswordField: 'input[placeholder="Password"]',
+  loginBtn: 'gs-button[type="default"][size="large"]',
+  mismatch: 'gs-notification[type="error"] .message',
   optCodeField: '#Code',
   validateOtpButton: 'button[value="send"]'
 }
@@ -14,9 +16,16 @@ class LoginPage extends BasePage {
   checkPageUrl() {
     this.checkUrl(Cypress.env('EQUITY_GATEWAY_BASE_URL'))
   }
-  login() {
-    this.loginWithSession(Cypress.env('EQUITY_GATEWAY_DEFAULT_USER_AUTH'), Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH'))
-    cy.url().should('contain', '/dashboard')
+  errorToast(){
+    cy.contains(selectors.mismatch, 'You entered an incorrect username or password.')
+  }
+  login(user, pw) {
+    if (user === undefined || pw === undefined){
+      this.loginWithSession(Cypress.env('EQUITY_GATEWAY_DEFAULT_USER_AUTH'), Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH'))
+      cy.url().should('contain', '/dashboard')
+    } else {
+      this.loginWithSession(user, pw)
+    }
     /**
      * >>> GATEWAY LOGIN STILL PROVISIONAL <<<
     cy.interceptHomeSystemInitializedAPICalls()
@@ -24,15 +33,17 @@ class LoginPage extends BasePage {
      */
   }
 
-  loginWithSession(email, password) {
+  loginWithSession(user, pw) {
     cy.visit(Cypress.env('EQUITY_GATEWAY_BASE_URL'));
-    cy.get(selectors.inputNameField).clear({ force: true }).type(email);
-    cy.get(selectors.inputPasswordField).clear({ force: true }).type(password, { log: false, force: true });
-    cy.contains('Login').click({ force: true });
 
-    // Store login details in session storage using cookies
-    cy.setCookie('email', email, { httpOnly: true });
-    cy.setCookie('password', password, { httpOnly: true })
+    if (user !== 'null.status'){
+      cy.get(selectors.inputNameField).clear({ force: true }).type(user);
+    }
+    if (pw !== 'null.status') {
+      cy.get(selectors.inputPasswordField).clear({ force: true }).type(pw);
+    }
+
+    cy.get(selectors.loginBtn).contains('Login').click({ force: true });
   }
 }
 
