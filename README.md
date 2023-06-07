@@ -12,6 +12,10 @@
 - [Cypress website](https://www.cypress.io/).
 - The API documentation is available [here](https://docs.cypress.io/api/api/table-of-contents.html).
 
+### Global Shares wiki about Cypress (take a look before proceeding):
+
+https://globalshares.atlassian.net/wiki/spaces/GCE/pages/2825716059/Cypress+Automation+Framework
+
 ---
 
 <br>
