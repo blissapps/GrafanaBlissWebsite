@@ -13,16 +13,13 @@ describe('Validate Page Navi Elements', () => {
 
   context('Validate Helpdesk Navigation', () => {
     /** Related to User Stories
-     * EGVFOUR-***
+     * EGVFOUR-39
      **/
-    it('C******** - Helpdesk navigation from welcome page', () => {
+    it('CC30458339 - Helpdesk navigation from welcome page', () => {
       equityGateway.PageNavi.navigateToHelpDeskNoAuth()
     })
 
-    /** Related to User Stories
-     * EGVFOUR-***
-     */
-    it('C******** - Helpdesk navigation from dashboard', () => {
+    it('CC30458338 - Helpdesk navigation from dashboard', () => {
       equityGateway.LoginPage.login() //Workaround for now
       equityGateway.PageNavi.navigateToHelpDeskAuth()
     })
@@ -50,57 +47,36 @@ describe('Validate Page Navi Elements', () => {
 
   context('Validate Sales Wizard Navigation', () => {
     /** Related to User Stories
-     * EGVFOUR-266
+     * EGVFOUR-266, EGVFOUR-264
      */
     it('C30159580 - Sales Wizard Default', () => {
       equityGateway.PageNavi.navigateToSalesWizard()
     })
 
-    /** Related to User Stories
-     * EGVFOUR-264
-     */
     it('C30159581 - Sales Wizard Security', () => {
       equityGateway.PageNavi.navigateToSalesWizard('security')
     })
 
-    /** Related to User Stories
-     * EGVFOUR-264
-     */
     it('C30159582 - Sales Wizard Share Group', () => {
       equityGateway.PageNavi.navigateToSalesWizard('share-group')
     })
 
-    /** Related to User Stories
-     * EGVFOUR-264
-     */
     it('C30159583 - Sales Wizard Amount to Sell', () => {
       equityGateway.PageNavi.navigateToSalesWizard('amount-to-sell')
     })
 
-    /** Related to User Stories
-     * EGVFOUR-264
-     */
     it('C30159584 - Sales Wizard Order Type', () => {
       equityGateway.PageNavi.navigateToSalesWizard('order-type')
     })
 
-    /** Related to User Stories
-     * EGVFOUR-264
-     */
     it('C30159585 - Sales Wizard Distribution', () => {
       equityGateway.PageNavi.navigateToSalesWizard('distribution')
     })
 
-    /** Related to User Stories
-     * EGVFOUR-264
-     */
     it('C30159586 - Sales Wizard Review Order', () => {
       equityGateway.PageNavi.navigateToSalesWizard('review-order')
     })
 
-    /** Related to User Stories
-     * EGVFOUR-264
-     */
     it('C30159587 - Sales Wizard Success Confirmation', () => {
       equityGateway.PageNavi.navigateToSalesWizard('success-confirmation')
     })
