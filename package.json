@@ -15,6 +15,7 @@
     "clean": "rm -rf ./node_modules/",
     " --- CYPRESS DEV SCRIPTS ---- ": "",
     "cy:open": "cypress open --e2e --browser chrome --config specPattern=cypress/integration/**/*.spec.js",
+    "cy:open:gateway": "cypress open --e2e --browser chrome --config specPattern=cypress/integration/gateway/**/*.spec.js",
     "cy:run": "cypress run --browser chrome",
     " --- CYPRESS PIPELINE SCRIPTS WITHOUT FILE RESULTS ---- ": "",
     "cy:run:chrome": "cypress run --browser chrome --spec 'cypress/integration/**/*.spec.js'",
