@@ -4,7 +4,6 @@ const equityGateway = new EquityGateway()
 describe('My Account Preferences Section', () => {
     beforeEach(() => {
         equityGateway.LoginPage.login() //Workaround for now
-        //FIXME PROVISORY MENU NAV IS BROKEN
         cy.window().then((win) => {
             // @ts-ignore
             win.location.href = 'https://eg-v4-alpha-25.gsapps.dev/my-account/profile/personal-information';
@@ -52,7 +51,7 @@ describe('My Account Preferences Section', () => {
         })
 
         it('C30092726 - Sale Distributions', () => {
-            //TODO developments are not finished yet
+            //TODO developments are not finished yet, waiting for DEV
             const elements = [
                 'Distributions methods',
                 'These are the methods in which you prefer to receive sale payments.',
@@ -67,7 +66,7 @@ describe('My Account Preferences Section', () => {
         })
 
         it('C30092726 - Sale BankAcc', () => {
-            //TODO developments are not finished yet
+            //TODO developments are not finished yet, waiting for DEV
             const elements = [
                 'Bank account',
                 'Revolut • EURO (€)',
@@ -83,7 +82,7 @@ describe('My Account Preferences Section', () => {
         })
 
         it('C30092726 - Dividend Distributions', () => {
-            //TODO developments are not finished yet
+            //TODO developments are not finished yet, waiting for DEV
             const elements = [
                 'Distributions methods',
                 'These are the methods in which you prefer to receive sale payments.',
@@ -98,7 +97,7 @@ describe('My Account Preferences Section', () => {
         })
 
         it('C30092726 - Dividend BankAcc', () => {
-            //TODO developments are not finished yet
+            //TODO developments are not finished yet, waiting for DEV
             const elements = [
                 'Bank account',
                 'Revolut • EURO (€)',
@@ -119,7 +118,7 @@ describe('My Account Preferences Section', () => {
          *  EGVFOUR-84
          */
         it('Page General validations', () => {
-            //TODO developments are not finished yet
+            //TODO developments are not finished yet, waiting for DEV
             const elements = [
                 'Selected language',
                 'EN - English',

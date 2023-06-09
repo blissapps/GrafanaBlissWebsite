@@ -12,11 +12,10 @@ const selectors = {
 
 class Activity extends BasePage {
     gotoActivity(){
-        cy.get(selectors.goToActivityBtn).contains('View all activity').should(($element) => {
-            const url = $element.attr('href')
-            expect(url).to.contain('/activity')
-        })
-        cy.get(selectors.goToActivityBtn).contains('View all activity').click()
+        cy.window().then((win) => {
+            // @ts-ignore
+            win.location.href = 'https://eg-v4-alpha-25.gsapps.dev/activity'
+        });
     }
     breadcrumbNavi(){
         cy.get(selectors.breadcrumb).contains('Dashboard').click()

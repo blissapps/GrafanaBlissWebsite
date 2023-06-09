@@ -3,8 +3,7 @@ import EquityGateway from '../../../support/pages/equityGateway'
 const equityGateway = new EquityGateway()
 describe('My Account Page', () => {
     beforeEach(() => {
-        equityGateway.LoginPage.login() //Workaround for now
-        //FIXME Provisory
+        equityGateway.LoginPage.login()
         cy.window().then((win) => {
             // @ts-ignore
             win.location.href = 'https://eg-v4-alpha-25.gsapps.dev/my-account/profile/personal-information';

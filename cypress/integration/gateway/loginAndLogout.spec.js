@@ -10,17 +10,31 @@ describe('Login and Logout tests', () => {
          */
         it('Success Login ACC1', () => {
             equityGateway.LoginPage.login(Cypress.env('EQUITY_GATEWAY_DEFAULT_USER_AUTH').toString(), Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH').toString())
-            cy.url().should('contain', '/dashboard')
+            equityGateway.Dashboard.checkPageUrl()
         })
 
         it('Success Login ACC2', () => {
             equityGateway.LoginPage.login('m1', Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH').toString())
-            cy.url().should('contain', '/dashboard')
+            equityGateway.Dashboard.checkPageUrl()
         })
 
         it('Success Login ACC3', () => {
             equityGateway.LoginPage.login('Paulandera', Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH').toString())
-            cy.url().should('contain', '/dashboard')
+            equityGateway.Dashboard.checkPageUrl()
+        })
+    })
+
+    context('General Login Unsuccessful Scenarios', () => {
+        /** General Account Login ACC Credentials Validation
+         */
+        it('Login without User', () => {
+            equityGateway.LoginPage.login('', Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH').toString())
+            equityGateway.LoginPage.errorToast()
+        })
+
+        it('Login without PW', () => {
+            equityGateway.LoginPage.login(Cypress.env('EQUITY_GATEWAY_DEFAULT_USER_AUTH').toString(), '')
+            equityGateway.LoginPage.errorToast()
         })
     })
 
@@ -42,7 +56,7 @@ describe('Login and Logout tests', () => {
                 'Privacy Policy',
                 'Help'
             ]
-            equityGateway.TopBar.accMenuClick(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_NAME')+' Maddox', 'Logout')
+            equityGateway.TopBar.accMenuClick(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_FULL_NAME'), 'Logout')
             equityGateway.LogoutPage.checkPage(logoutInfo)
             equityGateway.LogoutPage.checkFooter(footerInfo)
 
@@ -58,12 +72,12 @@ describe('Login and Logout tests', () => {
                 'Privacy Policy',
                 'Help'
             ]
-            equityGateway.TopBar.accMenuClick(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_NAME')+' Maddox', 'Logout')
+            equityGateway.TopBar.accMenuClick(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_FULL_NAME'), 'Logout')
             equityGateway.LogoutPage.checkPage(logoutInfo)
             equityGateway.LogoutPage.checkFooter(footerInfo)
             equityGateway.LogoutPage.checkout()
             equityGateway.LoginPage.login()
-            equityGateway.Dashboard.home(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_NAME'))
+            equityGateway.Dashboard.home(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_1ST_NAME'))
         })
     })
 })

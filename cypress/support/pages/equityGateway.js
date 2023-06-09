@@ -1,10 +1,7 @@
 // @ts-ignore
-//TODO
 // ------------------------------------------------------------- Components -------------------------------------------------------//
 
-//TODO
 // ----------------------------------------------------------------Pages -----------------------------------------------------------//
-
 //Dashboard
 import Dashboard from './equityGateway/dashboard/dashboard'
 import Portfolio from './equityGateway/dashboard/portfolio'
@@ -42,10 +39,8 @@ import LogoutPage from './equityGateway/logoutPage';
  */
 class EquityGateway {
     constructor() {
-        //TODO
         // -------------------------------------------------------------------------- Components --------------------------------------------------------------------//
 
-        //TODO
         // --------------------------------------------------------------------------------Pages ----------------------------------------------------------------------//
         //Dashboard
         this.SharesHeader = new SharesHeader()

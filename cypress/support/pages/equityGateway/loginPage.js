@@ -36,10 +36,10 @@ class LoginPage extends BasePage {
   loginWithSession(user, pw) {
     cy.visit(Cypress.env('EQUITY_GATEWAY_BASE_URL'));
 
-    if (user !== 'null.status'){
+    if (user !== 'null.status' && user !== ''){
       cy.get(selectors.inputNameField).clear({ force: true }).type(user);
     }
-    if (pw !== 'null.status') {
+    if (pw !== 'null.status' && pw !== '') {
       cy.get(selectors.inputPasswordField).clear({ force: true }).type(pw);
     }
 

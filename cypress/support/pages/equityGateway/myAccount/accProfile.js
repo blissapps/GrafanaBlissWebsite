@@ -28,7 +28,6 @@ const selectors = {
 }
 
 class accProfile extends BasePage {
-    //TODO EX: METHOD 1
     pageTitle(pageTitle){
         cy.get(selectors.title).contains(pageTitle)
     }

@@ -16,13 +16,17 @@ class Dashboard extends BasePage {
         cy.get(selectors.activityUrl).should(($element) => {
             const url = $element.attr('href')
             expect(url).to.contain('/activity')
-        });
+        })
     }
 
     footer(elementArray){
         elementArray.forEach((item) => {
             cy.get(selectors.footer).contains(item).should('exist');
-        });
+        })
+    }
+
+    checkPageUrl(){
+        this.checkUrl('/dashboard')
     }
 }
 export default Dashboard

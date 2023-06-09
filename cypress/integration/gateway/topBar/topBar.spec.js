@@ -14,7 +14,7 @@ describe('TopBar tests', () => {
          */
         it('C30092768 - TopBar Acc name Validation', () => {
             //The name on TopBar must be displayed as "full name" 1st and last name(1st name is a ENV variable)
-            equityGateway.TopBar.accDetails(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_NAME')+' Maddox')
+            equityGateway.TopBar.accDetails(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_FULL_NAME'))
         })
 
         it('C30092768 - TopBar ACC Menu and Hrefs Validation', () => {

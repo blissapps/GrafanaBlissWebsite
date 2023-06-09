@@ -4,7 +4,6 @@ const equityGateway = new EquityGateway()
 describe('My Account Profile Section', () => {
     beforeEach(() => {
         equityGateway.LoginPage.login() //Workaround for now
-        //FIXME PROVISORY
         cy.window().then((win) => {
             // @ts-ignore
             win.location.href = 'https://eg-v4-alpha-25.gsapps.dev/my-account/profile/personal-information';
@@ -17,7 +16,7 @@ describe('My Account Profile Section', () => {
          */
         it('C30092720 - Profile name validation', () => {
             equityGateway.AccProfile.pageTitle('Personal Information')
-            equityGateway.AccProfile.accName('Lorelei Hutchinson') //FIXME equityGateway.Profile.accName(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_NAME')+'LAST NAME')
+            equityGateway.AccProfile.accName(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_FULL_NAME'))
         })
 
         it('C30092720 - Profile and Demographic Content Titles', () => {

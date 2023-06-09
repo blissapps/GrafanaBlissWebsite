@@ -3,9 +3,8 @@ import EquityGateway from '../../../support/pages/equityGateway'
 const equityGateway = new EquityGateway()
 describe('Dashboard page tests', () => {
     beforeEach(() => {
-        equityGateway.LoginPage.login() //Workaround for now
-        //cy.loginWithUI(Cypress.env('EQUITY_GATEWAY_DEFAULT_USER_AUTH'), Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH'))
-        equityGateway.Activity.gotoActivity() //FIXME PROVISORY NAVIGATION TO ACTIVITY can't handle direct url navigation
+        equityGateway.LoginPage.login()
+        equityGateway.Activity.gotoActivity()
     })
 
     context('General Validations', () => {

@@ -5,7 +5,6 @@ const equityGateway = new EquityGateway()
 describe('Dashboard page tests', () => {
     beforeEach(() => {
         equityGateway.LoginPage.login() //Workaround for now
-        //cy.loginWithUI(Cypress.env('EQUITY_GATEWAY_DEFAULT_USER_AUTH'), Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH'))
     })
 
     context('General Dashboard Validations', () => {
@@ -13,7 +12,7 @@ describe('Dashboard page tests', () => {
          * EGVFOUR-49
          */
         it('C30092770 - Dashboard Home Elements Validation', () => {
-            equityGateway.Dashboard.home(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_NAME'))
+            equityGateway.Dashboard.home(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_1ST_NAME'))
         })
     })
 
@@ -25,7 +24,7 @@ describe('Dashboard page tests', () => {
             name: 'Big Yellow Group PLC',
             amount: '0.00',
             currency: 'GBP',
-            date: 'Mar 31', //FIXME dayjs().format('MMM DD, H:mm'),
+            date: 'Mar 31', //FIXME when Dev completed, use: dayjs().format('MMM DD, H:mm'),
             share_status: 'positive',
             sharesPositiveColor: 'rgb(0, 153, 0)',
             sharesNegativeColor: 'rgb(223, 7, 7)',
