@@ -40,7 +40,7 @@ class PageNavi extends BasePage {
    */
   navigateToMyAccountProfile() {
     // User logs in and is in dashboard
-    cy.get(selectors.dashboardDropdown).click()
+    cy.get(selectors.dashboardDropdown).eq(1).click()
     cy.get(selectors.dropdownPersonalInfo).click()
     cy.url().should('contains', 'my-account/profile/personal-information')
   }
@@ -58,7 +58,7 @@ class PageNavi extends BasePage {
    */
   navigateToActivity(){
     // User logs in
-    cy.visit('https://eg-v4-alpha-25.gsapps.dev/activity', { failOnStatusCode: false })
+    cy.visit('https://eg-v4-alpha-25.gsapps.dev/activity', { failOnStatusCode: false }) //TODO
     cy.url().should('contain', '/activity')
   }
 }
