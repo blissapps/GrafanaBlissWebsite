@@ -9,11 +9,11 @@ describe('My Account TAX Section', () => {
 
     context('General Validations', () => {
         it('C30092728 - Page General Validations', () => {
-            equityGateway.AccTax.header('Tax documents')
-            equityGateway.AccBasePage.sideMenuGotoPage('Tax documents', '/my-account/tax/tax-documents')
+            equityGateway.AccTaxPage.header('Tax documents')
+            equityGateway.AccSideMenu.sideMenuGotoPage('Tax documents', '/my-account/tax/tax-documents')
             cy.fixture('gateway/myAccount/taxInfo').then((jsonObject) => {
                 const stringArray = Object.values(jsonObject);
-                equityGateway.AccTax.infoSector(stringArray);
+                equityGateway.AccTaxPage.infoSector(stringArray);
             });
         })
     })
@@ -27,9 +27,9 @@ describe('My Account TAX Section', () => {
                 'Report - 2021',
                 'Report - 2022'
             ]
-            equityGateway.AccTax.yearMenuSelect(3, '2020')
-            equityGateway.AccTax.reportsElements(elementsExist, 'exist') //Passing an array because in future developments it will receive more that
-            equityGateway.AccTax.reportsElements(elementsNotExist, 'not.exist')
+            equityGateway.AccTaxPage.yearMenuSelect(3, '2020')
+            equityGateway.AccTaxPage.reportsElements(elementsExist, 'exist') //Passing an array because in future developments it will receive more that
+            equityGateway.AccTaxPage.reportsElements(elementsNotExist, 'not.exist')
         })
 
         it('Filter by Type', () => {
@@ -41,9 +41,9 @@ describe('My Account TAX Section', () => {
                 'Report - 2022',
                 'No results available'
             ]
-            equityGateway.AccTax.typeMenuSelect(2, '1089 Report')
-            equityGateway.AccTax.reportsElements(elementsExist, 'exist') //Passing an array because in future developments it will receive more that
-            equityGateway.AccTax.reportsElements(elementsNotExist, 'not.exist')
+            equityGateway.AccTaxPage.typeMenuSelect(2, '1089 Report')
+            equityGateway.AccTaxPage.reportsElements(elementsExist, 'exist') //Passing an array because in future developments it will receive more that
+            equityGateway.AccTaxPage.reportsElements(elementsNotExist, 'not.exist')
         })
 
         it('Complex Filter Year Type Match', () => {
@@ -55,12 +55,12 @@ describe('My Account TAX Section', () => {
                 'Report - 2022',
                 'No results available'
             ]
-            equityGateway.AccTax.yearMenuSelect(3, '2020')
-            equityGateway.AccTax.typeMenuSelect(2, '1089 Report')
-            equityGateway.AccTax.reportsElements(elementsExist, 'exist') //Passing an array because in future developments it will receive more that
-            equityGateway.AccTax.reportsElements(elementsExist, 'exist') //Passing an array because in future developments it will receive more that
-            equityGateway.AccTax.reportsElements(elementsNotExist, 'not.exist')
-            equityGateway.AccTax.reportsElements(elementsNotExist, 'not.exist')
+            equityGateway.AccTaxPage.yearMenuSelect(3, '2020')
+            equityGateway.AccTaxPage.typeMenuSelect(2, '1089 Report')
+            equityGateway.AccTaxPage.reportsElements(elementsExist, 'exist') //Passing an array because in future developments it will receive more that
+            equityGateway.AccTaxPage.reportsElements(elementsExist, 'exist') //Passing an array because in future developments it will receive more that
+            equityGateway.AccTaxPage.reportsElements(elementsNotExist, 'not.exist')
+            equityGateway.AccTaxPage.reportsElements(elementsNotExist, 'not.exist')
         })
 
         it('Complex Filter Year Type Not Match', () => {
@@ -71,12 +71,12 @@ describe('My Account TAX Section', () => {
                 'Report - 2021',
                 'Report - 2022'
             ]
-            equityGateway.AccTax.yearMenuSelect(1, '2022')
-            equityGateway.AccTax.typeMenuSelect(2, '1089 Report')
-            equityGateway.AccTax.reportsElements(elementsExist, 'exist') //Passing an array because in future developments it will receive more that
-            equityGateway.AccTax.reportsElements(elementsExist, 'exist') //Passing an array because in future developments it will receive more that
-            equityGateway.AccTax.reportsElements(elementsNotExist, 'not.exist')
-            equityGateway.AccTax.reportsElements(elementsNotExist, 'not.exist')
+            equityGateway.AccTaxPage.yearMenuSelect(1, '2022')
+            equityGateway.AccTaxPage.typeMenuSelect(2, '1089 Report')
+            equityGateway.AccTaxPage.reportsElements(elementsExist, 'exist') //Passing an array because in future developments it will receive more that
+            equityGateway.AccTaxPage.reportsElements(elementsExist, 'exist') //Passing an array because in future developments it will receive more that
+            equityGateway.AccTaxPage.reportsElements(elementsNotExist, 'not.exist')
+            equityGateway.AccTaxPage.reportsElements(elementsNotExist, 'not.exist')
         })
     })
 })

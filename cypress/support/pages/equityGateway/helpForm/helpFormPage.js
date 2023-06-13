@@ -35,7 +35,7 @@ const selectors = {
   welcomePageHelp: 'a.ng-star-inserted'
 }
 
-class HelpForm extends BasePage {
+class HelpFormPage extends BasePage {
   /** Navigates to the Helpdesk Page
    * @param {boolean} auth (Adapts the behavior corresponding to the user authentication status)
    */
@@ -181,4 +181,4 @@ class HelpForm extends BasePage {
     }
   }
 }
-export default HelpForm
+export default HelpFormPage

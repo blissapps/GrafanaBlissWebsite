@@ -15,11 +15,11 @@ describe('My Account Preferences Section', () => {
          *  EGVFOUR-81
          */
         beforeEach(() => {
-            equityGateway.AccBasePage.sideMenuGotoPage('Bank account', '/my-account/account-preferences/bank-account')
+            equityGateway.AccSideMenu.sideMenuGotoPage('Bank account', '/my-account/account-preferences/bank-account')
         })
 
         it('Page General Validations', () => {
-            equityGateway.AccPreferences.bankAccGrlValidations(
+            equityGateway.AccPreferencesPage.bankAccGrlValidations(
                 'Bank account',
                 'Linked bank accounts (3)',
                 '3/3 Bank account limit reached'
@@ -29,7 +29,7 @@ describe('My Account Preferences Section', () => {
         it('C30092725 - Page Validations', () => {
             cy.fixture('gateway/myAccount/linkedBankACC').then((jsonObject) => {
                 const stringArray = Object.values(jsonObject);
-                equityGateway.AccPreferences.bankAccCards(stringArray);
+                equityGateway.AccPreferencesPage.bankAccCards(stringArray);
             });
         })
     })
@@ -39,11 +39,11 @@ describe('My Account Preferences Section', () => {
          *  EGVFOUR-82
          */
         beforeEach(() => {
-            equityGateway.AccBasePage.sideMenuGotoPage('Payments', '/my-account/account-preferences/payments')
+            equityGateway.AccSideMenu.sideMenuGotoPage('Payments', '/my-account/account-preferences/payments')
         })
 
         it('Page General Validations', () => {
-            equityGateway.AccPreferences.paymentsGrlValidations(
+            equityGateway.AccPreferencesPage.paymentsGrlValidations(
                 'Payments',
                 'Sale',
                 'Dividend'
@@ -62,7 +62,7 @@ describe('My Account Preferences Section', () => {
              * Elements: Array of anything that you want to verify inside that section,excluding "Preferred delivery methods"
              * Delivery: Refers to "Preferred delivery methods inside", for now its just 1 (not necessarily need to pass)
              */
-            equityGateway.AccPreferences.saleSection(1, elements, 'Wire Transfer')
+            equityGateway.AccPreferencesPage.saleSection(1, elements, 'Wire Transfer')
         })
 
         it('C30092726 - Sale BankAcc', () => {
@@ -78,7 +78,7 @@ describe('My Account Preferences Section', () => {
              * Elements: Array of anything that you want to verify inside that section,excluding "Preferred delivery methods"
              * Delivery: Refers to "Preferred delivery methods inside", for now its just 1 (not necessarily need to pass)
              */
-            equityGateway.AccPreferences.saleSection(2, elements)
+            equityGateway.AccPreferencesPage.saleSection(2, elements)
         })
 
         it('C30092726 - Dividend Distributions', () => {
@@ -93,7 +93,7 @@ describe('My Account Preferences Section', () => {
              * Elements: Array of anything that you want to verify inside that section,excluding "Preferred delivery methods"
              * Delivery: Refers to "Preferred delivery methods inside", for now its just 1 (not necessarily need to pass)
              */
-            equityGateway.AccPreferences.dividendSection(1, elements, 'Wire Transfer')
+            equityGateway.AccPreferencesPage.dividendSection(1, elements, 'Wire Transfer')
         })
 
         it('C30092726 - Dividend BankAcc', () => {
@@ -109,7 +109,7 @@ describe('My Account Preferences Section', () => {
              * Elements: Array of anything that you want to verify inside that section,excluding "Preferred delivery methods"
              * Delivery: Refers to "Preferred delivery methods inside", for now its just 1 (not necessarily need to pass)
              */
-            equityGateway.AccPreferences.dividendSection(2, elements)
+            equityGateway.AccPreferencesPage.dividendSection(2, elements)
         })
     })
 
@@ -124,8 +124,8 @@ describe('My Account Preferences Section', () => {
                 'EN - English',
                 'English'
             ]
-            equityGateway.AccBasePage.sideMenuGotoPage('Language', '/my-account/account-preferences/language')
-            equityGateway.AccPreferences.languageSection(elements)
+            equityGateway.AccSideMenu.sideMenuGotoPage('Language', '/my-account/account-preferences/language')
+            equityGateway.AccPreferencesPage.languageSection(elements)
         })
     })
 })

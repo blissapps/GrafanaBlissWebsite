@@ -5,7 +5,6 @@ const equityGateway = new EquityGateway()
 describe('SideMenuBar tests', () => {
     beforeEach(() => {
         equityGateway.LoginPage.login() //Workaround for now
-        //cy.loginWithUI(Cypress.env('EQUITY_GATEWAY_DEFAULT_USER_AUTH'), Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH'))
     })
 
     context('Side Navigation Bar', () => {
@@ -13,7 +12,7 @@ describe('SideMenuBar tests', () => {
          * EGVFOUR-43
          */
 
-        it('C30092769 - SideMenuBar Pages Validation', () => {
+        it('C30092769 - SideMenuBar Content Validation', () => {
             //TODO pages must include href when DEVs finish
             equityGateway.SideMenuBar.mainPages('1', 'Dashboard')
             equityGateway.SideMenuBar.mainPages('2', 'Portfolio')
@@ -22,8 +21,8 @@ describe('SideMenuBar tests', () => {
             equityGateway.SideMenuBar.mainPages('5', 'Statements')
             equityGateway.SideMenuBar.mainPages('6', 'Resources')
 
-            //We must pass the URL that Support Page should contain
-            equityGateway.SideMenuBar.support('/help')
+            equityGateway.SideMenuBar.support('Support')
+            equityGateway.SideMenuBar.support('Help')
         })
 
         it('C30092769 - SideMenuBar Shares Validation', () => {

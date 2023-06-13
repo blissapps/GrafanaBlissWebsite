@@ -7,12 +7,13 @@ const selectors = {
     sideLbar: '.eg-my-account-sidebar__navigation'
 }
 
-class accBasePage extends BasePage {
+class accBase extends BasePage {
     sideMenu(expectedItems){
         expectedItems.forEach((item) => {
         cy.get(selectors.sideLmenu).contains(item).should('exist');
         })
     }
+    //FIXME TO BE REPLACED BY PAGENAVI TESTS
     sideMenuGotoPage(pageName, href){
         cy.get(selectors.sideLbar).contains(pageName).click({ force: true })
         cy.get(selectors.sideLbar).contains(pageName)
@@ -20,4 +21,4 @@ class accBasePage extends BasePage {
             .should('have.attr', 'href', href);
     }
 }
-export default accBasePage
+export default accBase

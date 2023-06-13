@@ -15,8 +15,8 @@ describe('My Account Profile Section', () => {
          *  EGVFOUR-76
          */
         it('C30092720 - Profile name validation', () => {
-            equityGateway.AccProfile.pageTitle('Personal Information')
-            equityGateway.AccProfile.accName(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_FULL_NAME'))
+            equityGateway.AccProfilePage.pageTitle('Personal Information')
+            equityGateway.AccProfilePage.accName(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_FULL_NAME'))
         })
 
         it('C30092720 - Profile and Demographic Content Titles', () => {
@@ -26,11 +26,11 @@ describe('My Account Profile Section', () => {
                 'Citizenship',
                 'Nationality'
             ]
-            equityGateway.AccProfile.profileContent(pageSections)
+            equityGateway.AccProfilePage.profileContent(pageSections)
         })
 
         it('C30092720 - Profile and Demographic Content Info', () => {
-            equityGateway.AccProfile.profileContent(
+            equityGateway.AccProfilePage.profileContent(
                 null,
                 'Rochford',
                 '2003/01/21',
@@ -50,11 +50,11 @@ describe('My Account Profile Section', () => {
                 'Primary tax ID type',
                 'Primary tax ID number'
             ]
-            equityGateway.AccProfile.taxContent(taxSections)
+            equityGateway.AccProfilePage.taxContent(taxSections)
         })
 
         it('C30092721 - Tax Content Info', () => {
-            equityGateway.AccProfile.taxContent(
+            equityGateway.AccProfilePage.taxContent(
                 null,
                 'United Kingdom of Great Britain',
                 'National Insurance Number (NINO)',
@@ -75,11 +75,11 @@ describe('My Account Profile Section', () => {
                 'Tax ID',
                 'Social Security Number'
             ]
-            equityGateway.AccProfile.identifiersContent(idSections)
+            equityGateway.AccProfilePage.identifiersContent(idSections)
         })
 
         it('C30092722 - Tax Content Info', () => {
-            equityGateway.AccProfile.identifiersContent(
+            equityGateway.AccProfilePage.identifiersContent(
                 null,
                 'SID24567',
                 'GS_028',
@@ -102,11 +102,11 @@ describe('My Account Profile Section', () => {
                 'suppliedEmailAddress',
                 'Preferred for email communications'
             ]
-            equityGateway.AccProfile.contactContent(contactSections)
+            equityGateway.AccProfilePage.contactContent(contactSections)
         })
 
         it('C30092723 - Contact Details Content Info', () => {
-            equityGateway.AccProfile.contactContent(
+            equityGateway.AccProfilePage.contactContent(
                 null,
                 'PersonalEmailAddress_32198597_967649@myglobalshares.com',
                 'SuppliedEmailAddress_29989189_967649@myglobalshares.com',
@@ -128,7 +128,7 @@ describe('My Account Profile Section', () => {
                 '16501 Erie',
                 'United Kingdom of Great Britain'
             ]
-            equityGateway.AccProfile.addressContent(addressInfo)
+            equityGateway.AccProfilePage.addressContent(addressInfo)
         })
     })
 })

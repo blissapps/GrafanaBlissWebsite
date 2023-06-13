@@ -25,11 +25,11 @@ describe('Validate Page Navi Elements', () => {
     })
   })
 
-  context('Validate Dashboard Navigation', () => {
+  context('Validate DashboardPage Navigation', () => {
     /** Related to User Stories
      * EGVFOUR-266
      */
-    it('C30159578 - Dashboard path navigation', () => {
+    it('C30159578 - DashboardPage path navigation', () => {
       equityGateway.LoginPage.login()
       equityGateway.PageNavi.navigateToDashboard()
     })
@@ -82,7 +82,7 @@ describe('Validate Page Navi Elements', () => {
     })
   })
 
-  context('Validate All Activity', () => {
+  context('Validate All ActivityPage', () => {
     /** Related to User Stories
      * EGVFOUR-266
      */

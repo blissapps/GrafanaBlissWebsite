@@ -17,7 +17,7 @@ describe('TopBar tests', () => {
             equityGateway.TopBar.accDetails(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_FULL_NAME'))
         })
 
-        it('C30092768 - TopBar ACC Menu and Hrefs Validation', () => {
+        it('C30092768 - TopBar ACC Menu and Hrefs Validation', () => { //FIXME THE URL VERIFY WILL BE REPLACED BY NAVI TESTS
             /** Validate Menu Items and respective Hrefs
              *  topbarAccMenuLabels & topbarAccMenuHRefs must contain the same length
              */

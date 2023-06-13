@@ -11,7 +11,7 @@ const selectors = {
     reportsContent: '.eg-tax > .p-5'
 }
 
-class accTax extends BasePage {
+class accTaxPage extends BasePage {
     header(title){
         cy.get(selectors.header).should('contain.text', title)
     }
@@ -41,4 +41,4 @@ class accTax extends BasePage {
     }
 
 }
-export default accTax
+export default accTaxPage

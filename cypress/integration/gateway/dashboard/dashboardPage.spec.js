@@ -2,17 +2,17 @@ import EquityGateway from '../../../support/pages/equityGateway'
 
 const equityGateway = new EquityGateway()
 //const dayjs = require('dayjs')
-describe('Dashboard page tests', () => {
+describe('DashboardPage page tests', () => {
     beforeEach(() => {
         equityGateway.LoginPage.login() //Workaround for now
     })
 
-    context('General Dashboard Validations', () => {
+    context('General DashboardPage Validations', () => {
         /** Related to User Stories
          * EGVFOUR-49
          */
-        it('C30092770 - Dashboard Home Elements Validation', () => {
-            equityGateway.Dashboard.home(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_1ST_NAME'))
+        it('C30092770 - DashboardPage Home Elements Validation', () => {
+            equityGateway.DashboardPage.home(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_1ST_NAME'))
         })
     })
 
@@ -44,7 +44,7 @@ describe('Dashboard page tests', () => {
         })
     })
 
-    context('Component Footer', () => {
+    context('Component Footer', () => { //FIXME ADD NEW TEST CLASS CALLED FOOTER
         /** Related to User Stories
          * EGVFOUR-50
          */
@@ -52,7 +52,7 @@ describe('Dashboard page tests', () => {
             //As new elements may be included on footer this method validates the num of labels passed
             const expectedFooterItems = ['Terms and Conditions', 'Privacy Policy', 'Help'];
 
-            equityGateway.Dashboard.footer(expectedFooterItems)
+            equityGateway.DashboardPage.footer(expectedFooterItems)
         })
     })
 

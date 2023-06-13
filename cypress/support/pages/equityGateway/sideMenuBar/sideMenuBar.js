@@ -4,7 +4,7 @@ const selectors = {
   pages: 'ul > :nth-child',
   shareInfo: '.pb-8 > eg-price-card',
   shareDerivation: '.lg\\:mr-8 > .flex',
-  support: '.eg-sidebar > .flex-column > .flex'
+  support: '.eg-sidebar > .flex-column'
 }
 
 class SideMenuBar extends BasePage {
@@ -32,12 +32,8 @@ class SideMenuBar extends BasePage {
       })
   }
 
-  support(href) {
-    cy.get(selectors.support).should(($element) => {
-      expect($element).to.have.attr('href', '/help')
-    })
-    cy.get(selectors.support).scrollIntoView().click({ force: true })
-    cy.url().should('contain', href)
+  support(label) {
+    cy.get(selectors.support).should('contain.text', label)
   }
 }
 export default SideMenuBar

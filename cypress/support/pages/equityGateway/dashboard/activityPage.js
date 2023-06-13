@@ -10,7 +10,7 @@ const selectors = {
     tabsFilter: '.eg-upcoming__filters'
 }
 
-class Activity extends BasePage {
+class ActivityPage extends BasePage {
     gotoActivity(){
         cy.window().then((win) => {
             // @ts-ignore
@@ -49,4 +49,4 @@ class Activity extends BasePage {
         });
     }
 }
-export default Activity
+export default ActivityPage

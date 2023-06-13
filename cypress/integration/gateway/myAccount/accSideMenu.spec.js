@@ -21,7 +21,7 @@ describe('My Account Page', () => {
                 'Tax documents',
                 'Help',
                 'Log Out']
-            equityGateway.AccBasePage.sideMenu(menuItems)
+            equityGateway.AccSideMenu.sideMenu(menuItems)
         })
     })
 })

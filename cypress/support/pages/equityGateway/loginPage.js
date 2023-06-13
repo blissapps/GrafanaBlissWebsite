@@ -34,16 +34,16 @@ class LoginPage extends BasePage {
   }
 
   loginWithSession(user, pw) {
-    cy.visit(Cypress.env('EQUITY_GATEWAY_BASE_URL'));
+    cy.visit(Cypress.env('EQUITY_GATEWAY_BASE_URL'))
 
-    if (user !== 'null.status' && user !== ''){
-      cy.get(selectors.inputNameField).clear({ force: true }).type(user);
+    if (user !== '') {
+      cy.get(selectors.inputNameField).clear({ force: true }).type(user)
     }
-    if (pw !== 'null.status' && pw !== '') {
-      cy.get(selectors.inputPasswordField).clear({ force: true }).type(pw);
+    if (pw !== '') {
+      cy.get(selectors.inputPasswordField).clear({ force: true }).type(pw)
     }
 
-    cy.get(selectors.loginBtn).contains('Login').click({ force: true });
+    cy.get(selectors.loginBtn).contains('Login').click({ force: true })
   }
 }
 

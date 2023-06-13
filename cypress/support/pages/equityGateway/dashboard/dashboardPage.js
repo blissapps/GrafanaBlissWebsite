@@ -7,7 +7,7 @@ const selectors = {
     footer: '.eg-footer'
 }
 
-class Dashboard extends BasePage {
+class DashboardPage extends BasePage {
     home(acc1stName){
         cy.get(selectors.headName).contains(`Hello, ${acc1stName}`)
         cy.get(selectors.activityWidget).contains('Activity')
@@ -29,4 +29,4 @@ class Dashboard extends BasePage {
         this.checkUrl('/dashboard')
     }
 }
-export default Dashboard
+export default DashboardPage

@@ -2,20 +2,20 @@
 // ------------------------------------------------------------- Components -------------------------------------------------------//
 
 // ----------------------------------------------------------------Pages -----------------------------------------------------------//
-//Dashboard
-import Dashboard from './equityGateway/dashboard/dashboard'
+//DashboardPage
+import DashboardPage from './equityGateway/dashboard/dashboardPage'
 import Portfolio from './equityGateway/dashboard/portfolio'
 import SharesHeader from './equityGateway/dashboard/sharesHeader'
-import Activity from './equityGateway/dashboard/activity'
+import ActivityPage from './equityGateway/dashboard/activityPage'
 
 //Help Form
-import HelpForm from './equityGateway/helpForm/helpForm'
+import HelpFormPage from './equityGateway/helpForm/helpFormPage'
 
 //My Account
-import AccBasePage from './equityGateway/myAccount/accBasePage'
-import AccPreferences from './equityGateway/myAccount/accPreferences';
-import AccProfile from './equityGateway/myAccount/accProfile'
-import AccTax from './equityGateway/myAccount/accTax'
+import AccSideMenu from './equityGateway/myAccount/accBase'
+import AccPreferencesPage from './equityGateway/myAccount/accPreferencesPage';
+import AccProfilePage from './equityGateway/myAccount/accProfilePage'
+import AccTaxPage from './equityGateway/myAccount/accTaxPage'
 
 //Side Menu
 import SideMenuBar from './equityGateway/sideMenuBar/sideMenuBar'
@@ -42,20 +42,20 @@ class EquityGateway {
         // -------------------------------------------------------------------------- Components --------------------------------------------------------------------//
 
         // --------------------------------------------------------------------------------Pages ----------------------------------------------------------------------//
-        //Dashboard
+        //DashboardPage
         this.SharesHeader = new SharesHeader()
-        this.Dashboard = new Dashboard()
-        this.Activity = new Activity()
+        this.DashboardPage = new DashboardPage()
+        this.ActivityPage = new ActivityPage()
         this.Portfolio = new Portfolio()
 
         //Help Form
-        this.HelpForm = new HelpForm()
+        this.HelpForm = new HelpFormPage()
 
         //My Account
-        this.AccBasePage = new AccBasePage()
-        this.AccPreferences = new AccPreferences()
-        this.AccProfile = new AccProfile()
-        this.AccTax = new AccTax()
+        this.AccSideMenu = new AccSideMenu()
+        this.AccPreferencesPage = new AccPreferencesPage()
+        this.AccProfilePage = new AccProfilePage()
+        this.AccTaxPage = new AccTaxPage()
 
         //Side Menu
         this.SideMenuBar = new SideMenuBar()
