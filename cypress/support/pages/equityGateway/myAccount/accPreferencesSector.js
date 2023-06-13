@@ -13,7 +13,7 @@ const selectors = {
     languageSection: '.p-6'
 }
 
-class accPreferencesPage extends BasePage {
+class accPreferencesSector extends BasePage {
     bankAccGrlValidations(pageTitle, linkedAccs, accVal){
         cy.get(selectors.baseH1).contains(pageTitle)
         cy.get(selectors.baseH2).contains(linkedAccs)
@@ -59,4 +59,4 @@ class accPreferencesPage extends BasePage {
         })
     }
 }
-export default accPreferencesPage
+export default accPreferencesSector

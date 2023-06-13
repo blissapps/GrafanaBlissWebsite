@@ -13,7 +13,7 @@ import HelpFormPage from './equityGateway/helpForm/helpFormPage'
 
 //My Account
 import AccSideMenu from './equityGateway/myAccount/accBase'
-import AccPreferencesPage from './equityGateway/myAccount/accPreferencesPage';
+import AccPreferencesSector from './equityGateway/myAccount/accPreferencesSector';
 import AccProfilePage from './equityGateway/myAccount/accProfilePage'
 import AccTaxPage from './equityGateway/myAccount/accTaxPage'
 
@@ -53,7 +53,7 @@ class EquityGateway {
 
         //My Account
         this.AccSideMenu = new AccSideMenu()
-        this.AccPreferencesPage = new AccPreferencesPage()
+        this.AccPreferencesSector = new AccPreferencesSector()
         this.AccProfilePage = new AccProfilePage()
         this.AccTaxPage = new AccTaxPage()
 
