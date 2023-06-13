@@ -1,4 +1,4 @@
-import BasePage from '../../basePage'
+import BasePage from '../../../basePage'
 
 const selectors = {
   pages: 'ul > :nth-child',
@@ -7,7 +7,7 @@ const selectors = {
   support: '.eg-sidebar > .flex-column'
 }
 
-class SideMenuBar extends BasePage {
+class MainPageSideMenuBar extends BasePage {
   mainPages(position, name) {
     cy.get(selectors.pages + '(' + position + ')').contains(name)
   }
@@ -36,4 +36,4 @@ class SideMenuBar extends BasePage {
     cy.get(selectors.support).should('contain.text', label)
   }
 }
-export default SideMenuBar
+export default MainPageSideMenuBar

@@ -5,7 +5,6 @@ const equityGateway = new EquityGateway()
 describe('TopBar tests', () => {
     beforeEach(() => {
         equityGateway.LoginPage.login() //Workaround for now
-        //cy.loginWithUI(Cypress.env('EQUITY_GATEWAY_DEFAULT_USER_AUTH'), Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH'))
     })
 
     context('Top Navigation Bar', () => {

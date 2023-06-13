@@ -17,11 +17,10 @@ import AccPreferencesSector from './equityGateway/myAccount/accPreferencesSector
 import AccProfilePage from './equityGateway/myAccount/accProfilePage'
 import AccTaxPage from './equityGateway/myAccount/accTaxPage'
 
-//Side Menu
-import SideMenuBar from './equityGateway/sideMenuBar/sideMenuBar'
-
-//Top Bar
-import TopBar from './equityGateway/topBar/topBar'
+//Elements Bars
+import TopBar from './equityGateway/elementBars/topBar'
+import FooterBar from './equityGateway/elementBars/footerBar'
+import MainPageSideMenuBar from './equityGateway/elementBars/mainPage/mainPageSideMenuBar'
 
 //Application Pages Navigation
 import PageNavi from './equityGateway/pageNavi/pageNavi'
@@ -57,11 +56,10 @@ class EquityGateway {
         this.AccProfilePage = new AccProfilePage()
         this.AccTaxPage = new AccTaxPage()
 
-        //Side Menu
-        this.SideMenuBar = new SideMenuBar()
-
-        //TopBar
+        //elementBars
         this.TopBar = new TopBar()
+        this.FooterBar = new FooterBar()
+        this.MainPageSideMenuBar = new MainPageSideMenuBar()
 
         //Application Pages Navigation
         this.PageNavi = new PageNavi()

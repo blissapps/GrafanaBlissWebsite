@@ -12,7 +12,14 @@ describe('DashboardPage page tests', () => {
          * EGVFOUR-49
          */
         it('C30092770 - DashboardPage Home Elements Validation', () => {
-            equityGateway.DashboardPage.home(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_1ST_NAME'))
+            const activityElements = [
+                'Activity',
+                'In progress',
+                'View all activity',
+                'Upcoming',
+                'Showing 3 of 6'
+            ]
+            equityGateway.DashboardPage.home(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_1ST_NAME'), activityElements)
         })
     })
 
@@ -40,19 +47,7 @@ describe('DashboardPage page tests', () => {
             equityGateway.SharesHeader.sharesFluctuation(shareLabels.sharesPositiveColor, shareLabels.sharesNegativeColor, shareLabels.sharesPositiveRgx, shareLabels.sharesNegativeRgx)
 
             //Match sidebar shares info
-            equityGateway.SideMenuBar.shareInfo(shareLabels.name, shareLabels.amount, shareLabels.currency, shareLabels.date, shareLabels.sharesPositiveColor, shareLabels.sharesNegativeColor, shareLabels.sharesPositiveRgx, shareLabels.sharesNegativeRgx)
-        })
-    })
-
-    context('Component Footer', () => { //FIXME ADD NEW TEST CLASS CALLED FOOTER
-        /** Related to User Stories
-         * EGVFOUR-50
-         */
-        it('Footer Elements Validation', () => {
-            //As new elements may be included on footer this method validates the num of labels passed
-            const expectedFooterItems = ['Terms and Conditions', 'Privacy Policy', 'Help'];
-
-            equityGateway.DashboardPage.footer(expectedFooterItems)
+            equityGateway.MainPageSideMenuBar.shareInfo(shareLabels.name, shareLabels.amount, shareLabels.currency, shareLabels.date, shareLabels.sharesPositiveColor, shareLabels.sharesNegativeColor, shareLabels.sharesPositiveRgx, shareLabels.sharesNegativeRgx)
         })
     })
 

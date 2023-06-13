@@ -1,6 +1,6 @@
 import BasePage from '../../basePage'
 import HelpFormPage from '../helpForm/helpFormPage'
-import SideMenuBar from '../sideMenuBar/sideMenuBar'
+import MainPageSideMenuBar from '../elementBars/mainPage/mainPageSideMenuBar'
 
 // @ts-ignore
 //TODO [Fix the selectors with navigation and div dependencies]
@@ -24,7 +24,7 @@ class PageNavi extends BasePage {
   /** Navigates to Helpdesk Page through the DashboardPage after authentication validates the URL
    */
   navigateToHelpDeskAuth() {
-    const sideMenuBar = new SideMenuBar()
+    const sideMenuBar = new MainPageSideMenuBar()
     sideMenuBar.support('/help')
     this.helpForm.validateFormElements()
   }

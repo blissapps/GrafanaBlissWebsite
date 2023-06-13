@@ -1,8 +1,8 @@
-import EquityGateway from '../../../support/pages/equityGateway'
+import EquityGateway from '../../../../support/pages/equityGateway'
 
 const equityGateway = new EquityGateway()
 //const dayjs = require('dayjs')
-describe('SideMenuBar tests', () => {
+describe('MainPageSideMenuBar tests', () => {
     beforeEach(() => {
         equityGateway.LoginPage.login() //Workaround for now
     })
@@ -12,20 +12,20 @@ describe('SideMenuBar tests', () => {
          * EGVFOUR-43
          */
 
-        it('C30092769 - SideMenuBar Content Validation', () => {
+        it('C30092769 - MainPageSideMenuBar Content Validation', () => {
             //TODO pages must include href when DEVs finish
-            equityGateway.SideMenuBar.mainPages('1', 'Dashboard')
-            equityGateway.SideMenuBar.mainPages('2', 'Portfolio')
-            equityGateway.SideMenuBar.mainPages('3', 'Plans')
-            equityGateway.SideMenuBar.mainPages('4', 'Transactions')
-            equityGateway.SideMenuBar.mainPages('5', 'Statements')
-            equityGateway.SideMenuBar.mainPages('6', 'Resources')
+            equityGateway.MainPageSideMenuBar.mainPages('1', 'Dashboard')
+            equityGateway.MainPageSideMenuBar.mainPages('2', 'Portfolio')
+            equityGateway.MainPageSideMenuBar.mainPages('3', 'Plans')
+            equityGateway.MainPageSideMenuBar.mainPages('4', 'Transactions')
+            equityGateway.MainPageSideMenuBar.mainPages('5', 'Statements')
+            equityGateway.MainPageSideMenuBar.mainPages('6', 'Resources')
 
-            equityGateway.SideMenuBar.support('Support')
-            equityGateway.SideMenuBar.support('Help')
+            equityGateway.MainPageSideMenuBar.support('Support') //Support Section
+            equityGateway.MainPageSideMenuBar.support('Help') //Help Page presence validation
         })
 
-        it('C30092769 - SideMenuBar Shares Validation', () => {
+        it('C30092769 - MainPageSideMenuBar Shares Validation', () => {
             const shareVariables = {
                 name: 'Big Yellow Group PLC',
                 amount: '0.00',
@@ -37,7 +37,7 @@ describe('SideMenuBar tests', () => {
                 sharesPositiveReg: /\+[0-9]*\.[0-9]+ \(\+[0-9]*\.[0-9]+%\)/,
                 sharesNegativeReg: /-[0-9]*\.[0-9]+ \(-[0-9]*\.[0-9]+%\)/
             }
-            equityGateway.SideMenuBar.shareInfo(
+            equityGateway.MainPageSideMenuBar.shareInfo(
                 shareVariables.name,
                 shareVariables.amount,
                 shareVariables.currency,

@@ -8,6 +8,7 @@ describe('Validate Page Navi Elements', () => {
      **/
     it('C30159577 - Authenticating with a different user loads its respective data', () => {
       //Test Body
+      //FIXME this test can be removed from here, its being tested by Dashboard Tests -contact: FLAVIO OLIVEIRA-
     })
   })
 
