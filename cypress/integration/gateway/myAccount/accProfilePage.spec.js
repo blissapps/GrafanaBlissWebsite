@@ -1,7 +1,7 @@
 import EquityGateway from '../../../support/pages/equityGateway'
 
 const equityGateway = new EquityGateway()
-describe('My Account Profile Section', () => {
+describe('MyAcc Profile Sector Tests', () => {
     beforeEach(() => {
         equityGateway.LoginPage.login() //Workaround for now
         cy.window().then((win) => {

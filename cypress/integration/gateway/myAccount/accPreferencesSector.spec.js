@@ -1,13 +1,9 @@
 import EquityGateway from '../../../support/pages/equityGateway';
 
 const equityGateway = new EquityGateway()
-describe('My Account Preferences Section', () => {
+describe('MyAcc Preferences Sector Tests', () => {
     beforeEach(() => {
         equityGateway.LoginPage.login() //Workaround for now
-        cy.window().then((win) => {
-            // @ts-ignore
-            win.location.href = 'https://eg-v4-alpha-25.gsapps.dev/my-account/profile/personal-information';
-        });
     })
 
     context('Bank Account Validations', () => {
@@ -15,7 +11,7 @@ describe('My Account Preferences Section', () => {
          *  EGVFOUR-81
          */
         beforeEach(() => {
-            equityGateway.AccSideMenu.sideMenuGotoPage('Bank account', '/my-account/account-preferences/bank-account')
+            equityGateway.AccBase.goToMyAccPage('Bank account')
         })
 
         it('General Page Validations', () => {
@@ -39,7 +35,7 @@ describe('My Account Preferences Section', () => {
          *  EGVFOUR-82
          */
         beforeEach(() => {
-            equityGateway.AccSideMenu.sideMenuGotoPage('Payments', '/my-account/account-preferences/payments')
+            equityGateway.AccBase.goToMyAccPage('Payments')
         })
 
         it('Page General Validations', () => {
@@ -124,7 +120,7 @@ describe('My Account Preferences Section', () => {
                 'EN - English',
                 'English'
             ]
-            equityGateway.AccSideMenu.sideMenuGotoPage('Language', '/my-account/account-preferences/language')
+            equityGateway.AccBase.goToMyAccPage('Language')
             equityGateway.AccPreferencesSector.languageSection(elements)
         })
     })

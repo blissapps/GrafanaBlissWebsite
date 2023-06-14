@@ -1,7 +1,7 @@
 import EquityGateway from '../../../support/pages/equityGateway'
 
 const equityGateway = new EquityGateway()
-describe('Validate Page Navi Elements', () => {
+describe('Page Navigation Tests', () => {
   context('Validate User Information', () => {
     /** Related to User Stories
      * EGVFOUR-252

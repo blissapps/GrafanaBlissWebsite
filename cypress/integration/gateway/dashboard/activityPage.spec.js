@@ -1,7 +1,7 @@
 import EquityGateway from '../../../support/pages/equityGateway'
 
 const equityGateway = new EquityGateway()
-describe('DashboardPage page tests', () => {
+describe('Activity Page Tests', () => {
     beforeEach(() => {
         equityGateway.LoginPage.login()
         equityGateway.ActivityPage.gotoActivity()

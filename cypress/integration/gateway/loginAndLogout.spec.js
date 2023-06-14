@@ -3,7 +3,7 @@ import EquityGateway from '../../support/pages/equityGateway'
 // @ts-ignore
 const equityGateway = new EquityGateway()
 
-describe('Login and Logout tests', () => {
+describe('Login and Logout Tests', () => {
 
     context('General Login Successful Scenarios', () => {
         /** General Account Login ACC Credentials Validation

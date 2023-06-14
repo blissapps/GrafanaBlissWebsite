@@ -2,7 +2,7 @@ import EquityGateway from '../../../support/pages/equityGateway'
 
 const equityGateway = new EquityGateway()
 
-describe('TopBar tests', () => {
+describe('Footer Bar Tests', () => {
     beforeEach(() => {
         equityGateway.LoginPage.login()
     })

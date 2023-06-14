@@ -1,5 +1,11 @@
 // @ts-ignore
 // ------------------------------------------------------------- Components -------------------------------------------------------//
+//Elements Bars
+import TopBar from './equityGateway/elementBars/topBar'
+import FooterBar from './equityGateway/elementBars/footerBar'
+import MainPageSideMenu from './equityGateway/elementBars/mainPage/mainPageSideMenu'
+import MyAccSideMenu from './equityGateway/elementBars/myAcc/myAccSideMenu'
+import PersonInfoRMenu from './equityGateway/elementBars/myAcc/profileSection/personInfoRMenu';
 
 // ----------------------------------------------------------------Pages -----------------------------------------------------------//
 //DashboardPage
@@ -12,15 +18,10 @@ import ActivityPage from './equityGateway/dashboard/activityPage'
 import HelpFormPage from './equityGateway/helpForm/helpFormPage'
 
 //My Account
-import AccSideMenu from './equityGateway/myAccount/accBase'
+import AccBase from './equityGateway/myAccount/accBase'
 import AccPreferencesSector from './equityGateway/myAccount/accPreferencesSector';
 import AccProfilePage from './equityGateway/myAccount/accProfilePage'
 import AccTaxPage from './equityGateway/myAccount/accTaxPage'
-
-//Elements Bars
-import TopBar from './equityGateway/elementBars/topBar'
-import FooterBar from './equityGateway/elementBars/footerBar'
-import MainPageSideMenuBar from './equityGateway/elementBars/mainPage/mainPageSideMenuBar'
 
 //Application Pages Navigation
 import PageNavi from './equityGateway/pageNavi/pageNavi'
@@ -39,6 +40,12 @@ import LogoutPage from './equityGateway/logoutPage';
 class EquityGateway {
     constructor() {
         // -------------------------------------------------------------------------- Components --------------------------------------------------------------------//
+        //elementBars
+        this.TopBar = new TopBar()
+        this.FooterBar = new FooterBar()
+        this.MainPageSideMenu = new MainPageSideMenu()
+        this.MyAccSideMenu = new MyAccSideMenu()
+        this.PersonInfoRMenu = new PersonInfoRMenu()
 
         // --------------------------------------------------------------------------------Pages ----------------------------------------------------------------------//
         //DashboardPage
@@ -51,15 +58,10 @@ class EquityGateway {
         this.HelpForm = new HelpFormPage()
 
         //My Account
-        this.AccSideMenu = new AccSideMenu()
+        this.AccBase = new AccBase()
         this.AccPreferencesSector = new AccPreferencesSector()
         this.AccProfilePage = new AccProfilePage()
         this.AccTaxPage = new AccTaxPage()
-
-        //elementBars
-        this.TopBar = new TopBar()
-        this.FooterBar = new FooterBar()
-        this.MainPageSideMenuBar = new MainPageSideMenuBar()
 
         //Application Pages Navigation
         this.PageNavi = new PageNavi()

@@ -5,12 +5,14 @@ const equityGateway = new EquityGateway()
 describe('TopBar tests', () => {
     beforeEach(() => {
         equityGateway.LoginPage.login() //Workaround for now
-    })
+    });
 
-    context('Top Navigation Bar', () => {
+    context('Top Bar Tests', () => {
+        // @ts-ignore
         /** Related to User Stories
          * EGVFOUR-42, EGVFOUR-109
          */
+
         it('C30092768 - TopBar Acc name Validation', () => {
             //The name on TopBar must be displayed as "full name" 1st and last name(1st name is a ENV variable)
             equityGateway.TopBar.accDetails(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_FULL_NAME'))

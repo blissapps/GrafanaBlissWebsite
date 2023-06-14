@@ -1,7 +1,7 @@
 import EquityGateway from '../../../support/pages/equityGateway';
 
 const equityGateway = new EquityGateway()
-describe('My Account TAX Section', () => {
+describe('MyAcc TAX Sector Tests', () => {
     beforeEach(() => {
         equityGateway.LoginPage.login() //Workaround for now
         equityGateway.TopBar.accMenuClick(null, 'Tax Documents')
@@ -10,7 +10,6 @@ describe('My Account TAX Section', () => {
     context('General Validations', () => {
         it('C30092728 - Page General Validations', () => {
             equityGateway.AccTaxPage.header('Tax documents')
-            equityGateway.AccSideMenu.sideMenuGotoPage('Tax documents', '/my-account/tax/tax-documents')
             cy.fixture('gateway/myAccount/taxInfo').then((jsonObject) => {
                 const stringArray = Object.values(jsonObject);
                 equityGateway.AccTaxPage.infoSector(stringArray);

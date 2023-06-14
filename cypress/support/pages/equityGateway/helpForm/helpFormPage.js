@@ -1,5 +1,5 @@
 import BasePage from '../../basePage'
-import MainPageSideMenuBar from '../elementBars/mainPage/mainPageSideMenuBar'
+import MainPageSideMenu from '../elementBars/mainPage/mainPageSideMenu'
 
 // @ts-ignore
 //TODO [Fix the selectors with navigation and div dependencies]
@@ -41,7 +41,7 @@ class HelpFormPage extends BasePage {
    */
   navigateToHelpDesk(auth = true) {
     if (auth) {
-      const sideMenuBar = new MainPageSideMenuBar()
+      const sideMenuBar = new MainPageSideMenu()
       sideMenuBar.support('/help')
     } else if (!auth) {
       cy.visit(`${Cypress.env('EQUITY_GATEWAY_BASE_URL')}`, { failOnStatusCode: false })

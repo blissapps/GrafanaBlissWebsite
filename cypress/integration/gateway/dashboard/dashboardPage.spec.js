@@ -2,7 +2,7 @@ import EquityGateway from '../../../support/pages/equityGateway'
 
 const equityGateway = new EquityGateway()
 //const dayjs = require('dayjs')
-describe('DashboardPage page tests', () => {
+describe('Dashboard Page Tests', () => {
     beforeEach(() => {
         equityGateway.LoginPage.login() //Workaround for now
     })
@@ -47,7 +47,7 @@ describe('DashboardPage page tests', () => {
             equityGateway.SharesHeader.sharesFluctuation(shareLabels.sharesPositiveColor, shareLabels.sharesNegativeColor, shareLabels.sharesPositiveRgx, shareLabels.sharesNegativeRgx)
 
             //Match sidebar shares info
-            equityGateway.MainPageSideMenuBar.shareInfo(shareLabels.name, shareLabels.amount, shareLabels.currency, shareLabels.date, shareLabels.sharesPositiveColor, shareLabels.sharesNegativeColor, shareLabels.sharesPositiveRgx, shareLabels.sharesNegativeRgx)
+            equityGateway.MainPageSideMenu.shareInfo(shareLabels.name, shareLabels.amount, shareLabels.currency, shareLabels.date, shareLabels.sharesPositiveColor, shareLabels.sharesNegativeColor, shareLabels.sharesPositiveRgx, shareLabels.sharesNegativeRgx)
         })
     })
 

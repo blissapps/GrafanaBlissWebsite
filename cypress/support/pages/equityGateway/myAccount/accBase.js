@@ -1,24 +1,38 @@
 import BasePage from '../../basePage'
 
-// @ts-ignore
-const selectors = {
-    sideLmenu: '.eg-my-account-sidebar',
-    sideRbar: '.eg-my-account-content-sidebar',
-    sideLbar: '.eg-my-account-sidebar__navigation'
-}
-
-class accBase extends BasePage {
-    sideMenu(expectedItems){
-        expectedItems.forEach((item) => {
-        cy.get(selectors.sideLmenu).contains(item).should('exist');
+class AccBase extends BasePage {
+    goToMyAccPage(pageName){
+        cy.window().then((win) => {
+            switch (pageName){
+                case 'Personal Information':
+                    // @ts-ignore
+                    win.location.href = Cypress.env('EQUITY_GATEWAY_BASE_URL')+'/my-account/profile/personal-information'
+                    break
+                case 'Bank account':
+                    // @ts-ignore
+                    win.location.href = Cypress.env('EQUITY_GATEWAY_BASE_URL')+'/my-account/account-preferences/bank-account'
+                    break
+                case 'Payments':
+                    // @ts-ignore
+                    win.location.href = Cypress.env('EQUITY_GATEWAY_BASE_URL')+'/my-account/account-preferences/payments'
+                    break
+                case 'Password & Security':
+                    //TODO not developed yet
+                    break
+                case 'Language':
+                    // @ts-ignore
+                    win.location.href = Cypress.env('EQUITY_GATEWAY_BASE_URL')+'/my-account/account-preferences/language'
+                    break
+                case 'Tax documents':
+                    //@ts-ignore
+                    win.location.href = Cypress.env('EQUITY_GATEWAY_BASE_URL')+'/help'
+                    break
+                default:
+                    //By default, go to personal information page
+                    //@ts-ignore
+                    win.location.href = Cypress.env('EQUITY_GATEWAY_BASE_URL')+'/my-account/profile/personal-information'
+            }
         })
     }
-    //FIXME TO BE REPLACED BY PAGENAVI TESTS
-    sideMenuGotoPage(pageName, href){
-        cy.get(selectors.sideLbar).contains(pageName).click({ force: true })
-        cy.get(selectors.sideLbar).contains(pageName)
-            .should('exist')
-            .should('have.attr', 'href', href);
-    }
 }
-export default accBase
+export default AccBase

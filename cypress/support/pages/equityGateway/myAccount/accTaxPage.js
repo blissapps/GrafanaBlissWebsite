@@ -3,7 +3,7 @@ import BasePage from '../../basePage'
 // @ts-ignore
 const selectors = {
     header: '.text-h2',
-    infoSector: '.eg-tax > .p-4',
+    infoSector: 'gs-card.p-4.mb-4.hover',
     yearMenu: 'input[placeholder="Select year"]',
     yearMenuOptions: '#option',
     typeMenu: 'input[placeholder="Select type"]',
