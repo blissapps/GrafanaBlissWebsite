@@ -5,19 +5,20 @@ const equityGateway = new EquityGateway()
 describe('TopBar tests', () => {
     beforeEach(() => {
         equityGateway.LoginPage.login() //Workaround for now
-        //cy.loginWithUI(Cypress.env('EQUITY_GATEWAY_DEFAULT_USER_AUTH'), Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH'))
-    })
+    });
 
-    context('Top Navigation Bar', () => {
+    context('Top Bar Tests', () => {
+        // @ts-ignore
         /** Related to User Stories
          * EGVFOUR-42, EGVFOUR-109
          */
+
         it('C30092768 - TopBar Acc name Validation', () => {
             //The name on TopBar must be displayed as "full name" 1st and last name(1st name is a ENV variable)
-            equityGateway.TopBar.accDetails(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_NAME')+' Maddox')
+            equityGateway.TopBar.accDetails(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_FULL_NAME'))
         })
 
-        it('C30092768 - TopBar ACC Menu and Hrefs Validation', () => {
+        it('C30092768 - TopBar ACC Menu and Hrefs Validation', () => { //FIXME THE URL VERIFY WILL BE REPLACED BY NAVI TESTS
             /** Validate Menu Items and respective Hrefs
              *  topbarAccMenuLabels & topbarAccMenuHRefs must contain the same length
              */

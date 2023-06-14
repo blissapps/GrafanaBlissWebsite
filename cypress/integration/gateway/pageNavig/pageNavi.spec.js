@@ -1,13 +1,14 @@
 import EquityGateway from '../../../support/pages/equityGateway'
 
 const equityGateway = new EquityGateway()
-describe('Validate Page Navi Elements', () => {
+describe('Page Navigation Tests', () => {
   context('Validate User Information', () => {
     /** Related to User Stories
      * EGVFOUR-252
      **/
     it('C30159577 - Authenticating with a different user loads its respective data', () => {
       //Test Body
+      //FIXME this test can be removed from here, its being tested by Dashboard Tests -contact: FLAVIO OLIVEIRA-
     })
   })
 
@@ -25,11 +26,11 @@ describe('Validate Page Navi Elements', () => {
     })
   })
 
-  context('Validate Dashboard Navigation', () => {
+  context('Validate DashboardPage Navigation', () => {
     /** Related to User Stories
      * EGVFOUR-266
      */
-    it('C30159578 - Dashboard path navigation', () => {
+    it('C30159578 - DashboardPage path navigation', () => {
       equityGateway.LoginPage.login()
       equityGateway.PageNavi.navigateToDashboard()
     })
@@ -83,7 +84,7 @@ describe('Validate Page Navi Elements', () => {
     })
   })
 
-  context('Validate All Activity', () => {
+  context('Validate All ActivityPage', () => {
     /** Related to User Stories
      * EGVFOUR-266
      */

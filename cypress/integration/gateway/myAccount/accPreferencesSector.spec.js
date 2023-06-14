@@ -1,14 +1,9 @@
 import EquityGateway from '../../../support/pages/equityGateway';
 
 const equityGateway = new EquityGateway()
-describe('My Account Preferences Section', () => {
+describe('MyAcc Preferences Sector Tests', () => {
     beforeEach(() => {
         equityGateway.LoginPage.login() //Workaround for now
-        //FIXME PROVISORY MENU NAV IS BROKEN
-        cy.window().then((win) => {
-            // @ts-ignore
-            win.location.href = 'https://eg-v4-alpha-25.gsapps.dev/my-account/profile/personal-information';
-        });
     })
 
     context('Bank Account Validations', () => {
@@ -16,21 +11,21 @@ describe('My Account Preferences Section', () => {
          *  EGVFOUR-81
          */
         beforeEach(() => {
-            equityGateway.AccBasePage.sideMenuGotoPage('Bank account', '/my-account/account-preferences/bank-account')
+            equityGateway.AccBase.goToMyAccPage('Bank account')
         })
 
-        it('Page General Validations', () => {
-            equityGateway.AccPreferences.bankAccGrlValidations(
+        it('General Page Validations', () => {
+            equityGateway.AccPreferencesSector.bankAccGrlValidations(
                 'Bank account',
                 'Linked bank accounts (3)',
                 '3/3 Bank account limit reached'
             )
         })
 
-        it('C30092725 - Page Validations', () => {
+        it('C30092725 - Linked Accounts Validations', () => {
             cy.fixture('gateway/myAccount/linkedBankACC').then((jsonObject) => {
                 const stringArray = Object.values(jsonObject);
-                equityGateway.AccPreferences.bankAccCards(stringArray);
+                equityGateway.AccPreferencesSector.bankAccCards(stringArray);
             });
         })
     })
@@ -40,11 +35,11 @@ describe('My Account Preferences Section', () => {
          *  EGVFOUR-82
          */
         beforeEach(() => {
-            equityGateway.AccBasePage.sideMenuGotoPage('Payments', '/my-account/account-preferences/payments')
+            equityGateway.AccBase.goToMyAccPage('Payments')
         })
 
         it('Page General Validations', () => {
-            equityGateway.AccPreferences.paymentsGrlValidations(
+            equityGateway.AccPreferencesSector.paymentsGrlValidations(
                 'Payments',
                 'Sale',
                 'Dividend'
@@ -52,7 +47,7 @@ describe('My Account Preferences Section', () => {
         })
 
         it('C30092726 - Sale Distributions', () => {
-            //TODO developments are not finished yet
+            //TODO developments are not finished yet, waiting for DEV
             const elements = [
                 'Distributions methods',
                 'These are the methods in which you prefer to receive sale payments.',
@@ -63,11 +58,11 @@ describe('My Account Preferences Section', () => {
              * Elements: Array of anything that you want to verify inside that section,excluding "Preferred delivery methods"
              * Delivery: Refers to "Preferred delivery methods inside", for now its just 1 (not necessarily need to pass)
              */
-            equityGateway.AccPreferences.saleSection(1, elements, 'Wire Transfer')
+            equityGateway.AccPreferencesSector.saleSection(1, elements, 'Wire Transfer')
         })
 
         it('C30092726 - Sale BankAcc', () => {
-            //TODO developments are not finished yet
+            //TODO developments are not finished yet, waiting for DEV
             const elements = [
                 'Bank account',
                 'Revolut • EURO (€)',
@@ -79,11 +74,11 @@ describe('My Account Preferences Section', () => {
              * Elements: Array of anything that you want to verify inside that section,excluding "Preferred delivery methods"
              * Delivery: Refers to "Preferred delivery methods inside", for now its just 1 (not necessarily need to pass)
              */
-            equityGateway.AccPreferences.saleSection(2, elements)
+            equityGateway.AccPreferencesSector.saleSection(2, elements)
         })
 
         it('C30092726 - Dividend Distributions', () => {
-            //TODO developments are not finished yet
+            //TODO developments are not finished yet, waiting for DEV
             const elements = [
                 'Distributions methods',
                 'These are the methods in which you prefer to receive sale payments.',
@@ -94,11 +89,11 @@ describe('My Account Preferences Section', () => {
              * Elements: Array of anything that you want to verify inside that section,excluding "Preferred delivery methods"
              * Delivery: Refers to "Preferred delivery methods inside", for now its just 1 (not necessarily need to pass)
              */
-            equityGateway.AccPreferences.dividendSection(1, elements, 'Wire Transfer')
+            equityGateway.AccPreferencesSector.dividendSection(1, elements, 'Wire Transfer')
         })
 
         it('C30092726 - Dividend BankAcc', () => {
-            //TODO developments are not finished yet
+            //TODO developments are not finished yet, waiting for DEV
             const elements = [
                 'Bank account',
                 'Revolut • EURO (€)',
@@ -110,7 +105,7 @@ describe('My Account Preferences Section', () => {
              * Elements: Array of anything that you want to verify inside that section,excluding "Preferred delivery methods"
              * Delivery: Refers to "Preferred delivery methods inside", for now its just 1 (not necessarily need to pass)
              */
-            equityGateway.AccPreferences.dividendSection(2, elements)
+            equityGateway.AccPreferencesSector.dividendSection(2, elements)
         })
     })
 
@@ -118,15 +113,15 @@ describe('My Account Preferences Section', () => {
         /** Related to User Stories
          *  EGVFOUR-84
          */
-        it('Page General validations', () => {
-            //TODO developments are not finished yet
+        it('General Page validations', () => {
+            //TODO developments are not finished yet, waiting for DEV
             const elements = [
                 'Selected language',
                 'EN - English',
                 'English'
             ]
-            equityGateway.AccBasePage.sideMenuGotoPage('Language', '/my-account/account-preferences/language')
-            equityGateway.AccPreferences.languageSection(elements)
+            equityGateway.AccBase.goToMyAccPage('Language')
+            equityGateway.AccPreferencesSector.languageSection(elements)
         })
     })
 })

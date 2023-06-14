@@ -1,6 +1,6 @@
 import BasePage from '../../basePage'
-import HelpForm from '../helpForm/helpForm'
-import SideMenuBar from '../sideMenuBar/sideMenuBar'
+import HelpFormPage from '../helpForm/helpFormPage'
+import MainPageSideMenu from '../elementBars/mainPage/mainPageSideMenu'
 
 // @ts-ignore
 //TODO [Fix the selectors with navigation and div dependencies]
@@ -11,7 +11,7 @@ const selectors = {
 }
 
 class PageNavi extends BasePage {
-  helpForm = new HelpForm()
+  helpForm = new HelpFormPage()
 
   /** Navigates to the Helpdesk Page without authentication validates the URL
    */
@@ -21,10 +21,10 @@ class PageNavi extends BasePage {
     this.helpForm.validateFormElements(false)
   }
 
-  /** Navigates to Helpdesk Page through the Dashboard after authentication validates the URL
+  /** Navigates to Helpdesk Page through the DashboardPage after authentication validates the URL
    */
   navigateToHelpDeskAuth() {
-    const sideMenuBar = new SideMenuBar()
+    const sideMenuBar = new MainPageSideMenu()
     sideMenuBar.support('/help')
     this.helpForm.validateFormElements()
   }
@@ -54,7 +54,7 @@ class PageNavi extends BasePage {
     cy.url().should('contain', '/sale-wizard/overview')
   }
 
-  /** Navigates to the Activity page and validates he URL
+  /** Navigates to the ActivityPage page and validates he URL
    */
   navigateToActivity(){
     // User logs in

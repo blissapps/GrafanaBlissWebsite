@@ -1,30 +1,27 @@
 // @ts-ignore
-//TODO
 // ------------------------------------------------------------- Components -------------------------------------------------------//
+//Elements Bars
+import TopBar from './equityGateway/elementBars/topBar'
+import FooterBar from './equityGateway/elementBars/footerBar'
+import MainPageSideMenu from './equityGateway/elementBars/mainPage/mainPageSideMenu'
+import MyAccSideMenu from './equityGateway/elementBars/myAcc/myAccSideMenu'
+import PersonInfoRMenu from './equityGateway/elementBars/myAcc/profileSection/personInfoRMenu';
 
-//TODO
 // ----------------------------------------------------------------Pages -----------------------------------------------------------//
-
-//Dashboard
-import Dashboard from './equityGateway/dashboard/dashboard'
+//DashboardPage
+import DashboardPage from './equityGateway/dashboard/dashboardPage'
 import Portfolio from './equityGateway/dashboard/portfolio'
 import SharesHeader from './equityGateway/dashboard/sharesHeader'
-import Activity from './equityGateway/dashboard/activity'
+import ActivityPage from './equityGateway/dashboard/activityPage'
 
 //Help Form
-import HelpForm from './equityGateway/helpForm/helpForm'
+import HelpFormPage from './equityGateway/helpForm/helpFormPage'
 
 //My Account
-import AccBasePage from './equityGateway/myAccount/accBasePage'
-import AccPreferences from './equityGateway/myAccount/accPreferences';
-import AccProfile from './equityGateway/myAccount/accProfile'
-import AccTax from './equityGateway/myAccount/accTax'
-
-//Side Menu
-import SideMenuBar from './equityGateway/sideMenuBar/sideMenuBar'
-
-//Top Bar
-import TopBar from './equityGateway/topBar/topBar'
+import AccBase from './equityGateway/myAccount/accBase'
+import AccPreferencesSector from './equityGateway/myAccount/accPreferencesSector';
+import AccProfilePage from './equityGateway/myAccount/accProfilePage'
+import AccTaxPage from './equityGateway/myAccount/accTaxPage'
 
 //Application Pages Navigation
 import PageNavi from './equityGateway/pageNavi/pageNavi'
@@ -42,31 +39,29 @@ import LogoutPage from './equityGateway/logoutPage';
  */
 class EquityGateway {
     constructor() {
-        //TODO
         // -------------------------------------------------------------------------- Components --------------------------------------------------------------------//
+        //elementBars
+        this.TopBar = new TopBar()
+        this.FooterBar = new FooterBar()
+        this.MainPageSideMenu = new MainPageSideMenu()
+        this.MyAccSideMenu = new MyAccSideMenu()
+        this.PersonInfoRMenu = new PersonInfoRMenu()
 
-        //TODO
         // --------------------------------------------------------------------------------Pages ----------------------------------------------------------------------//
-        //Dashboard
+        //DashboardPage
         this.SharesHeader = new SharesHeader()
-        this.Dashboard = new Dashboard()
-        this.Activity = new Activity()
+        this.DashboardPage = new DashboardPage()
+        this.ActivityPage = new ActivityPage()
         this.Portfolio = new Portfolio()
 
         //Help Form
-        this.HelpForm = new HelpForm()
+        this.HelpForm = new HelpFormPage()
 
         //My Account
-        this.AccBasePage = new AccBasePage()
-        this.AccPreferences = new AccPreferences()
-        this.AccProfile = new AccProfile()
-        this.AccTax = new AccTax()
-
-        //Side Menu
-        this.SideMenuBar = new SideMenuBar()
-
-        //TopBar
-        this.TopBar = new TopBar()
+        this.AccBase = new AccBase()
+        this.AccPreferencesSector = new AccPreferencesSector()
+        this.AccProfilePage = new AccProfilePage()
+        this.AccTaxPage = new AccTaxPage()
 
         //Application Pages Navigation
         this.PageNavi = new PageNavi()

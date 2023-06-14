@@ -27,8 +27,7 @@ const selectors = {
     addressSection: '#address'
 }
 
-class accProfile extends BasePage {
-    //TODO EX: METHOD 1
+class accProfilePage extends BasePage {
     pageTitle(pageTitle){
         cy.get(selectors.title).contains(pageTitle)
     }
@@ -98,4 +97,4 @@ class accProfile extends BasePage {
             })
     }
 }
-export default accProfile
+export default accProfilePage

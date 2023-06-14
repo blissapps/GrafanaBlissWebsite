@@ -1,5 +1,5 @@
 import BasePage from '../../basePage'
-import SideMenuBar from '../sideMenuBar/sideMenuBar'
+import MainPageSideMenu from '../elementBars/mainPage/mainPageSideMenu'
 
 // @ts-ignore
 //TODO [Fix the selectors with navigation and div dependencies]
@@ -35,13 +35,13 @@ const selectors = {
   welcomePageHelp: 'a.ng-star-inserted'
 }
 
-class HelpForm extends BasePage {
+class HelpFormPage extends BasePage {
   /** Navigates to the Helpdesk Page
    * @param {boolean} auth (Adapts the behavior corresponding to the user authentication status)
    */
   navigateToHelpDesk(auth = true) {
     if (auth) {
-      const sideMenuBar = new SideMenuBar()
+      const sideMenuBar = new MainPageSideMenu()
       sideMenuBar.support('/help')
     } else if (!auth) {
       cy.visit(`${Cypress.env('EQUITY_GATEWAY_BASE_URL')}`, { failOnStatusCode: false })
@@ -181,4 +181,4 @@ class HelpForm extends BasePage {
     }
   }
 }
-export default HelpForm
+export default HelpFormPage

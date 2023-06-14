@@ -1,14 +1,11 @@
-import EquityGateway from '../../../support/pages/equityGateway'
+import EquityGateway from '../../../../support/pages/equityGateway'
 
 const equityGateway = new EquityGateway()
-describe('My Account Page', () => {
+
+describe('MyAcc Side Menu Tests', () => {
     beforeEach(() => {
         equityGateway.LoginPage.login() //Workaround for now
-        //FIXME Provisory
-        cy.window().then((win) => {
-            // @ts-ignore
-            win.location.href = 'https://eg-v4-alpha-25.gsapps.dev/my-account/profile/personal-information';
-        });
+        equityGateway.AccBase.goToMyAccPage()
     })
 
     context('General Page Validations', () => {
@@ -21,8 +18,9 @@ describe('My Account Page', () => {
                 'Language',
                 'Tax documents',
                 'Help',
-                'Log Out']
-            equityGateway.AccBasePage.sideMenu(menuItems)
+                'Log Out'
+            ]
+            equityGateway.MyAccSideMenu.sideMenuValidation(menuItems)
         })
     })
 })

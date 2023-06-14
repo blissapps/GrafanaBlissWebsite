@@ -1,45 +1,44 @@
 import EquityGateway from '../../../support/pages/equityGateway'
 
 const equityGateway = new EquityGateway()
-describe('Dashboard page tests', () => {
+describe('Activity Page Tests', () => {
     beforeEach(() => {
-        equityGateway.LoginPage.login() //Workaround for now
-        //cy.loginWithUI(Cypress.env('EQUITY_GATEWAY_DEFAULT_USER_AUTH'), Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH'))
-        equityGateway.Activity.gotoActivity() //FIXME PROVISORY NAVIGATION TO ACTIVITY can't handle direct url navigation
+        equityGateway.LoginPage.login()
+        equityGateway.ActivityPage.gotoActivity()
     })
 
     context('General Validations', () => {
         /** Related to User Stories
          * EGVFOUR-113
          */
-        it('C30092745/.746 - Go to Dashboard trough Activity', () => {
-            equityGateway.Activity.breadcrumbNavi()
+        it('C30092745/.746 - Go to DashboardPage trough ActivityPage', () => {
+            equityGateway.ActivityPage.breadcrumbNavi()
             cy.url().should('include', '/dashboard')
         })
 
-        it('C30092744 - Activity Page Validation', () => {
+        it('C30092744 - ActivityPage Page Validation', () => {
             const pageTitle = 'Activity'
             const sector1Title = 'In progress'
             const sector2Title1 = 'Upcoming'
             const sector2Title2 = 'History'
 
-            equityGateway.Activity.pageValidation(pageTitle, sector1Title, sector2Title1, sector2Title2)
+            equityGateway.ActivityPage.pageValidation(pageTitle, sector1Title, sector2Title1, sector2Title2)
         })
     })
 
     context('In Progress Content', () => {
         it('C30092747 - Check Showing Counter', () => {
             //Showing X elements of a total Y elements
-            equityGateway.Activity.progressCounter(3, 6)
+            equityGateway.ActivityPage.progressCounter(3, 6)
         })
 
         it('C30092747/.748/.750/.752/.753 - Verify Transactions Elements', () => {
             //Verify Collapsed Elements
-            equityGateway.Activity.button('Show all')
-            equityGateway.Activity.progressElements(6)
+            equityGateway.ActivityPage.button('Show all')
+            equityGateway.ActivityPage.progressElements(6)
             //Verify Total Elements
-            equityGateway.Activity.button('Show less')
-            equityGateway.Activity.progressElements(3)
+            equityGateway.ActivityPage.button('Show less')
+            equityGateway.ActivityPage.progressElements(3)
         })
 
         it('C30092751 - If no Content does not Display', () => {
@@ -49,8 +48,8 @@ describe('Dashboard page tests', () => {
 
     context('Upcoming Content', () => {
         it('General Validations', () => {
-            const expectedFooterItems = ['Date', 'Activity type'];
-            equityGateway.Activity.tabsBarElements(expectedFooterItems)
+            const expectedFooterItems = ['Date', 'ActivityPage type'];
+            equityGateway.ActivityPage.tabsBarElements(expectedFooterItems)
         })
         //TODO no data to test it yet
     })
@@ -58,8 +57,8 @@ describe('Dashboard page tests', () => {
     context('History Content', () => {
         it('General Validations', () => {
             cy.get('.tabs-bar').contains('History').click({ force: true })
-            const expectedFooterItems = ['Date', 'Activity type'];
-            equityGateway.Activity.tabsBarElements(expectedFooterItems)
+            const expectedFooterItems = ['Date', 'ActivityPage type'];
+            equityGateway.ActivityPage.tabsBarElements(expectedFooterItems)
         })
         //TODO no data to test it yet
     })

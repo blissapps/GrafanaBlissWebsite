@@ -3,7 +3,7 @@ import BasePage from '../../basePage'
 // @ts-ignore
 const selectors = {
     header: '.text-h2',
-    infoSector: '.eg-tax > .p-4',
+    infoSector: 'gs-card.p-4.mb-4.hover',
     yearMenu: 'input[placeholder="Select year"]',
     yearMenuOptions: '#option',
     typeMenu: 'input[placeholder="Select type"]',
@@ -11,7 +11,7 @@ const selectors = {
     reportsContent: '.eg-tax > .p-5'
 }
 
-class accTax extends BasePage {
+class accTaxPage extends BasePage {
     header(title){
         cy.get(selectors.header).should('contain.text', title)
     }
@@ -41,4 +41,4 @@ class accTax extends BasePage {
     }
 
 }
-export default accTax
+export default accTaxPage

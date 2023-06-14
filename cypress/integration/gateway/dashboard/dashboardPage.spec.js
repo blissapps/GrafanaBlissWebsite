@@ -2,18 +2,24 @@ import EquityGateway from '../../../support/pages/equityGateway'
 
 const equityGateway = new EquityGateway()
 //const dayjs = require('dayjs')
-describe('Dashboard page tests', () => {
+describe('Dashboard Page Tests', () => {
     beforeEach(() => {
         equityGateway.LoginPage.login() //Workaround for now
-        //cy.loginWithUI(Cypress.env('EQUITY_GATEWAY_DEFAULT_USER_AUTH'), Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH'))
     })
 
-    context('General Dashboard Validations', () => {
+    context('General DashboardPage Validations', () => {
         /** Related to User Stories
          * EGVFOUR-49
          */
-        it('C30092770 - Dashboard Home Elements Validation', () => {
-            equityGateway.Dashboard.home(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_NAME'))
+        it('C30092770 - DashboardPage Home Elements Validation', () => {
+            const activityElements = [
+                'Activity',
+                'In progress',
+                'View all activity',
+                'Upcoming',
+                'Showing 3 of 6'
+            ]
+            equityGateway.DashboardPage.home(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_1ST_NAME'), activityElements)
         })
     })
 
@@ -25,7 +31,7 @@ describe('Dashboard page tests', () => {
             name: 'Big Yellow Group PLC',
             amount: '0.00',
             currency: 'GBP',
-            date: 'Mar 31', //FIXME dayjs().format('MMM DD, H:mm'),
+            date: 'Mar 31', //FIXME when Dev completed, use: dayjs().format('MMM DD, H:mm'),
             share_status: 'positive',
             sharesPositiveColor: 'rgb(0, 153, 0)',
             sharesNegativeColor: 'rgb(223, 7, 7)',
@@ -41,19 +47,7 @@ describe('Dashboard page tests', () => {
             equityGateway.SharesHeader.sharesFluctuation(shareLabels.sharesPositiveColor, shareLabels.sharesNegativeColor, shareLabels.sharesPositiveRgx, shareLabels.sharesNegativeRgx)
 
             //Match sidebar shares info
-            equityGateway.SideMenuBar.shareInfo(shareLabels.name, shareLabels.amount, shareLabels.currency, shareLabels.date, shareLabels.sharesPositiveColor, shareLabels.sharesNegativeColor, shareLabels.sharesPositiveRgx, shareLabels.sharesNegativeRgx)
-        })
-    })
-
-    context('Component Footer', () => {
-        /** Related to User Stories
-         * EGVFOUR-50
-         */
-        it('Footer Elements Validation', () => {
-            //As new elements may be included on footer this method validates the num of labels passed
-            const expectedFooterItems = ['Terms and Conditions', 'Privacy Policy', 'Help'];
-
-            equityGateway.Dashboard.footer(expectedFooterItems)
+            equityGateway.MainPageSideMenu.shareInfo(shareLabels.name, shareLabels.amount, shareLabels.currency, shareLabels.date, shareLabels.sharesPositiveColor, shareLabels.sharesNegativeColor, shareLabels.sharesPositiveRgx, shareLabels.sharesNegativeRgx)
         })
     })
 
