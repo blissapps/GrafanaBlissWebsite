@@ -1,11 +1,13 @@
 // @ts-ignore
 // ------------------------------------------------------------- Components -------------------------------------------------------//
 //Elements Bars
-import TopBar from './equityGateway/elementBars/topBar'
 import FooterBar from './equityGateway/elementBars/footerBar'
-import MainPageSideMenu from './equityGateway/elementBars/mainPage/mainPageSideMenu'
-import MyAccSideMenu from './equityGateway/elementBars/myAcc/myAccSideMenu'
-import PersonInfoRMenu from './equityGateway/elementBars/myAcc/profileSection/personInfoRMenu';
+    //Main Page
+    import TopBar from './equityGateway/elementBars/mainPage/topBar'
+    import MainPageSideMenu from './equityGateway/elementBars/mainPage/mainPageSideMenu'
+    //My Account
+    import MyAccSideMenu from './equityGateway/elementBars/myAcc/myAccSideMenu'
+    import PersonInfoRMenu from './equityGateway/elementBars/myAcc/profileSection/personInfoRMenu'
 
 // ----------------------------------------------------------------Pages -----------------------------------------------------------//
 //DashboardPage
@@ -26,6 +28,16 @@ import AccTaxPage from './equityGateway/myAccount/accTaxPage'
 //Application Pages Navigation
 import PageNavi from './equityGateway/pageNavi/pageNavi'
 
+//Sales Wizard
+import SalesWizBase from './equityGateway/salesWizard/salesWizBase'
+import SalesWizOverviewPage from './equityGateway/salesWizard/salesWizOverviewPage'
+import SalesWizSecurityPage from './equityGateway/salesWizard/salesWizSecurityPage'
+import SalesWizShareGroupPage from './equityGateway/salesWizard/salesWizShareGroupPage'
+import SalesWizAmount2SellPage from './equityGateway/salesWizard/salesWizAmount2SellPage'
+import SalesWizOrderTypePage from './equityGateway/salesWizard/salesWizOrderTypePage'
+import SalesWizDistributionPage from './equityGateway/salesWizard/salesWizDistributionPage'
+import SalesWizReviewOrderPage from './equityGateway/salesWizard/salesWizReviewOrderPage'
+
 // Others
 import LoginPage from './equityGateway/loginPage'
 import LogoutPage from './equityGateway/logoutPage';
@@ -40,12 +52,14 @@ import LogoutPage from './equityGateway/logoutPage';
 class EquityGateway {
     constructor() {
         // -------------------------------------------------------------------------- Components --------------------------------------------------------------------//
-        //elementBars
-        this.TopBar = new TopBar()
+        //Element Bars
         this.FooterBar = new FooterBar()
-        this.MainPageSideMenu = new MainPageSideMenu()
-        this.MyAccSideMenu = new MyAccSideMenu()
-        this.PersonInfoRMenu = new PersonInfoRMenu()
+            //Main Page
+            this.TopBar = new TopBar()
+            this.MainPageSideMenu = new MainPageSideMenu()
+            //My Account
+            this.MyAccSideMenu = new MyAccSideMenu()
+            this.PersonInfoRMenu = new PersonInfoRMenu()
 
         // --------------------------------------------------------------------------------Pages ----------------------------------------------------------------------//
         //DashboardPage
@@ -65,6 +79,16 @@ class EquityGateway {
 
         //Application Pages Navigation
         this.PageNavi = new PageNavi()
+
+        //Sales Wizard
+        this.SalesWizBase = new SalesWizBase()
+        this.SalesWizOverviewPage = new SalesWizOverviewPage()
+        this.SalesWizSecurityPage = new SalesWizSecurityPage()
+        this.SalesWizShareGroupPage = new SalesWizShareGroupPage()
+        this.SalesWizAmount2SellPage = new SalesWizAmount2SellPage()
+        this.SalesWizOrderTypePage = new SalesWizOrderTypePage()
+        this.SalesWizDistributionPage = new SalesWizDistributionPage()
+        this.SalesWizReviewOrderPage = new SalesWizReviewOrderPage()
 
         //Others
         this.LoginPage = new LoginPage()
