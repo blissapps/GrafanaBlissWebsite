@@ -1,4 +1,4 @@
-import BasePage from '../../basePage'
+import BasePage from '../../../basePage'
 
 const selectors = {
     accDetails: '.w-3 > .medium',
