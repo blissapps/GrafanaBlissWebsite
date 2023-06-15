@@ -1,4 +1,4 @@
-import EquityGateway from '../../../support/pages/equityGateway'
+import EquityGateway from '../../../../support/pages/equityGateway'
 
 const equityGateway = new EquityGateway()
 
