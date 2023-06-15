@@ -31,9 +31,8 @@ class PageNavi extends BasePage {
 
   /** After login the user is in dashboard and validates the URL
    */
-  navigateToDashboard() {
-    // User logs in
-    cy.url().should('contain', '/dashboard')
+  pageNaviUrlValidation(urlNavigation) {
+    cy.url().should('contain', urlNavigation)
   }
 
   /** Navigates to the Personal Information page and validates he URL

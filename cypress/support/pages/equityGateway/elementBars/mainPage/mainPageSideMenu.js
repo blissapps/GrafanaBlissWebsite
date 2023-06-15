@@ -4,7 +4,17 @@ const selectors = {
   pages: 'ul > :nth-child',
   shareInfo: '.pb-8 > eg-price-card',
   shareDerivation: '.lg\\:mr-8 > .flex',
-  support: '.eg-sidebar > .flex-column'
+  support: '.eg-sidebar > .flex-column',
+  sideBarButton: 'li > gs-button'
+}
+
+const sideMenuElementPositions = {
+  Dashboard: 0,
+  Portfolio: 1,
+  Plans: 2,
+  Transactions: 3,
+  Statements: 4,
+  Resources: 5
 }
 
 class MainPageSideMenu extends BasePage {
@@ -34,6 +44,11 @@ class MainPageSideMenu extends BasePage {
 
   support(label) {
     cy.get(selectors.support).should('contain.text', label)
+    cy.get(selectors.support).click()
+  }
+
+  clickSideMenuButton(buttonToClick){
+    cy.get(selectors.sideBarButton).eq(sideMenuElementPositions[buttonToClick])
   }
 }
 export default MainPageSideMenu

@@ -1,5 +1,4 @@
 import BasePage from '../../basePage'
-import MainPageSideMenu from '../elementBars/mainPage/mainPageSideMenu'
 
 // @ts-ignore
 //TODO [Fix the selectors with navigation and div dependencies]
@@ -21,9 +20,12 @@ const selectors = {
   emailMessageCharCount: '.h-3rem > .absolute', //FIXME (needs to be fixed nav dependent)
   emailMessageInput: 'gs-input-area[placeholder="Enter detailed description"] > textarea', //FIXME (needs to be fixed nav dependent)
   emailMessageError: 'gs-input-area[placeholder="Enter detailed description"] > div.message', //FIXME (needs to be fixed div and nav dependent)
-  emailFirstLastName: 'gs-input-field[title="First and last name"]',
-  emailFirstLastNameInput: 'gs-input-field[title="First and last name"] > div > input', //FIXME (needs to be fixed div and nav dependent)
-  emailFirstLastNameError: 'gs-input-field[title="First and last name"] > div.message', //FIXME (needs to be fixed div and nav dependent)
+  emailFirstName: 'gs-input-field[title="First name"]',
+  emailFirstNameInput: 'gs-input-field[title="First name"] > div > input', //FIXME (needs to be fixed div and nav dependent)
+  emailFirstNameError: 'gs-input-field[title="First name"] > div.message', //FIXME (needs to be fixed div and nav dependent)
+  emailLastName: 'gs-input-field[title="Last name"]',
+  emailLastNameInput: 'gs-input-field[title="Last name"] > div > input', //FIXME (needs to be fixed div and nav dependent)
+  emailLastNameError: 'gs-input-field[title="Last name"] > div.message', //FIXME (needs to be fixed div and nav dependent)
   emailRequester: 'gs-input-field[title="Email"]',
   emailRequesterInput: 'gs-input-field[title="Email"] > div > input', //FIXME (needs to be fixed div and nav dependent)
   emailRequesterError: 'gs-input-field[title="Email"] > div.message', //FIXME (needs to be fixed div and nav dependent)
@@ -37,16 +39,12 @@ const selectors = {
 
 class HelpFormPage extends BasePage {
   /** Navigates to the Helpdesk Page
-   * @param {boolean} auth (Adapts the behavior corresponding to the user authentication status)
    */
-  navigateToHelpDesk(auth = true) {
-    if (auth) {
-      const sideMenuBar = new MainPageSideMenu()
-      sideMenuBar.support('/help')
-    } else if (!auth) {
-      cy.visit(`${Cypress.env('EQUITY_GATEWAY_BASE_URL')}`, { failOnStatusCode: false })
-      cy.get(selectors.welcomePageHelp).click()
-    }
+  gotoHelpDesk() {
+    cy.window().then((win) => {
+      // @ts-ignore
+      win.location.href = 'https://eg-v4-alpha-25.gsapps.dev/help'
+  });
   }
 
   /** Validates Helpdesk form elements visibility
@@ -58,7 +56,8 @@ class HelpFormPage extends BasePage {
       this.validateElementAndAttribute(selectors.footerTermsAndConditions, 'href', '/terms-and-conditions')
     } else if (!auth) {
       this.validateElementAndAttribute(selectors.emailRequester, 'placeholder', 'Enter email address')
-      this.validateElementAndAttribute(selectors.emailFirstLastName, 'placeholder', 'Enter first and last name')
+      this.validateElementAndAttribute(selectors.emailFirstName, 'placeholder', 'Enter first name')
+      this.validateElementAndAttribute(selectors.emailLastName, 'placeholder', 'Enter last name')
     }
     this.validateElementAndAttribute(selectors.clientLogo, 'src', 'assets/images/companyLogoMed.svg')
     this.validateElementAndAttribute(selectors.clientLogo, 'alt', 'Skanska logo')
