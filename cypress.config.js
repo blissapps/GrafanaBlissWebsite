@@ -20,7 +20,7 @@ module.exports = defineConfig({
 
   retries: {
     runMode: 3,
-    openMode: 2
+    openMode: 0
   },
 
   reporter: 'cypress-multi-reporters',

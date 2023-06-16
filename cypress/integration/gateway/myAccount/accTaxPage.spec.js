@@ -13,7 +13,7 @@ describe('MyAcc TAX Sector Tests', () => {
             cy.fixture('gateway/myAccount/taxInfo').then((jsonObject) => {
                 const stringArray = Object.values(jsonObject);
                 equityGateway.AccTaxPage.infoSector(stringArray);
-            });
+            })
         })
     })
 

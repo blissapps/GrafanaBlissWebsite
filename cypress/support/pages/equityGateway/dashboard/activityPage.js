@@ -35,8 +35,8 @@ class ActivityPage extends BasePage {
     progressElements(num){
         // @ts-ignore
         cy.get('.mb-8 > :nth-child(n)').filter((index, element) => {
-            return Cypress.$(element).is(':nth-child(n)');
-        }).its('length').should('eq', num+2);
+            return Cypress.$(element).is(':nth-child(n)')
+        }).its('length').should('eq', num+2)
     }
 
     button(label){
@@ -46,7 +46,7 @@ class ActivityPage extends BasePage {
     tabsBarElements(elementArray){
         elementArray.forEach((item) => {
             cy.get(selectors.tabsFilter).contains(item).should('exist');
-        });
+        })
     }
 }
 export default ActivityPage

@@ -12,7 +12,7 @@ class DashboardPage extends BasePage {
         cy.get(selectors.headName).contains(`Hello, ${acc1stName}`)
 
         activityElements.forEach((item) => {
-            cy.get(selectors.activityWidget).contains(item).should('exist');
+            cy.get(selectors.activityWidget).contains(item).should('exist')
         })
 
         cy.get(selectors.activityUrl).should(($element) => {
