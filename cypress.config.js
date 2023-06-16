@@ -11,8 +11,8 @@ module.exports = defineConfig({
   defaultCommandTimeout: 15000,
   redirectionLimit: 50,
   //Changed to 1024x768 as defined with Edward Kelleher
-  viewportWidth: 1920, //old viewportWidth: 1920,
-  viewportHeight: 1080,  //old viewportHeight: 1080,
+  viewportWidth: 1024, //old viewportWidth: 1920,
+  viewportHeight: 768,  //old viewportHeight: 1080,
   screenshotOnRunFailure: true,
   screenshotConfig: {
     scale: false
