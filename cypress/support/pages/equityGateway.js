@@ -8,6 +8,10 @@ import FooterBar from './equityGateway/elementBars/footerBar'
     //My Account
     import MyAccSideMenu from './equityGateway/elementBars/myAcc/myAccSideMenu'
     import PersonInfoRMenu from './equityGateway/elementBars/myAcc/profileSection/personInfoRMenu'
+    //Sales Wizard
+    import SalesWizTopBar from './equityGateway/elementBars/salesWizard/salesWizTopBar'
+    import SalesWizSideLmenu from './equityGateway/elementBars/salesWizard/salesWizSideLmenu'
+    import SalesWizSideRmenu from './equityGateway/elementBars/salesWizard/salesWizSideRmenu'
 
 // ----------------------------------------------------------------Pages -----------------------------------------------------------//
 //DashboardPage
@@ -60,6 +64,10 @@ class EquityGateway {
             //My Account
             this.MyAccSideMenu = new MyAccSideMenu()
             this.PersonInfoRMenu = new PersonInfoRMenu()
+            //Sales Wizard
+            this.SalesWizTopBar = new SalesWizTopBar()
+            this.SalesWizSideLmenu = new SalesWizSideLmenu()
+            this.SalesWizSideRmenu = new SalesWizSideRmenu()
 
         // --------------------------------------------------------------------------------Pages ----------------------------------------------------------------------//
         //DashboardPage
