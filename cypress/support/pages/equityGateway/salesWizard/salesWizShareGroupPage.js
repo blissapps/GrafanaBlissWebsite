@@ -13,8 +13,7 @@ class salesWizShareGroupPage extends BasePage {
   validateMainBody() {
     this.isShareGroupOptionsBodyVisible()
     this.areAnyShareGroupOptionsVisible()
-    this.selectShareGroupByName('Purchase plan issuances')
-    //cy.get(selectors.shareGroupsAvailable).eq(0).click().should('have.attr', 'border-color', 'rgb(0, 101, 255)')
+    cy.get(selectors.shareGroupsAvailable).eq(0).click().should('have.attr', 'border-color', 'rgb(0, 101, 255)')
   }
 
   isShareGroupOptionsBodyVisible() {
