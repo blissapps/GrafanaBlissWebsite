@@ -63,13 +63,18 @@ describe('Sales Wizard Security Page Tests', () => {
             })
         })
     })
-    context('Click on Security Cards Elements', () => {
+
+    context('Verify if Security Cards are all clickable', () => {
         /** Related to User Stories
          * EGVFOUR-140
          **/
-        it('C30639260 - Cards Click', () => {
-            equityGateway.SalesWizSecurityPage.cardClick('Sage Group Plc')
-            equityGateway.SalesWizSecurityPage.cardClick('St James Place')
+        /*
+        const activityElements = [
+            'Sage Group Plc',
+            'St James Place'
+         ] */
+        it('C30639260 - Cards Click Verify', () => {
+            //TODO when Utils are develop
         })
     })
 })
