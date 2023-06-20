@@ -11,9 +11,11 @@ class DashboardPage extends BasePage {
     home(acc1stName, activityElements){
         cy.get(selectors.headName).contains(`Hello, ${acc1stName}`)
 
-        activityElements.forEach((item) => {
-            cy.get(selectors.activityWidget).contains(item).should('exist')
-        })
+        if (activityElements !== undefined){
+            activityElements.forEach((item) => {
+                cy.get(selectors.activityWidget).contains(item).should('exist')
+            })
+        }
 
         cy.get(selectors.activityUrl).should(($element) => {
             const url = $element.attr('href')
