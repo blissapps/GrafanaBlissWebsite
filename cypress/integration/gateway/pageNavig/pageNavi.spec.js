@@ -43,6 +43,7 @@ describe('Page Navigation Tests', () => {
     it('C30159579 - My Account path navigation', () => {
       equityGateway.LoginPage.login()
       equityGateway.PageNavi.navigateToDashboard()
+      equityGateway.PageNavi.navigateToMyAccountProfile()
     })
   })
 
