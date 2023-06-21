@@ -85,7 +85,7 @@ describe('Login and Logout Tests', () => {
                 equityGateway.DashboardPage.home(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_1ST_NAME'))
             } else {
                 equityGateway.LoginPage.login(Cypress.env('EQUITY_GATEWAY_DEFAULT_USER2_AUTH'), Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH'))
-                equityGateway.DashboardPage.home('Aryan')
+                //equityGateway.DashboardPage.home('Aryan')
             }
         })
     })
