@@ -3,7 +3,7 @@ import BasePage from '../../basePage'
 const selectors = {
     headName: '.text-h2',
     activityWidget: '.eg-activity-widget',
-    activityUrl: '.eg-activity-widget > :nth-child(1) > .mr-2',
+    activityUrl: 'a.mr-2',
     footer: '.eg-footer'
 }
 
@@ -25,6 +25,10 @@ class DashboardPage extends BasePage {
 
     checkPageUrl(){
         this.checkUrl('/dashboard')
+    }
+
+    clickViewAllActivity(){
+        cy.get(selectors.activityUrl).click()
     }
 }
 export default DashboardPage
