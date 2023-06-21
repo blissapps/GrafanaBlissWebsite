@@ -7,13 +7,11 @@ const selectors = {
   shareGroupsAvailable: 'gs-radio-button-option'
 }
 
-//#0065ff rgb(0, 101, 255) color HEX [.border-color-accent (border-color)]
-
 class salesWizShareGroupPage extends BasePage {
   validateMainBody() {
     this.isShareGroupOptionsBodyVisible()
     this.areAnyShareGroupOptionsVisible()
-    cy.get(selectors.shareGroupsAvailable).eq(0).click().should('have.attr', 'border-color', 'rgb(0, 101, 255)')
+    cy.get(selectors.shareGroupsAvailable).eq(0).dblclick().should('have.css', 'border-color', 'rgb(0, 101, 255)')
   }
 
   isShareGroupOptionsBodyVisible() {
@@ -24,7 +22,22 @@ class salesWizShareGroupPage extends BasePage {
     cy.get(selectors.shareGroupsAvailable).its('length').should('be.greaterThan', 0)
   }
 
-  selectShareGroupByName(shareGroupName){
+  isSharesGroupClickable(availableButtons) {
+    for (let i = 0; i < availableButtons; i++) {
+      cy.get(selectors.shareGroupsAvailable).eq(i).should('be.enabled')
+    }
+  }
+
+  setSharesGroupAvailableButtons() {
+    let availableSharesGroupButtons = 0
+    cy.get(selectors.shareGroupsAvailable)
+      .its('length')
+      .then((number) => (availableSharesGroupButtons = number))
+
+    return availableSharesGroupButtons
+  }
+
+  selectShareGroupByName(shareGroupName) {
     cy.get(selectors.shareGroupBody).contains(shareGroupName).click()
   }
 }

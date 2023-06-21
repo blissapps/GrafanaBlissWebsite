@@ -37,7 +37,7 @@ describe('Page Navigation Tests', () => {
       equityGateway.PageNavi.pageNaviUrlValidation('/help')
     })
 
-    it('***** - Validate other side menu elements', () => {
+    it('TBD Later - Validate other side menu elements', () => {
       //TBD When the other elements are available
     })
 
