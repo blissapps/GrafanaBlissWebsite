@@ -15,6 +15,7 @@ describe('Sales Wizard Group Page Tests', () => {
         })
 
         it('Validate Page Elements', () => {
+            //TODO PAULO MONTINHO
             //Top Bar
             //Main Body
             equityGateway.SalesWizShareGroupPage.validateMainBody()

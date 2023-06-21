@@ -1,6 +1,7 @@
 import EquityGateway from '../../../support/pages/equityGateway';
 
 const equityGateway = new EquityGateway()
+
 describe('MyAcc Preferences Sector Tests', () => {
     beforeEach(() => {
         equityGateway.LoginPage.login() //Workaround for now
