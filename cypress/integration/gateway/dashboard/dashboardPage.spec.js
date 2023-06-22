@@ -19,7 +19,7 @@ describe('Dashboard Page Tests', () => {
                 'Upcoming',
                 'Showing 3 of 6'
             ]
-            equityGateway.DashboardPage.home(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_1ST_NAME'), activityElements)
+            equityGateway.DashboardPage.home(equityGateway.LoginPage.getLastUser(), activityElements)
         })
     })
 

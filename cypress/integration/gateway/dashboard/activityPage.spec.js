@@ -48,7 +48,7 @@ describe('Activity Page Tests', () => {
 
     context('Upcoming Content', () => {
         it('General Validations', () => {
-            const expectedFooterItems = ['Date', 'ActivityPage type'];
+            const expectedFooterItems = ['Date', 'Activity type'];
             equityGateway.ActivityPage.tabsBarElements(expectedFooterItems)
         })
         //TODO no data to test it yet
@@ -57,7 +57,7 @@ describe('Activity Page Tests', () => {
     context('History Content', () => {
         it('General Validations', () => {
             cy.get('.tabs-bar').contains('History').click({ force: true })
-            const expectedFooterItems = ['Date', 'ActivityPage type'];
+            const expectedFooterItems = ['Date', 'Activity type'];
             equityGateway.ActivityPage.tabsBarElements(expectedFooterItems)
         })
         //TODO no data to test it yet

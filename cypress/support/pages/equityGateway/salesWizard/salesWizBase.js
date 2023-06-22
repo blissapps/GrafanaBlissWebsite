@@ -5,7 +5,7 @@ class salesWizBase extends BasePage {
         cy.window().then((win) => {
             // @ts-ignore
             win.location.href = Cypress.env('EQUITY_GATEWAY_BASE_URL')+'/sale-wizard/overview'
-        });
+        })
     }
 }
 export default salesWizBase

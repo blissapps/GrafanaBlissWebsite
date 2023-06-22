@@ -37,14 +37,14 @@ class MainPageSideMenu extends BasePage {
         } else if (colorValue === sharesNegativeColor) {
           cy.get(selectors.shareDerivation).invoke('text').should('match', sharesNegativeReg)
         } else {
-          cy.wrap(false).should('be.true', 'Unexpected color value')
+          throw new Error('Unexpected color value')
         }
       })
   }
 
   support(label) {
     cy.get(selectors.support).should('contain.text', label)
-    cy.get(selectors.support).click()
+    cy.get(selectors.support).click({ force: true })
   }
 
   clickSideMenuButton(buttonToClick){

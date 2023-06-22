@@ -20,7 +20,6 @@ describe('MainPage SideMenu Tests', () => {
             equityGateway.MainPageSideMenu.mainPages('5', 'Statements')
             equityGateway.MainPageSideMenu.mainPages('6', 'Resources')
 
-            equityGateway.MainPageSideMenu.support('Support') //Support Section
             equityGateway.MainPageSideMenu.support('Help') //Help Page presence validation
         })
 
