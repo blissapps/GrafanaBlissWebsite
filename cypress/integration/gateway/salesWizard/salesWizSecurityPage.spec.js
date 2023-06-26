@@ -4,8 +4,7 @@ const equityGateway = new EquityGateway()
 describe('Sales Wizard Security Page Tests', () => {
     beforeEach(() => {
         //NOT NECESSARY YET  - equityGateway.LoginPage.login()
-        equityGateway.SalesWizBase.gotoSalesWiz()
-        equityGateway.SalesWizTopBar.nextBtn('click')
+        equityGateway.SalesWizBase.gotoSecurity()
     })
     context('General Page Validations', () => {
         /** Related to User Stories

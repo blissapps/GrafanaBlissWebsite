@@ -8,10 +8,7 @@ describe('Sales Wizard Group Page Tests', () => {
          **/
         beforeEach('User Chooses a Security', () => {
             //NOT NECESSARY YET  - equityGateway.LoginPage.login()
-            equityGateway.SalesWizBase.gotoSalesWiz()
-            equityGateway.SalesWizTopBar.nextBtn('click')
-            cy.contains('h5', 'St James Place').click().click()
-            equityGateway.SalesWizTopBar.nextBtn('click')
+            equityGateway.SalesWizBase.gotoShareGroup()
         })
 
         it('Validate Page Elements', () => {

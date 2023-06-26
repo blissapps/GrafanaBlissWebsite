@@ -3,6 +3,7 @@ import BasePage from '../../basePage'
 /**
  * FIXME - Selectors that need to be fixed after ID development
  */
+
 const selectors = {
   orderTypeButton: 'gs-radio-button-option',
   dayLimitOrder: '.border-color-accent > .wrapper > .bg-color-white > .cursor-auto > gs-input-field.ng-star-inserted > .input > .ng-untouched', //FIXME
@@ -12,13 +13,6 @@ const selectors = {
 }
 
 class salesWizOrderTypePage extends BasePage {
-  /**
-   * FIXME Needs to implement step from Amount2Sell instead of this hardcoded process
-   */
-  goToOrderType() {
-    cy.get('.input').type('100')
-  }
-
   /**
    * Validates if the elements are present in the page DOM
    */

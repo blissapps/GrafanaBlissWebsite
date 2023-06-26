@@ -7,20 +7,14 @@ describe('Sales Wizard Order Type Page Tests', () => {
      * EGVFOUR-143
      **/
     beforeEach('User Defines the Amount to sell', () => {
-      equityGateway.SalesWizBase.gotoSalesWiz()
-      equityGateway.SalesWizTopBar.nextBtn('click')
-      cy.contains('h5', 'St James Place').click().click()
-      equityGateway.SalesWizTopBar.nextBtn('click')
-      equityGateway.SalesWizShareGroupPage.selectShareGroupByName('SIP Issuances')
-      equityGateway.SalesWizTopBar.nextBtn('click')
-      // FIXME relates to ..\equityGateway\salesWizard\salesWizOrderTypePage.js[goToOrderType()]
-      equityGateway.SalesWizOrderTypePage.goToOrderType()
-      equityGateway.SalesWizTopBar.nextBtn('click')
+      equityGateway.SalesWizBase.goToOrderType()
     })
+
     it('C30639283 - Validate Page Elements and Interactability', () => {
       equityGateway.SalesWizOrderTypePage.validatePageStructure()
       equityGateway.SalesWizOrderTypePage.validatePageInteractability()
     })
+
     it('C30904119 - Selects Market Order - Order Type', () => {
       equityGateway.SalesWizOrderTypePage.selectOrderTypeByName('Market Order').click()
       equityGateway.SalesWizTopBar.nextBtn('click')

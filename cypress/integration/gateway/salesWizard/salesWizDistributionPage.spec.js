@@ -8,7 +8,7 @@ describe('Sales Wizard Distribution Page Tests', () => {
          **/
         beforeEach(() => {
             //NOT NECESSARY YET  - equityGateway.LoginPage.login()
-            equityGateway.SalesWizBase.gotoSalesWiz()
+            equityGateway.SalesWizBase.goToDistribution()
         })
 
         it('Test 1', () => {

@@ -20,13 +20,7 @@ before(() => {
 
 beforeEach(() => {
     //NOT NECESSARY YET  - equityGateway.LoginPage.login()
-    equityGateway.SalesWizBase.gotoSalesWiz()
-    equityGateway.SalesWizTopBar.nextBtn('click')
-    equityGateway.SalesWizSecurityPage.cardClick('St James Place')
-    equityGateway.SalesWizTopBar.nextBtn('click')
-    equityGateway.SalesWizShareGroupPage.selectShareGroupByName('Purchase plan issuances')
-    equityGateway.SalesWizTopBar.nextBtn('click')
-    cy.url().should('include', '/amount-to-sell')
+    equityGateway.SalesWizBase.gotoAmount2Sell()
 })
 
 describe('Sales Wizard - Amount to Sell Page Tests', () => {
@@ -195,7 +189,7 @@ describe('Sales Wizard - Amount to Sell Page Tests', () => {
             equityGateway.SalesWizAmount2SellPage.certificatesModalEdit('DRIP_14466', 'Available', sharesValueToPass, 'check')
         })
 
-        it('C30988138 - Verify if the input field is accepting 0 as min value', () => {
+        it.only('C30988138 - Use total amount shares will trigger an info modal when moving to next page', () => {
             const restrictedShareContentElements = [
                 '29/03/2023',
                 'Retention',
@@ -208,7 +202,7 @@ describe('Sales Wizard - Amount to Sell Page Tests', () => {
             equityGateway.SalesWizTopBar.nextBtn('click')
             equityGateway.SalesWizAmount2SellPage.sharesModalValidation(restrictedShareContentElements)
             equityGateway.SalesWizAmount2SellPage.btnSharesModalClickAgree()
-            equityGateway.SalesWizTopBar.nextBtn('click')
+            equityGateway.SalesWizOrderTypePage.validatePageInteractability()
         })
     })
 })
