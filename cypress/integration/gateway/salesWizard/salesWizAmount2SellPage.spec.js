@@ -195,7 +195,7 @@ describe('Sales Wizard - Amount to Sell Page Tests', () => {
             equityGateway.SalesWizAmount2SellPage.certificatesModalEdit('DRIP_14466', 'Available', sharesValueToPass, 'check')
         })
 
-        it.only('C30988138 - Verify if the input field is accepting 0 as min value', () => {
+        it('C30988138 - Verify if the input field is accepting 0 as min value', () => {
             const restrictedShareContentElements = [
                 '29/03/2023',
                 'Retention',
