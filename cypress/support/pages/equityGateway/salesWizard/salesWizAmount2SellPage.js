@@ -15,9 +15,11 @@ const selectors = {
     certificateTitle: '.eg-amount > :nth-child(6) > .font-bold',
     certificateTable: 'div.eg-amount__table',
     certificateTableElementColo: '> .square > .eg-amount__table-body-row > .flex > .eg-amount__status-icon',
-    certificateModal: '.eg-modal__modal',
-    certificateModalInputField: '.mt-5 > .input > .ng-untouched',
-    certificateModalCloseBtn: '.border-none'
+    sharesModal: '.eg-modal__modal',
+    sharesModalAgreeBtn: 'gs-button[data-test-id="sw-restricted-shares-btn-agree"]',
+    sharesModalHeader: '.eg-modal__modal-header',
+    sharesModalInputField: '.mt-5 > .input > .ng-untouched',
+    sharesModalCloseBtn: '.border-none'
 }
 
 class salesWizAmount2SellPage extends BasePage {
@@ -100,8 +102,9 @@ class salesWizAmount2SellPage extends BasePage {
 
     certificatesModalValidation (certificateName, availability) {
         const elements = [
-            'Edit shares selection', 'Available',
-            ' Estimated Proceeds',
+            'Edit shares selection',
+            'Available',
+            'Estimated Proceeds',
             'Estimated Gain/Loss',
             'Dismiss',
             'Save'
@@ -117,12 +120,12 @@ class salesWizAmount2SellPage extends BasePage {
             throw new Error('Availability error')
         }
 
-        cy.get('.eg-modal__modal-header').then(($element) => {
+        cy.get(selectors.sharesModalHeader).then(($element) => {
             if ($element.length > 0) {
                 elements.forEach((item) => {
-                    cy.get(selectors.certificateModal).contains(item).should('exist')
+                    cy.get(selectors.sharesModal).contains(item).should('exist')
                 })
-                cy.get(selectors.certificateModalInputField).should('be.visible')
+                cy.get(selectors.sharesModalInputField).should('be.visible')
             } else {
                 throw new Error('Modal elements missing')
             }
@@ -136,12 +139,12 @@ class salesWizAmount2SellPage extends BasePage {
 
         switch (checkORetype) {
             case 'type':
-                cy.get(selectors.certificateModalInputField).clear().type(sharesAmount, { force: true }).then(() => {
-                    cy.get(selectors.certificateModalInputField).should('not.have.value', /[0-9]+/)
+                cy.get(selectors.sharesModalInputField).clear().type(sharesAmount, { force: true }).then(() => {
+                    cy.get(selectors.sharesModalInputField).should('not.have.value', /[0-9]+/)
                 })
                 break
             case 'check':
-                cy.get(selectors.certificateModalInputField).should('have.value', sharesAmount)
+                cy.get(selectors.sharesModalInputField).should('have.value', sharesAmount)
                 break
             default:
                 throw new Error('Passed "checkORetype" statement was not expected')
@@ -149,16 +152,16 @@ class salesWizAmount2SellPage extends BasePage {
 
         switch (dismissORsaveORclose) {
             case 'dismiss':
-                cy.get(selectors.certificateModalInputField).clear().type(sharesAmount, { force: true }).then(() => {
-                    cy.get(selectors.certificateModal).contains('Dismiss').click( { force: true })
+                cy.get(selectors.sharesModalInputField).clear().type(sharesAmount, { force: true }).then(() => {
+                    cy.get(selectors.sharesModal).contains('Dismiss').click( { force: true })
                 })
                 break
             case 'save':
-                cy.get(selectors.certificateModal).contains('Save').click( { force: true })
+                cy.get(selectors.sharesModal).contains('Save').click( { force: true })
                 break
 
             case 'close':
-                cy.get(selectors.certificateModalCloseBtn).click( { force: true })
+                cy.get(selectors.sharesModalCloseBtn).click( { force: true })
                 break
 
             case undefined :
@@ -167,6 +170,31 @@ class salesWizAmount2SellPage extends BasePage {
             default:
                 throw new Error('Passed "dismissORsave" statement was not expected')
         }
+    }
+
+    sharesModalValidation (restrictedShareContentElements) {
+        const elements = [
+            'Restricted shares',
+            'You have selected to sell some restricted shares.',
+            'Retention date',
+            'Restriction type',
+            'Issuance type',
+            'Number of shares',
+            'Restriction type',
+            'Impact',
+            'Dismiss',
+            'I agree'
+        ]
+        elements.forEach((item) => {
+            cy.get(selectors.sharesModal).contains(item).should('exist')
+        })
+        restrictedShareContentElements.forEach((item) => {
+            cy.get(selectors.sharesModal).contains(item).should('exist')
+        })
+    }
+
+    btnSharesModalClickAgree () {
+        cy.get(selectors.sharesModalAgreeBtn).click({ force: true })
     }
 }
 export default salesWizAmount2SellPage

@@ -194,5 +194,21 @@ describe('Sales Wizard - Amount to Sell Page Tests', () => {
             equityGateway.SalesWizAmount2SellPage.certificatesModalEdit('DRIP_14466', 'Available', sharesValueToPass, 'type', 'save')
             equityGateway.SalesWizAmount2SellPage.certificatesModalEdit('DRIP_14466', 'Available', sharesValueToPass, 'check')
         })
+
+        it.only('C30988138 - Verify if the input field is accepting 0 as min value', () => {
+            const restrictedShareContentElements = [
+                '29/03/2023',
+                'Retention',
+                'Match',
+                '2,000',
+                '11,00000',
+                'Matching shares to be cancelled'
+            ]
+            equityGateway.SalesWizAmount2SellPage.btnTotalAmountClick()
+            equityGateway.SalesWizTopBar.nextBtn('click')
+            equityGateway.SalesWizAmount2SellPage.sharesModalValidation(restrictedShareContentElements)
+            equityGateway.SalesWizAmount2SellPage.btnSharesModalClickAgree()
+            equityGateway.SalesWizTopBar.nextBtn('click')
+        })
     })
 })
