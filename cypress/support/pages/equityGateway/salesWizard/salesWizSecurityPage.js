@@ -7,7 +7,10 @@ const selectors = {
     cardElementp1: ':nth-child',
     cardElementp2: ' > .wrapper',
     stockDerivation: ' > .w-full > .justify-content-start > .mb-4 > .eg-security__class-container > .flex-row > .flex > .text-small',
-    stockValue: ' > .w-full > .justify-content-start > .mb-4 > .eg-security__class-container > .pr-5'
+    stockValue: ' > .w-full > .justify-content-start > .mb-4 > .eg-security__class-container > .pr-5',
+    confirmationModal: '.eg-modal__modal',
+    btnConfirmationModalCancel: 'gs-button[type="icon"]',
+    btnConfirmationModalConfirm: 'gs-button[appearance="flat"][size="large"]'
 }
 
 class salesWizSecurityPage extends BasePage {
@@ -19,6 +22,21 @@ class salesWizSecurityPage extends BasePage {
     }
     cardClick(cardName){
         cy.get(selectors.cardSector).contains(cardName).click()
+    }
+
+    cardConfirmationModal(confirmORcancel){
+        switch (confirmORcancel) {
+            case 'confirm':
+                cy.get(selectors.confirmationModal).should('be.visible')
+                cy.get(selectors.btnConfirmationModalConfirm).contains('Confirm').click({ force: true })
+                break
+            case 'cancel':
+                cy.get(selectors.confirmationModal).should('be.visible')
+                cy.get(selectors.btnConfirmationModalCancel).contains('Confirm').click({ force: true })
+                break
+            default:
+                throw new Error('Unexpected "confirmORcancel" statement, Status: ' + confirmORcancel)
+        }
     }
 
     cardValidation(cardPosition, generalItems, currency, currencyValue, stockDerivation){
