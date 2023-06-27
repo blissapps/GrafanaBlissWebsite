@@ -67,7 +67,8 @@ describe('Sales Wizard - Amount to Sell Page Tests', () => {
          **/
         it('C30639311 - Checkbox Enabled Turns Certificates with Restrictions Dimmed Out', () => {
             equityGateway.SalesWizAmount2SellPage.checkBoxClick()
-            //TODO VERIFY Dimmed out elements
+            //Select certificates to be Dimmed Out and not Clickable
+            equityGateway.SalesWizAmount2SellPage.certificatesDisable('DRIP_14466', 2)
         })
     })
 
@@ -196,7 +197,7 @@ describe('Sales Wizard - Amount to Sell Page Tests', () => {
             equityGateway.SalesWizAmount2SellPage.certificatesModalEdit('DRIP_14466', 1, 'Available', sharesValueToPass, 'check')
         })
 
-        it.only('C30988138 - Verify if the input field is accepting 0 as min value', () => {
+        it('C30988138 - Use total amount shares will trigger an info modal when moving to next page', () => {
             const restrictedShareContentElements = [
                 '29/03/2023',
                 'Retention',

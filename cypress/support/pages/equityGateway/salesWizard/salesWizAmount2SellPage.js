@@ -80,6 +80,31 @@ class salesWizAmount2SellPage extends BasePage {
         }
     }
 
+    sharesModalValidation (restrictedShareContentElements) {
+        const elements = [
+            'Restricted shares',
+            'You have selected to sell some restricted shares.',
+            'Retention date',
+            'Restriction type',
+            'Issuance type',
+            'Number of shares',
+            'Restriction type',
+            'Impact',
+            'Dismiss',
+            'I agree'
+        ]
+        elements.forEach((item) => {
+            cy.get(selectors.sharesModalInfo).contains(item).should('exist')
+        })
+        restrictedShareContentElements.forEach((item) => {
+            cy.get(selectors.sharesModalInfo).contains(item).should('exist')
+        })
+    }
+
+    btnSharesModalClickAgree () {
+        cy.get(selectors.btnSharesModalAgree).click({ force: true })
+    }
+
     certificateSectorValidation(){
         const certificates = [
             'Certificates',
@@ -103,6 +128,13 @@ class salesWizAmount2SellPage extends BasePage {
         certificateNames.forEach((item) => {
             cy.get(selectors.certificateTable).contains(item).should('exist')
         })
+    }
+
+    certificatesDisable (certificateName, certificatePosition) {
+        selectors.certificateName = `div[data-test-id="sw-amount-to-sell-certificates-card-${certificatePosition}"]`
+        cy.get(selectors.certificateName).should('have.class', 'disabled-item')
+        cy.contains(certificateName).get(selectors.certificateName+' > div > div > div > div').should('have.css', 'background-color', 'rgb(255, 202, 95)').click()
+        cy.get(selectors.sharesModalEdit).should('not.exist')
     }
 
     certificatesModalValidation (certificateName, availability, certificatePosition) {
@@ -179,31 +211,6 @@ class salesWizAmount2SellPage extends BasePage {
             default:
                 throw new Error('Passed "dismissORsave" statement was not expected')
         }
-    }
-
-    sharesModalValidation (restrictedShareContentElements) {
-        const elements = [
-            'Restricted shares',
-            'You have selected to sell some restricted shares.',
-            'Retention date',
-            'Restriction type',
-            'Issuance type',
-            'Number of shares',
-            'Restriction type',
-            'Impact',
-            'Dismiss',
-            'I agree'
-        ]
-        elements.forEach((item) => {
-            cy.get(selectors.sharesModalInfo).contains(item).should('exist')
-        })
-        restrictedShareContentElements.forEach((item) => {
-            cy.get(selectors.sharesModalInfo).contains(item).should('exist')
-        })
-    }
-
-    btnSharesModalClickAgree () {
-        cy.get(selectors.btnSharesModalAgree).click({ force: true })
     }
 }
 export default salesWizAmount2SellPage
