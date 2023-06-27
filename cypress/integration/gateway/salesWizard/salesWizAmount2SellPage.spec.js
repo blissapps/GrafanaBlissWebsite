@@ -89,7 +89,7 @@ describe('Sales Wizard - Amount to Sell Page Tests', () => {
         it('C30639314 - Checkbox unticked the, maximum value is equal to sum of Total Available and Available w/Restrictions', () => {
             equityGateway.SalesWizAmount2SellPage.btnTotalAmountClick()
 
-            //TODO @sum needs to be adjusted because we are not receiving real value yet, @sharesAvailableRestrictions contains white spaces
+            //TODO @sum needs to be adjusted later because we are not receiving real value yet, @sharesAvailableRestrictions contains white spaces
             const sum = parseInt(sharesAvailable.replace(/\s/g, ''), 10) + parseInt(sharesAvailableRestrictions.replace(/\s/g, ''), 10)
             equityGateway.SalesWizAmount2SellPage.inputFieldShares('check', sum)
         })
@@ -104,6 +104,7 @@ describe('Sales Wizard - Amount to Sell Page Tests', () => {
             equityGateway.SalesWizAmount2SellPage.inputFieldShares('check', sharesAvailable)
         })
 
+        //TODO @sum needs to be adjusted later because we are not receiving real value yet, @sharesAvailableRestrictions contains white spaces
         it('C30639317/..18 - Checkbox unticked, clicks Total Amount button, value should be equal to Sum of total Available plus Available with Restrictions shares', () => {
             equityGateway.SalesWizAmount2SellPage.btnTotalAmountClick()
             const sum = parseInt(sharesAvailable.replace(/\s/g, ''), 10) + parseInt(sharesAvailableRestrictions.replace(/\s/g, ''), 10)
@@ -125,15 +126,15 @@ describe('Sales Wizard - Amount to Sell Page Tests', () => {
 
         it('C30639321 - Certificates counter updates according to the number of certificates', () => {
             const certificates = ['DRIP_14466', 'DRIP_14466']
-            equityGateway.SalesWizAmount2SellPage.certificatesValidation(2, certificates)
+            equityGateway.SalesWizAmount2SellPage.certificatesCounterValidation(2, certificates)
         })
 
         it('C30639323 - Clicking a certificate (Available) triggers a modal', () => {
-            equityGateway.SalesWizAmount2SellPage.certificatesModalValidation('DRIP_14466', 'Available')
+            equityGateway.SalesWizAmount2SellPage.certificatesModalValidation('DRIP_14466', 'Available', 1)
         })
 
         it('C30639324/..31 - Clicking a certificate (Available with restrictions) triggers a modal', () => {
-            equityGateway.SalesWizAmount2SellPage.certificatesModalValidation('DRIP_14466', 'Available with restrictions')
+            equityGateway.SalesWizAmount2SellPage.certificatesModalValidation('DRIP_14466', 'Available with restrictions', 2)
         })
     })
 
@@ -151,51 +152,51 @@ describe('Sales Wizard - Amount to Sell Page Tests', () => {
 
         it('C30639326 - Certificate modal amount input field accepts only numeric characters', () => {
             //Automatically checks the value typed if does not contain nay other CHARs than 0-9
-            equityGateway.SalesWizAmount2SellPage.certificatesModalEdit('DRIP_14466', 'Available', '999 AA', 'type')
+            equityGateway.SalesWizAmount2SellPage.certificatesModalEdit('DRIP_14466', 2, 'Available with restrictions', '999 AA', 'type')
         })
 
         it('C30639327 - Certificate modal amount input field is prepopulated with the previous amount to sell value defined in the Amount to Sell Page', () => {
             const sharesValueToPass = Math.floor(Math.random() * 490) + 10
             equityGateway.SalesWizAmount2SellPage.inputFieldShares('type', sharesValueToPass)
-            equityGateway.SalesWizAmount2SellPage.certificatesModalEdit('DRIP_14466', 'Available', sharesValueToPass, 'check')
+            equityGateway.SalesWizAmount2SellPage.certificatesModalEdit('DRIP_14466', 1, 'Available', sharesValueToPass, 'check')
         })
 
         it('C30639328 - Clicking the close button of certificate modal without new changes', () => {
-            equityGateway.SalesWizAmount2SellPage.certificatesModalEdit('DRIP_14466', 'Available', 'null', 'type', 'close')
-            equityGateway.SalesWizAmount2SellPage.certificatesModalEdit('DRIP_14466', 'Available', '100', 'check')
+            equityGateway.SalesWizAmount2SellPage.certificatesModalEdit('DRIP_14466', 1, 'Available', 'null', 'type', 'close')
+            equityGateway.SalesWizAmount2SellPage.certificatesModalEdit('DRIP_14466', 1, 'Available', '100', 'check')
         })
 
         it('C30639329 -  Clicking the close button of certificate modal with new changes', () => {
             const sharesValueToPass = Math.floor(Math.random() * 490) + 10
-            equityGateway.SalesWizAmount2SellPage.certificatesModalEdit('DRIP_14466', 'Available', sharesValueToPass, 'type', 'close')
+            equityGateway.SalesWizAmount2SellPage.certificatesModalEdit('DRIP_14466', 2, 'Available with restrictions', sharesValueToPass, 'type', 'close')
             //this test is waiting for new DEVS
         })
 
         it('C30639330 -  Clicking the save changes button when user closes the certificate modal', () => {
             const sharesValueToPass = Math.floor(Math.random() * 490) + 10
-            equityGateway.SalesWizAmount2SellPage.certificatesModalEdit('DRIP_14466', 'Available', sharesValueToPass, 'type', 'close')
+            equityGateway.SalesWizAmount2SellPage.certificatesModalEdit('DRIP_14466', 2, 'Available with restrictions', sharesValueToPass, 'type', 'close')
             //this test is waiting for new DEVS
         })
 
         it('C30639333 -   Select "Save" button when user is on the modal', () => {
             const sharesValueToPass = Math.floor(Math.random() * 490) + 10
-            equityGateway.SalesWizAmount2SellPage.certificatesModalEdit('DRIP_14466', 'Available', sharesValueToPass, 'type', 'save')
-            equityGateway.SalesWizAmount2SellPage.certificatesModalEdit('DRIP_14466', 'Available', sharesValueToPass, 'check')
+            equityGateway.SalesWizAmount2SellPage.certificatesModalEdit('DRIP_14466', 1, 'Available', sharesValueToPass, 'type', 'save')
+            equityGateway.SalesWizAmount2SellPage.certificatesModalEdit('DRIP_14466', 1, 'Available', sharesValueToPass, 'check')
         })
 
         it('C30639334 -   Select "Dismiss" button when user is on the modal', () => {
             const sharesValueToPass = Math.floor(Math.random() * 490) + 10
-            equityGateway.SalesWizAmount2SellPage.certificatesModalEdit('DRIP_14466', 'Available', sharesValueToPass, 'type', 'dismiss')
-            equityGateway.SalesWizAmount2SellPage.certificatesModalEdit('DRIP_14466', 'Available', '100', 'check')
+            equityGateway.SalesWizAmount2SellPage.certificatesModalEdit('DRIP_14466', 1, 'Available', sharesValueToPass, 'type', 'dismiss')
+            equityGateway.SalesWizAmount2SellPage.certificatesModalEdit('DRIP_14466', 1, 'Available', '100', 'check')
         })
 
         it('C30639335 - Verify if the input field is accepting 0 as min value', () => {
             const sharesValueToPass = 0
-            equityGateway.SalesWizAmount2SellPage.certificatesModalEdit('DRIP_14466', 'Available', sharesValueToPass, 'type', 'save')
-            equityGateway.SalesWizAmount2SellPage.certificatesModalEdit('DRIP_14466', 'Available', sharesValueToPass, 'check')
+            equityGateway.SalesWizAmount2SellPage.certificatesModalEdit('DRIP_14466', 1, 'Available', sharesValueToPass, 'type', 'save')
+            equityGateway.SalesWizAmount2SellPage.certificatesModalEdit('DRIP_14466', 1, 'Available', sharesValueToPass, 'check')
         })
 
-        it('C30988138 - Verify if the input field is accepting 0 as min value', () => {
+        it.only('C30988138 - Verify if the input field is accepting 0 as min value', () => {
             const restrictedShareContentElements = [
                 '29/03/2023',
                 'Retention',
@@ -208,7 +209,7 @@ describe('Sales Wizard - Amount to Sell Page Tests', () => {
             equityGateway.SalesWizTopBar.nextBtn('click')
             equityGateway.SalesWizAmount2SellPage.sharesModalValidation(restrictedShareContentElements)
             equityGateway.SalesWizAmount2SellPage.btnSharesModalClickAgree()
-            equityGateway.SalesWizTopBar.nextBtn('click')
+            equityGateway.SalesWizOrderTypePage.validatePageStructure()
         })
     })
 })

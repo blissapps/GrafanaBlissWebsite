@@ -6,17 +6,22 @@ const utils = new Utils()
 const selectors = {
     title: 'header > h2',
     description: 'header > .text-color-cool80',
-    checkbox: '.eg-amount__checkbox-container > .mr-3',
-    inputField: 'input[placeholder="0"]',
-    btnTotalShares: 'gs-button[type="default"]',
-    sharesLabels: '.eg-amount__total',
-    sharesLabelsValues: '.eg-amount__total > ',
-    certificateSector: '.eg-amount > :nth-child(6)',
-    certificateTitle: '.eg-amount > :nth-child(6) > .font-bold',
-    certificateTable: 'div.eg-amount__table',
-    certificateTableElementColo: '> .square > .eg-amount__table-body-row > .flex > .eg-amount__status-icon',
-    sharesModal: '.eg-modal__modal',
-    sharesModalAgreeBtn: 'gs-button[data-test-id="sw-restricted-shares-btn-agree"]',
+    checkbox: 'gs-checkbox[data-test-id="sw-amount-to-sell-shares-checkbox"]',
+    inputField: 'gs-input-field[data-test-id="sw-amount-to-sell-shares-input"] input',
+    btnTotalShares: 'gs-button[data-test-id="sw-amount-to-sell-shares-btn"]',
+    sharesLabelAvail: 'div[data-test-id="sw-amount-to-sell-shares-available"]',
+    sharesLabelAvailWithRestri: 'div[data-test-id="sw-amount-to-sell-shares-available-w-restrictions"]',
+    sharesLabelEstimatedProcee: 'div[data-test-id="sw-amount-to-sell-shares-estimated-proceeds"]',
+    sharesLabelEstimatedGainLoss: 'div[data-test-id="sw-amount-to-sell-shares-estimated-gain-loss"]',
+    certificateSector: 'div[data-test-id="sw-amount-to-sell-certificates"]',
+    certificateTitle: 'h4[data-test-id="sw-amount-to-sell-certificates-title"]',
+    certificateTable: 'div[data-test-id="sw-amount-to-sell-certificates-card"]',
+    certificateName: 'div[data-test-id="sw-amount-to-sell-certificates-card-0"]',
+    sharesModalEdit: 'section[data-test-id="sw-edit-shares"]',
+    sharesModalInfo: 'section[data-test-id="sw-restricted-shares"]',
+    btnSharesModalAgree: 'gs-button[data-test-id="sw-restricted-shares-btn-agree"]',
+    btnSharesModalDismiss: 'gs-button[data-test-id="sw-edit-shares-btn-dismiss"]',
+    btnSharesModalSave: 'gs-button[data-test-id="sw-edit-shares-btn-save"]',
     sharesModalHeader: '.eg-modal__modal-header',
     sharesModalInputField: '.mt-5 > .input > .ng-untouched',
     sharesModalCloseBtn: '.border-none'
@@ -58,20 +63,20 @@ class salesWizAmount2SellPage extends BasePage {
     }
 
     sharesLabelValue(available, availableWithRestrictions, estimatedProceeds, estimatedGainLoss){
-        cy.get(`${selectors.sharesLabelsValues}:nth-child(${1}) > .text-h4`).should('contain.text', available)
-        cy.get(`${selectors.sharesLabelsValues}:nth-child(${2}) > .text-h4`).should('contain.text', availableWithRestrictions)
-        cy.get(`${selectors.sharesLabelsValues}:nth-child(${3}) > .text-h4`).should('contain.text', estimatedProceeds)
-        cy.get(`${selectors.sharesLabelsValues}:nth-child(${4}) > .text-h4`).should('contain.text', estimatedGainLoss)
+        cy.get(selectors.sharesLabelAvail).should('contain.text', available)
+        cy.get(selectors.sharesLabelAvailWithRestri).should('contain.text', availableWithRestrictions)
+        cy.get(selectors.sharesLabelEstimatedProcee).should('contain.text', estimatedProceeds)
+        cy.get(selectors.sharesLabelEstimatedGainLoss).should('contain.text', estimatedGainLoss)
 
         const positiveRgx = /€ ([0-9]+(\.[0-9]+)+)/
         const negativeRgx = /€ -([0-9]+(\.[0-9]+)+)/
 
         if (positiveRgx.test(estimatedGainLoss)) {
-            cy.get(`${selectors.sharesLabelsValues}:nth-child(${4}) > .text-h4`).should('have.css', 'color', 'rgb(0, 153, 0)')
+            cy.get(`${selectors.sharesLabelEstimatedGainLoss} > .text-h4`).should('have.css', 'color', 'rgb(0, 153, 0)')
         } else if (negativeRgx.test(estimatedGainLoss)) {
-            cy.get(`${selectors.sharesLabelsValues}:nth-child(${4}) > .text-h4`).should('have.css', 'color', 'rgb(223, 7, 7)')
+            cy.get(`${selectors.sharesLabelEstimatedGainLoss} > .text-h4`).should('have.css', 'color', 'rgb(223, 7, 7)')
         } else {
-            throw new Error('Unexpected estimatedGainLoss value')
+            throw new Error('Unexpected "estimatedGainLoss" value')
         }
     }
 
@@ -92,7 +97,7 @@ class salesWizAmount2SellPage extends BasePage {
         })
     }
 
-    certificatesValidation (numberCertificates, certificateNames) {
+    certificatesCounterValidation (numberCertificates, certificateNames) {
         cy.get(selectors.certificateTitle).should('contain.text', numberCertificates)
 
         certificateNames.forEach((item) => {
@@ -100,7 +105,7 @@ class salesWizAmount2SellPage extends BasePage {
         })
     }
 
-    certificatesModalValidation (certificateName, availability) {
+    certificatesModalValidation (certificateName, availability, certificatePosition) {
         const elements = [
             'Edit shares selection',
             'Available',
@@ -110,20 +115,24 @@ class salesWizAmount2SellPage extends BasePage {
             'Save'
         ]
 
-        if (availability === 'Available') {
-            //FIXME it will change, to implement trough ID
-            cy.contains(certificateName).get(selectors.certificateTable+' > :nth-child(2)'+selectors.certificateTableElementColo).should('have.css', 'background-color', 'rgb(0, 153, 0)').click()
-        } else if (availability === 'Available with restrictions') {
-            //FIXME it will change, to implement trough ID
-            cy.contains(certificateName).get(selectors.certificateTable+' > :nth-child(3)'+selectors.certificateTableElementColo).should('have.css', 'background-color', 'rgb(255, 202, 95)').click()
+        if (certificatePosition !== undefined){
+            selectors.certificateName = `div[data-test-id="sw-amount-to-sell-certificates-card-${certificatePosition}"]`
+
+            if (availability === 'Available') {
+                cy.contains(certificateName).get(selectors.certificateName+' > div > div > div > div').should('have.css', 'background-color', 'rgb(0, 153, 0)').click()
+            } else if (availability === 'Available with restrictions') {
+                cy.contains(certificateName).get(selectors.certificateName+' > div > div > div > div').should('have.css', 'background-color', 'rgb(255, 202, 95)').click()
+            } else {
+                throw new Error('Unexpected "availability" value')
+            }
         } else {
-            throw new Error('Availability error')
+            throw new Error('Missing "certificatePosition" value')
         }
 
         cy.get(selectors.sharesModalHeader).then(($element) => {
             if ($element.length > 0) {
                 elements.forEach((item) => {
-                    cy.get(selectors.sharesModal).contains(item).should('exist')
+                    cy.get(selectors.sharesModalEdit).contains(item).should('exist')
                 })
                 cy.get(selectors.sharesModalInputField).should('be.visible')
             } else {
@@ -132,9 +141,9 @@ class salesWizAmount2SellPage extends BasePage {
         })
     }
 
-    certificatesModalEdit (certificateName, ShareAvailability, sharesAmount, checkORetype, dismissORsaveORclose) {
+    certificatesModalEdit (certificateName, certificatePosition, ShareAvailability, sharesAmount, checkORetype, dismissORsaveORclose) {
         if (ShareAvailability !== 'null') {
-            this.certificatesModalValidation (certificateName, ShareAvailability)
+            this.certificatesModalValidation (certificateName, ShareAvailability, certificatePosition)
         }
 
         switch (checkORetype) {
@@ -153,11 +162,11 @@ class salesWizAmount2SellPage extends BasePage {
         switch (dismissORsaveORclose) {
             case 'dismiss':
                 cy.get(selectors.sharesModalInputField).clear().type(sharesAmount, { force: true }).then(() => {
-                    cy.get(selectors.sharesModal).contains('Dismiss').click( { force: true })
+                    cy.get(selectors.btnSharesModalDismiss).click( { force: true })
                 })
                 break
             case 'save':
-                cy.get(selectors.sharesModal).contains('Save').click( { force: true })
+                cy.get(selectors.btnSharesModalSave).click( { force: true })
                 break
 
             case 'close':
@@ -186,15 +195,15 @@ class salesWizAmount2SellPage extends BasePage {
             'I agree'
         ]
         elements.forEach((item) => {
-            cy.get(selectors.sharesModal).contains(item).should('exist')
+            cy.get(selectors.sharesModalInfo).contains(item).should('exist')
         })
         restrictedShareContentElements.forEach((item) => {
-            cy.get(selectors.sharesModal).contains(item).should('exist')
+            cy.get(selectors.sharesModalInfo).contains(item).should('exist')
         })
     }
 
     btnSharesModalClickAgree () {
-        cy.get(selectors.sharesModalAgreeBtn).click({ force: true })
+        cy.get(selectors.btnSharesModalAgree).click({ force: true })
     }
 }
 export default salesWizAmount2SellPage
