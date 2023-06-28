@@ -1,0 +1,48 @@
+{
+    "notes": {
+        "id": "[data-test-id='sw-review-order-notes']",
+        "elements": [
+            {
+                "elementType": "h2",
+                "elementText": "Notes"
+            },
+            {
+                "elementType": "p",
+                "elementText": " 1. The share price information shown is an estimate share price quote provided by an external market data provider. The actual execution price achieved on the market may be different and will be confirmed on sale finalization. "
+            },
+            {
+                "elementType": "p",
+                "elementText": " 2. Any Forex rate provided at this point is an estimate Forex rate quote provided by an external market data provider and does not include commissions. The actual Forex rate may be different and will be finalized at the point of proceeds payment and will incorporate Forex commission. "
+            },
+            {
+                "elementType": "p",
+                "elementText": " 3. The estimated gross proceeds is an estimated value which derives from the number of shares you have selected to sell multiplied by the estimate share price. The resulting value displayed is an estimate value which is not inclusive of fees and commissions.. "
+            },
+            {
+                "elementType": "p",
+                "elementText": " 4. On completion please check that all details are correct, if you do find any errors or omissions in this trade confirmation, please use the online Help-desk facility to contact Global Shares. "
+            },
+            {
+                "elementType": "p",
+                "elementText": " 5. On completion your confirmation will be deemed conclusive after 10 calendar days from trade date, if we do not hear to the contrary within this time period, we shall assume your acceptance of the published transaction(s). "
+            }
+        ]
+    },
+    "confirmation": {
+        "id": "[data-test-id='sw-review-order-confirmation']",
+        "elements": [
+            {
+                "elementType": "h2",
+                "elementText": "Confirmation"
+            },
+            {
+                "elementType": "p",
+                "elementText": " By submitting any request to sell shares, you agree to be bound by the Terms and Conditions "
+            },
+            {
+                "elementType": "p",
+                "elementText": " I hereby give irrevocable instructions for the shares listed above to be sold on my behalf by broker, and for the funds generated from the sale to be remitted in my chosen currency to the bank account details I have given. I understand that associated commissions and fees apply and depend on the distribution currency I have chosen. Foreign exchange rates may also apply. "
+            }
+        ]
+    }
+}

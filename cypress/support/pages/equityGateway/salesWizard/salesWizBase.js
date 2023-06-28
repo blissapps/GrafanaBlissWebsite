@@ -4,12 +4,14 @@ import SalesWizSecurityPage from './salesWizSecurityPage'
 import SalesWizShareGroupPage from './salesWizShareGroupPage'
 import SalesWizAmount2SellPage from './salesWizAmount2SellPage'
 import SalesWizOrderTypePage from './salesWizOrderTypePage'
+import salesWizDistributionPage from './salesWizDistributionPage'
 
 const salesWizTopBar = new SalesWizTopBar()
 const salesWizSecurity = new SalesWizSecurityPage()
 const salesWizShareGroup = new SalesWizShareGroupPage()
 const salesWizAmount2Sell = new SalesWizAmount2SellPage()
 const salesWizOrderType = new SalesWizOrderTypePage()
+const salesWizDistribution = new salesWizDistributionPage()
 
 class salesWizBase extends BasePage {
     gotoSalesWiz(){
@@ -54,8 +56,10 @@ class salesWizBase extends BasePage {
     }
 
     goToReviewOrder() {
-        this.goToOrderType()
-        //TODO import
+        this.goToDistribution()
+        salesWizDistribution.selectElementByOption('method', 'Wire')
+        salesWizDistribution.selectElementByOption('bankAccount', 'Santander - G78NORTH 1234 5698 7267 45')
+        salesWizDistribution.selectElementByOption('currency', 'Dollar ・ USD')
         salesWizTopBar.nextBtn('click')
         cy.url().should('include', '/review-order')
     }
