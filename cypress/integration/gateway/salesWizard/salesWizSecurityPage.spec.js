@@ -24,11 +24,13 @@ describe('Sales Wizard Security Page Tests', () => {
             cy.fixture('gateway/salesWizard/securityCards').then((jsonObject) => {
                 const { firstShare } = jsonObject
                 const shareArray = Object.values(firstShare)
+                const { currency } = firstShare
+                const { amount } = firstShare
                 equityGateway.SalesWizSecurityPage.cardValidation(
                     1,
                     shareArray,
-                    'USD',
-                    '60.40',
+                    currency,
+                    amount,
                     'UP'
                 )
             })
@@ -38,11 +40,13 @@ describe('Sales Wizard Security Page Tests', () => {
             cy.fixture('gateway/salesWizard/securityCards').then((jsonObject) => {
                 const { secondShare } = jsonObject
                 const shareArray = Object.values(secondShare)
+                const { currency } = secondShare
+                const { amount } = secondShare
                 equityGateway.SalesWizSecurityPage.cardValidation(
                     2,
                     shareArray,
-                    'USD',
-                    '60.40',
+                    currency,
+                    amount,
                     'UP'
                 )
             })
@@ -52,11 +56,13 @@ describe('Sales Wizard Security Page Tests', () => {
             cy.fixture('gateway/salesWizard/securityCards').then((jsonObject) => {
                 const { thirdShare } = jsonObject
                 const shareArray = Object.values(thirdShare)
+                const { currency } = thirdShare
+                const { amount } = thirdShare
                 equityGateway.SalesWizSecurityPage.cardValidation(
                     3,
                     shareArray,
-                    'USD',
-                    '60.40',
+                    currency,
+                    amount,
                     'UP'
                 )
             })

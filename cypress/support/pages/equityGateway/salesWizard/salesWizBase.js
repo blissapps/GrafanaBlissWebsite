@@ -27,7 +27,7 @@ class salesWizBase extends BasePage {
 
     gotoShareGroup(){
         this.gotoSecurity()
-        salesWizSecurity.cardClick('St James Place')
+        salesWizSecurity.cardClick('2')
         salesWizTopBar.btnNext('click')
         cy.url().should('include', '/share-group')
     }

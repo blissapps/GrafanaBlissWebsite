@@ -11,8 +11,8 @@ describe('MyAcc TAX Sector Tests', () => {
         it('C30092728 - Page General Validations', () => {
             equityGateway.AccTaxPage.header('Tax documents')
             cy.fixture('gateway/myAccount/taxInfo').then((jsonObject) => {
-                const stringArray = Object.values(jsonObject);
-                equityGateway.AccTaxPage.infoSector(stringArray);
+                const stringArray = Object.values(jsonObject)
+                equityGateway.AccTaxPage.infoSector(stringArray)
             })
         })
     })
