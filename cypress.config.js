@@ -19,7 +19,7 @@ module.exports = defineConfig({
   },
 
   retries: {
-    runMode: 3,
+    runMode: 2, //Changed for EGateway
     openMode: 0
   },
 
