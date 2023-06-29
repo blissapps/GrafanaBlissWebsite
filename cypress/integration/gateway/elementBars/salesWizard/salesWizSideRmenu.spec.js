@@ -3,27 +3,15 @@ import EquityGateway from '../../../../support/pages/equityGateway'
 const equityGateway = new EquityGateway()
 
 describe('Sales Wizard Element Bars Tests', () => {
-    let securityName, securityPosition, shareName, shares2sell, availableShares, availableWihRestrictions, orderName, stockName, sumShares
+    let accInfo
 
     before(() => {
-        cy.fixture('gateway/salesWizard/summaryFlow').then((jsonObject) => {
-            const {
-                security: { securityName: sName, securityPosition: sPosition, stockName: sStockName },
-                shareGroup: { shareName: sShareName },
-                amountShares2sell: { shares2sell: s2sell, availableShares: sAvailableShares, availableWithRestrictionsShares: sAvailableWihRestrictions  },
-                orderType: { orderName: oName }
-            } = jsonObject
-
-            securityName = sName
-            stockName = sStockName
-            securityPosition = sPosition
-            shareName = sShareName
-            shares2sell = s2sell
-            availableShares = sAvailableShares
-            availableWihRestrictions = sAvailableWihRestrictions
-            orderName = oName
-            sumShares = parseInt(availableShares) + parseInt(availableWihRestrictions)
-            cy.log(securityName, securityPosition, shareName, shares2sell, availableShares, availableWihRestrictions, orderName)
+        equityGateway.LoginPage.getAccInfo().then((result) => {
+            accInfo = result
+            // Use the returned values
+            // @ts-ignore
+            const { securityName, securityPosition, stockName, shareName, totalShares, availableShares, availableWihRestrictions, orderName, shares2sell } = accInfo
+            cy.log('Account Info: '+securityName, securityPosition, stockName, shareName, availableShares, availableWihRestrictions, totalShares, orderName, shares2sell)
         })
     })
 
@@ -52,72 +40,72 @@ describe('Sales Wizard Element Bars Tests', () => {
 
     context('Summary Side Menu Element Stepper Individual Validations', () => {
         it('C30639272 - Validate sidebar in Step 2 - Security', () => {
-            equityGateway.SalesWizSecurityPage.cardClick(securityPosition)
+            equityGateway.SalesWizSecurityPage.cardClick(accInfo.securityPosition)
             equityGateway.SalesWizTopBar.btnNext('click')
 
-            equityGateway.SalesWizSideRmenu.securitySummary([securityName, stockName])
+            equityGateway.SalesWizSideRmenu.securitySummary([accInfo.securityName, accInfo.stockName])
         })
 
         it('C30639273 - Validate sidebar in Step 3 - Share Group', () => {
-            equityGateway.SalesWizSecurityPage.cardClick(securityPosition)
+            equityGateway.SalesWizSecurityPage.cardClick(accInfo.securityPosition)
             equityGateway.SalesWizTopBar.btnNext('click')
 
-            equityGateway.SalesWizShareGroupPage.selectShareGroupByName(shareName)
+            equityGateway.SalesWizShareGroupPage.selectShareGroupByName(accInfo.shareName)
             equityGateway.SalesWizTopBar.btnNext('click')
 
-            equityGateway.SalesWizSideRmenu.shareGroupShareGroupSummary(shareName)
+            equityGateway.SalesWizSideRmenu.shareGroupShareGroupSummary(accInfo.shareName)
 
         })
 
         it('C30639274 - Validate sidebar in Step 4 - Amount to Sell', () => {
-            equityGateway.SalesWizSecurityPage.cardClick(securityPosition)
+            equityGateway.SalesWizSecurityPage.cardClick(accInfo.securityPosition)
             equityGateway.SalesWizTopBar.btnNext('click')
 
-            equityGateway.SalesWizShareGroupPage.selectShareGroupByName(shareName)
+            equityGateway.SalesWizShareGroupPage.selectShareGroupByName(accInfo.shareName)
             equityGateway.SalesWizTopBar.btnNext('click')
 
-            equityGateway.SalesWizAmount2SellPage.inputFieldShares('type', shares2sell)
+            equityGateway.SalesWizAmount2SellPage.inputFieldShares('type', accInfo.shares2sell)
             equityGateway.SalesWizTopBar.btnNext('click')
 
-            equityGateway.SalesWizSideRmenu.amount2SellShareGroupSummary([shares2sell, sumShares])
+            equityGateway.SalesWizSideRmenu.amount2SellShareGroupSummary([accInfo.shares2sell, accInfo.totalShares])
         })
 
         it('C30639275 - Validate sidebar in Step 5 - Order Type', () => {
-            equityGateway.SalesWizSecurityPage.cardClick(securityPosition)
+            equityGateway.SalesWizSecurityPage.cardClick(accInfo.securityPosition)
             equityGateway.SalesWizTopBar.btnNext('click')
 
-            equityGateway.SalesWizShareGroupPage.selectShareGroupByName(shareName)
+            equityGateway.SalesWizShareGroupPage.selectShareGroupByName(accInfo.shareName)
             equityGateway.SalesWizTopBar.btnNext('click')
 
-            equityGateway.SalesWizAmount2SellPage.inputFieldShares('type', shares2sell)
+            equityGateway.SalesWizAmount2SellPage.inputFieldShares('type', accInfo.shares2sell)
             equityGateway.SalesWizTopBar.btnNext('click')
 
-            equityGateway.SalesWizOrderTypePage.selectOrderTypeByName(orderName).click()
+            equityGateway.SalesWizOrderTypePage.selectOrderTypeByName(accInfo.orderName).click()
             equityGateway.SalesWizTopBar.btnNext('click')
 
-            equityGateway.SalesWizSideRmenu.oderTypeShareGroupSummary(orderName)
+            equityGateway.SalesWizSideRmenu.oderTypeShareGroupSummary(accInfo.orderName)
         })
     })
 
     context( 'Summary Side Menu Element Stepper Complex Validations', () => {
         it('C30639278/..279 - Changes in the summary sidebar are displayed when user clicks the next button', () => {
-            equityGateway.SalesWizSecurityPage.cardClick(securityPosition)
+            equityGateway.SalesWizSecurityPage.cardClick(accInfo.securityPosition)
             equityGateway.SalesWizTopBar.btnNext('click')
             equityGateway.SalesWizSideRmenu.securitySummary()
 
-            equityGateway.SalesWizShareGroupPage.selectShareGroupByName(shareName)
+            equityGateway.SalesWizShareGroupPage.selectShareGroupByName(accInfo.shareName)
             equityGateway.SalesWizTopBar.btnNext('click')
             equityGateway.SalesWizSideRmenu.shareGroupShareGroupSummary()
 
-            equityGateway.SalesWizAmount2SellPage.inputFieldShares('type', shares2sell)
+            equityGateway.SalesWizAmount2SellPage.inputFieldShares('type', accInfo.shares2sell)
             equityGateway.SalesWizTopBar.btnNext('click')
             equityGateway.SalesWizSideRmenu.amount2SellShareGroupSummary()
 
-            equityGateway.SalesWizOrderTypePage.selectOrderTypeByName(orderName).click()
+            equityGateway.SalesWizOrderTypePage.selectOrderTypeByName(accInfo.orderName).click()
             equityGateway.SalesWizTopBar.btnNext('click')
             equityGateway.SalesWizSideRmenu.oderTypeShareGroupSummary()
 
-            equityGateway.SalesWizSideRmenu.elementsValidation([securityName, shareName, shares2sell, sumShares.toString(), orderName])
+            equityGateway.SalesWizSideRmenu.elementsValidation([accInfo.securityName, accInfo.shareName, accInfo.shares2sell, accInfo.totalShares, accInfo.orderName])
         })
     })
 })

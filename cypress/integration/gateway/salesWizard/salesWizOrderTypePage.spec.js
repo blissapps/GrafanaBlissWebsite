@@ -17,7 +17,7 @@ describe('Sales Wizard Order Type Page Tests', () => {
 
     it('C30904119 - Selects Market Order - Order Type', () => {
       equityGateway.SalesWizOrderTypePage.selectOrderTypeByName('Market Order').click()
-      equityGateway.SalesWizTopBar.nextBtn('click')
+      equityGateway.SalesWizTopBar.btnNext('click')
       equityGateway.SalesWizOrderTypePage.validateMenuAdvanced()
     })
 
@@ -26,7 +26,7 @@ describe('Sales Wizard Order Type Page Tests', () => {
       //TBD After limit validation is done on the FE the tests need to incorporate that
       // ---> equityGateway.SalesWizOrderTypePage.validateDayLimitInputLimits()
       equityGateway.SalesWizOrderTypePage.fillDayLimitInput('Day Limit')
-      equityGateway.SalesWizTopBar.nextBtn('click')
+      equityGateway.SalesWizTopBar.btnNext('click')
       equityGateway.SalesWizOrderTypePage.validateMenuAdvanced()
     })
 
@@ -35,7 +35,7 @@ describe('Sales Wizard Order Type Page Tests', () => {
       //TBD After limit validation is done on the FE the tests need to incorporate that
       // ---> equityGateway.SalesWizOrderTypePage.validateDayLimitInputLimits()
       equityGateway.SalesWizOrderTypePage.fillDayLimitInput('Limit Day Order')
-      equityGateway.SalesWizTopBar.nextBtn('click')
+      equityGateway.SalesWizTopBar.btnNext('click')
       equityGateway.SalesWizOrderTypePage.validateMenuAdvanced()
     })
   })

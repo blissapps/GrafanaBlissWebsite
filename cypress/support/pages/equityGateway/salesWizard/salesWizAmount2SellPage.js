@@ -23,8 +23,8 @@ const selectors = {
     btnSharesModalDismiss: 'gs-button[data-test-id="sw-edit-shares-btn-dismiss"]',
     btnSharesModalSave: 'gs-button[data-test-id="sw-edit-shares-btn-save"]',
     sharesModalHeader: '.eg-modal__modal-header',
-    sharesModalInputField: '.mt-5 > .input > .ng-untouched',
-    sharesModalCloseBtn: '.border-none'
+    sharesModalInputField: 'gs-input-field[data-test-id="sw-edit-shares-input"] > div > input',
+    sharesModalCloseBtn: 'gs-button[type="icon"]'
 }
 
 class salesWizAmount2SellPage extends BasePage {

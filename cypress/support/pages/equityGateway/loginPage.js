@@ -141,6 +141,29 @@ class LoginPage extends BasePage {
       }
     })
   }
+
+  getAccInfo() {
+    return cy.fixture('gateway/salesWizard/summaryFlow').then((jsonObject) => {
+      const {
+        security: { securityName: sName, securityPosition: sPosition, stockName: sStockName },
+        shareGroup: { shareName: sShareName },
+        amountShares2sell: { shares2sell: s2sell, totalShares: sTotalShares, availableShares: sAvailableShares, availableWithRestrictionsShares: sAvailableWihRestrictions },
+        orderType: { orderName: oName }
+      } = jsonObject;
+
+      return {
+        securityName: sName,
+        securityPosition: sPosition,
+        shareName: sShareName,
+        stockName: sStockName,
+        shares2sell: s2sell,
+        totalShares: sTotalShares,
+        availableShares: sAvailableShares,
+        availableWihRestrictions: sAvailableWihRestrictions,
+        orderName: oName
+      };
+    });
+  }
 }
 
 export default LoginPage
