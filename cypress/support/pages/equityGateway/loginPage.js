@@ -105,7 +105,7 @@ class LoginPage extends BasePage {
         this.count = 0
         this.maxAttempts = 10
         this._checkURL(Cypress.env('EQUITY_GATEWAY_BASE_URL')+'/dashboard')
-      } else {
+      } else if (verify === 2) {
         //Account Backup Disable
         cy.location('pathname').should('eq', '/dashboard')
       }
