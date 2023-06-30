@@ -92,7 +92,7 @@ describe('Sales Wizard Element Bars Tests', () => {
         })
     })
 
-    context.only('Top Bar Back Btn Progress Behaviour Steps Validations', () => {
+    context('Top Bar Back Btn Progress Behaviour Steps Validations', () => {
         /** Related to User Stories
          * EGVFOUR-259
          **/

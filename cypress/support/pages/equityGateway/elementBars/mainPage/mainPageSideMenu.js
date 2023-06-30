@@ -4,7 +4,7 @@ const selectors = {
   pages: 'ul > :nth-child',
   shareInfo: '.pb-8 > eg-price-card',
   shareDerivation: '.lg\\:mr-8 > .flex',
-  support: '.eg-sidebar > .flex-column',
+  support: '.eg-sidebar > .flex-column > a',
   sideBarButton: 'li > gs-button'
 }
 

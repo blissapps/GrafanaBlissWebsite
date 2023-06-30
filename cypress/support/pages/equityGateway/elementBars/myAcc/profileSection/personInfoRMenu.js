@@ -3,19 +3,8 @@ import BasePage from '../../../../basePage'
 const selectors = {
   sideRmenu: '.eg-my-account-content-sidebar',
   sideRinfo: '.align-items-start',
-  close: 'gs-button.eg-my-account-sidebar__close',
-  sideMenuElements: 'nav.eg-my-account-sidebar__navigation a'
-}
-
-const sideMenuElementPositions = {
-  'Personal Information': 0,
-  'Bank Account': 1,
-  Payments: 2,
-  'Password & Security': 3,
-  Language: 4,
-  'Tax Documents': 5,
-  Help: 6,
-  Logout: 7
+  close: 'gs-button[type="default"][appearance="flat"]',
+  sideMenuElements: 'nav.eg-my-account-sidebar__navigation'
 }
 
 class PersonalInfoRMenu extends BasePage {
@@ -42,10 +31,8 @@ class PersonalInfoRMenu extends BasePage {
     cy.get(selectors.close).click()
   }
 
-  clickSideMenuButton(buttonToClick) {~
-    cy.log(`### Result for ${buttonToClick} - ${sideMenuElementPositions[buttonToClick]}nth element`)
-    cy.get(selectors.sideMenuElements).eq(sideMenuElementPositions[buttonToClick]).click()
+  clickSideMenuButton(buttonToClick) {
+    cy.get(selectors.sideMenuElements).contains(buttonToClick).click({ force: true })
   }
-
 }
 export default PersonalInfoRMenu

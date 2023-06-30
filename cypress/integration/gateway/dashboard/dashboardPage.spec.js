@@ -27,11 +27,12 @@ describe('Dashboard Page Tests', () => {
         /** Related to User Stories
          * EGVFOUR-52, EGVFOUR-249
          */
+        //TODO change to accData when implemented
         const shareLabels = {
             name: 'Big Yellow Group PLC',
-            amount: '0.00',
+            amount: '11.69',
             currency: 'GBP',
-            date: 'Mar 31', //FIXME when Dev completed, use: dayjs().format('MMM DD, H:mm'),
+            date: 'Mar 31',
             share_status: 'positive',
             sharesPositiveColor: 'rgb(0, 153, 0)',
             sharesNegativeColor: 'rgb(223, 7, 7)',

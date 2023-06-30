@@ -101,9 +101,13 @@ class LoginPage extends BasePage {
       cy.get(selectors.loginBtn).contains('Login').click({ force: true })
 
       if (verify === 2 && Cypress.env('EQUITY_GATEWAY_LOGIN_AUTH_VERIFICATION') === 'active' && customizedUser === false) {
+        //Account Backup Active
         this.count = 0
         this.maxAttempts = 10
         this._checkURL(Cypress.env('EQUITY_GATEWAY_BASE_URL')+'/dashboard')
+      } else {
+        //Account Backup Disable
+        cy.location('pathname').should('eq', '/dashboard')
       }
   }
 
@@ -118,6 +122,7 @@ class LoginPage extends BasePage {
     cy.url().then((url) => {
       if (url.includes(targetURL)) {
         //check url if it matches
+        cy.location('pathname').should('eq', '/dashboard')
         cy.log(`URL includes "${targetURL}"`)
       } else {
         // @ts-ignore
@@ -142,6 +147,9 @@ class LoginPage extends BasePage {
     })
   }
 
+  /**
+   * Later phases this may be replaced by API retrieved DATA
+   */
   getAccInfo() {
     return cy.fixture('gateway/salesWizard/summaryFlow').then((jsonObject) => {
       const {
@@ -149,7 +157,7 @@ class LoginPage extends BasePage {
         shareGroup: { shareName: sShareName },
         amountShares2sell: { shares2sell: s2sell, totalShares: sTotalShares, availableShares: sAvailableShares, availableWithRestrictionsShares: sAvailableWihRestrictions },
         orderType: { orderName: oName }
-      } = jsonObject;
+      } = jsonObject
 
       return {
         securityName: sName,
@@ -161,8 +169,8 @@ class LoginPage extends BasePage {
         availableShares: sAvailableShares,
         availableWihRestrictions: sAvailableWihRestrictions,
         orderName: oName
-      };
-    });
+      }
+    })
   }
 }
 
