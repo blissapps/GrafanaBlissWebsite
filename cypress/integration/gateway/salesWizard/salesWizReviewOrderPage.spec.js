@@ -11,35 +11,35 @@ describe('Sales Wizard Order Page Tests', () => {
             equityGateway.SalesWizBase.goToReviewOrder()
         })
 
-        it('Validate Page Elements', () => {
+        it('C30639262 - Validate Review Order / T&C', () => {
             equityGateway.SalesWizReviewOrderPage.validateElements()
         })
 
-        it('Validate Review Estimated Proceeds Card', () => {
+        it('C30639263 - Validate Review Estimated Proceeds Card', () => {
             equityGateway.SalesWizReviewOrderPage.validateTableElements('reviewEstimatedProceeds')
         })
 
-        it('Validate Order Detail Card', () => {
+        it('C30639264 - Validate Order Detail Card', () => {
             equityGateway.SalesWizReviewOrderPage.validateTableElements('orderDetail')
         })
 
-        it('Validate Fund Distribution Card', () => {
+        it('C30639265 - Validate Fund Distribution Card', () => {
             equityGateway.SalesWizReviewOrderPage.validateTableElements('fundDistribution')
         })
 
-        it('Validate Notes Card', () => {
+        it('C30639266 - Validate Notes Card', () => {
            equityGateway.SalesWizReviewOrderPage.validateSectionContent('notes')
         })
 
-        it('Validate Confirmation Card', () => {
+        it('C30639267 - Validate Confirmation Card', () => {
             equityGateway.SalesWizReviewOrderPage.validateSectionContent('confirmation')
         })
 
-        it('Validate Submit Button - Accepted', () => {
+        it('C30639268 - Validate Submit Button - Accepted', () => {
             equityGateway.SalesWizReviewOrderPage.validateSubmitButton()
         })
 
-        it('Validate Submit Button - Not Accepted', () => {
+        it('C30639268 - Validate Submit Button - Not Accepted', () => {
             equityGateway.SalesWizReviewOrderPage.validateSubmitButton(false)
         })
     })

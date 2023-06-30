@@ -10,7 +10,7 @@ describe('Sales Wizard Distribution Page Tests', () => {
       equityGateway.SalesWizBase.goToDistribution()
     })
 
-    it('Validate Page Elements', () => {
+    it('C30639341, C30639342, C30639343 - Distribution container UI elements validation', () => {
       equityGateway.SalesWizDistributionPage.validatePageElements()
     })
 
