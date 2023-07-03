@@ -48,19 +48,20 @@ class PageNavi extends BasePage {
    * @param {string} salesWizardStep (the desired Sales Wizard Step to navigate to)
    */
   navigateToSalesWizard(salesWizardStep = '') {
-    cy.log(`SALES WIZARD PAGE TO NAVIGATE: ${salesWizardStep}`)
-    cy.visit(`https://eg-v4-alpha-25.gsapps.dev/sale-wizard/${salesWizardStep}`, { failOnStatusCode: false })
+    cy.window().then((win) => {
+      // @ts-ignore
+      win.location.href = Cypress.env('EQUITY_GATEWAY_BASE_URL') + '/sale-wizard/overview'
+    })
     cy.url().should('contain', '/sale-wizard/overview')
   }
 
   /** Navigates to the ActivityPage page and validates he URL
    */
-  navigateToActivity(){
+  navigateToActivity() {
     // User logs in
     cy.visit('https://eg-v4-alpha-25.gsapps.dev/activity', { failOnStatusCode: false }) //TODO
     cy.url().should('contain', '/activity')
   }
 }
-
 
 export default PageNavi

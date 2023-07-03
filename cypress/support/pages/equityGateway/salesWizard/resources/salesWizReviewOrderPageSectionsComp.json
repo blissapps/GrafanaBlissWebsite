@@ -44,5 +44,47 @@
                 "elementText": " I hereby give irrevocable instructions for the shares listed above to be sold on my behalf by broker, and for the funds generated from the sale to be remitted in my chosen currency to the bank account details I have given. I understand that associated commissions and fees apply and depend on the distribution currency I have chosen. Foreign exchange rates may also apply. "
             }
         ]
+    },
+    "modal_ApprovalsAndPayments":{
+        "id" : "section",
+        "elements" : [
+            {
+                "elementType": "p",
+                "elementText": "Approvals & payments"
+            },
+            {
+                "elementType": "p",
+                "elementText": "Approvals"
+            },
+            {
+                "elementType": "p",
+                "elementText": "Please ensure you have obtained any prior approvals necessary to enable you to sell or transfer your shares. "
+            },
+            {
+                "elementType": "p",
+                "elementText": "Payments"
+            },
+            {
+                "elementType": "p",
+                "elementText": " Any proceeds due to you from the exercise of options will be delivered to you by Company via the next available payroll run. "
+            }
+        ]
+    },
+    "modal_TradingTermsAndConditions":{
+        "id" : "section",
+        "elements" : [
+            {
+                "elementType": "p",
+                "elementText": "Trading terms & conditions"
+            },
+            {
+                "elementType": "p",
+                "elementText": "I have read and accepted the Terms and Conditions"
+            },
+            {
+                "elementType": "p",
+                "elementText": " (The terms and Conditions were presented to you at the point of Company EquityGateway account activation. You can access the document through this link Terms and Conditions or at any time via the link on the bottom right of this pages.) "
+            }
+        ]
     }
 }
