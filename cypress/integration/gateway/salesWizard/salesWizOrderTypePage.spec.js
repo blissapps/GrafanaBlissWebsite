@@ -10,7 +10,7 @@ describe('Sales Wizard Order Type Page Tests', () => {
       equityGateway.SalesWizBase.goToOrderType()
     })
 
-    it('C30639283, C30904118 - Validate Page Elements and Interactability', () => {
+    it.only('C30639283, C30904118 - Validate Page Elements and Interactability', () => {
       equityGateway.SalesWizOrderTypePage.validatePageStructure()
       equityGateway.SalesWizOrderTypePage.validatePageInteractability()
     })

@@ -5,6 +5,7 @@ import BasePage from '../../basePage'
  */
 
 const selectors = {
+  orderTypeTitle: 'header > h2',
   orderTypeButton: 'gs-radio-button-option',
   dayLimitOrder: '.border-color-accent > .wrapper > .bg-color-white > .cursor-auto > gs-input-field.ng-star-inserted > .input > .ng-untouched', //FIXME
   limitOrder: '.border-color-accent > .wrapper > .bg-color-white > .cursor-auto > :nth-child(2) > .input > .ng-untouched', //FIXME
@@ -17,7 +18,7 @@ class salesWizOrderTypePage extends BasePage {
    * Validates if the elements are present in the page DOM
    */
   validatePageStructure() {
-    cy.get('h2').contains('Order type')
+    cy.get(selectors.orderTypeTitle).scrollIntoView().contains('Order type')
     this.selectOrderTypeByName('Market Order')
     this.selectOrderTypeByName('Day limit order')
     this.selectOrderTypeByName("Limit Order - Good' til cancelled")
@@ -27,10 +28,10 @@ class salesWizOrderTypePage extends BasePage {
    * Validates if the elements are displayed
    */
   validatePageInteractability() {
-    cy.get('h2').contains('Order type').should('be.visible')
-    this.selectOrderTypeByName('Market Order').should('be.visible')
-    this.selectOrderTypeByName('Day limit order').should('be.visible')
-    this.selectOrderTypeByName("Limit Order - Good' til cancelled").should('be.visible')
+    cy.get(selectors.orderTypeTitle).contains('Order type').scrollIntoView().should('be.visible')
+    this.selectOrderTypeByName('Market Order').scrollIntoView().should('be.visible')
+    this.selectOrderTypeByName('Day limit order').scrollIntoView().should('be.visible')
+    this.selectOrderTypeByName("Limit Order - Good' til cancelled").scrollIntoView().should('be.visible')
   }
 
   /**
@@ -38,7 +39,7 @@ class salesWizOrderTypePage extends BasePage {
    * @returns the Order Type [card] element
    */
   selectOrderTypeByName(orderTypeName) {
-    return cy.get(selectors.orderTypeButton).contains(orderTypeName)
+    return cy.get(selectors.orderTypeButton).should('be.visible').contains(orderTypeName)
   }
 
   /**

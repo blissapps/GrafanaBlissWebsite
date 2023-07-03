@@ -40,7 +40,7 @@ describe('Dashboard Page Tests', () => {
             sharesNegativeRgx: /-[0-9]*\.[0-9]+ \(-[0-9]*\.[0-9]+%\)/
         }
 
-        it.only('C30092773/.789/.790/.791 - Shares Details', () => {
+        it('C30092773/.789/.790/.791 - Shares Details', () => {
             equityGateway.SharesHeader.sharesName(shareLabels.name)
             equityGateway.SharesHeader.sharesAmount(shareLabels.amount)
             equityGateway.SharesHeader.currency(shareLabels.currency)

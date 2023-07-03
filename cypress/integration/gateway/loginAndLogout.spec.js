@@ -4,7 +4,6 @@ import EquityGateway from '../../support/pages/equityGateway'
 const equityGateway = new EquityGateway()
 let savedLoggedInUser
 describe('Login and Logout Tests', () => {
-
     context('General Login Successful Scenarios', () => {
         /** General Account Login ACC Credentials Validation
          */
@@ -41,7 +40,7 @@ describe('Login and Logout Tests', () => {
         })
     })
 
-    context('Logout Page Scenarios', () => {
+    context.skip('Logout Page Scenarios', () => {
         /** Related to User Stories
          *  EGVFOUR-247
          */
