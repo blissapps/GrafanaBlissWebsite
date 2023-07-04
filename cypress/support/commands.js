@@ -189,16 +189,4 @@ Cypress.Commands.add('purgeClient', (clientId) => {
     })
   })
 })
-
-//ADDED loginWithUI it is not working properly working yet
-Cypress.Commands.add('loginWithUI', (username, password) => {
-  cy.session(username, () => {
-    cy.visit(Cypress.env('EQUITY_GATEWAY_BASE_URL'))
-    cy.get('input[placeholder="Username"]').clear({ force: true }).type(username)
-    cy.get('input[placeholder="Password"]').clear({ force: true }).type(password, { log: false, force: true })
-    cy.get('gs-button[type="default"]').contains('Login').click()
-    cy.url().should('not.include', '/welcome')
-    cy.url().should('include', '/dashboard')
-  })
-})
 export default executeCommand

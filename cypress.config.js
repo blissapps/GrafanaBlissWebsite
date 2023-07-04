@@ -10,16 +10,15 @@ module.exports = defineConfig({
   videoUploadOnPasses: true,
   defaultCommandTimeout: 15000,
   redirectionLimit: 50,
-  //Changed to 1024x768 as defined with Edward Kelleher
-  viewportWidth: 1024, //old viewportWidth: 1920,
-  viewportHeight: 768,  //old viewportHeight: 1080,
+  viewportWidth: 1920,
+  viewportHeight: 1080,
   screenshotOnRunFailure: true,
   screenshotConfig: {
     scale: false
   },
 
   retries: {
-    runMode: 2, //Changed for EGateway
+    runMode: 2,
     openMode: 0
   },
 

@@ -2426,11 +2426,6 @@ find-up@^4.1.0:
     locate-path "^5.0.0"
     path-exists "^4.0.0"
 
-fixtures@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/fixtures/-/fixtures-0.0.2.tgz#09d9b0cb994439e334b0c9469fe2ed52c91f7cc9"
-  integrity sha512-fjm3jdIdl9Hff30B/E1/i8gBXE9FrALyYCJHJjbbgKDm+kyGfNBuAR3XyD5lNcpQOVU9bXFJ5GhYkSdNNQOTgQ==
-
 flat-cache@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/flat-cache/-/flat-cache-3.0.4.tgz#61b0338302b2fe9f957dcc32fc2a87f1c3048b11"
