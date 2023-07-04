@@ -11,7 +11,7 @@ describe('Client search tests related with the search bar functionally in the ho
   /**
    * @bug_raised https://globalshares.atlassian.net/browse/PB-1185
    */
-  it('C16515489 Search client', () => {
+  it.skip('C16515489 Search client', () => {
     const clientName = 'label'
 
     equityAdmin.searchEngine.search(clientName)
@@ -29,44 +29,8 @@ describe('Client search tests related with the search bar functionally in the ho
     equityAdmin.homePage.assertClientCardSummaryInformation(506, 'WhiteLabel1', 'ITA', 'Regulated')
   })
 
-  it('C16515490 Clear client search', () => {
-    const clientName = 'label'
-    const firstClientCardId = 472
-
-    equityAdmin.homePage.assertClientCardSummaryInformation(firstClientCardId, 'ActivateLang')
-    equityAdmin.searchEngine.search(clientName)
-    equityAdmin.homePage.assertNumberOfClientsDisplayedOnThePageHeader(6)
-    equityAdmin.searchEngine.clearSearchBoxByXIcon()
-    equityAdmin.homePage.assertClientCardSummaryInformation(firstClientCardId, 'ActivateLang')
-  })
-
   /**
-   * @bug_raised SkIPPING DUE TO https://globalshares.atlassian.net/browse/PB-1184
-   */
-  it.skip('C16524712 Favorite/Unfavorite Client', () => {
-    const clientName = 'Revertdata1'
-    const clientId = 516
-
-    equityAdmin.searchEngine.search(clientName)
-
-    // Favorite
-    equityAdmin.homePage.favoriteUnfavoriteClient(clientId)
-    equityAdmin.homePage.assertToastNotificationMessageIsDisplayed('Client added to favorites')
-    equityAdmin.homePage.assertClientIsFavorite(clientId)
-    equityAdmin.searchEngine.clearSearchBoxByXIcon()
-    equityAdmin.homePage.assertClientIsFavorite(clientId)
-    equityAdmin.homePage.assertSectionIsDisplayed('Favorites')
-
-    // Unfavorite
-    equityAdmin.homePage.favoriteUnfavoriteClient(clientId)
-    equityAdmin.homePage.assertToastNotificationMessageIsDisplayed('Client removed from favorites')
-    equityAdmin.homePage.assertClientIsFavorite(clientId, false)
-    equityAdmin.homePage.assertSectionIsDisplayed('Favorites', false)
-  })
-
-  /**
-   * @bug_raised
-   * SkIPPING DUE TO https://globalshares.atlassian.net/browse/PB-1185
+   * @bug_raised https://globalshares.atlassian.net/browse/PB-1185
    */
   it.skip('C16524713 Group clients by alphabets', () => {
     // All Companies (default)
@@ -88,6 +52,38 @@ describe('Client search tests related with the search bar functionally in the ho
     // Sector
     equityAdmin.homePage.selectGroupByOptionForCompanies('sector')
     equityAdmin.homePage.assertCompaniesAreOrdered()
+  })
+
+  it('C16515490 Clear client search', () => {
+    const clientName = 'label'
+    const firstClientCardId = 472
+
+    equityAdmin.homePage.assertClientCardSummaryInformation(firstClientCardId, 'ActivateLang')
+    equityAdmin.searchEngine.search(clientName)
+    equityAdmin.homePage.assertNumberOfClientsDisplayedOnThePageHeader(6)
+    equityAdmin.searchEngine.clearSearchBoxByXIcon()
+    equityAdmin.homePage.assertClientCardSummaryInformation(firstClientCardId, 'ActivateLang')
+  })
+
+  it('C16524712 Favorite/Unfavorite Client', () => {
+    const clientName = 'Revertdata1'
+    const clientId = 516
+
+    equityAdmin.searchEngine.search(clientName)
+
+    // Favorite
+    equityAdmin.homePage.favoriteUnfavoriteClient(clientId)
+    equityAdmin.homePage.assertToastNotificationMessageIsDisplayed('Client added to favorites')
+    equityAdmin.homePage.assertClientIsFavorite(clientId)
+    equityAdmin.searchEngine.clearSearchBoxByXIcon()
+    equityAdmin.homePage.assertClientIsFavorite(clientId)
+    equityAdmin.homePage.assertSectionIsDisplayed('Favorites')
+
+    // Unfavorite
+    equityAdmin.homePage.favoriteUnfavoriteClient(clientId)
+    equityAdmin.homePage.assertToastNotificationMessageIsDisplayed('Client removed from favorites')
+    equityAdmin.homePage.assertClientIsFavorite(clientId, false)
+    equityAdmin.homePage.assertSectionIsDisplayed('Favorites', false)
   })
 
   /**

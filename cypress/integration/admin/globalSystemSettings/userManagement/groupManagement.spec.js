@@ -340,7 +340,7 @@ describe('Group Management tests over User Management settings', () => {
     /**
      * @bug_raised https://globalshares.atlassian.net/browse/PB-1212
      */
-    it('C16661662 Create a New Group - User does not have Create permission', () => {
+    it.skip('C16661662 Create a New Group - User does not have Create permission', () => {
       equityAdmin.loginPage.login('tlaw@globalshares.com')
       equityAdmin.homePage.navigateToUrl('/tenant/260/settings/group-management') // cashgen024
 

@@ -13,7 +13,7 @@ describe('OTC Rules', () => {
   context('Error Scenarios ', () => {
     /**
      * @missing_data Waiting for proper data
-     * @bug_raised SkIPPING DUE TO https://globalshares.atlassian.net/browse/PB-1338
+     * @bug_raised https://globalshares.atlassian.net/browse/PB-1338
      */
     it.skip('C21823507 Create new OTC rule - check mandatory fields', () => {
       const regulatoryFrameworkId = 6

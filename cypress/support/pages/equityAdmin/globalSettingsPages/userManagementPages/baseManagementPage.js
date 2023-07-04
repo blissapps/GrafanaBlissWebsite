@@ -280,7 +280,7 @@ class BaseManagementPage extends BasePage {
    * @param {boolean} focused True is default to validate if the entity is focused. False, otherwise.
    */
   assertEntityIsFocused(focused = true) {
-    this.assertElementIsFocused(selectors.entityNameInput, focused)
+    focused ? cy.get(selectors.entityNameInput).should('have.focus') : cy.get(selectors.entityNameInput).should('not.have.focus')
   }
 
   /**
