@@ -142,35 +142,35 @@ describe('Page Navigation Tests', () => {
      * EGVFOUR-266, EGVFOUR-264
      */
     it('C30159580 - Sales Wizard Default', () => {
-      equityGateway.PageNavi.navigateToSalesWizard()
+      equityGateway.PageNavi.checkSalesWizardRedirect()
     })
 
     it('C30159581 - Sales Wizard Security', () => {
-      equityGateway.PageNavi.navigateToSalesWizard('security')
+      equityGateway.PageNavi.checkSalesWizardRedirect('security')
     })
 
     it('C30159582 - Sales Wizard Share Group', () => {
-      equityGateway.PageNavi.navigateToSalesWizard('share-group')
+      equityGateway.PageNavi.checkSalesWizardRedirect('share-group')
     })
 
     it('C30159583 - Sales Wizard Amount to Sell', () => {
-      equityGateway.PageNavi.navigateToSalesWizard('amount-to-sell')
+      equityGateway.PageNavi.checkSalesWizardRedirect('amount-to-sell')
     })
 
     it('C30159584 - Sales Wizard Order Type', () => {
-      equityGateway.PageNavi.navigateToSalesWizard('order-type')
+      equityGateway.PageNavi.checkSalesWizardRedirect('order-type')
     })
 
     it('C30159585 - Sales Wizard Distribution', () => {
-      equityGateway.PageNavi.navigateToSalesWizard('distribution')
+      equityGateway.PageNavi.checkSalesWizardRedirect('distribution')
     })
 
     it('C30159586 - Sales Wizard Review Order', () => {
-      equityGateway.PageNavi.navigateToSalesWizard('review-order')
+      equityGateway.PageNavi.checkSalesWizardRedirect('review-order')
     })
 
     it('C30159587 - Sales Wizard Success Confirmation', () => {
-      equityGateway.PageNavi.navigateToSalesWizard('success-confirmation')
+      equityGateway.PageNavi.checkSalesWizardRedirect('success-confirmation')
     })
   })
 })
