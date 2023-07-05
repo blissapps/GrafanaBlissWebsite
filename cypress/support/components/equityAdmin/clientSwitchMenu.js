@@ -46,7 +46,7 @@ class ClientSwitchMenu extends BasePage {
   // ------------------------------------------------------------------------------------- ASSERTIONS  ---------------------------------------------------------------------------- //
 
   /**
-   * Assert the list of clients is displayed bellow the ALL sharesHeader
+   * Assert the list of clients is displayed bellow the ALL header
    *
    * @param {boolean} displayed True to validate the list is displayed, false otherwise
    */

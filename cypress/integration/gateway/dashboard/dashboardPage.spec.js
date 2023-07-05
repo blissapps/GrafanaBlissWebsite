@@ -1,10 +1,10 @@
 import EquityGateway from '../../../support/pages/equityGateway'
 
 const equityGateway = new EquityGateway()
-//const dayjs = require('dayjs')
+
 describe('Dashboard Page Tests', () => {
     beforeEach(() => {
-        equityGateway.LoginPage.login() //Workaround for now
+        equityGateway.LoginPage.login()
     })
 
     context('General DashboardPage Validations', () => {

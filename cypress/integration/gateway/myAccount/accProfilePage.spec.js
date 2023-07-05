@@ -3,11 +3,11 @@ import EquityGateway from '../../../support/pages/equityGateway'
 const equityGateway = new EquityGateway()
 describe('MyAcc Profile Sector Tests', () => {
     beforeEach(() => {
-        equityGateway.LoginPage.login() //Workaround for now
+        equityGateway.LoginPage.login()
         cy.window().then((win) => {
             // @ts-ignore
-            win.location.href = 'https://eg-v4-alpha-25.gsapps.dev/my-account/profile/personal-information';
-        });
+            win.location.href = 'https://eg-v4-alpha-25.gsapps.dev/my-account/profile/personal-information'
+        })
     })
 
     context('Personal Information Validations', () => {

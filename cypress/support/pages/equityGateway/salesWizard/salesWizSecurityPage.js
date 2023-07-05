@@ -12,7 +12,6 @@ const selectors = {
     btnConfirmationModalCancel: 'gs-button[type="icon"]',
     btnConfirmationModalConfirm: 'gs-button[appearance="flat"][size="large"]'
 }
-
 class salesWizSecurityPage extends BasePage {
     pageTitle(title){
         cy.get(selectors.pageHeader).should('have.text', title)

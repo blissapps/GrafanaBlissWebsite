@@ -4,11 +4,10 @@ const equityGateway = new EquityGateway()
 
 describe('TopBar tests', () => {
     beforeEach(() => {
-        equityGateway.LoginPage.login() //Workaround for now
+        equityGateway.LoginPage.login()
     });
 
     context('Top Bar Tests', () => {
-        // @ts-ignore
         /** Related to User Stories
          * EGVFOUR-42, EGVFOUR-109
          */
@@ -18,7 +17,7 @@ describe('TopBar tests', () => {
             equityGateway.TopBar.accDetails(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_FULL_NAME'))
         })
 
-        it('C30092768 - TopBar ACC Menu and Hrefs Validation', () => { //FIXME THE URL VERIFY WILL BE REPLACED BY NAVI TESTS
+        it('C30092768 - TopBar ACC Menu and Hrefs Validation', () => {
             /** Validate Menu Items and respective Hrefs
              *  topbarAccMenuLabels & topbarAccMenuHRefs must contain the same length
              */

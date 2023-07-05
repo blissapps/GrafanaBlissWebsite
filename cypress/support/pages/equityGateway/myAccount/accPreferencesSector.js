@@ -1,6 +1,5 @@
 import BasePage from '../../basePage'
 
-// @ts-ignore
 const selectors = {
     bankAccBasePage: '.ng-star-inserted',
     baseH1: '.text-h2',

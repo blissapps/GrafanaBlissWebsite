@@ -36,10 +36,12 @@ class ActivityPage extends BasePage {
     }
 
     progressElements(num){
-        // @ts-ignore
-        cy.get('.mb-8 > :nth-child(n)').filter((index, element) => {
-            return Cypress.$(element).is(':nth-child(n)')
-        }).its('length').should('eq', num+2)
+        cy.get('.mb-8 > :nth-child(n)')
+          .filter((_, element) => {
+              return Cypress.$(element).is(':nth-child(n)')
+          })
+          .its('length')
+          .should('eq', num + 2)
     }
 
     button(label){

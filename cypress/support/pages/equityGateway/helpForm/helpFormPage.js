@@ -1,6 +1,5 @@
 import BasePage from '../../basePage'
 
-// @ts-ignore
 //TODO [Fix the selectors with navigation and div dependencies]
 const selectors = {
   clientLogo: 'eg-company-logo > img',
@@ -113,7 +112,7 @@ class HelpFormPage extends BasePage {
   }
 
   /** Validates the errors that could occur when interacting with the inputs
-   * (eg. empty (required) input would lead to an Field is required error)
+   * (eg. empty (required) input would lead to a Field is required error)
    * @param {string} elementIdentifier input element to validate identifier
    * @param {string} input input text to be passed
    * @param {string} errorMessage the error message that should be visible if an error occurs
@@ -157,6 +156,7 @@ class HelpFormPage extends BasePage {
    *  with the desired tex
    * @param {string} elementIdentifier element to validate identifier
    * @param {string} elementText text that should be within the validated element
+   * @param contains
    */
   validateElementAndText(elementIdentifier, elementText, contains = false) {
     if (!contains) {

@@ -1,10 +1,9 @@
 import EquityGateway from '../../../support/pages/equityGateway';
 
 const equityGateway = new EquityGateway()
-
 describe('MyAcc Preferences Sector Tests', () => {
     beforeEach(() => {
-        equityGateway.LoginPage.login() //Workaround for now
+        equityGateway.LoginPage.login()
     })
 
     context('Bank Account Validations', () => {
@@ -25,8 +24,8 @@ describe('MyAcc Preferences Sector Tests', () => {
 
         it('C30092725 - Linked Accounts Validations', () => {
             cy.fixture('gateway/myAccount/linkedBankACC').then((jsonObject) => {
-                const stringArray = Object.values(jsonObject);
-                equityGateway.AccPreferencesSector.bankAccCards(stringArray);
+                const stringArray = Object.values(jsonObject)
+                equityGateway.AccPreferencesSector.bankAccCards(stringArray)
             });
         })
     })

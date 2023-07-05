@@ -18,7 +18,7 @@ class salesWizOrderTypePage extends BasePage {
    * Validates if the elements are present in the page DOM
    */
   validatePageStructure() {
-    cy.get(selectors.orderTypeTitle).scrollIntoView().contains('Order type')
+    cy.get(selectors.orderTypeTitle).contains('Order type')
     this.selectOrderTypeByName('Market Order')
     this.selectOrderTypeByName('Day limit order')
     this.selectOrderTypeByName("Limit Order - Good' til cancelled")

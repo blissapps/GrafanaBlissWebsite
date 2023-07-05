@@ -1,6 +1,5 @@
 import BasePage from '../../basePage'
 
-// @ts-ignore
 const selectors = {
     title: '.text-h2',
     profileName: '.mr-3 > .text-h5',

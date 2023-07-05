@@ -1,6 +1,7 @@
 import EquityGateway from '../../../../support/pages/equityGateway'
 
 const equityGateway = new EquityGateway()
+
 describe('Sales Wizard - Lateral Progress Stepper', () => {
   context('Validate Navigation and UI without limitations', () => {
     /** Related to User Stories
@@ -168,7 +169,7 @@ describe('Sales Wizard - Lateral Progress Stepper', () => {
 
   })
 
-  /** TODO each test case
+  /** TODO each test case, waiting for developments
    * After we can mock, or access a user with a single Security and/or Share Group
    */
   context.skip('The user does not have Security || Share Groups', () => {
@@ -181,27 +182,27 @@ describe('Sales Wizard - Lateral Progress Stepper', () => {
     })
 
     it('C30639297 - Security step hidden from the progress side bar when user has only a single security option', () => {
-      //TODO
+      //Waiting Dev....
     })
 
     it('C30639298 - Shared Group step hidden from the progress side bar when user has only a single shared group option', () => {
-      //TODO
+      //Waiting Dev....
     })
 
     it('C31084285 - Shared Group && Security step hidden from the progress side bar when user has only a single shared group option and a single security option', () => {
-      //TODO
+      //Waiting Dev....
     })
 
     it('C30639299 - Full wizard completion with a single security and share group options', () => {
-      //TODO
+      //Waiting Dev....
     })
 
     it('C30639301 - Full wizard completion with more than 1 security option and a single share group option', () => {
-      //TODO
+      //Waiting Dev....
     })
 
     it('C30639302 - Full wizard completion with a single security option and more than 1 share group option', () => {
-      //TODO
+      //Waiting Dev....
     })
   })
 })

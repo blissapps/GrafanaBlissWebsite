@@ -1,6 +1,5 @@
 import EquityGateway from '../../support/pages/equityGateway'
 
-// @ts-ignore
 const equityGateway = new EquityGateway()
 let savedLoggedInUser
 describe('Login and Logout Tests', () => {
@@ -40,7 +39,7 @@ describe('Login and Logout Tests', () => {
         })
     })
 
-    context.skip('Logout Page Scenarios', () => {
+    context('Logout Page Scenarios', () => {
         /** Related to User Stories
          *  EGVFOUR-247
          */

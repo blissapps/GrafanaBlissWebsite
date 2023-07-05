@@ -1,6 +1,4 @@
 import BasePage from '../../basePage'
-// @ts-ignore
-const pageComp = require('../salesWizard/resources/salesWizReviewOrderPageSectionsComp.json')
 
 const selectors = {
   reviewEstimatedProceeds: {
@@ -84,9 +82,18 @@ class salesWizReviewOrderPage extends BasePage {
   }
 
   validateSectionContent(sectionJsonID) {
-    const allElements = pageComp[sectionJsonID].elements
-    allElements.forEach((element) => {
-      cy.get(pageComp[sectionJsonID].id).find(element.elementType).contains(element.elementText).scrollIntoView().should('be.visible')
+    cy.fixture('gateway/salesWizard/orderPageSectionsComp').then((data) => {
+      const sectionData = data[sectionJsonID]
+
+      if (sectionData) {
+        const allElements = sectionData.elements
+
+        allElements.forEach((element) => {
+          cy.get(sectionData.id).find(element.elementType).contains(element.elementText).scrollIntoView().should('be.visible')
+        });
+      } else {
+        throw new Error(`Section ${sectionJsonID} not found.`)
+      }
     })
   }
 

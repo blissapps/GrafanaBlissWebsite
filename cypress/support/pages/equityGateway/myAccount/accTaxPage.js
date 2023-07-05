@@ -1,6 +1,5 @@
 import BasePage from '../../basePage'
 
-// @ts-ignore
 const selectors = {
     header: '.text-h2',
     infoSector: 'gs-card.p-4.mb-4.hover',
@@ -37,8 +36,7 @@ class accTaxPage extends BasePage {
     reportsElements(elements, exist){
         elements.forEach((item) => {
             cy.get(selectors.reportsContent).contains(item).should(exist)
-        });
+        })
     }
-
 }
 export default accTaxPage
