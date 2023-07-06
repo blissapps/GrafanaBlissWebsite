@@ -7,10 +7,9 @@ import BasePage from '../../basePage'
 const selectors = {
   orderTypeTitle: 'header > h2',
   orderTypeButton: 'gs-radio-button-option',
-  dayLimitOrder: '.border-color-accent > .wrapper > .bg-color-white > .cursor-auto > gs-input-field.ng-star-inserted > .input > .ng-untouched', //FIXME
-  limitOrder: '.border-color-accent > .wrapper > .bg-color-white > .cursor-auto > :nth-child(2) > .input > .ng-untouched', //FIXME
-  limitOrder2: ':nth-child(3) > .input > .ng-untouched', //FIXME
-  closeBtn: ''
+  dayLimitOrder: '[data-test-id="sw-order-type-2-input-0"]',
+  limitOrder: '[data-test-id="sw-order-type-3-input-0"]',
+  limitOrder2: '[data-test-id="sw-order-type-3-input-1"]'
 }
 
 class salesWizOrderTypePage extends BasePage {
@@ -48,10 +47,10 @@ class salesWizOrderTypePage extends BasePage {
    */
   fillDayLimitInput(orderTypeCard) {
     if (orderTypeCard === 'Day Limit') {
-      cy.get(selectors.dayLimitOrder).type('5')
+      cy.get(selectors.dayLimitOrder).children().children('input').type('5')
     } else if (orderTypeCard === 'Limit Day Order') {
-      cy.get(selectors.limitOrder).type('5')
-      cy.get(selectors.limitOrder2).type('12-02-2026')
+      cy.get(selectors.limitOrder).children().children('input').type('5')
+      cy.get(selectors.limitOrder2).children().children('input').type('12-02-2026')
     }
   }
 
