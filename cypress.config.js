@@ -5,7 +5,7 @@ module.exports = defineConfig({
   chromeWebSecurity: false,
   trashAssetsBeforeRuns: true,
   numTestsKeptInMemory: 1,
-  video: false, //EGV4 Modified only for "Bliss Team" - default status: true
+  video: true,
   videoCompression: false,
   videoUploadOnPasses: true,
   defaultCommandTimeout: 15000,
