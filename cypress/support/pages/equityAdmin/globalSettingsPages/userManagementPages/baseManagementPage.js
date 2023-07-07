@@ -183,7 +183,7 @@ class BaseManagementPage extends BasePage {
   /**
    * Assert if the entity header/name is displayed. Also, asserts its content if the parameter headerText is sent
    *
-   * @param {string} headerText Send the name of the header if you want to validate the sharesHeader content. SEND NOTHING to skip the validation of the content
+   * @param {string} headerText Send the name of the header if you want to validate the header content. SEND NOTHING to skip the validation of the content
    * and just validate that the header is displayed
    */
   assertEntityHeaderIsDisplayedAsExpected(headerText = '') {
