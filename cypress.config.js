@@ -42,7 +42,7 @@ module.exports = defineConfig({
       return require('./cypress/plugins/index.js')(on, config)
     },
 
-    baseUrl: 'https://ea-v3-at-10.gscloud.dev/',
+    baseUrl: 'https://eg-v4-alpha-25.gsapps.dev/', //changed https://ea-v3-at-10.gscloud.dev/
     specPattern: ['cypress/integration/admin/**/*.spec.js', 'cypress/integration/gateway/**/*.spec.js'],
     excludeSpecPattern: ['**/__snapshots__/*', '**/__image_snapshots__/*'],
     slowTestThreshold: 30000

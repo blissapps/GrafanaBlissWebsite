@@ -64,7 +64,7 @@ class HomePage extends BasePage {
 
   /**
    *
-   * @param {boolean} displayed True is the default value to assert the "Companies" text sharesHeader is displayed. Send false otherwise
+   * @param {boolean} displayed True is the default value to assert the "Companies" text header is displayed. Send false otherwise
    */
   assertCompaniesHeaderIsDisplayed(displayed = true) {
     displayed ? cy.get(selectors.homePageHeader).should('be.visible') : cy.get(selectors.homePageHeader).should('not.exist')
