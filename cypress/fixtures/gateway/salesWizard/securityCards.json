@@ -1,0 +1,26 @@
+{
+  "firstShare": {
+    "name": "Sage Group Plc",
+    "stockname": "London stock exchange",
+    "acronim": "SGE ・ LSS",
+    "amount": "60.40",
+    "currency": "USD",
+    "date": "Oct 15, 17:36 GMT +2"
+  },
+  "secondShare": {
+    "name": "St James Place",
+    "stockname": "London stock exchange",
+    "acronim": "SGE ・ LSS",
+    "amount": "60.40",
+    "currency": "USD",
+    "date": "Oct 15, 17:36 GMT +2"
+  },
+  "thirdShare": {
+    "name": "Sage Group Plc",
+    "stockname": "London stock exchange",
+    "acronim": "SGE ・ LSS",
+    "amount": "60.40",
+    "currency": "USD",
+    "date": "Oct 15, 17:36 GMT +2"
+  }
+}

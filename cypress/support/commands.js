@@ -189,5 +189,4 @@ Cypress.Commands.add('purgeClient', (clientId) => {
     })
   })
 })
-
 export default executeCommand

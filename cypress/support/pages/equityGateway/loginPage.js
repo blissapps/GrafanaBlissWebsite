@@ -1,52 +1,176 @@
 import BasePage from '../basePage'
 
+/**
+ * Do not change default values
+ */
+let actionPerformed = false
+let accCheckTimer = false
+let customizedUser = false
+let accCheck = 'acc1'
+
 const selectors = {
-  inputNameField: '#Username',
-  inputPasswordField: '#Password',
-  loginButton: 'input[value="Login"],button[type="Submit"]',
+  inputNameField: 'input[placeholder="Username"]',
+  inputPasswordField: 'input[placeholder="Password"]',
+  loginBtn: 'gs-button[type="default"][size="large"]',
+  mismatch: 'gs-notification[type="error"] .message',
   optCodeField: '#Code',
-  validateOtpButton: 'button[value="send"]'
+  validateOtpButton: 'button[value="send"]',
+  accDetails: '.w-3 > .medium'
 }
 
 class LoginPage extends BasePage {
-  /**
-   * Check if the url is the one expected for this page
-   */
   checkPageUrl() {
-    this.checkUrl('Authentication/LogOn')
+    this.checkUrl(Cypress.env('EQUITY_GATEWAY_BASE_URL'))
+  }
+
+  errorToast(){
+    cy.contains(selectors.mismatch, 'You entered an incorrect username or password.')
+  }
+
+  login(user, pw) {
+    let userToUse
+    let pwToUse
+
+    if (user === undefined || pw === undefined || user === null || pw === null) {
+      userToUse = Cypress.env('EQUITY_GATEWAY_DEFAULT_USER1_AUTH')
+      pwToUse = Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH')
+    } else {
+      if (user !== Cypress.env('EQUITY_GATEWAY_DEFAULT_USER1_AUTH').toString() && user !== Cypress.env('EQUITY_GATEWAY_DEFAULT_USER2_AUTH').toString()){
+        customizedUser = true
+        cy.log('Customized Login Detected: Login are set to use the provided ACC')
+      }
+      userToUse = user
+      pwToUse = pw
+    }
+
+    if (actionPerformed === false || customizedUser === true) {
+      this._loginWithSession(userToUse, pwToUse)
+    } else if (actionPerformed === true) {
+      if (accCheckTimer === false && customizedUser === false) {
+        accCheckTimer = true
+        // @ts-ignore
+        setTimeout(() => {
+          accCheck = 'acc1'
+          accCheckTimer = false
+        }, 5 * 60 * 1000); // 5 minutes
+      }
+      if (accCheck === 'acc2') {
+        userToUse = Cypress.env('EQUITY_GATEWAY_DEFAULT_USER2_AUTH')
+      }
+      this._loginWithSession(userToUse, pwToUse)
+    }
+
+    customizedUser = false
+    this.lastUser = userToUse
+
+  return {
+      user: this.lastUser
+    }
+  }
+
+  getLastUser() {
+    //FIXME PROVISORY ACC NAME ITS NOT SAME AS LOGIN NAME
+    let returnName
+    if (this.lastUser === Cypress.env('EQUITY_GATEWAY_DEFAULT_USER1_AUTH')){
+      returnName = 'Cassius'
+    } else {
+      returnName = 'Aryan'
+    }
+
+  return returnName
   }
 
   /**
-   * Login command through the application UI
-   *
-   * @param {String} email email to login. The default variable is set in the cypress.json file
-   * @param {String} password password to login. The default variable is set in the cypress.json file
+   * INFO Function _loginWithSession
+   * @private
    */
-  login(email, password) {
-    this.loginWithoutSession(email, password)
+  _loginWithSession(user, pw) {
+      let verify = 0
+
+      cy.session([user, pw], () => {
+        cy.visit(Cypress.env('EQUITY_GATEWAY_BASE_URL'))
+
+        if (user !== '') {
+          cy.get(selectors.inputNameField).clear({ force: true }).type(user)
+          verify += 1
+        }
+        if (pw !== '') {
+          cy.get(selectors.inputPasswordField).clear({ force: true }).type(pw)
+          verify += 1
+        }
+
+        cy.get(selectors.loginBtn).contains('Login').click({ force: true })
+
+        if (verify === 2 && Cypress.env('EQUITY_GATEWAY_LOGIN_AUTH_VERIFICATION') === 'active' && customizedUser === false) {
+          //Account Backup Active
+          this.count = 0
+          this.maxAttempts = 12
+          this._checkURL(Cypress.env('EQUITY_GATEWAY_BASE_URL')+'/dashboard')
+        } else if (verify === 2) {
+          //Account Backup Disable
+          cy.location('pathname').should('eq', '/dashboard')
+        }
+      })
   }
 
   /**
-   * Login command through the application UI WITHOUT session storage (We don't use sessions for the Equity Gateway)
+   * INFO Function _checkURL
+   * @private
    *
-   * @param {String} email email to login. The default variable is set in the cypress.json file
-   * @param {String} password password to login. The default variable is set in the cypress.json file
+   * Carefully working on this function, it includes some conditions and recursion,
+   * you can end up in an ** INFINITE LOOP **
    */
-  loginWithoutSession(email, password) {
-    cy.get(selectors.inputNameField).clear({ force: true }).type(email)
-    cy.get(selectors.loginButton).click({ force: true })
-
-    cy.get(selectors.inputPasswordField).clear({ force: true }).type(password, { log: false, force: true })
-    cy.get(selectors.loginButton).click()
-
-    cy.url().then(($url) => {
-      if ($url.includes('/Mfa/Authenticate')) {
-        cy.task('generateOTP', Cypress.env('OTP_SECRET_KEY')).then((token) => {
+  _checkURL(targetURL) {
+    cy.url().then((url) => {
+      if (url.includes(targetURL)) {
+        //check url if it matches
+        cy.location('pathname').should('eq', '/dashboard')
+        cy.log(`URL includes: "${targetURL}"`)
+      } else {
+        // @ts-ignore
+        if (this.count < this.maxAttempts) {
+          // eslint-disable-next-line cypress/no-unnecessary-waiting
+          cy.wait(450)
           // @ts-ignore
-          cy.get(selectors.optCodeField).type(token)
-        })
+          this.count++
+          this._checkURL(targetURL) // Recursive call to checkURL() function
+        } else {
+          // Perform actions or assertions for failure case here
+          if (accCheck === 'acc1'){
+            actionPerformed = true
+            accCheck = 'acc2'
+            cy.log('Login Problem Occurred: logging in with backup ACC2: '+Cypress.env('EQUITY_GATEWAY_DEFAULT_USER2_AUTH'))
+            this.login(Cypress.env('EQUITY_GATEWAY_DEFAULT_USER2_AUTH'), Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH'))
+          } else if (accCheck === 'acc2') {
+            throw new Error('Login Problem Occurred: Unable to Login with any configured Account')
+          }
+        }
+      }
+    })
+  }
 
-        cy.get(selectors.validateOtpButton).click()
+  /**
+   * Later phases this may be replaced by API retrieved DATA
+   */
+  getAccInfo() {
+    return cy.fixture('gateway/salesWizard/summaryFlow').then((jsonObject) => {
+      const {
+        security: { securityName: sName, securityPosition: sPosition, stockName: sStockName },
+        shareGroup: { shareName: sShareName },
+        amountShares2sell: { shares2sell: s2sell, totalShares: sTotalShares, availableShares: sAvailableShares, availableWithRestrictionsShares: sAvailableWihRestrictions },
+        orderType: { orderName: oName }
+      } = jsonObject
+
+      return {
+        securityName: sName,
+        securityPosition: sPosition,
+        shareName: sShareName,
+        stockName: sStockName,
+        shares2sell: s2sell,
+        totalShares: sTotalShares,
+        availableShares: sAvailableShares,
+        availableWihRestrictions: sAvailableWihRestrictions,
+        orderName: oName
       }
     })
   }
