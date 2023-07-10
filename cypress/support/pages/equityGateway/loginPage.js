@@ -87,30 +87,28 @@ class LoginPage extends BasePage {
   _loginWithSession(user, pw) {
       let verify = 0
 
-      cy.session([user, pw], () => {
-        cy.visit(Cypress.env('EQUITY_GATEWAY_BASE_URL'))
+    cy.visit(Cypress.env('EQUITY_GATEWAY_BASE_URL'))
 
-        if (user !== '') {
-          cy.get(selectors.inputNameField).clear({ force: true }).type(user)
-          verify += 1
-        }
-        if (pw !== '') {
-          cy.get(selectors.inputPasswordField).clear({ force: true }).type(pw)
-          verify += 1
-        }
+    if (user !== '') {
+      cy.get(selectors.inputNameField).clear({ force: true }).type(user)
+      verify += 1
+    }
+    if (pw !== '') {
+      cy.get(selectors.inputPasswordField).clear({ force: true }).type(pw)
+      verify += 1
+    }
 
-        cy.get(selectors.loginBtn).contains('Login').click({ force: true })
+    cy.get(selectors.loginBtn).contains('Login').click({ force: true })
 
-        if (verify === 2 && Cypress.env('EQUITY_GATEWAY_LOGIN_AUTH_VERIFICATION') === 'active' && customizedUser === false) {
-          //Account Backup Active
-          this.count = 0
-          this.maxAttempts = 12
-          this._checkURL(Cypress.env('EQUITY_GATEWAY_BASE_URL')+'/dashboard')
-        } else if (verify === 2) {
-          //Account Backup Disable
-          cy.location('pathname').should('eq', '/dashboard')
-        }
-      })
+    if (verify === 2 && Cypress.env('EQUITY_GATEWAY_LOGIN_AUTH_VERIFICATION') === 'active' && customizedUser === false) {
+      //Account Backup Active
+      this.count = 0
+      this.maxAttempts = 12
+      this._checkURL(Cypress.env('EQUITY_GATEWAY_BASE_URL')+'/dashboard')
+    } else if (verify === 2) {
+      //Account Backup Disable
+      cy.location('pathname').should('eq', '/dashboard')
+    }
   }
 
   /**
