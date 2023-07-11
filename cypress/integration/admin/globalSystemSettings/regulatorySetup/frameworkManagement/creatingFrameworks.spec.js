@@ -67,9 +67,6 @@ describe('Creating Framework - Error Scenarios', () => {
       equityAdmin.newFrameworkPage.assertCreateOrSaveButtonEnabled(false)
     })
 
-    /**
-     * @bug_raised https://globalshares.atlassian.net/browse/DEVOP-7411
-     */
     it('C21139982 Create a Framework - using same name', () => {
       const frameworkName = utils.generateRandomString(7)
       let frameworkCode = utils.generateRandomString(7)
@@ -98,7 +95,6 @@ describe('Creating Framework - Error Scenarios', () => {
 
         if (i === 0) {
           equityAdmin.frameworkManagementPage.assertToastNotificationMessageIsDisplayed('Regulatory Framework has been created successfully')
-          // equityAdmin.frameworkManagementPage.assertFrameworkListedOnTheFrameworksTable('', frameworkName) //Uncomment this as soon as DEVOP-7411 is fixed
           equityAdmin.frameworkManagementPage.clickNewFramework()
         } else {
           equityAdmin.newFrameworkPage.assertNotificationErrorDisplayed('The Name ' + frameworkName + ' is already taken by another Regulatory Framework.')
@@ -106,9 +102,6 @@ describe('Creating Framework - Error Scenarios', () => {
       }
     })
 
-    /**
-     * @bug_raised https://globalshares.atlassian.net/browse/DEVOP-7411
-     */
     it('C21721838 Create a Framework - using same code', () => {
       let frameworkName = utils.generateRandomString(7)
       const frameworkCode = utils.generateRandomString(7)
@@ -137,7 +130,6 @@ describe('Creating Framework - Error Scenarios', () => {
 
         if (i === 0) {
           equityAdmin.frameworkManagementPage.assertToastNotificationMessageIsDisplayed('Regulatory Framework has been created successfully')
-          // equityAdmin.frameworkManagementPage.assertFrameworkListedOnTheFrameworksTable(frameworkCode) //Uncomment this as soon as DEVOP-7411 is fixed
           equityAdmin.frameworkManagementPage.clickNewFramework()
         } else {
           equityAdmin.newFrameworkPage.assertNotificationErrorDisplayed('The Code ' + frameworkCode + ' is already in used by another Regulatory Framework.')

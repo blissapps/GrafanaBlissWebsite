@@ -15,6 +15,7 @@
     "clean": "rm -rf ./node_modules/",
     " --- CYPRESS DEV SCRIPTS ---- ": "",
     "cy:open": "cypress open --e2e --browser chrome --config specPattern=cypress/integration/**/*.spec.js",
+    "cy:open:gateway": "cypress open --e2e --browser chrome --config specPattern=cypress/integration/gateway/**/*.spec.js",
     "cy:run": "cypress run --browser chrome",
     " --- CYPRESS PIPELINE SCRIPTS WITHOUT FILE RESULTS ---- ": "",
     "cy:run:chrome": "cypress run --browser chrome --spec 'cypress/integration/**/*.spec.js'",
@@ -34,7 +35,9 @@
     "prettier:check": "yarn prettier:cli -l",
     "prettier:fix": "yarn prettier:cli --write \"**/**.{ts,js,tsx}\" \"**/**.{json,md,yml}\"",
     "ts:clear": "rm -rf dist",
-    "compile": "tsc && rm -rf dist"
+    "compile": "tsc && rm -rf dist",
+    " --- Report commands - To Be Used over the pipeline (not with yarn) ---- ": "",
+    "merge:results": "npx mochawesome-merge cypress/test-results/jsonResults/*.json > cypress/test-results/jsonResults/merge-results.json"
   },
   "keywords": [
     "tests",
@@ -42,35 +45,33 @@
     "cypress"
   ],
   "devDependencies": {
-    "@babel/core": "7.21.3",
-    "@babel/eslint-parser": "7.21.3",
-    "cypress": "12.10.0",
+    "@babel/core": "7.22.1",
+    "@babel/eslint-parser": "7.21.8",
+    "cypress": "12.14.0",
     "cypress-grep": "3.0.4",
-    "cypress-mochawesome-reporter": "3.3.0",
+    "cypress-mochawesome-reporter": "3.5.0",
     "cypress-multi-reporters": "1.6.3",
     "cypress-otp": "1.0.3",
     "cypress-plugin-snapshots": "1.4.4",
-    "cypress-real-events": "1.7.6",
+    "cypress-real-events": "1.8.1",
     "cypress-wait-until": "1.7.2",
     "cypress-xpath": "2.0.1",
-    "dayjs": "1.11.7",
-    "eslint": "8.36.0",
-    "eslint-config-prettier": "8.7.0",
-    "eslint-plugin-cypress": "2.12.1",
-    "eslint-plugin-eslint-plugin": "5.0.8",
+    "dayjs": "1.11.8",
+    "eslint": "8.42.0",
+    "eslint-config-prettier": "8.8.0",
+    "eslint-plugin-cypress": "2.13.3",
+    "eslint-plugin-eslint-plugin": "5.1.0",
     "eslint-plugin-import": "2.27.5",
     "eslint-plugin-mocha": "10.1.0",
     "eslint-plugin-prettier": "4.2.1",
-    "find-cypress-specs": "1.31.1",
+    "find-cypress-specs": "1.34.3",
     "husky": "8.0.3",
-    "junit-report-merger": "5.0.0",
+    "junit-report-merger": "6.0.2",
     "mocha": "10.2.0",
     "mocha-junit-reporter": "2.2.0",
-    "prettier": "2.8.4",
+    "mochawesome-merge": "4.3.0",
+    "prettier": "2.8.8",
     "tsc-silent": "1.2.2",
-    "typescript": "5.0.2"
-  },
-  "dependencies": {
-    "fixtures": "^0.0.2"
+    "typescript": "5.1.3"
   }
 }

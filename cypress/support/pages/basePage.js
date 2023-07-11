@@ -41,15 +41,6 @@ class BasePage {
   // ------------------------------------------------------------------------------- GETS AND CLICKS ------------------------------------------------------------------- //
 
   /**
-   * Click in the checkbox to select all elements of table when bulk actions is available
-   */
-  clickToSelectAllElementsInTable() {
-    this.assertBulkOptionsDisplayed()
-
-    cy.get(selectors.bulkActionsCheckbox).click()
-  }
-
-  /**
    * Close the L4 right bar by clicking in the middle of the current page
    */
   clickOutsideToCloseL4RightBar() {
@@ -222,16 +213,6 @@ class BasePage {
       cy.get(selectors.notificationError).contains(textDisplayed)
       // cy.get(selectors.notificationError).invoke('text').then((text) => { expect(text.trim()).equal(textDisplayed) })
     }
-  }
-
-  /**
-   * Assert if an element is focused
-   *
-   * @param {string} elementSelector element selector to be validated
-   * @param {boolean} focused True is default to validate if the element is focused. False to assert otherwise.
-   */
-  assertElementIsFocused(elementSelector, focused = true) {
-    focused ? cy.get(elementSelector).should('have.focus') : cy.get(elementSelector).should('not.have.focus')
   }
 
   /**

@@ -6,7 +6,7 @@ const equityAdmin = new EquityAdmin()
  * The tests bellow are created to check data integrity.
  * This spec files is supposed to run right after the warmup spec in the pipeline.
  *
- * @bug_raised SKIPPING DUE TO https://globalshares.atlassian.net/browse/PB-1315 https://globalshares.atlassian.net/browse/PB-1316
+ * @bug_raised https://globalshares.atlassian.net/browse/PB-1315 https://globalshares.atlassian.net/browse/PB-1316
  *
  */
 describe.skip('[AT-10 Environment only] - These tests bellow are related to data integrity', () => {
