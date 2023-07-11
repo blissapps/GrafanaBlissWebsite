@@ -6,12 +6,11 @@ const selectors = {
   shareGroupBody: 'gs-radio-button-group',
   shareGroupsAvailable: 'gs-radio-button-option'
 }
-
 class salesWizShareGroupPage extends BasePage {
   validateMainBody() {
     this.isShareGroupOptionsBodyVisible()
     this.areAnyShareGroupOptionsVisible()
-    //FIXME OR REMOVE cy.get(selectors.shareGroupsAvailable).eq(0).dblclick().should('have.css', 'border-color', 'rgb(0, 101, 255)')
+    cy.get(selectors.shareGroupsAvailable).eq(0).dblclick().should('have.css', 'border-color', 'rgb(0, 101, 255)')
   }
 
   isShareGroupOptionsBodyVisible() {

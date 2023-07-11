@@ -162,4 +162,5 @@ class LoginPage extends BasePage {
     cy.get(selectors.loginButton).should('be.visible')
   }
 }
+
 export default LoginPage

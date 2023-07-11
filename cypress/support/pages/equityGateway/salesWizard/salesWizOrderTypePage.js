@@ -5,11 +5,11 @@ import BasePage from '../../basePage'
  */
 
 const selectors = {
+  orderTypeTitle: 'header > h2',
   orderTypeButton: 'gs-radio-button-option',
-  dayLimitOrder: '.border-color-accent > .wrapper > .bg-color-white > .cursor-auto > gs-input-field.ng-star-inserted > .input > .ng-untouched', //FIXME
-  limitOrder: '.border-color-accent > .wrapper > .bg-color-white > .cursor-auto > :nth-child(2) > .input > .ng-untouched', //FIXME
-  limitOrder2: ':nth-child(3) > .input > .ng-untouched', //FIXME
-  closeBtn: ''
+  dayLimitOrder: '[data-test-id="sw-order-type-2-input-0"]',
+  limitOrder: '[data-test-id="sw-order-type-3-input-0"]',
+  limitOrder2: '[data-test-id="sw-order-type-3-input-1"]'
 }
 
 class salesWizOrderTypePage extends BasePage {
@@ -17,7 +17,7 @@ class salesWizOrderTypePage extends BasePage {
    * Validates if the elements are present in the page DOM
    */
   validatePageStructure() {
-    cy.get('h2').contains('Order type')
+    cy.get(selectors.orderTypeTitle).contains('Order type')
     this.selectOrderTypeByName('Market Order')
     this.selectOrderTypeByName('Day limit order')
     this.selectOrderTypeByName("Limit Order - Good' til cancelled")
@@ -27,10 +27,10 @@ class salesWizOrderTypePage extends BasePage {
    * Validates if the elements are displayed
    */
   validatePageInteractability() {
-    cy.get('h2').contains('Order type').should('be.visible')
-    this.selectOrderTypeByName('Market Order').should('be.visible')
-    this.selectOrderTypeByName('Day limit order').should('be.visible')
-    this.selectOrderTypeByName("Limit Order - Good' til cancelled").should('be.visible')
+    cy.get(selectors.orderTypeTitle).contains('Order type').scrollIntoView().should('be.visible')
+    this.selectOrderTypeByName('Market Order').scrollIntoView().should('be.visible')
+    this.selectOrderTypeByName('Day limit order').scrollIntoView().should('be.visible')
+    this.selectOrderTypeByName("Limit Order - Good' til cancelled").scrollIntoView().should('be.visible')
   }
 
   /**
@@ -38,7 +38,7 @@ class salesWizOrderTypePage extends BasePage {
    * @returns the Order Type [card] element
    */
   selectOrderTypeByName(orderTypeName) {
-    return cy.get(selectors.orderTypeButton).contains(orderTypeName)
+    return cy.get(selectors.orderTypeButton).should('be.visible').contains(orderTypeName)
   }
 
   /**
@@ -47,10 +47,10 @@ class salesWizOrderTypePage extends BasePage {
    */
   fillDayLimitInput(orderTypeCard) {
     if (orderTypeCard === 'Day Limit') {
-      cy.get(selectors.dayLimitOrder).type('5')
+      cy.get(selectors.dayLimitOrder).children().children('input').type('5')
     } else if (orderTypeCard === 'Limit Day Order') {
-      cy.get(selectors.limitOrder).type('5')
-      cy.get(selectors.limitOrder2).type('12-02-2026')
+      cy.get(selectors.limitOrder).children().children('input').type('5')
+      cy.get(selectors.limitOrder2).children().children('input').type('12-02-2026')
     }
   }
 

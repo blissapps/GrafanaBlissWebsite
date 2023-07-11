@@ -1,7 +1,4 @@
 import BasePage from '../../basePage'
-import Utils from '../../../utils'
-
-const utils = new Utils()
 
 const selectors = {
     title: 'header > h2',
@@ -34,8 +31,8 @@ class salesWizAmount2SellPage extends BasePage {
     }
 
     interactiveElementsCheck(){
-        utils.checkClickable(selectors.checkbox)
-        utils.checkClickable(selectors.btnTotalShares)
+        this.checkClickable(selectors.checkbox)
+        this.checkClickable(selectors.btnTotalShares)
         cy.get(selectors.inputField).should('be.visible').should('not.have.attr', 'readonly')
     }
 
@@ -45,6 +42,12 @@ class salesWizAmount2SellPage extends BasePage {
 
     btnTotalAmountClick(){
         cy.get(selectors.btnTotalShares).click()
+    }
+
+    checkClickable(subject) {
+        cy.get(subject).should('be.visible')
+        cy.get(subject).should('have.css', 'pointer-events', 'auto')
+        cy.get(subject).should('not.have.attr', 'disabled')
     }
 
     inputFieldShares (checkORetype, sharesAmount) {
@@ -173,7 +176,7 @@ class salesWizAmount2SellPage extends BasePage {
         })
     }
 
-    certificatesModalEdit (certificateName, certificatePosition, ShareAvailability, sharesAmount, checkORetype, dismissORsaveORclose) {
+    certificatesModalEdit (certificateName, certificatePosition, ShareAvailability, sharesAmount, checkORetype, dismissORsaveORclose = '') {
         if (ShareAvailability !== 'null') {
             this.certificatesModalValidation (certificateName, ShareAvailability, certificatePosition)
         }

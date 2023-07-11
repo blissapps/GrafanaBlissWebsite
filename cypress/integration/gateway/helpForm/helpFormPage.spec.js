@@ -70,8 +70,7 @@ describe('Help form page tests - Not Authenticated', () => {
 
 describe('Help form page tests - Authenticated', () => {
   beforeEach(() => {
-    equityGateway.LoginPage.login() //Workaround for now
-    //cy.loginWithUI(Cypress.env('EQUITY_GATEWAY_DEFAULT_USER_AUTH'), Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH'))
+    equityGateway.LoginPage.login()
     equityGateway.HelpForm.gotoHelpDesk()
   })
 

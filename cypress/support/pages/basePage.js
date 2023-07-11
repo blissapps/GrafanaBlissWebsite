@@ -244,7 +244,7 @@ class BasePage {
   }
 
   /**
-   * Assert the number of rows in a table (The sharesHeader is not counted as a row)
+   * Assert the number of rows in a table (The header is not counted as a row)
    *
    * @param {number} expectedNumberOfRows Expected number of rows in the table WITHOUT COUNTING THE TABLE HEADER
    */

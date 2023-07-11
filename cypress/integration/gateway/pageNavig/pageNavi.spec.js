@@ -33,7 +33,7 @@ describe('Page Navigation Tests', () => {
     })
 
     it('C30458338 - User is redirected to Helpdesk when it clicks on sidebar Support-Help Button', () => {
-      equityGateway.MainPageSideMenu.support('SupportHelp')
+      equityGateway.MainPageSideMenu.support('Help')
       equityGateway.PageNavi.pageNaviUrlValidation('/help')
     })
 
@@ -87,7 +87,7 @@ describe('Page Navigation Tests', () => {
     })
 
     it('C30665117 - Bank Account Navigation', () => {
-      equityGateway.PersonInfoRMenu.clickSideMenuButton('Bank Account')
+      equityGateway.PersonInfoRMenu.clickSideMenuButton('Bank account')
       equityGateway.PageNavi.pageNaviUrlValidation('/my-account/account-preferences/bank-account')
     })
 
@@ -96,7 +96,7 @@ describe('Page Navigation Tests', () => {
       equityGateway.PageNavi.pageNaviUrlValidation('/my-account/account-preferences/payments')
     })
 
-    it('******** - Password and Security Navigation', () => {
+    it.skip('******** - Password and Security Navigation', () => {
       // equityGateway.PersonInfoRMenu.clickSideMenuButton('Password & Security')
       // equityGateway.PageNavi.pageNaviUrlValidation('/my-account/account-preferences/password-and-security')
       //#TODO the behaviour is broken in the application
@@ -108,7 +108,7 @@ describe('Page Navigation Tests', () => {
     })
 
     it('C30665120 - Tax Documents Navigation', () => {
-      equityGateway.PersonInfoRMenu.clickSideMenuButton('Tax Documents')
+      equityGateway.PersonInfoRMenu.clickSideMenuButton('Tax documents')
       equityGateway.PageNavi.pageNaviUrlValidation('/my-account/tax/tax-documents')
     })
 
@@ -118,7 +118,7 @@ describe('Page Navigation Tests', () => {
     })
 
     it('C30665122 - Logout Navigation', () => {
-      equityGateway.PersonInfoRMenu.clickSideMenuButton('Logout')
+      equityGateway.PersonInfoRMenu.clickSideMenuButton('Log Out')
       equityGateway.PageNavi.pageNaviUrlValidation('/welcome')
     })
   })
@@ -142,35 +142,35 @@ describe('Page Navigation Tests', () => {
      * EGVFOUR-266, EGVFOUR-264
      */
     it('C30159580 - Sales Wizard Default', () => {
-      equityGateway.PageNavi.navigateToSalesWizard()
+      equityGateway.PageNavi.checkSalesWizardRedirect()
     })
 
     it('C30159581 - Sales Wizard Security', () => {
-      equityGateway.PageNavi.navigateToSalesWizard('security')
+      equityGateway.PageNavi.checkSalesWizardRedirect('security')
     })
 
     it('C30159582 - Sales Wizard Share Group', () => {
-      equityGateway.PageNavi.navigateToSalesWizard('share-group')
+      equityGateway.PageNavi.checkSalesWizardRedirect('share-group')
     })
 
     it('C30159583 - Sales Wizard Amount to Sell', () => {
-      equityGateway.PageNavi.navigateToSalesWizard('amount-to-sell')
+      equityGateway.PageNavi.checkSalesWizardRedirect('amount-to-sell')
     })
 
     it('C30159584 - Sales Wizard Order Type', () => {
-      equityGateway.PageNavi.navigateToSalesWizard('order-type')
+      equityGateway.PageNavi.checkSalesWizardRedirect('order-type')
     })
 
     it('C30159585 - Sales Wizard Distribution', () => {
-      equityGateway.PageNavi.navigateToSalesWizard('distribution')
+      equityGateway.PageNavi.checkSalesWizardRedirect('distribution')
     })
 
     it('C30159586 - Sales Wizard Review Order', () => {
-      equityGateway.PageNavi.navigateToSalesWizard('review-order')
+      equityGateway.PageNavi.checkSalesWizardRedirect('review-order')
     })
 
     it('C30159587 - Sales Wizard Success Confirmation', () => {
-      equityGateway.PageNavi.navigateToSalesWizard('success-confirmation')
+      equityGateway.PageNavi.checkSalesWizardRedirect('success-confirmation')
     })
   })
 })

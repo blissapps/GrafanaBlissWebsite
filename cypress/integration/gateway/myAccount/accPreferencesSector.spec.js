@@ -1,10 +1,9 @@
 import EquityGateway from '../../../support/pages/equityGateway';
 
 const equityGateway = new EquityGateway()
-
 describe('MyAcc Preferences Sector Tests', () => {
     beforeEach(() => {
-        equityGateway.LoginPage.login() //Workaround for now
+        equityGateway.LoginPage.login()
     })
 
     context('Bank Account Validations', () => {
@@ -25,8 +24,8 @@ describe('MyAcc Preferences Sector Tests', () => {
 
         it('C30092725 - Linked Accounts Validations', () => {
             cy.fixture('gateway/myAccount/linkedBankACC').then((jsonObject) => {
-                const stringArray = Object.values(jsonObject);
-                equityGateway.AccPreferencesSector.bankAccCards(stringArray);
+                const stringArray = Object.values(jsonObject)
+                equityGateway.AccPreferencesSector.bankAccCards(stringArray)
             });
         })
     })
@@ -59,7 +58,7 @@ describe('MyAcc Preferences Sector Tests', () => {
              * Elements: Array of anything that you want to verify inside that section,excluding "Preferred delivery methods"
              * Delivery: Refers to "Preferred delivery methods inside", for now its just 1 (not necessarily need to pass)
              */
-            equityGateway.AccPreferencesSector.saleSection(1, elements, 'Wire Transfer')
+            equityGateway.AccPreferencesSector.saleSection( elements, 'Wire Transfer')
         })
 
         it('C30092726 - Sale BankAcc', () => {
@@ -75,7 +74,7 @@ describe('MyAcc Preferences Sector Tests', () => {
              * Elements: Array of anything that you want to verify inside that section,excluding "Preferred delivery methods"
              * Delivery: Refers to "Preferred delivery methods inside", for now its just 1 (not necessarily need to pass)
              */
-            equityGateway.AccPreferencesSector.saleSection(2, elements)
+            equityGateway.AccPreferencesSector.saleSectionBank(elements)
         })
 
         it('C30092726 - Dividend Distributions', () => {
@@ -90,7 +89,7 @@ describe('MyAcc Preferences Sector Tests', () => {
              * Elements: Array of anything that you want to verify inside that section,excluding "Preferred delivery methods"
              * Delivery: Refers to "Preferred delivery methods inside", for now its just 1 (not necessarily need to pass)
              */
-            equityGateway.AccPreferencesSector.dividendSection(1, elements, 'Wire Transfer')
+            equityGateway.AccPreferencesSector.dividendSection(elements, 'Wire Transfer')
         })
 
         it('C30092726 - Dividend BankAcc', () => {
@@ -106,7 +105,7 @@ describe('MyAcc Preferences Sector Tests', () => {
              * Elements: Array of anything that you want to verify inside that section,excluding "Preferred delivery methods"
              * Delivery: Refers to "Preferred delivery methods inside", for now its just 1 (not necessarily need to pass)
              */
-            equityGateway.AccPreferencesSector.dividendSection(2, elements)
+            equityGateway.AccPreferencesSector.dividendSectionBank(elements)
         })
     })
 

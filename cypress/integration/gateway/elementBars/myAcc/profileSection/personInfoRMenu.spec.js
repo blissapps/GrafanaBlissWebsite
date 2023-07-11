@@ -4,7 +4,7 @@ const equityGateway = new EquityGateway()
 
 describe('MyAcc Side Profile RMenu Tests', () => {
     beforeEach(() => {
-        equityGateway.LoginPage.login() //Workaround for now
+        equityGateway.LoginPage.login()
         equityGateway.AccBase.goToMyAccPage()
     })
 

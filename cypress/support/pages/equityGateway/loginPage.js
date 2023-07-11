@@ -31,8 +31,6 @@ class LoginPage extends BasePage {
     let userToUse
     let pwToUse
 
-    cy.visit(Cypress.env('EQUITY_GATEWAY_BASE_URL'))
-
     if (user === undefined || pw === undefined || user === null || pw === null) {
       userToUse = Cypress.env('EQUITY_GATEWAY_DEFAULT_USER1_AUTH')
       pwToUse = Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH')
@@ -89,22 +87,28 @@ class LoginPage extends BasePage {
   _loginWithSession(user, pw) {
       let verify = 0
 
-      if (user !== '') {
-        cy.get(selectors.inputNameField).clear({ force: true }).type(user)
-        verify += 1
-      }
-      if (pw !== '') {
-        cy.get(selectors.inputPasswordField).clear({ force: true }).type(pw)
-        verify += 1
-      }
+    cy.visit(Cypress.env('EQUITY_GATEWAY_BASE_URL'))
 
-      cy.get(selectors.loginBtn).contains('Login').click({ force: true })
+    if (user !== '') {
+      cy.get(selectors.inputNameField).clear({ force: true }).type(user)
+      verify += 1
+    }
+    if (pw !== '') {
+      cy.get(selectors.inputPasswordField).clear({ force: true }).type(pw)
+      verify += 1
+    }
 
-      if (verify === 2 && Cypress.env('EQUITY_GATEWAY_LOGIN_AUTH_VERIFICATION') === 'active' && customizedUser === false) {
-        this.count = 0
-        this.maxAttempts = 10
-        this._checkURL(Cypress.env('EQUITY_GATEWAY_BASE_URL')+'/dashboard')
-      }
+    cy.get(selectors.loginBtn).contains('Login').click({ force: true })
+
+    if (verify === 2 && Cypress.env('EQUITY_GATEWAY_LOGIN_AUTH_VERIFICATION') === 'active' && customizedUser === false) {
+      //Account Backup Active
+      this.count = 0
+      this.maxAttempts = 12
+      this._checkURL(Cypress.env('EQUITY_GATEWAY_BASE_URL')+'/dashboard')
+    } else if (verify === 2) {
+      //Account Backup Disable
+      cy.location('pathname').should('eq', '/dashboard')
+    }
   }
 
   /**
@@ -118,15 +122,16 @@ class LoginPage extends BasePage {
     cy.url().then((url) => {
       if (url.includes(targetURL)) {
         //check url if it matches
-        cy.log(`URL includes "${targetURL}"`)
+        cy.location('pathname').should('eq', '/dashboard')
+        cy.log(`URL includes: "${targetURL}"`)
       } else {
         // @ts-ignore
         if (this.count < this.maxAttempts) {
           // eslint-disable-next-line cypress/no-unnecessary-waiting
-          cy.wait(450); // Wait for 1 second before checking the URL again
+          cy.wait(450)
           // @ts-ignore
           this.count++
-          this._checkURL(targetURL); // Recursive call to checkURL() function
+          this._checkURL(targetURL) // Recursive call to checkURL() function
         } else {
           // Perform actions or assertions for failure case here
           if (accCheck === 'acc1'){
@@ -142,6 +147,9 @@ class LoginPage extends BasePage {
     })
   }
 
+  /**
+   * Later phases this may be replaced by API retrieved DATA
+   */
   getAccInfo() {
     return cy.fixture('gateway/salesWizard/summaryFlow').then((jsonObject) => {
       const {
@@ -149,7 +157,7 @@ class LoginPage extends BasePage {
         shareGroup: { shareName: sShareName },
         amountShares2sell: { shares2sell: s2sell, totalShares: sTotalShares, availableShares: sAvailableShares, availableWithRestrictionsShares: sAvailableWihRestrictions },
         orderType: { orderName: oName }
-      } = jsonObject;
+      } = jsonObject
 
       return {
         securityName: sName,
@@ -161,8 +169,8 @@ class LoginPage extends BasePage {
         availableShares: sAvailableShares,
         availableWihRestrictions: sAvailableWihRestrictions,
         orderName: oName
-      };
-    });
+      }
+    })
   }
 }
 

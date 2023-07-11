@@ -1,10 +1,10 @@
 import EquityGateway from '../../../../support/pages/equityGateway'
 
 const equityGateway = new EquityGateway()
-//const dayjs = require('dayjs')
+
 describe('MainPage SideMenu Tests', () => {
     beforeEach(() => {
-        equityGateway.LoginPage.login() //Workaround for now
+        equityGateway.LoginPage.login()
     })
 
     context('Side Navigation Bar', () => {
@@ -25,10 +25,13 @@ describe('MainPage SideMenu Tests', () => {
 
         it('C30092769 - MainPageSideMenu Shares Validation', () => {
             const shareVariables = {
+                /**
+                 * Provisory Mocked Data
+                 */
                 name: 'Big Yellow Group PLC',
-                amount: '0.00',
+                amount: '11.69',
                 currency: 'GBP',
-                date: 'Mar 31', //FIXME dayjs().format('MMM DD, H:mm'),
+                date: 'Mar 31',
                 share_status: 'positive',
                 sharesPositiveColor: 'rgb(0, 153, 0)',
                 sharesNegativeColor: 'rgb(223, 7, 7)',

@@ -11,19 +11,11 @@ describe('Sales Wizard Group Page Tests', () => {
             equityGateway.SalesWizBase.gotoShareGroup()
         })
 
-        it('Validate Page Elements', () => {
-            //TODO PAULO MONTINHO
-            //Top Bar
-            //Main Body
+        it('C30639258 - Validate Page Elements', () => {
             equityGateway.SalesWizShareGroupPage.validateMainBody()
-            //Share Group Border
-            //Footer
-            //equityGateway.FooterBar.checkPage('Help', '/help')
-            //equityGateway.FooterBar.checkPage('Privacy Policy', '/privacy-policy')
-            //equityGateway.FooterBar.checkPage('Terms and Conditions', '/terms-and-conditions')
         })
 
-        it('Validate Page Elements are clickable', () => {
+        it('C30639258 - Validate Page Elements are clickable', () => {
             equityGateway.SalesWizShareGroupPage.isSharesGroupClickable(equityGateway.SalesWizShareGroupPage.setSharesGroupAvailableButtons())
         })
     })

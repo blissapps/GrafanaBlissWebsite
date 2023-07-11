@@ -107,16 +107,6 @@ class Utils {
 
     return result
   }
-
-  /**
-   * Check if Element is Clickable or not
-   * @param subject
-   */
-  checkClickable(subject) {
-    cy.get(subject).should('be.visible')
-    cy.get(subject).should('have.css', 'pointer-events', 'auto')
-    cy.get(subject).should('not.have.attr', 'disabled')
-  }
 }
 
 export default Utils

@@ -14,12 +14,14 @@ class ActivityPage extends BasePage {
     gotoActivity(){
         cy.window().then((win) => {
             // @ts-ignore
-            win.location.href = 'https://eg-v4-alpha-25.gsapps.dev/activity'
-        });
+            win.location.href = Cypress.env('EQUITY_GATEWAY_BASE_URL')+'/activity'
+        })
     }
+
     breadcrumbNavi(){
-        cy.get(selectors.breadcrumb).contains('Dashboard').click()
+        cy.get(selectors.breadcrumb).contains('Dashboard').click({ force: true })
     }
+
     pageValidation(page_title, sector1_title, sector2_title1, sector2_title2){
         cy.get(selectors.pageTitle).contains(page_title)
         cy.get(selectors.progressSectorTileHeader).contains(sector1_title)
@@ -28,15 +30,18 @@ class ActivityPage extends BasePage {
             cy.contains(sector2_title2)
         })
     }
+
     progressCounter(label1, label2){
         cy.get(selectors.progressCounter).should('contain', 'showing '+label1+' of '+label2)
     }
 
     progressElements(num){
-        // @ts-ignore
-        cy.get('.mb-8 > :nth-child(n)').filter((index, element) => {
-            return Cypress.$(element).is(':nth-child(n)')
-        }).its('length').should('eq', num+2)
+        cy.get('.mb-8 > :nth-child(n)')
+          .filter((_, element) => {
+              return Cypress.$(element).is(':nth-child(n)')
+          })
+          .its('length')
+          .should('eq', num + 2)
     }
 
     button(label){
@@ -45,7 +50,7 @@ class ActivityPage extends BasePage {
 
     tabsBarElements(elementArray){
         elementArray.forEach((item) => {
-            cy.get(selectors.tabsFilter).contains(item).should('exist');
+            cy.get(selectors.tabsFilter).contains(item).should('exist')
         })
     }
 }

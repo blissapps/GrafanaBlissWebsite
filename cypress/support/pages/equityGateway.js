@@ -1,4 +1,3 @@
-// @ts-ignore
 // ------------------------------------------------------------- Components -------------------------------------------------------//
 //Elements Bars
 import FooterBar from './equityGateway/elementBars/footerBar'

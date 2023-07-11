@@ -7,7 +7,6 @@ const selectors = {
     sectionProcessOverview: 'gs-card[data-test-id="sw-overview-process"]'
 }
 
-// @ts-ignore
 class salesWizOverviewPage extends BasePage {
     pageHeaderValidation(elements){
         elements.forEach((item) => {
@@ -32,5 +31,4 @@ class salesWizOverviewPage extends BasePage {
         })
     }
 }
-// @ts-ignore
 export default salesWizOverviewPage

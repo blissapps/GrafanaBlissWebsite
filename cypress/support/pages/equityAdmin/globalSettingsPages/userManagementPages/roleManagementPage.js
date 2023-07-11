@@ -19,7 +19,7 @@ const selectors = {
   columnHeaderUpdate: 'thead th[name=column_update]',
   columnHeaderCreate: 'thead th[name=column_create]',
   columnHeaderDelete: 'thead th[name=column_delete]',
-  searchResultForPermissions: '//div[@class="permission-sharesHeader"]//div',
+  searchResultForPermissions: '//div[@class="permission-header"]//div',
   rolePageHeader: '#roleMgmtHeader'
 }
 
@@ -295,7 +295,7 @@ class RoleManagementPage extends BaseManagementPage {
    *
    */
   assertRoleIsEditable(editable = true) {
-    // sharesHeader not editable
+    // header not editable
     editable ? this.assertEntityNameEditable(true) : this.assertEntityNameEditable(false)
 
     // table not editable
@@ -314,10 +314,10 @@ class RoleManagementPage extends BaseManagementPage {
   }
 
   /**
-   * Assert the page sharesHeader 'Roles' is displayed.
+   * Assert the page header 'Roles' is displayed.
    *
-   * @param {string} headerText Send a text if you want to validate the text in the sharesHeader. Send '' to skip the text validation.
-   * @param {boolean} displayed True is the default value to assert the sharesHeader is displayed. Send false to validate the otherwise
+   * @param {string} headerText Send a text if you want to validate the text in the header. Send '' to skip the text validation.
+   * @param {boolean} displayed True is the default value to assert the header is displayed. Send false to validate the otherwise
    */
   assertRolePageHeaderIsDisplayed(headerText = '', displayed = true) {
     if (displayed) {
@@ -406,7 +406,7 @@ class RoleManagementPage extends BaseManagementPage {
    * @param {string} permissionsType Permissions type, in which are are allowed ['view', 'update', 'create', 'delete']
    *
    * @example:
-   * insertOrRemoveAllPermissions('delete') -> It clicks on the Delete column sharesHeader to insert or remove all delete permissions of all permissions
+   * insertOrRemoveAllPermissions('delete') -> It clicks on the Delete column header to insert or remove all delete permissions of all permissions
    */
   addOrRemoveAllPermissions(permissionsType) {
     // Manipulate permissionName and permissionsType, so we do not need to be worried about capitalization nor blank spaces
@@ -523,7 +523,7 @@ class RoleManagementPage extends BaseManagementPage {
    * @param {Number} number Number to be asserted in the Permissions Search Results after searching for a permission
    *
    * @example
-   * Send number equals 1 to assert the text 1 SEARCH RESULT(S) alongside the Permissions sharesHeader
+   * Send number equals 1 to assert the text 1 SEARCH RESULT(S) alongside the Permissions header
    */
   assertNumberOfSearchResultsForPermissions(number) {
     cy.xpath(selectors.searchResultForPermissions + `[normalize-space(text()) = '${number} Search Result(s)']`).should('be.visible')

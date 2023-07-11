@@ -22,10 +22,10 @@ class SecurityPage extends BasePage {
   // -----------------------------------------------------------------------------  ASSERTIONS ---------------------------------------------------------------------- //
 
   /**
-   * Assert if the Security sharesHeader is displayed correctly
+   * Assert if the Security header is displayed correctly
    *
-   * @param {boolean} displayed True is the default value to validate with the sharesHeader is displayed. False to validate the otherwise
-   * @param {string} textToValidate Send a text to validate the text displayed in the sharesHeader
+   * @param {boolean} displayed True is the default value to validate with the header is displayed. False to validate the otherwise
+   * @param {string} textToValidate Send a text to validate the text displayed in the header
    */
   assertHeaderIsDisplayedCorrectly(displayed = true, textToValidate = '') {
     if (displayed) {

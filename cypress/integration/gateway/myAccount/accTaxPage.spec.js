@@ -3,7 +3,7 @@ import EquityGateway from '../../../support/pages/equityGateway';
 const equityGateway = new EquityGateway()
 describe('MyAcc TAX Sector Tests', () => {
     beforeEach(() => {
-        equityGateway.LoginPage.login() //Workaround for now
+        equityGateway.LoginPage.login()
         equityGateway.TopBar.accMenuClick(null, 'Tax Documents')
     })
 

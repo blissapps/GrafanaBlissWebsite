@@ -1,33 +1,28 @@
 import BasePage from '../../basePage'
 
-// @ts-ignore
 //TODO [Fix the selectors with navigation and div dependencies]
 const selectors = {
   clientLogo: 'eg-company-logo > img',
   contactHeader: 'h1',
   contactText: '.eg-contact__text',
-  phoneHeader: '.flex-column > .text-h5', //FIXME (needs to be fixed nav dependent)
-  phoneSubTitleTop: '.eg-contact__container > .flex-column > .mb-2', //FIXME (needs to be fixed nav dependent)
-  phoneSubTitleBot: '.flex-column > .font-semibold.mb-5',
-  phoneBodyTop: '.overline',
-  phoneBodyBot: '.eg-contact__numbers > div > :nth-child(2)', //FIXME (needs to be fixed div and nav dependent)
+  phoneSection: '.eg-contact__side',
   emailTitle: '.mb-9 > .text-h5', //FIXME (needs to be fixed div and nav dependent)
   emailSubject: 'gs-input-field[title="Subject"]',
   emailSubjectCharCount: 'gs-input-field[title="Subject"] + label', //FIXME (needs to be fixed nav dependent)
-  emailSubjectInput: 'gs-input-field[title="Subject"] > div > input', //FIXME (needs to be fixed div and nav dependent)
+  emailSubjectInput: 'input[placeholder="Enter subject"]',
   emailSubjectError: 'gs-input-field[title="Subject"] > div.message', //FIXME (needs to be fixed div and nav dependent)
   emailMessage: 'gs-input-area[placeholder="Enter detailed description"]',
   emailMessageCharCount: '.h-3rem > .absolute', //FIXME (needs to be fixed nav dependent)
-  emailMessageInput: 'gs-input-area[placeholder="Enter detailed description"] > textarea', //FIXME (needs to be fixed nav dependent)
+  emailMessageInput: 'textarea[placeholder="Enter detailed description"]',
   emailMessageError: 'gs-input-area[placeholder="Enter detailed description"] > div.message', //FIXME (needs to be fixed div and nav dependent)
   emailFirstName: 'gs-input-field[title="First name"]',
-  emailFirstNameInput: 'gs-input-field[title="First name"] > div > input', //FIXME (needs to be fixed div and nav dependent)
+  emailFirstNameInput: 'input[placeholder="Enter first name"]',
   emailFirstNameError: 'gs-input-field[title="First name"] > div.message', //FIXME (needs to be fixed div and nav dependent)
   emailLastName: 'gs-input-field[title="Last name"]',
-  emailLastNameInput: 'gs-input-field[title="Last name"] > div > input', //FIXME (needs to be fixed div and nav dependent)
+  emailLastNameInput: 'input[placeholder="Enter last name"]',
   emailLastNameError: 'gs-input-field[title="Last name"] > div.message', //FIXME (needs to be fixed div and nav dependent)
   emailRequester: 'gs-input-field[title="Email"]',
-  emailRequesterInput: 'gs-input-field[title="Email"] > div > input', //FIXME (needs to be fixed div and nav dependent)
+  emailRequesterInput: 'input[placeholder="Enter email address"]',
   emailRequesterError: 'gs-input-field[title="Email"] > div.message', //FIXME (needs to be fixed div and nav dependent)
   submitButton: 'gs-button',
   footerTermsAndConditions: 'footer > div > a.mr-3', //FIXME (needs to be fixed nav dependent)
@@ -44,7 +39,7 @@ class HelpFormPage extends BasePage {
     cy.window().then((win) => {
       // @ts-ignore
       win.location.href = 'https://eg-v4-alpha-25.gsapps.dev/help'
-  });
+    })
   }
 
   /** Validates Helpdesk form elements visibility
@@ -61,16 +56,16 @@ class HelpFormPage extends BasePage {
     }
     this.validateElementAndAttribute(selectors.clientLogo, 'src', 'assets/images/companyLogoMed.svg')
     this.validateElementAndAttribute(selectors.clientLogo, 'alt', 'Skanska logo')
-    this.validateElementAndText(selectors.contactHeader, 'Contact us')
+    this.validateElementAndText(selectors.contactHeader, 'Contact us', true)
     this.validateElementAndText(
       selectors.contactText,
       " Need help? We're here for you. Our service desk team are here to answer all your questions - from navigating your portfolio to transferring your shares. "
     )
-    this.validateElementAndText(selectors.phoneHeader, 'Reach us by phone')
-    this.validateElementAndText(selectors.phoneSubTitleTop, 'Monday to Friday')
-    this.validateElementAndText(selectors.phoneSubTitleBot, '08:00 AM - 5:30 PM (GMT)')
-    this.validateElementAndText(selectors.phoneBodyTop, 'English')
-    this.validateElementAndText(selectors.phoneBodyBot, '+44 2034056932')
+    this.validateElementAndText(selectors.phoneSection, 'Reach us by phone', true)
+    this.validateElementAndText(selectors.phoneSection, 'Monday to Friday', true)
+    this.validateElementAndText(selectors.phoneSection, '08:00 AM - 5:30 PM (GMT)', true)
+    this.validateElementAndText(selectors.phoneSection, 'English', true)
+    this.validateElementAndText(selectors.phoneSection, '+44 2034056932', true)
     this.validateElementAndText(selectors.emailTitle, 'Write a message')
     this.validateElementAndAttribute(selectors.emailSubject, 'placeholder', 'Enter subject')
     this.validateElementAndAttribute(selectors.emailMessage, 'placeholder', 'Enter detailed description')
@@ -117,7 +112,7 @@ class HelpFormPage extends BasePage {
   }
 
   /** Validates the errors that could occur when interacting with the inputs
-   * (eg. empty (required) input would lead to an Field is required error)
+   * (eg. empty (required) input would lead to a Field is required error)
    * @param {string} elementIdentifier input element to validate identifier
    * @param {string} input input text to be passed
    * @param {string} errorMessage the error message that should be visible if an error occurs
@@ -161,9 +156,14 @@ class HelpFormPage extends BasePage {
    *  with the desired tex
    * @param {string} elementIdentifier element to validate identifier
    * @param {string} elementText text that should be within the validated element
+   * @param contains
    */
-  validateElementAndText(elementIdentifier, elementText) {
-    cy.get(elementIdentifier).should('have.text', elementText)
+  validateElementAndText(elementIdentifier, elementText, contains = false) {
+    if (!contains) {
+      cy.get(elementIdentifier).should('have.text', elementText)
+    } else {
+      cy.get(elementIdentifier).contains(elementText)
+    }
   }
 
   /** Validates if the element mapped to elementIdentifier is available in the DOM

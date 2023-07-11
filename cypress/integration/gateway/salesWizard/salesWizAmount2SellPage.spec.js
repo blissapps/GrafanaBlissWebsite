@@ -1,7 +1,6 @@
 import EquityGateway from '../../../support/pages/equityGateway'
 
 const equityGateway = new EquityGateway()
-
 describe('Sales Wizard - Amount to Sell Page Tests', () => {
     let accInfo, sharesAvailableRestrictions, estimatedProceeds, estimatedGainLoss, hasContextFailed
 
@@ -20,7 +19,6 @@ describe('Sales Wizard - Amount to Sell Page Tests', () => {
     })
 
     beforeEach(() => {
-        //NOT NECESSARY YET  - equityGateway.LoginPage.login()
         equityGateway.SalesWizBase.gotoAmount2Sell()
     })
 
@@ -96,7 +94,6 @@ describe('Sales Wizard - Amount to Sell Page Tests', () => {
             equityGateway.SalesWizAmount2SellPage.inputFieldShares('check', accInfo.availableShares)
         })
 
-        //TODO @sum needs to be adjusted later because we are not receiving real value yet, @sharesAvailableRestrictions contains white spaces
         it('C30639317/..18 - Checkbox unticked, clicks Total Amount button, value should be equal to Sum of total Available plus Available with Restrictions shares', () => {
             equityGateway.SalesWizAmount2SellPage.btnTotalAmountClick()
             equityGateway.SalesWizAmount2SellPage.inputFieldShares('check', accInfo.totalShares)
@@ -135,7 +132,6 @@ describe('Sales Wizard - Amount to Sell Page Tests', () => {
          * TODO this tests will suffer changes
          **/
         before(() => {
-            // @ts-ignore
             if (hasContextFailed === 'failed'){
                 throw new Error('Test Suite skipped Because Suite: "Certificates - General Validations" Status: FAIL')
             }
