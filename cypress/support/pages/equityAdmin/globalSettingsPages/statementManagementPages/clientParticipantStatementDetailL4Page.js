@@ -5,7 +5,7 @@ const properties = {
 }
 
 const selectors = {
-  nameOfParticipantHeader: 'gs-container-l4 div.statement-sharesHeader',
+  nameOfParticipantHeader: 'gs-container-l4 div.statement-header',
   participantAvatar: 'gs-container-l4 div > gs-avatar',
   asOfDate: 'gs-container-l4 div.statement-info:nth-child(2)',
   currentStatus: 'gs-container-l4 div.statement-info:nth-child(3) > gs-badge',

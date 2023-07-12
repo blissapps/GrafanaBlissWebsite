@@ -38,9 +38,9 @@ const selectors = {
 class BaseManagementPage extends BasePage {
   // ------------------------------------------------------------------------------- GETS --------------------------------------------------------------------------------------- //
   /**
-   * Get the entity (group role, or dap) sharesHeader element of a selected entity
+   * Get the entity (group role, or dap) header element of a selected entity
    *
-   * @returns Entity sharesHeader
+   * @returns Entity header
    */
   getEntityHeader() {
     return cy.get(selectors.entityNameInput).scrollIntoView()
@@ -181,18 +181,18 @@ class BaseManagementPage extends BasePage {
   // --------------------------------------------------------------------------------- ASSERTIONS ------------------------------------------------------------------------------------- //
 
   /**
-   * Assert if the entity sharesHeader/name is displayed. Also, asserts its content if the parameter headerText is sent
+   * Assert if the entity header/name is displayed. Also, asserts its content if the parameter headerText is sent
    *
-   * @param {string} headerText Send the name of the sharesHeader if you want to validate the sharesHeader content. SEND NOTHING to skip the validation of the content
-   * and just validate that the sharesHeader is displayed
+   * @param {string} headerText Send the name of the header if you want to validate the header content. SEND NOTHING to skip the validation of the content
+   * and just validate that the header is displayed
    */
   assertEntityHeaderIsDisplayedAsExpected(headerText = '') {
     this.getEntityHeader().as('header')
 
-    cy.get('@sharesHeader').should('be.visible')
+    cy.get('@header').should('be.visible')
 
     if (headerText !== '') {
-      cy.get('@sharesHeader').should('have.value', headerText)
+      cy.get('@header').should('have.value', headerText)
     }
   }
 
@@ -337,7 +337,7 @@ class BaseManagementPage extends BasePage {
   }
 
   /**
-   * Assert a badge with View Only is displayed next the entity sharesHeader/title
+   * Assert a badge with View Only is displayed next the entity header/title
    *
    * @param {string} textOnBadge Send a text to validate the content text of the view only badge
    * @param {boolean} displayed True is the default value to assert the VIEW ONLY badge is displayed. False otherwise
@@ -355,7 +355,7 @@ class BaseManagementPage extends BasePage {
   }
 
   /**
-   * Assert if the name of the entity in the sharesHeader is editable or not over the UI
+   * Assert if the name of the entity in the header is editable or not over the UI
    *
    * @param {boolean} editable True is the default value to assert the entity name is editable, false otherwise
    */
