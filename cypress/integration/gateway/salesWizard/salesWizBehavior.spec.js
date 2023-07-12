@@ -1,8 +1,6 @@
-import EquityGateway from '../../../support/pages/equityGateway'
+//FIXME import EquityGateway from '../../../support/pages/equityGateway'
 
-//FIXME
-//@ts-ignore
-const equityGateway = new EquityGateway()
+//FIXME const equityGateway = new EquityGateway()
 describe('Sales Wizard Behavior Tests', () => {
   /**
    * Tests Related to Sales Wizard Section
