@@ -9,6 +9,8 @@
 // References for global autocomplete
 /// <reference types="cypress" />
 
+import 'cypress-wait-until'
+
 const executeCommand = (command) => {
   cy.task('pluginExecuteCommand', command)
 }

@@ -10,6 +10,9 @@
 // https://on.cypress.io/plugins-guide
 // ***********************************************************
 
+// Plugin snapshot variables:
+const { initPlugin } = require('cypress-plugin-snapshots/plugin')
+
 // Reporter necessary variables
 const { beforeRunHook, afterRunHook } = require('cypress-mochawesome-reporter/lib')
 const exec = require('child_process').execSync
@@ -82,6 +85,8 @@ module.exports = (on, config) => {
   on('task', {
     generateOTP: require('cypress-otp')
   })
+
+  initPlugin(on, config)
 
   console.log('\x1b[32m \nModules were successfully loaded\x1b[39m')
 

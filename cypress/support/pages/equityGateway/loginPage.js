@@ -87,7 +87,6 @@ class LoginPage extends BasePage {
   _loginWithSession(user, pw) {
       let verify = 0
 
-      cy.session([user, pw], () => {
         cy.visit(Cypress.env('EQUITY_GATEWAY_BASE_URL'))
 
         if (user !== '') {
@@ -110,7 +109,6 @@ class LoginPage extends BasePage {
           //Account Backup Disable
           cy.location('pathname').should('eq', '/dashboard')
         }
-      })
   }
 
   /**
