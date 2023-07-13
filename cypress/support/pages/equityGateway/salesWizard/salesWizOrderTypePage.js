@@ -95,4 +95,5 @@ class salesWizOrderTypePage extends BasePage {
     cy.url().should('contain', '/sale-wizard/distribution')
   }
 }
+
 export default salesWizOrderTypePage

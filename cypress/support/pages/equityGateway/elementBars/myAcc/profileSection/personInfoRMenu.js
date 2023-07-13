@@ -19,6 +19,7 @@ class PersonalInfoRMenu extends BasePage {
       cy.get(selectors.sideRmenu).contains(item).should('exist')
     })
   }
+
   /*
     sideMenuValidationHref(pageName, href){
         cy.get(selectors.sideLbar).contains(pageName)
@@ -35,4 +36,5 @@ class PersonalInfoRMenu extends BasePage {
     cy.get(selectors.sideMenuElements).contains(buttonToClick).click({ force: true })
   }
 }
+
 export default PersonalInfoRMenu

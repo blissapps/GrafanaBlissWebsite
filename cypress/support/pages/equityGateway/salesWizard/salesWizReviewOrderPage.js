@@ -90,7 +90,7 @@ class salesWizReviewOrderPage extends BasePage {
 
         allElements.forEach((element) => {
           cy.get(sectionData.id).find(element.elementType).contains(element.elementText).scrollIntoView().should('be.visible')
-        });
+        })
       } else {
         throw new Error(`Section ${sectionJsonID} not found.`)
       }
@@ -109,18 +109,19 @@ class salesWizReviewOrderPage extends BasePage {
   }
 
   validateModalSubmitButton(accepted = true) {
-    accepted ? cy.get('gs-button').contains('Submit').should('have.css', 'background-color', 'rgb(0, 101, 255)') :
-    cy.get('gs-button').contains('Submit').should('have.css', 'background-color', 'rgb(0, 101, 255)')
+    accepted
+      ? cy.get('gs-button').contains('Submit').should('have.css', 'background-color', 'rgb(0, 101, 255)')
+      : cy.get('gs-button').contains('Submit').should('have.css', 'background-color', 'rgb(0, 101, 255)')
   }
 
-  validateModalCloseButton(){
-  cy.get(selectors.modalClose).click()
-  this.validateElements()
+  validateModalCloseButton() {
+    cy.get(selectors.modalClose).click()
+    this.validateElements()
   }
 
-  validateModalDismissButton(){
+  validateModalDismissButton() {
     cy.get('gs-button').contains('Dismiss').click()
-  this.validateElements()
+    this.validateElements()
   }
 
   clickCheckBoxByName(checkboxName) {
