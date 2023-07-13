@@ -2,6 +2,10 @@ import EquityGateway from '../../../support/pages/equityGateway'
 
 const equityGateway = new EquityGateway()
 
+/**
+   * https://globalshares.testrail.net/index.php?/suites/view/18820&group_by=cases:section_id&group_order=asc&display_deleted_cases=0&group_id=1006706
+   * Activity Page Test Suite
+   */
 describe('Activity Page Tests', () => {
     beforeEach(() => {
         equityGateway.LoginPage.login()

@@ -1,5 +1,9 @@
 import EquityGateway from '../../../support/pages/equityGateway'
 
+/**
+ * https://globalshares.testrail.net/index.php?/suites/view/18820&group_by=cases:section_id&group_order=asc&display_deleted_cases=0&group_id=1006704
+ * HelpDesk Test Suite
+ */
 const equityGateway = new EquityGateway()
 describe('Help form page tests - Not Authenticated', () => {
   beforeEach(() => {

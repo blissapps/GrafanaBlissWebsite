@@ -2,6 +2,11 @@ import EquityGateway from '../../../../support/pages/equityGateway'
 
 const equityGateway = new EquityGateway()
 
+/**
+ * https://globalshares.testrail.net/index.php?/suites/view/18820&group_by=cases:section_id&group_order=asc&display_deleted_cases=0&group_id=1026234
+ * Sales Wizard Summary Sidebar Test Suite
+ */
+
 describe('Sales Wizard Element Bars Tests', () => {
     let accInfo
 
