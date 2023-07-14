@@ -3,7 +3,7 @@ import EquityGateway from '../../../support/pages/equityGateway'
 const equityGateway = new EquityGateway()
 describe('Sales Wizard Security Page Tests', () => {
     beforeEach(() => {
-        //NOT NECESSARY YET  - equityGateway.LoginPage.login()
+        equityGateway.LoginPage.login()
         equityGateway.SalesWizBase.gotoSecurity()
     })
     context('General Page Validations', () => {

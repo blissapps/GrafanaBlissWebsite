@@ -19,6 +19,7 @@ describe('Sales Wizard - Amount to Sell Page Tests', () => {
     })
 
     beforeEach(() => {
+        equityGateway.LoginPage.login()
         equityGateway.SalesWizBase.gotoAmount2Sell()
     })
 
