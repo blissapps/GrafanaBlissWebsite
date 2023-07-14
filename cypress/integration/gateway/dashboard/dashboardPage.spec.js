@@ -4,16 +4,7 @@ const equityGateway = new EquityGateway()
 
 describe('Dashboard Page Tests', () => {
     beforeEach(() => {
-        //equityGateway.LoginPage.login()
-        cy.session('mySession', () => {
-            cy.visit('/')
-            cy.get('input[placeholder="Username"]').type('Anthayes161260')
-            cy.get('input[placeholder="Password"]').type('GShares1234')
-            cy.get('gs-button[type="default"][size="large"]').click()
-            cy.url().should('contain', '/dashboard')
-        }).then(() => {
-            cy.visit('/dashboard')
-        })
+        equityGateway.LoginPage.login()
     })
 
     context('General DashboardPage Validations', () => {
@@ -21,7 +12,6 @@ describe('Dashboard Page Tests', () => {
          * EGVFOUR-49
          */
         it('C30092770 - DashboardPage Home Elements Validation', () => {
-            cy.visit('/dashboard')
             const activityElements = [
                 'Activity',
                 'In progress',

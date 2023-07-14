@@ -3,7 +3,8 @@ import BasePage from '../../basePage'
 const selectors = {
     filterSelector: 'gs-select[aria-label="graph type"]',
     portfolio: '.eg-portfolio',
-    portfolioBasis: '.eg-portfolio > .flex-column'
+    portfolioBasis: '.eg-portfolio > .flex-column',
+    portfolioValueAndUnits: 'div.flex.align-items-center.py-2.px-4'
 }
 
 class Portfolio extends BasePage {
@@ -18,7 +19,7 @@ class Portfolio extends BasePage {
 
     portfolioBasis(label1){
         cy.contains(selectors.portfolioBasis, 'Estimated gross value')
-        cy.get('p.text-color-cool80.mb-5').contains(`${label1} Units`)
+        cy.get(selectors.portfolioValueAndUnits).contains(`${label1} Units`)
     }
 }
 export default Portfolio

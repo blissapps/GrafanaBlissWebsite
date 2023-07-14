@@ -1,8 +1,8 @@
 import BasePage from '../../basePage'
 
 const selectors = {
-    sharesHeaderBar: 'gs-card.mb-7 > eg-price-card > .eg-shared-price',
-    sharesFluctuation: '.lg\\:mr-8 > .flex'
+    sharesHeaderBar: 'eg-price-card',
+    sharesFluctuation: '.pl-8 > .flex'
 }
 class SharesHeader extends BasePage {
     sharesName(name){
