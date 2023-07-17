@@ -2,7 +2,6 @@ import EquityGateway from '../../../../support/pages/equityGateway'
 
 const equityGateway = new EquityGateway()
 
-
 /**
  * https://globalshares.testrail.net/index.php?/suites/view/18820&group_by=cases:section_id&group_order=asc&display_deleted_cases=0&group_id=1026235
  * Sales Wizard Progress Stepper Test Suite
@@ -171,7 +170,6 @@ describe('Sales Wizard - Lateral Progress Stepper', () => {
       equityGateway.SalesWizSideLmenu.validateStepperStatus('Distribution')
       equityGateway.SalesWizSideLmenu.validateStepperStatus('Review order')
     })
-
   })
 
   /** TODO each test case, waiting for developments
