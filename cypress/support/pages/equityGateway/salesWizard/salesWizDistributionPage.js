@@ -65,4 +65,5 @@ class salesWizDistributionPage extends BasePage {
     //TODO Step to validate the implementation of the information change info and link
   }
 }
+
 export default salesWizDistributionPage

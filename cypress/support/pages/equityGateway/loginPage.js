@@ -23,7 +23,7 @@ class LoginPage extends BasePage {
     this.checkUrl(Cypress.env('EQUITY_GATEWAY_BASE_URL'))
   }
 
-  errorToast(){
+  errorToast() {
     cy.contains(selectors.mismatch, 'You entered an incorrect username or password.')
   }
 
@@ -35,7 +35,7 @@ class LoginPage extends BasePage {
       userToUse = Cypress.env('EQUITY_GATEWAY_DEFAULT_USER1_AUTH')
       pwToUse = Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH')
     } else {
-      if (user !== Cypress.env('EQUITY_GATEWAY_DEFAULT_USER1_AUTH').toString() && user !== Cypress.env('EQUITY_GATEWAY_DEFAULT_USER2_AUTH').toString()){
+      if (user !== Cypress.env('EQUITY_GATEWAY_DEFAULT_USER1_AUTH').toString() && user !== Cypress.env('EQUITY_GATEWAY_DEFAULT_USER2_AUTH').toString()) {
         customizedUser = true
         cy.log('Customized Login Detected: Login are set to use the provided ACC')
       }
@@ -52,7 +52,7 @@ class LoginPage extends BasePage {
         setTimeout(() => {
           accCheck = 'acc1'
           accCheckTimer = false
-        }, 5 * 60 * 1000); // 5 minutes
+        }, 5 * 60 * 1000) // 5 minutes
       }
       if (accCheck === 'acc2') {
         userToUse = Cypress.env('EQUITY_GATEWAY_DEFAULT_USER2_AUTH')
@@ -63,7 +63,7 @@ class LoginPage extends BasePage {
     customizedUser = false
     this.lastUser = userToUse
 
-  return {
+    return {
       user: this.lastUser
     }
   }
@@ -71,13 +71,13 @@ class LoginPage extends BasePage {
   getLastUser() {
     //FIXME PROVISORY ACC NAME ITS NOT SAME AS LOGIN NAME
     let returnName
-    if (this.lastUser === Cypress.env('EQUITY_GATEWAY_DEFAULT_USER1_AUTH')){
+    if (this.lastUser === Cypress.env('EQUITY_GATEWAY_DEFAULT_USER1_AUTH')) {
       returnName = 'Cassius'
     } else {
       returnName = 'Aryan'
     }
 
-  return returnName
+    return returnName
   }
 
   /**
@@ -85,30 +85,30 @@ class LoginPage extends BasePage {
    * @private
    */
   _loginWithSession(user, pw) {
-      let verify = 0
+    let verify = 0
 
-        cy.visit(Cypress.env('EQUITY_GATEWAY_BASE_URL'))
+    cy.visit(Cypress.env('EQUITY_GATEWAY_BASE_URL'))
 
-        if (user !== '') {
-          cy.get(selectors.inputNameField).clear({ force: true }).type(user)
-          verify += 1
-        }
-        if (pw !== '') {
-          cy.get(selectors.inputPasswordField).clear({ force: true }).type(pw)
-          verify += 1
-        }
+    if (user !== '') {
+      cy.get(selectors.inputNameField).clear({ force: true }).type(user)
+      verify += 1
+    }
+    if (pw !== '') {
+      cy.get(selectors.inputPasswordField).clear({ force: true }).type(pw)
+      verify += 1
+    }
 
-        cy.get(selectors.loginBtn).contains('Login').click({ force: true })
+    cy.get(selectors.loginBtn).contains('Login').click({ force: true })
 
-        if (verify === 2 && Cypress.env('EQUITY_GATEWAY_LOGIN_AUTH_VERIFICATION') === 'active' && customizedUser === false) {
-          //Account Backup Active
-          this.count = 0
-          this.maxAttempts = 12
-          this._checkURL(Cypress.env('EQUITY_GATEWAY_BASE_URL')+'/dashboard')
-        } else if (verify === 2) {
-          //Account Backup Disable
-          cy.location('pathname').should('eq', '/dashboard')
-        }
+    if (verify === 2 && Cypress.env('EQUITY_GATEWAY_LOGIN_AUTH_VERIFICATION') === 'active' && customizedUser === false) {
+      //Account Backup Active
+      this.count = 0
+      this.maxAttempts = 12
+      this._checkURL(Cypress.env('EQUITY_GATEWAY_BASE_URL') + '/dashboard')
+    } else if (verify === 2) {
+      //Account Backup Disable
+      cy.location('pathname').should('eq', '/dashboard')
+    }
   }
 
   /**
@@ -134,10 +134,10 @@ class LoginPage extends BasePage {
           this._checkURL(targetURL) // Recursive call to checkURL() function
         } else {
           // Perform actions or assertions for failure case here
-          if (accCheck === 'acc1'){
+          if (accCheck === 'acc1') {
             actionPerformed = true
             accCheck = 'acc2'
-            cy.log('Login Problem Occurred: logging in with backup ACC2: '+Cypress.env('EQUITY_GATEWAY_DEFAULT_USER2_AUTH'))
+            cy.log('Login Problem Occurred: logging in with backup ACC2: ' + Cypress.env('EQUITY_GATEWAY_DEFAULT_USER2_AUTH'))
             this.login(Cypress.env('EQUITY_GATEWAY_DEFAULT_USER2_AUTH'), Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH'))
           } else if (accCheck === 'acc2') {
             throw new Error('Login Problem Occurred: Unable to Login with any configured Account')

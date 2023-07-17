@@ -36,8 +36,8 @@ describe('Sales Wizard Order Type Page Tests', () => {
       equityGateway.SalesWizOrderTypePage.validateMenuAdvanced()
     })
 
-    it('C30639287, C30639288 - Selects Limit order (Good\' til cancelled - Order Type', () => {
-      equityGateway.SalesWizOrderTypePage.selectOrderTypeByName('Limit Order - Good\' til cancelled').click()
+    it("C30639287, C30639288 - Selects Limit order (Good' til cancelled - Order Type", () => {
+      equityGateway.SalesWizOrderTypePage.selectOrderTypeByName("Limit Order - Good' til cancelled").click()
       //TBD After limit validation is done on the FE the tests need to incorporate that
       // ---> equityGateway.SalesWizOrderTypePage.validateDayLimitInputLimits()
       equityGateway.SalesWizOrderTypePage.fillDayLimitInput('Limit Day Order')
