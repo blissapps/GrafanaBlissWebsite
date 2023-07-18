@@ -1,9 +1,9 @@
 import BasePage from '../../basePage'
 
 const selectors = {
-  headName: '.text-h2',
-  activityWidget: '.eg-activity-widget',
-  activityUrl: 'a.mr-2',
+  headName: 'h1',
+  activityWidget: '[data-test-id="dbrd-activity"]',
+  activityUrl: '[data-test-id="dbrd-activity-link-view-all"]',
   footer: '.eg-footer'
 }
 

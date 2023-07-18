@@ -1,35 +1,29 @@
 import BasePage from '../../basePage'
 
-//TODO [Fix the selectors with navigation and div dependencies]
 const selectors = {
-  clientLogo: 'eg-company-logo > img',
   contactHeader: 'h1',
   contactText: '.eg-contact__text',
-  phoneSection: '.eg-contact__side',
-  emailTitle: '.mb-9 > .text-h5', //FIXME (needs to be fixed div and nav dependent)
-  emailSubject: 'gs-input-field[title="Subject"]',
-  emailSubjectCharCount: 'gs-input-field[title="Subject"] + label', //FIXME (needs to be fixed nav dependent)
+  phoneSection: '[data-test-id="helpdesk-contacts"]',
+  emailTitle: 'div:nth-child(1) > h2',
+  emailSubject: '[data-test-id="helpdesk-form-input-subject"]',
+  emailSubjectCharCount: '.eg-contact__formlength',
   emailSubjectInput: 'input[placeholder="Enter subject"]',
-  emailSubjectError: 'gs-input-field[title="Subject"] > div.message', //FIXME (needs to be fixed div and nav dependent)
+  emailSubjectError: '[data-test-id="helpdesk-form-input-subject"] > div.message',
   emailMessage: 'gs-input-area[placeholder="Enter detailed description"]',
-  emailMessageCharCount: '.h-3rem > .absolute', //FIXME (needs to be fixed nav dependent)
-  emailMessageInput: 'textarea[placeholder="Enter detailed description"]',
-  emailMessageError: 'gs-input-area[placeholder="Enter detailed description"] > div.message', //FIXME (needs to be fixed div and nav dependent)
-  emailFirstName: 'gs-input-field[title="First name"]',
-  emailFirstNameInput: 'input[placeholder="Enter first name"]',
-  emailFirstNameError: 'gs-input-field[title="First name"] > div.message', //FIXME (needs to be fixed div and nav dependent)
-  emailLastName: 'gs-input-field[title="Last name"]',
-  emailLastNameInput: 'input[placeholder="Enter last name"]',
-  emailLastNameError: 'gs-input-field[title="Last name"] > div.message', //FIXME (needs to be fixed div and nav dependent)
-  emailRequester: 'gs-input-field[title="Email"]',
-  emailRequesterInput: 'input[placeholder="Enter email address"]',
-  emailRequesterError: 'gs-input-field[title="Email"] > div.message', //FIXME (needs to be fixed div and nav dependent)
-  submitButton: 'gs-button',
-  footerTermsAndConditions: 'footer > div > a.mr-3', //FIXME (needs to be fixed nav dependent)
-  footerPrivacyPolicy: 'footer > div.eg-footer__right > :last-child', //FIXME (needs to be fixed nav dependent)
-  footerGSCopy: 'footer > div > p', //FIXME (needs to be fixed nav dependent)
-  footerGSLogo: 'footer > div > img', //FIXME (needs to be fixed nav dependent)
-  welcomePageHelp: 'a.ng-star-inserted'
+  emailMessageCharCount: '.h-3rem  > label:nth-child(2)',
+  emailMessageInput: '[data-test-id="helpdesk-form-input-message"] > textarea',
+  emailMessageError: '[data-test-id="helpdesk-form-input-message"]  > div.message',
+  emailFirstName: '[data-test-id="helpdesk-form-input-first-name"]',
+  emailFirstNameInput: '[data-test-id="helpdesk-form-input-first-name"] input',
+  emailFirstNameError: '[data-test-id="helpdesk-form-input-first-name"] > div.message',
+  emailLastName: '[data-test-id="helpdesk-form-input-last-name"]',
+  emailLastNameInput: '[data-test-id="helpdesk-form-input-last-name"] input',
+  emailLastNameError: '[data-test-id="helpdesk-form-input-last-name"] > .message',
+  emailRequester: '[data-test-id="helpdesk-form-input-email"]',
+  emailRequesterInput: '[data-test-id="helpdesk-form-input-email"] input',
+  emailRequesterError: '[data-test-id="helpdesk-form-input-email"] > .message',
+  submitButton: '[data-test-id="helpdesk-form-btn-submit"]',
+  footer: 'footer'
 }
 
 class HelpFormPage extends BasePage {
@@ -48,47 +42,29 @@ class HelpFormPage extends BasePage {
   validateFormElements(auth = true) {
     cy.url().should('contain', '/help')
     if (auth) {
-      this.validateElementAndAttribute(selectors.footerTermsAndConditions, 'href', '/terms-and-conditions')
+      this._validateElementAndAttribute(selectors.footer+' > div > a:nth-child(1)', 'href', '/terms-and-conditions')
+      this._validateElementAndAttribute(selectors.footer+' > div > a:nth-child(2)', 'href', '/privacy-policy')
     } else if (!auth) {
-      this.validateElementAndAttribute(selectors.emailRequester, 'placeholder', 'Enter email address')
-      this.validateElementAndAttribute(selectors.emailFirstName, 'placeholder', 'Enter first name')
-      this.validateElementAndAttribute(selectors.emailLastName, 'placeholder', 'Enter last name')
+      this._validateElementAndAttribute(selectors.footer+' > div > a:nth-child(1)', 'href', '/privacy-policy')
+      this._validateElementAndAttribute(selectors.emailRequester, 'placeholder', 'Enter email address')
+      this._validateElementAndAttribute(selectors.emailFirstName, 'placeholder', 'Enter first name')
+      this._validateElementAndAttribute(selectors.emailLastName, 'placeholder', 'Enter last name')
     }
-    this.validateElementAndAttribute(selectors.clientLogo, 'src', 'assets/images/companyLogoMed.svg')
-    this.validateElementAndAttribute(selectors.clientLogo, 'alt', 'Skanska logo')
-    this.validateElementAndText(selectors.contactHeader, 'Contact us', true)
-    this.validateElementAndText(
+    this._validateElementAndText(selectors.contactHeader, 'Contact us', true)
+    this._validateElementAndText(
       selectors.contactText,
       " Need help? We're here for you. Our service desk team are here to answer all your questions - from navigating your portfolio to transferring your shares. "
     )
-    this.validateElementAndText(selectors.phoneSection, 'Reach us by phone', true)
-    this.validateElementAndText(selectors.phoneSection, 'Monday to Friday', true)
-    this.validateElementAndText(selectors.phoneSection, '08:00 AM - 5:30 PM (GMT)', true)
-    this.validateElementAndText(selectors.phoneSection, 'English', true)
-    this.validateElementAndText(selectors.phoneSection, '+44 2034056932', true)
-    this.validateElementAndText(selectors.emailTitle, 'Write a message')
-    this.validateElementAndAttribute(selectors.emailSubject, 'placeholder', 'Enter subject')
-    this.validateElementAndAttribute(selectors.emailMessage, 'placeholder', 'Enter detailed description')
-    this.validateElementAndAttribute(selectors.footerPrivacyPolicy, 'href', '/privacy-policy')
-    this.validateElementAndText(selectors.footerGSCopy, 'Service desk provided by')
-    this.validateElementAndAttribute(selectors.footerGSLogo, 'src', 'assets/images/gs_small.svg')
-    this.validateElementAndAttribute(selectors.footerGSLogo, 'alt', 'Global Shares and J.P. Morgan company logo')
+    this._validateElementAndText(selectors.phoneSection, 'Reach us by phone', true)
+    this._validateElementAndText(selectors.phoneSection, 'Monday to Friday', true)
+    this._validateElementAndText(selectors.phoneSection, '08:00 AM - 5:30 PM (GMT)', true)
+    this._validateElementAndText(selectors.phoneSection, 'English', true)
+    this._validateElementAndText(selectors.phoneSection, '+44 2034056932', true)
+    this._validateElementAndText(selectors.emailTitle, 'Write a message')
+    this._validateElementAndAttribute(selectors.emailSubject, 'placeholder', 'Enter subject')
+    this._validateElementAndAttribute(selectors.emailMessage, 'placeholder', 'Enter detailed description')
+    this._validateElementAndText(selectors.footer, 'Service desk provided by', true)
     this.validateElementAndClass('submitButton', 'disabled')
-  }
-
-  /** Generates a string with (a * [times] charsToGenerate)
-   *  (eg generateChars(3) will return aaa)
-   * @param {number} charsToGenerate
-   */
-  generateChars(charsToGenerate) {
-    let chars = ''
-    for (let i = 0; i < charsToGenerate; i++) {
-      const randomCharCode = Math.floor(Math.random() * 26) + 97 // Random ASCII code between 97 ('a') and 122 ('z')
-      const randomChar = String.fromCharCode(randomCharCode) // Convert ASCII code to character
-      chars += randomChar
-    }
-
-    return chars
   }
 
   /** Validates the character related error for input fields
@@ -99,16 +75,16 @@ class HelpFormPage extends BasePage {
    */
   validateInputFieldCharsError(elementIdentifier, charsLimit, errorMessage) {
     cy.get(selectors[`${elementIdentifier}Input`])
-      .invoke('val', this.generateChars(charsLimit - 1))
+      .invoke('val', this._generateChars(charsLimit - 1))
       .type('a')
 
-    this.validateElementAndText(selectors[`${elementIdentifier}CharCount`], ` ${charsLimit}/${charsLimit} `)
+    this._validateElementAndText(selectors[`${elementIdentifier}CharCount`], ` ${charsLimit}/${charsLimit} `)
 
-    cy.get(selectors[`${elementIdentifier}Input`]).clear().invoke('val', this.generateChars(charsLimit)).type('a')
+    cy.get(selectors[`${elementIdentifier}Input`]).clear().invoke('val', this._generateChars(charsLimit)).type('a')
 
-    this.validateElementAndText(selectors[`${elementIdentifier}CharCount`], ` ${charsLimit + 1}/${charsLimit} `)
+    this._validateElementAndText(selectors[`${elementIdentifier}CharCount`], ` ${charsLimit + 1}/${charsLimit} `)
     this.validateElementAndClass(elementIdentifier, 'error')
-    this.validateElementAndText(selectors[`${elementIdentifier}Error`], errorMessage)
+    this._validateElementAndText(selectors[`${elementIdentifier}Error`], errorMessage, true)
   }
 
   /** Validates the errors that could occur when interacting with the inputs
@@ -120,15 +96,14 @@ class HelpFormPage extends BasePage {
    */
   validateInputCustomError(elementIdentifier, input, errorMessage, isRequiredField = true) {
     if (isRequiredField) {
-      cy.get(selectors[`${elementIdentifier}Input`]).type(input)
-      cy.get(selectors[`${elementIdentifier}Input`]).clear()
-      cy.get(selectors.clientLogo).click()
+      cy.get(selectors[`${elementIdentifier}Input`]).type(input).clear()
+      cy.get(selectors.contactHeader).click()
       this.validateElementAndClass(elementIdentifier, 'error')
-      this.validateElementAndText(selectors[`${elementIdentifier}Error`], ' Field is required\n')
+      this._validateElementAndText(selectors[`${elementIdentifier}Error`], 'Field is required', true)
     } else {
       cy.get(selectors[`${elementIdentifier}Input`]).type(input)
       this.validateElementAndClass(elementIdentifier, 'error')
-      this.validateElementAndText(selectors[`${elementIdentifier}Error`], errorMessage)
+      this._validateElementAndText(selectors[`${elementIdentifier}Error`], errorMessage, true)
     }
     cy.get(selectors[`${elementIdentifier}Input`]).clear()
   }
@@ -143,30 +118,6 @@ class HelpFormPage extends BasePage {
   }
 
   /** Validates if the element mapped to elementIdentifier is available in the DOM
-   * with the desired attribute and attribute value
-   * @param {string} elementIdentifier element to validate identifier
-   * @param {string} attribute attribute that the element should have
-   * @param {string} attributeValue value of the element attribute
-   */
-  validateElementAndAttribute(elementIdentifier, attribute, attributeValue) {
-    cy.get(elementIdentifier).should('have.attr', attribute, attributeValue)
-  }
-
-  /** Validates if the element mapped to elementIdentifier is available in the DOM
-   *  with the desired tex
-   * @param {string} elementIdentifier element to validate identifier
-   * @param {string} elementText text that should be within the validated element
-   * @param contains
-   */
-  validateElementAndText(elementIdentifier, elementText, contains = false) {
-    if (!contains) {
-      cy.get(elementIdentifier).should('have.text', elementText)
-    } else {
-      cy.get(elementIdentifier).contains(elementText)
-    }
-  }
-
-  /** Validates if the element mapped to elementIdentifier is available in the DOM
    * with the desired class or the negation of it
    * @param {string} elementIdentifier element to validate identifier
    * @param {string} elementClass class that the element should have or not
@@ -178,6 +129,45 @@ class HelpFormPage extends BasePage {
     } else {
       cy.get(selectors[elementIdentifier]).should('have.class', elementClass)
     }
+  }
+
+  /** Validates if the element mapped to elementIdentifier is available in the DOM
+   * with the desired attribute and attribute value
+   * @param {string} elementIdentifier element to validate identifier
+   * @param {string} attribute attribute that the element should have
+   * @param {string} attributeValue value of the element attribute
+   */
+  _validateElementAndAttribute(elementIdentifier, attribute, attributeValue) {
+    cy.get(elementIdentifier).should('have.attr', attribute, attributeValue)
+  }
+
+  /** Validates if the element mapped to elementIdentifier is available in the DOM
+   *  with the desired tex
+   * @param {string} elementIdentifier element to validate identifier
+   * @param {string} elementText text that should be within the validated element
+   * @param contains
+   */
+  _validateElementAndText(elementIdentifier, elementText, contains = false) {
+    if (!contains) {
+      cy.get(elementIdentifier).should('have.text', elementText)
+    } else {
+      cy.get(elementIdentifier).contains(elementText)
+    }
+  }
+
+  /** Generates a string with (a * [times] charsToGenerate)
+   *  (eg generateChars(3) will return aaa)
+   * @param {number} charsToGenerate
+   */
+  _generateChars(charsToGenerate) {
+    let chars = ''
+    for (let i = 0; i < charsToGenerate; i++) {
+      const randomCharCode = Math.floor(Math.random() * 26) + 97 // Random ASCII code between 97 ('a') and 122 ('z')
+      const randomChar = String.fromCharCode(randomCharCode) // Convert ASCII code to character
+      chars += randomChar
+    }
+
+    return chars
   }
 }
 

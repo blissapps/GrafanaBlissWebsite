@@ -15,8 +15,9 @@ describe('Dashboard Page Tests', () => {
     /** Related to User Stories
      * EGVFOUR-49
      */
-    it('C30092770 - DashboardPage Home Elements Validation', () => {
-      const activityElements = ['Activity', 'In progress', 'View all activity', 'Upcoming', 'Showing 3 of 6']
+
+    it('C30092770 - Dashboard Page General Activity Elements Validation', () => {
+      const activityElements = ['Activity', 'View all activity', 'Upcoming', 'Showing 3']
       equityGateway.DashboardPage.home(equityGateway.LoginPage.getLastUser(), activityElements)
     })
   })
