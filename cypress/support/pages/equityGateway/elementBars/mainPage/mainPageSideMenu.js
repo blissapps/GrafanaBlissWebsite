@@ -21,6 +21,7 @@ class MainPageSideMenu extends BasePage {
   mainPages(position, name) {
     cy.get(selectors.pages + '(' + position + ')').contains(name)
   }
+
   shareInfo(name, amount, currency, date, sharesPositiveColor, sharesNegativeColor, sharesPositiveReg, sharesNegativeReg) {
     cy.get(selectors.shareInfo).contains(name)
     cy.get(selectors.shareInfo).contains(amount)
@@ -47,8 +48,9 @@ class MainPageSideMenu extends BasePage {
     cy.get(selectors.support).click({ force: true })
   }
 
-  clickSideMenuButton(buttonToClick){
+  clickSideMenuButton(buttonToClick) {
     cy.get(selectors.sideBarButton).eq(sideMenuElementPositions[buttonToClick])
   }
 }
+
 export default MainPageSideMenu

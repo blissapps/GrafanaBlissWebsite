@@ -1,89 +1,90 @@
 import EquityGateway from '../../../support/pages/equityGateway'
 
 const equityGateway = new EquityGateway()
+
+/**
+ * https://globalshares.testrail.net/index.php?/suites/view/18820&group_by=cases:section_id&group_order=asc&display_deleted_cases=0&group_id=1026241
+ * Sales Wizard Ammount to Sell Test Suite
+ */
+
 describe('Sales Wizard - Amount to Sell Page Tests', () => {
-    let accInfo, sharesAvailableRestrictions, estimatedProceeds, estimatedGainLoss, hasContextFailed
+  let accInfo, sharesAvailableRestrictions, estimatedProceeds, estimatedGainLoss, hasContextFailed
 
-    before(() => {
-        equityGateway.LoginPage.getAccInfo().then((result) => {
-            accInfo = result
-            // Use the returned values
-            // @ts-ignore
-            const { securityName, securityPosition, stockName, shareName, totalShares, availableShares, availableWihRestrictions, orderName, shares2sell } = accInfo
-            cy.log('Account Info: '+securityName, securityPosition, stockName, shareName, totalShares, availableShares, availableWihRestrictions, orderName, shares2sell)
-        })
-
-        sharesAvailableRestrictions = '3 788'
-        estimatedProceeds = '€ 16.660.00'
-        estimatedGainLoss = '€ 16.660.00'
+  before(() => {
+    equityGateway.LoginPage.getAccInfo().then((result) => {
+      accInfo = result
+      // Use the returned values
+      // @ts-ignore
+      const { securityName, securityPosition, stockName, shareName, totalShares, availableShares, availableWihRestrictions, orderName, shares2sell } = accInfo
+      cy.log('Account Info: ' + securityName, securityPosition, stockName, shareName, totalShares, availableShares, availableWihRestrictions, orderName, shares2sell)
     })
 
-    beforeEach(() => {
-        equityGateway.LoginPage.login()
-        equityGateway.SalesWizBase.gotoAmount2Sell()
+    sharesAvailableRestrictions = '3 788'
+    estimatedProceeds = '€ 16.660.00'
+    estimatedGainLoss = '€ 16.660.00'
+  })
+
+  beforeEach(() => {
+    equityGateway.LoginPage.login()
+    equityGateway.SalesWizBase.gotoAmount2Sell()
+  })
+
+  context('General Page Validations', () => {
+    /** Related to User Stories
+     * EGVFOUR-142
+     **/
+    it('C30639310 - Title and Description Verification', () => {
+      equityGateway.SalesWizAmount2SellPage.titleAndDescription('Amount to sell', 'Please enter the number of shares')
+      equityGateway.SalesWizAmount2SellPage.interactiveElementsCheck()
     })
 
-    context('General Page Validations', () => {
-        /** Related to User Stories
-         * EGVFOUR-142
-         **/
-        it('C30639310 - Title and Description Verification', () => {
-            equityGateway.SalesWizAmount2SellPage.titleAndDescription('Amount to sell', 'Please enter the number of shares')
-            equityGateway.SalesWizAmount2SellPage.interactiveElementsCheck()
-        })
-
-        /** TODO
-         * This Test will suffer changes at later DEV PHASES
-         * Will retrieve data from logged ACC
-         */
-        it('C30639310/..19/..20 - Shares Verification', () => {
-            equityGateway.SalesWizAmount2SellPage.sharesLabelValue(
-                accInfo.availableShares,
-                sharesAvailableRestrictions,
-                estimatedProceeds,
-                estimatedGainLoss
-            )
-        })
-
-        /** TODO
-         * This Test will suffer changes at later DEV PHASES
-         * Will retrieve data from logged ACC
-         */
-        it('C30639310/..32 - Certificates Sector Verification', () => {
-            equityGateway.SalesWizAmount2SellPage.certificateSectorValidation()
-        })
+    /** TODO
+     * This Test will suffer changes at later DEV PHASES
+     * Will retrieve data from logged ACC
+     */
+    it('C30639310/..19/..20 - Shares Verification', () => {
+      equityGateway.SalesWizAmount2SellPage.sharesLabelValue(accInfo.availableShares, sharesAvailableRestrictions, estimatedProceeds, estimatedGainLoss)
     })
 
-    context('Shares Restrictions - CheckBox Validations', () => {
-        /** Related to User Stories
-         * EGVFOUR-142
-         **/
-        it('C30639311 - Checkbox Enabled Turns Certificates with Restrictions Dimmed Out', () => {
-            equityGateway.SalesWizAmount2SellPage.checkBoxClick()
-            //Select certificates to be Dimmed Out and not Clickable
-            equityGateway.SalesWizAmount2SellPage.certificatesDisable('DRIP_14466', 2)
-        })
+    /** TODO
+     * This Test will suffer changes at later DEV PHASES
+     * Will retrieve data from logged ACC
+     */
+    it('C30639310/..32 - Certificates Sector Verification', () => {
+      equityGateway.SalesWizAmount2SellPage.certificateSectorValidation()
+    })
+  })
+
+  context('Shares Restrictions - CheckBox Validations', () => {
+    /** Related to User Stories
+     * EGVFOUR-142
+     **/
+    it('C30639311 - Checkbox Enabled Turns Certificates with Restrictions Dimmed Out', () => {
+      equityGateway.SalesWizAmount2SellPage.checkBoxClick()
+      //Select certificates to be Dimmed Out and not Clickable
+      equityGateway.SalesWizAmount2SellPage.certificatesDisable('DRIP_14466', 2)
+    })
+  })
+
+  context('Shares to Sell - Input Field Validations', () => {
+    /** Related to User Stories
+     * EGVFOUR-142, EGVFOUR-295
+     **/
+
+    it('C30639312 - Accepts only numeric characters', () => {
+      equityGateway.SalesWizAmount2SellPage.inputFieldShares('type', '9999999 AAAA')
     })
 
-    context('Shares to Sell - Input Field Validations', () => {
-        /** Related to User Stories
-         * EGVFOUR-142, EGVFOUR-295
-         **/
+    it('C30639313 - Checkbox ticked the maximum value is equal to the "Available" value', () => {
+      equityGateway.SalesWizAmount2SellPage.inputFieldShares('type', '9999999')
+      equityGateway.SalesWizAmount2SellPage.checkBoxClick()
+      equityGateway.SalesWizAmount2SellPage.inputFieldShares('check', accInfo.availableShares)
+    })
 
-        it('C30639312 - Accepts only numeric characters', () => {
-            equityGateway.SalesWizAmount2SellPage.inputFieldShares('type', '9999999 AAAA')
-        })
-
-        it('C30639313 - Checkbox ticked the maximum value is equal to the "Available" value', () => {
-            equityGateway.SalesWizAmount2SellPage.inputFieldShares('type', '9999999')
-            equityGateway.SalesWizAmount2SellPage.checkBoxClick()
-            equityGateway.SalesWizAmount2SellPage.inputFieldShares('check', accInfo.availableShares)
-        })
-
-        it('C30639314 - Checkbox unticked the, maximum value is equal to sum of Total Available and Available w/Restrictions', () => {
-            equityGateway.SalesWizAmount2SellPage.btnTotalAmountClick()
-            equityGateway.SalesWizAmount2SellPage.inputFieldShares('check', accInfo.totalShares)
-        })
+    it('C30639314 - Checkbox unticked the, maximum value is equal to sum of Total Available and Available w/Restrictions', () => {
+      equityGateway.SalesWizAmount2SellPage.btnTotalAmountClick()
+      equityGateway.SalesWizAmount2SellPage.inputFieldShares('check', accInfo.totalShares)
+    })
 
         it('C30639315 - Error display when input amount is higher than the Total Available', () => {
             //TODO not implemented yet

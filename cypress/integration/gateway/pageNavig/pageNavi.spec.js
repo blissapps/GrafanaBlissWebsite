@@ -1,6 +1,11 @@
 import EquityGateway from '../../../support/pages/equityGateway'
 
 const equityGateway = new EquityGateway()
+//FIXME - Split this into smaller pages
+/**
+ * https://globalshares.testrail.net/index.php?/suites/view/18820&group_by=cases:section_id&group_order=asc&display_deleted_cases=0&group_id=1008667
+ * Cross Screen Functionalities Test Suite
+ */
 describe('Page Navigation Tests', () => {
   /** Related to User Stories
    * EGVFOUR-266

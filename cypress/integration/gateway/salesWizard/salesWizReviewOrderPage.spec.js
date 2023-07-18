@@ -1,6 +1,11 @@
 import EquityGateway from '../../../support/pages/equityGateway'
 
 const equityGateway = new EquityGateway()
+
+/**
+ * https://globalshares.testrail.net/index.php?/suites/view/18820&group_by=cases:section_id&group_order=asc&display_deleted_cases=0&group_id=1026244
+ * Sales Wizard Review Order Test Suite
+ */
 describe('Sales Wizard Review Order && T/C Page Tests', () => {
   context('Validate Review Order Page Elements', () => {
     /** Related to User Stories

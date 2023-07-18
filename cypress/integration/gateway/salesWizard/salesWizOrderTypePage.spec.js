@@ -1,6 +1,11 @@
 import EquityGateway from '../../../support/pages/equityGateway'
 
 const equityGateway = new EquityGateway()
+
+/**
+ * https://globalshares.testrail.net/index.php?/suites/view/18820&group_by=cases:section_id&group_order=asc&display_deleted_cases=0&group_id=1026242
+ * Sales Wizard Order Type Test Suite
+ */
 describe('Sales Wizard Order Type Page Tests', () => {
   context('Validate Order Type Page Interaction', () => {
     /** Related to User Stories
@@ -31,8 +36,8 @@ describe('Sales Wizard Order Type Page Tests', () => {
       equityGateway.SalesWizOrderTypePage.validateMenuAdvanced()
     })
 
-    it('C30639287, C30639288 - Selects Limit order (Good\' til cancelled - Order Type', () => {
-      equityGateway.SalesWizOrderTypePage.selectOrderTypeByName('Limit Order - Good\' til cancelled').click()
+    it("C30639287, C30639288 - Selects Limit order (Good' til cancelled - Order Type", () => {
+      equityGateway.SalesWizOrderTypePage.selectOrderTypeByName("Limit Order - Good' til cancelled").click()
       //TBD After limit validation is done on the FE the tests need to incorporate that
       // ---> equityGateway.SalesWizOrderTypePage.validateDayLimitInputLimits()
       equityGateway.SalesWizOrderTypePage.fillDayLimitInput('Limit Day Order')

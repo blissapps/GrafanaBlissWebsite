@@ -16,7 +16,7 @@ class PageNavi extends BasePage {
   checkSalesWizardRedirect(salesWizardStep = '') {
     cy.window().then((win) => {
       // @ts-ignore
-      win.location.href = (`${Cypress.env('EQUITY_GATEWAY_BASE_URL')}/sale-wizard/${salesWizardStep}`)
+      win.location.href = `${Cypress.env('EQUITY_GATEWAY_BASE_URL')}/sale-wizard/${salesWizardStep}`
     })
     cy.url().should('contain', '/sale-wizard/overview')
   }

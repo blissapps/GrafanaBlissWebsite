@@ -31,4 +31,5 @@ class salesWizSideLmenu extends BasePage {
     }
   }
 }
+
 export default salesWizSideLmenu

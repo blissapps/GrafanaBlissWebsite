@@ -180,4 +180,5 @@ class HelpFormPage extends BasePage {
     }
   }
 }
+
 export default HelpFormPage
