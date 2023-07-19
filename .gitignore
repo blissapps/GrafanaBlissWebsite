@@ -10,6 +10,7 @@ downloads
 # Vs code or other IDE generated config files:
 .vs
 .vscode
+.idea
 
 # Yarn files
 yarn-error.log
