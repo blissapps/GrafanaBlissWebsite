@@ -27,21 +27,40 @@ class LoginPage extends BasePage {
     cy.contains(selectors.mismatch, 'You entered an incorrect username or password.')
   }
 
+  /**
+   * @param user
+   * @param pw have a default value
+   * @returns {{user}} in use
+   */
+  x = Cypress.env('EQUITY_GATEWAY_DEFAULT_USER1_AUTH')
+  y = Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH')
   login(user, pw) {
     let userToUse
     let pwToUse
 
-    if (user === undefined || pw === undefined || user === null || pw === null) {
+    if (user !== undefined) {
+      const defaultUser1 = Cypress.env('EQUITY_GATEWAY_DEFAULT_USER1_AUTH').toString()
+      const defaultUser2 = Cypress.env('EQUITY_GATEWAY_DEFAULT_USER2_AUTH').toString()
+
+      if (user !== defaultUser1 && user !== defaultUser2) {
+        customizedUser = true;
+        cy.log('Customized Login Detected: Login is set to use the provided ACC')
+        userToUse = user
+        if (pw !== undefined){
+          pwToUse = pw
+        } else {
+          pwToUse = Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH')
+        }
+      } else {
+        throw new Error('Login Problem Occurred: Provided ACC is reserved for exclusive use and cannot be set as a custom ACC')
+      }
+    } else {
       userToUse = Cypress.env('EQUITY_GATEWAY_DEFAULT_USER1_AUTH')
       pwToUse = Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH')
-    } else {
-      if (user !== Cypress.env('EQUITY_GATEWAY_DEFAULT_USER1_AUTH').toString() && user !== Cypress.env('EQUITY_GATEWAY_DEFAULT_USER2_AUTH').toString()) {
-        customizedUser = true
-        cy.log('Customized Login Detected: Login are set to use the provided ACC')
-      }
-      userToUse = user
-      pwToUse = pw
     }
+
+    cy.log('Defined USER: '+userToUse)
+    cy.log('Defined PW: '+pwToUse)
 
     if (actionPerformed === false || customizedUser === true) {
       this._loginWithSession(userToUse, pwToUse)
@@ -89,11 +108,11 @@ class LoginPage extends BasePage {
 
     cy.visit(Cypress.env('EQUITY_GATEWAY_BASE_URL'))
 
-    if (user !== '') {
+    if (user !== null) {
       cy.get(selectors.inputNameField).clear({ force: true }).type(user)
       verify += 1
     }
-    if (pw !== '') {
+    if (pw !== null) {
       cy.get(selectors.inputPasswordField).clear({ force: true }).type(pw)
       verify += 1
     }
