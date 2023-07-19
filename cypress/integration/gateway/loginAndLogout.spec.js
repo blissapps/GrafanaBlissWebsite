@@ -13,31 +13,30 @@ describe('Login and Logout Tests', () => {
       cy.log('USER USED: ' + equityGateway.LoginPage.getLastUser())
     })
 
-        it('Success Login ACC2', () => {
-            equityGateway.LoginPage.login('m1')
-            equityGateway.DashboardPage.checkPageUrl()
-
-        })
-
-        it('Success Login ACC3', () => {
-            equityGateway.LoginPage.login('Paulandera')
-            equityGateway.DashboardPage.checkPageUrl()
-        })
+    it('Success Login ACC2', () => {
+      equityGateway.LoginPage.login('m1')
+      equityGateway.DashboardPage.checkPageUrl()
     })
 
-    context('General Login Unsuccessful Scenarios', () => {
-        /** General Account Login ACC Credentials Validation
-         */
-        it('Login without User', () => {
-            equityGateway.LoginPage.login(null, Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH'))
-            equityGateway.LoginPage.errorToast()
-        })
-
-        it('Login without PW', () => {
-            equityGateway.LoginPage.login('Paulandera', null)
-            equityGateway.LoginPage.errorToast()
-        })
+    it('Success Login ACC3', () => {
+      equityGateway.LoginPage.login('Paulandera')
+      equityGateway.DashboardPage.checkPageUrl()
     })
+  })
+
+  context('General Login Unsuccessful Scenarios', () => {
+    /** General Account Login ACC Credentials Validation
+     */
+    it('Login without User', () => {
+      equityGateway.LoginPage.login(null, Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH'))
+      equityGateway.LoginPage.errorToast()
+    })
+
+    it('Login without PW', () => {
+      equityGateway.LoginPage.login('Paulandera', null)
+      equityGateway.LoginPage.errorToast()
+    })
+  })
 
   context('Logout Page Scenarios', () => {
     /** Related to User Stories
@@ -56,23 +55,15 @@ describe('Login and Logout Tests', () => {
       equityGateway.LogoutPage.checkFooter(footerInfo)
     })
 
-        it('C30426961 - Logout and Login Validation', () => {
-            const logoutInfo = [
-                'You\'re logged out.',
-                'Welcome to the company\'s equity plans portal, sponsored by Global Shares.',
-                'Software version'
-            ]
-            const footerInfo = [
-                'Privacy Policy',
-                'Help'
-            ]
-            equityGateway.TopBar.accMenuClick(null, 'Logout')
-            equityGateway.LogoutPage.checkPage(logoutInfo)
-            equityGateway.LogoutPage.checkFooter(footerInfo)
-            equityGateway.LogoutPage.checkout()
-            equityGateway.LoginPage.login()
-            equityGateway.DashboardPage.home(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_1ST_NAME'))
-
-        })
+    it('C30426961 - Logout and Login Validation', () => {
+      const logoutInfo = ["You're logged out.", "Welcome to the company's equity plans portal, sponsored by Global Shares.", 'Software version']
+      const footerInfo = ['Privacy Policy', 'Help']
+      equityGateway.TopBar.accMenuClick(null, 'Logout')
+      equityGateway.LogoutPage.checkPage(logoutInfo)
+      equityGateway.LogoutPage.checkFooter(footerInfo)
+      equityGateway.LogoutPage.checkout()
+      equityGateway.LoginPage.login()
+      equityGateway.DashboardPage.home(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_1ST_NAME'))
     })
+  })
 })
