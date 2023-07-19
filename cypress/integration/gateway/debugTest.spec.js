@@ -5,7 +5,7 @@ const equityGateway = new EquityGateway()
 describe('Login and Logout Tests', () => {
   context('General Login Successful Scenarios', () => {
 
-    it('Success Login ACC1', () => {
+    it.skip('Success Login ACC1', () => {
       cy.request({
         method: 'GET',
         url: 'https://eg-v4-alpha-25.gsapps.dev/dashboard',
@@ -16,12 +16,12 @@ describe('Login and Logout Tests', () => {
     })
 
     it('Success Login ACC2', () => {
-      equityGateway.LoginPage.getBearerToken()
-
+      //equityGateway.LoginPage.getBearerToken()
+      equityGateway.LoginPage.login('Paul Fox')
     })
 
     it('Success Login ACC3', () => {
-      equityGateway.LoginPage.loginAuth('Paulandera', Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH'))
+      equityGateway.LoginPage.login('Paulandera', Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH'))
       equityGateway.DashboardPage.checkPageUrl()
     })
   })

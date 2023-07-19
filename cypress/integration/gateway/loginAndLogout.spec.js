@@ -1,7 +1,7 @@
 import EquityGateway from '../../support/pages/equityGateway'
 
 const equityGateway = new EquityGateway()
-let savedLoggedInUser
+
 describe('Login and Logout Tests', () => {
     context('General Login Successful Scenarios', () => {
         /** General Account Login ACC Credentials Validation
@@ -14,13 +14,13 @@ describe('Login and Logout Tests', () => {
         });
 
         it('Success Login ACC2', () => {
-            equityGateway.LoginPage.login('m1', Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH'))
+            equityGateway.LoginPage.login('m1')
             equityGateway.DashboardPage.checkPageUrl()
 
         })
 
         it('Success Login ACC3', () => {
-            equityGateway.LoginPage.login('Paulandera', Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH'))
+            equityGateway.LoginPage.login('Paulandera')
             equityGateway.DashboardPage.checkPageUrl()
         })
     })
@@ -29,12 +29,12 @@ describe('Login and Logout Tests', () => {
         /** General Account Login ACC Credentials Validation
          */
         it('Login without User', () => {
-            equityGateway.LoginPage.login('', Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH'))
+            equityGateway.LoginPage.login(null, Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH'))
             equityGateway.LoginPage.errorToast()
         })
 
         it('Login without PW', () => {
-            equityGateway.LoginPage.login(Cypress.env('EQUITY_GATEWAY_DEFAULT_USER1_AUTH'), '')
+            equityGateway.LoginPage.login('Paulandera', null)
             equityGateway.LoginPage.errorToast()
         })
     })
@@ -77,14 +77,9 @@ describe('Login and Logout Tests', () => {
             equityGateway.LogoutPage.checkPage(logoutInfo)
             equityGateway.LogoutPage.checkFooter(footerInfo)
             equityGateway.LogoutPage.checkout()
-            //to change
-            if (savedLoggedInUser === Cypress.env('EQUITY_GATEWAY_DEFAULT_USER1_AUTH')) {
-                equityGateway.LoginPage.login()
-                equityGateway.DashboardPage.home(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_1ST_NAME'))
-            } else {
-                equityGateway.LoginPage.login(Cypress.env('EQUITY_GATEWAY_DEFAULT_USER2_AUTH'), Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH'))
-                //equityGateway.DashboardPage.home('Aryan')
-            }
+            equityGateway.LoginPage.login()
+            equityGateway.DashboardPage.home(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_1ST_NAME'))
+
         })
     })
 })
