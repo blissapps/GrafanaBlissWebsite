@@ -1,13 +1,12 @@
 import BasePage from '../../basePage'
 
 const selectors = {
-  header: '.text-h2',
-  infoSector: 'gs-card.p-4.mb-4.hover',
-  yearMenu: 'input[placeholder="Select year"]',
-  yearMenuOptions: '#option',
-  typeMenu: 'input[placeholder="Select type"]',
-  typeMenuOptions: '#option',
-  reportsContent: '.eg-tax > .p-5'
+  header: 'h1',
+  infoSector: '[data-test-id="tax-report"]',
+  yearMenu: '[data-test-id="tax-list-select-year"] > div > div',
+  menuOptions: '#option',
+  typeMenu: '[data-test-id="tax-list-select-type"] > div > div',
+  reportsContent: '[data-test-id="tax-list"]'
 }
 
 class accTaxPage extends BasePage {
@@ -24,7 +23,7 @@ class accTaxPage extends BasePage {
   yearMenuSelect(position, positionName) {
     cy.get(selectors.yearMenu)
       .click()
-      .get(selectors.yearMenuOptions + (position - 1).toString()) // Convert position to string
+      .get(selectors.menuOptions + (position - 1).toString()) // Convert position to string
       .should('have.text', positionName)
       .click()
   }
@@ -32,7 +31,7 @@ class accTaxPage extends BasePage {
   typeMenuSelect(position, positionName) {
     cy.get(selectors.typeMenu)
       .click()
-      .get(selectors.typeMenuOptions + (position - 1).toString()) // Convert position to string
+      .get(selectors.menuOptions + (position - 1).toString()) // Convert position to string
       .should('have.text', positionName)
       .click()
   }
