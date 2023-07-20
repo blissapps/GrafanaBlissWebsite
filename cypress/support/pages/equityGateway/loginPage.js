@@ -32,8 +32,6 @@ class LoginPage extends BasePage {
    * @param pw have a default value
    * @returns {{user}} in use
    */
-  x = Cypress.env('EQUITY_GATEWAY_DEFAULT_USER1_AUTH')
-  y = Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH')
   login(user, pw) {
     let userToUse
     let pwToUse
