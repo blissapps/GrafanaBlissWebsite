@@ -13,7 +13,7 @@ describe('Sales Wizard Group Page Tests', () => {
      * EGVFOUR-141, EGVFOUR-253
      **/
     beforeEach('User Chooses a Security', () => {
-      equityGateway.LoginPage.login()
+      equityGateway.LoginPage.login('Paulandera')
       equityGateway.SalesWizBase.gotoShareGroup()
     })
 

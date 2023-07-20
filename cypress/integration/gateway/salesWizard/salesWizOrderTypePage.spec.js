@@ -12,7 +12,7 @@ describe('Sales Wizard Order Type Page Tests', () => {
      * EGVFOUR-143
      **/
     beforeEach('User Defines the Amount to sell', () => {
-      equityGateway.LoginPage.login()
+      equityGateway.LoginPage.login('Paulandera')
       equityGateway.SalesWizBase.goToOrderType()
     })
 
