@@ -19,14 +19,6 @@ const selectors = {
 }
 
 class LoginPage extends BasePage {
-  /**
-   * @param user
-   * @param pw have a default value
-   * @returns {{user}} in use
-   */
-  x = Cypress.env('EQUITY_GATEWAY_DEFAULT_USER1_AUTH')
-  y = Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH')
-
   checkPageUrl() {
     this.checkUrl(Cypress.env('EQUITY_GATEWAY_BASE_URL'))
   }
@@ -35,6 +27,13 @@ class LoginPage extends BasePage {
     cy.contains(selectors.mismatch, 'You entered an incorrect username or password.')
   }
 
+  /**
+   * @param user
+   * @param pw have a default value
+   * @returns {{user}} in use
+   */
+  x = Cypress.env('EQUITY_GATEWAY_DEFAULT_USER1_AUTH')
+  y = Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH')
   login(user, pw) {
     let userToUse
     let pwToUse
