@@ -45,11 +45,11 @@ class salesWizOrderTypePage extends BasePage {
    *
    * @param {String} orderTypeCard the Order Type [card] to select and fill the inputs
    */
-  fillDayLimitInput(orderTypeCard) {
+  fillDayLimitInput(orderTypeCard, limit) {
     if (orderTypeCard === 'Day Limit') {
-      cy.get(selectors.dayLimitOrder).children().children('input').type('5')
+      cy.get(selectors.dayLimitOrder).children().children('input').type(limit)
     } else if (orderTypeCard === 'Limit Day Order') {
-      cy.get(selectors.limitOrder).children().children('input').type('5')
+      cy.get(selectors.limitOrder).children().children('input').type(limit)
       cy.get(selectors.limitOrder2).children().children('input').type('12-02-2026')
     }
   }
