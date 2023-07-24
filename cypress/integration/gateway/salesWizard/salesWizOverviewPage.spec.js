@@ -12,7 +12,7 @@ describe('Sales Wizard Overview Page Tests', () => {
      * EGVFOUR-139
      **/
     beforeEach(() => {
-      equityGateway.LoginPage.login()
+      equityGateway.LoginPage.login('Paulandera')
       equityGateway.SalesWizBase.gotoSalesWiz()
     })
 

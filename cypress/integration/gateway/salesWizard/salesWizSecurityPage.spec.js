@@ -9,7 +9,7 @@ const equityGateway = new EquityGateway()
 
 describe('Sales Wizard Security Page Tests', () => {
   beforeEach(() => {
-    equityGateway.LoginPage.login()
+    equityGateway.LoginPage.login('Paulandera')
     equityGateway.SalesWizBase.gotoSecurity()
   })
   context('General Page Validations', () => {

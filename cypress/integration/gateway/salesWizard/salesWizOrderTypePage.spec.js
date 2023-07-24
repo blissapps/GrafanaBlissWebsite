@@ -12,7 +12,7 @@ describe('Sales Wizard Order Type Page Tests', () => {
      * EGVFOUR-143
      **/
     beforeEach('User Defines the Amount to sell', () => {
-      equityGateway.LoginPage.login()
+      equityGateway.LoginPage.login('Paulandera')
       equityGateway.SalesWizBase.goToOrderType()
     })
 
@@ -31,7 +31,7 @@ describe('Sales Wizard Order Type Page Tests', () => {
       equityGateway.SalesWizOrderTypePage.selectOrderTypeByName('Day limit order').click()
       //TBD After limit validation is done on the FE the tests need to incorporate that
       // ---> equityGateway.SalesWizOrderTypePage.validateDayLimitInputLimits()
-      equityGateway.SalesWizOrderTypePage.fillDayLimitInput('Day Limit')
+      equityGateway.SalesWizOrderTypePage.fillDayLimitInput('Day Limit', 7)
       equityGateway.SalesWizTopBar.btnNext('click')
       equityGateway.SalesWizOrderTypePage.validateMenuAdvanced()
     })
@@ -40,7 +40,7 @@ describe('Sales Wizard Order Type Page Tests', () => {
       equityGateway.SalesWizOrderTypePage.selectOrderTypeByName("Limit Order - Good' til cancelled").click()
       //TBD After limit validation is done on the FE the tests need to incorporate that
       // ---> equityGateway.SalesWizOrderTypePage.validateDayLimitInputLimits()
-      equityGateway.SalesWizOrderTypePage.fillDayLimitInput('Limit Day Order')
+      equityGateway.SalesWizOrderTypePage.fillDayLimitInput('Limit Day Order', 7)
       equityGateway.SalesWizTopBar.btnNext('click')
       equityGateway.SalesWizOrderTypePage.validateMenuAdvanced()
     })

@@ -31,6 +31,7 @@ const selectors = {
     elements: ['h2', 'p.text-color-cool80.mt-2']
   },
   submitButton: '[data-test-id="sw-review-order-confirmation-btn-submit"]',
+  modalGeneralButton: 'div.eg-modal__modal gs-button',
   modalClose: 'gs-button.eg-modal__close'
 }
 
@@ -109,11 +110,17 @@ class salesWizReviewOrderPage extends BasePage {
   }
 
   validateModalSubmitButton(accepted = true) {
-    accepted
-      ? cy.get('gs-button').contains('Submit').should('have.css', 'background-color', 'rgb(0, 101, 255)')
-      : cy.get('gs-button').contains('Submit').should('have.css', 'background-color', 'rgb(0, 101, 255)')
-  }
+    const submitButtonColor = accepted ? 'rgb(0, 101, 255)' : 'rgb(244, 246, 248)'
 
+    cy.get(selectors.modalGeneralButton)
+        .contains('Submit')
+        .should('have.css', 'background-color', submitButtonColor)
+        .then(($button) => {
+          if (accepted) {
+            $button.click()
+          }
+      })
+  }
   validateModalCloseButton() {
     cy.get(selectors.modalClose).click()
     this.validateElements()
@@ -127,6 +134,10 @@ class salesWizReviewOrderPage extends BasePage {
   clickCheckBoxByName(checkboxName) {
     cy.get('section').contains(checkboxName).siblings('div').children('gs-checkbox').click()
   }
-}
 
+  validateSuccessTransactionId() {
+    cy.get('.mt-1').should('contain.text', 'Transaction ID')
+  }
+
+}
 export default salesWizReviewOrderPage
