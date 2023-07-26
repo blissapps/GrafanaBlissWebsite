@@ -10,7 +10,7 @@ describe('Login and Logout Tests', () => {
       equityGateway.LoginPage.login()
       equityGateway.DashboardPage.checkPageUrl()
       //Check used User
-      cy.log('USER USED: ' + equityGateway.LoginPage.getLastUser())
+      cy.log('USER USED: ' + equityGateway.LoginPage.getLoggedUser())
     })
 
     it('Success Login ACC2', () => {

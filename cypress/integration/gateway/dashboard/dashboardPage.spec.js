@@ -44,18 +44,14 @@ describe('Dashboard Page Tests', () => {
       equityGateway.SharesHeader.sharesAmount(shareLabels.amount)
       equityGateway.SharesHeader.currency(shareLabels.currency)
       equityGateway.SharesHeader.date(shareLabels.date)
-      equityGateway.SharesHeader.sharesFluctuation(shareLabels.sharesPositiveColor, shareLabels.sharesNegativeColor, shareLabels.sharesPositiveRgx, shareLabels.sharesNegativeRgx)
+      equityGateway.SharesHeader.sharesFluctuation()
 
       //Match sidebar shares info
       equityGateway.MainPageSideMenu.shareInfo(
         shareLabels.name,
         shareLabels.amount,
         shareLabels.currency,
-        shareLabels.date,
-        shareLabels.sharesPositiveColor,
-        shareLabels.sharesNegativeColor,
-        shareLabels.sharesPositiveRgx,
-        shareLabels.sharesNegativeRgx
+        shareLabels.date
       )
     })
   })
@@ -81,6 +77,35 @@ describe('Dashboard Page Tests', () => {
     it('C30092776 - Filter by Plan', () => {
       equityGateway.Portfolio.filter(2) //Filter '2' stands for 'By Plan'
       equityGateway.Portfolio.filterContent('SAYE', 'Employee purchase plan')
+    })
+  })
+})
+
+describe('Dashboard Page Tests ACC With Multiple Securities', () => {
+  beforeEach(() => {
+    equityGateway.LoginPage.login('Paulandera')
+    equityGateway.LoginPage.getLoggedUser()
+  })
+
+  context('General DashboardPage Validations', () => {
+    /** Related to User Stories
+     * EGVFOUR-252
+     */
+
+    it('C31576573 - ACC does not show any security if any is not selected', () => {
+      //TODO
+    })
+
+    it('C30159577 - ACC with multiple securities must available them', () => {
+      //TODO
+    })
+
+    it('C31576630 - Select a security must show his info only', () => {
+      //TODO
+    })
+
+    it('C31576631 - User can change is security any time and the corresponded info must be shown only', () => {
+      //TODO
     })
   })
 })

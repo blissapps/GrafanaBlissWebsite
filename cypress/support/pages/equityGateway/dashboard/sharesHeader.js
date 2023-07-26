@@ -18,16 +18,23 @@ class SharesHeader extends BasePage {
     cy.get(selectors.sharesHeaderBar).contains(amount)
   }
 
-  sharesFluctuation(sharesPositiveColor, sharesNegativeColor, sharesPositiveReg, sharesNegativeReg) {
+  sharesFluctuation() {
+    const shareLabels = {
+      sharesPositiveColor: 'rgb(0, 153, 0)',
+      sharesNegativeColor: 'rgb(223, 7, 7)',
+      sharesPositiveRgx: /\+[0-9]*\.[0-9]+ \(\+[0-9]*\.[0-9]+%\)/,
+      sharesNegativeRgx: /-[0-9]*\.[0-9]+ \(-[0-9]*\.[0-9]+%\)/
+    }
+
     cy.get(selectors.sharesFluctuation)
       .should('have.css', 'color')
       .then((color) => {
         const colorValue = String(color) // Convert color to string
 
-        if (colorValue === sharesPositiveColor) {
-          cy.get(selectors.sharesFluctuation).invoke('text').should('match', sharesPositiveReg)
-        } else if (colorValue === sharesNegativeColor) {
-          cy.get(selectors.sharesFluctuation).invoke('text').should('match', sharesNegativeReg)
+        if (colorValue === shareLabels.sharesPositiveColor) {
+          cy.get(selectors.sharesFluctuation).invoke('text').should('match', shareLabels.sharesPositiveReg)
+        } else if (colorValue === shareLabels.sharesNegativeColor) {
+          cy.get(selectors.sharesFluctuation).invoke('text').should('match', shareLabels.sharesNegativeReg)
         } else {
           cy.wrap(false).should('be.true', 'Unexpected color value')
         }
