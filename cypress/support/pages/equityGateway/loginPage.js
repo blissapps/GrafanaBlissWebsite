@@ -80,7 +80,7 @@ class LoginPage extends BasePage {
     }
   }
 
-  getLastUser() {
+  getLoggedUser() {
     //FIXME PROVISORY ACC NAME ITS NOT SAME AS LOGIN NAME
     let returnName
     if (this.lastUser === Cypress.env('EQUITY_GATEWAY_DEFAULT_USER1_AUTH')) {

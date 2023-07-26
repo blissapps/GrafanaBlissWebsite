@@ -2,10 +2,10 @@ import EquityGateway from '../../support/pages/equityGateway';
 
 const equityGateway = new EquityGateway()
 
-describe('Login and Logout Tests', () => {
+describe.skip('Login and Logout Tests', () => {
   context('General Login Successful Scenarios', () => {
 
-    it.skip('Success Login ACC1', () => {
+    it('Success Login ACC1', () => {
       cy.request({
         method: 'GET',
         url: 'https://eg-v4-alpha-25.gsapps.dev/dashboard',

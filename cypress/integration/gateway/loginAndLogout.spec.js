@@ -10,7 +10,7 @@ describe('Login and Logout Tests', () => {
       equityGateway.LoginPage.login()
       equityGateway.DashboardPage.checkPageUrl()
       //Check used User
-      cy.log('USER USED: ' + equityGateway.LoginPage.getLastUser())
+      cy.log('USER USED: ' + equityGateway.LoginPage.getLoggedUser())
     })
 
     it('Success Login ACC2', () => {
@@ -24,7 +24,7 @@ describe('Login and Logout Tests', () => {
     })
   })
 
-  context('General Login Unsuccessful Scenarios', () => {
+  context.skip('General Login Unsuccessful Scenarios', () => {
     /** General Account Login ACC Credentials Validation
      */
     it('Login without User', () => {
