@@ -17,7 +17,7 @@ class salesWizBase extends BasePage {
   gotoSalesWiz() {
     cy.window().then((win) => {
       // @ts-ignore
-      win.location.href = Cypress.env('EQUITY_GATEWAY_BASE_URL') + '/sale-wizard/overview'
+      win.location.href = Cypress.env('EQUITY_GATEWAY_BASE_URL') + '/sale-wizard'
     })
   }
 

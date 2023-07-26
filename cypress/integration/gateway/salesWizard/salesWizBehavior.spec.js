@@ -11,7 +11,7 @@ describe('Sales Wizard Behavior Tests (Legacy)', () => {
          * Referred URL: https://globalshares.testrail.net/index.php?/cases/view/66802
          */
         it('C66802 - LimitOrder', () => {
-            equityGateway.LoginPage.login(Cypress.env('EQUITY_GATEWAY_DEFAULT_USER3_AUTH'), Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH'))
+            equityGateway.LoginPage.login(Cypress.env('EQUITY_GATEWAY_DEFAULT_USER3_AUTH'))
             equityGateway.SalesWizBase.gotoAmount2Sell(true, false)
             equityGateway.SalesWizAmount2SellPage.inputFieldShares('type', '2')
             equityGateway.SalesWizTopBar.btnNext('click')
@@ -45,7 +45,7 @@ describe('Sales Wizard Behavior Tests (Legacy)', () => {
          */
         //TODO - Not Covered Yet, the limit order good til canceled selection is covered but not a full cycle scenario ORDER TYPE TESTS
         it('C66801 - GoodTillCancelled', () => {
-            equityGateway.LoginPage.login(Cypress.env('EQUITY_GATEWAY_DEFAULT_USER3_AUTH'), Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH'))
+            equityGateway.LoginPage.login(Cypress.env('EQUITY_GATEWAY_DEFAULT_USER3_AUTH'))
             equityGateway.SalesWizBase.gotoAmount2Sell(true, false)
             equityGateway.SalesWizAmount2SellPage.inputFieldShares('type', '2')
             equityGateway.SalesWizTopBar.btnNext('click')
@@ -80,7 +80,7 @@ describe('Sales Wizard Behavior Tests (Legacy)', () => {
          */
         //TODO - Not Covered Yet, the market order selection is covered but not and full cycle scenario - ORDER TYPE TESTS
         it('C66803 - MarketOrder', () => {
-            equityGateway.LoginPage.login(Cypress.env('EQUITY_GATEWAY_DEFAULT_USER3_AUTH'), Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH'))
+            equityGateway.LoginPage.login(Cypress.env('EQUITY_GATEWAY_DEFAULT_USER3_AUTH'))
             equityGateway.SalesWizBase.gotoAmount2Sell(true, false)
             equityGateway.SalesWizAmount2SellPage.inputFieldShares('type', '2')
             equityGateway.SalesWizTopBar.btnNext('click')
