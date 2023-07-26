@@ -17,7 +17,7 @@ class salesWizBase extends BasePage {
   gotoSalesWiz() {
     cy.window().then((win) => {
       // @ts-ignore
-      win.location.href = Cypress.env('EQUITY_GATEWAY_BASE_URL') + '/sale-wizard/overview'
+      win.location.href = Cypress.env('EQUITY_GATEWAY_BASE_URL') + '/sale-wizard'
     })
   }
 
@@ -32,13 +32,26 @@ class salesWizBase extends BasePage {
       this.gotoSecurity()
       salesWizSecurity.cardClick(304)
       salesWizTopBar.btnNext('click')
-      //FIXME - URL Issues FIX  cy.url().should('include', '/share-group')
+    } else {
+      this.gotoSalesWiz()
+      salesWizTopBar.btnNext('click')
     }
+    //FIXME - URL Issues FIX  cy.url().should('include', '/share-group')
   }
 
   gotoAmount2Sell(hasSecurityStep = true, hasShareGroupStep=true) {
-    this.gotoShareGroup(hasSecurityStep)
-    if (hasShareGroupStep){
+    if (!hasSecurityStep && hasShareGroupStep){
+      this.gotoShareGroup(false)
+      salesWizShareGroup.selectShareGroupByName('Purchase plan issuances')
+      salesWizTopBar.btnNext('click')
+    } else if (hasSecurityStep && !hasShareGroupStep) {
+      this.gotoSecurity()
+      salesWizSecurity.cardClick(304)
+      salesWizTopBar.btnNext('click')
+    } else if (!hasSecurityStep && !hasShareGroupStep) {
+      throw new Error('Unexpected hasSecurityStep or hasShareGroupStep statements')
+    } else {
+      this.gotoShareGroup(true)
       salesWizShareGroup.selectShareGroupByName('Purchase plan issuances')
       salesWizTopBar.btnNext('click')
     }

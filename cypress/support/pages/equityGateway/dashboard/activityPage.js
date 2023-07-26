@@ -4,8 +4,8 @@ const selectors = {
   goToActivityBtn: '.eg-activity-widget',
   pageTitle: '.text-h2',
   breadcrumb: '.mb-7 > .flex',
-  progressSectorTileHeader: '.mb-8 > .p-5',
-  progressCounter: '.mb-8 > .p-5 > .overline',
+  progressSectorTileHeader: '[data-test-id="activity-in-progress"] p',
+  progressCounter: '[data-test-id="activity-in-progress-counter"]',
   tabsBarHeader: '.tabs-bar',
   tabsFilter: '.eg-upcoming__filters'
 }
