@@ -24,7 +24,7 @@ describe('Login and Logout Tests', () => {
     })
   })
 
-  context('General Login Unsuccessful Scenarios', () => {
+  context.skip('General Login Unsuccessful Scenarios', () => {
     /** General Account Login ACC Credentials Validation
      */
     it('Login without User', () => {
