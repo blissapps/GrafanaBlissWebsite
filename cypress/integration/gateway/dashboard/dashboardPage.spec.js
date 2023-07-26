@@ -18,7 +18,7 @@ describe('Dashboard Page Tests', () => {
 
     it('C30092770 - Dashboard Page General Activity Elements Validation', () => {
       const activityElements = ['Activity', 'View all activity', 'Upcoming', 'Showing 3']
-      equityGateway.DashboardPage.home(equityGateway.LoginPage.getLastUser(), activityElements)
+      equityGateway.DashboardPage.home(equityGateway.LoginPage.getLoggedUser(), activityElements)
     })
   })
 
@@ -32,11 +32,7 @@ describe('Dashboard Page Tests', () => {
       amount: '11.69',
       currency: 'GBP',
       date: 'Mar 31',
-      share_status: 'positive',
-      sharesPositiveColor: 'rgb(0, 153, 0)',
-      sharesNegativeColor: 'rgb(223, 7, 7)',
-      sharesPositiveRgx: /\s\+[0-9]*\.[0-9]+ \(\+[0-9]*\.[0-9]+%\)\s/,
-      sharesNegativeRgx: /\s-[0-9]*\.[0-9]+ \(-[0-9]*\.[0-9]+%\)\s/
+      share_status: 'positive'
     }
 
     it('C30092773/.789/.790/.791 - Shares Details', () => {

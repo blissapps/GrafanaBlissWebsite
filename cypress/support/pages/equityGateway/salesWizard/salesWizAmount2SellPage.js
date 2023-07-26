@@ -1,7 +1,7 @@
 import BasePage from '../../basePage'
 
 const selectors = {
-  title: 'header > h2',
+  title: 'h1',
   description: 'header > .text-color-cool80',
   checkbox: 'gs-checkbox[data-test-id="sw-amount-to-sell-shares-checkbox"]',
   inputField: 'gs-input-field[data-test-id="sw-amount-to-sell-shares-input"] input',
