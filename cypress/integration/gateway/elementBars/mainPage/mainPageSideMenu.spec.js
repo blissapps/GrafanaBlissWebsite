@@ -36,21 +36,13 @@ describe('MainPage SideMenu Tests', () => {
         amount: '11.69',
         currency: 'GBP',
         date: 'Mar 31',
-        share_status: 'positive',
-        sharesPositiveColor: 'rgb(0, 153, 0)',
-        sharesNegativeColor: 'rgb(223, 7, 7)',
-        sharesPositiveReg: /\+[0-9]*\.[0-9]+ \(\+[0-9]*\.[0-9]+%\)/,
-        sharesNegativeReg: /-[0-9]*\.[0-9]+ \(-[0-9]*\.[0-9]+%\)/
+        share_status: 'positive'
       }
       equityGateway.MainPageSideMenu.shareInfo(
         shareVariables.name,
         shareVariables.amount,
         shareVariables.currency,
-        shareVariables.date,
-        shareVariables.sharesPositiveColor,
-        shareVariables.sharesNegativeColor,
-        shareVariables.sharesPositiveReg,
-        shareVariables.sharesNegativeReg
+        shareVariables.date
       )
     })
   })
