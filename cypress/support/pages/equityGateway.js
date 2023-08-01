@@ -16,7 +16,7 @@ import FooterBar from './equityGateway/elementBars/footerBar'
 //DashboardPage
 import DashboardPage from './equityGateway/dashboard/dashboardPage'
 import Portfolio from './equityGateway/dashboard/portfolio'
-import SharesHeader from './equityGateway/dashboard/sharesHeader'
+import DashboardSharesHeader from './equityGateway/dashboard/dashboardSharesHeader'
 import ActivityPage from './equityGateway/dashboard/activityPage'
 
 //Help Form
@@ -70,7 +70,7 @@ class EquityGateway {
 
         // --------------------------------------------------------------------------------Pages ----------------------------------------------------------------------//
         //DashboardPage
-        this.SharesHeader = new SharesHeader()
+        this.dashboardSharesHeader = new DashboardSharesHeader()
         this.DashboardPage = new DashboardPage()
         this.ActivityPage = new ActivityPage()
         this.Portfolio = new Portfolio()

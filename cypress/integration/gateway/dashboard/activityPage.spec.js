@@ -22,12 +22,7 @@ describe('Activity Page Tests', () => {
     })
 
     it('C30092744 - ActivityPage Page Validation', () => {
-      const pageTitle = 'Activity'
-      const sector1Title = 'In progress'
-      const sector2Title1 = 'Upcoming'
-      const sector2Title2 = 'History'
-
-      equityGateway.ActivityPage.pageValidation(pageTitle, sector1Title, sector2Title1, sector2Title2)
+      equityGateway.ActivityPage.pageValidation('Activity', 'In progress', 'Upcoming', 'History')
     })
   })
 

@@ -17,12 +17,12 @@ describe('MainPage SideMenu Tests', () => {
      */
 
     it('C30092769 - MainPageSideMenu Content Validation', () => {
-      equityGateway.MainPageSideMenu.mainPages('1', 'Dashboard')
-      equityGateway.MainPageSideMenu.mainPages('2', 'Portfolio')
-      equityGateway.MainPageSideMenu.mainPages('3', 'Plans')
-      equityGateway.MainPageSideMenu.mainPages('4', 'Transactions')
-      equityGateway.MainPageSideMenu.mainPages('5', 'Statements')
-      equityGateway.MainPageSideMenu.mainPages('6', 'Resources')
+      equityGateway.MainPageSideMenu.pages('1', 'Dashboard')
+      equityGateway.MainPageSideMenu.pages('2', 'Portfolio')
+      equityGateway.MainPageSideMenu.pages('3', 'Plans')
+      equityGateway.MainPageSideMenu.pages('4', 'Transactions')
+      equityGateway.MainPageSideMenu.pages('5', 'Statements')
+      equityGateway.MainPageSideMenu.pages('6', 'Resources')
 
       equityGateway.MainPageSideMenu.support('Help') //Help Page presence validation
     })
@@ -36,21 +36,14 @@ describe('MainPage SideMenu Tests', () => {
         amount: '11.69',
         currency: 'GBP',
         date: 'Mar 31',
-        share_status: 'positive',
-        sharesPositiveColor: 'rgb(0, 153, 0)',
-        sharesNegativeColor: 'rgb(223, 7, 7)',
-        sharesPositiveReg: /\+[0-9]*\.[0-9]+ \(\+[0-9]*\.[0-9]+%\)/,
-        sharesNegativeReg: /-[0-9]*\.[0-9]+ \(-[0-9]*\.[0-9]+%\)/
+        share_status: 'positive'
       }
-      equityGateway.MainPageSideMenu.shareInfo(
+
+      equityGateway.MainPageSideMenu.shareValidation('true',
         shareVariables.name,
         shareVariables.amount,
         shareVariables.currency,
-        shareVariables.date,
-        shareVariables.sharesPositiveColor,
-        shareVariables.sharesNegativeColor,
-        shareVariables.sharesPositiveReg,
-        shareVariables.sharesNegativeReg
+        shareVariables.date
       )
     })
   })
