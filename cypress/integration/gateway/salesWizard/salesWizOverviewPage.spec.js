@@ -12,7 +12,7 @@ describe('Sales Wizard Overview Page Tests', () => {
      * EGVFOUR-139
      **/
     beforeEach(() => {
-      equityGateway.LoginPage.login('Paulandera')
+      equityGateway.LoginPage.login(Cypress.env('EQUITY_GATEWAY_DEFAULT_USER3_AUTH'))
       equityGateway.SalesWizBase.gotoSalesWiz()
     })
 

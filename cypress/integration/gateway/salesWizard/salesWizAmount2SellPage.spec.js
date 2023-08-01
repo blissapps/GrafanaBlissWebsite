@@ -25,7 +25,7 @@ describe('Sales Wizard - Amount to Sell Page Tests', () => {
   })
 
   beforeEach(() => {
-    equityGateway.LoginPage.login('Paulandera')
+    equityGateway.LoginPage.login(Cypress.env('EQUITY_GATEWAY_DEFAULT_USER3_AUTH'))
     equityGateway.SalesWizBase.gotoAmount2Sell()
   })
 

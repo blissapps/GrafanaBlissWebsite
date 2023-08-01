@@ -12,7 +12,7 @@ describe('Sales Wizard Review Order && T/C Page Tests', () => {
      * EGVFOUR-145, EGVFOUR-251
      **/
     beforeEach(() => {
-      equityGateway.LoginPage.login('Paulandera')
+      equityGateway.LoginPage.login(Cypress.env('EQUITY_GATEWAY_DEFAULT_USER3_AUTH'))
       equityGateway.SalesWizBase.goToReviewOrder()
     })
 
