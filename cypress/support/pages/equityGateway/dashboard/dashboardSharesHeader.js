@@ -1,11 +1,11 @@
 import BasePage from '../../basePage'
 
 const selectors = {
-  sharesHeaderBar: 'eg-price-card',
-  sharesFluctuation: '.pl-8 > .flex'
+  sharesHeaderBar: '[data-test-id="dbrd-port-breakdown"] eg-price-card',
+  sharesFluctuation: '[data-test-id="dbrd-port-breakdown"] .pl-8 > .flex'
 }
 
-class SharesHeader extends BasePage {
+class DashboardSharesHeader extends BasePage {
   sharesName(name) {
     cy.get(selectors.sharesHeaderBar).contains(name)
   }
@@ -22,8 +22,8 @@ class SharesHeader extends BasePage {
     const shareLabels = {
       sharesPositiveColor: 'rgb(0, 153, 0)',
       sharesNegativeColor: 'rgb(223, 7, 7)',
-      sharesPositiveRgx: /\+[0-9]*\.[0-9]+ \(\+[0-9]*\.[0-9]+%\)/,
-      sharesNegativeRgx: /-[0-9]*\.[0-9]+ \(-[0-9]*\.[0-9]+%\)/
+      sharesPositiveRgx: /\s[0-9]*\.[0-9]+ \([0-9]*\.[0-9]+%\)\s/,
+      sharesNegativeRgx: /\s-[0-9]*\.[0-9]+ \(-[0-9]*\.[0-9]+%\)\s/
     }
 
     cy.get(selectors.sharesFluctuation)
@@ -32,11 +32,11 @@ class SharesHeader extends BasePage {
         const colorValue = String(color) // Convert color to string
 
         if (colorValue === shareLabels.sharesPositiveColor) {
-          cy.get(selectors.sharesFluctuation).invoke('text').should('match', shareLabels.sharesPositiveReg)
+          cy.get(selectors.sharesFluctuation).invoke('text').should('match', shareLabels.sharesPositiveRgx)
         } else if (colorValue === shareLabels.sharesNegativeColor) {
-          cy.get(selectors.sharesFluctuation).invoke('text').should('match', shareLabels.sharesNegativeReg)
+          cy.get(selectors.sharesFluctuation).invoke('text').should('match', shareLabels.sharesNegativeRgx)
         } else {
-          cy.wrap(false).should('be.true', 'Unexpected color value')
+          throw new Error('Unexpected color value')
         }
       })
   }
@@ -46,4 +46,4 @@ class SharesHeader extends BasePage {
   }
 }
 
-export default SharesHeader
+export default DashboardSharesHeader

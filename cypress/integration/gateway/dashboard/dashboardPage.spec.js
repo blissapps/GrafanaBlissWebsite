@@ -15,6 +15,9 @@ describe('Dashboard Page Tests', () => {
     /** Related to User Stories
      * EGVFOUR-49
      */
+    it('C31801379 - Dashboard Page General Activity Elements Validation', () => {
+      equityGateway.Portfolio.portfolioValidation()
+    })
 
     it('C30092770 - Dashboard Page General Activity Elements Validation', () => {
       const activityElements = ['Activity', 'View all activity', 'Upcoming', 'Showing 3']
@@ -36,14 +39,14 @@ describe('Dashboard Page Tests', () => {
     }
 
     it('C30092773/.789/.790/.791 - Shares Details', () => {
-      equityGateway.SharesHeader.sharesName(shareLabels.name)
-      equityGateway.SharesHeader.sharesAmount(shareLabels.amount)
-      equityGateway.SharesHeader.currency(shareLabels.currency)
-      equityGateway.SharesHeader.date(shareLabels.date)
-      equityGateway.SharesHeader.sharesFluctuation()
+      equityGateway.dashboardSharesHeader.sharesName(shareLabels.name)
+      equityGateway.dashboardSharesHeader.sharesAmount(shareLabels.amount)
+      equityGateway.dashboardSharesHeader.currency(shareLabels.currency)
+      equityGateway.dashboardSharesHeader.date(shareLabels.date)
+      equityGateway.dashboardSharesHeader.sharesFluctuation()
 
       //Match sidebar shares info
-      equityGateway.MainPageSideMenu.shareInfo(
+      equityGateway.MainPageSideMenu.shareValidation('true',
         shareLabels.name,
         shareLabels.amount,
         shareLabels.currency,
@@ -57,22 +60,27 @@ describe('Dashboard Page Tests', () => {
      * EGVFOUR-53, EGVFOUR-54, EGVFOUR-55
      */
     it('Portfolio - General view', () => {
-      equityGateway.Portfolio.portfolioBasis('1117') //label1 must be the amount of Units allocated to the Test ACC
+      equityGateway.Portfolio.portfolioValue('1117') //label1 must be the amount of Units allocated to the Test ACC
     })
 
     it('C30092774 - Filter by Status', () => {
       equityGateway.Portfolio.filter(0) //Filter '0' stands for 'By Status'
-      equityGateway.Portfolio.filterContent('Available', 'Unavailable')
+      //equityGateway.Portfolio.filterContent('Available', 'Unavailable')
+      equityGateway.Portfolio.filterContentStatus('4,442.20', '380', '8,615.53', '737')
     })
 
     it('C30092775 - Filter by Type', () => {
       equityGateway.Portfolio.filter(1) //Filter '1' stands for 'By Type'
-      equityGateway.Portfolio.filterContent('Options', 'Shares')
+      equityGateway.Portfolio.filterContentType('8,615.53', '380', '737', '000.00')
     })
 
     it('C30092776 - Filter by Plan', () => {
+      const card1 = ['4,652.62', '398 Units', '0 Available', '398 Unavailable']
+      const card2 = ['4,442.20', '380 Units', '380 Available', '0 Unavailable']
+      const card3 = ['3,962.91', '339 Units', '0 Available', '339 Unavailable']
+
       equityGateway.Portfolio.filter(2) //Filter '2' stands for 'By Plan'
-      equityGateway.Portfolio.filterContent('SAYE', 'Employee purchase plan')
+      equityGateway.Portfolio.filterContentPlan(3, [card1, card2, card3])
     })
   })
 })
@@ -83,25 +91,35 @@ describe('Dashboard Page Tests ACC With Multiple Securities', () => {
     equityGateway.LoginPage.getLoggedUser()
   })
 
-  context('General DashboardPage Validations', () => {
+  context('Multiple Securities - DashboardPage Validations', () => {
     /** Related to User Stories
      * EGVFOUR-252
      */
 
     it('C31576573 - ACC does not show any security if any is not selected', () => {
-      //TODO
+      equityGateway.MainPageSideMenu.shareValidation('false')
     })
 
     it('C30159577 - ACC with multiple securities must available them', () => {
-      //TODO
+      equityGateway.MainPageSideMenu.shareValidation('false')
+      equityGateway.MainPageSideMenu.shareSelect('false', 'SSAP')
+      equityGateway.MainPageSideMenu.shareSelect('true', 'Skanska B')
+      equityGateway.MainPageSideMenu.shareSelect('true', 'SEC')
     })
 
-    it('C31576630 - Select a security must show his info only', () => {
-      //TODO
-    })
+    it('C31576630 - Selecting a security must show his info only', () => {
+      equityGateway.MainPageSideMenu.shareValidation('false')
+      equityGateway.MainPageSideMenu.shareSelect('false', 'SSAP')
+      equityGateway.MainPageSideMenu.shareValidation('true', 'SSAP, SKA B', '158.55', 'SEK', 'Mar 31, 4:00 GMT+1')
+      equityGateway.dashboardSharesHeader.sharesName('SSAP')
+      equityGateway.dashboardSharesHeader.sharesAmount('158.55')
+      equityGateway.dashboardSharesHeader.sharesFluctuation()
 
-    it('C31576631 - User can change is security any time and the corresponded info must be shown only', () => {
-      //TODO
+      equityGateway.MainPageSideMenu.shareSelect('true', 'Skanska B')
+      equityGateway.MainPageSideMenu.shareValidation('true', 'Skanska B', '158.55 ', 'SEK', 'Mar 31, 4:00 GMT+1')
+      equityGateway.dashboardSharesHeader.sharesName('Skanska B')
+      equityGateway.dashboardSharesHeader.sharesAmount('158.55')
+      equityGateway.dashboardSharesHeader.sharesFluctuation()
     })
   })
 })
