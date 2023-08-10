@@ -1,0 +1,42 @@
+{
+  "accountUid": "AJUObUKRLSEA",
+  "account": "/account/AJUObUKRLSEA",
+  "personUid": "AJUObUKRLSEA",
+  "person": "/person/AJUObUKRLSEA",
+  "salutation": "Unknown",
+  "personFirstName": "Kailani",
+  "personLastName": "Camilla",
+  "identifier": "paulandera",
+  "assetOwner": [
+    {
+      "appOptions": "/assetOwner/AJUObUKRLSEA/AppOptions",
+      "assetOwner": "/assetOwner/AJUObUKRLSEA",
+      "companyName": "Skanska",
+      "companyUuid": "ODzrQuT_UKBFAAA",
+      "logoImage": "https://gatewaybff-alpha-25.gscloud.dev/api/v1.0/Content/logo-client-ODzrQuT_UKBFAAA/login.png",
+      "resellerCode": "GLOBALSH",
+      "resellerName": "Global Shares"
+    }
+  ],
+  "defaultCurrency": "SEK",
+  "selectableCurrencies": [
+    "CZK",
+    "DKK",
+    "EUR",
+    "HUF",
+    "NOK",
+    "PLN",
+    "GBP",
+    "RON",
+    "SEK",
+    "USD"
+  ],
+  "defaultLanguage": "EN",
+  "selectableLocale": [
+    "EN",
+    "CS",
+    "FI",
+    "PL",
+    "SV"
+  ]
+}
