@@ -1,15 +1,15 @@
 import BasePage from '../../basePage'
 
 const selectors = {
-  bankAccBasePage: '.ng-star-inserted',
+  bankAccBasePage: '[data-test-id="bank-account"]',
   baseH1: '.text-h2',
   baseH2: '.text-h5',
   baseH3: '.eg-payments',
-  bankAccBaseH2s2: 'section > .flex > p',
-  saleSection: 'gs-card.p-7.mb-7.hover',
-  saleSectionBank: ':nth-child(1) > .p-7.ng-star-inserted',
-  dividendSection: 'gs-card.p-7.mb-4.hover',
-  dividendSectionBank: ':nth-child(2) > gs-card.p-7.mb-7.hover',
+  bankAccBaseH2s2: '[data-test-id="bank-account-resume"] > p',
+  saleSection: '[data-test-id="payments-sale-methods"]',
+  saleSectionBank: '[data-test-id="payments-sale-bank-account"]',
+  dividendSection: '[data-test-id="payments-dividend-methods"]',
+  dividendSectionBank: '[data-test-id="payments-dividend-bank-account"]',
   sectionDelivery: 'input[placeholder="Preferred delivery methods"]',
   languageSection: '.p-6'
 }
