@@ -4,10 +4,11 @@ import BasePage from '../../basePage'
  * Do not change default values
  */
 let actionPerformed = false
+let userPreset = 'empty'
 
 class accProfilePage extends BasePage {
   _getAccToken(user) {
-    if (user === undefined || user === null){
+    if (user === undefined || user === null) {
       user = Cypress.env('EQUITY_GATEWAY_DEFAULT_USER1_AUTH')
       cy.log('Request Warning: No user provided, using Default ACC USER1_AUTH')
     }
@@ -42,37 +43,47 @@ class accProfilePage extends BasePage {
         headers: {
           Authorization: `Bearer ${token}` //Attach the token as a Bearer token
         }
-      }).then((response) => {
-        expect(response.status).to.equal(200)
-        // Write Fixture personal info
-        cy.writeFile('cypress/fixtures/gateway/accInfo/personalInfo.json', response.body)
-
-        // Store the personUid
-        // eslint-disable-next-line prefer-destructuring
-        const { companyUuid } = response.body.assetOwner[0]
-
-        cy.wrap(response).as('userInfo')
-
-        //Chaining the second request
-        return cy.request({
-          method: 'GET',
-          url: `https://gatewaybff-alpha-25.gscloud.dev/api/v1.0/Company/${companyUuid}/Security`,
-          headers: {
-            Authorization: `Bearer ${token}` //Attach the token as a Bearer token
-          }
-        }).as('security')
-      }).then((securityResponse) => {
-        // Write Fixture security info
-        cy.writeFile('cypress/fixtures/gateway/accInfo/securities.json', securityResponse.body)
       })
+        .then((response) => {
+          expect(response.status).to.equal(200)
+          // Write Fixture personal info
+          cy.writeFile(`cypress/fixtures/gateway/accInfo/personalInfo${user}.json`, response.body)
+
+          // Store the personUid
+          // eslint-disable-next-line prefer-destructuring
+          const { companyUuid } = response.body.assetOwner[0]
+
+          cy.wrap(response).as('userInfo')
+
+          //Chaining the second request
+          return cy
+            .request({
+              method: 'GET',
+              url: `https://gatewaybff-alpha-25.gscloud.dev/api/v1.0/Company/${companyUuid}/Security`,
+              headers: {
+                Authorization: `Bearer ${token}` //Attach the token as a Bearer token
+              }
+            })
+            .as('security')
+        })
+        .then((securityResponse) => {
+          // Write Fixture security info
+          cy.writeFile(`cypress/fixtures/gateway/accInfo/securities${user}.json`, securityResponse.body)
+        })
     })
   }
 
-  accDataCollect(user){
-    if (actionPerformed === false ){
-      cy.log('Updating Account Details: ACC general Info, Shares and Securities')
+  accDataCollect(user) {
+    if (userPreset === user){
       // Set actionPerformed during test execution time
       actionPerformed = true
+    } else {
+      userPreset = user
+      actionPerformed = false
+    }
+
+    if (actionPerformed === false) {
+      cy.log('Updating Account Details: ACC general Info, Shares and Securities')
 
       this._getUserInfo(user).then(() => {
         cy.get('@userInfo').then((response) => {
@@ -81,21 +92,20 @@ class accProfilePage extends BasePage {
           cy.log('Person Name: ' + response.body.personFirstName + ' ' + response.body.personLastName)
 
           cy.get('@security').then((securityResponse) => {
-            // Get ACC Securities - cy.log('Security Response: ' + JSON.stringify(securityResponse.body));
+            // Get ACC Securities - cy.log('Security Response: ' + JSON.stringify(securityResponse.body))
 
             // Extract ACC security names and log them with iteration number
             // @ts-ignore
             securityResponse.body.forEach(({ securityName }, index) => {
-              cy.log(`Security Name (${index + 1}): ${securityName}`);
+              cy.log(`Security Name (${index + 1}): ${securityName}`)
             })
           })
         })
       })
     } else {
-      cy.log('Account general Info, Shares and Securities up to date!')
+      cy.log('Info Message: Account Data already up to date!')
     }
   }
-
 }
 
 export default accProfilePage

@@ -1,4 +1,7 @@
 import BasePage from '../basePage'
+import AccDetails from './accDetails/accDetails'
+
+const accDetails = new AccDetails()
 
 /**
  * Do not change default values
@@ -74,6 +77,12 @@ class LoginPage extends BasePage {
 
     customizedUser = false
     this.lastUser = userToUse
+    //Retrieve/Check User Account Data
+    if (user === undefined){
+      accDetails.accDataCollect(Cypress.env('EQUITY_GATEWAY_DEFAULT_USER1_AUTH').toString())
+    } else {
+      accDetails.accDataCollect(user)
+    }
 
     return {
       user: this.lastUser
@@ -128,7 +137,7 @@ class LoginPage extends BasePage {
    * @private
    *
    * Carefully working on this function, it includes some conditions and recursion,
-   * you can end up in an ** INFINITE LOOP **
+   * you can end up into an ** INFINITE LOOP **
    */
   _checkURL(targetURL) {
     cy.url().then((url) => {
@@ -160,7 +169,7 @@ class LoginPage extends BasePage {
   }
 
   /**
-   * Later phases this may be replaced by API retrieved DATA
+   * TO BE DEPRECATED
    */
   getAccInfo() {
     return cy.fixture('gateway/salesWizard/summaryFlow').then((jsonObject) => {
