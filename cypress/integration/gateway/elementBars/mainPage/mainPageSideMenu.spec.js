@@ -39,12 +39,7 @@ describe('MainPage SideMenu Tests', () => {
         share_status: 'positive'
       }
 
-      equityGateway.MainPageSideMenu.shareValidation('true',
-        shareVariables.name,
-        shareVariables.amount,
-        shareVariables.currency,
-        shareVariables.date
-      )
+      equityGateway.MainPageSideMenu.shareValidation('true', shareVariables.name, shareVariables.amount, shareVariables.currency, shareVariables.date)
     })
   })
 })

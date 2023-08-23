@@ -23,5 +23,4 @@ describe('Page Navigation Tests', () => {
       cy.url().should('include', '/dashboard')
     })
   })
-
 })
