@@ -6,7 +6,6 @@ const equityGateway = new EquityGateway()
  * Cross Screen Functionalities Test Suite
  */
 describe('Sales Wizard Page Navigation Tests', () => {
-
   context('Validate Sales Wizard Navigation', () => {
     /** Related to User Stories
      * EGVFOUR-266, EGVFOUR-264

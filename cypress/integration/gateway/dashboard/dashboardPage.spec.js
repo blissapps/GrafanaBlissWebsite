@@ -46,12 +46,7 @@ describe('Dashboard Page Tests', () => {
       equityGateway.dashboardSharesHeader.sharesFluctuation()
 
       //Match sidebar shares info
-      equityGateway.MainPageSideMenu.shareValidation('true',
-        shareLabels.name,
-        shareLabels.amount,
-        shareLabels.currency,
-        shareLabels.date
-      )
+      equityGateway.MainPageSideMenu.shareValidation('true', shareLabels.name, shareLabels.amount, shareLabels.currency, shareLabels.date)
     })
   })
 
