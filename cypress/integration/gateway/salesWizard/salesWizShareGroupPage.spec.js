@@ -13,7 +13,7 @@ describe('Sales Wizard Group Page Tests', () => {
      * EGVFOUR-141, EGVFOUR-253
      **/
     beforeEach('User Chooses a Security', () => {
-      equityGateway.LoginPage.login(Cypress.env('EQUITY_GATEWAY_DEFAULT_USER3_AUTH'))
+      equityGateway.LoginPage.login(Cypress.env('EQUITY_GATEWAY_DEFAULT_USER2_AUTH'))
       equityGateway.SalesWizBase.gotoShareGroup()
     })
 

@@ -63,7 +63,7 @@ describe('Login and Logout Tests', () => {
       equityGateway.LogoutPage.checkFooter(footerInfo)
       equityGateway.LogoutPage.checkout()
       equityGateway.LoginPage.login()
-      equityGateway.DashboardPage.home(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_1ST_NAME'))
+      //FIXME WITH REAL API DATA equityGateway.DashboardPage.home(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_1ST_NAME'))
     })
   })
 })

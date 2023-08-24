@@ -11,7 +11,7 @@ describe('Sales Wizard Page Navigation Tests', () => {
      * EGVFOUR-266, EGVFOUR-264
      */
     beforeEach(() => {
-      equityGateway.LoginPage.login(Cypress.env('EQUITY_GATEWAY_DEFAULT_USER3_AUTH'), Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH'))
+      equityGateway.LoginPage.login(Cypress.env('EQUITY_GATEWAY_DEFAULT_USER2_AUTH'), Cypress.env('EQUITY_GATEWAY_DEFAULT_PASSWORD_AUTH'))
     })
     it('C30159580 - Sales Wizard Default', () => {
       equityGateway.PageNavi.checkSalesWizardRedirect()

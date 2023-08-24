@@ -22,7 +22,7 @@ describe('MyAcc Profile Sector Tests', () => {
      */
     it('C30092720 - Profile name validation', () => {
       equityGateway.AccProfilePage.pageTitle('Personal Information')
-      equityGateway.AccProfilePage.accName(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_FULL_NAME'))
+      //FIXME WIT REAL API DATA equityGateway.AccProfilePage.accName(Cypress.env('EQUITY_GATEWAY_DEFAULT_ACC_FULL_NAME'))
     })
 
     it('C30092720 - Profile and Demographic Content Titles', () => {
