@@ -9,7 +9,7 @@ const equityGateway = new EquityGateway()
 
 describe('Sales Wizard Security Page Tests', () => {
   beforeEach(() => {
-    equityGateway.LoginPage.login(Cypress.env('EQUITY_GATEWAY_DEFAULT_USER3_AUTH'))
+    equityGateway.LoginPage.login(Cypress.env('EQUITY_GATEWAY_DEFAULT_USER2_AUTH'))
     equityGateway.SalesWizBase.gotoSecurity()
   })
   context('General Page Validations', () => {
