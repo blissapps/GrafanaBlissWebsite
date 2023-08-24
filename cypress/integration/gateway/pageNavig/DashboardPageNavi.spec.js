@@ -6,7 +6,6 @@ const equityGateway = new EquityGateway()
  * Cross Screen Functionalities Test Suite
  */
 describe('Dashboard Page Navigation Tests', () => {
-
   context('Dashboard Page Navigations', () => {
     /** Related to User Stories
      * EGVFOUR-252

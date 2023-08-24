@@ -59,5 +59,4 @@ describe('Page Navigation Tests', () => {
       equityGateway.PageNavi.pageNaviUrlValidation('/welcome')
     })
   })
-
 })
