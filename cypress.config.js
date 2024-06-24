@@ -28,7 +28,7 @@ module.exports = defineConfig({
     cypressMochawesomeReporterReporterOptions: {
       reportDir: 'cypress/test-results',
       charts: true,
-      reportPageTitle: 'Equity Admin V2 - Test results',
+      reportPageTitle: 'Test results',
       embeddedScreenshots: true,
       inlineAssets: true
     },
@@ -42,8 +42,8 @@ module.exports = defineConfig({
       return require('./cypress/plugins/index.js')(on, config)
     },
 
-    baseUrl: 'https://ea-v3-at-10.gscloud.dev/',
-    specPattern: ['cypress/integration/admin/**/*.spec.js', 'cypress/integration/gateway/**/*.spec.js'],
+    baseUrl: 'https://www.blissapplications.com/',
+    specPattern: ['cypress/integration/**/*.spec.js'],
     excludeSpecPattern: ['**/__snapshots__/*', '**/__image_snapshots__/*'],
     slowTestThreshold: 30000
   }
