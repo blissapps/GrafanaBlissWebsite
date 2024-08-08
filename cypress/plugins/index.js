@@ -80,6 +80,8 @@ module.exports = (on, config) => {
     await exec('cp -r cypress/test-results/.jsons cypress/test-results/jsonResults')
     await afterRunHook()
     await exec('yarn jrm ./cypress/test-results/JUnitReport.xml ./cypress/test-results/junit/*.xml')
+    await exec('node mergeReport.js')
+    await exec('node dataTrSender.js')
   })
 
   on('task', {
