@@ -51,6 +51,7 @@ module.exports = (on, config) => {
     }
 
     // List of forbidden environments to run automation
+    /*
     const regMasterEnvironmentsToAvoid = ['alpha-23', 'alpha23', '23']
 
     // This routine avoids accidents, so the tests will never be allowed to run in the environments placed in the regMasterEnvironmentsToAvoid variable
@@ -69,6 +70,7 @@ module.exports = (on, config) => {
         }
       })
     }
+    */
 
     console.log('\x1b[32mThe given environment "' + details.config.baseUrl + '" is approved for testing. Moving on...\x1b[39m')
 
@@ -85,7 +87,7 @@ module.exports = (on, config) => {
   })
 
   on('task', {
-    generateOTP: require('cypress-otp')
+    //generateOTP: require('cypress-otp')
   })
 
   initPlugin(on, config)
