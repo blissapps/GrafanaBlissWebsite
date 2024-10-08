@@ -29,7 +29,7 @@ describe('Bliss Blog Page Tests', () => {
     })
 
     it.skip('Check Profile Description Phone Containers', () => {
-      blissHome.BlissHomePage.checkTestObject(9)
+      blissHome.BlissHomePage.checkTestObject(0)
     })
   })
 })
