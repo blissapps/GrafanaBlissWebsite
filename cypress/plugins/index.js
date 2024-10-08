@@ -51,6 +51,7 @@ module.exports = (on, config) => {
     }
 
     // List of forbidden environments to run automation
+    /*
     const regMasterEnvironmentsToAvoid = ['alpha-23', 'alpha23', '23']
 
     // This routine avoids accidents, so the tests will never be allowed to run in the environments placed in the regMasterEnvironmentsToAvoid variable
@@ -69,6 +70,7 @@ module.exports = (on, config) => {
         }
       })
     }
+    */
 
     console.log('\x1b[32mThe given environment "' + details.config.baseUrl + '" is approved for testing. Moving on...\x1b[39m')
 
@@ -80,10 +82,12 @@ module.exports = (on, config) => {
     await exec('cp -r cypress/test-results/.jsons cypress/test-results/jsonResults')
     await afterRunHook()
     await exec('yarn jrm ./cypress/test-results/JUnitReport.xml ./cypress/test-results/junit/*.xml')
+    await exec('node mergeReport.js')
+    await exec('node dataTrSender.js')
   })
 
   on('task', {
-    generateOTP: require('cypress-otp')
+    //generateOTP: require('cypress-otp')
   })
 
   initPlugin(on, config)

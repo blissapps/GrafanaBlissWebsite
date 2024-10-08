@@ -1,12 +1,12 @@
 {
-  "name": "gs-cypress-automation-framework",
-  "version": "1.0.0",
-  "description": "Cypress framework for the new Equity Admin Portal",
+  "name": "bliss-cypress-automation-framework",
+  "version": "2.0.0",
+  "description": "BLISS Applications Cypress Framework",
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.org/globalshares/gscypressautomationframework"
+    "url": "https://github.com/OFlavioBliss/GrafanaFE.git"
   },
-  "author": "Global Shares",
+  "author": "Bliss Applications",
   "license": "ISC",
   "engines": {
     "node": ">=12.22.0"
@@ -70,8 +70,12 @@
     "mocha": "10.2.0",
     "mocha-junit-reporter": "2.2.0",
     "mochawesome-merge": "4.3.0",
+    "mongodb": "6.8.0",
     "prettier": "2.8.8",
     "tsc-silent": "1.2.2",
     "typescript": "5.1.3"
+  },
+  "dependencies": {
+    "yarn": "^1.22.22"
   }
 }

@@ -28,6 +28,7 @@ module.exports = defineConfig({
     cypressMochawesomeReporterReporterOptions: {
       reportDir: 'cypress/test-results',
       charts: true,
+      video: false,
       reportPageTitle: 'Test results',
       embeddedScreenshots: true,
       inlineAssets: true
@@ -39,6 +40,7 @@ module.exports = defineConfig({
 
   e2e: {
     setupNodeEvents(on, config) {
+
       return require('./cypress/plugins/index.js')(on, config)
     },
 
