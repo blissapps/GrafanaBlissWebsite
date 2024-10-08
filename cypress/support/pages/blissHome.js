@@ -1,4 +1,5 @@
 import BlissHomePage from './home/blissHomePage'
+import ContactPage from './contact/contactPage'
 
 class BlissHome {
   constructor() {
@@ -9,6 +10,7 @@ class BlissHome {
 
     // --------------------------------------------------------------------------------Pages ----------------------------------------------------------------------//
     this.BlissHomePage = new BlissHomePage()
+    this.ContactPage = new ContactPage()
   }
 }
 

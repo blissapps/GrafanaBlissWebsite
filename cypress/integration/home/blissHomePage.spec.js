@@ -11,22 +11,24 @@ describe('Bliss Home Page Tests', () => {
       blissHome.BlissHomePage.checkTestObject(0)
     })
 
-    it('Check Home Banner', () => {
-      blissHome.BlissHomePage.checkTestObject(0)
+    it('Check Home Menu', () => {
+      blissHome.BlissHomePage.checkPage()
     })
 
-    it('Check Home Buttons', () => {
-      blissHome.BlissHomePage.checkTestObject(0)
+    it('Check HomePage Buttons', () => {
+      blissHome.BlissHomePage.checkButtons()
     })
-  })
 
-  context('Navigation Bar Validation', () => {
-    it('Check Home Form', () => {
+    it('Check Email Contact', () => {
+      blissHome.BlissHomePage.checkForm()
+    })
+
+    it('Check Email Contact2', () => {
       blissHome.BlissHomePage.checkForm()
     })
   })
 
-  context('ReachOut Form Validation', () => {
+  context('Check Menu Navigation', () => {
     it('Check AboutUs Page', () => {
       blissHome.BlissHomePage.checkPage('aboutUs')
     })
@@ -37,7 +39,6 @@ describe('Bliss Home Page Tests', () => {
 
     it('Check Careers Page', () => {
       blissHome.BlissHomePage.checkPage('careers')
-      blissHome.BlissHomePage.checkTestObject(9)
     })
 
     it('Check Contact Page', () => {
@@ -46,27 +47,6 @@ describe('Bliss Home Page Tests', () => {
 
     it('Check Blog Page', () => {
       blissHome.BlissHomePage.checkPage('blog')
-    })
-  })
-})
-
-describe('Bliss Contact Form Page Tests', () => {
-  beforeEach(() => {
-    blissHome.BlissHomePage.goToHome()
-  })
-
-  context('General Validations', () => {
-    it('Check Contact Form Page', () => {
-      blissHome.BlissHomePage.checkTestObject(0)
-    })
-
-    it('Check Home Banner', () => {
-      blissHome.BlissHomePage.checkTestObject(0)
-    })
-
-    it('Check Home Form', () => {
-      blissHome.BlissHomePage.checkPage('contact')
-      blissHome.BlissHomePage.fillForm()
     })
   })
 })
