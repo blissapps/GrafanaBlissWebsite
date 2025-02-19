@@ -1,4 +1,4 @@
-import BlissHome from '../../support/pages/blissHome'
+import BlissHome from '../support/pages/blissHome'
 
 const blissHome = new BlissHome()
 describe('Bliss Home Page Tests', () => {

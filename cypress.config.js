@@ -44,7 +44,7 @@ module.exports = defineConfig({
       return require('./cypress/plugins/index.js')(on, config)
     },
 
-    baseUrl: 'https://www.blissapplications.com/',
+    baseUrl: 'https://qa.site.blissapplications.com/',
     specPattern: ['cypress/integration/**/*.spec.js'],
     excludeSpecPattern: ['**/__snapshots__/*', '**/__image_snapshots__/*'],
     slowTestThreshold: 30000
