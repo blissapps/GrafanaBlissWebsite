@@ -1,5 +1,7 @@
 import BasePage from '../basePage'
+import TopMenu from '../elementBars/topMenu'
 
+const topMenu = new TopMenu();
 const selectors = {
   topBar: '.top-bar',
   thumbnail: '#main > .hero-pages',
@@ -13,8 +15,9 @@ const selectors = {
 
 class AboutUsPage extends BasePage{
   goToAboutUs() {
-    cy.visit('/about')
-    cy.get(selectors.topBar).should('exist')
+      cy.visit('/about')
+      cy.get(selectors.topBar).should('exist')
+      topMenu.validateTopBar();
   }
 
   validateThumbnail(){
@@ -41,7 +44,7 @@ class AboutUsPage extends BasePage{
     cy.get(selectors.lifeAtBliss)
   }
 
-  validateBtnJoinUs () {
+  btnJoinUs () {
     cy.get(selectors.btnJoinUs).click()
     cy.url().should('contain', 'contacts')
   }

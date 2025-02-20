@@ -8,7 +8,7 @@ module.exports = defineConfig({
   video: true,
   videoCompression: false,
   videoUploadOnPasses: true,
-  defaultCommandTimeout: 15000,
+  defaultCommandTimeout: 10000,
   redirectionLimit: 50,
   viewportWidth: 1920,
   viewportHeight: 1080,
@@ -47,6 +47,6 @@ module.exports = defineConfig({
     baseUrl: 'https://qa.site.blissapplications.com/',
     specPattern: ['cypress/integration/**/*.spec.js'],
     excludeSpecPattern: ['**/__snapshots__/*', '**/__image_snapshots__/*'],
-    slowTestThreshold: 30000
+    slowTestThreshold: 15000
   }
 })

@@ -2,8 +2,12 @@ import BlissHome from '../support/pages/blissHome'
 
 const blissHome = new BlissHome()
 
-describe('Bliss Home Page Tests', () => {
+describe('Bliss About US Page - Tests', () => {
   beforeEach(() => {
+    cy.session('navigate', () => {
+      cy.visit('/')
+      blissHome.AboutUsPage.goToAboutUs()
+    })
     blissHome.AboutUsPage.goToAboutUs()
   })
 
@@ -33,7 +37,7 @@ describe('Bliss Home Page Tests', () => {
     })
 
     it('Check Join Us Button', () => {
-      blissHome.AboutUsPage.validateBtnJoinUs()
+      blissHome.AboutUsPage.btnJoinUs()
     })
   })
 
