@@ -1,0 +1,40 @@
+name: SAPO Java CI with Maven
+
+on:
+  schedule:
+    - cron: '30 9 * * 1-5'  # Week days 9:30AM UTC
+  push:
+    branches:
+      - pipeline
+      - master
+      - dev
+  pull_request:
+    branches:
+      - pipeline
+      - master
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          # Cron only uses pipeline branch. Push, uses accordingly branch.
+          ref: ${{ github.event_name == 'schedule' && 'master' || github.ref_name }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Clear Maven cache
+        run: rm -rf ~/.m2/repository
+
+      - name: Run Tests
+        run: npx cypress run
