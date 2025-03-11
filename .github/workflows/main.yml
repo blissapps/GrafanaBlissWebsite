@@ -33,8 +33,5 @@ jobs:
       - name: Install dependencies
         run: npm install --force
 
-      - name: Clear Maven cache
-        run: rm -rf ~/.m2/repository
-
       - name: Run Tests
         run: npx cypress run
