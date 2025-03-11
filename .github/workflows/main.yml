@@ -1,4 +1,4 @@
-name: SAPO Java CI with Maven
+name: Bliss Website Cypress CI
 
 on:
   schedule:
