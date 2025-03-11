@@ -1,96 +1,59 @@
 import BasePage from '../basePage'
 
 const selectors = {
-  navBar: '.header__navigation',
-  form: '[id=details] > form > div > div',
-  cookie: '.footer-cookies > div > div > div:nth-child(2)',
-  blogId: '.blog-grid > :nth-child(3)',
-  btnFindOutMore: '.info > a > .button',
-  btnCheckOurWork: '.services__action > a > .button'
+  thumbnail: '.hero__overlay',
+  workProjects: '.works__items',
+  workProjectsSwiper: '.swiper',
+  services: '.accordion-block',
+  get servicesCategory() { return `${this.services} > :nth-child(2) > div` },
+  cardsBlock: '.cards-block',
+  statsBlock: '.stats-block',
+  quotesContainer: '.quotes-block',
+  btnExploreWork: '.call-to-action > .btn'
 }
+
 class BlissHomePage extends BasePage{
-  goToHome() {
-    cy.visit('/')
-    cy.get(selectors.navBar).should('exist')
+  validateThumbnail(){
+    cy.get(selectors.thumbnail).should('be.visible')
   }
 
-  checkTestObject(ratio) {
-    this._cookie()
-
-    const elnum = this.getRandomInt(10)
-
-    if (elnum < 5) {
-      cy.scrollTo('bottom')
-      // eslint-disable-next-line cypress/no-unnecessary-waiting
-      cy.wait(600)
-      cy.scrollTo('top')
-      // eslint-disable-next-line cypress/no-unnecessary-waiting
-      cy.wait(300)
-    }
-
-    if (elnum < ratio) {
-      throw new Error('Element not Found')
-    }
+  workProjects(){
+    cy.get(selectors.workProjects).should('be.visible')
   }
 
-  /**
-     * @param {string} page
-     */
-  checkPage(page = '') {
-    this._cookie()
-
-    if (!page){
-      switch (page) {
-        case 'aboutUs':
-          cy.get(selectors.navBar).contains('About us').click()
-          break
-
-        case 'work':
-          cy.get(selectors.navBar).contains('Work').click()
-          break
-
-        case 'careers':
-          cy.get(selectors.navBar).contains('Careers').click()
-          break
-
-        case 'blog':
-          cy.get(selectors.navBar).contains('Blog').click()
-          // eslint-disable-next-line cypress/no-unnecessary-waiting
-          cy.wait(600)
-          cy.scrollTo('bottom')
-          // eslint-disable-next-line cypress/no-unnecessary-waiting
-          cy.wait(600)
-          cy.get(selectors.blogId).click()
-          break
-
-        case 'contact':
-          cy.get(selectors.navBar).contains('Contact').click()
-          break
-      }
-    } else {
-      cy.get(selectors.navBar).should('exist')
-    }
-
-
-    cy.get('.footer')
+  workProjectsSwiper(){
+    cy.get(selectors.workProjectsSwiper).should('be.visible')
   }
 
-  checkButtons() {
-    cy.get(selectors.btnFindOutMore)
-    cy.get(selectors.btnCheckOurWork)
+  validateServices() {
+    cy.get(selectors.services)
+    cy.get(selectors.servicesCategory).invoke('text').then((text) => {
+      expect(text).to.contain('Product Vision and Strategy')
+      expect(text).to.contain('Product Experience and Design')
+      expect(text).to.contain('Design System and Accessibility Setup')
+      expect(text).to.contain('Emotional Design Foundations')
+      expect(text).to.contain('Custom AI Agents')
+      expect(text).to.contain('Web and Mobile Development')
+      expect(text).to.contain('Server and Process Optimization')
+      expect(text).to.contain('Product Lifecycle Management')
+    })
   }
 
-  checkForm() {
-    this._cookie()
-
-    cy.scrollTo('bottom')
-
-    cy.get('[placeholder="Enter your email..."]').eq(1).type('toKnowMore@bliss.com', { force: true })
-    cy.get('.input-checkbox > label').click()
+  cardsContainer() {
+    cy.get(selectors.cardsBlock)
   }
 
-  _cookie () {
-    cy.get(selectors.cookie).click()
+  statsContainer() {
+    cy.get(selectors.statsBlock)
+  }
+
+  quotesContainer(){
+    cy.get(selectors.quotesContainer)
+  }
+
+  btnExploreWork(){
+    cy.get(selectors.btnExploreWork).click( { force: true })
+    cy.url().should('contain', 'our-work')
   }
 }
 export default BlissHomePage

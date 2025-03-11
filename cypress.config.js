@@ -5,10 +5,10 @@ module.exports = defineConfig({
   chromeWebSecurity: false,
   trashAssetsBeforeRuns: true,
   numTestsKeptInMemory: 1,
-  video: true,
+  video: false,
   videoCompression: false,
-  videoUploadOnPasses: true,
-  defaultCommandTimeout: 15000,
+  videoUploadOnPasses: false,
+  defaultCommandTimeout: 10000,
   redirectionLimit: 50,
   viewportWidth: 1920,
   viewportHeight: 1080,
@@ -18,7 +18,7 @@ module.exports = defineConfig({
   },
 
   retries: {
-    runMode: 2,
+    runMode: 3,
     openMode: 0
   },
 
@@ -44,9 +44,9 @@ module.exports = defineConfig({
       return require('./cypress/plugins/index.js')(on, config)
     },
 
-    baseUrl: 'https://www.blissapplications.com/',
+    baseUrl: 'https://qa.site.blissapplications.com/',
     specPattern: ['cypress/integration/**/*.spec.js'],
     excludeSpecPattern: ['**/__snapshots__/*', '**/__image_snapshots__/*'],
-    slowTestThreshold: 30000
+    slowTestThreshold: 20000
   }
 })
