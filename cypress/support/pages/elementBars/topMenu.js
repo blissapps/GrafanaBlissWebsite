@@ -27,5 +27,20 @@ class TopMenu extends BasePage{
     cy.get(selectors.topBtn).click( { force: true })
     cy.url().should('contain', 'contacts')
   }
+
+
+  /**
+     * @param {string | undefined} [name]
+     */
+  pagesRedirect(name) {
+    if (name) {
+      cy.get(selectors.topMenu).contains(name).click()
+      cy.url().should('contain', name.toLowerCase().trim())
+      this.validateTopBar()
+    } else {
+      cy.get(selectors.topIco).click()
+      cy.url().should('eq', 'https://qa.site.blissapplications.com/')
+    }
+  }
 }
 export default TopMenu

@@ -2,7 +2,7 @@ import BlissHome from '../support/pages/blissHome'
 
 const blissHome = new BlissHome()
 
-describe.skip('Bliss Services Page Tests', () => {
+describe('Bliss Services Page Tests', () => {
   beforeEach(() => {
     cy.session('navigate', () => {
       cy.visit('/')

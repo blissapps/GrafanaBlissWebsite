@@ -3,14 +3,14 @@ import BlissHome from '../support/pages/blissHome'
 const blissHome = new BlissHome()
 describe('Bliss Home Page Tests', () => {
   beforeEach(() => {
-    cy.session('navigate', () => {
+    cy.session('home', () => {
       cy.visit('/')
     })
     cy.visit('/')
   })
 
   context('General Validations', () => {
-    it('Validate Top Bar', () => {
+    it('Validate Top Bar Elements', () => {
       blissHome.TopMenu.validateTopBar()
     })
 
@@ -50,19 +50,28 @@ describe('Bliss Home Page Tests', () => {
     it('Validate Get In Touch Button', () => {
       blissHome.TopMenu.btnGetInTouch()
     })
+
+    it('Validate Clickable elements', () => {
+      blissHome.TopMenu.pagesRedirect('About')
+      blissHome.TopMenu.pagesRedirect('Services')
+      blissHome.TopMenu.pagesRedirect('Work')
+      blissHome.TopMenu.pagesRedirect('Careers')
+      blissHome.TopMenu.pagesRedirect('Blog')
+      blissHome.TopMenu.pagesRedirect()
+    })
   })
 })
 
 describe('Contact Page Validation', () => {
   beforeEach(() => {
-    cy.session('navigate', () => {
+    cy.session('contact', () => {
       cy.visit('/')
       blissHome.ContactPage.goToContact()
     })
     blissHome.ContactPage.goToContact()
   })
 
-  context.skip('General Validations', () => {
+  context('General Validations', () => {
     it('Validate Contact Page Thumbnail', () => {
       blissHome.ContactPage.validateThumbnail()
     })
@@ -75,8 +84,22 @@ describe('Contact Page Validation', () => {
       blissHome.ContactPage.validateEmailContainer()
     })
 
-    it('Validate Form', () => {
-      blissHome.ContactPage.validateForm('QA_FIRST_NAME', 'QA_LAST_NAME', 'QA_EMAIL')
+    it('Validate Form Become CLient', () => {
+      blissHome.ContactPage.validateForm('QA_first_name', 'QA_last_name', 'QA_email@test.com', '1')
+      blissHome.ContactPage.validateBecameClient('QA Bliss Test', '910000000', 'This is a TEST performed by BLISS QA AT')
+      blissHome.ContactPage.submitForm('check')
+    })
+
+    it('Validate Form Join Us', () => {
+      blissHome.ContactPage.validateForm('QA_first_name', 'QA_last_name', 'QA_email@test.com', '2')
+      blissHome.ContactPage.validateJoin('910000000', 'This is a TEST performed by BLISS QA AT')
+      blissHome.ContactPage.submitForm('check')
+    })
+
+    it('Validate Form Other', () => {
+      blissHome.ContactPage.validateForm('QA_first_name', 'QA_last_name', 'QA_email@test.com', '3')
+      blissHome.ContactPage.validateEvrElse('910000000', 'This is a TEST performed by BLISS QA AT')
+      blissHome.ContactPage.submitForm()
     })
   })
 })

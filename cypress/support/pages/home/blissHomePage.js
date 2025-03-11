@@ -9,13 +9,9 @@ const selectors = {
   cardsBlock: '.cards-block',
   statsBlock: '.stats-block',
   quotesContainer: '.quotes-block',
-  btnExploreWork: '.call-to-action > .btn',
-
-  navBar: '.header__navigation',
-  form: '[id=details] > form > div > div',
-  cookie: '.footer-cookies > div > div > div:nth-child(2)',
-  blogId: '.blog-grid > :nth-child(3)'
+  btnExploreWork: '.call-to-action > .btn'
 }
+
 class BlissHomePage extends BasePage{
   validateThumbnail(){
     cy.get(selectors.thumbnail).should('be.visible')
