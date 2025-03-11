@@ -1,13 +1,15 @@
 # Pull image
-FROM node16.14.2-slim-chrome100-ff99-edge
+FROM cypress/included:13.8.0
 
 # Creating a directory inside container
-RUN mkdir /testApp
-WORKDIR /testApp
+WORKDIR /blissWebsiteApp
 
 # Copying Cypress tests code from your repo/host to container
-COPY . /testApp
+COPY . /blissWebsiteApp
+
+# Run dependencies
+# RUN npm install --force
 
 # Running the tests
-# RUN yarn && yarn cy:run
+RUN yarn && yarn cy:run
 # You can use "docker build -t cypress ." to run as well
