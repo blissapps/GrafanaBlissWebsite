@@ -2,11 +2,6 @@ const { MongoClient, ServerApiVersion } = require('mongodb')
 const fs = require('fs')
 const path = require('path')
 
-// Promisify exec to use async/await
-const { exec } = require('child_process')
-const util = require('util')
-const execPromise = util.promisify(exec)
-
 //MongoDB's connection details
 mongodb_cnt = {
   uri: 'undefined', //'mongodb+srv://fcoliveira:nKZmLJjNXVzmAtdV@cluster0.lg9bn4y.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
@@ -93,17 +88,6 @@ async function sendTestResults() {
   }
 }
 
-//Check current Git branch
-async function getCurrentGitBranch() {
-  try {
-    const { stdout } = await execPromise('git rev-parse --abbrev-ref HEAD')
-
-    return stdout
-  } catch (error) {
-    throw new Error('Error getting current Git branch: ' + error.message)
-  }
-}
-
 //Check test validation
 async function testValidation() {
   return new Promise((resolve, reject) => {
@@ -115,32 +99,16 @@ async function testValidation() {
       const config = JSON.parse(data)
 
       if (config.DATA_SENDER_ENABLED === 'true') {
-        if (config.TARGET_ENV === 'locally') {
-          let branch = await getCurrentGitBranch()
-          branch = branch.trim().toLowerCase()
+        if (config.TARGET_ENV === 'local') {
+          console.log('Running on local config, DataSender DISABLE!')
 
-          //Check if it's the correct branch
-          if (branch === 'master' || branch === 'dev') {
-            console.log('DataSender is ENABLE to run locally, preparing...')
-
-            return resolve(true)
-          } else {
-            console.log(`Not on a proper local test branch (current branch: ${branch}), UNABLE to execute DataSender`)
-
-            return resolve(false)
-          }
+          return resolve(false)
         } else if (config.TARGET_ENV === 'ci')  {
-          if (process.env.CI_DTRS === 'true') {
-            console.log('DataSender is ENABLE to run on CI, preparing...')
+          console.log('DataSender is ENABLE to run on CI, preparing...')
 
-            return resolve(true)
-          } else {
-            console.log('CI environment configuration missing, DataSender is DISABLED')
-
-            return resolve(false)
-          }
+          return resolve(true)
         } else {
-          console.log('DataSender is DISABLED or NOT properly configured')
+          console.log('DataSender is NOT properly configured')
 
           return resolve(false)
         }
